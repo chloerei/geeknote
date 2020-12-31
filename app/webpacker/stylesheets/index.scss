@@ -1,0 +1,14 @@
+@import 'campo-ui/src/css/campo-ui';
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.container--small {
+  max-width: 640px;
+}
+
+.app-content {
+  flex-grow: 1;
+}

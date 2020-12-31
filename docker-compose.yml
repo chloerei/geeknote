@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  web:
+    build:
+      context: .
+      target: base
+    entrypoint: bin/entrypoint.sh
+    command: bin/rails server -b 0.0.0.0
+    environment:
+      WEBPACKER_DEV_SERVER_HOST: webpacker
+    volumes:
+      - community-sync:/app:nocopy
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+      - redis
+  webpacker:
+    build:
+      context: .
+      target: base
+    command: bin/webpack-dev-server
+    environment:
+      WEBPACKER_DEV_SERVER_HOST: webpacker
+    volumes:
+      - community-sync:/app:nocopy
+    ports:
+      - 3035:3035
+  worker:
+    build:
+      context: .
+      target: base
+    command: bundle exec sidekiq
+    volumes:
+      - community-sync:/app:nocopy
+    depends_on:
+      - postgres
+      - redis
+  postgres:
+    image: postgres:12
+    environment:
+      POSTGRES_PASSWORD: postgres
+  redis:
+    image: redis:5
+
+volumes:
+  community-sync:
+    external: true

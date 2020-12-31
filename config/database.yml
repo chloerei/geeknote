@@ -1,0 +1,27 @@
+# On Heroku and other platform providers, you may have a full connection URL
+# available as an environment variable. For example:
+#
+#   DATABASE_URL="postgres://myuser:mypass@localhost/somedatabase"
+#
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  host: postgres
+  username: postgres
+  password: postgres
+  database: community_development
+
+test:
+  <<: *default
+  host: postgres
+  username: postgres
+  password: postgres
+  database: community_test
+
+production:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
