@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_13_065337) do
+ActiveRecord::Schema.define(version: 2021_03_18_121934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
+
+  create_table "spaces", force: :cascade do |t|
+    t.citext "path"
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_type", "owner_id"], name: "index_spaces_on_owner"
+    t.index ["path"], name: "index_spaces_on_path", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
