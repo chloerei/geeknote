@@ -3,13 +3,13 @@
     <%= form.text_field :name %>
   </div>
   <div class="form__field">
+    <%= form.text_field :username %>
+  </div>
+  <div class="form__field">
     <%= form.text_field :email %>
   </div>
   <div class="form__field">
     <%= form.password_field :password %>
-  </div>
-  <div class="form__field">
-    <%= form.password_field :password_confirmation %>
   </div>
   <%= form.submit 'Sign up', class: 'button button--contained button--primary button--full-width' %>
 <% end %>

@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.where("lower(email) = lower(:email)", email: params[:email]).first
+    user = User.find_by(email: params[:email])
 
     if user&.authenticate(params[:password])
       sign_in(user)
