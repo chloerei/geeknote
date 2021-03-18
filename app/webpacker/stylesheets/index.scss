@@ -12,3 +12,12 @@
 .app-content {
   flex-grow: 1;
 }
+
+.alert {
+  padding: 12px;
+  color: #F44336;
+  border: 1px solid #F44336;
+  border-radius: 4px;
+  background: lighten(#F44336, 30%);
+  margin-bottom: 16px;
+}

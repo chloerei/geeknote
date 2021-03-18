@@ -1,6 +1,8 @@
 import Rails from "@rails/ujs"
 Rails.start()
 
+import "@hotwired/turbo-rails"
+
 import * as ActiveStorage from "@rails/activestorage"
 ActiveStorage.start()
 

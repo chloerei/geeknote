@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       redirect_to session.delete(:return_to) || root_path
     else
       @sign_in_error = true
-      render :new
+      render turbo_stream: turbo_stream.replace('sign-in-form', partial: 'form')
     end
   end
 

@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       sign_in(@user)
       redirect_to root_url
     else
-      render :new
+      render turbo_stream: turbo_stream.replace('sign-up-form', partial: 'form')
     end
   end
 

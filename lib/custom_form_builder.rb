@@ -6,7 +6,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
       @template.content_tag(:div, class: klass) do
         @template.content_tag(:div, class: 'text-field__container') do
           super(attribute, options.merge(placeholder: ' ')) +
-          label(attribute, class: 'text-field__label')
+          label(attribute, options[:label], class: 'text-field__label')
         end +
         @template.content_tag(:div, class: 'text-field__helper-text') do
           options[:helper_text]

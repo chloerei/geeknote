@@ -6,10 +6,8 @@
     <%= form.password_field :password %>
   </div>
   <% if @sign_in_error %>
-    <div class="form__field form__field--invalid">
-      <div class="form__message">
-        Account or password is incorrect.
-      </div>
+    <div class="alert">
+      Account or password is incorrect.
     </div>
   <% end %>
   <%= form.submit 'Sign in', class: 'button button--contained button--primary button--full-width' %>

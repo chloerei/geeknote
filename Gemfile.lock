@@ -189,6 +189,8 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     thor (1.0.1)
+    turbo-rails (0.5.9)
+      rails (>= 6.0.0)
     tzinfo (2.0.3)
       concurrent-ruby (~> 1.0)
     web-console (4.0.1)
@@ -234,6 +236,7 @@ DEPENDENCIES
   sidekiq (~> 6.0)
   spring
   spring-watcher-listen (~> 2.0.0)
+  turbo-rails
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 5.0)
