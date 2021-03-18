@@ -6,7 +6,11 @@
 }
 
 .container--small {
-  max-width: 640px;
+  max-width: 480px;
+}
+
+.app-bar--borderless {
+  box-shadow: none;
 }
 
 .app-content {
