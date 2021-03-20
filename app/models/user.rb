@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_one :space, as: :owner, autosave: true
+  has_many :posts, as: :author
 
   has_secure_password
   has_secure_token :auth_token

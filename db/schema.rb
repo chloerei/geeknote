@@ -10,11 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_18_121934) do
+ActiveRecord::Schema.define(version: 2021_03_20_032646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
+
+  create_table "posts", force: :cascade do |t|
+    t.bigint "space_id"
+    t.bigint "author_id"
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_posts_on_author_id"
+    t.index ["space_id"], name: "index_posts_on_space_id"
+  end
 
   create_table "spaces", force: :cascade do |t|
     t.citext "path"
