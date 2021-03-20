@@ -1,0 +1,41 @@
+
+.nav {
+}
+
+.nav__item {
+  display: flex;
+}
+
+.nav__item {
+  padding: 10px;
+  margin: 6px;
+  display: flex;
+  text-decoration: none;
+  line-height: 20px;
+  align-items: center;
+  border-radius: 4px;
+  overflow: hidden;
+  color: var(--text-secondary-color);
+
+  svg {
+    fill: currentColor;
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  &:active {
+    color: var(--text-primary-color)
+  }
+
+  &.nav__item--active {
+    color: var(--text-primary-color)
+  }
+}
+
+.nav__item__icon {
+  height: 24px;
+  width: 24px;
+  margin: -2px 16px -2px 0;
+}

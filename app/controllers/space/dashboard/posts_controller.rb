@@ -1,4 +1,4 @@
-class Space::Dashboard::PostsController < ApplicationController
+class Space::Dashboard::PostsController < Space::Dashboard::BaseController
   def index
   end
 end

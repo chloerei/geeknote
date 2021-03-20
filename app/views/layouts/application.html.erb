@@ -51,7 +51,7 @@
       </div>
     </div>
     <div class="app-content">
-      <%= yield %>
+      <%= content_for?(:app_content) ? yield(:app_content) : yield %>
     </div>
   </div>
 <% end %>

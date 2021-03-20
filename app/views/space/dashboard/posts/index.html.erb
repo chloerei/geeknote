@@ -1,0 +1,53 @@
+<div class="toolbar margin-bottom">
+  <div class="toolbar__title">
+    Posts
+  </div>
+  <div class="toolbar__action dropdown" data-controller="dropdown">
+    <button type="button" class="button button--text" data-action="dropdown#toggle">
+      <div class="button__label">
+        All posts
+      </div>
+      <div class="button__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+      </div>
+    </button>
+    <div class="dropdown__menu dropdown__menu--top-right">
+      <a href="#" class="dropdown__item">All posts</a>
+      <a href="#" class="dropdown__item">Draft posts</a>
+      <a href="#" class="dropdown__item">Published posts</a>
+      <a href="#" class="dropdown__item">Scheduled posts</a>
+      <a href="#" class="dropdown__item">Trashed posts</a>
+    </div>
+  </div>
+  <div class="toolbar__action">
+    <a href="#" class="button button--contained button--primary">
+      New Post
+    </a>
+  </div>
+</div>
+
+<table class="table table--flex">
+  <thead>
+    <tr>
+      <th class="table__cell--title">Title</th>
+      <th class="table__cell--attribute">Status</th>
+      <th class="table__cell--action"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% 20.times do %>
+      <tr>
+        <td class="table__cell--title">
+          <div class="text-primary text-bold">
+            Post title
+          </div>
+          <div class="text-secondary">
+            By author &centerdot; 1 day ago
+          </div>
+        </td>
+        <td class="table__cell--attribute">Status</td>
+        <td class="table__cell--action"></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

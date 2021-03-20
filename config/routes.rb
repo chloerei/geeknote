@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :posts
 
     namespace :dashboard do
+      root to: 'home#index'
       resources :posts
     end
   end
