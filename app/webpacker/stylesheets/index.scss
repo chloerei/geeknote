@@ -15,6 +15,8 @@
 
 .app-content {
   flex-grow: 1;
+  overflow: auto;
+  padding: 16px 0;
 }
 
 .alert {
@@ -23,5 +25,85 @@
   border: 1px solid #F44336;
   border-radius: 4px;
   background: lighten(#F44336, 30%);
+  margin-bottom: 16px;
+}
+
+.row {
+  display: flex;
+}
+
+.col {
+}
+
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    width: $i / 12 * 100%;
+  }
+}
+
+.profile {
+  padding: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.profile__avatar {
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.profile__name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.profile__description {
+  margin-bottom: 16px;
+}
+
+.profile__meta {
+  margin-bottom: 16px;
+}
+
+.post-list {
+}
+
+.post-list__item {
+  padding: 16px;
+}
+
+.post-list__item__meta {
+}
+
+.post-list__item__author {
+}
+
+.post-list__item__title {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.post-list__item__summary {
+}
+
+.post-list__item__footer {
+  margin: 0 -12px;
+}
+
+.button--text {
+  min-width: 0;
+
+  .button__icon {
+    margin-right: 0;
+  }
+
+  .button__icon + .button__label {
+    margin-left: 8px;
+  }
+}
+
+.margin-bottom {
   margin-bottom: 16px;
 }
