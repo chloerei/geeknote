@@ -44,9 +44,6 @@
 
 .profile {
   padding: 16px;
-  position: sticky;
-  top: 0;
-  z-index: 1;
 }
 
 .profile__avatar {
@@ -148,4 +145,10 @@
 
 .text-bold {
   font-weight: bold;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }

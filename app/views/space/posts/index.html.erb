@@ -1,34 +1,36 @@
 <div class="container">
   <div class="row">
     <div class="col-2">
-      <div class="profile">
-        <div class="profile__avatar">
-          <img src="<%= asset_pack_path 'media/images/avatar.png' %>">
-        </div>
-        <div class="profile__name">
-          <%= @space.owner.name %>
-        </div>
-        <div class="profile__description">
-          <%= @space.owner.bio %>
-        </div>
-        <div class="profile__meta">
-          10 follwing <br> 200 follwers
-        </div>
-        <div class="profile__action">
-          <button type="button" class="button button--contained button--primary">
-            Follow
-          </button>
-          <div class="dropdown" data-controller="dropdown">
-            <button type="button" class="button button--text" data-action="dropdown#toggle">
-              <div class="button__icon">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-              </div>
+      <div class="sidebar">
+        <div class="profile">
+          <div class="profile__avatar">
+            <img src="<%= asset_pack_path 'media/images/avatar.png' %>">
+          </div>
+          <div class="profile__name">
+            <%= @space.owner.name %>
+          </div>
+          <div class="profile__description">
+            <%= @space.owner.bio %>
+          </div>
+          <div class="profile__meta">
+            10 follwing <br> 200 follwers
+          </div>
+          <div class="profile__action">
+            <button type="button" class="button button--contained button--primary">
+              Follow
             </button>
-            <div class="dropdown__menu">
-              <a href="<%= space_dashboard_root_path(space_path: @space.path) %>" class="dropdown__item">Dashboard</a>
-              <hr class="divider">
-              <a href="#" class="dropdown__item">Block</a>
-              <a href="#" class="dropdown__item">Report</a>
+            <div class="dropdown" data-controller="dropdown">
+              <button type="button" class="button button--text" data-action="dropdown#toggle">
+                <div class="button__icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                </div>
+              </button>
+              <div class="dropdown__menu">
+                <a href="<%= space_dashboard_root_path(space_path: @space.path) %>" class="dropdown__item">Dashboard</a>
+                <hr class="divider">
+                <a href="#" class="dropdown__item">Block</a>
+                <a href="#" class="dropdown__item">Report</a>
+              </div>
             </div>
           </div>
         </div>
