@@ -1,0 +1,34 @@
+.cm-content {
+  padding: 12px;
+  outline: none;
+  white-space: pre;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+.cm-placeholder {
+  color: var(--text-secondary-color);
+}
+
+.cmt-meta {
+  color: var(--text-secondary-color);
+}
+
+.cmt-strong {
+  font-weight: bold;
+
+  &.cmt-meta {
+    color: var(--text-primary-color);
+  }
+}
+
+.cmt-heading {
+  font-weight: bold;
+}
+
+.cmt-emphasis {
+  font-style: italic;
+}
+
+.cmt-url {
+}
