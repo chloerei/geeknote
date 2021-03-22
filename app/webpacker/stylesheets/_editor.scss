@@ -32,3 +32,32 @@
 
 .cmt-url {
 }
+
+.editor-toolbar {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.editor-toolbar__button {
+  border: none;
+  padding: 6px;
+  line-height: 0;
+  background: transparent;
+  outline: none;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+
+  svg {
+    height: 24px;
+    width: 24px;
+    fill: currentColor;
+  }
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.9);
+  }
+}
+
+.editor-toolbar__button--disabled {
+  color: rgba(0, 0, 0, 0.3);
+}
