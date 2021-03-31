@@ -50,6 +50,25 @@ function linePrependCommand(mark) {
   }
 }
 
+function insertLink(view) {
+  view.dispatch(
+    view.state.changeByRange(range => {
+      let text = view.state.sliceDoc(range.from, range.to)
+      if (text == '') {
+        text = 'text'
+      }
+
+      let url = 'https://'
+
+      return {
+        changes: [{ from: range.from, to: range.to, insert: `[${text}](${url})` }],
+          range: EditorSelection.range(range.from + text.length + 3, range.from + text.length + url.length + 3)
+      }
+    })
+  )
+  view.focus()
+}
+
 const toolbarItemOptions = {
   bold: {
     icon: '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"/></svg>',
@@ -69,7 +88,7 @@ const toolbarItemOptions = {
   },
   link: {
     icon: '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>',
-    command: () => { alert('not implement!') }
+    command: insertLink
   },
   image: {
     icon: '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4.86 8.86l-3 3.87L9 13.14 6 17h12l-3.86-5.14z"/></svg>',
