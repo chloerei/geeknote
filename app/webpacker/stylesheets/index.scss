@@ -1,6 +1,7 @@
 @import 'campo-ui/src/css/campo-ui';
 @import 'nav';
 @import 'editor';
+@import 'codemirror';
 
 .container {
   max-width: 1280px;
@@ -15,10 +16,13 @@
   box-shadow: none;
 }
 
+.app-bar {
+  z-index: 10;
+}
+
 .app-content {
   flex-grow: 1;
   overflow: auto;
-  padding: 16px 0;
 }
 
 .alert {
