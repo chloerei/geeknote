@@ -62,7 +62,29 @@ function insertLink(view) {
 
       return {
         changes: [{ from: range.from, to: range.to, insert: `[${text}](${url})` }],
-          range: EditorSelection.range(range.from + text.length + 3, range.from + text.length + url.length + 3)
+        range: EditorSelection.range(range.from + text.length + 3, range.from + text.length + url.length + 3)
+      }
+    })
+  )
+  view.focus()
+}
+
+function wrapCode(view) {
+  view.dispatch(
+    view.state.changeByRange(range => {
+      let lineFrom = view.state.doc.lineAt(range.from)
+      let lineTo = view.state.doc.lineAt(range.to)
+
+      if (lineFrom.number != lineTo.number || (lineFrom.from == range.from && lineTo.to == range.to)) {
+        return {
+          changes: [{ from: lineFrom.from, insert: "```lang\n" }, { from: lineTo.to, insert: "\n```"}],
+          range: EditorSelection.range(lineFrom.from + 3, lineFrom.from + 7)
+        }
+      } else {
+        return {
+          changes: [{ from: range.from, insert: '`' }, { from: range.to, insert: '`'}],
+          range: EditorSelection.range(range.from + 1, range.to + 1)
+        }
       }
     })
   )
@@ -100,7 +122,7 @@ const toolbarItemOptions = {
   },
   code: {
     icon: '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>',
-    command: () => { alert('not implement!') }
+    command: wrapCode
   },
 }
 
