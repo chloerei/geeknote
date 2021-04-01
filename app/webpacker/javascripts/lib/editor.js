@@ -30,7 +30,7 @@ class Editor {
             ...historyKeymap,
           ]),
           markdown(),
-          toolbar()
+          toolbar(options)
         ]
       }),
       parent: element
