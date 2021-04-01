@@ -1,4 +1,4 @@
-<div class="app-bar-wrapper">
+<div class="app-bar-wrapper" data-controller="post-editor" data-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>">
   <div class="app-bar">
     <div class="container">
       <div class="toolbar">
@@ -39,9 +39,12 @@
         </div>
         <div class="col-8">
           <div class="post-editor__container">
-            <input type="text" class="post-editor__title" placeholder="Title">
-            <div class="editor" data-controller="editor" data-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>">
-            </div>
+            <%= form_with model: @post, url: [@space, :dashboard, @post] do |form| %>
+              <%= form.text_field :title, placeholder: 'Title', autocomplete: 'off', class: 'post-editor__title', "data-post-editor-target": 'titleInput' %>
+              <%= form.hidden_field :content, "data-post-editor-target": 'contentInput' %>
+              <div data-post-editor-target="contentEditor">
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

@@ -9,9 +9,14 @@ class ToolbarItem {
   constructor(view, options) {
     this.view = view
     this.options = options
-    this.dom = document.createElement('button')
-    this.dom.className = 'editor-toolbar__button'
-    this.dom.innerHTML = options.icon
+
+    let button = document.createElement('button')
+    button.type = 'button'
+    button.className = 'editor-toolbar__button'
+    button.innerHTML = options.icon
+    button.tabIndex = '-1'
+
+    this.dom = button
 
     this.dom.addEventListener('click', () => {
       this.options.command(this.view)
@@ -198,5 +203,5 @@ class ToolbarPlugin {
 }
 
 export function toolbar(options) {
-  return ViewPlugin.define(view => { return new ToolbarPlugin(view, options) })
+  return ViewPlugin.define(view => new ToolbarPlugin(view, options))
 }

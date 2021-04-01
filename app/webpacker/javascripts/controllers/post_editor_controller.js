@@ -7,9 +7,12 @@ export default class extends Controller {
     directUploadUrl: String
   }
 
+  static targets = ['contentEditor', 'contentInput']
+
   connect() {
     const directUploadUrl = this.directUploadUrlValue
-    this.editor = new Editor(this.element, {
+    this.editor = new Editor(this.contentEditorTarget, {
+      input: this.contentInputTarget,
       uploadImage: (file) => {
         return new Promise(function(resolve, reject) {
           const upload = new DirectUpload(file, directUploadUrl)

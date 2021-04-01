@@ -20,7 +20,7 @@
 
 .cm-content {
   flex-grow: 2;
-  padding: 8px;
+  padding: 8px 0;
   outline: none;
   white-space: pre-wrap;
   font-family: monospace;
@@ -31,7 +31,7 @@
 
 .cm-line {
   display: block;
-  padding: 0 2px 0 4px;
+  padding: 0;
 }
 
 .cm-lineWrapping {

@@ -12,11 +12,15 @@ import { StyleModule } from "style-mod"
 StyleModule.mount = () => { /* Disabled it ! */ }
 
 import { toolbar } from './editor/toolbar'
+import { syncInput } from './editor/sync_input'
 
 class Editor {
   constructor(element, options = {}) {
+    this.element = element
+    this.options = options
     this.editorView = new EditorView({
       state: EditorState.create({
+        doc: this.options.input ? this.options.input.value : '',
         extensions: [
           history(),
           indentOnInput(),
@@ -30,7 +34,8 @@ class Editor {
             ...historyKeymap,
           ]),
           markdown(),
-          toolbar(options)
+          toolbar(options),
+          syncInput(this.options.input)
         ]
       }),
       parent: element

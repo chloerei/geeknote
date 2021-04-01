@@ -172,20 +172,5 @@
   border: none;
   outline: 0;
   margin-bottom: 16px;
-}
-
-.post-editor__toolbar {
-  border-bottom: 1px solid var(--border-color);
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  display: flex;
-
-  .button--toggle {
-    color: var(--text-secondary-color);
-
-    svg {
-      fill: currentColor;
-    }
-  }
+  padding: 0;
 }
