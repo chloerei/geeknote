@@ -3,7 +3,7 @@
     <div class="container">
       <div class="toolbar">
         <div class="toolbar__action">
-          <a href="#" class="button button--text">
+          <a href="<%= space_dashboard_posts_path %>" class="button button--text">
             <div class="button__icon">
               <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59z"/></svg>
             </div>
@@ -39,7 +39,7 @@
         </div>
         <div class="col-8">
           <div class="post-editor__container">
-            <%= form_with model: @post, url: [@space, :dashboard, @post] do |form| %>
+            <%= form_with model: @post, url: [@space, :dashboard, @post], data: { 'post-editor-target': 'form' } do |form| %>
               <%= form.text_field :title, placeholder: 'Title', autocomplete: 'off', class: 'post-editor__title', "data-post-editor-target": 'titleInput' %>
               <%= form.hidden_field :content, "data-post-editor-target": 'contentInput' %>
               <div data-post-editor-target="contentEditor">
