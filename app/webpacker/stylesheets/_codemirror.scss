@@ -23,6 +23,7 @@
   padding: 8px 0;
   outline: none;
   white-space: pre-wrap;
+  word-break: break-word;
   font-family: monospace;
   font-size: 18px;
   min-height: 800px;
@@ -75,7 +76,6 @@
 }
 
 .cmt-link {
-  word-break: break-all;
 }
 
 .cmt-url {
