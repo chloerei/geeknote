@@ -14,7 +14,11 @@ Rails.application.routes.draw do
 
     namespace :dashboard do
       root to: 'home#index'
-      resources :posts
+      resources :posts do
+        scope module: 'posts' do
+          resource :status, only: [:update]
+        end
+      end
     end
   end
 end

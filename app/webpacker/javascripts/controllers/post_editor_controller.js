@@ -126,7 +126,7 @@ export default class extends Controller {
       if (location) {
         let url = new URL(location)
         Turbo.navigator.history.replace(url)
-        this.formTarget.setAttribute('action', url.pathname)
+        this.formTarget.setAttribute('action', url.pathname.slice(0, -5)) // remove '/edit'
         let methodInput = document.createElement('input')
         methodInput.type = 'hidden'
         methodInput.name = '_method'

@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2021_04_01_083351) do
     t.bigint "author_id"
     t.string "title"
     t.text "content"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_posts_on_author_id"

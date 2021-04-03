@@ -1,24 +1,5 @@
 <div class="app-bar-wrapper" data-controller="post-editor" data-post-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>">
-  <div class="app-bar">
-    <div class="container">
-      <div class="toolbar" id="toolbar">
-        <div class="toolbar__action">
-          <a href="<%= space_dashboard_posts_path %>" class="button button--text">
-            <div class="button__icon">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59z"/></svg>
-            </div>
-            <div class="button__label">
-              Posts
-            </div>
-          </a>
-        </div>
-        <div class="toolbar__title">
-          <div class="text-secondary" data-target="post-editor.saveStatus" data-message-saving="saving..." data-message-saved="saved">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= render 'appbar' %>
   <div class="app-content">
     <div class="container">
       <div class="row">
@@ -36,5 +17,7 @@
         </div>
       </div>
     </div>
+  </div>
+  <div id="snackbar-container" class="snackbar-container">
   </div>
 </div>

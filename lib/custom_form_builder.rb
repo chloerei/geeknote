@@ -30,4 +30,12 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
       end
     end
   end
+
+  def radio_button(attribute, tag_value, options = {})
+    @template.content_tag(:label, class: 'radio') do
+      super(attribute, tag_value, options) +
+      @template.content_tag(:div, class: 'radio__icon') do
+      end
+    end
+  end
 end
