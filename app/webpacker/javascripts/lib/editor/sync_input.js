@@ -9,7 +9,7 @@ class SyncInputPlugin {
   update(viewUpdate) {
     if (viewUpdate.docChanged) {
       this.input.value = this.view.state.doc.toString()
-      this.input.dispatchEvent(new Event('change'))
+      this.input.dispatchEvent(new Event('input', { bubbles: true }))
     }
   }
 

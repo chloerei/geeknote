@@ -4,13 +4,23 @@ class Space::Dashboard::PostsController < Space::Dashboard::BaseController
 
   def new
     @post = @space.posts.new
-    render layout: 'base'
+    render 'editor', layout: 'base'
   end
 
   def create
     @post = @space.posts.new post_params.merge(author: current_user)
     @post.save!
     headers['Location'] = edit_space_dashboard_post_url(@space, @post)
+  end
+
+  def edit
+    @post = @space.posts.find params[:id]
+    render 'editor', layout: 'base'
+  end
+
+  def update
+    @post = @space.posts.find params[:id]
+    @post.update post_params
   end
 
   private
