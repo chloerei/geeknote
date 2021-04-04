@@ -1,21 +1,13 @@
 <div class="app-bar-wrapper" data-controller="post-editor" data-post-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>">
   <%= render 'appbar' %>
   <div class="app-content">
-    <div class="container">
-      <div class="row">
-        <div class="col-2">
+    <div class="post-editor__container">
+      <%= form_with model: @post, url: [@space, :dashboard, @post], data: { 'post-editor-target': 'form' } do |form| %>
+        <%= form.text_field :title, placeholder: 'Title', autocomplete: 'off', class: 'post-editor__title', "data-post-editor-target": 'titleInput' %>
+        <%= form.hidden_field :content, "data-post-editor-target": 'contentInput' %>
+        <div data-post-editor-target="contentEditor">
         </div>
-        <div class="col-8">
-          <div class="post-editor__container">
-            <%= form_with model: @post, url: [@space, :dashboard, @post], data: { 'post-editor-target': 'form' } do |form| %>
-              <%= form.text_field :title, placeholder: 'Title', autocomplete: 'off', class: 'post-editor__title', "data-post-editor-target": 'titleInput' %>
-              <%= form.hidden_field :content, "data-post-editor-target": 'contentInput' %>
-              <div data-post-editor-target="contentEditor">
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
+      <% end %>
     </div>
   </div>
   <div id="snackbar-container" class="snackbar-container">
