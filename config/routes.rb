@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       root to: 'home#index'
       resources :posts do
         scope module: 'posts' do
+          resource :preview, only: [:create]
           resource :status, only: [:update]
         end
       end
