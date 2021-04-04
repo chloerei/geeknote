@@ -18,8 +18,8 @@
 }
 
 .post__info__avatar {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   margin-right: 8px;
 }
 
@@ -30,6 +30,11 @@
   font-size: 16px;
   line-height: 20px;
   font-weight: bold;
+
+   a {
+     color: var(--text-primary-color);
+     text-decoration: none;
+   }
 }
 
 .post__info__time {
