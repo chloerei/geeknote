@@ -1,0 +1,39 @@
+.post-container {
+  max-width: 768px;
+  padding: 60px 16px;
+  margin: 0 auto;
+  max-width: 768px;
+}
+
+.post__title {
+  font-size: 3em;
+  font-weight: bold;
+  margin: 0 0 16px;
+  padding: 0;
+}
+
+.post__info {
+  display: flex;
+  align-items: center;
+}
+
+.post__info__avatar {
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+}
+
+.post__info__content {
+}
+
+.post__info__author-name {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: bold;
+}
+
+.post__info__time {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-secondary-color);
+}

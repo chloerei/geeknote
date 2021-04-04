@@ -1,0 +1,21 @@
+<div class="post-container">
+  <div class="post">
+    <h1 class="post__title"><%= @post.title %></h1>
+    <div class="post__info">
+      <div class="post__info__avatar">
+        <%= image_tag asset_pack_path('media/images/avatar.png') %>
+      </div>
+      <div class="post__info__content">
+        <div class="post__info__author-name">
+          <%= @post.author.name %>
+        </div>
+        <div class="post__info__time">
+          <%= l @post.created_at, format: :short %>
+        </div>
+      </div>
+    </div>
+    <div class="post__content">
+      <%= markdown_render @post.content %>
+    </div>
+  </div>
+</div>

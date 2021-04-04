@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resources :posts
 
+  get 'attachments/:key/:filename', to: 'attachments#show'
+
   scope '/:space_path', module: 'space', as: :space do
     root to: 'posts#index'
     resources :posts
