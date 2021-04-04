@@ -191,3 +191,12 @@
 .dropdown__menu--paddingless {
   padding: 0;
 }
+
+.typography {
+  font-size: 18px;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary-color);
+    margin: 1em 0;
+  }
+}
