@@ -1,11 +1,11 @@
-<div class="app-bar-wrapper" data-controller="post-editor" data-post-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>">
+<div class="app-bar-wrapper post-editor" data-controller="post-editor" data-post-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>">
   <%= render 'appbar' %>
   <div class="app-content">
     <div class="post-editor__container">
-      <%= form_with model: @post, url: [@space, :dashboard, @post], data: { 'post-editor-target': 'form' } do |form| %>
+      <%= form_with model: @post, url: [@space, :dashboard, @post], data: { 'post-editor-target': 'form' }, class: 'post-editor__form' do |form| %>
         <%= form.text_field :title, placeholder: 'Title', autocomplete: 'off', class: 'post-editor__title', "data-post-editor-target": 'titleInput' %>
         <%= form.hidden_field :content, "data-post-editor-target": 'contentInput' %>
-        <div data-post-editor-target="contentEditor">
+        <div class="post-editor__content-editor" data-post-editor-target="contentEditor">
         </div>
       <% end %>
     </div>
