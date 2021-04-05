@@ -41,6 +41,10 @@ class Editor {
       parent: element
     })
   }
+
+  focus() {
+    this.editorView.focus()
+  }
 }
 
 export { Editor }

@@ -95,11 +95,13 @@
 .post-editor__title {
   width: 100%;
   font-size: 3em;
+  line-height: 1.5;
   font-weight: bold;
   border: none;
   outline: 0;
   margin: 60px 0 16px;
   padding: 0;
+  resize: none;
 }
 
 .post-editor__content-editor {

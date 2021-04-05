@@ -10,10 +10,20 @@ export default class extends Controller {
     directUploadUrl: String
   }
 
-  static targets = ['form', 'contentEditor', 'contentInput', 'saveStatus']
+  static targets = ['form', 'titleInput', 'contentEditor', 'contentInput', 'saveStatus']
 
   connect() {
     this.initEditor()
+
+    this.resizeTitle()
+    this.titleInputTarget.addEventListener('keydown', (event) => {
+      // Enter
+      if (event.keyCode == 13) {
+        event.preventDefault()
+        this.editor.focus()
+      }
+    })
+    this.titleInputTarget.addEventListener('input', this.resizeTitle.bind(this))
 
     this.formTarget.addEventListener('turbo:submit-end', this.submitEnd.bind(this))
 
@@ -23,6 +33,11 @@ export default class extends Controller {
     this.formTarget.addEventListener('input', () => {
       this.autoSave()
     })
+  }
+
+  resizeTitle() {
+    this.titleInputTarget.style.height = 0
+    this.titleInputTarget.style.height = this.titleInputTarget.scrollHeight + 'px'
   }
 
   disconnect() {
