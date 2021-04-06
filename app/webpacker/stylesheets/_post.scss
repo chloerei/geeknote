@@ -109,3 +109,13 @@
   display: flex;
   flex-direction: column;
 }
+
+.post-editor__toolbar {
+  background: #fafafa;
+}
+
+.post-editor__toolbar-container {
+  padding: 0 4px;
+  margin: 0 auto;
+  max-width: 768px;
+}

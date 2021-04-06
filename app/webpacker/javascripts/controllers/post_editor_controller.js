@@ -10,7 +10,7 @@ export default class extends Controller {
     directUploadUrl: String
   }
 
-  static targets = ['form', 'titleInput', 'contentEditor', 'contentInput', 'saveStatus']
+  static targets = ['form', 'titleInput', 'contentEditor', 'contentInput', 'saveStatus', 'toolbarContainer']
 
   connect() {
     this.initEditor()
@@ -59,6 +59,9 @@ export default class extends Controller {
             }
           })
         })
+      },
+      toolbar: {
+        parent: this.toolbarContainerTarget
       }
     })
   }

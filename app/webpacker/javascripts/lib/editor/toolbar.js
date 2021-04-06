@@ -192,7 +192,11 @@ class ToolbarPlugin {
       this.dom.appendChild(item.dom)
     }
 
-    view.dom.insertBefore(this.dom, view.dom.firstChild)
+    if (this.options.toolbar.parent) {
+      this.options.toolbar.parent.appendChild(this.dom)
+    } else {
+      view.dom.insertBefore(this.dom, view.dom.firstChild)
+    }
   }
 
   update(viewUpdate) {
