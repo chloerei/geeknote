@@ -33,6 +33,14 @@ export default class extends Controller {
     this.formTarget.addEventListener('input', () => {
       this.autoSave()
     })
+
+    this.formTarget.addEventListener('keydown', () => {
+      this.editing()
+    })
+
+    this.element.addEventListener('mousemove', () => {
+      this.viewing()
+    })
   }
 
   resizeTitle() {
@@ -64,6 +72,14 @@ export default class extends Controller {
         parent: this.toolbarContainerTarget
       }
     })
+  }
+
+  editing() {
+    this.element.classList.add('post-editor--editing')
+  }
+
+  viewing() {
+    this.element.classList.remove('post-editor--editing')
   }
 
   autoSave() {

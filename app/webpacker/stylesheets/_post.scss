@@ -119,3 +119,16 @@
   margin: 0 auto;
   max-width: 768px;
 }
+
+.post-editor__appbar,
+.post-editor__toolbar {
+  transition: opacity 0.3s;
+}
+
+.post-editor--editing {
+  .post-editor__appbar,
+  .post-editor__toolbar {
+    transition: opacity 1s;
+    opacity: 0;
+  }
+}
