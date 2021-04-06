@@ -21,6 +21,10 @@ class Space::Dashboard::PostsController < Space::Dashboard::BaseController
   def update
     @post = @space.posts.find params[:id]
     @post.update post_params
+
+    if params[:submit] == 'preview'
+      render :preview
+    end
   end
 
   private

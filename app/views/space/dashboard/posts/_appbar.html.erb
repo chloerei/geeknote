@@ -12,11 +12,9 @@
     </div>
     <% if !@post.new_record? %>
       <div class="toolbar__action">
-        <%= form_with url: space_dashboard_post_preview_path(@space, @post) do %>
-          <button type="submit" class="button button--text button--primary">
-            Preview
-          </button>
-        <% end %>
+        <button type="submit" class="button button--text button--primary" name="submit" value="preview" form="post-form">
+          Preview
+        </button>
       </div>
       <div class="toolbar__action">
         <%= render 'space/dashboard/posts/statuses/button' %>

@@ -2,7 +2,7 @@
   <%= render 'appbar' %>
   <div class="app-content">
     <div class="post-editor__container">
-      <%= form_with model: @post, url: [@space, :dashboard, @post], data: { 'post-editor-target': 'form' }, class: 'post-editor__form' do |form| %>
+      <%= form_with model: @post, url: [@space, :dashboard, @post], data: { 'post-editor-target': 'form' }, class: 'post-editor__form', id: 'post-form' do |form| %>
         <%= form.text_area :title, placeholder: 'Post Title', autocomplete: 'off', class: 'post-editor__title', "data-post-editor-target": 'titleInput' %>
         <%= form.hidden_field :content, "data-post-editor-target": 'contentInput' %>
         <div class="post-editor__content-editor" data-post-editor-target="contentEditor">
