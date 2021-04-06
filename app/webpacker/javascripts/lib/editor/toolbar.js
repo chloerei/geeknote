@@ -193,6 +193,7 @@ class ToolbarPlugin {
     }
 
     if (this.options.toolbar.parent) {
+      this.options.toolbar.parent.innerHTML = ''
       this.options.toolbar.parent.appendChild(this.dom)
     } else {
       view.dom.insertBefore(this.dom, view.dom.firstChild)

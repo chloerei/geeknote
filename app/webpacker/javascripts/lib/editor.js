@@ -19,6 +19,7 @@ class Editor {
   constructor(element, options = {}) {
     this.element = element
     this.options = options
+    this.element.innerHTML = ''
     this.editorView = new EditorView({
       state: EditorState.create({
         doc: this.options.input ? this.options.input.value : '',
