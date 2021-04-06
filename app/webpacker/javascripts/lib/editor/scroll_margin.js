@@ -4,7 +4,7 @@ export function scrollMargin() {
   return ViewPlugin.fromClass(class {
     constructor() {
       this.margin = {
-        bottom: 100
+        bottom: 160
       }
     }
   }, {
