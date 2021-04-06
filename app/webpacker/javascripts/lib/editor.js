@@ -13,6 +13,7 @@ StyleModule.mount = () => { /* Disabled it ! */ }
 
 import { toolbar } from './editor/toolbar'
 import { syncInput } from './editor/sync_input'
+import { scrollMargin } from './editor/scroll_margin'
 
 class Editor {
   constructor(element, options = {}) {
@@ -35,7 +36,8 @@ class Editor {
           ]),
           markdown(),
           toolbar(options),
-          syncInput(this.options.input)
+          syncInput(this.options.input),
+          scrollMargin()
         ]
       }),
       parent: element
