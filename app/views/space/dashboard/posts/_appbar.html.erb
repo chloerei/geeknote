@@ -7,7 +7,7 @@
     </div>
     <div class="toolbar__title">
       <%= @post.draft? ? 'Draft' : 'Published' %> in <%= @space.owner.name %>
-      <span class="post-editor__save-status" data-post-editor-target="saveStatus" data-message-saving="saving..." data-message-saved="saved">
+      <span class="post-editor__save-status" data-post-editor-target="saveStatus" data-message-saving="saving..." data-message-saved="saved" data-message-save-failed="save faild!">
       </span>
     </div>
     <% if !@post.new_record? %>

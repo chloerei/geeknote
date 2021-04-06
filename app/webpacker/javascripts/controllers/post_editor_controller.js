@@ -2,6 +2,7 @@ import { Controller } from "stimulus"
 import { Editor } from "../lib/editor"
 import { DirectUpload } from "@rails/activestorage"
 import { Turbo } from '@hotwired/turbo-rails'
+import { Snackbar } from '../lib/snackbar'
 
 const isMac = /Mac/.test(navigator.platform)
 
@@ -142,6 +143,10 @@ export default class extends Controller {
     this.saveStatusTarget.textContent = this.saveStatusTarget.dataset.messageSaved
   }
 
+  displaySaveFailed() {
+    this.saveStatusTarget.textContent = this.saveStatusTarget.dataset.messageSaveFailed
+  }
+
   save() {
     if (!this.saving) {
       this.saving = true
@@ -168,8 +173,9 @@ export default class extends Controller {
         this.formTarget.appendChild(methodInput)
       }
     } else {
-      // TODO: errror notice and save local
+      // TODO: save local
+      this.displaySaveFailed()
+      Snackbar.display('Save failed! Please check your network and refresh.', 30000)
     }
-
   }
 }
