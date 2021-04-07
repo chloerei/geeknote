@@ -30,3 +30,9 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries: "1 - %{count} of %{count}"
+      more_pages:
+        display_entries: "%{first} - %{last} of %{total}"

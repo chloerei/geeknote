@@ -1,6 +1,6 @@
 class Space::Dashboard::PostsController < Space::Dashboard::BaseController
   def index
-    @posts = @space.posts.order(updated_at: :desc)
+    @posts = @space.posts.order(updated_at: :desc).page(params[:page])
   end
 
   def new

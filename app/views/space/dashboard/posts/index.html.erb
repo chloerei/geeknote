@@ -61,6 +61,16 @@
             <% end %>
           </tbody>
         </table>
+        <div class="toolbar border-top">
+          <div class="toolbar__space">
+          </div>
+          <div class="toolbar__text">
+            <%= page_entries_info @posts %>
+          </div>
+          <div class="toolbar__action">
+            <%= paginate @posts %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
