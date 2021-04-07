@@ -5,6 +5,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.belongs_to :author
       t.string :title
       t.text :content
+      t.text :summary
       t.integer :status, default: 0
       t.string :preview_token
 

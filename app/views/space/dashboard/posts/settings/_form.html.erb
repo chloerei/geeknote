@@ -1,0 +1,8 @@
+<%= form_with model: @post, url: space_dashboard_post_settings_path(@space, @post), builder: CustomFormBuilder, class: 'form', id: 'settings-form' do |form| %>
+  <div class="form__field">
+    <%= form.text_area :summary %>
+  </div>
+  <button type="submit" class="button button--contained button--primary">
+    Save changes
+  </button>
+<% end %>

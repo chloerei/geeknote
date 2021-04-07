@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :posts do
         scope module: 'posts' do
           resource :status, only: [:update]
+          resource :settings, only: [:show, :update]
         end
       end
     end

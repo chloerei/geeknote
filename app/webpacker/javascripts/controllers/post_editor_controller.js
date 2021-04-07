@@ -165,12 +165,14 @@ export default class extends Controller {
       if (location) {
         let url = new URL(location)
         Turbo.navigator.history.replace(url)
-        this.formTarget.setAttribute('action', url.pathname.slice(0, -5)) // remove '/edit'
+        let resourcePath = url.pathname.slice(0, -5) // remove '/edit'
+        this.formTarget.setAttribute('action', resourcePath)
         let methodInput = document.createElement('input')
         methodInput.type = 'hidden'
         methodInput.name = '_method'
         methodInput.value = 'PUT'
         this.formTarget.appendChild(methodInput)
+        document.querySelector('#settings').setAttribute('src', resourcePath + '/settings')
       }
     } else {
       // TODO: save local

@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2021_04_01_083351) do
     t.bigint "author_id"
     t.string "title"
     t.text "content"
+    t.text "summary"
     t.integer "status", default: 0
     t.string "preview_token"
     t.datetime "created_at", precision: 6, null: false
