@@ -3,6 +3,7 @@
 @import 'editor';
 @import 'codemirror';
 @import 'post';
+@import 'clipboard';
 
 .container {
   max-width: 1280px;
@@ -24,6 +25,11 @@
 
 .toolbar {
   padding: 4px;
+}
+
+.toolbar__text {
+  padding: 12px;
+  line-height: 24px;
 }
 
 .app-content {
@@ -187,4 +193,14 @@
     width: 100%;
     height: 100%;
   }
+}
+
+.text-field__trailing-icon {
+  .button--icon {
+    margin: -8px -8px 0 0;
+  }
+}
+
+.flex-justify-content-center {
+  justify-content: center;
 }

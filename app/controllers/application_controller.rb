@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def render_not_found
+    render file: Rails.root.join('public/404.html'), layout: false, status: :not_found
+  end
+
   def require_sign_in
     unless current_user
       return_path = request.get? ? request.path : URI(request.referer.presence || '/').path

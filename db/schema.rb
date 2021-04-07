@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_04_01_083351) do
     t.string "title"
     t.text "content"
     t.integer "status", default: 0
+    t.string "preview_token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_posts_on_author_id"

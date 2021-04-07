@@ -3,13 +3,13 @@
     <h1 class="post__title"><%= @post.title %></h1>
     <div class="post__info">
       <div class="post__info__avatar">
-        <a href="<%= space_post_path(@post.author.space) %>">
+        <a href="<%= space_root_path(@post.author.space) %>">
           <%= image_tag asset_pack_path('media/images/avatar.png') %>
         </a>
       </div>
       <div class="post__info__content">
         <div class="post__info__author-name">
-          <a href="<%= space_post_path(@post.author.space) %>">
+          <a href="<%= space_root_path(@post.author.space) %>">
             <%= @post.author.name %>
           </a>
         </div>

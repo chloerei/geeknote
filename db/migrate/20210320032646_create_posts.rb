@@ -6,6 +6,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.string :title
       t.text :content
       t.integer :status, default: 0
+      t.string :preview_token
 
       t.timestamps
     end

@@ -6,19 +6,22 @@ Rails.application.routes.draw do
   delete 'sign_out', to: 'sessions#destroy', as: 'sign_out'
   resources :sessions, only: [:create]
 
-  resources :posts
 
   get 'attachments/:key/:filename', to: 'attachments#show'
 
   scope '/:space_path', module: 'space', as: :space do
     root to: 'posts#index'
-    resources :posts
+
+    resources :posts do
+      scope module: 'posts' do
+        resource :preview, only: [:show]
+      end
+    end
 
     namespace :dashboard do
       root to: 'home#index'
       resources :posts do
         scope module: 'posts' do
-          resource :preview, only: [:create]
           resource :status, only: [:update]
         end
       end

@@ -12,10 +12,26 @@
         </div>
       </div>
       <div class="flex-grow-1">
-        <iframe src="<%= space_post_path(@space, @post) %>" class="post-preview-iframe">
+        <iframe src="<%= space_post_preview_path(@space, @post, token: @post.preview_token) %>" class="post-preview-iframe">
         </iframe>
       </div>
-      <div class="toolbar__bottom border-top">
+      <div class="toolbar border-top flex-justify-content-center">
+        <div class="toolbar__text">
+          Share link
+        </div>
+        <div class="toolbar__action">
+          <div class="clipboard" data-controller="clipboard">
+            <input type="text" value="<%= space_post_preview_url(@space, @post, token: @post.preview_token) %>" data-clipboard-target="source">
+            <button type="button" class="button button--contained button--primary" data-action="clipboard#copy">
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="toolbar__action">
+          <a href="<%= space_post_preview_path(@space, @post, token: @post.preview_token) %>" class="button button--icon" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </div>
