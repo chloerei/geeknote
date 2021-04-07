@@ -7,18 +7,21 @@
       <div class="toolbar__action dropdown" data-controller="dropdown">
         <button type="button" class="button button--text" data-action="dropdown#toggle">
           <div class="button__label">
-            All posts
+            <% if Post.statuses.include?(params[:status]) %>
+              <%= Post.human_attribute_name("status.#{params[:status]}") %>
+            <% else %>
+              All posts
+            <% end %>
           </div>
           <div class="button__icon">
             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
           </div>
         </button>
         <div class="dropdown__menu dropdown__menu--top-right">
-          <a href="#" class="dropdown__item">All posts</a>
-          <a href="#" class="dropdown__item">Draft posts</a>
-          <a href="#" class="dropdown__item">Published posts</a>
-          <a href="#" class="dropdown__item">Scheduled posts</a>
-          <a href="#" class="dropdown__item">Trashed posts</a>
+          <a href="<%= url_for(post_filter_params.merge(status: nil)) %>" class="dropdown__item">All posts</a>
+          <% Post.statuses.keys.each do |status| %>
+            <a href="<%= url_for(post_filter_params.merge(status: status)) %>" class="dropdown__item"><%= Post.human_attribute_name(status) %></a>
+          <% end %>
         </div>
       </div>
       <div class="toolbar__action">

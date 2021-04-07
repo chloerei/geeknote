@@ -1,6 +1,12 @@
 class Space::Dashboard::PostsController < Space::Dashboard::BaseController
+  helper_method :post_filter_params
+
   def index
     @posts = @space.posts.order(updated_at: :desc).page(params[:page])
+
+    if Post.statuses.include?(params[:status])
+      @posts = @posts.where(status: params[:status])
+    end
   end
 
   def new
@@ -32,5 +38,9 @@ class Space::Dashboard::PostsController < Space::Dashboard::BaseController
 
   def post_params
     params.require(:post).permit(:title, :content)
+  end
+
+  def post_filter_params
+    params.permit(:status)
   end
 end
