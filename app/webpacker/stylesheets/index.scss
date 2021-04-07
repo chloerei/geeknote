@@ -204,3 +204,11 @@
 .flex-justify-content-center {
   justify-content: center;
 }
+
+.table tbody tr:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.toolbar__action .button--last {
+  margin-right: 8px;
+}
