@@ -132,3 +132,29 @@
     opacity: 0;
   }
 }
+
+.post-image-uploader {
+  background: rgba(0, 0, 0, 0.05);
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  overflow: hidden;
+
+  input[type="file"] {
+    display: none;
+  }
+
+  image {
+    max-width: 100%;
+  }
+}
+
+.post-image-uploader__delete-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
