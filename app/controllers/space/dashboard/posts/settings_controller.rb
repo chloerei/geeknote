@@ -15,6 +15,6 @@ class Space::Dashboard::Posts::SettingsController < Space::Dashboard::Posts::Bas
   private
 
   def settings_params
-    params.require(:post).permit(:summary)
+    params.require(:post).permit(:excerpt)
   end
 end
