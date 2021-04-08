@@ -24,7 +24,7 @@ Rails.application.routes.draw do
         scope module: 'posts' do
           resource :status, only: [:update]
           resource :settings, only: [:show, :update]
-          resource :image, only: [:update, :destroy]
+          resource :featured_image, only: [:update, :destroy]
         end
       end
     end
