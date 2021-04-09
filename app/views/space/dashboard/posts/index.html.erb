@@ -58,7 +58,7 @@
                   </div>
                 </td>
                 <td class="table__cell--attribute"></td>
-                <td class="table__cell--attribute"><%= post.status %></td>
+                <td class="table__cell--attribute"><%= Post.human_attribute_name "status.#{post.status}" %></td>
                 <td class="table__cell--action"></td>
               </tr>
             <% end %>

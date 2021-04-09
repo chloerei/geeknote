@@ -6,6 +6,8 @@ class Space::Dashboard::PostsController < Space::Dashboard::BaseController
 
     if Post.statuses.include?(params[:status])
       @posts = @posts.where(status: params[:status])
+    else
+      @posts = @posts.not_trashed
     end
   end
 
@@ -34,6 +36,12 @@ class Space::Dashboard::PostsController < Space::Dashboard::BaseController
     end
   end
 
+  def destroy
+    @post = @space.posts.find params[:id]
+    @post.destroy
+    redirect_to space_dashboard_posts_url(@space)
+  end
+
   private
 
   def post_params
@@ -41,6 +49,6 @@ class Space::Dashboard::PostsController < Space::Dashboard::BaseController
   end
 
   def post_filter_params
-    params.permit(:status)
+    request.params.slice(:status)
   end
 end
