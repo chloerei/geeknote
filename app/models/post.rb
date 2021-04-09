@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  include Taggable
+
   belongs_to :space
   belongs_to :author, class_name: 'User'
 
