@@ -2087,7 +2087,7 @@ camelcase@^5.0.0, camelcase@^5.3.1:
 
 "campo-ui@https://github.com/getcampo/campo-ui.git#dev":
   version "0.0.7"
-  resolved "https://github.com/getcampo/campo-ui.git#9c3977caa01909a878fb668040c3268b57c32547"
+  resolved "https://github.com/getcampo/campo-ui.git#3801acbe4ba6bf8acd5cb2cddfe3ce97939d26cc"
 
 caniuse-api@^3.0.0:
   version "3.0.0"

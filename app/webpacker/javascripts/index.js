@@ -8,8 +8,13 @@ ActiveStorage.start()
 
 import './channels'
 
-import { application } from 'campo-ui/src/js/campo-ui'
+import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
+
+const application = Application.start()
+
+import { init } from "campo-ui/src/js/campo-ui"
+init(application)
 
 const context = require.context("./controllers", true, /\.js$/)
 application.load(definitionsFromContext(context))
