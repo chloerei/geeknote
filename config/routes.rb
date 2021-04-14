@@ -6,8 +6,13 @@ Rails.application.routes.draw do
   delete 'sign_out', to: 'sessions#destroy', as: 'sign_out'
   resources :sessions, only: [:create]
 
-
   get 'attachments/:key/:filename', to: 'attachments#show'
+
+  resources :tags, only: [] do
+    collection do
+      get :search
+    end
+  end
 
   scope '/:space_path', module: 'space', as: :space do
     root to: 'posts#index'
