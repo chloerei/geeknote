@@ -2,12 +2,16 @@ class Space::Dashboard::PostsController < Space::Dashboard::BaseController
   helper_method :post_filter_params
 
   def index
-    @posts = @space.posts.order(updated_at: :desc).page(params[:page])
+    @posts = @space.posts.preload(:tags).order(updated_at: :desc).page(params[:page])
 
     if Post.statuses.include?(params[:status])
       @posts = @posts.where(status: params[:status])
     else
       @posts = @posts.not_trashed
+    end
+
+    if params[:tag]
+      @posts = @posts.tagged_with(params[:tag])
     end
   end
 

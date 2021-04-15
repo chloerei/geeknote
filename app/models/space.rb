@@ -8,4 +8,8 @@ class Space < ApplicationRecord
   def to_param
     path
   end
+
+  def post_tags
+    Tag.joins(:posts).where(posts: { space_id: self.id }).distinct
+  end
 end
