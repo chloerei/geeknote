@@ -3,7 +3,8 @@
     <%= form.text_area :excerpt, data: { action: 'change->form#submit' } %>
   </div>
   <div class="form__field">
-    <div class="selector" data-controller="tag-selector" data-tag-selector-placeholder-value="Tag..." data-tag-selector-creatable-value="true">
+    <label>Tags</label>
+    <div class="selector" data-controller="tag-selector" data-tag-selector-placeholder-value="add tag" data-tag-selector-creatable-value="true">
       <select name="post[tag_list][]" class="selector__select" data-tag-selector-target="select" data-action="change->form#submit" multiple>
         <% @post.tags.each do |tag| %>
           <option value="<%= tag.name %>" selected><%= tag.name %></option>
