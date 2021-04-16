@@ -3,6 +3,7 @@
 @import 'editor';
 @import 'codemirror';
 @import 'post';
+@import 'space';
 @import 'clipboard';
 
 .container {
@@ -58,54 +59,6 @@
   .col-#{$i} {
     width: $i / 12 * 100%;
   }
-}
-
-.profile {
-  padding: 16px;
-}
-
-.profile__avatar {
-  margin-bottom: 16px;
-  line-height: 1;
-}
-
-.profile__name {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 16px;
-}
-
-.profile__description {
-  margin-bottom: 16px;
-}
-
-.profile__meta {
-  margin-bottom: 16px;
-}
-
-.post-list {
-}
-
-.post-list__item {
-  padding: 16px;
-}
-
-.post-list__item__meta {
-}
-
-.post-list__item__author {
-}
-
-.post-list__item__title {
-  font-size: 2em;
-  font-weight: bold;
-}
-
-.post-list__item__summary {
-}
-
-.post-list__item__footer {
-  margin: 0 -12px;
 }
 
 .button--text {

@@ -1,124 +1,91 @@
-<div class="container">
-  <div class="row">
-    <div class="col-2">
-      <div class="sidebar">
-        <div class="profile">
-          <div class="profile__avatar">
-            <img src="<%= asset_pack_path 'media/images/avatar.png' %>">
+<div class="space-container">
+  <div class="space-profile">
+    <div class="space-profile__avatar">
+      <img src="<%= asset_pack_path 'media/images/avatar.png' %>">
+    </div>
+    <div class="space-profile__info">
+      <div class="space-profile__header">
+        <div class="space-profile__name">
+          <%= @space.owner.name %>
+        </div>
+        <div class="dropdown" data-controller="dropdown">
+          <button type="button" class="button button--icon" data-action="dropdown#toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          </button>
+        </div>
+        <a href="#" class="button button--contained button--primary">
+          Follow
+        </a>
+      </div>
+      <div class="space-profile__description">
+        <%= @space.owner.bio %>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab border-top border-bottom">
+    <a href="#" class="tab__item tab__item--active">
+      Posts
+    </a>
+    <a href="#" class="tab__item">
+      Series
+    </a>
+    <a href="#" class="tab__item">
+      Likes
+    </a>
+  </div>
+
+  <div class="space-post-list">
+    <% @space.posts.each do |post| %>
+      <div class="space-post">
+        <a href="<%= space_post_path(@space, post) %>" class="space-post__content">
+          <div class="flex-grow-1">
+            <h3 class="space-post__title">
+              <%= post.title.presence || 'Untitle' %>
+            </h3>
+            <div class="space-post__content">
+              <%= truncate post.content, length: 140 %>
+            </div>
           </div>
-          <div class="profile__name">
-            <%= @space.owner.name %>
+          <% if post.featured_image.attached? %>
+            <div class="space-post__feature-image">
+              <%= image_tag post.featured_image %>
+            </div>
+          <% end %>
+        </a>
+        <div class="space-post__footer">
+          <div class="flex-grow-1">
+            <div class="flex">
+              <div class="space-post__author-avatar">
+                <img src="<%= asset_pack_path 'media/images/avatar.png' %>">
+              </div>
+              <div>
+                <div class="space-post__author-name">
+                  <%= post.author.name %>
+                </div>
+                <div class="space-post__author-time">
+                  <%= l post.created_at, format: :short %>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="profile__description">
-            <%= @space.owner.bio %>
-          </div>
-          <div class="profile__meta">
-            10 follwing <br> 200 follwers
-          </div>
-          <div class="profile__action">
-            <button type="button" class="button button--contained button--primary">
-              Follow
+          <div class="space-post__footer__action">
+            <button type="button" class="button button--icon">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
             </button>
-            <div class="dropdown" data-controller="dropdown">
-              <button type="button" class="button button--text" data-action="dropdown#toggle">
-                <div class="button__icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                </div>
-              </button>
-              <div class="dropdown__menu">
-                <a href="<%= space_dashboard_root_path(space_path: @space.path) %>" class="dropdown__item">Dashboard</a>
-                <hr class="divider">
-                <a href="#" class="dropdown__item">Block</a>
-                <a href="#" class="dropdown__item">Report</a>
-              </div>
-            </div>
+          </div>
+          <div class="space-post__footer__action">
+            <button type="button" class="button button--icon">
+              <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><rect fill="none" height="24" width="24"/><path d="M17,11v6.97l-5-2.14l-5,2.14V5h6V3H7C5.9,3,5,3.9,5,5v16l7-3l7,3V11H17z M21,7h-2v2h-2V7h-2V5h2V3h2v2h2V7z"/></svg>
+            </button>
+          </div>
+          <div class="space-post__footer__action">
+            <button type="button" class="button button--icon">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>
+            </button>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-8">
-      <div class="border-bottom margin-bottom">
-        <div class="tab">
-          <a href="#" class="tab__item tab__item--active">Posts</a>
-          <a href="#" class="tab__item">Series</a>
-          <a href="#" class="tab__item">Comments</a>
-          <a href="#" class="tab__item">Likes</a>
-        </div>
-      </div>
-      <div class="post-list">
-        <% 10.times do %>
-          <div class="post-list__item">
-            <div class="post-list__item__meta">
-              <span class="post-list__item__author">
-                Author
-              </span>
-              &centerdot;
-              <span class="post-list__item__time">
-                1 day ago
-              </span>
-            </div>
-            <div class="post-list__item__title">
-              Post title
-            </div>
-            <div class="post-list__item__summary">
-              Summary ...
-            </div>
-            <div class="post-list__item__footer">
-              <div class="toolbar">
-                <div class="toolbar__action">
-                  <button type="button" class="button button--text">
-                    <div class="button__icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>
-                    </div>
-                    <div class="button__label">
-                      0
-                    </div>
-                  </button>
-                </div>
-                <div class="toolbar__action">
-                  <button type="button" class="button button--text">
-                    <div class="button__icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM20 4v13.17L18.83 16H4V4h16zM6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z"/></svg>
-                    </div>
-                    <div class="button__label">
-                      0
-                    </div>
-                  </button>
-                </div>
-                <div class="toolbar__space">
-                </div>
-                <div class="toolbar__action">
-                  <button type="button" class="button button--text">
-                    <div class="button__icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24"/></g><g><path d="M16,5l-1.42,1.42l-1.59-1.59V16h-1.98V4.83L9.42,6.42L8,5l4-4L16,5z M20,10v11c0,1.1-0.9,2-2,2H6c-1.11,0-2-0.9-2-2V10 c0-1.11,0.89-2,2-2h3v2H6v11h12V10h-3V8h3C19.1,8,20,8.89,20,10z"/></g></svg>
-                    </div>
-                  </button>
-                </div>
-                <div class="toolbar__action">
-                  <button type="button" class="button button--text">
-                    <div class="button__icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"/></svg>
-                    </div>
-                  </button>
-                </div>
-                <div class="toolbar__action dropdown" data-controller="dropdown">
-                  <button type="button" class="button button--text" data-action="dropdown#toggle">
-                    <div class="button__icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                    </div>
-                  </button>
-                  <div class="dropdown__menu dropdown__menu--top-right">
-                    <a href="#" class="dropdown__item">Edit</a>
-                    <a href="#" class="dropdown__item">Trash</a>
-                    <hr class="divider">
-                    <a href="#" class="dropdown__item">Report</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>
