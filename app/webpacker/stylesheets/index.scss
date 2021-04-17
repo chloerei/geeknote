@@ -77,26 +77,6 @@
   margin-bottom: 16px;
 }
 
-.space-header {
-  display: flex;
-  padding: 12px 16px;
-  align-items: center;
-  line-height: 24px;
-}
-
-.space-header__avatar {
-  width: 32px;
-  height: 32px;
-  margin: -4px 12px -4px -4px;
-}
-
-.space-header__name {
-  font-weight: bold;
-}
-
-.dashboard-header {
-}
-
 .table__cell--title {
   flex-grow: 1;
 }

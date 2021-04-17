@@ -4,12 +4,12 @@
   padding: 16px;
 }
 
-.space-profile {
+.space-header {
   display: flex;
   margin-bottom: 16px;
 }
 
-.space-profile__avatar {
+.space-header__avatar {
   margin-right: 16px;
 
   img {
@@ -18,70 +18,24 @@
   }
 }
 
-.space-profile__info {
+.space-header__content {
   flex-grow: 1;
-}
 
-.space-profile__header {
-  display: flex;
-  align-items: center;
-  margin: 16px 0;
-}
-
-.space-profile__name {
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 36px;
-  flex-grow: 1;
-}
-
-.space-profile__description {
-  margin-bottom: 16px;
-}
-
-.space-posts {
-}
-
-.space-post {
-  padding: 16px;
-}
-
-.space-post__content {
-  display: flex;
-  margin-bottom: 16px;
-  color: var(--text-primary-color);
-  text-decoration: none;
-}
-
-.space-post__title {
-  margin: 0 0 8px;
-}
-
-.space-post__feature-image {
-  margin-left: 16px;
-
-  img {
-    max-width: 160px;
-    border-radius: 4px;
+  .toolbar {
+    margin-top: 16px;
+    margin-right: -4px;
+    padding: 0;
   }
 }
 
-.space-post__footer {
-  display: flex;
+.space-header__name {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 40px;
+  margin: 4px 0;
+  flex-grow: 1;
 }
 
-.space-post__author-avatar {
-  width: 40px;
-  height: 40px;
-  margin-right: 8px;
-}
-
-.space-post__author-name {
-  font-size: 16px;
-  line-height: 20px;
-}
-
-.space-post__author-time {
-  font-size: 14px;
-  line-height: 20px;
+.space-header__description {
+  margin-bottom: 16px;
 }
