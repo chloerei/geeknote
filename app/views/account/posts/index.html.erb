@@ -9,9 +9,16 @@
           <%= @account.owner.name %>
         </div>
         <div class="toolbar__action">
-          <button type="button" class="button button--icon" data-action="dropdown#toggle">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-          </button>
+          <div class="dropdown" data-controller="dropdown">
+            <button type="button" class="button button--icon" data-action="dropdown#toggle">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+            </button>
+            <div class="dropdown__menu dropdown__menu--top-right">
+              <a href="<%= account_dashboard_root_path(@account) %>" class="dropdown__item">
+                Dashboard
+              </a>
+            </div>
+          </div>
         </div>
         <div class="toolbar__action">
           <a href="#" class="button button--contained button--primary">
@@ -20,7 +27,11 @@
         </div>
       </div>
       <div class="account-header__description">
-        <%= @account.owner.bio %>
+        <% if @account.owner.is_a?(User) %>
+          <%= @account.owner.bio %>
+        <% else %>
+          <%= @account.owner.description %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -30,7 +41,7 @@
       Posts
     </a>
     <a href="#" class="tab__item">
-      Series
+      Collections
     </a>
     <a href="#" class="tab__item">
       Likes

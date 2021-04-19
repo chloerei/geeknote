@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :organizations, only: [:new, :create]
+
   scope '/:account_path', module: 'account', as: :account do
     root to: 'posts#index'
 
