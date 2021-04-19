@@ -1,0 +1,15 @@
+<%= form_with model: @post, url: account_dashboard_post_settings_path(@account, @post), builder: CustomFormBuilder, class: 'form', id: 'settings-form', data: { controller: 'form' } do |form| %>
+  <div class="form__field">
+    <%= form.text_area :excerpt, data: { action: 'change->form#submit' } %>
+  </div>
+  <div class="form__field">
+    <label>Tags</label>
+    <div class="selector" data-controller="tag-selector" data-tag-selector-placeholder-value="add tag" data-tag-selector-creatable-value="true">
+      <select name="post[tag_list][]" class="selector__select" data-tag-selector-target="select" data-action="change->form#submit" multiple>
+        <% @post.tags.each do |tag| %>
+          <option value="<%= tag.name %>" selected><%= tag.name %></option>
+        <% end %>
+      </select>
+    </div>
+  </div>
+<% end %>

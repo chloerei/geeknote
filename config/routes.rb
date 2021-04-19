@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
-  scope '/:space_path', module: 'space', as: :space do
+  scope '/:account_path', module: 'account', as: :account do
     root to: 'posts#index'
 
     resources :posts do

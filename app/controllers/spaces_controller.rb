@@ -1,2 +1,2 @@
-class SpacesController < ApplicationController
+class AccountsController < ApplicationController
 end

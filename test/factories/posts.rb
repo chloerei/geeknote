@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :post do
     title { 'Title' }
     content { 'Content' }
-    space
+    account
     author factory: :user
   end
 end

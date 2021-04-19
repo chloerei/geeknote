@@ -1,0 +1,11 @@
+class Account::Dashboard::Posts::StatusesController < Account::Dashboard::Posts::BaseController
+  def update
+    @post.update post_params
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:status)
+  end
+end

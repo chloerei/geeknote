@@ -1,0 +1,38 @@
+<%= turbo_stream.replace 'preview-dialog' do %>
+  <div id="preview-dialog" class="dialog dialog--open dialog--full-screen" data-controller="dialog">
+    <div class="dialog__container">
+      <div class="toolbar border-bottom">
+        <div class="toolbar__title">
+          Preview
+        </div>
+        <div class="toolbar__action">
+          <button type="button" class="button button--icon" data-action="dialog#close">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="flex-grow-1">
+        <iframe src="<%= account_post_preview_path(@account, @post, token: @post.preview_token) %>" class="post-preview-iframe">
+        </iframe>
+      </div>
+      <div class="toolbar border-top flex-justify-content-center">
+        <div class="toolbar__text">
+          Share link
+        </div>
+        <div class="toolbar__action">
+          <div class="clipboard" data-controller="clipboard">
+            <input type="text" value="<%= account_post_preview_url(@account, @post, token: @post.preview_token) %>" data-clipboard-target="source">
+            <button type="button" class="button button--contained button--primary" data-action="clipboard#copy">
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="toolbar__action">
+          <a href="<%= account_post_preview_path(@account, @post, token: @post.preview_token) %>" class="button button--icon" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -16,6 +16,16 @@ ActiveRecord::Schema.define(version: 2021_04_09_083652) do
   enable_extension "citext"
   enable_extension "plpgsql"
 
+  create_table "accounts", force: :cascade do |t|
+    t.citext "path"
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_type", "owner_id"], name: "index_accounts_on_owner"
+    t.index ["path"], name: "index_accounts_on_path", unique: true
+  end
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -45,7 +55,7 @@ ActiveRecord::Schema.define(version: 2021_04_09_083652) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.bigint "space_id"
+    t.bigint "account_id"
     t.bigint "author_id"
     t.string "title"
     t.text "content"
@@ -54,18 +64,8 @@ ActiveRecord::Schema.define(version: 2021_04_09_083652) do
     t.string "preview_token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_posts_on_account_id"
     t.index ["author_id"], name: "index_posts_on_author_id"
-    t.index ["space_id"], name: "index_posts_on_space_id"
-  end
-
-  create_table "spaces", force: :cascade do |t|
-    t.citext "path"
-    t.string "owner_type"
-    t.bigint "owner_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["owner_type", "owner_id"], name: "index_spaces_on_owner"
-    t.index ["path"], name: "index_spaces_on_path", unique: true
   end
 
   create_table "taggings", force: :cascade do |t|

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_one :space, as: :owner, autosave: true
+  has_one :account, as: :owner, autosave: true
   has_many :posts, as: :author
 
   has_secure_password
@@ -8,19 +8,19 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true
 
-  before_validation :set_space
+  before_validation :set_account
   after_validation :set_username_error
 
-  def set_space
-    if space
-      space.path = username
+  def set_account
+    if account
+      account.path = username
     else
-      build_space(path: username)
+      build_account(path: username)
     end
   end
 
   def set_username_error
-    space.errors.details[:path].each do |error|
+    account.errors.details[:path].each do |error|
       errors.add(:username, error[:error], **error.except(:error, :value))
     end
   end

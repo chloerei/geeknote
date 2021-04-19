@@ -1,0 +1,41 @@
+.account-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.account-header {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.account-header__avatar {
+  margin-right: 16px;
+
+  img {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+.account-header__content {
+  flex-grow: 1;
+
+  .toolbar {
+    margin-top: 16px;
+    margin-right: -4px;
+    padding: 0;
+  }
+}
+
+.account-header__name {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 40px;
+  margin: 4px 0;
+  flex-grow: 1;
+}
+
+.account-header__description {
+  margin-bottom: 16px;
+}
