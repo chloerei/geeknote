@@ -8,6 +8,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new organization_params
 
     if @organization.save
+      @organization.memberships.create(role: 'owner', user: current_user)
       redirect_to account_root_path(@organization.account)
     else
       render turbo_stream: turbo_stream.replace('organization-form', partial: 'form')
