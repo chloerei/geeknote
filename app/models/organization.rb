@@ -4,5 +4,5 @@ class Organization < ApplicationRecord
 
   validates :name, presence: true
 
-  accepts_nested_attributes_for :account
+  accepts_nested_attributes_for :account, update_only: true
 end

@@ -10,20 +10,13 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true
 
-  before_validation :set_account
-  after_validation :set_username_error
-
-  def set_account
-    if account
-      account.path = username
-    else
-      build_account(path: username)
+  # only for error display
+  attr_accessor :current_password
+  validate :current_password do
+    if current_password && !authenticate(current_password)
+      errors.add :current_password, :not_match
     end
   end
 
-  def set_username_error
-    account.errors.details[:path].each do |error|
-      errors.add(:username, error[:error], **error.except(:error, :value))
-    end
-  end
+  accepts_nested_attributes_for :account, update_only: true
 end
