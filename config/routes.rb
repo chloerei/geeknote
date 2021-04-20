@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   namespace :settings do
     resource :profile
     resource :account
+    resource :password
   end
 
   scope '/:account_path', module: 'account', as: :account do
