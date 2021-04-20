@@ -5,6 +5,7 @@
 @import 'post';
 @import 'account';
 @import 'clipboard';
+@import 'avatar';
 
 .container {
   max-width: 1280px;
@@ -13,6 +14,10 @@
 
 .container--small {
   max-width: 480px;
+}
+
+.container--medium {
+  max-width: 960px;
 }
 
 .app-bar--borderless {
@@ -144,4 +149,8 @@
 
 .toolbar__action .button--last {
   margin-right: 8px;
+}
+
+.margin-top-0 {
+  margin-top: 0;
 }

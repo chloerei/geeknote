@@ -25,7 +25,7 @@
             <a href="<%= account_root_path(account_path: current_user.account.path) %>" class="dropdown__item">Profile</a>
             <a href="#" class="dropdown__item">Drafts</a>
             <a href="#" class="dropdown__item">Series</a>
-            <a href="#" class="dropdown__item">Settings</a>
+            <a href="<%= settings_profile_path %>" class="dropdown__item">Settings</a>
             <hr class="divider">
             <a href="#" class="dropdown__item">Sign out</a>
           </div>
@@ -43,7 +43,15 @@
       <% end %>
     </div>
   </div>
-  <%= yield %>
+  <%= content_for?(:main) ? yield(:main) : yield %>
+
+  <div id="snackbar-container" class="snackbar-container">
+    <% if flash[:notice] %>
+      <div class="snackbar" data-controller="snackbar" data-snackbar-period="5000">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <%= render template: 'layouts/base' %>

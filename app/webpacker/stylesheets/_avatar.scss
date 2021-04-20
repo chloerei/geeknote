@@ -1,0 +1,41 @@
+.avatar {
+  line-height: 0;
+
+  img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+}
+
+.avatar--large {
+  img {
+    height: 160px;
+    width: 160px;
+  }
+}
+
+.avatar-uploader {
+  position: relative;
+  display: inline-flex;
+
+  input[type="file"] {
+    display: none;
+  }
+
+  .avatar {
+    transition: opacity 0.3s;
+  }
+
+  &:hover .avatar {
+    opacity: 0.5;
+  }
+}
+
+.avatar-uploader__button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -20px;
+  margin-left: -20px;
+}

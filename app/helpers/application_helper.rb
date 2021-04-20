@@ -7,4 +7,12 @@ module ApplicationHelper
     doc = CommonMarker.render_doc(text, :DEFAULT, [:table, :tasklist, :strikethrough, :autolink, :tagfilter])
     sanitize doc.to_html([:HARDBREAKS]), tags: MARKDOWN_ALLOW_TAGS, attributes: MARKDOWN_ALLOW_ATTRIBUTES
   end
+
+  def avatar_image_tag(avatar)
+    if avatar.attached?
+      image_tag avatar.variant(resize_to_fill: [160, 160])
+    else
+      image_tag asset_pack_path('media/images/avatar.png')
+    end
+  end
 end

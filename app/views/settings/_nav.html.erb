@@ -1,0 +1,21 @@
+<div class="nav-header">
+  <div class="nav-header__avatar">
+    <%= image_tag asset_pack_path('media/images/avatar.png') %>
+  </div>
+  <div class="nav-header__content">
+    <div class="nav-header__primary-text">
+      <%= current_user.name %>
+    </div>
+    <div class="nav-header__secondary-text">
+      User account
+    </div>
+  </div>
+</div>
+<div class="nav">
+  <a href="<%= settings_profile_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'profiles' %>">
+    Profile
+  </a>
+  <a href="<%= settings_profile_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'accounts' %>">
+    Account
+  </a>
+</div>
