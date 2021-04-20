@@ -11,9 +11,9 @@ class User < ApplicationRecord
   validates :email, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true
 
   # only for error display
-  attr_accessor :current_password
+  attr_accessor :current_password, :require_password
   validate :current_password do
-    if current_password && !authenticate(current_password)
+    if require_password && !authenticate(current_password)
       errors.add :current_password, :not_match
     end
   end

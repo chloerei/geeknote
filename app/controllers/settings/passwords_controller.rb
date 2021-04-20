@@ -5,6 +5,7 @@ class Settings::PasswordsController < Settings::BaseController
 
   def update
     @user = current_user
+    @user.require_password = true
     if @user.update user_params
       redirect_to settings_password_path, notice: 'Password update successful'
     else
