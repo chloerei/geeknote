@@ -12,4 +12,17 @@ class Account < ApplicationRecord
   def post_tags
     Tag.joins(:posts).where(posts: { account_id: self.id }).distinct
   end
+
+  def can_manage_by?(user)
+    return false if user.nil?
+
+    case owner
+    when User
+      owner == user
+    when Organization
+      user.memberships.where(organization: owner).role.in? %w(owner admin)
+    else
+      false
+    end
+  end
 end

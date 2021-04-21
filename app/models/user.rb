@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_one :account, as: :owner, autosave: true
   has_many :posts, as: :author
   has_many :memberships
+  has_many :organizations, through: :memberships
 
   has_secure_password
   has_secure_token :auth_token

@@ -1,6 +1,7 @@
 class Organization < ApplicationRecord
   has_one :account, as: :owner, autosave: true
   has_many :memberships
+  has_one_attached :avatar
 
   validates :name, presence: true
 
