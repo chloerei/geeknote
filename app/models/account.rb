@@ -20,7 +20,7 @@ class Account < ApplicationRecord
     when User
       owner == user
     when Organization
-      user.memberships.where(organization: owner).role.in? %w(owner admin)
+      owner.memberships.find_by(user: user)&.role&.in? %w(owner admin)
     else
       false
     end

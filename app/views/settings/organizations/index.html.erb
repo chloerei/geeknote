@@ -1,0 +1,43 @@
+<div class="container container--medium padding">
+  <div class="row">
+    <div class="col-3">
+      <%= render 'settings/nav' %>
+    </div>
+    <div class="col-9">
+      <div class="toolbar">
+        <div class="toolbar__title">
+          Organizations
+        </div>
+      </div>
+      <div class="padding">
+        <div class="card card--outlined">
+          <table class="table table--flex">
+            <thead>
+              <tr>
+                <td class="table__cell--title">
+                  Name
+                </td>
+                <td class="table__cell--attribute">
+                  Role
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <% @organizations.each do |organization| %>
+                <tr>
+                  <td class="table__cell--title">
+                    <a href="<%= account_root_path(organization.account) %>" class="table__row-link"></a>
+                    <%= organization.name %>
+                  </td>
+                  <td class="table__cell--attribute">
+                    <%= Membership.roles.key(organization.role) %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

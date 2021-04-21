@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resource :profile
     resource :account
     resource :password
+    resources :organizations, only: [:index]
   end
 
   scope '/:account_path', module: 'account', as: :account do
