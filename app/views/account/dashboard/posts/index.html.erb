@@ -1,103 +1,104 @@
-<div class="app-bar-wrapper">
-  <div class="app-bar app-bar--borderless">
-    <div class="toolbar">
-      <div class="toolbar__title">
-        Posts
-      </div>
-      <div class="toolbar__action dropdown" data-controller="dropdown">
-        <button type="button" class="button button--text" data-action="dropdown#toggle">
-          <div class="button__label">
-            <% if Post.statuses.include?(params[:status]) %>
-              <%= Post.human_attribute_name("status.#{params[:status]}") %>
-            <% else %>
-              Status
-            <% end %>
-          </div>
-          <div class="button__icon">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-          </div>
-        </button>
-        <div class="dropdown__menu dropdown__menu--top-right">
-          <a href="<%= url_for(post_filter_params.merge(status: nil)) %>" class="dropdown__item">All</a>
-          <% Post.statuses.keys.each do |status| %>
-            <a href="<%= url_for(post_filter_params.merge(status: status)) %>" class="dropdown__item"><%= Post.human_attribute_name(status) %></a>
-          <% end %>
-        </div>
-      </div>
-      <div class="toolbar__action dropdown" data-controller="dropdown">
-        <button type="button" class="button button--text" data-action="dropdown#toggle">
-          <div class="button__label">
-            <% if params[:tag] %>
-              <%= params[:tag] %>
-            <% else %>
-              Tags
-            <% end %>
-          </div>
-          <div class="button__icon">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-          </div>
-        </button>
-        <div class="dropdown__menu dropdown__menu--top-right">
-          <a href="<%= url_for(post_filter_params.merge(tag: nil)) %>" class="dropdown__item">All</a>
-          <% @account.post_tags.each do |tag| %>
-            <a href="<%= url_for(post_filter_params.merge(tag: tag.name)) %>" class="dropdown__item"><%= tag.name %></a>
-          <% end %>
-        </div>
-      </div>
-      <div class="toolbar__action">
-        <a href="<%= new_account_dashboard_post_path(@account.path) %>" class="button button--contained button--primary button--last">
-          New Post
-        </a>
-      </div>
+<div class="container container--medium padding">
+  <div class="row">
+    <div class="col-3">
+      <%= render 'account/dashboard/nav' %>
     </div>
-  </div>
-
-  <div class="app-content">
-    <div class="padding">
-      <div class="card card--outlined">
-        <table class="table table--flex">
-          <thead>
-            <tr>
-              <th class="table__cell--title">Title</th>
-              <th class="table__cell--attribute">Series</th>
-              <th class="table__cell--attribute">Status</th>
-              <th class="table__cell--action"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @posts.each do |post| %>
-              <tr>
-                <td class="table__cell--title">
-                  <a href="<%= edit_account_dashboard_post_path(@account, post) %>" class="table__row-link">
-                  </a>
-                  <div class="text-primary text-bold">
-                    <%= post.title.presence || 'Untitled' %>
-                  </div>
-                  <div class="text-secondary">
-                    By <%= post.author.name %>
-                    &centerdot;
-                    <% if post.tags.any? %>
-                      <%= post.tags.pluck(:name).join(', ') %>
-                      &centerdot;
-                    <% end %>
-                    <%= l post.updated_at, format: :short %>
-                  </div>
-                </td>
-                <td class="table__cell--attribute"></td>
-                <td class="table__cell--attribute"><%= Post.human_attribute_name "status.#{post.status}" %></td>
-                <td class="table__cell--action"></td>
-              </tr>
+    <div class="col-9">
+      <div class="toolbar">
+        <div class="toolbar__title">
+          Posts
+        </div>
+        <div class="toolbar__action dropdown" data-controller="dropdown">
+          <button type="button" class="button button--text" data-action="dropdown#toggle">
+            <div class="button__label">
+              <% if Post.statuses.include?(params[:status]) %>
+                <%= Post.human_attribute_name("status.#{params[:status]}") %>
+              <% else %>
+                Status
+              <% end %>
+            </div>
+            <div class="button__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+            </div>
+          </button>
+          <div class="dropdown__menu dropdown__menu--top-right">
+            <a href="<%= url_for(post_filter_params.merge(status: nil)) %>" class="dropdown__item">All</a>
+            <% Post.statuses.keys.each do |status| %>
+              <a href="<%= url_for(post_filter_params.merge(status: status)) %>" class="dropdown__item"><%= Post.human_attribute_name(status) %></a>
             <% end %>
-          </tbody>
-        </table>
-        <div class="toolbar border-top">
-          <div class="toolbar__space">
           </div>
-          <div class="toolbar__text">
-            <%= page_entries_info @posts %>
+        </div>
+        <div class="toolbar__action dropdown" data-controller="dropdown">
+          <button type="button" class="button button--text" data-action="dropdown#toggle">
+            <div class="button__label">
+              <% if params[:tag] %>
+                <%= params[:tag] %>
+              <% else %>
+                Tags
+              <% end %>
+            </div>
+            <div class="button__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+            </div>
+          </button>
+          <div class="dropdown__menu dropdown__menu--top-right">
+            <a href="<%= url_for(post_filter_params.merge(tag: nil)) %>" class="dropdown__item">All</a>
+            <% @account.post_tags.each do |tag| %>
+              <a href="<%= url_for(post_filter_params.merge(tag: tag.name)) %>" class="dropdown__item"><%= tag.name %></a>
+            <% end %>
           </div>
-          <div class="toolbar__action">
-            <%= paginate @posts %>
+        </div>
+        <div class="toolbar__action">
+          <a href="<%= new_account_dashboard_post_path(@account.path) %>" class="button button--contained button--primary button--last">
+            New Post
+          </a>
+        </div>
+      </div>
+
+      <div class="padding">
+        <div class="card card--outlined">
+          <table class="table table--flex">
+            <thead>
+              <tr>
+                <th class="table__cell--title">Title</th>
+                <th class="table__cell--attribute">Status</th>
+                <th class="table__cell--action"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @posts.each do |post| %>
+                <tr>
+                  <td class="table__cell--title">
+                    <a href="<%= edit_account_dashboard_post_path(@account, post) %>" class="table__row-link">
+                    </a>
+                    <div class="text-primary text-bold">
+                      <%= post.title.presence || 'Untitled' %>
+                    </div>
+                    <div class="text-secondary">
+                      By <%= post.author.name %>
+                      &centerdot;
+                      <% if post.tags.any? %>
+                        <%= post.tags.pluck(:name).join(', ') %>
+                        &centerdot;
+                      <% end %>
+                      <%= l post.updated_at, format: :short %>
+                    </div>
+                  </td>
+                  <td class="table__cell--attribute"><%= Post.human_attribute_name "status.#{post.status}" %></td>
+                  <td class="table__cell--action"></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <div class="toolbar border-top">
+            <div class="toolbar__space">
+            </div>
+            <div class="toolbar__text">
+              <%= page_entries_info @posts %>
+            </div>
+            <div class="toolbar__action">
+              <%= paginate @posts %>
+            </div>
           </div>
         </div>
       </div>

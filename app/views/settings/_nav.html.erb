@@ -1,6 +1,8 @@
 <div class="nav-header">
   <div class="nav-header__avatar">
-    <%= image_tag asset_pack_path('media/images/avatar.png') %>
+    <div class="avatar">
+      <%= avatar_image_tag current_user.avatar %>
+    </div>
   </div>
   <div class="nav-header__content">
     <div class="nav-header__primary-text">

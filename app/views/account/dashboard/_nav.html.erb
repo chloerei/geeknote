@@ -1,0 +1,32 @@
+<div class="nav-header">
+  <div class="nav-header__avatar">
+    <div class="avatar">
+      <%= avatar_image_tag current_user.avatar %>
+    </div>
+  </div>
+  <div class="nav-header__content">
+    <div class="nav-header__primary-text">
+      <%= current_user.name %>
+    </div>
+    <div class="nav-header__secondary-text">
+      User account
+    </div>
+  </div>
+</div>
+<div class="nav">
+  <a href="<%= account_dashboard_root_path(@account.path) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'home' %>">
+    Dashboard
+  </a>
+  <a href="<%= account_dashboard_posts_path(@account.path) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'posts' %>">
+    Posts
+  </a>
+  <a href="#" class="nav__item">
+    Collections
+  </a>
+  <a href="#" class="nav__item">
+    Comments
+  </a>
+  <a href="#" class="nav__item">
+    Settings
+  </a>
+</div>
