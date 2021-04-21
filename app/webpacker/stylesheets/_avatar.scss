@@ -24,10 +24,6 @@
   }
 
   .avatar {
-    transition: opacity 0.3s;
-  }
-
-  &:hover .avatar {
     opacity: 0.5;
   }
 }
