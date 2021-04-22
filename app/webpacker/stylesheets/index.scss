@@ -6,6 +6,7 @@
 @import 'account';
 @import 'clipboard';
 @import 'avatar';
+@import 'breadcrumb';
 
 .container {
   max-width: 1280px;
@@ -157,4 +158,8 @@
 
 .padding-x {
   padding: 0 16px;
+}
+
+.margin-y {
+  margin: 16px 0;
 }

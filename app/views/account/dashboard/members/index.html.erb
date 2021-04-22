@@ -1,0 +1,44 @@
+<div class="container container--medium padding">
+  <%= render 'account/dashboard/breadcrumb' %>
+  <div class="row">
+    <div class="col-3">
+      <%= render 'account/dashboard/nav' %>
+    </div>
+    <div class="col-9">
+      <div class="toolbar">
+        <div class="toolbar__title">
+          Members
+        </div>
+        <div class="toolbar__action">
+          <a href="#" class="button button--contained button--primary button--last">
+            Invite member
+          </a>
+        </div>
+      </div>
+      <div class="padding">
+        <div class="card card--outlined">
+          <table class="table">
+            <thead>
+              <tr>
+                <td class="table__cell--title">Name</td>
+                <td class="table__cell--attribute">Role</td>
+              </tr>
+            </thead>
+            <tbody>
+              <% @memberships.each do |membership| %>
+                <tr>
+                  <td class="table__cell--title">
+                    <%= membership.user.name %>
+                  </td>
+                  <td class="table__cell--attribute">
+                    <%= Membership.human_attribute_name "role.#{membership.role}" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

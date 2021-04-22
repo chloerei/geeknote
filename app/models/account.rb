@@ -25,4 +25,8 @@ class Account < ApplicationRecord
       false
     end
   end
+
+  def organization?
+    owner_type == 'Organization'
+  end
 end

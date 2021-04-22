@@ -41,6 +41,7 @@ Rails.application.routes.draw do
           resource :featured_image, only: [:update, :destroy]
         end
       end
+      resources :members
     end
   end
 end

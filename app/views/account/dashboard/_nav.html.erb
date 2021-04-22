@@ -1,22 +1,4 @@
-<div class="nav-header">
-  <div class="nav-header__avatar">
-    <div class="avatar">
-      <%= avatar_image_tag current_user.avatar %>
-    </div>
-  </div>
-  <div class="nav-header__content">
-    <div class="nav-header__primary-text">
-      <%= current_user.name %>
-    </div>
-    <div class="nav-header__secondary-text">
-      User account
-    </div>
-  </div>
-</div>
 <div class="nav">
-  <a href="<%= account_dashboard_root_path(@account.path) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'home' %>">
-    Dashboard
-  </a>
   <a href="<%= account_dashboard_posts_path(@account.path) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'posts' %>">
     Posts
   </a>
@@ -26,7 +8,17 @@
   <a href="#" class="nav__item">
     Comments
   </a>
+  <% if @account.organization? %>
+    <a href="<%= account_dashboard_members_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'members' %>">
+      Members
+    </a>
+  <% end %>
   <a href="#" class="nav__item">
-    Settings
+    <div class="nav__item__text">
+      Settings
+    </div>
+    <div class="nav__item__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"/></svg>
+    </div>
   </a>
 </div>
