@@ -1,4 +1,4 @@
-class Account::Dashboard::MembersController < Account::Dashboard::BaseController
+class Account::Dashboard::MembershipsController < Account::Dashboard::BaseController
   before_action :require_organization_account
 
   def index

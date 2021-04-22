@@ -7,4 +7,9 @@ class Membership < ApplicationRecord
     admin: 1,
     member: 2
   }
+
+  enum status: {
+    pending: 0,
+    accepted: 1
+  }
 end

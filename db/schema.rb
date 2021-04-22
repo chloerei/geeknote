@@ -57,7 +57,12 @@ ActiveRecord::Schema.define(version: 2021_04_19_091839) do
   create_table "memberships", force: :cascade do |t|
     t.bigint "organization_id"
     t.bigint "user_id"
-    t.integer "role", null: false
+    t.integer "role"
+    t.string "invitation_email"
+    t.string "invitation_token"
+    t.datetime "invited_at"
+    t.datetime "accepted_at"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["organization_id"], name: "index_memberships_on_organization_id"

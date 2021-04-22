@@ -9,7 +9,7 @@
     Comments
   </a>
   <% if @account.organization? %>
-    <a href="<%= account_dashboard_members_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'members' %>">
+    <a href="<%= account_dashboard_memberships_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'memberships' %>">
       Members
     </a>
   <% end %>
