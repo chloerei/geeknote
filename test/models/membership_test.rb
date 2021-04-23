@@ -23,13 +23,13 @@ class MembershipTest < ActiveSupport::TestCase
     membership = @organization.memberships.new(identifier: 'unregister@example.com')
     assert membership.valid?
     assert_nil membership.user
-    assert_equal 'unregister@example.com', membership.invite_email
+    assert_equal 'unregister@example.com', membership.invitation_email
   end
 
   test "should not as duplicate identifier" do
     user = create(:user)
     @organization.memberships.create(user: user)
-    @organization.memberships.create(invite_email: 'account@example.com')
+    @organization.memberships.create(invitation_email: 'account@example.com')
 
     membership = @organization.memberships.new(identifier: user.account.path)
     assert_not membership.valid?

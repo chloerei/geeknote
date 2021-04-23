@@ -4,7 +4,7 @@
       <%= form.text_field :identifier %>
     <% else %>
       <label class="label">Identifier</label>
-      <%= @membership.user ? @membership.user.name : @membership.invite_email %>
+      <%= @membership.user ? @membership.user.name : @membership.invitation_email %>
     <% end %>
   </div>
   <div class="form__field">

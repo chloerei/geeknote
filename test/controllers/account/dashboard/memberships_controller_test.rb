@@ -1,7 +1,12 @@
 require "test_helper"
 
 class Account::Dashboard::MembershipsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @organization = create(:organization)
+    @user = create(:user)
+    create(:membership, organization: @organization, user: user, role: :owner)
+  end
+
+  test "should create membership invitation" do
+  end
 end

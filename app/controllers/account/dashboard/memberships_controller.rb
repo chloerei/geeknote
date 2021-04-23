@@ -15,6 +15,7 @@ class Account::Dashboard::MembershipsController < Account::Dashboard::BaseContro
     @membership = @account.owner.memberships.new new_membership_params
 
     if @membership.save
+      OrganizationMailer.with(membership: @membership).invitation_email.deliver_later
       redirect_to account_dashboard_membership_path(@account, @membership), notice: "Invitation send"
     else
       render turbo_stream: turbo_stream.replace('membership-form', partial: 'form')

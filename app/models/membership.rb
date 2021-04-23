@@ -1,6 +1,8 @@
 class Membership < ApplicationRecord
   belongs_to :organization
   belongs_to :user, optional: true
+  belongs_to :inviter, class_name: 'User', optional: true
+  has_secure_token :invitation_token
 
   enum role: {
     owner: 0,
@@ -16,7 +18,7 @@ class Membership < ApplicationRecord
   attr_accessor :identifier
 
   validates :user_id, uniqueness: { scope: :organization_id }, allow_nil: true
-  validates :invite_email, uniqueness: { scope: :organization_id }, allow_nil: true
+  validates :invitation_email, uniqueness: { scope: :organization_id }, allow_nil: true
 
   validate :validate_identifier, on: :create
 
@@ -45,10 +47,10 @@ class Membership < ApplicationRecord
             self.user = user
           end
         else
-          if organization.memberships.where(invite_email: identifier).exists?
+          if organization.memberships.where(invitation_email: identifier).exists?
             errors.add :identifier, :already_exists
           else
-            self.invite_email = identifier
+            self.invitation_email = identifier
           end
         end
       else

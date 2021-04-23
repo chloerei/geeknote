@@ -32,6 +32,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resource :invitation, only: [:show, :update]
+
     namespace :dashboard do
       root to: 'home#index'
       resources :posts do
