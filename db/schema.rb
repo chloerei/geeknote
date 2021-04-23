@@ -58,13 +58,14 @@ ActiveRecord::Schema.define(version: 2021_04_19_091839) do
     t.bigint "organization_id"
     t.bigint "user_id"
     t.integer "role"
-    t.string "invitation_email"
-    t.string "invitation_token"
+    t.citext "invite_email"
+    t.string "invite_token"
     t.datetime "invited_at"
     t.datetime "accepted_at"
     t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id", "user_id"], name: "index_memberships_on_organization_id_and_user_id", unique: true
     t.index ["organization_id"], name: "index_memberships_on_organization_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end

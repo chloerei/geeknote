@@ -5,13 +5,15 @@ class CreateMemberships < ActiveRecord::Migration[6.1]
       t.belongs_to :user
       t.integer :role
 
-      t.string :invitation_email
-      t.string :invitation_token
+      t.citext :invite_email
+      t.string :invite_token
       t.datetime :invited_at
       t.datetime :accepted_at
       t.integer :status, default: 0
 
       t.timestamps
+
+      t.index [:organization_id, :user_id], unique: true
     end
   end
 end

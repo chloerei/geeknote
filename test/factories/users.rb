@@ -4,5 +4,6 @@ FactoryBot.define do
     sequence(:username) { |n| "username#{n}" }
     sequence(:email) { |n| "username#{n}@example.com" }
     password { SecureRandom.base58 }
+    association :account, strategy: :build
   end
 end
