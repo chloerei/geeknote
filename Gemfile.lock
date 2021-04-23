@@ -82,6 +82,8 @@ GEM
     concurrent-ruby (1.1.7)
     connection_pool (2.2.2)
     crass (1.0.6)
+    css_parser (1.9.0)
+      addressable
     dotenv (2.7.6)
     dotenv-rails (2.7.6)
       dotenv (= 2.7.6)
@@ -95,6 +97,7 @@ GEM
     ffi (1.12.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    htmlentities (4.3.4)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     image_processing (1.10.3)
@@ -136,6 +139,13 @@ GEM
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     pg (1.2.3)
+    premailer (1.14.3)
+      addressable
+      css_parser (>= 1.6.0)
+      htmlentities (>= 4.0.0)
+    premailer-rails (1.11.1)
+      actionmailer (>= 3)
+      premailer (~> 1.7, >= 1.7.9)
     public_suffix (4.0.4)
     puma (4.3.3)
       nio4r (~> 2.0)
@@ -247,6 +257,7 @@ DEPENDENCIES
   kaminari
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
+  premailer-rails
   puma (~> 4.1)
   rails (= 6.1.0)
   redis (~> 4.0)
