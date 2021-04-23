@@ -35,6 +35,11 @@ class Account::Dashboard::MembershipsController < Account::Dashboard::BaseContro
     end
   end
 
+  def destroy
+    @membership.destroy
+    redirect_to account_dashboard_memberships_path
+  end
+
   private
 
   def new_membership_params
