@@ -1,6 +1,11 @@
 <%= form_with model: @membership, url: [@account, :dashboard, @membership], builder: CustomFormBuilder, class: 'form', id: 'membership-form' do |form| %>
   <div class="form__field">
-    <%= form.text_field :identifier %>
+    <% if @membership.new_record? %>
+      <%= form.text_field :identifier %>
+    <% else %>
+      <label class="label">Identifier</label>
+      <%= @membership.user ? @membership.user.name : @membership.invite_email %>
+    <% end %>
   </div>
   <div class="form__field">
     <label class="label">Role</label>
@@ -38,9 +43,11 @@
       </label>
     </div>
   </div>
-  <div class="form__field">
-    <button type="submit" class="button button--contained button--primary">
+  <button type="submit" class="button button--contained button--primary">
+    <% if @membership.new_record? %>
       Send Invitation
-    </button>
-  </div>
+    <% else %>
+      Save changes
+    <% end %>
+  </button>
 <% end %>

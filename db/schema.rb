@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2021_04_19_091839) do
     t.citext "invite_email"
     t.string "invite_token"
     t.datetime "invited_at"
-    t.datetime "accepted_at"
+    t.datetime "actived_at"
     t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

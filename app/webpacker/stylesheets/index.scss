@@ -56,6 +56,7 @@
 
 .row {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .col {
@@ -68,16 +69,18 @@
 }
 
 .button--text {
-  min-width: 0;
+}
 
-  .button__icon {
-    margin-right: 0;
+.button__icon {
+  &:first-child {
+    margin-right: 8px;
   }
 
-  .button__icon + .button__label {
+  &:last-child {
     margin-left: 8px;
   }
 }
+
 
 .margin-bottom {
   margin-bottom: 16px;
@@ -177,8 +180,26 @@
 }
 
 .label {
+  font-weight: bold;
   display: block;
   font-size: 16px;
   line-height: 1.5;
   margin-bottom: 8px;
+}
+
+dl {
+  margin: 0;
+}
+
+dt {
+  font-weight: bold;
+  margin: 0 0 8px;
+}
+
+dd {
+  margin: 0 0 8px;
+}
+
+.card {
+  margin: 0;
 }

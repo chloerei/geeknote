@@ -8,7 +8,7 @@ class CreateMemberships < ActiveRecord::Migration[6.1]
       t.citext :invite_email
       t.string :invite_token
       t.datetime :invited_at
-      t.datetime :accepted_at
+      t.datetime :actived_at
       t.integer :status, default: 0
 
       t.timestamps

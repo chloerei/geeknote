@@ -9,8 +9,8 @@ class Membership < ApplicationRecord
   }
 
   enum status: {
-    invited: 0,
-    accepted: 1
+    pending: 0,
+    active: 1
   }
 
   attr_accessor :identifier

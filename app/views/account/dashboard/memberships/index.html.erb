@@ -38,9 +38,9 @@
             </tbody>
           </table>
         </div>
-        <% if @invited_memberships.any? %>
+        <% if @pending_memberships.any? %>
           <div class="subheader">
-            Invitations
+            Pending
           </div>
           <div class="card card--outlined">
             <table class="table table--flex">
@@ -51,7 +51,7 @@
                 </tr>
               </thead>
               <tbody>
-                <% @invited_memberships.each do |membership| %>
+                <% @pending_memberships.each do |membership| %>
                   <tr>
                     <td class="table__cell--title">
                       <a href="<%= account_dashboard_membership_path(@account, membership) %>" class="table__row-link"></a>
