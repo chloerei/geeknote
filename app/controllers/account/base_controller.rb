@@ -4,6 +4,6 @@ class Account::BaseController < ApplicationController
   private
 
   def set_account
-    @account = Account.find_by! path: params[:account_path]
+    @account = Account.find_by! name: params[:account_name]
   end
 end

@@ -7,7 +7,7 @@ class MembershipTest < ActiveSupport::TestCase
 
   test "should set identifier as username" do
     user = create(:user)
-    membership = @organization.memberships.new(identifier: user.account.path)
+    membership = @organization.memberships.new(identifier: user.account.name)
     assert membership.valid?
     assert_equal user, membership.user
   end
@@ -31,7 +31,7 @@ class MembershipTest < ActiveSupport::TestCase
     @organization.memberships.create(user: user)
     @organization.memberships.create(invitation_email: 'account@example.com')
 
-    membership = @organization.memberships.new(identifier: user.account.path)
+    membership = @organization.memberships.new(identifier: user.account.name)
     assert_not membership.valid?
     assert membership.errors.where(:identifier, :already_exists).any?
 

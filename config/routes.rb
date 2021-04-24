@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     resources :organizations, only: [:index]
   end
 
-  scope '/:account_path', module: 'account', as: :account do
+  scope '/:account_name', module: 'account', as: :account do
     root to: 'posts#index'
 
     resources :posts do

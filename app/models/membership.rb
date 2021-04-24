@@ -25,8 +25,8 @@ class Membership < ApplicationRecord
   def validate_identifier
     if identifier
       case identifier
-      when Account::PATH_REGEXP
-        user = User.joins(:account).find_by(account: { path: identifier })
+      when Account::NAME_REGEXP
+        user = User.joins(:account).find_by(account: { name: identifier })
 
         if user
           if organization.memberships.where(user: user).exists?

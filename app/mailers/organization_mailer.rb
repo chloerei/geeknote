@@ -4,6 +4,6 @@ class OrganizationMailer < ApplicationMailer
 
     email = @membership.user ? @membership.user.email : @membership.invitation_email
 
-    mail(to: email, subject: "@#{@membership.inviter.account.path} has invite you to join @#{@membership.organization.account.path} organization")
+    mail(to: email, subject: "@#{@membership.inviter.account.name} has invite you to join @#{@membership.organization.account.name} organization")
   end
 end

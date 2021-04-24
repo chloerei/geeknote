@@ -2,9 +2,11 @@
   <div class="form__field">
     <%= form.text_field :name %>
   </div>
-  <div class="form__field">
-    <%= form.text_field :username %>
-  </div>
+  <% form.fields_for :account do |account_form| %>
+    <div class="form__field">
+      <%= account_form.text_field :name %>
+    </div>
+  <% end %>
   <div class="form__field">
     <%= form.text_field :email %>
   </div>

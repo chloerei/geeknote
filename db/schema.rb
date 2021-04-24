@@ -17,13 +17,13 @@ ActiveRecord::Schema.define(version: 2021_04_19_091839) do
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
-    t.citext "path"
+    t.citext "name"
     t.string "owner_type"
     t.bigint "owner_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_accounts_on_name", unique: true
     t.index ["owner_type", "owner_id"], name: "index_accounts_on_owner"
-    t.index ["path"], name: "index_accounts_on_path", unique: true
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -113,7 +113,6 @@ ActiveRecord::Schema.define(version: 2021_04_19_091839) do
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
-    t.citext "username", null: false
     t.citext "email", null: false
     t.text "bio"
     t.string "password_digest"
@@ -121,7 +120,6 @@ ActiveRecord::Schema.define(version: 2021_04_19_091839) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

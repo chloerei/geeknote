@@ -1,21 +1,21 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-  test "username should be unique" do
-    user_one = create(:user, username: 'path')
+  test "account name should be unique" do
+    user_one = create(:user, account_attributes: { name: 'user' })
     assert user_one.valid?
-    user_two = build(:user, username: 'path')
+    user_two = build(:user, account_attributes: { name: 'user' })
     assert_not user_two.valid?
-    assert user_two.errors.add(:username, :taken)
+    assert user_two.account.errors.where(:name, :taken).any?
   end
 
-  test "username should be valid format" do
-    assert build(:user, username: 'abc').valid?
-    assert build(:user, username: 'a-c').valid?
+  test "account name should be valid format" do
+    assert build(:user, account_attributes: { name: 'abc' }).valid?
+    assert build(:user, account_attributes: { name: 'a-c' }).valid?
 
-    assert_not build(:user, username: '').valid?
-    assert_not build(:user, username: '-abc').valid?
-    assert_not build(:user, username: 'abc-').valid?
-    assert_not build(:user, username: 'a.bc').valid?
+    assert_not build(:user, account_attributes: { name: '' }).valid?
+    assert_not build(:user, account_attributes: { name: '-abc' }).valid?
+    assert_not build(:user, account_attributes: { name: 'abc-' }).valid?
+    assert_not build(:user, account_attributes: { name: 'a.bc' }).valid?
   end
 end
