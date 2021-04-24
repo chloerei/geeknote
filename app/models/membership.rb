@@ -58,4 +58,8 @@ class Membership < ApplicationRecord
       end
     end
   end
+
+  def invitation_exipred?
+    pending? && invited_at && invited_at < 7.days.ago
+  end
 end

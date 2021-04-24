@@ -36,6 +36,9 @@
               </dt>
               <dd class="col-9">
                 <%= Membership.human_attribute_name "status.#{@membership.status}" %>
+                <% if @membership.invitation_exipred? %>
+                  <span class="text--failed">(Invitation Expired)</span>
+                <% end %>
               </dd>
               <% if @membership.invited_at %>
                 <dt class="col-3">
@@ -67,16 +70,20 @@
                   </div>
                 </a>
               </div>
-              <div class="toolbar__action">
-                <button type="button" class="button button--text">
-                  <div class="button__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4.01 6.03l7.51 3.22-7.52-1 .01-2.22m7.5 8.72L4 17.97v-2.22l7.51-1M2.01 3L2 10l15 2-15 2 .01 7L23 12 2.01 3z"/></svg>
-                  </div>
-                  <div class="button__text">
-                    Resend
-                  </div>
-                </button>
-              </div>
+              <% if @membership.invitation_exipred? %>
+                <div class="toolbar__action">
+                  <%= form_with url: resend_account_dashboard_membership_path(@account, @membership) do %>
+                    <button type="submit" class="button button--text">
+                      <div class="button__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4.01 6.03l7.51 3.22-7.52-1 .01-2.22m7.5 8.72L4 17.97v-2.22l7.51-1M2.01 3L2 10l15 2-15 2 .01 7L23 12 2.01 3z"/></svg>
+                      </div>
+                      <div class="button__text">
+                        Resend Invitation
+                      </div>
+                    </button>
+                  <% end %>
+                </div>
+              <% end %>
               <div class="toolbar__space">
               </div>
               <% if current_role == 'owner' || @membership.member? %>

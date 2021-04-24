@@ -1,7 +1,7 @@
 class Account::Dashboard::MembershipsController < Account::Dashboard::BaseController
   before_action :require_organization_account
   before_action :require_account_admin, except: [:index, :show]
-  before_action :set_membership, only: [:show, :edit, :update, :destroy]
+  before_action :set_membership, only: [:show, :edit, :update, :destroy, :resend]
 
   def index
     @memberships = @account.owner.memberships.includes(user: :account).active
@@ -16,6 +16,7 @@ class Account::Dashboard::MembershipsController < Account::Dashboard::BaseContro
     @membership = @account.owner.memberships.new new_membership_params.merge(inviter: current_user)
 
     if @membership.save
+      @membership.touch(:invited_at)
       OrganizationMailer.with(membership: @membership).invitation_email.deliver_later
       redirect_to account_dashboard_membership_path(@account, @membership), notice: "Invitation send"
     else
@@ -44,6 +45,14 @@ class Account::Dashboard::MembershipsController < Account::Dashboard::BaseContro
       @membership.destroy
     end
     redirect_to account_dashboard_memberships_path
+  end
+
+  def resend
+    if @membership.invitation_exipred?
+      @membership.regenerate_invitation_token
+      @membership.touch(:invited_at)
+    end
+    redirect_to account_dashboard_membership_path(@account, @membership)
   end
 
   private

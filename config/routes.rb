@@ -43,7 +43,11 @@ Rails.application.routes.draw do
           resource :featured_image, only: [:update, :destroy]
         end
       end
-      resources :memberships
+      resources :memberships do
+        member do
+          post :resend
+        end
+      end
     end
   end
 end
