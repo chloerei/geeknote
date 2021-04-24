@@ -1,12 +1,12 @@
 <%= form_with model: @organization, builder: CustomFormBuilder, html: { class: 'form', id: 'organization-form' } do |form| %>
+  <%= form.fields_for :account do |account_form| %>
+    <div class="form__field">
+      <%= account_form.text_field :name, prefix_text: ENV['HOST'] + '/', autofocus: true %>
+    </div>
+  <% end %>
   <div class="form__field">
     <%= form.text_field :name %>
   </div>
-  <%= form.fields_for :account do |account_form| %>
-    <div class="form__field">
-      <%= account_form.text_field :path %>
-    </div>
-  <% end %>
   <div class="form__field">
     <%= form.text_area :description %>
   </div>

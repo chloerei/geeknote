@@ -7,6 +7,12 @@ en:
         display_entries: "%{first} - %{last} of %{total}"
   activerecord:
     attributes:
+      account:
+        name: Account Name
+      user:
+        name: Display Name
+      organization:
+        name: Display Name
       post/status:
         draft: "Draft"
         published: "Published"

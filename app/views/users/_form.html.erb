@@ -1,12 +1,12 @@
 <%= form_with model: @user, builder: CustomFormBuilder, html: { class: 'form', id: 'sign-up-form' } do |form| %>
+  <%= form.fields_for :account do |account_form| %>
+    <div class="form__field">
+      <%= account_form.text_field :name, prefix_text: ENV['HOST'] + '/', autofocus: true %>
+    </div>
+  <% end %>
   <div class="form__field">
     <%= form.text_field :name %>
   </div>
-  <% form.fields_for :account do |account_form| %>
-    <div class="form__field">
-      <%= account_form.text_field :name %>
-    </div>
-  <% end %>
   <div class="form__field">
     <%= form.text_field :email %>
   </div>
