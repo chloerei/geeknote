@@ -3,7 +3,7 @@ class CreateMemberships < ActiveRecord::Migration[6.1]
     create_table :memberships do |t|
       t.belongs_to :organization
       t.belongs_to :user
-      t.integer :role
+      t.integer :role, default: 2
 
       t.belongs_to :inviter
       t.citext :invitation_email

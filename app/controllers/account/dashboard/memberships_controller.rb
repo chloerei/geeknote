@@ -1,5 +1,6 @@
 class Account::Dashboard::MembershipsController < Account::Dashboard::BaseController
   before_action :require_organization_account
+  before_action :require_account_admin, except: [:index, :show]
   before_action :set_membership, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -12,7 +13,7 @@ class Account::Dashboard::MembershipsController < Account::Dashboard::BaseContro
   end
 
   def create
-    @membership = @account.owner.memberships.new new_membership_params
+    @membership = @account.owner.memberships.new new_membership_params.merge(inviter: current_user)
 
     if @membership.save
       OrganizationMailer.with(membership: @membership).invitation_email.deliver_later
@@ -36,19 +37,33 @@ class Account::Dashboard::MembershipsController < Account::Dashboard::BaseContro
     end
   end
 
+  # admin can remove member
+  # owner can remove owner and admin
   def destroy
-    @membership.destroy
+    if current_role == 'owner' || @membership.member?
+      @membership.destroy
+    end
     redirect_to account_dashboard_memberships_path
   end
 
   private
 
+  # owner can add all roles
+  # admin can add member role
   def new_membership_params
-    params.require(:membership).permit(:identifier, :role)
+    params.require(:membership).permit(:identifier, :role).delete_if do |key, value|
+      if key == 'role' && current_role != 'owner'
+        !value.in?(%w(member))
+      end
+    end
   end
 
   def edit_membership_params
-    params.require(:membership).permit(:role)
+    params.require(:membership).permit(:role).delete_if do |key, value|
+      if key == 'role' && current_role != 'owner'
+        !value.in?(%w(member))
+      end
+    end
   end
 
   def set_membership

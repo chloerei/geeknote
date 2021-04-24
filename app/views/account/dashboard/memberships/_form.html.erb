@@ -7,42 +7,44 @@
       <%= @membership.user ? @membership.user.name : @membership.invitation_email %>
     <% end %>
   </div>
-  <div class="form__field">
-    <label class="label">Role</label>
-    <div class="form__control">
-      <%= form.radio_button :role, :owner %>
-      <label for="membership_role_owner" class="form__control__label">
-        <div class="primary-text">
-          Owner
+    <div class="form__field">
+      <label class="label">Role</label>
+      <% if current_role == 'owner' %>
+        <div class="form__control">
+          <%= form.radio_button :role, :owner %>
+          <label for="membership_role_owner" class="form__control__label">
+            <div class="primary-text">
+              Owner
+            </div>
+            <div class="secondary-text">
+              Has all permissions on this organization.
+            </div>
+          </label>
         </div>
-        <div class="secondary-text">
-          Has all permissions on this organization.
+        <div class="form__control">
+          <%= form.radio_button :role, :admin %>
+          <label for="membership_role_admin" class="form__control__label">
+            <div class="primary-text">
+              Admin
+            </div>
+            <div class="secondary-text">
+              Has most permissions except for adding admin on this organization.
+            </div>
+          </label>
         </div>
-      </label>
+      <% end %>
+      <div class="form__control">
+        <%= form.radio_button :role, :member %>
+        <label for="membership_role_member" class="form__control__label">
+          <div class="primary-text">
+            Member
+          </div>
+          <div class="secondary-text">
+            Can publish and modify their own posts.
+          </div>
+        </label>
+      </div>
     </div>
-    <div class="form__control">
-      <%= form.radio_button :role, :admin %>
-      <label for="membership_role_admin" class="form__control__label">
-        <div class="primary-text">
-          Admin
-        </div>
-        <div class="secondary-text">
-          Has most permissions except for adding admin on this organization.
-        </div>
-      </label>
-    </div>
-    <div class="form__control">
-      <%= form.radio_button :role, :member %>
-      <label for="membership_role_member" class="form__control__label">
-        <div class="primary-text">
-          Member
-        </div>
-        <div class="secondary-text">
-          Can publish and modify their own posts.
-        </div>
-      </label>
-    </div>
-  </div>
   <button type="submit" class="button button--contained button--primary">
     <% if @membership.new_record? %>
       Send Invitation

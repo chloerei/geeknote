@@ -28,6 +28,7 @@
               <% @memberships.each do |membership| %>
                 <tr>
                   <td class="table__cell--title">
+                    <a href="<%= account_dashboard_membership_path(@account, membership) %>" class="table__row-link"></a>
                     <%= membership.user.name %>
                   </td>
                   <td class="table__cell--attribute">
