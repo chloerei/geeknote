@@ -2,7 +2,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   helper_method :post_filter_params
 
   def index
-    @posts = @account.posts.preload(:tags).order(updated_at: :desc).page(params[:page])
+    @posts = scoped_posts.preload(:tags).order(updated_at: :desc).page(params[:page])
 
     if Post.statuses.include?(params[:status])
       @posts = @posts.where(status: params[:status])
@@ -27,12 +27,12 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   end
 
   def edit
-    @post = @account.posts.find params[:id]
+    @post = scoped_posts.find params[:id]
     render 'editor', layout: 'base'
   end
 
   def update
-    @post = @account.posts.find params[:id]
+    @post = scoped_posts.find params[:id]
     @post.update post_params
 
     if params[:submit] == 'preview'
@@ -41,7 +41,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   end
 
   def destroy
-    @post = @account.posts.find params[:id]
+    @post = scoped_posts.find params[:id]
     @post.destroy
     redirect_to account_dashboard_posts_url(@account)
   end
@@ -54,5 +54,13 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
 
   def post_filter_params
     request.params.slice(:status)
+  end
+
+  def scoped_posts
+    if current_role.in? %w(owner admin)
+      @account.posts
+    else
+      @account.posts.where(author: current_user)
+    end
   end
 end
