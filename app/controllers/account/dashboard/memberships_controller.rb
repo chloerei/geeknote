@@ -51,6 +51,7 @@ class Account::Dashboard::MembershipsController < Account::Dashboard::BaseContro
     if @membership.invitation_exipred?
       @membership.regenerate_invitation_token
       @membership.touch(:invited_at)
+      OrganizationMailer.with(membership: @membership).invitation_email.deliver_later
     end
     redirect_to account_dashboard_membership_path(@account, @membership)
   end

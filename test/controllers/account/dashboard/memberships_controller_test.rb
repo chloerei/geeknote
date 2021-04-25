@@ -26,8 +26,10 @@ class Account::Dashboard::MembershipsControllerTest < ActionDispatch::Integratio
     assert_response :not_found
 
     sign_in create(:membership, organization: @organization, role: 'admin').user
-    assert_difference "@organization.memberships.count" do
-      post account_dashboard_memberships_path(@account), params: { membership: { identifier: 'account@example.com', role: 'admin' } }
+    assert_emails 1 do
+      assert_difference "@organization.memberships.count" do
+        post account_dashboard_memberships_path(@account), params: { membership: { identifier: 'account@example.com', role: 'admin' } }
+      end
     end
     assert_redirected_to account_dashboard_membership_path(@account, @organization.memberships.last)
     assert_equal 'member', @organization.memberships.last.role
@@ -129,7 +131,7 @@ class Account::Dashboard::MembershipsControllerTest < ActionDispatch::Integratio
   end
 
   test "should resend for expired invitation" do
-    membership = create(:membership, organization: @organization, invited_at: Time.now.utc, status: 'pending')
+    membership = create(:invitation, organization: @organization)
 
     sign_in create(:membership, organization: @organization, role: 'admin').user
     old_token = membership.invitation_token
@@ -139,7 +141,9 @@ class Account::Dashboard::MembershipsControllerTest < ActionDispatch::Integratio
 
     travel_to 8.days.from_now do
       assert membership.invitation_exipred?
-      post resend_account_dashboard_membership_path(@account, membership)
+      assert_emails 1 do
+        post resend_account_dashboard_membership_path(@account, membership)
+      end
       membership.reload
       assert_not membership.invitation_exipred?
       assert_not_equal old_token, membership.invitation_token
