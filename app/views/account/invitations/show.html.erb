@@ -1,0 +1,42 @@
+<div class="container container--small">
+  <div class="padding">
+    <div class="card card--outlined">
+      <div class="padding">
+        <div class="flex flex-direction-column flex-align-items-center margin-bottom">
+          <div class="avatar avatar--medium">
+            <%= avatar_image_tag @account.owner.avatar %>
+          </div>
+        </div>
+        <div class="text-align-center">
+          <h3>
+            You’ve been invited to the <%= @account.name %> organization.
+          </h3>
+          <p class="text--secondary">
+            Invited by @<%= @membership.inviter.account.name %>
+          </p>
+          <% if current_user %>
+            <% if @account.owner.memberships.active.where(user: current_user).exists? %>
+              <p>
+                You are already a member of @<%= @account.name %>.
+                <a href="<%= sign_in_path(return_to: account_invitation_path(invitation_token: @membership.invitation_token)) %>">Sign in</a> as another user if you want to join as another user.
+              </p>
+            <% else %>
+              <%= form_with url: account_invitation_path(invitation_token: @membership.invitation_token), method: 'patch' do %>
+                <button type="submit" class="button button--contained button--primary">
+                  Join @<%= @account.owner.name %>
+                </button>
+              <% end %>
+            <% end %>
+          <% else %>
+            <p>
+              <a href="<%= sign_up_path(return_to: account_invitation_path(invitation_token: @membership.invitation_token)) %>">New to GeekNote? Sign up.</a>
+            </p>
+            <p>
+              <a href="<%= sign_in_path(return_to: account_invitation_path(invitation_token: @membership.invitation_token)) %>">Already have account? Sign in.</a>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

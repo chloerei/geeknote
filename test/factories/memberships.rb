@@ -4,5 +4,12 @@ FactoryBot.define do
     user
     status { 'active' }
     role { 'member' }
+
+    factory :invitation do
+      user { nil }
+      status { 'pending' }
+      inviter factory: :user
+      invited_at { Time.now }
+    end
   end
 end

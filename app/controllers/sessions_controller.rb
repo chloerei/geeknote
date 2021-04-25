@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
   def new
     if params[:return_to]
-      session[:return_to] = URI(params[:return_to]).path
+      uri = URI(params[:return_to])
+      session[:return_to] = [uri.path, uri.query].compact.join('?')
     end
   end
 

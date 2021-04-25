@@ -4,6 +4,18 @@
 
 <p>This invitation will expire in 7 days.</p>
 
-<p>
-  <a href="<%= account_invitation_url(@membership.organization.account, invitation_token: @membership.invitation_token) %>" class="btn-primary">Join @<%= @membership.organization.account.name %></a>
+<p class="aligncenter">
+  <a href="<%= account_invitation_url(@membership.organization.account, invitation_token: (@membership.user ? nil : @membership.invitation_token)) %>" class="btn-primary">
+    Join @<%= @membership.organization.account.name %>
+  </a>
 </p>
+
+<% if @membership.user %>
+  <p>
+    <b>Note:</b> If you get a 404 page, make sure you’re signed in as @<%= @membership.user.account.name %>.
+  </p>
+<% else %>
+  <p>
+    <b>New to GeekNote?</b> GeekNote is a writing and publishing platform for geeks.
+  </p>
+<% end %>

@@ -27,7 +27,11 @@
             <a href="<%= settings_organizations_path %>" class="dropdown__item">Organizations</a>
             <a href="<%= settings_profile_path %>" class="dropdown__item">Settings</a>
             <hr class="divider">
-            <a href="#" class="dropdown__item">Sign out</a>
+            <%= form_with url: sign_out_path, method: 'delete' do %>
+              <button type="submit" class="dropdown__item">
+                Sign out
+              </button>
+            <% end %>
           </div>
         </div>
         <div class="toolbar__action">

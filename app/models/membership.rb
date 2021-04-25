@@ -22,6 +22,8 @@ class Membership < ApplicationRecord
 
   validate :validate_identifier, on: :create
 
+  scope :invitations, -> { where(status: :pending).where("invited_at > ?", 7.days.ago) }
+
   def validate_identifier
     if identifier
       case identifier

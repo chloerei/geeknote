@@ -5,12 +5,6 @@ class Account::Dashboard::BaseController < Account::BaseController
 
   private
 
-  def require_organization_account
-    unless @account.organization?
-      render_not_found
-    end
-  end
-
   def current_role
     @current_role ||= if @account.organization?
       membership = @account.owner.memberships.active.find_by(user: current_user)

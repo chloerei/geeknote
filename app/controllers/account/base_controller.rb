@@ -6,4 +6,10 @@ class Account::BaseController < ApplicationController
   def set_account
     @account = Account.find_by! name: params[:account_name]
   end
+
+  def require_organization_account
+    unless @account.organization?
+      render_not_found
+    end
+  end
 end

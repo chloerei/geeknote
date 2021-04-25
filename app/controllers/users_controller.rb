@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
   def new
+    if params[:return_to]
+      uri = URI(params[:return_to])
+      session[:return_to] = [uri.path, uri.query].compact.join('?')
+    end
     @user = User.new
     @user.build_account
   end
@@ -9,7 +13,7 @@ class UsersController < ApplicationController
 
     if @user.save
       sign_in(@user)
-      redirect_to root_url
+      redirect_to session.delete(:return_to) || root_path
     else
       render turbo_stream: turbo_stream.replace('sign-up-form', partial: 'form')
     end
