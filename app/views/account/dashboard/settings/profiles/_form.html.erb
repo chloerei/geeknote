@@ -1,0 +1,20 @@
+<%= form_with model: @owner, url: account_dashboard_settings_profile_path, builder: CustomFormBuilder, class: 'form', id: 'profile-form' do |form| %>
+  <div class="form__field">
+    <%= form.fields_for :account, include_id: false do |account_form| %>
+      <%= account_form.text_field :name, prefix_text: ENV['HOST'] + '/' %>
+    <% end %>
+  </div>
+  <div class="form__field">
+    <%= form.text_field :name %>
+  </div>
+  <div class="form__field">
+    <% if @owner.is_a? Organization %>
+      <%= form.text_area :description %>
+    <% else %>
+      <%= form.text_area :bio %>
+    <% end %>
+  </div>
+  <button type="submit" class="button button--contained button--primary">
+    Save changes
+  </button>
+<% end %>

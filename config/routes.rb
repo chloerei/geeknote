@@ -48,6 +48,10 @@ Rails.application.routes.draw do
           post :resend
         end
       end
+
+      namespace :settings do
+        resource :profile, onlu: [:show, :update]
+      end
     end
   end
 end
