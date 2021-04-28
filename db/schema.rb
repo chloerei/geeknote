@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2021_04_19_091839) do
   create_table "organizations", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.boolean "display_post_author", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

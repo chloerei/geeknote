@@ -25,13 +25,21 @@
   <div class="form__field">
     <%= form.text_field :name %>
   </div>
-  <div class="form__field">
-    <% if @owner.is_a? Organization %>
+  <% if @owner.is_a? Organization %>
+    <div class="form__field">
       <%= form.text_area :description %>
-    <% else %>
+    </div>
+    <div class="form__field">
+      <div class="form__control">
+        <%= form.check_box :display_post_author %>
+        <%= form.label :display_post_author, class: 'form__control__label' %>
+      </div>
+    </div>
+  <% else %>
+    <div class="form__field">
       <%= form.text_area :bio %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
   <button type="submit" class="button button--contained button--primary">
     Save changes
   </button>
