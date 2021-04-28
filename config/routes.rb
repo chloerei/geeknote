@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   delete 'sign_out', to: 'sessions#destroy', as: 'sign_out'
   resources :sessions, only: [:create]
 
-  get 'attachments/:key/:filename', to: 'attachments#show'
+  get 'attachments/:key/:filename', to: 'attachments#show', as: :attachment
 
   resources :tags, only: [] do
     collection do
@@ -42,11 +42,14 @@ Rails.application.routes.draw do
           resource :featured_image, only: [:update, :destroy]
         end
       end
+
       resources :memberships do
         member do
           post :resend
         end
       end
+
+      resources :attachments, only: [:create]
 
       namespace :settings do
         resource :profile, onlu: [:show, :update]

@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :posts, as: :author
   has_many :memberships
   has_many :organizations, through: :memberships
+  has_many :attachments
 
   has_secure_password
   has_secure_token :auth_token

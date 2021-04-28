@@ -3,12 +3,14 @@ import { Editor } from "../lib/editor"
 import { DirectUpload } from "@rails/activestorage"
 import { Turbo } from '@hotwired/turbo-rails'
 import { Snackbar } from '../lib/snackbar'
+import Rails from "@rails/ujs"
 
 const isMac = /Mac/.test(navigator.platform)
 
 export default class extends Controller {
   static values = {
-    directUploadUrl: String
+    directUploadUrl: String,
+    attachmentsUrl: String
   }
 
   static targets = ['form', 'titleInput', 'contentEditor', 'contentInput', 'saveStatus', 'toolbarContainer']
@@ -55,17 +57,24 @@ export default class extends Controller {
 
   initEditor() {
     const directUploadUrl = this.directUploadUrlValue
+    const attachmentsUrl = this.attachmentsUrlValue
     this.editor = new Editor(this.contentEditorTarget, {
       input: this.contentInputTarget,
       uploadImage: (file) => {
         return new Promise(function(resolve, reject) {
           const upload = new DirectUpload(file, directUploadUrl)
           upload.create((error, blob) => {
-            if (error) {
-
-            } else {
-              resolve(`/attachments/${blob.key}/${blob.filename}`)
-            }
+            // Todo: error handle
+            let formData = new FormData()
+            formData.append('attachment[file]', blob.signed_id)
+            Rails.ajax({
+              url: attachmentsUrl,
+              data: formData,
+              type: 'post',
+              success: (data) => {
+                resolve(data.url)
+              }
+            })
           })
         })
       },

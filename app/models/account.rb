@@ -1,6 +1,7 @@
 class Account < ApplicationRecord
   belongs_to :owner, polymorphic: true
   has_many :posts
+  has_many :attachments
 
   NAME_REGEXP = /\A[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9]\z/
   validates :name, uniqueness: true, format: { with: NAME_REGEXP }, presence: true
