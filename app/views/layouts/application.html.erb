@@ -25,7 +25,7 @@
             <a href="<%= account_root_path(current_user.account) %>" class="dropdown__item">Profile</a>
             <a href="<%= account_dashboard_root_path(current_user.account) %>" class="dropdown__item">Dashboard</a>
             <a href="<%= settings_organizations_path %>" class="dropdown__item">Organizations</a>
-            <a href="<%= settings_profile_path %>" class="dropdown__item">Settings</a>
+            <a href="<%= settings_account_path %>" class="dropdown__item">Settings</a>
             <hr class="divider">
             <%= form_with url: sign_out_path, method: 'delete' do %>
               <button type="submit" class="dropdown__item">

@@ -1,4 +1,22 @@
-<%= form_with model: @owner, url: account_dashboard_settings_profile_path, builder: CustomFormBuilder, class: 'form', id: 'profile-form' do |form| %>
+<%= form_with model: @owner, url: account_dashboard_settings_profile_path, builder: CustomFormBuilder, class: 'form', id: 'profile-form', data: { controller: 'form' } do |form| %>
+  <div class="form__field">
+    <div class="avatar-uploader">
+      <div class="avatar avatar--large">
+        <%= avatar_image_tag(@owner.avatar) %>
+      </div>
+      <div class="avatar-uploader__button">
+        <label for="account-avatar" class="button button--text">
+          <div class="button__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><path d="M18,15v3H6v-3H4v3c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2v-3H18z M7,9l1.41,1.41L11,7.83V16h2V7.83l2.59,2.58L17,9l-5-5L7,9z"/></g></svg>
+          </div>
+          <div class="button__text">
+            Upload avatar
+          </div>
+        </label>
+      </div>
+      <%= form.file_field :avatar, direct_upload: true, id: 'account-avatar', data: { action: 'change->form#submit' } %>
+    </div>
+  </div>
   <div class="form__field">
     <%= form.fields_for :account, include_id: false do |account_form| %>
       <%= account_form.text_field :name, prefix_text: ENV['HOST'] + '/' %>

@@ -1,10 +1,5 @@
 <%= form_with model: @user, url: settings_account_path, builder: CustomFormBuilder, class: 'form', id: 'account-form', data: { controller: 'form' } do |form| %>
   <div class="form__field">
-    <%= form.fields_for :account, include_id: false do |account_form| %>
-      <%= account_form.text_field :name, prefix_text: '@' %>
-    <% end %>
-  </div>
-  <div class="form__field">
     <%= form.text_field :email %>
   </div>
   <div class="form__field">

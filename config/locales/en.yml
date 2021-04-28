@@ -8,7 +8,7 @@ en:
   activerecord:
     attributes:
       account:
-        name: Account Name
+        name: Name
       user:
         name: Display Name
       organization:

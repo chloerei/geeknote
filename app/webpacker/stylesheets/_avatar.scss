@@ -30,22 +30,15 @@
 }
 
 .avatar-uploader {
-  position: relative;
-  display: inline-flex;
 
   input[type="file"] {
     display: none;
   }
 
   .avatar {
-    opacity: 0.5;
+    margin-bottom: 8px;
   }
 }
 
 .avatar-uploader__button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -20px;
-  margin-left: -20px;
 }

@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   resources :organizations, only: [:new, :create]
 
   namespace :settings do
-    resource :profile
     resource :account
     resource :password
     resources :organizations, only: [:index]
