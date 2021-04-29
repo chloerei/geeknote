@@ -2,7 +2,7 @@
   <a href="<%= account_dashboard_posts_path(@account) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'posts' %>">
     Posts
   </a>
-  <a href="#" class="nav__item">
+  <a href="<%= account_dashboard_collections_path(@account) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'collections' %>">
     Collections
   </a>
   <a href="#" class="nav__item">

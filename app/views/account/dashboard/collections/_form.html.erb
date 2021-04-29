@@ -1,0 +1,35 @@
+<%= form_with model: @collection, url: [@account, :dashboard, @collection], builder: CustomFormBuilder, class: 'form', id: 'collection-form' do |form| %>
+  <div class="form__field">
+    <%= form.text_field :name %>
+  </div>
+  <div class="form__field">
+    <%= form.text_area :description %>
+  </div>
+  <div class="form__field">
+    <div class="form__control">
+      <%= form.radio_button :visibility, :private %>
+      <%= form.label :visibility, value: :private, class: 'form__control__label' do %>
+        <div class="primary-text">
+          Private
+        </div>
+        <div class="secondary-text">
+          Only me can view
+        </div>
+      <% end %>
+    </div>
+    <div class="form__control">
+      <%= form.radio_button :visibility, :public %>
+      <%= form.label :visibility, value: :public, class: 'form__control__label' do %>
+        <div class="primary-text">
+          Public
+        </div>
+        <div class="secondary-text">
+          Everyone can view
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <button type="submit" class="button button--contained button--primary">
+    Create Collection
+  </button>
+<% end %>

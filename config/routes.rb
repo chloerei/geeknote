@@ -43,6 +43,8 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :collections
+
       resources :memberships do
         member do
           post :resend

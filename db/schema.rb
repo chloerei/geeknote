@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_28_125015) do
+ActiveRecord::Schema.define(version: 2021_04_29_064541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -63,6 +63,16 @@ ActiveRecord::Schema.define(version: 2021_04_28_125015) do
     t.index ["account_id"], name: "index_attachments_on_account_id"
     t.index ["key"], name: "index_attachments_on_key", unique: true
     t.index ["user_id"], name: "index_attachments_on_user_id"
+  end
+
+  create_table "collections", force: :cascade do |t|
+    t.bigint "account_id"
+    t.string "name"
+    t.text "description"
+    t.integer "visibility", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_collections_on_account_id"
   end
 
   create_table "memberships", force: :cascade do |t|
