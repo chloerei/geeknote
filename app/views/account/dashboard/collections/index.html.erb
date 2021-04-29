@@ -1,54 +1,48 @@
-<div class="container container--medium">
-  <%= render 'account/dashboard/breadcrumb' %>
-  <div class="row">
-    <div class="col-3">
-      <%= render 'account/dashboard/nav' %>
+<div class="app-bar app-bar--borderless">
+  <div class="toolbar">
+    <div class="toolbar__title">
+      Collections
     </div>
-    <div class="col-9">
+    <div class="toolbar__action">
+      <a href="<%= new_account_dashboard_collection_path(@account) %>" class="button button--contained button--primary button--last">
+        New Collection
+      </a>
+    </div>
+  </div>
+
+  <div class="app-content">
+    <div class="padding">
+      <div class="card card--outlined">
+        <table class="table table--flex">
+          <thead>
+            <tr>
+              <th class="table__cell--title">Name</th>
+              <th class="table__cell--attribute">Visibility</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @collections.each do |collection| %>
+            <tr>
+              <td class="table__cell--title">
+                <a href="<%= account_dashboard_collection_path(@account, collection) %>" class="table__row-link"></a>
+                <%= collection.name %>
+              </td>
+              <td class="table__cell--attribute">
+                <%= Collection.human_attribute_name "visibility.#{collection.visibility}" %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
       <div class="toolbar">
-        <div class="toolbar__title">
-          Collections
+        <div class="toolbar__space">
+        </div>
+        <div class="toolbar__text">
+          <%= page_entries_info @collections %>
         </div>
         <div class="toolbar__action">
-          <a href="<%= new_account_dashboard_collection_path(@account) %>" class="button button--contained button--primary button--last">
-            New Collection
-          </a>
-        </div>
-      </div>
-
-      <div class="padding">
-        <div class="card card--outlined">
-          <table class="table table--flex">
-            <thead>
-              <tr>
-                <th class="table__cell--title">Name</th>
-                <th class="table__cell--attribute">Visibility</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @collections.each do |collection| %>
-                <tr>
-                  <td class="table__cell--title">
-                    <a href="<%= account_dashboard_collection_path(@account, collection) %>" class="table__row-link"></a>
-                    <%= collection.name %>
-                  </td>
-                  <td class="table__cell--attribute">
-                    <%= Collection.human_attribute_name "visibility.#{collection.visibility}" %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-          <div class="toolbar border-top">
-            <div class="toolbar__space">
-            </div>
-            <div class="toolbar__text">
-              <%= page_entries_info @collections %>
-            </div>
-            <div class="toolbar__action">
-              <%= paginate @collections %>
-            </div>
-          </div>
+          <%= paginate @collections %>
         </div>
       </div>
     </div>

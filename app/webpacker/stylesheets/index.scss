@@ -42,7 +42,6 @@
 .app-content {
   flex-grow: 1;
   overflow: auto;
-  position: relative;
 }
 
 .alert {
@@ -226,4 +225,14 @@ dd {
 
 .form__field {
   margin-bottom: 16px;
+}
+
+.nav-header {
+  display: flex;
+  align-items: center;
+  padding: 6px;
+
+  .avatar {
+    margin-right: 8px;
+  }
 }

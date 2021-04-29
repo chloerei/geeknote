@@ -3,6 +3,8 @@ class Account::Dashboard::BaseController < Account::BaseController
 
   helper_method :current_role
 
+  layout 'dashboard'
+
   private
 
   def current_role
