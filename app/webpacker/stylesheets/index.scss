@@ -85,6 +85,26 @@
   margin-bottom: 16px;
 }
 
+.margin-x {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.margin-y {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.padding-x {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.padding-y {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
 .table__cell--title {
   flex-grow: 1;
 }
@@ -160,14 +180,6 @@
 
 .margin-top-0 {
   margin-top: 0;
-}
-
-.padding-x {
-  padding: 0 16px;
-}
-
-.margin-y {
-  margin: 16px 0;
 }
 
 .primary-text {
