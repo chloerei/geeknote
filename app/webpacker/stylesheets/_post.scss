@@ -216,7 +216,7 @@
 }
 
 .posts__item__footer {
-  .toolbar {
+  & > .toolbar {
     padding: 0;
     margin: 0 -4px -4px;
   }

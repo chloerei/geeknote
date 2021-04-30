@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resources :posts do
       scope module: 'posts' do
         resource :preview, only: [:show]
+        resources :collections
       end
     end
 

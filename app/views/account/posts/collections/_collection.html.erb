@@ -1,0 +1,8 @@
+<%= form_with model: collection, url: account_post_collection_path(@account, @post, collection), builder: CustomFormBuilder, class: 'form', data: { controller: 'form' } do |form| %>
+  <div class="form__control">
+    <%= form.check_box :add, id: "collection-#{collection.id}-add", data: { action: 'form#submit' } %>
+    <%= form.label :add, for: "collection-#{collection.id}-add", class: "form__control__label" do %>
+      <%= collection.name %>
+    <% end %>
+  </div>
+<% end %>
