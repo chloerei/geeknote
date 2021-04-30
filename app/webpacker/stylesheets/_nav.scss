@@ -2,20 +2,20 @@
 }
 
 .nav__item {
-  display: flex;
-}
-
-.nav__item {
   padding: 10px;
   margin: 6px;
+  border: none;
+  background: transparent;
   display: flex;
   text-decoration: none;
-  line-height: 20px;
   align-items: center;
   border-radius: 4px;
   position: relative;
   overflow: hidden;
   color: var(--text-secondary-color);
+  font-size: 16px;
+  line-height: 20px;
+  cursor: pointer;
 
   svg {
     fill: var(--text-secondary-color);

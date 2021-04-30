@@ -1,5 +1,6 @@
 @import 'campo-ui/src/css/campo-ui';
 @import 'nav';
+@import 'menu';
 @import 'editor';
 @import 'codemirror';
 @import 'post';
@@ -80,6 +81,9 @@
   }
 }
 
+.margin-right {
+  margin-right: 16px;
+}
 
 .margin-bottom {
   margin-bottom: 16px;
@@ -184,13 +188,13 @@
 
 .primary-text {
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 24px;
   color: var(--text-primary-color);
 }
 
 .secondary-text {
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 16px;
   color: var(--text-secondary-color);
 }
 
@@ -239,12 +243,46 @@ dd {
   margin-bottom: 16px;
 }
 
-.nav-header {
-  display: flex;
-  align-items: center;
-  padding: 6px;
+.drawer__header {
+}
+
+.drawer__body {
+  flex-grow: 1
+}
+
+.drawer__footer {
+}
+
+.dropdown--account {
+  display: block;
+  margin: 6px;
+
+}
+
+.button--account {
+  width: 100%;
+  text-align: left;
+  padding: 4px 2px;
+
+  .button__avatar {
+    margin-right: 6px;
+  }
+
+  .button__text {
+    flex-grow: 1;
+  }
+}
+
+.button--text.button--user {
+  margin: 0;
+  padding: 2px;
+  min-width: 0;
+  border-radius: 20px;
 
   .avatar {
-    margin-right: 8px;
+    img {
+      width: 36px;
+      height: 36px;
+    }
   }
 }
