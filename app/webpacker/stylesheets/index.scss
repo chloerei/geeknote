@@ -290,3 +290,19 @@ dd {
     }
   }
 }
+
+.snackbar-container {
+  z-index: 1000;
+}
+
+label.list__item {
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  &:active {
+    background: rgba(0, 0, 0, 0.075);
+  }
+}
