@@ -2,11 +2,21 @@ class Account::Posts::CollectionsController < Account::Posts::BaseController
   before_action :require_sign_in
 
   def index
-    @collections = current_user.account.collections.includes(:collection_items)
+    @target_account = if params[:account]
+      current_user.manage_accounts.find_by! name: params[:account]
+    else
+      current_user.account
+    end
+
+    @collections = @target_account.collections.includes(:collection_items)
   end
 
   def update
-    @collection = current_user.account.collections.find params[:id]
+    @collection = Collection.find params[:id]
+
+    unless current_user.account == @collection.account || current_user.manage_accounts.include?(@collection.account)
+      render_not_found and return
+    end
 
     if params[:collection][:added] == '1'
       flash.now[:notice] = "Added to #{@collection.name}"

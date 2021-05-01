@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :posts, as: :author
   has_many :memberships
   has_many :organizations, through: :memberships
+  has_many :manage_accounts, -> { where(memberships: { role: Membership.roles.values_at(:admin, :owner) })}, through: :organizations, source: :account
   has_many :attachments
 
   has_secure_password

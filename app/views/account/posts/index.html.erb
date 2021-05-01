@@ -102,7 +102,7 @@
                 </button>
                 <div class="dialog" id="post-<%= post.id %>-collections-dialog" data-controller="dialog">
                   <div class="dialog__container">
-                    <%= turbo_frame_tag "post-#{post.id}-collections", src: account_post_collections_path(post.account, post), loading: 'lazy'  %>
+                    <%= turbo_frame_tag "post-#{post.id}-collections", src: account_post_collections_path(post.account, post), loading: 'lazy' %>
                   </div>
                 </div>
               </div>
