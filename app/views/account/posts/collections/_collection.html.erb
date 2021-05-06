@@ -9,7 +9,7 @@
   </div>
   <div class="list__icon">
     <%= form_with model: collection, url: account_post_collection_path(@account, @post, collection), builder: CustomFormBuilder, class: 'form', data: { controller: 'form' } do |form| %>
-      <%= form.check_box :added, id: "collection-#{collection.id}-added", checked: collection.collection_items.where(post: @post).exists?, data: { action: 'form#submit' } %>
+      <%= form.check_box :added, id: "collection-#{collection.id}-added", data: { action: 'form#submit' } %>
     <% end %>
   </div>
 </label>

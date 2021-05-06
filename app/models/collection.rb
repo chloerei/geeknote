@@ -3,6 +3,14 @@ class Collection < ApplicationRecord
   has_many :collection_items
   has_many :posts, through: :collection_items
 
+  attribute :added
+
+  scope :with_post_added, -> (post) {
+    select(
+      sanitize_sql_array(["*, exists(select 1 from collection_items where collection_items.collection_id = collections.id and collection_items.post_id = :post_id) as added", post_id: post.id])
+    )
+  }
+
   enum visibility: {
     private: 0,
     public: 1
