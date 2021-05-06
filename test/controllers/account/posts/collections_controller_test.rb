@@ -18,11 +18,11 @@ class Account::Posts::CollectionsControllerTest < ActionDispatch::IntegrationTes
 
     sign_in user
     assert_difference "collection.collection_items.count" do
-      patch account_post_collection_path(post.account, post, collection), params: { collection: { added: '1' } }, as: :turbo_stream
+      patch account_post_collection_path(post.account, post, collection), as: :turbo_stream
     end
 
     assert_difference "collection.collection_items.count", -1 do
-      patch account_post_collection_path(post.account, post, collection), params: { collection: { added: '0' } }, as: :turbo_stream
+      delete account_post_collection_path(post.account, post, collection), as: :turbo_stream
     end
 
     sign_in create(:user)
@@ -56,24 +56,24 @@ class Account::Posts::CollectionsControllerTest < ActionDispatch::IntegrationTes
 
     sign_in create(:user)
     assert_no_difference "collection.collection_items.count" do
-      patch account_post_collection_path(post.account, post, collection, account: organization.account.name), params: { collection: { added: '1' } }, as: :turbo_stream
+      patch account_post_collection_path(post.account, post, collection, account: organization.account.name), as: :turbo_stream
       assert_response :not_found
     end
 
     sign_in create(:membership, organization: organization).user
     assert_no_difference "collection.collection_items.count" do
-      patch account_post_collection_path(post.account, post, collection, account: organization.account.name), params: { collection: { added: '1' } }, as: :turbo_stream
+      patch account_post_collection_path(post.account, post, collection, account: organization.account.name), as: :turbo_stream
       assert_response :not_found
     end
 
     sign_in create(:membership, organization: organization, role: 'admin').user
     assert_difference "collection.collection_items.count" do
-      patch account_post_collection_path(post.account, post, collection, account: organization.account.name), params: { collection: { added: '1' } }, as: :turbo_stream
+      patch account_post_collection_path(post.account, post, collection, account: organization.account.name), as: :turbo_stream
       assert_response :success
     end
 
     assert_difference "collection.collection_items.count", -1 do
-      patch account_post_collection_path(post.account, post, collection, account: organization.account.name), params: { collection: { added: '0' } }, as: :turbo_stream
+      delete account_post_collection_path(post.account, post, collection, account: organization.account.name), as: :turbo_stream
       assert_response :success
     end
   end

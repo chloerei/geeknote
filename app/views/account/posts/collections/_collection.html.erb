@@ -8,8 +8,8 @@
     </div>
   </div>
   <div class="list__icon">
-    <%= form_with model: collection, url: account_post_collection_path(@account, @post, collection), builder: CustomFormBuilder, class: 'form', data: { controller: 'form' } do |form| %>
-      <%= form.check_box :added, id: "collection-#{collection.id}-added", data: { action: 'form#submit' } %>
+    <%= form_with url: account_post_collection_path(@account, @post, collection), builder: CustomFormBuilder, class: 'form', data: { controller: 'form' } do |form| %>
+      <%= form.check_box '_method', { checked: collection.added, id: "collection-#{collection.id}-added", data: { action: 'form#submit' } }, 'patch', 'delete' %>
     <% end %>
   </div>
 </label>

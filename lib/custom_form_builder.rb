@@ -28,9 +28,9 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  def check_box(attribute, options = {})
+  def check_box(attribute, options = {}, checked_value = '1', unchecked_value = '0')
     @template.content_tag(:label, class: 'checkbox') do
-      super(attribute, options) +
+      super(attribute, options, checked_value, unchecked_value) +
       @template.content_tag(:div, class: 'checkbox__icon') do
         <<~EOF.html_safe
           <svg viewBox="0 0 24 24">
