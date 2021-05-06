@@ -16,7 +16,7 @@
           </button>
           <div class="dropdown__menu dropdown__menu--top-right">
             <% if @account.can_manage_by?(current_user) %>
-              <a href="<%= account_dashboard_posts_path(@account) %>" class="dropdown__item">
+              <a href="<%= account_dashboard_root_path(@account) %>" class="dropdown__item">
                 Dashboard
               </a>
             <% end %>
