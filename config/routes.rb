@@ -32,6 +32,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :collections
+
     resource :invitation, only: [:show, :update]
 
     namespace :dashboard do

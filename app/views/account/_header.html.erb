@@ -1,0 +1,52 @@
+<div class="account-header">
+  <div class="account-header__avatar">
+    <div class="avatar avatar--large">
+      <%= avatar_image_tag @account.owner.avatar %>
+    </div>
+  </div>
+  <div class="account-header__content">
+    <div class="toolbar">
+      <div class="account-header__name">
+        <%= @account.owner.name %>
+      </div>
+      <div class="toolbar__action">
+        <div class="dropdown" data-controller="dropdown">
+          <button type="button" class="button button--icon" data-action="dropdown#toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          </button>
+          <div class="dropdown__menu dropdown__menu--top-right">
+            <% if @account.can_manage_by?(current_user) %>
+              <a href="<%= account_dashboard_posts_path(@account) %>" class="dropdown__item">
+                Dashboard
+              </a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="toolbar__action">
+        <a href="#" class="button button--contained button--primary">
+          Follow
+        </a>
+      </div>
+    </div>
+    <div class="account-header__description">
+      <% if @account.owner.is_a?(User) %>
+        <%= @account.owner.bio %>
+      <% else %>
+        <%= @account.owner.description %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="tab border-top border-bottom">
+  <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>">
+    Posts
+  </a>
+  <a href="<%= account_collections_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'collections' %>">
+    Collections
+  </a>
+  <a href="#" class="tab__item">
+    Likes
+  </a>
+</div>

@@ -1,0 +1,19 @@
+<div class="container container--medium">
+  <%= render 'account/header' %>
+
+  <div class="collection-grid padding">
+    <% @collections.each do |collection| %>
+      <div class="card card--outlined position-relative">
+        <a href="<%= account_collection_path(@account, collection) %>" class="stretched-link"></a>
+        <div class="padding">
+          <div class="primary-text">
+            <%= collection.name %>
+          </div>
+          <div class="secondary-text">
+            <%= collection.collection_items.count %> items
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
