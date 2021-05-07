@@ -77,4 +77,49 @@ class Account::Posts::CollectionsControllerTest < ActionDispatch::IntegrationTes
       assert_response :success
     end
   end
+
+  test "should create collection and add post by user" do
+    user = create(:user)
+    post = create(:post, account: user.account)
+
+    sign_in user
+    get new_account_post_collection_path(user.account, post)
+    assert_response :success
+
+    assert_difference "user.account.collections.count" do
+      post account_post_collections_path(user.account, post), params: { collection: { name: 'test' }}
+      assert_redirected_to account_post_collections_path(user.account, post)
+    end
+    assert user.account.collections.last.posts.include?(post)
+  end
+
+  test "should create collection and add post by org admin" do
+    organization = create(:organization)
+    post = create(:post, account: organization.account)
+    collection = create(:collection, account: organization.account)
+
+    sign_in create(:user)
+    get new_account_post_collection_path(post.account, post, account: organization.account.name), as: :turbo_stream
+    assert_response :not_found
+
+    post account_post_collections_path(post.account, post, account: organization.account.name)
+    assert_response :not_found
+
+    sign_in create(:membership, organization: organization).user
+    get new_account_post_collection_path(post.account, post, collection, account: organization.account.name), as: :turbo_stream
+    assert_response :not_found
+
+    post account_post_collections_path(post.account, post, account: organization.account.name)
+    assert_response :not_found
+
+    sign_in create(:membership, organization: organization, role: 'admin').user
+    get new_account_post_collection_path(post.account, post, collection, account: organization.account.name), as: :turbo_stream
+    assert_response :success
+
+    assert_difference "organization.account.collections.count" do
+      post account_post_collections_path(post.account, post, account: organization.account.name), params: { collection: { name: 'test' } }
+      assert_redirected_to account_post_collections_path(post.account, post, account: organization.account.name)
+    end
+    assert organization.account.collections.last.posts.include?(post)
+  end
 end

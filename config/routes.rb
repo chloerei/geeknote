@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     resources :posts do
       scope module: 'posts' do
         resource :preview, only: [:show]
-        resources :collections, only: [:index, :update, :destroy]
+        resources :collections, only: [:index, :new, :create, :update, :destroy]
       end
     end
 

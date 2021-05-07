@@ -1,0 +1,11 @@
+<%= form_with model: @collection, url: account_post_collections_path(account: params[:account]), builder: CustomFormBuilder, class: 'form', id: "post-#{@post.id}-collection-form" do |form|%>
+  <div class="form__field">
+    <%= form.text_field :name %>
+  </div>
+  <div class="form__field">
+    <%= form.text_area :description %>
+  </div>
+  <button type="submit" class="button button--contained button--primary">
+    Create Collection
+  </button>
+<% end %>

@@ -1,8 +1,5 @@
 <%= turbo_frame_tag "post-#{@post.id}-collections" do %>
   <div class="toolbar">
-    <div class="toolbar__title">
-      Add to collection
-    </div>
     <div class="toolbar__action">
       <div class="dropdown" data-controller="dropdown">
         <button type="button" class="button button--text button--user" data-action="dropdown#toggle">
@@ -18,37 +15,57 @@
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
           </div>
         </button>
-        <div class="dropdown__menu dropdown__menu--top-right">
-          <div class="menu">
-            <a href="<%= account_post_collections_path(@account, @post) %>" class="menu__item">
-              <div class="menu__item__avatar">
+        <div class="dropdown__menu">
+          <a href="<%= account_post_collections_path(@account, @post) %>" class="dropdown__item">
+            <div class="dropdown__item__avatar">
+              <div class="avatar">
+                <%= avatar_image_tag current_user.avatar %>
+              </div>
+            </div>
+            <div class="dropdown__item__text">
+              <%= current_user.name %>
+            </div>
+          </a>
+          <% current_user.manage_accounts.each do |account| %>
+            <a href="<%= account_post_collections_path(@account, @post, account: account.name) %>" class="dropdown__item">
+              <div class="dropdown__item__avatar">
                 <div class="avatar">
-                  <%= avatar_image_tag current_user.avatar %>
+                  <%= avatar_image_tag account.owner.avatar %>
                 </div>
               </div>
-              <div class="menu__item__text">
-                <%= current_user.name %>
+              <div class="dropdown__item__text">
+                <%= account.owner.name %>
               </div>
             </a>
-            <% current_user.manage_accounts.each do |account| %>
-              <a href="<%= account_post_collections_path(@account, @post, account: account.name) %>" class="menu__item">
-                <div class="menu__item__avatar">
-                  <div class="avatar">
-                    <%= avatar_image_tag account.owner.avatar %>
-                  </div>
-                </div>
-                <div class="menu__item__text">
-                  <%= account.owner.name %>
-                </div>
-              </a>
-            <% end %>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>
+    <div class="toolbar__title">
+      Add to collection
+    </div>
+    <div class="toolbar__action">
+      <button type="button" class="button button--icon" data-action="dialog#close">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </div>
   </div>
 
-  <div class="list">
-    <%= render @collections %>
-  </div>
+  <%= turbo_frame_tag "post-#{@post.id}-collections-content" do %>
+    <div class="flex-grow overflow-auto">
+      <div class="list">
+        <%= render @collections %>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="toolbar__space">
+      </div>
+      <div class="toolbar__action">
+        <a href="<%= new_account_post_collection_path(@account, @post, account: params[:account]) %>" class="button button--text">
+          New Collection
+        </a>
+      </div>
+    </div>
+  <% end %>
 <% end %>

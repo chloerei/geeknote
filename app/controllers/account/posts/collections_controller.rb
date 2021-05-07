@@ -1,16 +1,27 @@
 class Account::Posts::CollectionsController < Account::Posts::BaseController
   before_action :require_sign_in
 
+  before_action :set_target_account, only: [:index, :new, :create]
   before_action :set_collection, only: [:update, :destroy]
 
   def index
-    @target_account = if params[:account]
-      current_user.manage_accounts.find_by! name: params[:account]
-    else
-      current_user.account
-    end
-
     @collections = @target_account.collections.with_post_added(@post)
+  end
+
+  def new
+    @collection = @target_account.collections.new
+  end
+
+  def create
+    @collection = @target_account.collections.new collection_params
+
+    if @collection.save
+      @collection.collection_items.create(post: @post)
+      @collection.added = true
+      redirect_to account_post_collections_path(@account, @post, account: params[:account])
+    else
+      render turbo_stream: turbo_stream.replace("post-#{@post.id}-collection-form", partial: 'form')
+    end
   end
 
   def update
@@ -28,6 +39,18 @@ class Account::Posts::CollectionsController < Account::Posts::BaseController
   end
 
   private
+
+  def set_target_account
+    @target_account = if params[:account]
+      current_user.manage_accounts.find_by! name: params[:account]
+    else
+      current_user.account
+    end
+  end
+
+  def collection_params
+    params.require(:collection).permit(:name, :description, :visibility)
+  end
 
   def set_collection
     @collection = Collection.find params[:id]
