@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2021_05_01_075058) do
     t.string "name"
     t.text "description"
     t.integer "visibility", default: 0
+    t.integer "collection_items_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_collections_on_account_id"
