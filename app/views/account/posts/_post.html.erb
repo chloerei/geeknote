@@ -48,6 +48,7 @@
             <div class="dialog__container">
               <%= turbo_frame_tag "post-#{post.id}-collections", src: account_post_collections_path(post.account, post), loading: 'lazy' %>
             </div>
+            <div class="dialog__scrim" data-action="click->dialog#close"></div>
           </div>
         </div>
         <div class="toolbar__action">

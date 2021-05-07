@@ -1,6 +1,5 @@
 @import 'campo-ui/src/css/campo-ui';
 @import 'nav';
-@import 'menu';
 @import 'editor';
 @import 'codemirror';
 @import 'post';
@@ -306,4 +305,9 @@ label.list__item {
   &:active {
     background: rgba(0, 0, 0, 0.075);
   }
+}
+
+.dropdown__item__avatar {
+  margin: 0 8px 0 -8px;
+
 }
