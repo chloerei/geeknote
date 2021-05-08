@@ -42,7 +42,7 @@ class Account::Dashboard::CollectionsController < Account::Dashboard::BaseContro
   private
 
   def collection_params
-    params.require(:collection).permit(:name, :description, :visibility)
+    params.require(:collection).permit(:name, :description, :visibility, :cover)
   end
 
   def set_collection

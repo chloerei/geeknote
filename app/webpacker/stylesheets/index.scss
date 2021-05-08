@@ -85,6 +85,10 @@
   margin-right: 16px;
 }
 
+.margin-right-8 {
+  margin-right: 8px;
+}
+
 .margin-bottom {
   margin-bottom: 16px;
 }
@@ -320,4 +324,10 @@ label.list__item {
     height: 16px;
     width: 16px;
   }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }

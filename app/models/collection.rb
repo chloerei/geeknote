@@ -3,6 +3,8 @@ class Collection < ApplicationRecord
   has_many :collection_items
   has_many :posts, through: :collection_items
 
+  has_one_attached :cover
+
   attribute :added
 
   scope :with_post_added, -> (post) {
