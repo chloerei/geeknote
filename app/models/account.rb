@@ -28,6 +28,19 @@ class Account < ApplicationRecord
     end
   end
 
+  def has_member?(user)
+    return false if user.nil?
+
+    case owner
+    when User
+      owner == user
+    when Organization
+      owner.memberships.where(user: user).exists?
+    else
+      false
+    end
+  end
+
   def organization?
     owner_type == 'Organization'
   end

@@ -5,6 +5,34 @@
   <div class="form__field">
     <%= form.text_area :description %>
   </div>
+  <div class="form__field">
+    <label class="form__control">
+      <%= form.radio_button :visibility, :private %>
+      <div class="form__control__label">
+        <div class="text-primary text-bold">
+          Private
+        </div>
+        <div class="text-secondary">
+          <% if @target_account.organization? %>
+            Only organization members can see.
+          <% else %>
+            Only you can see.
+          <% end %>
+        </div>
+      </div>
+    </label>
+    <label class="form__control">
+      <%= form.radio_button :visibility, :public %>
+      <div class="form__control__label">
+        <div class="text-primary text-bold">
+          Public
+        </div>
+        <div class="text-secondary">
+          Anyone can see.
+        </div>
+      </div>
+    </label>
+  </div>
   <button type="submit" class="button button--contained button--primary">
     Create Collection
   </button>
