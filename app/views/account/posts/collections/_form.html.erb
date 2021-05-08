@@ -33,7 +33,14 @@
       </div>
     </label>
   </div>
-  <button type="submit" class="button button--contained button--primary">
-    Create Collection
-  </button>
+  <div class="flex">
+    <button type="submit" class="button button--contained button--primary">
+      Create Collection
+    </button>
+    <div class="flex-grow-1">
+    </div>
+    <a href="<%= account_post_collections_path(@account, @post, account: params[:account]) %>" class="button button--text">
+      Cancel
+    </a>
+  </div>
 <% end %>
