@@ -331,3 +331,30 @@ label.list__item {
   flex-direction: column;
   overflow: hidden;
 }
+
+.cover {
+  width: 100%;
+  padding-top: 25%;
+  position: relative;
+}
+
+.cover__inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+  }
+}
+
+.link-text {
+  color: var(--text-primary-color);
+  text-decoration: none;
+}

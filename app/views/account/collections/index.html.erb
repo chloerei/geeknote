@@ -4,10 +4,12 @@
   <div class="collection-grid padding">
     <% @collections.each do |collection| %>
       <div class="card card--outlined position-relative">
-        <a href="<%= account_collection_path(@account, collection) %>" class="stretched-link"></a>
         <div class="cover">
-          <%= cover_image_tag collection.cover %>
+          <div class="cover__inner">
+            <%= cover_image_tag collection.cover %>
+          </div>
         </div>
+        <a href="<%= account_collection_path(@account, collection) %>" class="stretched-link"></a>
         <div class="padding flex-grow-1">
           <div class="text-primary text-bold">
             <%= collection.name %>

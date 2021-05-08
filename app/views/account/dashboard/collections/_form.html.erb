@@ -1,7 +1,9 @@
 <%= form_with model: @collection, url: [@account, :dashboard, @collection], builder: CustomFormBuilder, class: 'form', id: 'collection-form' do |form| %>
   <div class="form__field">
     <div class="cover">
-      <%= cover_image_tag @collection.cover %>
+      <div class="cover__inner">
+        <%= cover_image_tag @collection.cover %>
+      </div>
     </div>
     <%= form.file_field :cover %>
   </div>
