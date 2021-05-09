@@ -85,4 +85,51 @@
       </div>
     </div>
   </div>
+
+  <hr class="divider">
+
+  <div class="list list--breakout">
+    <div class="list__item">
+      <div class="list__avatar">
+        <div class="avatar">
+          <%= avatar_image_tag @post.author.avatar %>
+        </div>
+      </div>
+      <div class="list__content">
+        <div class="text-primary text-bold">
+          <%= @post.author.name %>
+        </div>
+        <div class="text-secondary">
+          <%= @post.author.bio %>
+        </div>
+      </div>
+      <div class="list__action">
+        <button type="button" class="button button--outlined">
+          Follow
+        </button>
+      </div>
+    </div>
+    <% if @post.account.organization? %>
+      <div class="list__item">
+        <div class="list__avatar">
+          <div class="avatar">
+            <%= avatar_image_tag @post.account.owner.avatar %>
+          </div>
+        </div>
+        <div class="list__content">
+          <div class="text-primary text-bold">
+            <%= @post.account.owner.name %>
+          </div>
+          <div class="text-secondary">
+            <%= @post.account.owner.description %>
+          </div>
+        </div>
+        <div class="list__action">
+          <button type="button" class="button button--outlined">
+            Follow
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

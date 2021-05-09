@@ -202,13 +202,13 @@
   color: var(--text-secondary-color);
 }
 
-.text--primary {
+.text-primary {
   font-size: 16px;
   line-height: 24px;
   color: var(--text-primary-color);
 }
 
-.text--secondary {
+.text-secondary {
   font-size: 14px;
   line-height: 16px;
   color: var(--text-secondary-color);
@@ -387,6 +387,18 @@ label.list__item {
   margin: 0 8px;
 }
 
+.margin-top-0 {
+  margin-top: 0;
+}
+
 .margin-right-8 {
   margin-right: 8px;
+}
+
+.list--breakout {
+  margin: 0 -16px;
+}
+
+.list__action {
+  padding: 16px;
 }
