@@ -41,6 +41,10 @@ class Account < ApplicationRecord
     end
   end
 
+  def user?
+    owner_type == 'User'
+  end
+
   def organization?
     owner_type == 'Organization'
   end

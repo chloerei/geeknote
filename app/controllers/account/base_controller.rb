@@ -12,4 +12,10 @@ class Account::BaseController < ApplicationController
       render_not_found
     end
   end
+
+  def require_user_account
+    unless @account.user?
+      render_not_found
+    end
+  end
 end

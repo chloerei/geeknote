@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     end
 
     resources :collections
+    resources :likes
 
     resource :invitation, only: [:show, :update]
 
