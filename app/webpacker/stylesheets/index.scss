@@ -358,3 +358,15 @@ label.list__item {
   color: var(--text-primary-color);
   text-decoration: none;
 }
+
+.toolbar--breakout {
+  margin: 0 -16px;
+}
+
+.display-none {
+  display: none;
+}
+
+.button--liked {
+  color: #F44336;
+}

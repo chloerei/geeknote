@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   include Taggable
+  include Likable
 
   belongs_to :account
   belongs_to :author, class_name: 'User'

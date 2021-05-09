@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :organizations, through: :memberships
   has_many :manage_accounts, -> { where(memberships: { role: Membership.roles.values_at(:admin, :owner) })}, through: :organizations, source: :account
   has_many :attachments
+  has_many :likes
 
   has_secure_password
   has_secure_token :auth_token
