@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 2021_05_09_070254) do
     t.text "excerpt"
     t.integer "status", default: 0
     t.string "preview_token"
+    t.integer "likes_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_posts_on_account_id"

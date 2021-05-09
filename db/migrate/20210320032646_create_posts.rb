@@ -8,6 +8,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.text :excerpt
       t.integer :status, default: 0
       t.string :preview_token
+      t.integer :likes_count, default: 0
 
       t.timestamps
     end
