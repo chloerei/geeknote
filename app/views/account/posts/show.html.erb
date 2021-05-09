@@ -7,37 +7,45 @@
     <% end %>
     <h1 class="post__title"><%= @post.title %></h1>
 
-    <div class="toolbar">
+    <div class="toolbar toolbar--breakout">
       <div class="toolbar__action">
-        <a href="<%= account_root_path(@post.author.account) %>" class="author">
-          <div class="author__avatar">
-            <img src="<%= asset_pack_path 'media/images/avatar.png' %>">
-          </div>
-          <div class="author__info">
-            <div class="author__name">
+        <div class="post-meta">
+          <a href="<%= account_root_path(@post.author.account) %>" class="link-author margin-right-8">
+            <div class="avatar margin-right-8">
+              <%= avatar_image_tag @post.author.avatar %>
+            </div>
+            <div class="text-primary text-bold">
               <%= @post.author.name %>
             </div>
-            <div class="author__time">
-              <%= l @post.created_at, format: :short %>
-            </div>
-          </div>
-        </a>
+          </a>
+          <% if @post.account != @post.author.account %>
+            <span class="margin-right-8">
+              for
+            </span>
+            <a href="<%= account_root_path(@post.account) %>" class="link-text margin-right-8">
+              <div class="text-bold">
+                <%= @post.account.owner.name %>
+              </div>
+            </a>
+          <% end %>
+          <span class="text-secondary">
+            <%= l @post.created_at, format: :short %>
+          </span>
+        </div>
       </div>
       <div class="toolbar__space">
       </div>
       <div class="toolbar__action">
         <button type="button" class="button button--icon">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92zM18 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM6 13c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm12 7.02c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
+        </button>
+      </div>
+      <div class="toolbar__action">
+        <%= render 'account/posts/collections/button', post: @post %>
+      </div>
+      <div class="toolbar__action">
+        <button type="button" class="button button--icon">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-        </button>
-      </div>
-      <div class="toolbar__action">
-        <button type="button" class="button button--icon">
-          <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><rect fill="none" height="24" width="24"/><path d="M17,11v6.97l-5-2.14l-5,2.14V5h6V3H7C5.9,3,5,3.9,5,5v16l7-3l7,3V11H17z M21,7h-2v2h-2V7h-2V5h2V3h2v2h2V7z"/></svg>
-        </button>
-      </div>
-      <div class="toolbar__action">
-        <button type="button" class="button button--icon">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>
         </button>
       </div>
     </div>

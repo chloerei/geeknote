@@ -3,6 +3,29 @@
     <a href="<%= account_post_path(post.account, post) %>" class="stretched-link"></a>
     <div class="posts__item__body">
       <div class="posts__item__content">
+        <div class="post__item__author">
+          <a href="<%= account_root_path(post.author.account) %>" class="link-author margin-right-8">
+            <div class="avatar avatar--small margin-right-8">
+              <%= avatar_image_tag post.author.avatar %>
+            </div>
+            <div class="text-primary text-small text-bold">
+              <%= post.author.name %>
+            </div>
+          </a>
+          <% if post.account != post.author.account %>
+            <span class="margin-right-8">
+              for
+            </span>
+            <a href="<%= account_root_path(post.account) %>" class="link-text margin-right-8">
+              <div class="text-small text-bold">
+                <%= post.account.owner.name %>
+              </div>
+            </a>
+          <% end %>
+          <span class="text-secondary">
+            <%= l post.created_at, format: :short %>
+          </span>
+        </div>
         <h3 class="posts__item__title">
           <%= post.title.presence || 'Untitle' %>
         </h3>
@@ -18,34 +41,30 @@
     </div>
     <div class="posts__item__footer">
       <div class="toolbar">
-        <div class="toolbar__action">
-          <a href="<%= account_root_path(post.author.account) %>" class="author">
-            <div class="author__avatar">
-              <img src="<%= asset_pack_path 'media/images/avatar.png' %>">
+        <div class="toolbar__text">
+          <div class="flex flex-align-items-center text--secondary">
+            <div class="margin-right">
+              <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>
+              </span>
+              <%= post.likes_count %> likes
             </div>
-            <div class="author__info">
-              <div class="author__name">
-                <%= post.author.name %>
-              </div>
-              <div class="author__time">
-                <%= l post.created_at, format: :short %>
-              </div>
+            <div>
+              <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM20 4v13.17L18.83 16H4V4h16zM6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z"/></svg>
+              </span>
+              0 comments
             </div>
-          </a>
+          </div>
         </div>
         <div class="toolbar__space">
-        </div>
-        <div class="toolbar__action">
-          <button type="button" class="button button--icon">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-          </button>
         </div>
         <div class="toolbar__action">
           <%= render 'account/posts/collections/button', post: post %>
         </div>
         <div class="toolbar__action">
           <button type="button" class="button button--icon">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
           </button>
         </div>
       </div>

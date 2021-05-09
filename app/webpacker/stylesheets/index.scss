@@ -214,6 +214,10 @@
   color: var(--text-secondary-color);
 }
 
+.text-small {
+  font-size: 14px;
+}
+
 .label {
   font-weight: bold;
   display: block;
@@ -323,6 +327,7 @@ label.list__item {
   svg {
     height: 16px;
     width: 16px;
+    fill: currentColor;
   }
 }
 
@@ -359,6 +364,13 @@ label.list__item {
   text-decoration: none;
 }
 
+.link-author {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-primary-color);
+  text-decoration: none;
+}
+
 .toolbar--breakout {
   margin: 0 -16px;
 }
@@ -369,4 +381,12 @@ label.list__item {
 
 .button--liked {
   color: #F44336;
+}
+
+.margin-x-8 {
+  margin: 0 8px;
+}
+
+.margin-right-8 {
+  margin-right: 8px;
 }
