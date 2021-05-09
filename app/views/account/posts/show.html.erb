@@ -91,14 +91,16 @@
   <div class="list list--breakout">
     <div class="list__item">
       <div class="list__avatar">
-        <div class="avatar">
-          <%= avatar_image_tag @post.author.avatar %>
-        </div>
+        <a href="<%= account_root_path(@post.author.account) %>" class="link-text">
+          <div class="avatar">
+            <%= avatar_image_tag @post.author.avatar %>
+          </div>
+        </a>
       </div>
       <div class="list__content">
-        <div class="text-primary text-bold">
+        <a href="<%= account_root_path(@post.author.account) %>" class="link-text text-primary text-bold">
           <%= @post.author.name %>
-        </div>
+        </a>
         <div class="text-secondary">
           <%= @post.author.bio %>
         </div>
@@ -112,14 +114,14 @@
     <% if @post.account.organization? %>
       <div class="list__item">
         <div class="list__avatar">
-          <div class="avatar">
+          <a href="<%= account_root_path(@post.account) %>" class="link-text">
             <%= avatar_image_tag @post.account.owner.avatar %>
-          </div>
+          </a>
         </div>
         <div class="list__content">
-          <div class="text-primary text-bold">
+          <a href="<%= account_root_path(@post.account) %>" class="link-text text-primary text-bold">
             <%= @post.account.owner.name %>
-          </div>
+          </a>
           <div class="text-secondary">
             <%= @post.account.owner.description %>
           </div>
