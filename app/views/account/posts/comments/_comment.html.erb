@@ -1,0 +1,70 @@
+<div class="comment" id="comment-<%= comment.id %>">
+  <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="stretched-link"></a>
+  <div class="comment__avatar">
+    <div class="avatar">
+      <a href="<%= account_root_path(comment.user.account) %>">
+        <%= avatar_image_tag comment.user.avatar %>
+      </a>
+    </div>
+  </div>
+  <div class="flex-grow-1">
+    <div class="comment__header">
+      <div class="toolbar">
+        <div class="comment__meta">
+          <a href="<%= account_root_path(comment.user.account) %>" class="link-text text-bold">
+            <%= comment.user.name %>
+          </a>
+          <span class="text-muted">
+            <%= l comment.created_at, format: :short %>
+          </span>
+        </div>
+        <div class="toolbar__action">
+          <div class="dropdown" data-controller="dropdown">
+            <button type="button" class="button button--icon" data-action="dropdown#toggle">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+            </button>
+            <div class="dropdown__menu dropdown__menu--top-right">
+              <% if comment.user == current_user %>
+                <a href="<%= edit_account_post_comment_path(@account, @post, comment) %>" class="dropdown__item">
+                  Edit
+                </a>
+                <%= form_with url: account_post_comment_path(@account, @post, comment), method: 'delete' do |form| %>
+                  <button type="submit" class="dropdown__item" data-confirm="Are you sure delete this comment?">
+                    Delete
+                  </button>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="comment__content">
+      <%= simple_format comment.content %>
+    </div>
+    <div class="comment__footer">
+      <div class="toolbar">
+        <div class="toolbar__action">
+          <button type="button" class="button button--text">
+            <div class="button__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>
+            </div>
+            <div class="button__text">
+              <%= comment.likes_count %>
+            </div>
+          </button>
+        </div>
+        <div class="toolbar__action">
+          <button type="button" class="button button--text">
+            <div class="button__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM20 4v13.17L18.83 16H4V4h16zM6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z"/></svg>
+            </div>
+            <div class="button__text">
+              <%= comment.replies_count %>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

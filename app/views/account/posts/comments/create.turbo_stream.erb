@@ -1,0 +1,7 @@
+<%= turbo_stream.prepend 'comments' do %>
+  <%= render 'comment', comment: @comment %>
+<% end %>
+
+<%= turbo_stream.replace 'comment-form' do %>
+  <%= render 'form', comment: Comment.new(parent: @comment.parent) %>
+<% end %>

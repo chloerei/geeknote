@@ -1,0 +1,20 @@
+class Comment < ApplicationRecord
+  include Likable
+
+  belongs_to :commentable, polymorphic: true, counter_cache: true
+  belongs_to :parent, class_name: 'Comment', optional: true, counter_cache: :replies_count
+  belongs_to :account
+  belongs_to :user
+  has_many :replies, class_name: 'Comment', foreign_key: :parent_id
+
+  validates :content, presence: true
+  validate :check_parent_comment
+
+  scope :no_parent, -> { where(parent_id: nil) }
+
+  def check_parent_comment
+    if parent && parent.commentable != commentable
+      errors.add(:parent, :invalid)
+    end
+  end
+end

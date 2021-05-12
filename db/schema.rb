@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_09_070254) do
+ActiveRecord::Schema.define(version: 2021_05_10_085534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -85,6 +85,23 @@ ActiveRecord::Schema.define(version: 2021_05_09_070254) do
     t.index ["account_id"], name: "index_collections_on_account_id"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.bigint "account_id"
+    t.string "commentable_type"
+    t.bigint "commentable_id"
+    t.bigint "user_id"
+    t.bigint "parent_id"
+    t.text "content"
+    t.integer "likes_count", default: 0
+    t.integer "replies_count", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_comments_on_account_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "likes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "likable_type", null: false
@@ -130,6 +147,7 @@ ActiveRecord::Schema.define(version: 2021_05_09_070254) do
     t.integer "status", default: 0
     t.string "preview_token"
     t.integer "likes_count", default: 0
+    t.integer "comments_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_posts_on_account_id"

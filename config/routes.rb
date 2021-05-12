@@ -30,6 +30,7 @@ Rails.application.routes.draw do
         resource :preview, only: [:show]
         resources :collections, only: [:index, :new, :create, :update, :destroy]
         resource :like, only: [:create, :destroy]
+        resources :comments
       end
     end
 

@@ -8,6 +8,7 @@
 @import 'avatar';
 @import 'breadcrumb';
 @import 'collection';
+@import 'comment';
 
 .container {
   max-width: 1280px;
@@ -69,6 +70,7 @@
 }
 
 .button--text {
+  min-width: 0;
 }
 
 .button__icon {
@@ -105,6 +107,14 @@
 
 .padding-x {
   padding-left: 16px;
+  padding-right: 16px;
+}
+
+.padding-top {
+  padding-top: 16px;
+}
+
+.padding-right {
   padding-right: 16px;
 }
 
@@ -362,6 +372,10 @@ label.list__item {
 .link-text {
   color: var(--text-primary-color);
   text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .link-author {
