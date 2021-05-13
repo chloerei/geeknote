@@ -30,7 +30,7 @@
     </div>
     <hr class="divider">
     <div id="comments" class="comments">
-      <%= render @comment.replies %>
+      <%= render @comment.replies.with_liked(current_user) %>
     </div>
   <% end %>
 </div>
