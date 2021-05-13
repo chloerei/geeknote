@@ -8,29 +8,23 @@
     <h1 class="post__title"><%= @post.title %></h1>
 
     <div class="toolbar toolbar--breakout">
-      <div class="toolbar__text">
-        <div class="post-meta">
-          <a href="<%= account_root_path(@post.author.account) %>" class="link-author margin-right-8">
-            <div class="avatar avatar--small margin-right-8">
-              <%= avatar_image_tag @post.author.avatar %>
+      <div class="toobar__author">
+        <div class="flex">
+          <div class="avatar margin-right">
+            <%= avatar_image_tag @post.author.avatar %>
+          </div>
+          <div>
+            <div class="text-primary">
+              <a href="<%= account_root_path(@post.author.account) %>" class="link-text text-bold"><%= @post.author.name %></a>
+              <% if @post.account != @post.author.account %>
+                for
+                <a href="<%= account_root_path(@post.account) %>" class="link-text text-bold"><%= @post.account.owner.name %></a>
+              <% end %>
             </div>
-            <div class="text-primary text-small text-bold">
-              <%= @post.author.name %>
+            <div class="text-secondary">
+              <%= l @post.created_at, format: :short %>
             </div>
-          </a>
-          <% if @post.account != @post.author.account %>
-            <span class="margin-right-8">
-              for
-            </span>
-            <a href="<%= account_root_path(@post.account) %>" class="link-text margin-right-8">
-              <div class="text-small text-bold">
-                <%= @post.account.owner.name %>
-              </div>
-            </a>
-          <% end %>
-          <span class="text-secondary">
-            <%= l @post.created_at, format: :short %>
-          </span>
+          </div>
         </div>
       </div>
       <div class="toolbar__space">

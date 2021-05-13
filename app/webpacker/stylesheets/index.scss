@@ -41,6 +41,10 @@
   line-height: 24px;
 }
 
+.toobar__author {
+  padding: 0 12px;
+}
+
 .app-content {
   flex-grow: 1;
   overflow: auto;
@@ -73,7 +77,7 @@
   min-width: 0;
 }
 
-.button__icon {
+.button--text .button__icon {
   &:first-child {
     margin-right: 8px;
   }
@@ -85,6 +89,10 @@
 
 .margin-right {
   margin-right: 16px;
+}
+
+.margin-left-8 {
+  margin-left: 8px;
 }
 
 .margin-right-8 {
@@ -142,6 +150,10 @@
 
 .text-bold {
   font-weight: bold;
+}
+
+.text-muted {
+  color: var(--text-secondary-color);
 }
 
 .sidebar {
@@ -371,6 +383,15 @@ label.list__item {
 
 .link-text {
   color: var(--text-primary-color);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.link-text-muted {
+  color: var(--text-secondary-color);
   text-decoration: none;
 
   &:hover {

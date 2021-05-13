@@ -9,7 +9,7 @@
       <%= form_with model: comment, url: [@account, @post, comment], builder: CustomFormBuilder, class: 'form' do |form| %>
         <%= form.hidden_field :parent_id %>
         <div class="form__field">
-          <%= form.text_area :content, rows: 3 %>
+          <%= form.text_area :content, rows: 3, autofocus: true %>
         </div>
         <button type="submit" class="button button--contained button--primary">
           <% if comment.new_record? %>
