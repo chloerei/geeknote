@@ -443,3 +443,18 @@ label.list__item {
     background: rgba(0, 0, 0, 0.03);
   }
 }
+
+.notification-unread {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    top: 6px;
+    right: 6px;
+    background: var(--primary-color);
+  }
+}
