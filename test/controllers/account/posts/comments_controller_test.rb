@@ -1,6 +1,8 @@
 require "test_helper"
 
 class Account::Posts::CommentsControllerTest < ActionDispatch::IntegrationTest
+  include ActiveJob::TestHelper
+
   setup do
     @account = create(:user_account)
     @post = create(:post, account: @account)
@@ -19,8 +21,10 @@ class Account::Posts::CommentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create comment" do
     sign_in create(:user)
-    assert_difference "@post.comments.count" do
-      post account_post_comments_path(@account, @post), params: { comment: { content: 'text' } }, as: :turbo_stream
+    assert_enqueued_with(job: CommentNotificationJob) do
+      assert_difference "@post.comments.count" do
+        post account_post_comments_path(@account, @post), params: { comment: { content: 'text' } }, as: :turbo_stream
+      end
     end
   end
 

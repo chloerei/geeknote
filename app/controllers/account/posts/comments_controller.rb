@@ -13,6 +13,7 @@ class Account::Posts::CommentsController < Account::Posts::BaseController
     @comment = Comment.new comment_params.merge(account: @account, commentable: @post, user: current_user)
 
     if @comment.save
+      CommentNotificationJob.perform_later(@comment)
       render :create
     else
       render turbo_stream: turbo_stream.replace('comment-form', partial: 'form', locals: { comment: @comment })
