@@ -437,3 +437,9 @@ label.list__item {
 .list__action {
   padding: 16px;
 }
+
+.list__item {
+  .stretched-link:hover::after {
+    background: rgba(0, 0, 0, 0.03);
+  }
+}

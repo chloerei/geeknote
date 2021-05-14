@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_10_085534) do
+ActiveRecord::Schema.define(version: 2021_05_14_082428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -128,6 +128,20 @@ ActiveRecord::Schema.define(version: 2021_05_10_085534) do
     t.index ["organization_id", "user_id"], name: "index_memberships_on_organization_id_and_user_id", unique: true
     t.index ["organization_id"], name: "index_memberships_on_organization_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "account_id"
+    t.bigint "user_id"
+    t.string "record_type"
+    t.bigint "record_id"
+    t.integer "type"
+    t.datetime "read_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_notifications_on_account_id"
+    t.index ["record_type", "record_id"], name: "index_notifications_on_record"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "organizations", force: :cascade do |t|

@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :attachments
   has_many :likes
   has_many :liked_posts, through: :likes, source: :likable, source_type: 'Post'
+  has_many :notifications
 
   has_secure_password
   has_secure_token :auth_token

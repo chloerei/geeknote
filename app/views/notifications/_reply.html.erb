@@ -1,0 +1,24 @@
+<% comment = notification.record %>
+
+<div class="list__item position-relative">
+  <div class="list__avatar">
+    <div class="avatar">
+      <%= avatar_image_tag comment.user.avatar %>
+    </div>
+  </div>
+  <div class="list__content">
+    <a href="<%= account_post_comment_path(comment.account, comment.commentable, comment) %>" class="stretched-link"></a>
+    <div class="text-primary">
+      <a href="<%= account_root_path(comment.user.account) %>" class="link-text text-bold">
+        <%= comment.user.name %>
+      </a>
+      reply on
+      <a href="<%= account_post_path(comment.account, comment.commentable) %>" class="link-text">
+        <%= comment.commentable.title %>
+      </a>
+    </div>
+    <div class="text-secondary">
+      <%= truncate comment.content %>
+    </div>
+  </div>
+</div>

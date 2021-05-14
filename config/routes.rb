@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :organizations, only: [:new, :create]
+  resources :notifications, only: [:index]
 
   namespace :settings do
     resource :account
