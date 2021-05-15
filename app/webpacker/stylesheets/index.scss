@@ -78,6 +78,8 @@
 }
 
 .button--text .button__icon {
+  margin-right: 0;
+
   &:first-child {
     margin-right: 8px;
   }
@@ -97,6 +99,10 @@
 
 .margin-right-8 {
   margin-right: 8px;
+}
+
+.margin-top {
+  margin-top: 16px;
 }
 
 .margin-bottom {

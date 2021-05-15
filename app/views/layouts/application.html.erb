@@ -47,7 +47,8 @@
       <% end %>
     </div>
   </div>
-  <%= yield %>
+
+  <%= content_for?(:app_content) ? yield(:app_content) : yield %>
 
   <div id="snackbar-container" class="snackbar-container">
     <% if flash[:notice] %>
