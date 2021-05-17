@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_082428) do
+ActiveRecord::Schema.define(version: 2021_05_17_113850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -100,6 +100,15 @@ ActiveRecord::Schema.define(version: 2021_05_14_082428) do
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "account_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id", "user_id"], name: "index_follows_on_account_id_and_user_id", unique: true
+    t.index ["user_id"], name: "index_follows_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|

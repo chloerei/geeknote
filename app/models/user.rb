@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :likes
   has_many :liked_posts, through: :likes, source: :likable, source_type: 'Post'
   has_many :notifications
+  has_many :follows
+  has_many :followings, through: :follows, source: :account
 
   has_secure_password
   has_secure_token :auth_token

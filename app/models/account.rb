@@ -3,6 +3,8 @@ class Account < ApplicationRecord
   has_many :posts
   has_many :collections
   has_many :attachments
+  has_many :follows
+  has_many :followers, through: :follows, source: :user
 
   NAME_REGEXP = /\A[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9]\z/
   validates :name, uniqueness: true, format: { with: NAME_REGEXP }, presence: true

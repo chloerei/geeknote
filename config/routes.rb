@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       end
     end
 
+    resource :follow, only: [:create, :destroy]
     resources :collections
     resources :likes
 
