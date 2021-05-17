@@ -9,7 +9,11 @@
       <% end %>
     </div>
     <div class="button__text">
-      <%= post.likes_count %> likes
+      <% if post.likes_count > 0 %>
+        <%= post.likes_count %> likes
+      <% else %>
+        Like
+      <% end %>
     </div>
     <%= form.check_box :_method, { checked: liked, class: 'display-none', data: { action: 'form#submit' } }, 'post', 'delete'  %>
   </label>

@@ -17,4 +17,15 @@ class Comment < ApplicationRecord
       errors.add(:parent, :invalid)
     end
   end
+
+  def ancestors
+    sql = <<~EOF
+      with recursive ancestors as (
+        select comments.* from comments where id = :parent_id
+        union all
+        select comments.* from comments join ancestors on ancestors.parent_id = comments.id
+      ) select * from ancestors
+    EOF
+    Comment.find_by_sql([sql, { parent_id: parent_id }])
+  end
 end
