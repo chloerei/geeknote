@@ -1,7 +1,11 @@
-.post-container {
+.container--post {
   max-width: 768px;
-  padding: 60px 16px;
   margin: 0 auto;
+}
+
+.post {
+  margin-top: 32px;
+  padding: 16px;
 }
 
 .post__feature-image {

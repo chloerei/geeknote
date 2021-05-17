@@ -9,15 +9,20 @@
       <%= form_with model: comment, url: [@account, @post, comment], builder: CustomFormBuilder, class: 'form' do |form| %>
         <%= form.hidden_field :parent_id %>
         <div class="form__field">
-          <%= form.text_area :content, rows: 3, autofocus: true %>
+          <%= form.text_area :content, rows: 3 %>
         </div>
-        <button type="submit" class="button button--contained button--primary">
-          <% if comment.new_record? %>
+        <% if comment.new_record? %>
+          <button type="submit" class="button button--contained button--primary">
             Post
-          <% else %>
+          </button>
+        <% else %>
+          <button type="submit" class="button button--contained button--primary">
             Save
-          <% end %>
-        </button>
+          </button>
+          <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="button button--text">
+            Cancel
+          </a>
+        <% end %>
       <% end %>
     </div>
   </div>

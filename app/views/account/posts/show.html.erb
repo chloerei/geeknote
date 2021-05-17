@@ -1,4 +1,4 @@
-<div class="post-container">
+<div class="container container--post">
   <div class="post">
     <% if @post.featured_image.attached? %>
       <div class="post__feature-image">
@@ -53,14 +53,14 @@
         <%= render 'account/posts/likes/button', post: @post %>
       </div>
       <div class="toolbar__action">
-        <button type="button" class="button button--text" data-controller="toggle" data-toggle-target="#comments-sheet" data-toggle-action="sheet#toggle">
+        <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text">
           <div class="button__icon">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM20 4v13.17L18.83 16H4V4h16zM6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z"/></svg>
           </div>
           <div class="button__text">
             <%= @post.comments_count %> comments
           </div>
-        </button>
+        </a>
       </div>
       <div class="toolbar__space">
       </div>
@@ -127,13 +127,5 @@
         </div>
       </div>
     <% end %>
-  </div>
-</div>
-
-<div id="comments-sheet" class="sheet sheet--modal sheet--comments" data-controller="sheet">
-  <div class="sheet__container">
-    <%= turbo_frame_tag 'post-comments', src: account_post_comments_path(@account, @post), loading: 'lazy' %>
-  </div>
-  <div class="sheet__scrim" data-action="click->sheet#close">
   </div>
 </div>

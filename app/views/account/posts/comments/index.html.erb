@@ -1,35 +1,31 @@
-<div class="container container--medium">
-  <%= turbo_frame_tag 'post-comments' do %>
-    <div class="toolbar">
-      <div class="toolbar__title">
-        Comments
-      </div>
-      <div class="toolbar__action">
-        <button type="button" class="button button--icon" data-action="sheet#close">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-        </button>
-      </div>
-    </div>
-    <% if current_user %>
-      <%= render 'form', comment: Comment.new %>
-    <% else %>
-      <div class="padding">
-        <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--contained button--primary" data-turbo-frame="_top">Sign in to comment</a>
-      </div>
-    <% end %>
-    <hr class="divider">
-    <div id="comments" class="comments">
-      <%= render @comments %>
-    </div>
-    <div class="toolbar">
-      <div class="toolbar__space">
-      </div>
-      <div class="toolbar__text">
-        <%= page_entries_info @comments %>
-      </div>
-      <div class="toolbar__action">
-        <%= paginate @comments %>
-      </div>
+<div class="container container--post">
+  <div class="breadcrumb padding">
+    <a href="<%= account_post_path(@account, @post) %>" class="breadcrumb__item">
+      <%= @post.title %>
+    </a>
+    <span class="breadcrumb__item breadcrumb__item--active">
+      Comments
+    </span>
+  </div>
+  <% if current_user %>
+    <%= render 'form', comment: Comment.new %>
+  <% else %>
+    <div class="padding">
+      <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--contained button--primary" data-turbo-frame="_top">Sign in to comment</a>
     </div>
   <% end %>
+  <hr class="divider">
+  <div id="comments" class="comments">
+    <%= render @comments %>
+  </div>
+  <div class="toolbar">
+    <div class="toolbar__space">
+    </div>
+    <div class="toolbar__text">
+      <%= page_entries_info @comments %>
+    </div>
+    <div class="toolbar__action">
+      <%= paginate @comments %>
+    </div>
+  </div>
 </div>
