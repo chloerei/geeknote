@@ -36,6 +36,12 @@
         <%= @account.owner.description %>
       <% end %>
     </div>
+    <div class="account-header__info">
+      <% if @account.user? %>
+        <a href="#" class="link-text margin-right-8"><b><%= @account.owner.followings_count %></b> followings</a>
+      <% end %>
+      <a href="#" class="link-text"><b><%= @account.followers_count %></b> followers</a>
+    </div>
   </div>
 </div>
 

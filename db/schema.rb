@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_113850) do
     t.bigint "owner_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "followers_count", default: 0
     t.index ["name"], name: "index_accounts_on_name", unique: true
     t.index ["owner_type", "owner_id"], name: "index_accounts_on_owner"
   end
@@ -203,6 +204,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_113850) do
     t.string "auth_token", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "followings_count", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
