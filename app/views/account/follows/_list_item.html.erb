@@ -1,0 +1,24 @@
+<div class="list__item border-bottom position-relative">
+  <div class="list__avatar">
+    <div class="avatar">
+      <%= avatar_image_tag account.owner.avatar %>
+    </div>
+  </div>
+  <div class="list__content">
+    <a href="<%= account_root_path(account) %>" class="link-text text-primary text-bold stretched-link">
+      <%= account.owner.name %>
+    </a>
+    <div class="text-secondary">
+      <% if account.user? %>
+        <%= account.owner.bio %>
+      <% else %>
+        <%= account.owner.description %>
+      <% end %>
+    </div>
+  </div>
+  <% if current_user && account != current_user.account %>
+    <div class="list__action">
+      <%= render 'account/follows/button', account: account %>
+    </div>
+  <% end %>
+</div>

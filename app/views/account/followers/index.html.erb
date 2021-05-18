@@ -1,0 +1,34 @@
+<div class="container container--medium">
+  <div class="padding border-bottom">
+    <div class="breadcrumb">
+      <a href="<%= account_root_path(@account) %>" class="breadcrumb__item">
+        <div class="flex">
+          <div class="avatar avatar--small">
+            <%= avatar_image_tag @account.owner.avatar %>
+          </div>
+          <div class="text-primary">
+            <%= @account.owner.name %>
+          </div>
+        </div>
+      </a>
+      <span class="breadcrumb__item breadcrumb__item--active">
+        Followers
+      </span>
+    </div>
+  </div>
+
+  <div class="list">
+    <%= render partial: 'account/follows/list_item', collection: @accounts, as: :account %>
+  </div>
+
+  <div class="toolbar">
+    <div class="toolbar__space">
+    </div>
+    <div class="toolbar__text">
+      <%= page_entries_info @accounts %>
+    </div>
+    <div class="toolbar__action">
+      <%= paginate @accounts %>
+    </div>
+  </div>
+</div>
