@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root to: 'home#index'
+  root to: 'posts#index'
+
   get 'sign_up', to: 'users#new', as: 'sign_up'
   resources :users, only: [:create]
   get 'sign_in', to: 'sessions#new', as: 'sign_in'
@@ -7,6 +8,12 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create]
 
   get 'attachments/:key/:filename', to: 'attachments#show', as: :attachment
+
+  resources :posts, only: [] do
+    collection do
+      get :following
+    end
+  end
 
   resources :tags, only: [] do
     collection do
