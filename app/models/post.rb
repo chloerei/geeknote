@@ -19,4 +19,12 @@ class Post < ApplicationRecord
   scope :following_by, -> (user) {
     where(account: user.followings).or(where(author: user.following_users))
   }
+
+  before_update :set_published_at
+
+  def set_published_at
+    if published_at.nil? && status_changed? && status == 'published'
+      self.published_at = Time.now
+    end
+  end
 end

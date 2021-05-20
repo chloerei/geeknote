@@ -172,10 +172,12 @@ ActiveRecord::Schema.define(version: 2021_05_17_113850) do
     t.string "preview_token"
     t.integer "likes_count", default: 0
     t.integer "comments_count", default: 0
+    t.datetime "published_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_posts_on_account_id"
     t.index ["author_id"], name: "index_posts_on_author_id"
+    t.index ["published_at"], name: "index_posts_on_published_at"
   end
 
   create_table "taggings", force: :cascade do |t|

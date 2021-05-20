@@ -6,7 +6,12 @@ class PostsController < ApplicationController
   end
 
   def following
-    @posts = Post.published.following_by(current_user).page(params[:page])
+    @posts = Post.published.following_by(current_user).order(published_at: :desc).page(params[:page])
+    render :index
+  end
+
+  def latest
+    @posts = Post.published.order(published_at: :desc).page(params[:page])
     render :index
   end
 end

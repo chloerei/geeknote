@@ -1,6 +1,6 @@
 class Account::PostsController < Account::BaseController
   def index
-    @posts = scoped_posts.order(updated_at: :desc).page(params[:page])
+    @posts = scoped_posts.order(published_at: :desc).page(params[:page])
   end
 
   def show
