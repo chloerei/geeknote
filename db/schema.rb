@@ -80,9 +80,9 @@ ActiveRecord::Schema.define(version: 2021_05_17_113850) do
     t.string "name"
     t.text "description"
     t.integer "visibility", default: 0
-    t.integer "collection_items_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "posts_count", default: 0
     t.index ["account_id"], name: "index_collections_on_account_id"
   end
 
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_113850) do
     t.datetime "published_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "collections_count", default: 0
     t.index ["account_id"], name: "index_posts_on_account_id"
     t.index ["author_id"], name: "index_posts_on_author_id"
     t.index ["published_at"], name: "index_posts_on_published_at"
