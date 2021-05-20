@@ -20,6 +20,10 @@ class Post < ApplicationRecord
     where(account: user.followings).or(where(author: user.following_users))
   }
 
+  scope :hot, -> {
+    select("*, (log(10, greatest(3 * likes_count + comments_count, 1)) + (extract(epoch from published_at) / 432000)) as score").order(score: :desc)
+  }
+
   before_update :set_published_at
 
   def set_published_at
