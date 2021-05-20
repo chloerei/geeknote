@@ -8,8 +8,5 @@ class CreateCollectionItems < ActiveRecord::Migration[6.1]
 
       t.index [:collection_id, :post_id], unique: true
     end
-
-    add_column :collections, :posts_count, :integer, default: 0
-    add_column :posts, :collections_count, :integer, default: 0
   end
 end

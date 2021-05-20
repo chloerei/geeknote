@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 2021_05_17_113850) do
     t.citext "name"
     t.string "owner_type"
     t.bigint "owner_id"
+    t.integer "followers_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "followers_count", default: 0
     t.index ["name"], name: "index_accounts_on_name", unique: true
     t.index ["owner_type", "owner_id"], name: "index_accounts_on_owner"
   end
@@ -80,9 +80,9 @@ ActiveRecord::Schema.define(version: 2021_05_17_113850) do
     t.string "name"
     t.text "description"
     t.integer "visibility", default: 0
+    t.integer "posts_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "posts_count", default: 0
     t.index ["account_id"], name: "index_collections_on_account_id"
   end
 
@@ -172,10 +172,10 @@ ActiveRecord::Schema.define(version: 2021_05_17_113850) do
     t.string "preview_token"
     t.integer "likes_count", default: 0
     t.integer "comments_count", default: 0
+    t.integer "collections_count", default: 0
     t.datetime "published_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "collections_count", default: 0
     t.index ["account_id"], name: "index_posts_on_account_id"
     t.index ["author_id"], name: "index_posts_on_author_id"
     t.index ["published_at"], name: "index_posts_on_published_at"
@@ -205,9 +205,9 @@ ActiveRecord::Schema.define(version: 2021_05_17_113850) do
     t.text "bio"
     t.string "password_digest"
     t.string "auth_token", null: false
+    t.integer "followings_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "followings_count", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

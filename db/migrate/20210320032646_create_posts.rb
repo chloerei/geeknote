@@ -10,6 +10,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.string :preview_token
       t.integer :likes_count, default: 0
       t.integer :comments_count, default: 0
+      t.integer :collections_count, default: 0
       t.datetime :published_at
 
       t.timestamps

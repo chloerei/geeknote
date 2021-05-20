@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.text :bio
       t.string :password_digest
       t.string :auth_token, null: false
+      t.integer :followings_count, default: 0
 
       t.timestamps
 
