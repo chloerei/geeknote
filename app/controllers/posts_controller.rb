@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   end
 
   def following
-    @posts = Post.published.where(account: current_user.followings).page(params[:page])
+    @posts = Post.published.following_by(current_user).page(params[:page])
     render :index
   end
 end

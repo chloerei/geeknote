@@ -15,4 +15,8 @@ class Post < ApplicationRecord
     published: 1,
     trashed: 2
   }
+
+  scope :following_by, -> (user) {
+    where(account: user.followings).or(where(author: user.following_users))
+  }
 end
