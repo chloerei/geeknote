@@ -460,3 +460,16 @@ label.list__item {
 .sheet .display-on-sheet {
   display: flex;
 }
+
+.tab__item {
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+    background: none;
+  }
+}
+
+.tab__item--active {
+  opacity: 1;
+}
