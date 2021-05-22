@@ -1,14 +1,14 @@
 <%= form_with url: sessions_path, builder: CustomFormBuilder, html: { class: 'form', id: 'sign-in-form' } do |form| %>
   <div class="form__field">
-    <%= form.text_field :email %>
+    <%= form.text_field :email, label: t('common.email') %>
   </div>
   <div class="form__field">
-    <%= form.password_field :password %>
+    <%= form.password_field :password, label: t('common.password') %>
   </div>
   <% if @sign_in_error %>
     <div class="alert">
-      Account or password is incorrect.
+      <%= t 'errors.messages.email_or_password_error' %>
     </div>
   <% end %>
-  <%= form.submit 'Sign in', class: 'button button--contained button--primary button--full-width' %>
+  <%= form.submit t('common.sign_in'), class: 'button button--contained button--primary button--full-width' %>
 <% end %>

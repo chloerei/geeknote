@@ -1,13 +1,13 @@
 <div class="container container--medium">
   <div class="tab margin-bottom">
     <a href="<%= root_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'index' %>">
-      Recommend
+      <%= t 'common.recommend' %>
     </a>
     <a href="<%= following_posts_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'following' %>">
-      Following
+      <%= t 'common.following' %>
     </a>
     <a href="<%= latest_posts_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'latest' %>">
-      Latest
+      <%= t 'common.latest' %>
     </a>
   </div>
 

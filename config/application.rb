@@ -33,6 +33,9 @@ module Community
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    config.i18n.available_locales = ["zh-CN"]
+    config.i18n.default_locale = "zh-CN"
+
     config.cache_store = :redis_cache_store, {
       url: ENV["REDIS_URL"],
       namespace: 'cache',
