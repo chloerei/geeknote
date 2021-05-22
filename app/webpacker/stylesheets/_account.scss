@@ -1,16 +1,15 @@
 .account-header {
   display: flex;
-  margin: 16px 0;
   padding: 16px;
 }
 
 .account-header__avatar {
+  z-index: 1;
   margin-right: 16px;
-
-  img {
-    width: 160px;
-    height: 160px;
-  }
+  margin-top: -32px;
+  padding: 4px;
+  background: white;
+  border-radius: 50%;
 }
 
 .account-header__content {

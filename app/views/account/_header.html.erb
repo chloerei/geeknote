@@ -1,60 +1,68 @@
-<div class="account-header">
-  <div class="account-header__avatar">
-    <div class="avatar avatar--large">
-      <%= avatar_image_tag @account.owner.avatar %>
-    </div>
-  </div>
-  <div class="account-header__content">
-    <div class="toolbar">
-      <div class="account-header__name">
-        <%= @account.owner.name %>
-      </div>
-      <div class="toolbar__action">
-        <div class="dropdown" data-controller="dropdown">
-          <button type="button" class="button button--icon" data-action="dropdown#toggle">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-          </button>
-          <div class="dropdown__menu dropdown__menu--top-right">
-            <% if @account.can_manage_by?(current_user) %>
-              <a href="<%= account_dashboard_root_path(@account) %>" class="dropdown__item">
-                Dashboard
-              </a>
-            <% end %>
-          </div>
-        </div>
-      </div>
-      <% if @account.owner != current_user %>
-        <div class="toolbar__action">
-          <%= render 'account/follows/button', account: @account %>
-        </div>
-      <% end %>
-    </div>
-    <div class="account-header__description">
-      <% if @account.owner.is_a?(User) %>
-        <%= @account.owner.bio %>
-      <% else %>
-        <%= @account.owner.description %>
-      <% end %>
-    </div>
-    <div class="account-header__info">
-      <% if @account.user? %>
-        <a href="<%= account_followings_path(@account) %>" class="link-text margin-right-8"><b><%= @account.owner.followings_count %></b> followings</a>
-      <% end %>
-      <a href="<%= account_followers_path(@account) %>" class="link-text"><b><%= @account.followers_count %></b> followers</a>
-    </div>
+<div class="cover cover--heading">
+  <div class="cover__inner">
+    <%= cover_image_tag @account.owner.cover %>
   </div>
 </div>
 
-<div class="tab border-top border-bottom">
-  <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>">
-    Posts
-  </a>
-  <a href="<%= account_collections_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'collections' %>">
-    Collections
-  </a>
-  <% if @account.user? %>
-    <a href="<%= account_likes_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'likes' %>">
-      Likes
+<div class="container container--medium">
+  <div class="account-header">
+    <div class="account-header__avatar">
+      <div class="avatar avatar--large">
+        <%= avatar_image_tag @account.owner.avatar %>
+      </div>
+    </div>
+    <div class="account-header__content">
+      <div class="toolbar">
+        <div class="account-header__name">
+          <%= @account.owner.name %>
+        </div>
+        <div class="toolbar__action">
+          <div class="dropdown" data-controller="dropdown">
+            <button type="button" class="button button--icon" data-action="dropdown#toggle">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+            </button>
+            <div class="dropdown__menu dropdown__menu--top-right">
+              <% if @account.can_manage_by?(current_user) %>
+                <a href="<%= account_dashboard_root_path(@account) %>" class="dropdown__item">
+                  Dashboard
+                </a>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% if @account.owner != current_user %>
+          <div class="toolbar__action">
+            <%= render 'account/follows/button', account: @account %>
+          </div>
+        <% end %>
+      </div>
+      <div class="account-header__description">
+        <% if @account.owner.is_a?(User) %>
+          <%= @account.owner.bio %>
+        <% else %>
+          <%= @account.owner.description %>
+        <% end %>
+      </div>
+      <div class="account-header__info">
+        <% if @account.user? %>
+          <a href="<%= account_followings_path(@account) %>" class="link-text margin-right-8"><b><%= @account.owner.followings_count %></b> followings</a>
+        <% end %>
+        <a href="<%= account_followers_path(@account) %>" class="link-text"><b><%= @account.followers_count %></b> followers</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab padding">
+    <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>">
+      Posts
     </a>
-  <% end %>
+    <a href="<%= account_collections_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'collections' %>">
+      Collections
+    </a>
+    <% if @account.user? %>
+      <a href="<%= account_likes_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'likes' %>">
+        Likes
+      </a>
+    <% end %>
+  </div>
 </div>
