@@ -355,7 +355,7 @@ label.list__item {
 
 .cover {
   width: 100%;
-  padding-top: 20%;
+  padding-top: 25%;
   position: relative;
 }
 
@@ -436,6 +436,10 @@ label.list__item {
   .stretched-link:hover::after {
     background: rgba(0, 0, 0, 0.03);
   }
+}
+
+.list__item__thumb {
+  width: 160px;
 }
 
 .notification-unread {

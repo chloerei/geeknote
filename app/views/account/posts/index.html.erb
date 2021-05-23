@@ -3,15 +3,15 @@
 <div class="container container--medium">
   <div class="posts">
     <%= render @posts %>
-    <div class="toolbar">
-      <div class="toolbar__space">
-      </div>
-      <div class="toolbar__text">
-        <%= page_entries_info @posts %>
-      </div>
-      <div class="toolbar__action">
-        <%= paginate @posts %>
-      </div>
+  </div>
+  <div class="toolbar">
+    <div class="toolbar__space">
+    </div>
+    <div class="toolbar__text">
+      <%= page_entries_info @posts %>
+    </div>
+    <div class="toolbar__action">
+      <%= paginate @posts %>
     </div>
   </div>
 </div>
