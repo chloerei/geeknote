@@ -8,5 +8,7 @@ class CreateLikes < ActiveRecord::Migration[6.1]
 
       t.index [:likable_type, :likable_id, :user_id], unique: true
     end
+
+    add_column :posts, :likes_count, :integer, default: 0
   end
 end
