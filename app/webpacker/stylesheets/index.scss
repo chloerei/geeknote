@@ -283,36 +283,8 @@ dd {
 
 }
 
-.button__avatar {
-  margin-right: 8px;
-}
-
-.button--account {
-  width: 100%;
-  text-align: left;
-  padding: 4px 2px;
-
-  .button__avatar {
-    margin-right: 6px;
-  }
-
-  .button__text {
-    flex-grow: 1;
-  }
-}
-
-.button--text.button--user {
-  margin: 0;
-  padding: 2px;
-  min-width: 0;
-  border-radius: 20px;
-
-  .avatar {
-    img {
-      width: 36px;
-      height: 36px;
-    }
-  }
+.button--text .button__avatar {
+  margin: -4px 8px -4px -4px;
 }
 
 .snackbar-container {
