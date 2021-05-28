@@ -5,7 +5,6 @@ class Post < ApplicationRecord
 
   belongs_to :account
   belongs_to :author, class_name: 'User'
-  has_many :collection_items
 
   has_secure_token :preview_token
   has_one_attached :featured_image

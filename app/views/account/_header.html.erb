@@ -56,9 +56,6 @@
     <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>">
       Posts
     </a>
-    <a href="<%= account_collections_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'collections' %>">
-      Collections
-    </a>
     <% if @account.user? %>
       <a href="<%= account_likes_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'likes' %>">
         Likes

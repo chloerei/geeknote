@@ -66,26 +66,6 @@ ActiveRecord::Schema.define(version: 2021_05_17_113850) do
     t.index ["user_id"], name: "index_attachments_on_user_id"
   end
 
-  create_table "collection_items", force: :cascade do |t|
-    t.bigint "collection_id"
-    t.bigint "post_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["collection_id", "post_id"], name: "index_collection_items_on_collection_id_and_post_id", unique: true
-    t.index ["post_id"], name: "index_collection_items_on_post_id"
-  end
-
-  create_table "collections", force: :cascade do |t|
-    t.bigint "account_id"
-    t.string "name"
-    t.text "description"
-    t.integer "visibility", default: 0
-    t.integer "posts_count", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_id"], name: "index_collections_on_account_id"
-  end
-
   create_table "comments", force: :cascade do |t|
     t.bigint "account_id"
     t.string "commentable_type"
@@ -172,7 +152,6 @@ ActiveRecord::Schema.define(version: 2021_05_17_113850) do
     t.string "preview_token"
     t.integer "likes_count", default: 0
     t.integer "comments_count", default: 0
-    t.integer "collections_count", default: 0
     t.datetime "published_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

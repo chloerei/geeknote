@@ -20,7 +20,7 @@ module ApplicationHelper
     if cover.attached?
       image_tag cover.variant(resize_to_fill: [1920, 1080])
     else
-      image_tag asset_pack_path('media/images/collection.png')
+      image_tag asset_pack_path('media/images/cover.png')
     end
   end
 end

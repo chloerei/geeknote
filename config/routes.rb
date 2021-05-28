@@ -37,7 +37,6 @@ Rails.application.routes.draw do
     resources :posts do
       scope module: 'posts' do
         resource :preview, only: [:show]
-        resources :collections, only: [:index, :new, :create, :update, :destroy]
         resource :like, only: [:create, :destroy]
         resources :comments do
           scope module: 'comments' do
@@ -50,7 +49,6 @@ Rails.application.routes.draw do
     resource :follow, only: [:create, :destroy]
     resources :followings, only: [:index]
     resources :followers, only: [:index]
-    resources :collections
     resources :likes
 
     resource :invitation, only: [:show, :update]
@@ -64,8 +62,6 @@ Rails.application.routes.draw do
           resource :featured_image, only: [:update, :destroy]
         end
       end
-
-      resources :collections
 
       resources :memberships do
         member do
