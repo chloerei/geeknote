@@ -4,12 +4,14 @@ class Account::Posts::BookmarksController < Account::Posts::BaseController
   def create
     current_user.bookmarks.create(post: @post)
     @post.saved = true
-    render turbo_stream: turbo_stream.replace("post-#{@post.id}-bookmark-button", partial: 'button', locals: { post: @post })
+    flash.now[:notice] = 'Bookmark added'
+    render :update
   end
 
   def destroy
     current_user.bookmarks.find_by(post: @post)&.destroy
     @post.saved = false
-    render turbo_stream: turbo_stream.replace("post-#{@post.id}-bookmark-button", partial: 'button', locals: { post: @post })
+    flash.now[:notice] = 'Bookmark removed'
+    render :update
   end
 end
