@@ -24,6 +24,11 @@ Rails.application.routes.draw do
 
   resources :organizations, only: [:new, :create]
   resources :notifications, only: [:index]
+  resources :bookmarks, only: [:index, :update, :destroy] do
+    collection do
+      get :archived
+    end
+  end
 
   namespace :settings do
     resource :account

@@ -1,0 +1,73 @@
+<% post = bookmark.post %>
+
+<div class="posts__item" id="bookmark-<%= bookmark.id %>">
+  <a href="<%= account_post_path(post.account, post) %>" class="stretched-link"></a>
+  <div class="flex">
+    <div class="">
+      <h2 class="margin-top-0 margin-bottom">
+        <%= post.title.presence || 'Untitle' %>
+      </h2>
+      <div class="text-muted margin-bottom">
+        <%= truncate post.content, length: 70 %>
+      </div>
+    </div>
+    <% if post.featured_image.attached? %>
+      <div class="posts__item__feature-image margin-left">
+        <%= image_tag post.featured_image.variant(resize_to_fill: [800, 450]) %>
+      </div>
+    <% end %>
+  </div>
+  <div class="toolbar">
+    <div class="toobar__author">
+      <div class="flex">
+        <div class="avatar margin-right">
+          <%= avatar_image_tag post.author.avatar %>
+        </div>
+        <div>
+          <div class="text-primary">
+            <a href="<%= account_root_path(post.author.account) %>" class="link-text text-bold"><%= post.author.name %></a>
+            <% if post.account != post.author.account %>
+              for
+              <a href="<%= account_root_path(post.account) %>" class="link-text text-bold"><%= post.account.owner.name %></a>
+            <% end %>
+          </div>
+          <div class="text-secondary">
+            <%= l post.created_at, format: :short %>
+            &centerdot;
+            <%= post.likes_count %> likes
+            &centerdot;
+            <%= post.comments_count %> comments
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="toolbar__space">
+    </div>
+    <div class="toolbar__action">
+      <%= form_with model: bookmark, url: bookmark_path(bookmark), method: 'delete' do |form| %>
+        <button type="submit" class="button button--icon">
+          <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><rect fill="none" height="24" width="24"/><path d="M17,11v6.97l-5-2.14l-5,2.14V5h6V3H7C5.9,3,5,3.9,5,5v16l7-3l7,3V11H17z M21,7h-6V5h6V7z"/></svg>
+        </button>
+      <% end %>
+    </div>
+    <% if bookmark.archived? %>
+      <div class="toolbar__action">
+        <%= form_with model: bookmark, url: bookmark_path(bookmark) do |form| %>
+          <%= form.hidden_field :status, value: :saved %>
+          <button type="submit" class="button button--icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20.54 5.23l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM6.24 5h11.52l.83 1H5.42l.82-1zM5 19V8h14v11H5zm3-5h2.55v3h2.9v-3H16l-4-4z"/></svg>
+          </button>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="toolbar__action">
+        <%= form_with model: bookmark, url: bookmark_path(bookmark) do |form| %>
+          <%= form.hidden_field :status, value: :archived %>
+          <button type="submit" class="button button--icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20.54 5.23l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM6.24 5h11.52l.81.97H5.44l.8-.97zM5 19V8h14v11H5zm8.45-9h-2.9v3H8l4 4 4-4h-2.55z"/></svg>
+          </button>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
