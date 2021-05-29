@@ -2,7 +2,7 @@ class Account::Posts::BookmarksController < Account::Posts::BaseController
   before_action :require_sign_in
 
   def create
-    current_user.bookmarks.create(post: @post)
+    current_user.bookmarks.find_or_create_by(post: @post)
     @post.saved = true
     flash.now[:notice] = 'Bookmark added'
     render :update
