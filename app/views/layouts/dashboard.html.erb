@@ -1,48 +1,10 @@
 <% content_for :app_content do %>
   <div class="container container--medium">
-    <div class="toolbar margin-top">
-      <div class="toolbar__action">
-        <div class="dropdown" data-controller="dropdown">
-          <button type="button" class="button button--text" data-action="dropdown#toggle">
-            <div class="button__avatar">
-              <div class="avatar avatar--small">
-                <%= avatar_image_tag @account.owner.avatar %>
-              </div>
-            </div>
-            <div class="button__text">
-              <%= @account.owner.name %>
-            </div>
-            <div class="button__icon">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-            </div>
-          </button>
-          <div class="dropdown__menu">
-            <a href="<%= account_dashboard_root_path(current_user.account) %>" class="dropdown__item">
-              <div class="dropdown__item__avatar">
-                <div class="avatar avatar--small">
-                  <%= avatar_image_tag current_user.avatar %>
-                </div>
-              </div>
-              <div class="dropdown__item__text">
-                <%= current_user.name %>
-              </div>
-            </a>
-            <% current_user.member_accounts.each do |account| %>
-              <a href="<%= account_dashboard_root_path(account) %>" class="dropdown__item">
-                <div class="dropdown__item__avatar">
-                  <div class="avatar avatar--small">
-                    <%= avatar_image_tag account.owner.avatar %>
-                  </div>
-                </div>
-                <div class="dropdown__item__text">
-                  <%= account.owner.name %>
-                </div>
-              </a>
-            <% end %>
-          </div>
-        </div>
-      </div>
-      <div class="toolbar__space">
+    <div class="toolbar">
+      <div class="toolbar__title">
+        <h3>
+          <%= @account.owner.name %>
+        </h3>
       </div>
       <div class="toolbar__action">
         <a href="<%= account_root_path(@account) %>" class="button button--text">

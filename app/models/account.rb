@@ -1,6 +1,7 @@
 class Account < ApplicationRecord
   belongs_to :owner, polymorphic: true
   has_many :posts
+  has_many :comments
   has_many :attachments
   has_many :follows
   has_many :followers, through: :follows, source: :user
