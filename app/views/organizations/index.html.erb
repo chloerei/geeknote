@@ -1,0 +1,50 @@
+<div class="container container--medium">
+  <div class="toolbar">
+    <div class="toolbar__title">
+      <h3>
+        Organizations
+      </h3>
+    </div>
+    <div class="toolbar__action">
+      <a href="<%= new_organization_path %>" class="button button--contained button--primary">
+        New organization
+      </a>
+    </div>
+  </div>
+
+  <div class="list">
+    <% @memberships.each do |membership| %>
+      <div class="list__item position-relative border-bottom">
+        <a href="<%= account_root_path(membership.organization.account) %>" class="stretched-link"></a>
+        <div class="list__avatar">
+          <%= avatar_image_tag membership.organization.avatar %>
+        </div>
+        <div class="list__content">
+          <div class="text-primary">
+            <%= membership.organization.name %>
+          </div>
+          <div class="text-secondary">
+            <%= membership.organization.description %>
+          </div>
+        </div>
+        <div class="list__action">
+          <div class="dropdown" data-controller="dropdown">
+            <button type="button" class="button button--text" data-action="dropdown#toggle">
+              <div class="button__text">
+                <%= membership.role %>
+              </div>
+              <div class="button__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+              </div>
+            </button>
+            <div class="dropdown__menu dropdown__menu--top-right">
+              <a href="<%= account_dashboard_root_path(membership.organization.account) %>" class="dropdown__item">
+                Dashboard
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

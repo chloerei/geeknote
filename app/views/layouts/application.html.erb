@@ -13,6 +13,11 @@
           </a>
         </div>
         <div class="toolbar__action">
+          <a href="<%= new_account_dashboard_post_path(current_user.account) %>" class="button button--icon">
+            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><g/><g><path d="M17,19.22H5V7h7V5H5C3.9,5,3,5.9,3,7v12c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2v-7h-2V19.22z"/><path d="M19,2h-2v3h-3c0.01,0.01,0,2,0,2h3v2.99c0.01,0.01,2,0,2,0V7h3V5h-3V2z"/><rect height="2" width="8" x="7" y="9"/><polygon points="7,12 7,14 15,14 15,12 12,12"/><rect height="2" width="8" x="7" y="15"/></g></g></svg>
+          </a>
+        </div>
+        <div class="toolbar__action">
           <a href="<%= bookmarks_path %>" class="button button--icon">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15 7v12.97l-4.21-1.81-.79-.34-.79.34L5 19.97V7h10m4-6H8.99C7.89 1 7 1.9 7 3h10c1.1 0 2 .9 2 2v13l2 1V3c0-1.1-.9-2-2-2zm-4 4H5c-1.1 0-2 .9-2 2v16l7-3 7 3V7c0-1.1-.9-2-2-2z"/></svg>
           </a>
@@ -24,7 +29,7 @@
           <div class="dropdown__menu dropdown__menu--top-right">
             <a href="<%= account_root_path(current_user.account) %>" class="dropdown__item">Profile</a>
             <a href="<%= account_dashboard_root_path(current_user.account) %>" class="dropdown__item">Dashboard</a>
-            <a href="<%= settings_organizations_path %>" class="dropdown__item">Organizations</a>
+            <a href="<%= organizations_path %>" class="dropdown__item">Organizations</a>
             <a href="<%= settings_account_path %>" class="dropdown__item">Settings</a>
             <hr class="divider">
             <%= form_with url: sign_out_path, method: 'delete' do %>
@@ -33,16 +38,6 @@
               </button>
             <% end %>
           </div>
-        </div>
-        <div class="toolbar__action">
-          <a href="<%= new_account_dashboard_post_path(current_user.account) %>" class="button button--contained button--primary">
-            <div class="button__icon">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM5.92 19H5v-.92l9.06-9.06.92.92L5.92 19zM20.71 5.63l-2.34-2.34c-.2-.2-.45-.29-.71-.29s-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41z"/></svg>
-            </div>
-            <div class="button__text">
-              Post
-            </div>
-          </a>
         </div>
       <% else %>
         <div class="toolbar__action">

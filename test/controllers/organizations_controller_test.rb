@@ -1,7 +1,32 @@
 require "test_helper"
 
 class OrganizationsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  test "should get index" do
+    user = create(:user)
+    organization = create(:organization)
+    create(:membership, user: user, organization: organization)
+
+    sign_in user
+    get organizations_path
+    assert_response :success
+  end
+
+  test "should get new page" do
+    user = create(:user)
+
+    sign_in user
+    get new_organization_path
+    assert_response :success
+  end
+
+  test "should create organization" do
+    user = create(:user)
+
+    sign_in user
+    assert_difference "Organization.count" do
+      post organizations_path, params: { organization: { account_attributes: { name: 'neworg' }, name: 'org' }}
+    end
+    membership = user.memberships.last
+    assert membership.owner?
+  end
 end

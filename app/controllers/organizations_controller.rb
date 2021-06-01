@@ -1,4 +1,10 @@
 class OrganizationsController < ApplicationController
+  before_action :require_sign_in
+
+  def index
+    @memberships = current_user.memberships.includes(organization: :account)
+  end
+
   def new
     @organization = Organization.new
     @organization.build_account

@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :organizations, only: [:new, :create]
+  resources :organizations, only: [:index, :new, :create]
   resources :notifications, only: [:index]
   resources :bookmarks, only: [:index, :update, :destroy] do
     collection do
