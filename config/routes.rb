@@ -77,7 +77,6 @@ Rails.application.routes.draw do
 
       resources :attachments, only: [:create]
 
-      resources :settings, only: [:index]
       namespace :settings do
         resource :profile, onlu: [:show, :update]
       end

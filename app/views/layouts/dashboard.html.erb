@@ -2,7 +2,7 @@
   <div class="container container--medium">
     <div class="toolbar">
       <div class="toolbar__title">
-        <h3>
+        <h3 class="margin-0">
           <%= @account.owner.name %>
         </h3>
       </div>
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div class="tab">
+    <div class="tab margin-bottom">
       <a href="<%= account_dashboard_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'home' %>">
         Dashboard
       </a>
@@ -33,7 +33,7 @@
           Members
         </a>
       <% end %>
-      <a href="<%= account_dashboard_settings_path %>" class="tab__item <%= 'tab__item--active' if request.path.include?('settings') %>">
+      <a href="<%= account_dashboard_settings_profile_path %>" class="tab__item <%= 'tab__item--active' if request.path.include?('settings') %>">
         Settings
       </a>
     </div>
