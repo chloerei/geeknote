@@ -457,3 +457,12 @@ label.list__item {
 .snackbar-container {
   position: fixed;
 }
+
+.button--icon.button--avatar {
+  padding: 2px;
+
+  .avatar img {
+    height: 36px;
+    width: 36px;
+  }
+}
