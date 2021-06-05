@@ -25,9 +25,6 @@
       <a href="<%= account_dashboard_posts_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>">
         Posts
       </a>
-      <a href="#" class="tab__item">
-        Comments
-      </a>
       <% if @account.organization? %>
         <a href="<%= account_dashboard_memberships_path %>" class="tab__item <%= 'tab__item--active' if controller_name == 'memberships' %>">
           Members
