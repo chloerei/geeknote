@@ -2,12 +2,12 @@
   <a href="<%= account_post_path(post.account, post) %>" class="stretched-link"></a>
   <div class="flex">
     <div class="">
-      <div class="flex margin-bottom-8">
+      <div class="flex flex-align-items-center margin-bottom-8">
         <div class="avatar avatar--small margin-right-8">
           <%= avatar_image_tag post.author.avatar %>
         </div>
         <div>
-          <div class="text-primary">
+          <div class="text-small">
             <span class="text-bold"><%= post.author.name %></span>
             <% if post.account != post.author.account %>
               in

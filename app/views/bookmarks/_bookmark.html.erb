@@ -4,51 +4,44 @@
   <a href="<%= account_post_path(post.account, post) %>" class="stretched-link"></a>
   <div class="flex">
     <div class="">
-      <h2 class="margin-top-0 margin-bottom">
+      <div class="flex flex-align-items-center margin-bottom-8">
+        <div class="avatar avatar--small margin-right-8">
+          <%= avatar_image_tag post.author.avatar %>
+        </div>
+        <div>
+          <div class="text-small">
+            <span class="text-bold"><%= post.author.name %></span>
+            <% if post.account != post.author.account %>
+              in
+              <span class="link-text text-bold"><%= post.account.owner.name %></span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <h3 class="margin-top-0 margin-bottom-8">
         <%= post.title.presence || 'Untitle' %>
-      </h2>
-      <div class="text-muted margin-bottom">
-        <%= truncate post.content, length: 70 %>
+      </h3>
+      <div class="text-secondary">
+        <%= truncate post.content, length: 100 %>
       </div>
     </div>
     <% if post.featured_image.attached? %>
       <div class="posts__item__feature-image margin-left">
-        <%= image_tag post.featured_image.variant(resize_to_fill: [800, 450]) %>
+        <%= image_tag post.featured_image.variant(resize_to_fill: [800, 800]) %>
       </div>
     <% end %>
   </div>
   <div class="toolbar">
-    <div class="toobar__author">
-      <div class="flex">
-        <div class="avatar margin-right">
-          <%= avatar_image_tag post.author.avatar %>
-        </div>
-        <div>
-          <div class="text-primary">
-            <a href="<%= account_root_path(post.author.account) %>" class="link-text text-bold"><%= post.author.name %></a>
-            <% if post.account != post.author.account %>
-              for
-              <a href="<%= account_root_path(post.account) %>" class="link-text text-bold"><%= post.account.owner.name %></a>
-            <% end %>
-          </div>
-          <div class="text-secondary">
-            <%= l post.created_at, format: :short %>
-            &centerdot;
-            <%= post.likes_count %> likes
-            &centerdot;
-            <%= post.comments_count %> comments
-          </div>
-        </div>
+    <div class="toolbar__text">
+      <div class="text-secondary">
+        <%= l post.created_at, format: :short %>
+        &centerdot;
+        <%= post.likes_count %> likes
+        &centerdot;
+        <%= post.comments_count %> comments
       </div>
     </div>
     <div class="toolbar__space">
-    </div>
-    <div class="toolbar__action">
-      <%= form_with model: bookmark, url: bookmark_path(bookmark), method: 'delete' do |form| %>
-        <button type="submit" class="button button--icon">
-          <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><rect fill="none" height="24" width="24"/><path d="M17,11v6.97l-5-2.14l-5,2.14V5h6V3H7C5.9,3,5,3.9,5,5v16l7-3l7,3V11H17z M21,7h-6V5h6V7z"/></svg>
-        </button>
-      <% end %>
     </div>
     <% if bookmark.archived? %>
       <div class="toolbar__action">
@@ -69,5 +62,12 @@
         <% end %>
       </div>
     <% end %>
+    <div class="toolbar__action">
+      <%= form_with model: bookmark, url: bookmark_path(bookmark), method: 'delete' do |form| %>
+        <button type="submit" class="button button--icon">
+          <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><rect fill="none" height="24" width="24"/><path d="M17,11v6.97l-5-2.14l-5,2.14V5h6V3H7C5.9,3,5,3.9,5,5v16l7-3l7,3V11H17z M21,7h-6V5h6V7z"/></svg>
+        </button>
+      <% end %>
+    </div>
   </div>
 </div>
