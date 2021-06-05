@@ -137,16 +137,14 @@
 
 .posts__item {
   padding: 16px;
-  margin-bottom: 16px;
   position: relative;
 
   & > .toolbar {
-    margin: 0 -16px -8px;
+    margin: -8px -16px;
   }
 }
 
-.posts__item .stretched-link:hover::after {
-  border-radius: 4px;
+.posts__item:hover {
   background: rgba(0, 0, 0, 0.03);
 }
 
@@ -154,7 +152,8 @@
   margin-left: 16px;
 
   img {
-    max-width: 200px;
+    max-width: 100px;
+    max-height: 100px;
     border-radius: 4px;
   }
 }

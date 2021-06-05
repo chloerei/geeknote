@@ -400,18 +400,16 @@ label.list__item {
   margin-right: 8px;
 }
 
+.margin-bottom-8 {
+  margin-bottom: 8px;
+}
+
 .list--breakout {
   margin: 0 -16px;
 }
 
 .list__action {
   padding: 16px;
-}
-
-.list__item {
-  .stretched-link:hover::after {
-    background: rgba(0, 0, 0, 0.03);
-  }
 }
 
 .list__item__thumb {
