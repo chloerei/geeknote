@@ -1,28 +1,109 @@
-<div class="container container--medium">
-  <div class="tab margin-bottom">
-    <a href="<%= root_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'index' %>">
-      <%= t 'common.recommend' %>
-    </a>
-    <a href="<%= following_posts_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'following' %>">
-      <%= t 'common.following' %>
-    </a>
-    <a href="<%= latest_posts_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'latest' %>">
-      <%= t 'common.latest' %>
-    </a>
-  </div>
+<div class="container">
+  <div class="row margin-top">
+    <div class="col-9 padding-right border-right">
+      <div class="tab margin-bottom">
+        <a href="<%= root_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'index' %>">
+          <%= t 'common.recommend' %>
+        </a>
+        <a href="<%= following_posts_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'following' %>">
+          <%= t 'common.following' %>
+        </a>
+        <a href="<%= latest_posts_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'latest' %>">
+          <%= t 'common.latest' %>
+        </a>
+      </div>
 
-  <div class="list">
-    <%= render partial: 'account/posts/post', collection: @posts %>
-  </div>
+      <div class="list">
+        <%= render partial: 'account/posts/post', collection: @posts %>
+      </div>
 
-  <div class="toolbar">
-    <div class="toolbar__space">
+      <div class="toolbar">
+        <div class="toolbar__space">
+        </div>
+        <div class="toolbar__text">
+          <%= page_entries_info @posts %>
+        </div>
+        <div class="toolbar__action">
+          <%= paginate @posts %>
+        </div>
+      </div>
     </div>
-    <div class="toolbar__text">
-      <%= page_entries_info @posts %>
-    </div>
-    <div class="toolbar__action">
-      <%= paginate @posts %>
+
+    <div class="col-3 padding-left">
+      <% if !current_user %>
+        <div class="subheader">
+          Join GeekNote
+        </div>
+        <div class="padding">
+          <div class="text-primary margin-bottom">
+            GeekNote is a writting community for Geeks.
+          </div>
+          <div>
+            <a href="<%= sign_up_path %>" class="button button--contained button--primary">
+              <%= t 'common.sign_up' %>
+            </a>
+            <a href="<%= sign_in_path %>" class="button button--text button--primary">
+              <%= t 'common.sign_in' %>
+            </a>
+          </div>
+        </div>
+        <hr class="divider">
+      <% end %>
+
+      <div class="subheader">
+        Hot tags
+      </div>
+      <div class="padding">
+        <div class="flex flex-wrap">
+          <% Tag.order(taggings_count: :desc).limit(9).each do |tag| %>
+            <div class="chip margin-right-8 margin-bottom-8">
+              <div class="chip__text">
+                <%= tag.name %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <hr class="divider">
+
+      <% if current_user %>
+        <div class="subheader">
+          Reading list
+        </div>
+        <div class="posts">
+          <% current_user.bookmarks.includes(:post).each do |bookmark| %>
+            <% post = bookmark.post %>
+            <div class="posts__item">
+              <a href="<%= account_post_path(post.account, post) %>" class="stretched-link"></a>
+              <div class="flex flex-align-items-center margin-bottom-8">
+                <div class="avatar avatar--small margin-right-8">
+                  <%= avatar_image_tag post.author.avatar %>
+                </div>
+                <div>
+                  <div class="text-small">
+                    <span class="text-bold"><%= post.author.name %></span>
+                    <% if post.account != post.author.account %>
+                      in
+                      <span class="text-bold"><%= post.account.owner.name %></span>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <h4 class="margin-top-0 margin-bottom-8">
+                <%= post.title.presence || 'Untitle' %>
+              </h4>
+              <div class="text-secondary">
+                <%= l post.created_at, format: :short %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="padding-x">
+          <a href="<%= bookmarks_path %>" class="link-text">
+            View all
+          </a>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

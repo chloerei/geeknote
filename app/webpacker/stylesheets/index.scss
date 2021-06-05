@@ -124,6 +124,10 @@
   padding-right: 16px;
 }
 
+.padding-left {
+  padding-left: 16px;
+}
+
 .padding-y {
   padding-top: 16px;
   padding-bottom: 16px;
@@ -196,6 +200,10 @@
 
 .flex-align-items-center {
   align-items: center;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 .table tbody tr:hover {
@@ -463,4 +471,8 @@ label.list__item {
     height: 36px;
     width: 36px;
   }
+}
+
+.stretched-link::after {
+  cursor: pointer;
 }
