@@ -20,7 +20,7 @@ module ApplicationHelper
     if cover.attached?
       image_tag cover.variant(resize_to_limit: [1920, 1920])
     else
-      image_tag asset_pack_path('media/images/cover.png')
+      content_tag 'div', '', class: 'cover-image-placeholder'
     end
   end
 end

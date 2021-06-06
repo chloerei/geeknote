@@ -4,6 +4,11 @@ class Account::Dashboard::Settings::CoverImagesController < Account::Dashboard::
     render turbo_stream: turbo_stream.replace('cover-image-form', partial: 'form')
   end
 
+  def destroy
+    @account.owner.cover_image.purge_later
+    render turbo_stream: turbo_stream.replace('cover-image-form', partial: 'form')
+  end
+
   private
 
   def avatar_params

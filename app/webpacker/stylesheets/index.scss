@@ -337,13 +337,17 @@ label.list__item {
   overflow: hidden;
 }
 
-.cover {
+.cover-image {
   width: 100%;
   padding-top: 25%;
   position: relative;
 }
 
-.cover__inner {
+.cover-image--small {
+  padding-top: 10%;
+}
+
+.cover-image__inner {
   position: absolute;
   top: 0;
   left: 0;
@@ -494,7 +498,7 @@ label.list__item {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.5);
   }
 }
 
@@ -510,8 +514,18 @@ label.list__item {
 }
 
 .image-uploader__toolbar__action {
+  padding: 4px;
 }
 
 .image-uploader__input {
   display: none;
+}
+
+.cover-image-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
 }
