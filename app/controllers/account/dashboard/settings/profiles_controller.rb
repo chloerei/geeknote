@@ -18,9 +18,9 @@ class Account::Dashboard::Settings::ProfilesController < Account::Dashboard::Set
 
   def profile_params
     if @account.organization?
-      params.require(:organization).permit(:name, :description, :avatar, :display_post_author, account_attributes: [:name])
+      params.require(:organization).permit(:name, :description, :display_post_author, account_attributes: [:name])
     else
-      params.require(:user).permit(:name, :bio, :avatar, account_attributes: [:name])
+      params.require(:user).permit(:name, :bio, account_attributes: [:name])
     end
   end
 end

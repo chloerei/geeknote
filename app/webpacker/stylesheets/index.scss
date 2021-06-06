@@ -476,3 +476,42 @@ label.list__item {
 .stretched-link::after {
   cursor: pointer;
 }
+
+.display-inline-block {
+  display: inline-block;
+}
+
+.image-uploader {
+  position: relative;
+
+}
+
+.image-uploader__preview {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.image-uploader__toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-uploader__toolbar__action {
+}
+
+.image-uploader__input {
+  display: none;
+}

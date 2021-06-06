@@ -78,7 +78,9 @@ Rails.application.routes.draw do
       resources :attachments, only: [:create]
 
       namespace :settings do
-        resource :profile, onlu: [:show, :update]
+        resource :profile, only: [:show, :update]
+        resource :avatar, only: [:update]
+        resource :cover_image, only: [:update]
       end
     end
   end
