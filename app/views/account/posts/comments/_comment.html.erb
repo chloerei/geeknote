@@ -46,17 +46,24 @@
         <div class="toolbar__action">
           <%= render 'account/posts/comments/likes/button', comment: comment %>
         </div>
+        <% if comment.replies_count > 0 %>
+          <div class="toolbar__text">
+            <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="link-text text-muted">
+              <span class="text-muted">
+                <%= comment.replies_count %> replies
+              </span>
+            </a>
+          </div>
+        <% end %>
+        <div class="toolbar__space">
+        </div>
         <div class="toolbar__action">
-          <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="button button--text">
+          <a href="<%= account_post_comment_path(@account, @post, comment, anchor: 'comment-form') %>" class="button button--text">
             <div class="button__icon">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM20 4v13.17L18.83 16H4V4h16zM6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>
             </div>
             <div class="button__text">
-              <% if comment.replies_count > 0 %>
-                <%= comment.replies_count %> replies
-              <% else %>
-                Reply
-              <% end %>
+              Reply
             </div>
           </a>
         </div>

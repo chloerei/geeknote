@@ -400,8 +400,12 @@ label.list__item {
   display: none;
 }
 
-.button--liked {
+.button--icon.button--liked {
   color: #F44336;
+
+  svg {
+    fill: currentColor;
+  }
 }
 
 .margin-x-8 {
