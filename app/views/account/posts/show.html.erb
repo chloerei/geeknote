@@ -22,7 +22,7 @@
               <% end %>
             </div>
             <div class="text-secondary">
-              <%= l @post.created_at, format: :short %>
+              <%= local_time @post.created_at, format: :short %>
             </div>
           </div>
         </div>

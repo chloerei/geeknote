@@ -84,7 +84,7 @@
               Invited at
             </dt>
             <dd class="col-9">
-              <%= l @membership.invited_at, format: :short %>
+              <%= local_time @membership.invited_at, format: :short %>
             </dd>
           <% end %>
           <% if @membership.actived_at %>
@@ -92,7 +92,7 @@
               Accepted at
             </dt>
             <dd class="col-9">
-              <%= l @membership.actived_at, format: :short %>
+              <%= local_time @membership.actived_at, format: :short %>
             </dd>
           <% end %>
         </dl>

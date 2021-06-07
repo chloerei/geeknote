@@ -67,7 +67,7 @@
                 <div class="text-primary">
                   <b><%= comment.user.name %></b>
                   <span class="text-muted">&centerdot;</span>
-                  <span class="text-muted"><%= l comment.created_at, format: :short %></span>
+                  <span class="text-muted"><%= local_time comment.created_at, format: :short %></span>
                 </div>
                 <div class="text-muted">
                   <%= truncate comment.content %>

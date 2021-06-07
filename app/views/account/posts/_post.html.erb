@@ -32,7 +32,7 @@
   <div class="toolbar">
     <div class="toolbar__text">
       <div class="text-secondary">
-        <%= l post.created_at, format: :short %>
+        <%= local_time post.created_at, format: :short %>
         &centerdot;
         <%= post.likes_count %> likes
         &centerdot;

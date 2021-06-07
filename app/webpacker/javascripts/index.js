@@ -18,3 +18,6 @@ init(application)
 
 const context = require.context("./controllers", true, /\.js$/)
 application.load(definitionsFromContext(context))
+
+import LocalTime from "local-time"
+LocalTime.start()
