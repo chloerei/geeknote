@@ -44,20 +44,6 @@
       <div class="toolbar__action">
         <%= render 'account/posts/likes/button', post: @post %>
       </div>
-      <div class="toolbar__action">
-        <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text">
-          <div class="button__icon">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM20 4v13.17L18.83 16H4V4h16zM6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z"/></svg>
-          </div>
-          <div class="button__text">
-            <% if @post.comments_count > 0 %>
-              <%= @post.comments_count %> comments
-            <% else %>
-              Comment
-            <% end %>
-          </div>
-        </a>
-      </div>
       <div class="toolbar__space">
       </div>
       <div class="toolbar__action">
@@ -76,7 +62,7 @@
     </div>
   </div>
 
-  <hr class="divider">
+  <hr class="divider margin-x">
 
   <div class="list">
     <div class="list__item">
@@ -121,5 +107,33 @@
         </div>
       </div>
     <% end %>
+  </div>
+
+  <hr class="divider margin-x">
+
+  <h4 class="padding-x">
+    Comments (<%= @post.comments_count %>)
+  </h4>
+
+  <% if current_user %>
+    <%= render 'account/posts/comments/form', comment: Comment.new %>
+  <% else %>
+    <div class="padding">
+      <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--contained button--primary" data-turbo-frame="_top">Sign in to comment</a>
+    </div>
+  <% end %>
+  <hr class="divider margin-x">
+  <div id="comments" class="comments">
+    <%= render partial: 'account/posts/comments/comment', collection: @post.comments.order(likes_count: :desc).limit(3) %>
+  </div>
+  <div class="margin-y">
+    <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100">
+      <div class="button__text">
+        Show all comments
+      </div>
+      <div class="button__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z"/></svg>
+      </div>
+    </a>
   </div>
 </div>

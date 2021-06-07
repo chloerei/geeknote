@@ -1,10 +1,6 @@
 .comment {
   display: flex;
   position: relative;
-
-  .stretched-link:hover::after {
-    background: rgba(0, 0, 0, 0.03);
-  }
 }
 
 .comment__avatar {
@@ -51,12 +47,6 @@
       bottom: -12px;
       border-left: 2px solid var(--border-color);
     }
-  }
-}
-
-.comments {
-  .comment {
-    border-bottom: 1px solid var(--border-color);
   }
 }
 
