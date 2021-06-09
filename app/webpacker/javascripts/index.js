@@ -21,3 +21,8 @@ application.load(definitionsFromContext(context))
 
 import LocalTime from "local-time"
 LocalTime.start()
+
+// clean snackbar content
+document.addEventListener('turbo:before-cache', () => {
+  document.getElementById('snackbar-container').innerHTML = ''
+})
