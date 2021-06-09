@@ -1,1 +1,3 @@
 <%= turbo_stream.replace("post-#{@post.id}-bookmark-button", partial: 'button', locals: { post: @post }) %>
+
+<%= turbo_stream.replace("post-#{@post.id}-bookmark-button-bottom", partial: 'button', locals: { post: @post, suffix: '-bottom' }) %>
