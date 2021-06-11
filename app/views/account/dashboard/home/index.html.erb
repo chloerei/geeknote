@@ -1,122 +1,126 @@
-<div class="container container--medium">
-  <div class="padding">
+<div class="toolbar">
+  <div class="toolbar__title">
+    Dashboard
+  </div>
+</div>
+
+<div class="padding">
+  <div class="card card--outlined">
+    <div class="toolbar">
+      <div class="toolbar__title">
+        Last Posts
+      </div>
+      <div class="toolbar__action">
+        <a href="<%= account_dashboard_posts_path %>" class="button button--text">
+          View all
+        </a>
+      </div>
+    </div>
+    <div class="list">
+      <% @account.posts.order(updated_at: :desc).limit(3).each do |post| %>
+        <div class="list__item">
+          <div class="list__content">
+            <div class="text-primary">
+              <%= post.title %>
+            </div>
+            <div class="text-secondary">
+              By <%= post.author.name %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4 padding">
     <div class="card card--outlined">
       <div class="toolbar">
         <div class="toolbar__title">
-          Last Posts
+          Overview
         </div>
-        <div class="toolbar__action">
-          <a href="<%= account_dashboard_posts_path %>" class="button button--text">
-            View all
-          </a>
+      </div>
+      <div class="padding">
+        <dl>
+          <dt>Followers</dt>
+          <dd><%= @account.followers_count %></dd>
+          <dt>Likes</dt>
+          <dd><%= @account.posts.sum("likes_count") %></dd>
+          <dt>Comments</dt>
+          <dd><%= @account.posts.sum("comments_count") %></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 padding">
+    <div class="card card--outlined">
+      <div class="toolbar">
+        <div class="toolbar__title">
+          Comments
         </div>
       </div>
       <div class="list">
-        <% @account.posts.order(updated_at: :desc).limit(3).each do |post| %>
+        <% @account.comments.order(id: :desc).limit(3).includes(:user).each do |comment| %>
           <div class="list__item">
+            <div class="list__avatar">
+              <div class="avatar">
+                <%= avatar_image_tag comment.user.avatar %>
+              </div>
+            </div>
             <div class="list__content">
               <div class="text-primary">
-                <%= post.title %>
+                <b><%= comment.user.name %></b>
+                <span class="text-muted">&centerdot;</span>
+                <span class="text-muted"><%= local_time comment.created_at, format: :short %></span>
               </div>
-              <div class="text-secondary">
-                By <%= post.author.name %>
+              <div class="text-muted">
+                <%= truncate comment.content %>
               </div>
             </div>
           </div>
         <% end %>
       </div>
+      <div class="toolbar">
+        <div class="toolbar__action">
+          <a href="#" class="button button--text">
+            View all
+          </a>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-4 padding">
-      <div class="card card--outlined">
-        <div class="toolbar">
-          <div class="toolbar__title">
-            Overview
-          </div>
-        </div>
-        <div class="padding">
-          <dl>
-            <dt>Followers</dt>
-            <dd><%= @account.followers_count %></dd>
-            <dt>Likes</dt>
-            <dd><%= @account.posts.sum("likes_count") %></dd>
-            <dt>Comments</dt>
-            <dd><%= @account.posts.sum("comments_count") %></dd>
-          </dl>
+  <div class="col-4 padding">
+    <div class="card card--outlined">
+      <div class="toolbar">
+        <div class="toolbar__title">
+          Followers
         </div>
       </div>
-    </div>
-    <div class="col-4 padding">
-      <div class="card card--outlined">
-        <div class="toolbar">
-          <div class="toolbar__title">
-            Comments
-          </div>
-        </div>
-        <div class="list">
-          <% @account.comments.order(id: :desc).limit(3).includes(:user).each do |comment| %>
-            <div class="list__item">
-              <div class="list__avatar">
-                <div class="avatar">
-                  <%= avatar_image_tag comment.user.avatar %>
-                </div>
-              </div>
-              <div class="list__content">
-                <div class="text-primary">
-                  <b><%= comment.user.name %></b>
-                  <span class="text-muted">&centerdot;</span>
-                  <span class="text-muted"><%= local_time comment.created_at, format: :short %></span>
-                </div>
-                <div class="text-muted">
-                  <%= truncate comment.content %>
-                </div>
+      <div class="list">
+        <% @account.followers.order("follows.id desc").limit(3).includes(:account).each do |user| %>
+          <div class="list__item">
+            <div class="list__avatar">
+              <div class="avatar">
+                <%= avatar_image_tag user.avatar %>
               </div>
             </div>
-          <% end %>
-        </div>
-        <div class="toolbar">
-          <div class="toolbar__action">
-            <a href="#" class="button button--text">
-              View all
-            </a>
+            <div class="list__content">
+              <div class="text-primary">
+                <%= user.name %>
+              </div>
+              <div class="text-secondary">
+                <%= user.account.followers_count %> followers
+              </div>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
-    </div>
-    <div class="col-4 padding">
-      <div class="card card--outlined">
-        <div class="toolbar">
-          <div class="toolbar__title">
-            Followers
-          </div>
-        </div>
-        <div class="list">
-          <% @account.followers.order("follows.id desc").limit(3).includes(:account).each do |user| %>
-            <div class="list__item">
-              <div class="list__avatar">
-                <div class="avatar">
-                  <%= avatar_image_tag user.avatar %>
-                </div>
-              </div>
-              <div class="list__content">
-                <div class="text-primary">
-                  <%= user.name %>
-                </div>
-                <div class="text-secondary">
-                  <%= user.account.followers_count %> followers
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
-        <div class="toolbar">
-          <div class="toolbar__action">
-            <a href="<%= account_followers_path(@account) %>" class="button button--text">
-              View all
-            </a>
-          </div>
+      <div class="toolbar">
+        <div class="toolbar__action">
+          <a href="<%= account_followers_path(@account) %>" class="button button--text">
+            View all
+          </a>
         </div>
       </div>
     </div>

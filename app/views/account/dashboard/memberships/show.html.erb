@@ -1,102 +1,96 @@
-<div class="app-bar-wrapper">
-  <div class="app-bar app-bar--borderless">
+<div class="toolbar">
+  <div class="toolbar__action">
+    <a href="<%= account_dashboard_memberships_path %>" class="button button--icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    </a>
+  </div>
+  <div class="toolbar__title">
+    Membership
+  </div>
+  <% if current_role.in? %w(owner admin) %>
     <div class="toolbar">
       <div class="toolbar__action">
-        <a href="<%= account_dashboard_memberships_path %>" class="button button--icon">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        <a href="<%= edit_account_dashboard_membership_path(@account, @membership) %>" class="button button--text">
+          <div class="button__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/></svg>
+          </div>
+          <div class="button__text">
+            Edit
+          </div>
         </a>
       </div>
-      <div class="toolbar__title">
-        Membership
-      </div>
-      <% if current_role.in? %w(owner admin) %>
-        <div class="toolbar">
-          <div class="toolbar__action">
-            <a href="<%= edit_account_dashboard_membership_path(@account, @membership) %>" class="button button--text">
+      <% if @membership.invitation_exipred? %>
+        <div class="toolbar__action">
+          <%= form_with url: resend_account_dashboard_membership_path(@account, @membership) do %>
+            <button type="submit" class="button button--text">
               <div class="button__icon">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4.01 6.03l7.51 3.22-7.52-1 .01-2.22m7.5 8.72L4 17.97v-2.22l7.51-1M2.01 3L2 10l15 2-15 2 .01 7L23 12 2.01 3z"/></svg>
               </div>
               <div class="button__text">
-                Edit
+                Resend Invitation
               </div>
-            </a>
-          </div>
-          <% if @membership.invitation_exipred? %>
-            <div class="toolbar__action">
-              <%= form_with url: resend_account_dashboard_membership_path(@account, @membership) do %>
-                <button type="submit" class="button button--text">
-                  <div class="button__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4.01 6.03l7.51 3.22-7.52-1 .01-2.22m7.5 8.72L4 17.97v-2.22l7.51-1M2.01 3L2 10l15 2-15 2 .01 7L23 12 2.01 3z"/></svg>
-                  </div>
-                  <div class="button__text">
-                    Resend Invitation
-                  </div>
-                </button>
-              <% end %>
-            </div>
+            </button>
           <% end %>
-          <% if current_role == 'owner' || @membership.member? %>
-            <div class="toolbar__action">
-              <%= form_with url: account_dashboard_membership_path(@account, @membership), method: 'delete' do %>
-                <button type="submit" class="button button--text" data-confirm="Are you sure remove this member?">
-                  <div class="button__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M14,8c0-2.21-1.79-4-4-4C7.79,4,6,5.79,6,8c0,2.21,1.79,4,4,4C12.21,12,14,10.21,14,8z M12,8c0,1.1-0.9,2-2,2 c-1.1,0-2-0.9-2-2s0.9-2,2-2C11.1,6,12,6.9,12,8z"/><path d="M2,18v2h16v-2c0-2.66-5.33-4-8-4C7.33,14,2,15.34,2,18z M4,18c0.2-0.71,3.3-2,6-2c2.69,0,5.77,1.28,6,2H4z"/><rect height="2" width="6" x="17" y="10"/></g></g></svg>
-                  </div>
-                  <div class="button__text">
-                    Remove
-                  </div>
-                </button>
-              <% end %>
-            </div>
+        </div>
+      <% end %>
+      <% if current_role == 'owner' || @membership.member? %>
+        <div class="toolbar__action">
+          <%= form_with url: account_dashboard_membership_path(@account, @membership), method: 'delete' do %>
+            <button type="submit" class="button button--text" data-confirm="Are you sure remove this member?">
+              <div class="button__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M14,8c0-2.21-1.79-4-4-4C7.79,4,6,5.79,6,8c0,2.21,1.79,4,4,4C12.21,12,14,10.21,14,8z M12,8c0,1.1-0.9,2-2,2 c-1.1,0-2-0.9-2-2s0.9-2,2-2C11.1,6,12,6.9,12,8z"/><path d="M2,18v2h16v-2c0-2.66-5.33-4-8-4C7.33,14,2,15.34,2,18z M4,18c0.2-0.71,3.3-2,6-2c2.69,0,5.77,1.28,6,2H4z"/><rect height="2" width="6" x="17" y="10"/></g></g></svg>
+              </div>
+              <div class="button__text">
+                Remove
+              </div>
+            </button>
           <% end %>
         </div>
       <% end %>
     </div>
-  </div>
+  <% end %>
+</div>
 
-  <div class="app-content">
-    <div class="container container--small">
-      <div class="padding">
-        <dl class="row">
-          <dt class="col-3">
-            Identifier
-          </dt>
-          <dd class="col-9">
-            <%= @membership.user ? @membership.user.name : @membership.invitation_email %>
-          </dd>
-          <dt class="col-3">
-            Role
-          </dt>
-          <dd class="col-9">
-            <%= Membership.human_attribute_name "role.#{@membership.role}" %>
-          </dd>
-          <dt class="col-3">
-            Status
-          </dt>
-          <dd class="col-9">
-            <%= Membership.human_attribute_name "status.#{@membership.status}" %>
-            <% if @membership.invitation_exipred? %>
-              <span class="text--failed">(Invitation Expired)</span>
-            <% end %>
-          </dd>
-          <% if @membership.invited_at %>
-            <dt class="col-3">
-              Invited at
-            </dt>
-            <dd class="col-9">
-              <%= local_time @membership.invited_at, format: :short %>
-            </dd>
-          <% end %>
-          <% if @membership.actived_at %>
-            <dt class="col-3">
-              Accepted at
-            </dt>
-            <dd class="col-9">
-              <%= local_time @membership.actived_at, format: :short %>
-            </dd>
-          <% end %>
-        </dl>
-      </div>
-    </div>
+<div class="container container--small">
+  <div class="padding">
+    <dl class="row">
+      <dt class="col-3">
+        Identifier
+      </dt>
+      <dd class="col-9">
+        <%= @membership.user ? @membership.user.name : @membership.invitation_email %>
+      </dd>
+      <dt class="col-3">
+        Role
+      </dt>
+      <dd class="col-9">
+        <%= Membership.human_attribute_name "role.#{@membership.role}" %>
+      </dd>
+      <dt class="col-3">
+        Status
+      </dt>
+      <dd class="col-9">
+        <%= Membership.human_attribute_name "status.#{@membership.status}" %>
+        <% if @membership.invitation_exipred? %>
+          <span class="text--failed">(Invitation Expired)</span>
+        <% end %>
+      </dd>
+      <% if @membership.invited_at %>
+        <dt class="col-3">
+          Invited at
+        </dt>
+        <dd class="col-9">
+          <%= local_time @membership.invited_at, format: :short %>
+        </dd>
+      <% end %>
+      <% if @membership.actived_at %>
+        <dt class="col-3">
+          Accepted at
+        </dt>
+        <dd class="col-9">
+          <%= local_time @membership.actived_at, format: :short %>
+        </dd>
+      <% end %>
+    </dl>
   </div>
 </div>

@@ -15,8 +15,15 @@
 }
 
 .app-bar {
-  z-index: 10;
+  z-index: 20;
   padding: 0;
+}
+
+.drawer-wrapper {
+}
+
+.drawer {
+  z-index: 10;
 }
 
 .toolbar {
@@ -36,6 +43,7 @@
 .app-content {
   flex-grow: 1;
   overflow: auto;
+  position: relative;
 }
 
 .alert {
@@ -470,10 +478,6 @@ label.list__item {
 
 .tab__item--active {
   opacity: 1;
-}
-
-.snackbar-container {
-  position: fixed;
 }
 
 .button--icon.button--avatar {

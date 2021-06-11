@@ -1,69 +1,114 @@
 <% content_for :body do %>
-  <div class="app-bar">
-    <div class="toolbar">
-      <div class="toolbar__title">
-        <a href="/">
-          GeekNote
-        </a>
-      </div>
-      <% if current_user %>
+  <div class="app">
+    <div class="app-bar">
+      <div class="toolbar">
         <div class="toolbar__action">
-          <a href="<%= notifications_path %>" class="button button--icon <%= 'notification-unread' if current_user.notifications.unread.count > 0 %>">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19.29 17.29L18 16v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-1.29 1.29c-.63.63-.19 1.71.7 1.71h13.17c.9 0 1.34-1.08.71-1.71zM16 17H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6zm-4 5c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2z"/></svg>
-          </a>
-        </div>
-        <div class="toolbar__action">
-          <a href="<%= new_account_dashboard_post_path(current_user.account) %>" class="button button--icon">
-            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><g/><g><path d="M17,19.22H5V7h7V5H5C3.9,5,3,5.9,3,7v12c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2v-7h-2V19.22z"/><path d="M19,2h-2v3h-3c0.01,0.01,0,2,0,2h3v2.99c0.01,0.01,2,0,2,0V7h3V5h-3V2z"/><rect height="2" width="8" x="7" y="9"/><polygon points="7,12 7,14 15,14 15,12 12,12"/><rect height="2" width="8" x="7" y="15"/></g></g></svg>
-          </a>
-        </div>
-        <div class="toolbar__action">
-          <a href="<%= bookmarks_path %>" class="button button--icon">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15 7v12.97l-4.21-1.81-.79-.34-.79.34L5 19.97V7h10m4-6H8.99C7.89 1 7 1.9 7 3h10c1.1 0 2 .9 2 2v13l2 1V3c0-1.1-.9-2-2-2zm-4 4H5c-1.1 0-2 .9-2 2v16l7-3 7 3V7c0-1.1-.9-2-2-2z"/></svg>
-          </a>
-        </div>
-        <div class="toolbar__action dropdown" data-controller="dropdown">
-          <button type="button" class="button button--icon button--avatar" data-action="dropdown#toggle">
-            <div class="avatar">
-              <%= avatar_image_tag current_user.avatar %>
-            </div>
+          <button type="button" class="button button--icon" data-controller="toggle" data-toggle-target="#drawer" data-toggle-action="drawer#open">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
           </button>
-          <div class="dropdown__menu dropdown__menu--top-right">
-            <a href="<%= account_root_path(current_user.account) %>" class="dropdown__item">Profile</a>
-            <a href="<%= account_dashboard_root_path(current_user.account) %>" class="dropdown__item">Dashboard</a>
-            <a href="<%= organizations_path %>" class="dropdown__item">Organizations</a>
-            <a href="<%= settings_account_path %>" class="dropdown__item">Settings</a>
-            <hr class="divider">
-            <%= form_with url: sign_out_path, method: 'delete' do %>
-              <button type="submit" class="dropdown__item">
-                <%= t 'common.sign_out' %>
-              </button>
-            <% end %>
+        </div>
+        <div class="toolbar__title">
+          <a href="/">
+            GeekNote
+          </a>
+        </div>
+        <% if current_user %>
+          <div class="toolbar__action">
+            <a href="<%= new_account_dashboard_post_path(current_user.account) %>" class="button button--icon">
+              <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><g/><g><path d="M17,19.22H5V7h7V5H5C3.9,5,3,5.9,3,7v12c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2v-7h-2V19.22z"/><path d="M19,2h-2v3h-3c0.01,0.01,0,2,0,2h3v2.99c0.01,0.01,2,0,2,0V7h3V5h-3V2z"/><rect height="2" width="8" x="7" y="9"/><polygon points="7,12 7,14 15,14 15,12 12,12"/><rect height="2" width="8" x="7" y="15"/></g></g></svg>
+            </a>
+          </div>
+          <div class="toolbar__action">
+            <a href="<%= notifications_path %>" class="button button--icon <%= 'notification-unread' if current_user.notifications.unread.count > 0 %>">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19.29 17.29L18 16v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-1.29 1.29c-.63.63-.19 1.71.7 1.71h13.17c.9 0 1.34-1.08.71-1.71zM16 17H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6zm-4 5c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2z"/></svg>
+            </a>
+          </div>
+          <div class="toolbar__action dropdown" data-controller="dropdown">
+            <button type="button" class="button button--icon button--avatar" data-action="dropdown#toggle">
+              <div class="avatar">
+                <%= avatar_image_tag current_user.avatar %>
+              </div>
+            </button>
+            <div class="dropdown__menu dropdown__menu--top-right">
+              <a href="<%= account_root_path(current_user.account) %>" class="dropdown__item">Profile</a>
+              <a href="<%= account_dashboard_root_path(current_user.account) %>" class="dropdown__item">Dashboard</a>
+              <a href="<%= organizations_path %>" class="dropdown__item">Organizations</a>
+              <a href="<%= settings_account_path %>" class="dropdown__item">Settings</a>
+              <hr class="divider">
+              <%= form_with url: sign_out_path, method: 'delete' do %>
+                <button type="submit" class="dropdown__item">
+                  <%= t 'common.sign_out' %>
+                </button>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <div class="toolbar__action">
+            <a href="<%= sign_up_path %>" class="button button--text">
+              <%= t 'common.sign_up' %>
+            </a>
+          </div>
+          <div class="toolbar__action">
+            <a href="<%= sign_in_path %>" class="button button--text">
+              <%= t 'common.sign_in' %>
+            </a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="drawer-wrapper">
+      <div id="drawer" class="drawer drawer--modal" data-controller="drawer">
+        <div class="drawer__container">
+          <div class="app-bar">
+            <div class="toolbar">
+              <div class="toolbar__action">
+                <button type="button" class="button button--icon" data-action="drawer#close">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+                </button>
+              </div>
+              <div class="toolbar__title">
+                <a href="/">
+                  GeekNote
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="nav">
+            <a href="/" class="nav__item <%= 'nav__item--active' if controller_name == 'posts' %>">
+              <div class="nav__item__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
+              </div>
+              <div class="nav__item__text">
+                Home
+              </div>
+            </a>
+            <a href="<%= bookmarks_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'bookmarks' %>">
+              <div class="nav__item__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15 7v12.97l-4.21-1.81-.79-.34-.79.34L5 19.97V7h10m4-6H8.99C7.89 1 7 1.9 7 3h10c1.1 0 2 .9 2 2v13l2 1V3c0-1.1-.9-2-2-2zm-4 4H5c-1.1 0-2 .9-2 2v16l7-3 7 3V7c0-1.1-.9-2-2-2z"/></svg>
+              </div>
+              <div class="nav__item__text">
+                Bookmarks
+              </div>
+            </a>
           </div>
         </div>
-      <% else %>
-        <div class="toolbar__action">
-          <a href="<%= sign_up_path %>" class="button button--text">
-            <%= t 'common.sign_up' %>
-          </a>
+        <div class="drawer__scrim" data-action="click->drawer#close">
         </div>
-        <div class="toolbar__action">
-          <a href="<%= sign_in_path %>" class="button button--text">
-            <%= t 'common.sign_in' %>
-          </a>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-  <%= content_for?(:app_content) ? yield(:app_content) : yield %>
-
-  <div id="snackbar-container" class="snackbar-container">
-    <% if flash[:notice] %>
-      <div class="snackbar" data-controller="snackbar" data-snackbar-period="5000">
-        <%= flash[:notice] %>
       </div>
-    <% end %>
+
+      <div class="app-content">
+        <%= yield %>
+
+        <div id="snackbar-container" class="snackbar-container">
+          <% if flash[:notice] %>
+            <div class="snackbar" data-controller="snackbar" data-snackbar-period="5000">
+              <%= flash[:notice] %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>
 
