@@ -25,11 +25,40 @@
             </div>
           </div>
         </div>
-        <% if @account.can_manage_by?(current_user) %>
+        <% if @account.has_member?(current_user) %>
           <div class="toolbar__action">
-            <a href="<%= account_dashboard_root_path(@account) %>" class="button button--contained">
-              Dashboard
-            </a>
+            <div class="dropdown" data-controller="dropdown">
+              <button type="button" class="button button--text" data-action="dropdown#toggle">
+                <div class="button__text">
+                  <% if @account.user? %>
+                    Owner
+                  <% else %>
+                    <%= @account.owner.memberships.find_by(user: current_user).role %>
+                  <% end %>
+                </div>
+                <div class="button__icon">
+                  <span class="material-icons">expand_more</span>
+                </div>
+              </button>
+              <div class="dropdown__menu dropdown__menu--top-right">
+                <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="dropdown__item">
+                  <div class="dropdown__item__icon">
+                    <span class="material-icons">edit</span>
+                  </div>
+                  <div class="dropdown__item__text">
+                    Edit profile
+                  </div>
+                </a>
+                <a href="<%= account_dashboard_root_path(@account) %>" class="dropdown__item">
+                  <div class="dropdown__item__icon">
+                    <span class="material-icons">dashboard</span>
+                  </div>
+                  <div class="dropdown__item__text">
+                    Dashboard
+                  </div>
+                </a>
+              </div>
+            </div>
           </div>
         <% end %>
         <% if @account.owner != current_user %>

@@ -38,8 +38,21 @@
               </div>
             </button>
             <div class="dropdown__menu dropdown__menu--top-right">
+              <a href="<%= account_root_path(membership.organization.account) %>" class="dropdown__item">
+                <div class="dropdown__item__icon">
+                  <span class="material-icons">account_box</span>
+                </div>
+                <div class="dropdown__item__text">
+                  Profile
+                </div>
+              </a>
               <a href="<%= account_dashboard_root_path(membership.organization.account) %>" class="dropdown__item">
-                Dashboard
+                <div class="dropdown__item__icon">
+                  <span class="material-icons">dashboard</span>
+                </div>
+                <div class="dropdown__item__text">
+                  Dashboard
+                </div>
               </a>
             </div>
           </div>
