@@ -9,6 +9,7 @@
 @import 'avatar';
 @import 'breadcrumb';
 @import 'comment';
+@import 'material_icons';
 
 .app-bar--borderless {
   box-shadow: none;
@@ -86,6 +87,16 @@
 
   &:last-child {
     margin-left: 8px;
+  }
+
+  .material-icons {
+    font-size: 18px;
+  }
+}
+
+.chip__action .button--icon {
+  .material-icons {
+    font-size: 18px;
   }
 }
 
@@ -186,6 +197,14 @@
 
 .dropdown__menu--paddingless {
   padding: 0;
+}
+
+.dropdown__item__icon {
+  color: var(--text-secondary-color);
+
+  svg {
+    fill: currentColor;
+  }
 }
 
 .typography {

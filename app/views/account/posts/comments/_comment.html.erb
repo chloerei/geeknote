@@ -22,7 +22,7 @@
         <div class="toolbar__action">
           <div class="dropdown" data-controller="dropdown">
             <button type="button" class="button button--icon" data-action="dropdown#toggle">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+              <span class="material-icons">more_horiz</span>
             </button>
             <div class="dropdown__menu dropdown__menu--top-right">
               <% if comment.user == current_user %>
@@ -62,7 +62,7 @@
         <div class="toolbar__action">
           <a href="<%= account_post_comment_path(@account, @post, comment, anchor: 'comment-form') %>" class="button button--text">
             <div class="button__icon">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>
+              <span class="material-icons">reply</span>
             </div>
             <div class="button__text">
               Reply
