@@ -81,7 +81,7 @@ Rails.application.routes.draw do
       namespace :settings do
         resource :profile, only: [:show, :update]
         resource :avatar, only: [:update]
-        resource :cover_image, only: [:update, :destroy]
+        resource :banner_image, only: [:update, :destroy]
       end
     end
   end

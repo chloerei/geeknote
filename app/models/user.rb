@@ -17,7 +17,7 @@ class User < ApplicationRecord
   has_secure_password
   has_secure_token :auth_token
   has_one_attached :avatar
-  has_one_attached :cover_image
+  has_one_attached :banner_image
 
   validates :name, presence: true
   validates :email, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true

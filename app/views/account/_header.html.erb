@@ -1,6 +1,6 @@
-<div class="cover-image <%= 'cover-image--small' unless @account.owner.cover_image.attached? %>">
-  <div class="cover-image__inner">
-    <%= cover_image_tag @account.owner.cover_image %>
+<div class="banner-image <%= 'banner-image--small' unless @account.owner.banner_image.attached? %>">
+  <div class="banner-image__inner">
+    <%= banner_image_tag @account.owner.banner_image %>
   </div>
 </div>
 

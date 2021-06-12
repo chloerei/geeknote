@@ -1,19 +1,20 @@
-<%= form_with model: @account.owner, url: account_dashboard_settings_avatar_path(@account), id: 'avatar-form', data: { controller: 'form' } do |form| %>
-  <div class="form__field">
-    <div class="image-uploader display-inline-block">
-      <div class="image-uploader__preview">
-        <div class="avatar avatar--large">
-          <%= avatar_image_tag(@account.owner.avatar) %>
-        </div>
+<div id="avatar-form" class="margin-bottom">
+  <label class="label">Avatar</label>
+  <div class="image-uploader display-inline-block">
+    <div class="image-uploader__preview">
+      <div class="avatar avatar--large">
+        <%= avatar_image_tag(@account.owner.avatar) %>
       </div>
-      <div class="image-uploader__toolbar">
-        <div class="image-uploader__toolbar__action">
-        <label class="button button--icon">
-          <span class="material-icons">add_photo_alternate</span>
-          <%= form.file_field :avatar, direct_upload: true, class: 'image-uploader__input', data: { action: 'change->form#submit' } %>
-        </label>
-        </div>
+    </div>
+    <div class="image-uploader__toolbar">
+      <div class="image-uploader__toolbar__action">
+        <%= form_with model: @account.owner, url: account_dashboard_settings_avatar_path(@account), id: 'avatar-form', data: { controller: 'form' } do |form| %>
+          <label class="button button--icon">
+            <span class="material-icons">add_photo_alternate</span>
+            <%= form.file_field :avatar, direct_upload: true, class: 'image-uploader__input', data: { action: 'change->form#submit' } %>
+          </label>
+        <% end %>
       </div>
     </div>
   </div>
-<% end %>
+</div>

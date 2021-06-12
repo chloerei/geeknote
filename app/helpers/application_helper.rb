@@ -16,11 +16,11 @@ module ApplicationHelper
     end
   end
 
-  def cover_image_tag(cover)
+  def banner_image_tag(cover)
     if cover.attached?
       image_tag cover.variant(resize_to_limit: [1920, 1920])
     else
-      content_tag 'div', '', class: 'cover-image-placeholder'
+      content_tag 'div', '', class: 'banner-image-placeholder'
     end
   end
 end

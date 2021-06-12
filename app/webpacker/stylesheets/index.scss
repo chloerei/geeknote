@@ -380,17 +380,17 @@ label.list__item {
   overflow: hidden;
 }
 
-.cover-image {
+.banner-image {
   width: 100%;
   padding-top: 25%;
   position: relative;
 }
 
-.cover-image--small {
+.banner-image--small {
   padding-top: 10%;
 }
 
-.cover-image__inner {
+.banner-image__inner {
   position: absolute;
   top: 0;
   left: 0;
@@ -564,7 +564,7 @@ label.list__item {
   display: none;
 }
 
-.cover-image-placeholder {
+.banner-image-placeholder {
   position: absolute;
   top: 0;
   left: 0;

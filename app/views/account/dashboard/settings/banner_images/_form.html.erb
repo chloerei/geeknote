@@ -1,0 +1,31 @@
+<div id="banner-image-form" class="margin-bottom">
+  <label class="label">Banner image</label>
+  <div class="image-uploader">
+    <div class="image-uploader__preview">
+      <div class="banner-image">
+        <div class="banner-image__inner">
+          <%= banner_image_tag @account.owner.banner_image %>
+        </div>
+      </div>
+    </div>
+    <div class="image-uploader__toolbar">
+      <div class="image-uploader__toolbar__action">
+        <%= form_with model: @account.owner, url: account_dashboard_settings_banner_image_path(@account), data: { controller: 'form' } do |form| %>
+          <label class="button button--icon">
+            <span class="material-icons">add_photo_alternate</span>
+            <%= form.file_field :banner_image, direct_upload: true, class: 'image-uploader__input', data: { action: 'change->form#submit' } %>
+          </label>
+        <% end %>
+      </div>
+      <% if @account.owner.banner_image.attached? %>
+        <div class="image-uploader__toolbar__action">
+          <%= form_with url: account_dashboard_settings_banner_image_path(@account), method: :delete do |form| %>
+            <button type="submit" class="button button--icon">
+              <span class="material-icons">delete</span>
+            </button>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
