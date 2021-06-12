@@ -24,5 +24,7 @@
     <div class="sheet__container">
       <%= turbo_frame_tag 'settings', src: @post.new_record? ? nil : account_dashboard_post_settings_path(@account, @post), loading: "lazy" %>
     </div>
+    <div class="sheet__scrim" data-action="click->sheet#close">
+    </div>
   </div>
 </div>

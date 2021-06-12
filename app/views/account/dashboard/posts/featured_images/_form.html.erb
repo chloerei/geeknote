@@ -1,15 +1,32 @@
-<%= form_with model: @post, url: account_dashboard_post_featured_image_path(@account, @post), id: 'post-featured-image-form', data: { controller: 'form' }, method: (@post.featured_image.attached? ? 'delete' : 'patch')  do |form| %>
-  <div class="post-featured-image-uploader">
-    <% if @post.featured_image.attached? %>
-      <%= image_tag @post.featured_image %>
-      <button type="submit" class="button button--icon post-featured-image-uploader__delete-button">
-        <span class="material-icons">delete</span>
-      </button>
-    <% else %>
-      <%= form.file_field :featured_image, direct_upload: true, data: { action: 'change->form#submit' } %>
-      <label for="post_featured_image" class="button button--contained">
-        Upload featured image
-      </label>
-    <% end %>
+<div id="post-featured-image-form" class="margin-bottom">
+  <label class="label">Feature image</label>
+  <div class="image-uploader">
+    <div class="image-uploader__preview">
+      <% if @post.featured_image.attached? %>
+        <%= image_tag @post.featured_image %>
+      <% else %>
+        <div class="featured-image-placeholder">
+        </div>
+      <% end %>
+    </div>
+    <div class="image-uploader__toolbar">
+      <div class="image-uploader__toolbar__action">
+        <%= form_with model: @post, url: account_dashboard_post_featured_image_path(@account, @post), id: 'post-featured-image-form', data: { controller: 'form' }  do |form| %>
+          <label class="button button--icon">
+            <span class="material-icons">add_photo_alternate</span>
+            <%= form.file_field :featured_image, direct_upload: true, class: 'image-uploader__input', data: { action: 'change->form#submit' } %>
+          </label>
+        <% end %>
+      </div>
+      <% if @post.featured_image.attached? %>
+        <div class="image-uploader__toolbar__action">
+          <%= form_with model: @post, url: account_dashboard_post_featured_image_path(@account, @post), id: 'post-featured-image-form', data: { controller: 'form' }, method: :delete  do |form| %>
+            <button type="submit" class="button button--icon">
+              <span class="material-icons">delete</span>
+            </button>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>
