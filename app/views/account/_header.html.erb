@@ -16,15 +16,11 @@
         <div class="account-header__name">
           <%= @account.owner.name %>
         </div>
-        <div class="toolbar__action">
-          <div class="dropdown" data-controller="dropdown">
-            <button type="button" class="button button--icon" data-action="dropdown#toggle">
-              <span class="material-icons">more_horiz</span>
-            </button>
-            <div class="dropdown__menu dropdown__menu--top-right">
-            </div>
+        <% if @account.owner != current_user %>
+          <div class="toolbar__action">
+            <%= render 'account/follows/button', account: @account %>
           </div>
-        </div>
+        <% end %>
         <% if @account.has_member?(current_user) %>
           <div class="toolbar__action">
             <div class="dropdown" data-controller="dropdown">
@@ -41,6 +37,14 @@
                 </div>
               </button>
               <div class="dropdown__menu dropdown__menu--top-right">
+                <a href="<%= new_account_dashboard_post_path(@account) %>" class="dropdown__item">
+                  <div class="dropdown__item__icon">
+                    <span class="material-icons">post_add</span>
+                  </div>
+                  <div class="dropdown__item__text">
+                    New post
+                  </div>
+                </a>
                 <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="dropdown__item">
                   <div class="dropdown__item__icon">
                     <span class="material-icons">edit</span>
@@ -61,11 +65,15 @@
             </div>
           </div>
         <% end %>
-        <% if @account.owner != current_user %>
-          <div class="toolbar__action">
-            <%= render 'account/follows/button', account: @account %>
+        <div class="toolbar__action">
+          <div class="dropdown" data-controller="dropdown">
+            <button type="button" class="button button--icon" data-action="dropdown#toggle">
+              <span class="material-icons">more_horiz</span>
+            </button>
+            <div class="dropdown__menu dropdown__menu--top-right">
+            </div>
           </div>
-        <% end %>
+        </div>
       </div>
       <div class="account-header__description">
         <% if @account.owner.is_a?(User) %>
