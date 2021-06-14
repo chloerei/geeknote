@@ -97,14 +97,6 @@
   transition: opacity 0.3s;
 }
 
-.post-editor--editing {
-  .post-editor__appbar,
-  .post-editor__toolbar {
-    transition: opacity 1s;
-    opacity: 0;
-  }
-}
-
 .post-featured-image-uploader {
   background: rgba(0, 0, 0, 0.05);
   min-height: 120px;
