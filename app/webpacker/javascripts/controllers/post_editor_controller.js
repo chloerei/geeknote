@@ -125,7 +125,6 @@ export default class extends Controller {
   }
 
   displayEditing() {
-    this.saveStatusTarget.textContent = ''
   }
 
   displaySaving() {
@@ -133,7 +132,7 @@ export default class extends Controller {
   }
 
   displaySaved() {
-    this.saveStatusTarget.textContent = this.saveStatusTarget.dataset.messageSaved
+    this.saveStatusTarget.textContent = this.saveStatusTarget.dataset.messageStatus
   }
 
   displaySaveFailed() {
@@ -151,9 +150,9 @@ export default class extends Controller {
 
   submitEnd(event) {
     this.saving = false
-    this.displaySaved()
     let response = event.detail.fetchResponse.response
     if (response.ok) {
+      this.displaySaved()
       const location = response.headers.get('Location')
       if (location) {
         let url = new URL(location)

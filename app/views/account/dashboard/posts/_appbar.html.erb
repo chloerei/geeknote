@@ -6,8 +6,9 @@
       </a>
     </div>
     <div class="toolbar__title">
-      <%= Post.human_attribute_name "status.#{@post.status}" %> in <%= @account.owner.name %>
-      <span class="post-editor__save-status" data-post-editor-target="saveStatus" data-message-saving="saving..." data-message-saved="saved" data-message-save-failed="save faild!">
+      <%= @account.owner.name %>
+      <span class="post-editor__save-status" data-post-editor-target="saveStatus" data-message-status="<%= @post.status %>" data-message-saving="saving..." data-message-save-failed="save faild!">
+        <%= @post.status %>
       </span>
     </div>
     <% if !@post.new_record? %>
