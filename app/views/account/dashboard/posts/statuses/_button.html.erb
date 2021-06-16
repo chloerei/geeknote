@@ -1,7 +1,7 @@
 <div class="dropdown" data-controller="dropdown">
   <button type="button" class="button button--text" data-action="dropdown#toggle">
     <div class="button__text">
-      <%= @post.draft? ? 'Publish' : 'Update' %>
+      Publish
     </div>
     <div class="button__icon">
       <span class="material-icons">expand_more</span>
@@ -11,7 +11,7 @@
     <%= form_with model: @post, url: account_dashboard_post_status_path(@account, @post), builder: CustomFormBuilder, class: 'form' do |form| %>
       <div class="toolbar border-bottom">
         <div class="toolbar__title">
-          <%= @post.draft? ? 'Ready to publish?' : 'Update post status' %>
+          Update post status
         </div>
       </div>
       <% if @post.draft? %>

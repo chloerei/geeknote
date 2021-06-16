@@ -182,7 +182,7 @@
 }
 
 .dropdown__menu--medium {
-  min-width: 360px;
+  width: 360px;
 }
 
 .dropdown__menu--paddingless {
@@ -302,6 +302,13 @@ dd {
 
 .form__field {
   margin-bottom: 16px;
+}
+
+.form__control {
+  .radio,
+  .check_box {
+    flex-shrink: 0;
+  }
 }
 
 .drawer__header {
