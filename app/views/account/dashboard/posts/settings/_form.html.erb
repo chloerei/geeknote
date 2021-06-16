@@ -1,11 +1,11 @@
-<%= form_with model: @post, url: account_dashboard_post_settings_path(@account, @post), builder: CustomFormBuilder, class: 'form', id: 'settings-form', data: { controller: 'form', action: 'change->form#submit' } do |form| %>
+<%= form_with model: @post, url: account_dashboard_post_settings_path(@account, @post), builder: CustomFormBuilder, class: 'form', id: 'settings-form', data: { controller: 'form' } do |form| %>
   <div class="form__field">
-    <%= form.text_area :excerpt %>
+    <%= form.text_area :excerpt, data: { action: 'form#submit' } %>
   </div>
   <div class="form__field">
-    <label>Tags</label>
-    <div class="selector" data-controller="tag-selector" data-tag-selector-placeholder-value="add tag" data-tag-selector-creatable-value="true">
-      <select name="post[tag_list][]" class="selector__select" data-tag-selector-target="select" data-action="change->form#submit" multiple>
+    <label class="label">Tags</label>
+    <div class="selector tag-selector" data-controller="tag-selector" data-tag-selector-placeholder-value="add tag" data-tag-selector-creatable-value="true" data-tag-selector-max-items-value="5">
+      <select name="post[tag_list][]" class="selector__select" data-tag-selector-target="select" data-action="form#submit" multiple>
         <% @post.tags.each do |tag| %>
           <option value="<%= tag.name %>" selected><%= tag.name %></option>
         <% end %>
@@ -13,16 +13,15 @@
     </div>
   </div>
   <div class="form__field">
+    <label class="label">Options</label>
     <label class="form__control">
-      <%= form.check_box :allow_comments %>
+      <%= form.check_box :allow_comments, data: { action: 'form#submit' } %>
       <div class="form__control__label">
         Allow comments
       </div>
     </label>
-  </div>
-  <div class="form__field">
     <label class="form__control">
-      <%= form.check_box :featured %>
+      <%= form.check_box :featured, data: { action: 'form#submit' } %>
       <div class="form__control__label">
         Feature this post
       </div>

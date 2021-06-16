@@ -39,10 +39,4 @@ export default class extends SelectorController {
       </div>
     `
   }
-
-  removeSelected(value) {
-    super.removeSelected(value)
-    // TODO: fix in upstream
-    this.selectTarget.dispatchEvent(new Event('change', { bubbles: true }))
-  }
 }

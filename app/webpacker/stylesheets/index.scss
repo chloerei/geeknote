@@ -567,3 +567,23 @@ label.list__item {
   padding-bottom: 50%;
   background: rgba(0, 0, 0, 0.1);
 }
+
+.tag-selector {
+  &::after {
+    content: "";
+    border: 1px solid var(--text-secondary-color);
+    border-radius: 4px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+  }
+
+  &:focus-within {
+    &::after {
+      border: 2px solid var(--primary-color);
+    }
+  }
+}
