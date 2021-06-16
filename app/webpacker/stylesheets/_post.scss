@@ -150,3 +150,14 @@
     border-radius: 4px;
   }
 }
+
+.material-icons.featured-post__icon {
+  font-size: 16px;
+  color: var(--text-secondary-color);
+  margin-left: 8px;
+  display: none;
+}
+
+.posts--profile .featured-post__icon {
+  display: block;
+}

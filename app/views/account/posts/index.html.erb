@@ -1,7 +1,10 @@
 <%= render 'account/header' %>
 
 <div class="container container--medium">
-  <div class="posts">
+  <div class="posts posts--profile">
+    <% if @posts.current_page == 1 %>
+      <%= render @account.posts.featured %>
+    <% end %>
     <%= render @posts %>
   </div>
   <div class="toolbar">

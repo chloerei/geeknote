@@ -15,6 +15,6 @@ class Account::Dashboard::Posts::SettingsController < Account::Dashboard::Posts:
   private
 
   def settings_params
-    params.require(:post).permit(:excerpt, tag_list: [])
+    params.require(:post).permit(:excerpt, :allow_comments, :featured, tag_list: [])
   end
 end

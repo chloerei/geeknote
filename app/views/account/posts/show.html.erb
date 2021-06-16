@@ -115,29 +115,35 @@
 
   <hr class="divider margin-x">
 
-  <h4 class="padding-x">
-    Comments (<%= @post.comments_count %>)
-  </h4>
+  <% if @post.allow_comments? %>
+    <h4 class="padding-x">
+      Comments (<%= @post.comments_count %>)
+    </h4>
 
-  <% if current_user %>
-    <%= render 'account/posts/comments/form', comment: Comment.new %>
+    <% if current_user %>
+      <%= render 'account/posts/comments/form', comment: Comment.new %>
+    <% else %>
+      <div class="padding">
+        <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--contained button--primary" data-turbo-frame="_top">Sign in to comment</a>
+      </div>
+    <% end %>
+    <hr class="divider margin-x">
+    <div id="comments" class="comments">
+      <%= render partial: 'account/posts/comments/comment', collection: @post.comments.order(likes_count: :desc).limit(3) %>
+    </div>
+    <div class="margin-y">
+      <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100">
+        <div class="button__text">
+          Show all comments
+        </div>
+        <div class="button__icon">
+          <span class="material-icons">expand_more</span>
+        </div>
+      </a>
+    </div>
   <% else %>
-    <div class="padding">
-      <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--contained button--primary" data-turbo-frame="_top">Sign in to comment</a>
+    <div class="padding text-muted text-align-center">
+      Comment is disabled.
     </div>
   <% end %>
-  <hr class="divider margin-x">
-  <div id="comments" class="comments">
-    <%= render partial: 'account/posts/comments/comment', collection: @post.comments.order(likes_count: :desc).limit(3) %>
-  </div>
-  <div class="margin-y">
-    <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100">
-      <div class="button__text">
-        Show all comments
-      </div>
-      <div class="button__icon">
-        <span class="material-icons">expand_more</span>
-      </div>
-    </a>
-  </div>
 </div>

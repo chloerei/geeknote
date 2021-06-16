@@ -1,6 +1,6 @@
-<%= form_with model: @post, url: account_dashboard_post_settings_path(@account, @post), builder: CustomFormBuilder, class: 'form', id: 'settings-form', data: { controller: 'form' } do |form| %>
+<%= form_with model: @post, url: account_dashboard_post_settings_path(@account, @post), builder: CustomFormBuilder, class: 'form', id: 'settings-form', data: { controller: 'form', action: 'change->form#submit' } do |form| %>
   <div class="form__field">
-    <%= form.text_area :excerpt, data: { action: 'change->form#submit' } %>
+    <%= form.text_area :excerpt %>
   </div>
   <div class="form__field">
     <label>Tags</label>
@@ -11,5 +11,21 @@
         <% end %>
       </select>
     </div>
+  </div>
+  <div class="form__field">
+    <label class="form__control">
+      <%= form.check_box :allow_comments %>
+      <div class="form__control__label">
+        Allow comments
+      </div>
+    </label>
+  </div>
+  <div class="form__field">
+    <label class="form__control">
+      <%= form.check_box :featured %>
+      <div class="form__control__label">
+        Feature this post
+      </div>
+    </label>
   </div>
 <% end %>

@@ -37,8 +37,10 @@
         <%= local_time post.created_at, format: :short %>
         &centerdot;
         <%= post.likes_count %> likes
-        &centerdot;
-        <%= post.comments_count %> comments
+        <% if post.allow_comments %>
+          &centerdot;
+          <%= post.comments_count %> comments
+        <% end %>
       </div>
     </div>
     <div class="toolbar__space">
