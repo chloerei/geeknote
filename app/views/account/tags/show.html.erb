@@ -1,0 +1,36 @@
+<%= render 'account/header' %>
+
+<div class="container container--medium">
+  <div class="toolbar">
+    <div class="toolbar__title">
+      <h2 class="margin-0">
+        Tagged: <%= params[:id] %>
+      </h2>
+    </div>
+    <div class="toolbar__action">
+      <a href="<%= tag_path(id: params[:id]) %>" class="button button--text">
+        <div class="button__text">
+          All site
+        </div>
+        <div class="button__icon">
+          <span class="material-icons">arrow_forward</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="posts">
+    <%= render @posts %>
+  </div>
+
+  <div class="toolbar">
+    <div class="toolbar__space">
+    </div>
+    <div class="toolbar__text">
+      <%= page_entries_info @posts %>
+    </div>
+    <div class="toolbar__action">
+      <%= paginate @posts %>
+    </div>
+  </div>
+</div>

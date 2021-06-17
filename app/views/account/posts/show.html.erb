@@ -46,6 +46,16 @@
       <%= markdown_render @post.content %>
     </div>
 
+    <% if @post.tags.any? %>
+      <div class="post__tags">
+        <% @post.tags.each do |tag| %>
+          <a href="<%= account_tag_path(@account, id: tag.name) %>" class="chip">
+            <%= tag.name %>
+          </a>
+        <% end %>
+      </div>
+    <% end %>
+
     <div class="toolbar toolbar--breakout">
       <div class="toolbar__action">
         <%= render 'account/posts/likes/button', post: @post %>

@@ -80,6 +80,11 @@
   }
 }
 
+.chip {
+  text-decoration: none;
+  color: var(--text-primary-color);
+}
+
 .chip__action .button--icon {
   .material-icons {
     font-size: 18px;

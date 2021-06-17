@@ -56,11 +56,11 @@
       <div class="padding">
         <div class="flex flex-wrap">
           <% Tag.order(taggings_count: :desc).limit(9).each do |tag| %>
-            <div class="chip margin-right-8 margin-bottom-8">
+            <a href="<%= tag_path(id: tag.name) %>" class="chip margin-right-8 margin-bottom-8">
               <div class="chip__text">
                 <%= tag.name %>
               </div>
-            </div>
+            </a>
           <% end %>
         </div>
       </div>

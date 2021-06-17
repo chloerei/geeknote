@@ -1,0 +1,24 @@
+<div class="container container--medium">
+  <div class="toolbar">
+    <div class="toolbar__title">
+      <h2>
+        Tagged: <%= params[:id] %>
+      </h2>
+    </div>
+  </div>
+
+  <div class="list">
+    <%= render partial: 'account/posts/post', collection: @posts %>
+  </div>
+
+  <div class="toolbar">
+    <div class="toolbar__space">
+    </div>
+    <div class="toolbar__text">
+      <%= page_entries_info @posts %>
+    </div>
+    <div class="toolbar__action">
+      <%= paginate @posts %>
+    </div>
+  </div>
+</div>

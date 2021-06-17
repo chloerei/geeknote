@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tags, only: [] do
+  resources :tags, only: [:show] do
     collection do
       get :search
     end
@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     resources :followings, only: [:index]
     resources :followers, only: [:index]
     resources :likes
+    resources :tags, only: [:show]
 
     resource :invitation, only: [:show, :update]
 
