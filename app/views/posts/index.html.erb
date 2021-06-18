@@ -66,20 +66,6 @@
             <% post = bookmark.post %>
             <div class="posts__item">
               <a href="<%= account_post_path(post.account, post) %>" class="stretched-link"></a>
-              <div class="flex flex-align-items-center margin-bottom-8">
-                <div class="avatar avatar--small margin-right-8">
-                  <%= avatar_image_tag post.author.avatar %>
-                </div>
-                <div>
-                  <div class="text-small">
-                    <span class="text-bold"><%= post.author.name %></span>
-                    <% if post.account != post.author.account %>
-                      in
-                      <span class="text-bold"><%= post.account.owner.name %></span>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
               <h4 class="margin-top-0 margin-bottom-8">
                 <%= post.title.presence || 'Untitle' %>
               </h4>

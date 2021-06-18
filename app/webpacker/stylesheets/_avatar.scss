@@ -42,3 +42,15 @@
 
 .avatar-uploader__button {
 }
+
+.avatar-group {
+  display: flex;
+
+  .avatar:not(:first-child) {
+    margin-left: -20px;
+  }
+
+  .avatar--small:not(:first-child) {
+    margin-left: -12px;
+  }
+}

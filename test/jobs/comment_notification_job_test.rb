@@ -2,10 +2,11 @@ require "test_helper"
 
 class CommentNotificationJobTest < ActiveJob::TestCase
   test "should create notification for post author" do
-    post = create(:post)
+    user = create(:user)
+    post = create(:post, author_users: [user])
     comment = create(:comment, commentable: post)
 
-    assert_difference "post.author.notifications.count" do
+    assert_difference "user.notifications.count" do
       CommentNotificationJob.perform_now(comment)
     end
   end

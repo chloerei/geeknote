@@ -3,6 +3,5 @@ FactoryBot.define do
     title { 'Title' }
     content { 'Content' }
     account factory: :user_account
-    author factory: :user
   end
 end

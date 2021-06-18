@@ -69,7 +69,7 @@
                   <%= post.title.presence || 'Untitled' %>
                 </div>
                 <div class="text-secondary">
-                  By <%= post.author.name %>
+                  By <%= post.author_users.pluck(:name).join(', ') %>
                   &centerdot;
                   <% if post.tags.any? %>
                     <%= post.tags.pluck(:name).join(', ') %>

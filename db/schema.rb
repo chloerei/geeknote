@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_16_080352) do
+ActiveRecord::Schema.define(version: 2021_06_18_114817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -64,6 +64,16 @@ ActiveRecord::Schema.define(version: 2021_06_16_080352) do
     t.index ["account_id"], name: "index_attachments_on_account_id"
     t.index ["key"], name: "index_attachments_on_key", unique: true
     t.index ["user_id"], name: "index_attachments_on_user_id"
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.bigint "post_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id", "user_id"], name: "index_authors_on_post_id_and_user_id", unique: true
+    t.index ["post_id"], name: "index_authors_on_post_id"
+    t.index ["user_id"], name: "index_authors_on_user_id"
   end
 
   create_table "bookmarks", force: :cascade do |t|
@@ -153,7 +163,6 @@ ActiveRecord::Schema.define(version: 2021_06_16_080352) do
 
   create_table "posts", force: :cascade do |t|
     t.bigint "account_id"
-    t.bigint "author_id"
     t.string "title"
     t.text "content"
     t.text "excerpt"
@@ -168,7 +177,6 @@ ActiveRecord::Schema.define(version: 2021_06_16_080352) do
     t.boolean "allow_comments", default: true
     t.boolean "featured", default: false
     t.index ["account_id"], name: "index_posts_on_account_id"
-    t.index ["author_id"], name: "index_posts_on_author_id"
     t.index ["published_at"], name: "index_posts_on_published_at"
   end
 

@@ -4,7 +4,8 @@ class Post < ApplicationRecord
   include Commentable
 
   belongs_to :account
-  belongs_to :author, class_name: 'User'
+  has_many :authors
+  has_many :author_users, through: :authors, source: :user
   has_many :bookmarks
 
   has_secure_token :preview_token
@@ -17,7 +18,7 @@ class Post < ApplicationRecord
   }
 
   scope :following_by, -> (user) {
-    where(account: user.followings).or(where(author: user.following_users))
+    joins(:authors).where(account: user.followings).or(where(authors: { user: user.following_users } )).distinct
   }
 
   scope :hot, -> {
@@ -32,13 +33,13 @@ class Post < ApplicationRecord
     if user
       select(
         sanitize_sql_array(["
-          *,
+          posts.*,
           exists(select 1 from likes where likes.likable_type = :name and likes.likable_id = posts.id and likes.user_id = :user_id ) as liked,
           exists(select 1 from bookmarks where bookmarks.post_id = posts.id and bookmarks.user_id = :user_id ) as saved
           ", name: name, user_id: user.id])
       )
     else
-      select("*, false as liked, false as saved")
+      select("posts.*, false as liked, false as saved")
     end
   }
 

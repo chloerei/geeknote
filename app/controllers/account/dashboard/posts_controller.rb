@@ -21,7 +21,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   end
 
   def create
-    @post = @account.posts.new post_params.merge(author: current_user)
+    @post = @account.posts.new post_params.merge(author_users: [current_user])
     @post.save
     headers['Location'] = edit_account_dashboard_post_url(@account, @post)
   end
@@ -60,7 +60,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
     if current_role.in? %w(owner admin)
       @account.posts
     else
-      @account.posts.where(author: current_user)
+      @account.posts.joins(:authors).where(authors: { user_id: current_user.id })
     end
   end
 end

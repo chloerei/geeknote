@@ -10,15 +10,26 @@
     <div class="toolbar toolbar--breakout">
       <div class="toobar__author">
         <div class="flex">
-          <div class="avatar margin-right">
-            <%= avatar_image_tag @post.author.avatar %>
+          <div class="avatar-group margin-right">
+            <div class="avatar">
+              <%= avatar_image_tag @post.account.owner.avatar %>
+            </div>
+            <% if @post.account.organization? && @post.author_users.any? %>
+              <% @post.author_users.each do |user| %>
+                <div class="avatar">
+                  <%= avatar_image_tag user.avatar %>
+                </div>
+              <% end %>
+            <% end %>
           </div>
           <div>
             <div class="text-primary">
-              <a href="<%= account_root_path(@post.author.account) %>" class="link-text text-bold"><%= @post.author.name %></a>
-              <% if @post.account != @post.author.account %>
-                for
-                <a href="<%= account_root_path(@post.account) %>" class="link-text text-bold"><%= @post.account.owner.name %></a>
+              <a href="<%= account_root_path(@post.account) %>" class="link-text text-bold"><%= @post.account.owner.name %></a>
+              <% if @post.account.organization? && @post.author_users.any? %>
+                by
+                <% @post.author_users.each do |user| %>
+                  <a href="<%= account_root_path(user.account) %>" class="link-text text-bold"><%= user.name %></a>
+                <% end %>
               <% end %>
             </div>
             <div class="text-secondary">
@@ -81,45 +92,53 @@
   <div class="list">
     <div class="list__item">
       <div class="list__avatar">
-        <a href="<%= account_root_path(@post.author.account) %>" class="link-text">
+        <a href="<%= account_root_path(@post.account) %>" class="link-text">
           <div class="avatar">
-            <%= avatar_image_tag @post.author.avatar %>
+            <%= avatar_image_tag @post.account.owner.avatar %>
           </div>
         </a>
       </div>
       <div class="list__content">
-        <a href="<%= account_root_path(@post.author.account) %>" class="link-text text-primary text-bold">
-          <%= @post.author.name %>
+        <a href="<%= account_root_path(@post.account) %>" class="link-text text-primary text-bold">
+          <%= @post.account.owner.name %>
         </a>
         <div class="text-secondary">
-          <%= @post.author.bio %>
+          <% if @post.account.user? %>
+            <%= @post.account.owner.bio %>
+          <% else %>
+            <%= @post.account.owner.description %>
+          <% end %>
         </div>
       </div>
-      <% if @post.author != current_user %>
+      <% if @post.account != current_user.account %>
         <div class="list__action">
-          <%= render 'account/follows/button', account: @post.author.account %>
+          <%= render 'account/follows/button', account: @post.account %>
         </div>
       <% end %>
     </div>
     <% if @post.account.organization? %>
-      <div class="list__item">
-        <div class="list__avatar">
-          <a href="<%= account_root_path(@post.account) %>" class="link-text">
-            <%= avatar_image_tag @post.account.owner.avatar %>
-          </a>
-        </div>
-        <div class="list__content">
-          <a href="<%= account_root_path(@post.account) %>" class="link-text text-primary text-bold">
-            <%= @post.account.owner.name %>
-          </a>
-          <div class="text-secondary">
-            <%= @post.account.owner.description %>
+      <% @post.author_users.each do |user| %>
+        <div class="list__item">
+          <div class="list__avatar">
+            <a href="<%= account_root_path(user.account) %>" class="link-text">
+              <%= avatar_image_tag user.avatar %>
+            </a>
           </div>
+          <div class="list__content">
+            <a href="<%= account_root_path(user.account) %>" class="link-text text-primary text-bold">
+              <%= user.name %>
+            </a>
+            <div class="text-secondary">
+              <%= user.bio %>
+            </div>
+          </div>
+          <% if user != current_user %>
+            <div class="list__action">
+              <%= render 'account/follows/button', account: user.account %>
+            </div>
+          <% end %>
         </div>
-        <div class="list__action">
-          <%= render 'account/follows/button', account: @post.account %>
-        </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 
