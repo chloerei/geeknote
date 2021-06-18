@@ -1,0 +1,27 @@
+<div class="banner-image banner-image--small">
+  <div class="banner-image__inner">
+    <%= banner_image_tag @account.owner.banner_image %>
+  </div>
+</div>
+
+<div class="container container--medium">
+  <div class="toolbar">
+    <div class="toolbar__action">
+      <a href="<%= account_root_path(@account) %>" class="button button--icon">
+        <span class="material-icons">arrow_back</span>
+      </a>
+    </div>
+    <div class="toolbar__action">
+      <a href="<%= account_root_path(@account) %>" class="link-text">
+        <div class="flex flex-align-items-center">
+          <div class="avatar margin-right-8">
+            <%= avatar_image_tag @account.owner.avatar %>
+          </div>
+          <div class="text-bold">
+            <%= @account.owner.name %>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

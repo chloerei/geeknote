@@ -1,11 +1,9 @@
-<%= render 'account/header' %>
+<%= render 'account/subheader' %>
 
 <div class="container container--medium">
   <div class="toolbar">
     <div class="toolbar__title">
-      <h2 class="margin-0">
-        Tagged: <%= params[:id] %>
-      </h2>
+      Tagged: <%= params[:id] %>
     </div>
     <div class="toolbar__action">
       <a href="<%= tag_path(id: params[:id]) %>" class="button button--text">
