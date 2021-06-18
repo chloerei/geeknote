@@ -593,3 +593,12 @@ label.list__item {
     }
   }
 }
+
+.pagination {
+  padding: 4px;
+  justify-content: center;
+}
+
+.pagination .button--active {
+  color: var(--text-secondary-color);
+}

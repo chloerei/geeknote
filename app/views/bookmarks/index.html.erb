@@ -10,14 +10,5 @@
     <%= render @bookmarks %>
   </div>
 
-  <div class="toolbar">
-    <div class="toolbar__space">
-    </div>
-    <div class="toolbar__text">
-      <%= page_entries_info @bookmarks %>
-    </div>
-    <div class="toolbar__action">
-      <%= paginate @bookmarks %>
-    </div>
-  </div>
+  <%= paginate @bookmarks %>
 </div>
