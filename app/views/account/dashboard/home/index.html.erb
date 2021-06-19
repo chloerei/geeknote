@@ -4,35 +4,6 @@
   </div>
 </div>
 
-<div class="padding">
-  <div class="card card--outlined">
-    <div class="toolbar">
-      <div class="toolbar__title">
-        Last Posts
-      </div>
-      <div class="toolbar__action">
-        <a href="<%= account_dashboard_posts_path %>" class="button button--text">
-          View all
-        </a>
-      </div>
-    </div>
-    <div class="list">
-      <% @account.posts.order(updated_at: :desc).limit(3).each do |post| %>
-        <div class="list__item">
-          <div class="list__content">
-            <div class="text-primary">
-              <%= post.title %>
-            </div>
-            <div class="text-secondary">
-              By <%= post.author.name %>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-
 <div class="row">
   <div class="col-4 padding">
     <div class="card card--outlined">

@@ -12,6 +12,21 @@
       </select>
     </div>
   </div>
+  <% if @account.organization? %>
+    <div class="form__field">
+      <label class="label">Authors</label>
+      <div class="selector" data-controller="selector" data-selector-max-items-value="3">
+        <select name="post[author_list][]" class="selector__select" data-selector-target="select" data-action="form#submit" multiple>
+          <% @post.author_users.includes(:account).each do |user| %>
+            <option value="<%= user.account.name %>" selected><%= user.name %></option>
+          <% end %>
+          <% @account.owner.memberships.includes(user: :account).where.not(user: @post.author_users).each do |membership| %>
+            <option value="<%= membership.user.account.name %>"><%= membership.user.name %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  <% end %>
   <div class="form__field">
     <label class="label">Options</label>
     <label class="form__control">

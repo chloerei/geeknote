@@ -50,4 +50,10 @@ class Post < ApplicationRecord
       self.published_at = Time.now
     end
   end
+
+  def author_list=(list)
+    if account.organization?
+      self.author_users = account.owner.member_users.joins(:account).where(account: { name: list })
+    end
+  end
 end

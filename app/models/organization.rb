@@ -1,6 +1,7 @@
 class Organization < ApplicationRecord
   has_one :account, as: :owner, autosave: true
   has_many :memberships
+  has_many :member_users, through: :memberships, source: :user
   has_one_attached :avatar
   has_one_attached :banner_image
 

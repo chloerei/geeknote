@@ -574,7 +574,7 @@ label.list__item {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.tag-selector {
+.selector {
   &::after {
     content: "";
     border: 1px solid var(--text-secondary-color);
@@ -586,12 +586,12 @@ label.list__item {
     bottom: 0;
     pointer-events: none;
   }
+}
 
-  &:focus-within {
-    &::after {
-      border: 2px solid var(--primary-color);
-    }
-  }
+.selector__menu {
+  padding: 8px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
 }
 
 .pagination {
