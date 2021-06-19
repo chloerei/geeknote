@@ -1,18 +1,18 @@
 <p>
-  @<%= @membership.inviter.account.name %> has invite you to join @<%= @membership.organization.account.name %> organization. Head over to <a href="<%= account_root_url(@membership.organization.account) %>"><%= account_root_url(@membership.organization.account) %></a> to checkout @<%= @membership.organization.account.name %>'s profile.
+  @<%= @member.inviter.account.name %> has invite you to join @<%= @member.organization.account.name %> organization. Head over to <a href="<%= account_root_url(@member.organization.account) %>"><%= account_root_url(@member.organization.account) %></a> to checkout @<%= @member.organization.account.name %>'s profile.
 </p>
 
 <p>This invitation will expire in 7 days.</p>
 
 <p class="aligncenter">
-  <a href="<%= account_invitation_url(@membership.organization.account, invitation_token: (@membership.user ? nil : @membership.invitation_token)) %>" class="btn-primary">
-    Join @<%= @membership.organization.account.name %>
+  <a href="<%= account_invitation_url(@member.organization.account, invitation_token: (@member.user ? nil : @member.invitation_token)) %>" class="btn-primary">
+    Join @<%= @member.organization.account.name %>
   </a>
 </p>
 
-<% if @membership.user %>
+<% if @member.user %>
   <p>
-    <b>Note:</b> If you get a 404 page, make sure you’re signed in as @<%= @membership.user.account.name %>.
+    <b>Note:</b> If you get a 404 page, make sure you’re signed in as @<%= @member.user.account.name %>.
   </p>
 <% else %>
   <p>

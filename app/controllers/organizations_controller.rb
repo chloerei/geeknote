@@ -2,7 +2,7 @@ class OrganizationsController < ApplicationController
   before_action :require_sign_in
 
   def index
-    @memberships = current_user.memberships.includes(organization: :account)
+    @members = current_user.members.includes(organization: :account)
   end
 
   def new
@@ -14,7 +14,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new organization_params
 
     if @organization.save
-      @organization.memberships.create(role: 'owner', user: current_user, status: :active)
+      @organization.members.create(role: 'owner', user: current_user, status: :active)
       redirect_to account_root_path(@organization.account)
     else
       render turbo_stream: turbo_stream.replace('organization-form', partial: 'form')

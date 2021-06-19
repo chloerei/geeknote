@@ -70,7 +70,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :memberships do
+      resources :members do
         member do
           post :resend
         end

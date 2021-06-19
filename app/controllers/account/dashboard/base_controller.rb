@@ -9,8 +9,8 @@ class Account::Dashboard::BaseController < Account::BaseController
 
   def current_role
     @current_role ||= if @account.organization?
-      membership = @account.owner.memberships.active.find_by(user: current_user)
-      membership ? membership.role : ''
+      member = @account.owner.members.active.find_by(user: current_user)
+      member ? member.role : ''
     else
       @account.owner == current_user ? 'owner' : ''
     end

@@ -33,7 +33,7 @@ class Account::Dashboard::AttachmentsControllerTest < ActionDispatch::Integratio
       assert_response :not_found
     end
 
-    sign_in create(:membership, organization: organization).user
+    sign_in create(:member, organization: organization).user
     assert_difference "organization.account.attachments.count" do
       post account_dashboard_attachments_path(organization.account), params: { attachment: { file: fixture_file_upload('avatar.png') } }
       assert_response :success

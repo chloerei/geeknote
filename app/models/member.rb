@@ -1,4 +1,4 @@
-class Membership < ApplicationRecord
+class Member < ApplicationRecord
   belongs_to :organization
   belongs_to :user, optional: true
   belongs_to :inviter, class_name: 'User', optional: true
@@ -31,7 +31,7 @@ class Membership < ApplicationRecord
         user = User.joins(:account).find_by(account: { name: identifier })
 
         if user
-          if organization.memberships.where(user: user).exists?
+          if organization.members.where(user: user).exists?
             errors.add :identifier, :already_exists
           else
             self.user = user
@@ -43,13 +43,13 @@ class Membership < ApplicationRecord
         user = User.find_by(email: identifier)
 
         if user
-          if organization.memberships.where(user: user).exists?
+          if organization.members.where(user: user).exists?
             errors.add :identifier, :already_exists
           else
             self.user = user
           end
         else
-          if organization.memberships.where(invitation_email: identifier).exists?
+          if organization.members.where(invitation_email: identifier).exists?
             errors.add :identifier, :already_exists
           else
             self.invitation_email = identifier

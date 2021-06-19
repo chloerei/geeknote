@@ -48,7 +48,7 @@ class Account::InvitationsControllerTest < ActionDispatch::IntegrationTest
   test "should accept invitation by token" do
     invitation = create(:invitation, organization: @organization)
     sign_in create(:user)
-    assert_difference "@organization.memberships.active.count" do
+    assert_difference "@organization.members.active.count" do
       patch account_invitation_path(@organization.account, invitation_token: invitation.invitation_token)
     end
     assert_redirected_to account_dashboard_posts_path(@organization.account)
@@ -61,7 +61,7 @@ class Account::InvitationsControllerTest < ActionDispatch::IntegrationTest
     user = create(:user)
     invitation = create(:invitation, organization: @organization, user: user)
     sign_in user
-    assert_difference "@organization.memberships.active.count" do
+    assert_difference "@organization.members.active.count" do
       patch account_invitation_path(@organization.account)
     end
     assert_redirected_to account_dashboard_posts_path(@organization.account)
@@ -73,18 +73,18 @@ class Account::InvitationsControllerTest < ActionDispatch::IntegrationTest
     other_user = create(:user)
     sign_in other_user
 
-    assert_no_difference "@organization.memberships.active.count" do
+    assert_no_difference "@organization.members.active.count" do
       patch account_invitation_path(@organization.account, invitation_token: invitation.invitation_token)
     end
     assert_response :not_found
   end
 
   test "should not accept invitation by member" do
-    user = create(:membership, organization: @organization).user
+    user = create(:member, organization: @organization).user
     invitation = create(:invitation, organization: @organization)
     sign_in user
 
-    assert_no_difference "@organization.memberships.active.count" do
+    assert_no_difference "@organization.members.active.count" do
       patch account_invitation_path(@organization.account, invitation_token: invitation.invitation_token)
     end
     assert_redirected_to account_invitation_path(@organization.account, invitation_token: invitation.invitation_token)

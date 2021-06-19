@@ -1,16 +1,16 @@
 <div class="toolbar">
   <div class="toolbar__action">
-    <a href="<%= account_dashboard_memberships_path %>" class="button button--icon">
+    <a href="<%= account_dashboard_members_path %>" class="button button--icon">
       <span class="material-icons">arrow_back</span>
     </a>
   </div>
   <div class="toolbar__title">
-    Membership
+    Member
   </div>
   <% if current_role.in? %w(owner admin) %>
     <div class="toolbar">
       <div class="toolbar__action">
-        <a href="<%= edit_account_dashboard_membership_path(@account, @membership) %>" class="button button--text">
+        <a href="<%= edit_account_dashboard_member_path(@account, @member) %>" class="button button--text">
           <div class="button__icon">
             <span class="material-icons">edit</span>
           </div>
@@ -19,9 +19,9 @@
           </div>
         </a>
       </div>
-      <% if @membership.invitation_exipred? %>
+      <% if @member.invitation_exipred? %>
         <div class="toolbar__action">
-          <%= form_with url: resend_account_dashboard_membership_path(@account, @membership) do %>
+          <%= form_with url: resend_account_dashboard_member_path(@account, @member) do %>
             <button type="submit" class="button button--text">
               <div class="button__icon">
                 <span class="material-icons">send</span>
@@ -33,9 +33,9 @@
           <% end %>
         </div>
       <% end %>
-      <% if current_role == 'owner' || @membership.member? %>
+      <% if current_role == 'owner' || @member.member? %>
         <div class="toolbar__action">
-          <%= form_with url: account_dashboard_membership_path(@account, @membership), method: 'delete' do %>
+          <%= form_with url: account_dashboard_member_path(@account, @member), method: 'delete' do %>
             <button type="submit" class="button button--text" data-confirm="Are you sure remove this member?">
               <div class="button__icon">
                 <span class="material-icons">person_remove</span>
@@ -58,37 +58,37 @@
         Identifier
       </dt>
       <dd class="col-9">
-        <%= @membership.user ? @membership.user.name : @membership.invitation_email %>
+        <%= @member.user ? @member.user.name : @member.invitation_email %>
       </dd>
       <dt class="col-3">
         Role
       </dt>
       <dd class="col-9">
-        <%= Membership.human_attribute_name "role.#{@membership.role}" %>
+        <%= Member.human_attribute_name "role.#{@member.role}" %>
       </dd>
       <dt class="col-3">
         Status
       </dt>
       <dd class="col-9">
-        <%= Membership.human_attribute_name "status.#{@membership.status}" %>
-        <% if @membership.invitation_exipred? %>
+        <%= Member.human_attribute_name "status.#{@member.status}" %>
+        <% if @member.invitation_exipred? %>
           <span class="text--failed">(Invitation Expired)</span>
         <% end %>
       </dd>
-      <% if @membership.invited_at %>
+      <% if @member.invited_at %>
         <dt class="col-3">
           Invited at
         </dt>
         <dd class="col-9">
-          <%= local_time @membership.invited_at, format: :short %>
+          <%= local_time @member.invited_at, format: :short %>
         </dd>
       <% end %>
-      <% if @membership.actived_at %>
+      <% if @member.actived_at %>
         <dt class="col-3">
           Accepted at
         </dt>
         <dd class="col-9">
-          <%= local_time @membership.actived_at, format: :short %>
+          <%= local_time @member.actived_at, format: :short %>
         </dd>
       <% end %>
     </dl>

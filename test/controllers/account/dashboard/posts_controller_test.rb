@@ -19,9 +19,9 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
   test "should get org account posts" do
     organization = create(:organization)
     nobody = create(:user)
-    user = create(:membership, organization: organization).user
-    admin = create(:membership, organization: organization, role: 'admin').user
-    owner = create(:membership, organization: organization, role: 'owner').user
+    user = create(:member, organization: organization).user
+    admin = create(:member, organization: organization, role: 'admin').user
+    owner = create(:member, organization: organization, role: 'owner').user
     create(:post, account: organization.account, author_users: [user])
     create(:post, account: organization.account)
 
@@ -54,7 +54,7 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
 
   test "should get new page as org" do
     organization = create(:organization)
-    user = create(:membership, organization: organization).user
+    user = create(:member, organization: organization).user
 
     sign_in user
     get new_account_dashboard_post_path(organization.account)
@@ -75,7 +75,7 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create post as member" do
     organization = create(:organization)
-    user = create(:membership, organization: organization).user
+    user = create(:member, organization: organization).user
 
     sign_in user
     assert_difference "organization.account.posts.count" do
@@ -98,9 +98,9 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
   test "should get edit post as author admin" do
     organization = create(:organization)
     user = create(:user)
-    member = create(:membership, organization: organization).user
-    admin = create(:membership, organization: organization, role: 'admin').user
-    owner = create(:membership, organization: organization, role: 'owner').user
+    member = create(:member, organization: organization).user
+    admin = create(:member, organization: organization, role: 'admin').user
+    owner = create(:member, organization: organization, role: 'owner').user
 
     member_post = create(:post, account: organization.account, author_users: [member])
     other_post = create(:post, account: organization.account)
@@ -130,9 +130,9 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
   test "should update post as author or admin" do
     organization = create(:organization)
     user = create(:user)
-    member = create(:membership, organization: organization).user
-    admin = create(:membership, organization: organization, role: 'admin').user
-    owner = create(:membership, organization: organization, role: 'owner').user
+    member = create(:member, organization: organization).user
+    admin = create(:member, organization: organization, role: 'admin').user
+    owner = create(:member, organization: organization, role: 'owner').user
 
     member_post = create(:post, account: organization.account, author_users: [member])
     other_post = create(:post, account: organization.account)

@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 2021_06_18_114817) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "memberships", force: :cascade do |t|
+  create_table "members", force: :cascade do |t|
     t.bigint "organization_id"
     t.bigint "user_id"
     t.integer "role", default: 2
@@ -134,10 +134,10 @@ ActiveRecord::Schema.define(version: 2021_06_18_114817) do
     t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["inviter_id"], name: "index_memberships_on_inviter_id"
-    t.index ["organization_id", "user_id"], name: "index_memberships_on_organization_id_and_user_id", unique: true
-    t.index ["organization_id"], name: "index_memberships_on_organization_id"
-    t.index ["user_id"], name: "index_memberships_on_user_id"
+    t.index ["inviter_id"], name: "index_members_on_inviter_id"
+    t.index ["organization_id", "user_id"], name: "index_members_on_organization_id_and_user_id", unique: true
+    t.index ["organization_id"], name: "index_members_on_organization_id"
+    t.index ["user_id"], name: "index_members_on_user_id"
   end
 
   create_table "notifications", force: :cascade do |t|

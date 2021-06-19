@@ -2,9 +2,9 @@ class User < ApplicationRecord
   has_one :account, as: :owner, autosave: true
   has_many :authors
   has_many :author_posts, through: :authors, source: :post
-  has_many :memberships
-  has_many :organizations, through: :memberships
-  has_many :manage_accounts, -> { where(memberships: { role: Membership.roles.values_at(:admin, :owner) })}, through: :organizations, source: :account
+  has_many :members
+  has_many :organizations, through: :members
+  has_many :manage_accounts, -> { where(members: { role: Member.roles.values_at(:admin, :owner) })}, through: :organizations, source: :account
   has_many :member_accounts, through: :organizations, source: :account
   has_many :attachments
   has_many :likes

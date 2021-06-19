@@ -12,16 +12,16 @@
             You’ve been invited to the <%= @account.name %> organization.
           </h3>
           <p class="text--secondary">
-            Invited by @<%= @membership.inviter.account.name %>
+            Invited by @<%= @member.inviter.account.name %>
           </p>
           <% if current_user %>
-            <% if @account.owner.memberships.active.where(user: current_user).exists? %>
+            <% if @account.owner.members.active.where(user: current_user).exists? %>
               <p>
                 You are already a member of @<%= @account.name %>.
-                <a href="<%= sign_in_path(return_to: account_invitation_path(invitation_token: @membership.invitation_token)) %>">Sign in</a> as another user if you want to join as another user.
+                <a href="<%= sign_in_path(return_to: account_invitation_path(invitation_token: @member.invitation_token)) %>">Sign in</a> as another user if you want to join as another user.
               </p>
             <% else %>
-              <%= form_with url: account_invitation_path(invitation_token: @membership.invitation_token), method: 'patch' do %>
+              <%= form_with url: account_invitation_path(invitation_token: @member.invitation_token), method: 'patch' do %>
                 <button type="submit" class="button button--contained button--primary">
                   Join @<%= @account.owner.name %>
                 </button>
@@ -29,10 +29,10 @@
             <% end %>
           <% else %>
             <p>
-              <a href="<%= sign_up_path(return_to: account_invitation_path(invitation_token: @membership.invitation_token)) %>">New to GeekNote? Sign up.</a>
+              <a href="<%= sign_up_path(return_to: account_invitation_path(invitation_token: @member.invitation_token)) %>">New to GeekNote? Sign up.</a>
             </p>
             <p>
-              <a href="<%= sign_in_path(return_to: account_invitation_path(invitation_token: @membership.invitation_token)) %>">Already have account? Sign in.</a>
+              <a href="<%= sign_in_path(return_to: account_invitation_path(invitation_token: @member.invitation_token)) %>">Already have account? Sign in.</a>
             </p>
           <% end %>
         </div>

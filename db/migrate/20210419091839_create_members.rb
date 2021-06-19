@@ -1,6 +1,6 @@
-class CreateMemberships < ActiveRecord::Migration[6.1]
+class CreateMembers < ActiveRecord::Migration[6.1]
   def change
-    create_table :memberships do |t|
+    create_table :members do |t|
       t.belongs_to :organization
       t.belongs_to :user
       t.integer :role, default: 2

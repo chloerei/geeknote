@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :membership do
+  factory :member do
     organization
     user
     status { 'active' }

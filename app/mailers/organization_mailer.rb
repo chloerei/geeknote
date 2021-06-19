@@ -1,9 +1,9 @@
 class OrganizationMailer < ApplicationMailer
   def invitation_email
-    @membership = params[:membership]
+    @member = params[:member]
 
-    email = @membership.user ? @membership.user.email : @membership.invitation_email
+    email = @member.user ? @member.user.email : @member.invitation_email
 
-    mail(to: email, subject: "@#{@membership.inviter.account.name} has invite you to join @#{@membership.organization.account.name} organization")
+    mail(to: email, subject: "@#{@member.inviter.account.name} has invite you to join @#{@member.organization.account.name} organization")
   end
 end

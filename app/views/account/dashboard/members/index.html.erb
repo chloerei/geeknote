@@ -5,7 +5,7 @@
         Members
       </div>
       <div class="toolbar__action">
-        <a href="<%= new_account_dashboard_membership_path %>" class="button button--contained button--primary button--last">
+        <a href="<%= new_account_dashboard_member_path %>" class="button button--contained button--primary button--last">
           Invite member
         </a>
       </div>
@@ -23,21 +23,21 @@
             </tr>
           </thead>
           <tbody>
-            <% @memberships.each do |membership| %>
+            <% @members.each do |member| %>
               <tr>
                 <td class="table__cell--title">
-                  <a href="<%= account_dashboard_membership_path(@account, membership) %>" class="table__row-link"></a>
-                  <%= membership.user.name %>
+                  <a href="<%= account_dashboard_member_path(@account, member) %>" class="table__row-link"></a>
+                  <%= member.user.name %>
                 </td>
                 <td class="table__cell--attribute">
-                  <%= Membership.human_attribute_name "role.#{membership.role}" %>
+                  <%= Member.human_attribute_name "role.#{member.role}" %>
                 </td>
               </tr>
             <% end %>
           </tbody>
         </table>
       </div>
-      <% if @pending_memberships.any? %>
+      <% if @pending_members.any? %>
         <div class="subheader">
           Pending
         </div>
@@ -50,18 +50,18 @@
               </tr>
             </thead>
             <tbody>
-              <% @pending_memberships.each do |membership| %>
+              <% @pending_members.each do |member| %>
                 <tr>
                   <td class="table__cell--title">
-                    <a href="<%= account_dashboard_membership_path(@account, membership) %>" class="table__row-link"></a>
-                    <% if membership.user %>
-                      <%= membership.user.name %>
+                    <a href="<%= account_dashboard_member_path(@account, member) %>" class="table__row-link"></a>
+                    <% if member.user %>
+                      <%= member.user.name %>
                     <% else %>
-                      <%= membership.invitation_email %>
+                      <%= member.invitation_email %>
                     <% end %>
                   </td>
                   <td class="table__cell--attribute">
-                    <%= Membership.human_attribute_name "role.#{membership.role}" %>
+                    <%= Member.human_attribute_name "role.#{member.role}" %>
                   </td>
                 </tr>
               <% end %>

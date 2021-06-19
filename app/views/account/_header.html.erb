@@ -29,7 +29,7 @@
                   <% if @account.user? %>
                     Owner
                   <% else %>
-                    <%= @account.owner.memberships.find_by(user: current_user).role %>
+                    <%= @account.owner.members.find_by(user: current_user).role %>
                   <% end %>
                 </div>
                 <div class="button__icon">

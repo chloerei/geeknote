@@ -1,10 +1,10 @@
-<%= form_with model: @membership, url: [@account, :dashboard, @membership], builder: CustomFormBuilder, class: 'form', id: 'membership-form' do |form| %>
+<%= form_with model: @member, url: [@account, :dashboard, @member], builder: CustomFormBuilder, class: 'form', id: 'member-form' do |form| %>
   <div class="form__field">
-    <% if @membership.new_record? %>
+    <% if @member.new_record? %>
       <%= form.text_field :identifier %>
     <% else %>
       <label class="label">Identifier</label>
-      <%= @membership.user ? @membership.user.name : @membership.invitation_email %>
+      <%= @member.user ? @member.user.name : @member.invitation_email %>
     <% end %>
   </div>
     <div class="form__field">
@@ -12,7 +12,7 @@
       <% if current_role == 'owner' %>
         <div class="form__control">
           <%= form.radio_button :role, :owner %>
-          <label for="membership_role_owner" class="form__control__label">
+          <label for="member_role_owner" class="form__control__label">
             <div class="primary-text">
               Owner
             </div>
@@ -23,7 +23,7 @@
         </div>
         <div class="form__control">
           <%= form.radio_button :role, :admin %>
-          <label for="membership_role_admin" class="form__control__label">
+          <label for="member_role_admin" class="form__control__label">
             <div class="primary-text">
               Admin
             </div>
@@ -35,7 +35,7 @@
       <% end %>
       <div class="form__control">
         <%= form.radio_button :role, :member %>
-        <label for="membership_role_member" class="form__control__label">
+        <label for="member_role_member" class="form__control__label">
           <div class="primary-text">
             Member
           </div>
@@ -46,7 +46,7 @@
       </div>
     </div>
   <button type="submit" class="button button--contained button--primary">
-    <% if @membership.new_record? %>
+    <% if @member.new_record? %>
       Send Invitation
     <% else %>
       Save changes

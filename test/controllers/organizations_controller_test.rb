@@ -4,7 +4,7 @@ class OrganizationsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     user = create(:user)
     organization = create(:organization)
-    create(:membership, user: user, organization: organization)
+    create(:member, user: user, organization: organization)
 
     sign_in user
     get organizations_path
@@ -26,7 +26,7 @@ class OrganizationsControllerTest < ActionDispatch::IntegrationTest
     assert_difference "Organization.count" do
       post organizations_path, params: { organization: { account_attributes: { name: 'neworg' }, name: 'org' }}
     end
-    membership = user.memberships.last
-    assert membership.owner?
+    member = user.members.last
+    assert member.owner?
   end
 end
