@@ -98,5 +98,10 @@
         Likes
       </a>
     <% end %>
+    <% if @account.organization? %>
+      <a href="<%= account_members_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'members' %>">
+        Members
+      </a>
+    <% end %>
   </div>
 </div>

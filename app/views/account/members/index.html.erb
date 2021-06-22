@@ -1,0 +1,30 @@
+<%= render 'account/header' %>
+
+<div class="container container--medium">
+  <div class="list">
+    <% @members.each do |member| %>
+      <div class="list__item position-relative">
+        <div class="list__avatar">
+          <div class="avatar">
+            <%= avatar_image_tag member.user.avatar %>
+          </div>
+        </div>
+        <div class="list__content">
+          <a href="<%= account_root_path(member.user.account) %>" class="link-text text-primary text-bold stretched-link">
+            <%= member.user.name %>
+          </a>
+          <div class="text-secondary">
+            <%= member.user.bio %>
+          </div>
+        </div>
+        <div class="list__action">
+          <% if member.user != current_user %>
+            <%= render 'account/follows/button', account: member.user.account %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= paginate @members %>
+</div>
