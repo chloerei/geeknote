@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 2021_06_18_114817) do
   create_table "members", force: :cascade do |t|
     t.bigint "organization_id"
     t.bigint "user_id"
-    t.integer "role", default: 2
+    t.integer "role"
     t.bigint "inviter_id"
     t.citext "invitation_email"
     t.string "invitation_token"

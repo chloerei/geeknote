@@ -7,7 +7,7 @@
   <div class="toolbar__title">
     Member
   </div>
-  <% if current_role.in? %w(owner admin) %>
+  <% if can_manage?(@member) %>
     <div class="toolbar">
       <div class="toolbar__action">
         <a href="<%= edit_account_dashboard_member_path(@account, @member) %>" class="button button--text">
@@ -33,20 +33,18 @@
           <% end %>
         </div>
       <% end %>
-      <% if current_role == 'owner' || @member.member? %>
-        <div class="toolbar__action">
-          <%= form_with url: account_dashboard_member_path(@account, @member), method: 'delete' do %>
-            <button type="submit" class="button button--text" data-confirm="Are you sure remove this member?">
-              <div class="button__icon">
-                <span class="material-icons">person_remove</span>
-              </div>
-              <div class="button__text">
-                Remove
-              </div>
-            </button>
-          <% end %>
-        </div>
-      <% end %>
+      <div class="toolbar__action">
+        <%= form_with url: account_dashboard_member_path(@account, @member), method: 'delete' do %>
+          <button type="submit" class="button button--text" data-confirm="Are you sure remove this member?">
+            <div class="button__icon">
+              <span class="material-icons">person_remove</span>
+            </div>
+            <div class="button__text">
+              Remove
+            </div>
+          </button>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>

@@ -1,6 +1,13 @@
 class Account::Dashboard::MembersController < Account::Dashboard::BaseController
   before_action :require_organization_account
-  before_action :require_account_admin, except: [:index, :show]
+  helper_method :can_manage?
+
+  before_action do
+    unless current_member.has_permission?(:manage_member)
+      render_not_found
+    end
+  end
+
   before_action :set_member, only: [:show, :edit, :update, :destroy, :resend]
 
   def index
@@ -9,13 +16,13 @@ class Account::Dashboard::MembersController < Account::Dashboard::BaseController
   end
 
   def new
-    @member = Member.new role: :member
+    @member = Member.new role: :contributor
   end
 
   def create
     @member = @account.owner.members.new new_member_params.merge(inviter: current_user)
 
-    if @member.save
+    if can_manage?(@member) && @member.save
       @member.touch(:invited_at)
       OrganizationMailer.with(member: @member).invitation_email.deliver_later
       redirect_to account_dashboard_member_path(@account, @member), notice: "Invitation send"
@@ -31,7 +38,11 @@ class Account::Dashboard::MembersController < Account::Dashboard::BaseController
   end
 
   def update
-    if @member.update edit_member_params
+    if can_manage?(@member)
+      @member.assign_attributes(edit_member_params)
+    end
+
+    if can_manage?(@member) && @member.save
       redirect_to account_dashboard_member_path(@account, @member), notice: "Member updated"
     else
       render turbo_stream: turbo_stream.replace('member-form', partial: 'form')
@@ -41,7 +52,7 @@ class Account::Dashboard::MembersController < Account::Dashboard::BaseController
   # admin can remove member
   # owner can remove owner and admin
   def destroy
-    if current_role == 'owner' || @member.member?
+    if can_manage?(@member)
       @member.destroy
     end
     redirect_to account_dashboard_members_path
@@ -58,21 +69,24 @@ class Account::Dashboard::MembersController < Account::Dashboard::BaseController
 
   private
 
-  # owner can add all roles
-  # admin can add member role
   def new_member_params
-    params.require(:member).permit(:identifier, :role).delete_if do |key, value|
-      if key == 'role' && current_role != 'owner'
-        !value.in?(%w(member))
-      end
-    end
+    params.require(:member).permit(:identifier, :role)
   end
 
   def edit_member_params
-    params.require(:member).permit(:role).delete_if do |key, value|
-      if key == 'role' && current_role != 'owner'
-        !value.in?(%w(member))
-      end
+    params.require(:member).permit(:role)
+  end
+
+  def can_manage?(member)
+    case current_member.role
+    when 'owner'
+      true
+    when 'admin'
+      member.role.in? %w(editor writer contributor)
+    when 'editor'
+      member.role.in? %w(writer contributor)
+    else
+      false
     end
   end
 

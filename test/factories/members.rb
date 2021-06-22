@@ -3,7 +3,6 @@ FactoryBot.define do
     organization
     user
     status { 'active' }
-    role { 'member' }
 
     factory :invitation do
       user { nil }

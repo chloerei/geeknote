@@ -4,10 +4,10 @@ class Account::Dashboard::Posts::BaseController < Account::Dashboard::BaseContro
   private
 
   def scoped_posts
-    if current_role.in? %w(owner admin)
+    if current_member.has_permission?(:edit_other_post)
       @account.posts
     else
-      @account.posts.where(author: current_user)
+      @account.posts.joins(:authors).where(authors: { user: current_user })
     end
   end
 

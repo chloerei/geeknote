@@ -21,16 +21,12 @@
             <%= render 'account/follows/button', account: @account %>
           </div>
         <% end %>
-        <% if @account.has_member?(current_user) %>
+        <% if current_member %>
           <div class="toolbar__action">
             <div class="dropdown" data-controller="dropdown">
               <button type="button" class="button button--text" data-action="dropdown#toggle">
                 <div class="button__text">
-                  <% if @account.user? %>
-                    Owner
-                  <% else %>
-                    <%= @account.owner.members.find_by(user: current_user).role %>
-                  <% end %>
+                  <%= current_member.role %>
                 </div>
                 <div class="button__icon">
                   <span class="material-icons">expand_more</span>
@@ -45,14 +41,16 @@
                     New post
                   </div>
                 </a>
-                <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">edit</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    Edit profile
-                  </div>
-                </a>
+                <% if current_member.has_permission?(:edit_account_settings) %>
+                  <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="dropdown__item">
+                    <div class="dropdown__item__icon">
+                      <span class="material-icons">edit</span>
+                    </div>
+                    <div class="dropdown__item__text">
+                      Edit profile
+                    </div>
+                  </a>
+                <% end %>
                 <a href="<%= account_dashboard_root_path(@account) %>" class="dropdown__item">
                   <div class="dropdown__item__icon">
                     <span class="material-icons">dashboard</span>

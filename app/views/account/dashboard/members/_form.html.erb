@@ -7,44 +7,68 @@
       <%= @member.user ? @member.user.name : @member.invitation_email %>
     <% end %>
   </div>
-    <div class="form__field">
-      <label class="label">Role</label>
-      <% if current_role == 'owner' %>
-        <div class="form__control">
-          <%= form.radio_button :role, :owner %>
-          <label for="member_role_owner" class="form__control__label">
-            <div class="primary-text">
-              Owner
-            </div>
-            <div class="secondary-text">
-              Has all permissions on this organization.
-            </div>
-          </label>
+  <div class="form__field">
+    <label class="label">Role</label>
+    <div class="form__control">
+      <%= form.radio_button :role, :contributor %>
+      <label for="member_role_contributor" class="form__control__label">
+        <div class="primary-text">
+          Contributor
         </div>
-        <div class="form__control">
-          <%= form.radio_button :role, :admin %>
-          <label for="member_role_admin" class="form__control__label">
-            <div class="primary-text">
-              Admin
-            </div>
-            <div class="secondary-text">
-              Has most permissions except for adding admin on this organization.
-            </div>
-          </label>
+        <div class="secondary-text">
+          Can create and edit their own posts, but cannot publish. An Editor needs to publish for them.
         </div>
-      <% end %>
+      </label>
+    </div>
+    <div class="form__control">
+      <%= form.radio_button :role, :writer %>
+      <label for="member_role_writer" class="form__control__label">
+        <div class="primary-text">
+          Writer
+        </div>
+        <div class="secondary-text">
+          A trusted user who can create, edit and publish their own posts, but can’t modify others.
+        </div>
+      </label>
+    </div>
+    <% if Member.roles[current_member.role] < Member.roles['editor'] %>
       <div class="form__control">
-        <%= form.radio_button :role, :member %>
-        <label for="member_role_member" class="form__control__label">
+        <%= form.radio_button :role, :editor %>
+        <label for="member_role_editor" class="form__control__label">
           <div class="primary-text">
-            Member
+            Editor
           </div>
           <div class="secondary-text">
-            Can publish and modify their own posts.
+            Can invite and manage other Writers and Contributors, as well as edit and publish any posts on this account.
           </div>
         </label>
       </div>
-    </div>
+    <% end %>
+    <% if current_member.owner? %>
+      <div class="form__control">
+        <%= form.radio_button :role, :admin %>
+        <label for="member_role_admin" class="form__control__label">
+          <div class="primary-text">
+            Admin
+          </div>
+          <div class="secondary-text">
+            Trusted staff user who should be able to manage all content and users, as well as account settings and options.
+          </div>
+        </label>
+      </div>
+      <div class="form__control">
+        <%= form.radio_button :role, :owner %>
+        <label for="member_role_owner" class="form__control__label">
+          <div class="primary-text">
+            Owner
+          </div>
+          <div class="secondary-text">
+            Has all permissions on this account.
+          </div>
+        </label>
+      </div>
+    <% end %>
+  </div>
   <button type="submit" class="button button--contained button--primary">
     <% if @member.new_record? %>
       Send Invitation

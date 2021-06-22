@@ -4,11 +4,18 @@
       <div class="toolbar__title">
         Members
       </div>
-      <div class="toolbar__action">
-        <a href="<%= new_account_dashboard_member_path %>" class="button button--contained button--primary button--last">
-          Invite member
-        </a>
-      </div>
+      <% if current_member.has_permission?(:invite_member) %>
+        <div class="toolbar__action">
+          <a href="<%= new_account_dashboard_member_path %>" class="button button--text button--primary">
+            <div class="button__icon">
+              <span class="material-icons">person_add</span>
+            </div>
+            <div class="button__text">
+              Invite member
+            </div>
+          </a>
+        </div>
+      <% end %>
     </div>
   </div>
 

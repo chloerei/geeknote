@@ -7,8 +7,21 @@ class Member < ApplicationRecord
   enum role: {
     owner: 0,
     admin: 1,
-    member: 2
+    editor: 2,
+    writer: 3,
+    contributor: 4
   }
+
+  PERMISSIONS = Hash.new([])
+  PERMISSIONS['contributor'] = []
+  PERMISSIONS['writer'] = PERMISSIONS['contributor'] + [:publish_own_post]
+  PERMISSIONS['editor'] = PERMISSIONS['writer'] + [:edit_other_post, :publish_other_post, :manage_member]
+  PERMISSIONS['admin'] = PERMISSIONS['editor'] + [:edit_account_settings]
+  PERMISSIONS['owner'] = PERMISSIONS['admin'] + []
+
+  def has_permission?(name)
+    PERMISSIONS[role].include?(name)
+  end
 
   enum status: {
     pending: 0,
@@ -64,4 +77,5 @@ class Member < ApplicationRecord
   def invitation_exipred?
     pending? && invited_at && invited_at < 7.days.ago
   end
+
 end

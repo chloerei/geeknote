@@ -19,27 +19,21 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
   test "should get org account posts" do
     organization = create(:organization)
     nobody = create(:user)
-    user = create(:member, organization: organization).user
-    admin = create(:member, organization: organization, role: 'admin').user
-    owner = create(:member, organization: organization, role: 'owner').user
-    create(:post, account: organization.account, author_users: [user])
+    writer = create(:member, organization: organization, role: 'writer').user
+    editor = create(:member, organization: organization, role: 'editor').user
+    create(:post, account: organization.account, author_users: [writer])
     create(:post, account: organization.account)
 
     sign_in nobody
     get account_dashboard_posts_url(organization.account)
     assert_response :not_found
 
-    sign_in user
+    sign_in writer
     get account_dashboard_posts_url(organization.account)
     assert_response :success
     assert_select 'tbody tr', 1
 
-    sign_in admin
-    get account_dashboard_posts_url(organization.account)
-    assert_response :success
-    assert_select 'tbody tr', 2
-
-    sign_in owner
+    sign_in editor
     get account_dashboard_posts_url(organization.account)
     assert_response :success
     assert_select 'tbody tr', 2
@@ -54,7 +48,7 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
 
   test "should get new page as org" do
     organization = create(:organization)
-    user = create(:member, organization: organization).user
+    user = create(:member, organization: organization, role: 'writer').user
 
     sign_in user
     get new_account_dashboard_post_path(organization.account)
@@ -95,67 +89,61 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get edit post as author admin" do
+  test "should get edit post as author or editor" do
     organization = create(:organization)
     user = create(:user)
-    member = create(:member, organization: organization).user
-    admin = create(:member, organization: organization, role: 'admin').user
-    owner = create(:member, organization: organization, role: 'owner').user
+    writer = create(:member, organization: organization, role: 'writer').user
+    editor = create(:member, organization: organization, role: 'editor').user
 
-    member_post = create(:post, account: organization.account, author_users: [member])
+    writer_post = create(:post, account: organization.account, author_users: [writer])
     other_post = create(:post, account: organization.account)
 
-    get edit_account_dashboard_post_path(organization.account, member_post)
+    get edit_account_dashboard_post_path(organization.account, writer_post)
     assert_response :redirect
 
     sign_in user
-    get edit_account_dashboard_post_path(organization.account, member_post)
+    get edit_account_dashboard_post_path(organization.account, writer_post)
     assert_response :not_found
 
-    sign_in member
-    get edit_account_dashboard_post_path(organization.account, member_post)
+    sign_in writer
+    get edit_account_dashboard_post_path(organization.account, writer_post)
     assert_response :success
     get edit_account_dashboard_post_path(organization.account, other_post)
     assert_response :not_found
 
-    sign_in admin
-    get edit_account_dashboard_post_path(organization.account, other_post)
+    sign_in editor
+    get edit_account_dashboard_post_path(organization.account, writer_post)
     assert_response :success
-
-    sign_in owner
     get edit_account_dashboard_post_path(organization.account, other_post)
     assert_response :success
   end
 
-  test "should update post as author or admin" do
+  test "should update post as author or editor" do
     organization = create(:organization)
-    user = create(:user)
-    member = create(:member, organization: organization).user
-    admin = create(:member, organization: organization, role: 'admin').user
-    owner = create(:member, organization: organization, role: 'owner').user
+    nobody = create(:user)
+    writer = create(:member, organization: organization, role: 'writer').user
+    editor = create(:member, organization: organization, role: 'editor').user
 
-    member_post = create(:post, account: organization.account, author_users: [member])
+    writer_post = create(:post, account: organization.account, author_users: [writer])
     other_post = create(:post, account: organization.account)
 
-    patch account_dashboard_post_path(organization.account, member_post), params: { post: { title: 'change by none' }}, as: :turbo_stream
+    patch account_dashboard_post_path(organization.account, writer_post), params: { post: { title: 'change by none' }}, as: :turbo_stream
     assert_response :redirect
 
-    sign_in user
-    patch account_dashboard_post_path(organization.account, member_post), params: { post: { title: 'change by user' }}, as: :turbo_stream
+    sign_in nobody
+    patch account_dashboard_post_path(organization.account, writer_post), params: { post: { title: 'change by nobody' }}, as: :turbo_stream
     assert_response :not_found
 
-    sign_in member
-    patch account_dashboard_post_path(organization.account, member_post), params: { post: { title: 'change by member' }}, as: :turbo_stream
+    sign_in writer
+    patch account_dashboard_post_path(organization.account, writer_post), params: { post: { title: 'change by writer' }}, as: :turbo_stream
     assert_response :success
-    patch account_dashboard_post_path(organization.account, other_post), params: { post: { title: 'change by member' }}, as: :turbo_stream
+    patch account_dashboard_post_path(organization.account, other_post), params: { post: { title: 'change by writer' }}, as: :turbo_stream
     assert_response :not_found
 
-    sign_in admin
-    patch account_dashboard_post_path(organization.account, other_post), params: { post: { title: 'change by admin' }}, as: :turbo_stream
+    sign_in editor
+    patch account_dashboard_post_path(organization.account, writer_post), params: { post: { title: 'change by editor' }}, as: :turbo_stream
     assert_response :success
-
-    sign_in owner
-    patch account_dashboard_post_path(organization.account, other_post), params: { post: { title: 'change by owner' }}, as: :turbo_stream
+    patch account_dashboard_post_path(organization.account, other_post), params: { post: { title: 'change by editor' }}, as: :turbo_stream
     assert_response :success
   end
 end

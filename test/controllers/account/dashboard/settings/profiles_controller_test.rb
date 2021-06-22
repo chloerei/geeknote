@@ -18,7 +18,7 @@ class Account::Dashboard::Settings::ProfilesControllerTest < ActionDispatch::Int
     get account_dashboard_settings_profile_path(organization.account)
     assert_response :redirect
 
-    sign_in create(:member, organization: organization, role: 'member').user
+    sign_in create(:member, organization: organization, role: 'editor').user
     get account_dashboard_settings_profile_path(organization.account)
     assert_response :not_found
 
@@ -46,7 +46,7 @@ class Account::Dashboard::Settings::ProfilesControllerTest < ActionDispatch::Int
     patch account_dashboard_settings_profile_path(organization.account), params: { organization: { name: 'changed' }}
     assert_response :redirect
 
-    sign_in create(:member, organization: organization, role: 'member').user
+    sign_in create(:member, organization: organization, role: 'editor').user
     patch account_dashboard_settings_profile_path(organization.account), params: { organization: { name: 'changed' }}
     assert_response :not_found
 
