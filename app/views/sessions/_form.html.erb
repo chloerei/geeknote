@@ -1,6 +1,6 @@
 <%= form_with url: sessions_path, builder: CustomFormBuilder, html: { class: 'form', id: 'sign-in-form' } do |form| %>
   <div class="form__field">
-    <%= form.text_field :email, label: t('common.email') %>
+    <%= form.text_field :email, value: params[:email], label: t('common.email') %>
   </div>
   <div class="form__field">
     <%= form.password_field :password, label: t('common.password') %>

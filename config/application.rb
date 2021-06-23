@@ -51,5 +51,9 @@ module Community
       generate.assets false
       generate.view_specs false
     end
+
+    config.action_view.field_error_proc = Proc.new do |html_tag|
+      html_tag.html_safe
+    end
   end
 end
