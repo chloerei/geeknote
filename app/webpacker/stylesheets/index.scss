@@ -602,3 +602,7 @@ label.list__item {
 .pagination .button--active {
   color: var(--text-secondary-color);
 }
+
+input:-webkit-autofill {
+  box-shadow: inset 0 0 0 1000px white;
+}
