@@ -5,7 +5,7 @@
     </div>
     <div class="col-9">
       <div class="padding">
-        <h3 class="margin-top-0">Account</h3>
+        <h3 class="margin-top-0"><%= t 'common.account' %></h3>
 
         <div class="margin-bottom">
           <a href="<%= account_dashboard_settings_profile_path(current_user.account) %>" class="button button--text">
@@ -13,7 +13,7 @@
               <span class="material-icons">edit</span>
             </div>
             <div class="button__text">
-              Edit profile
+              <%= t 'common.edit_profile' %>
             </div>
           </a>
         </div>

@@ -7,8 +7,8 @@
     </div>
     <div class="toolbar__title">
       <%= @account.owner.name %>
-      <span class="post-editor__save-status" data-post-editor-target="saveStatus" data-message-status="<%= @post.status %>" data-message-saving="saving..." data-message-save-failed="save faild!">
-        <%= @post.status %>
+      <span class="post-editor__save-status" data-post-editor-target="saveStatus" data-message-status='<%= Post.human_attribute_name("status.#{@post.status}") %>' data-message-saving="<%= t 'common.saving' %>" data-message-save-failed="<%= t 'common.save_failed' %>">
+        <%= Post.human_attribute_name("status.#{@post.status}") %>
       </span>
     </div>
     <% if !@post.new_record? %>
@@ -21,7 +21,7 @@
                 <span class="material-icons">restore</span>
               </div>
               <div class="button__label">
-                Restore
+                <%= t 'common.restore' %>
               </div>
             </button>
           <% end %>
@@ -33,7 +33,7 @@
                 <span class="material-icons">delete_forever</span>
               </div>
               <div class="button__label">
-                Delete permanently
+                <%= t 'common.delete_permanently' %>
               </div>
             </button>
           <% end %>
@@ -41,7 +41,7 @@
       <% else %>
         <div class="toolbar__action">
           <button type="submit" class="button button--text" name="submit" value="preview" form="post-form">
-            Preview
+            <%= t 'common.preview' %>
           </button>
         </div>
         <div class="toolbar__action">

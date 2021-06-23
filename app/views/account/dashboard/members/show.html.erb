@@ -5,7 +5,7 @@
     </a>
   </div>
   <div class="toolbar__title">
-    Member
+    <%= t 'common.members' %>
   </div>
   <% if can_manage?(@member) %>
     <div class="toolbar">
@@ -15,7 +15,7 @@
             <span class="material-icons">edit</span>
           </div>
           <div class="button__text">
-            Edit
+            <%= t 'common.edit' %>
           </div>
         </a>
       </div>
@@ -27,7 +27,7 @@
                 <span class="material-icons">send</span>
               </div>
               <div class="button__text">
-                Resend Invitation
+                <%= t 'common.resend_invitation' %>
               </div>
             </button>
           <% end %>
@@ -40,7 +40,7 @@
               <span class="material-icons">person_remove</span>
             </div>
             <div class="button__text">
-              Remove
+              <%= t 'common.remove' %>
             </div>
           </button>
         <% end %>
@@ -53,19 +53,19 @@
   <div class="padding">
     <dl class="row">
       <dt class="col-3">
-        Identifier
+        <%= Member.human_attribute_name 'identifier' %>
       </dt>
       <dd class="col-9">
         <%= @member.user ? @member.user.name : @member.invitation_email %>
       </dd>
       <dt class="col-3">
-        Role
+        <%= Member.human_attribute_name 'role' %>
       </dt>
       <dd class="col-9">
         <%= Member.human_attribute_name "role.#{@member.role}" %>
       </dd>
       <dt class="col-3">
-        Status
+        <%= Member.human_attribute_name 'status' %>
       </dt>
       <dd class="col-9">
         <%= Member.human_attribute_name "status.#{@member.status}" %>
@@ -75,7 +75,7 @@
       </dd>
       <% if @member.invited_at %>
         <dt class="col-3">
-          Invited at
+          <%= Member.human_attribute_name 'invited_at' %>
         </dt>
         <dd class="col-9">
           <%= local_time @member.invited_at, format: :short %>
@@ -83,7 +83,7 @@
       <% end %>
       <% if @member.actived_at %>
         <dt class="col-3">
-          Accepted at
+          <%= Member.human_attribute_name 'accepted_at' %>
         </dt>
         <dd class="col-9">
           <%= local_time @member.actived_at, format: :short %>

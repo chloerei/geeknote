@@ -33,7 +33,6 @@ Rails.application.routes.draw do
   namespace :settings do
     resource :account
     resource :password
-    resources :organizations, only: [:index]
   end
 
   scope '/:account_name', module: 'account', as: :account do

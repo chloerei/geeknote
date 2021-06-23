@@ -3,20 +3,20 @@
     <% if @member.new_record? %>
       <%= form.text_field :identifier %>
     <% else %>
-      <label class="label">Identifier</label>
+      <label class="label"><%= Member.human_attribute_name 'identifier' %></label>
       <%= @member.user ? @member.user.name : @member.invitation_email %>
     <% end %>
   </div>
   <div class="form__field">
-    <label class="label">Role</label>
+    <label class="label"><%= t 'common.role' %></label>
     <div class="form__control">
       <%= form.radio_button :role, :contributor %>
       <label for="member_role_contributor" class="form__control__label">
         <div class="primary-text">
-          Contributor
+          <%= Member.human_attribute_name "role.contributor" %>
         </div>
         <div class="secondary-text">
-          Can create and edit their own posts, but cannot publish. An Editor needs to publish for them.
+          <%= t '.role_contributor_description' %>
         </div>
       </label>
     </div>
@@ -24,10 +24,10 @@
       <%= form.radio_button :role, :writer %>
       <label for="member_role_writer" class="form__control__label">
         <div class="primary-text">
-          Writer
+          <%= Member.human_attribute_name "role.writer" %>
         </div>
         <div class="secondary-text">
-          A trusted user who can create, edit and publish their own posts, but can’t modify others.
+          <%= t '.role_writer_description' %>
         </div>
       </label>
     </div>
@@ -36,10 +36,10 @@
         <%= form.radio_button :role, :editor %>
         <label for="member_role_editor" class="form__control__label">
           <div class="primary-text">
-            Editor
+            <%= Member.human_attribute_name "role.editor" %>
           </div>
           <div class="secondary-text">
-            Can invite and manage other Writers and Contributors, as well as edit and publish any posts on this account.
+            <%= t '.role_editor_description' %>
           </div>
         </label>
       </div>
@@ -49,10 +49,10 @@
         <%= form.radio_button :role, :admin %>
         <label for="member_role_admin" class="form__control__label">
           <div class="primary-text">
-            Admin
+            <%= Member.human_attribute_name "role.admin" %>
           </div>
           <div class="secondary-text">
-            Trusted staff user who should be able to manage all content and users, as well as account settings and options.
+            <%= t '.role_admin_description' %>
           </div>
         </label>
       </div>
@@ -60,10 +60,10 @@
         <%= form.radio_button :role, :owner %>
         <label for="member_role_owner" class="form__control__label">
           <div class="primary-text">
-            Owner
+            <%= Member.human_attribute_name "role.owner" %>
           </div>
           <div class="secondary-text">
-            Has all permissions on this account.
+            <%= t '.role_owner_description' %>
           </div>
         </label>
       </div>
@@ -71,9 +71,9 @@
   </div>
   <button type="submit" class="button button--contained button--primary">
     <% if @member.new_record? %>
-      Send Invitation
+      <%= t 'common.send_invitation' %>
     <% else %>
-      Save changes
+      <%= t 'common.save_changes' %>
     <% end %>
   </button>
 <% end %>

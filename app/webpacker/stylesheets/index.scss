@@ -61,22 +61,24 @@
 }
 
 .button--text {
-  min-width: 0;
 }
 
-.button--text .button__icon {
-  margin-right: 0;
+.button--contained,
+.button--text {
+  .button__icon {
+    margin-right: 0;
 
-  &:first-child {
-    margin-right: 8px;
-  }
+    &:first-child {
+      margin-right: 8px;
+    }
 
-  &:last-child {
-    margin-left: 8px;
-  }
+    &:last-child {
+      margin-left: 8px;
+    }
 
-  .material-icons {
-    font-size: 18px;
+    .material-icons {
+      font-size: 18px;
+    }
   }
 }
 
@@ -433,7 +435,7 @@ label.list__item {
   display: none;
 }
 
-.button--icon.button--liked {
+.button--text.button--liked {
   color: #F44336;
 
   svg {
@@ -495,6 +497,7 @@ label.list__item {
 .tab__item {
   font-weight: bold;
   opacity: 0.5;
+  min-width: 90px;
 
   &:hover {
     opacity: 1;

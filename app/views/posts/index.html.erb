@@ -23,11 +23,11 @@
     <div class="col-3 padding-left">
       <% if !current_user %>
         <div class="subheader">
-          Join GeekNote
+          <%= t '.join_geeknote' %>
         </div>
         <div class="padding">
           <div class="text-primary margin-bottom">
-            GeekNote is a writting community for Geeks.
+            <%= t '.join_geeknote_description' %>
           </div>
           <div>
             <a href="<%= sign_up_path %>" class="button button--contained button--primary">
@@ -42,7 +42,7 @@
       <% end %>
 
       <div class="subheader">
-        Hot tags
+        <%= t '.hot_tags' %>
       </div>
       <div class="padding">
         <div class="flex flex-wrap">
@@ -59,7 +59,7 @@
 
       <% if current_user %>
         <div class="subheader">
-          Reading list
+          <%= t 'common.bookmarks' %>
         </div>
         <div class="posts">
           <% current_user.bookmarks.includes(:post).each do |bookmark| %>
@@ -77,7 +77,7 @@
         </div>
         <div class="padding-x">
           <a href="<%= bookmarks_path %>" class="link-text">
-            View all
+            <%= t 'common.view_all' %>
           </a>
         </div>
       <% end %>

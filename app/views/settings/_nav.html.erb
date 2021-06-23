@@ -1,11 +1,8 @@
 <div class="nav">
   <a href="<%= settings_account_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'accounts' %>">
-    Account
+    <%= t 'common.account' %>
   </a>
   <a href="<%= settings_password_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'passwords' %>">
-    Password
-  </a>
-  <a href="<%= settings_organizations_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'organizations' %>">
-    Organizations
+    <%= t 'common.change_password' %>
   </a>
 </div>

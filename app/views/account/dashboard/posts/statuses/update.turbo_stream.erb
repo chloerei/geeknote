@@ -4,9 +4,12 @@
 
 <%= turbo_stream.update 'snackbar-container' do %>
   <div class="snackbar" data-controller="snackbar" data-snackbar-period="5000">
-    Post status change to <%= Post.human_attribute_name "status.#{@post.status}" %>
-    <% if @post.published? %>
-      <a href="#" class="button button--text button--secondary">VIEW</a>
+    <% case @post.status %>
+    <% when 'published' %>
+      <%= t '.post_is_published' %>
+      <a href="<%= account_post_path(@account, @post) %>" class="button button--text button--secondary"><%= t 'common.view' %></a>
+    <% when 'draft' %>
+      <%= t '.post_is_unpublished' %>
     <% end %>
   </div>
 <% end %>

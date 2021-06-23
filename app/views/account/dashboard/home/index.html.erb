@@ -1,6 +1,6 @@
 <div class="toolbar">
   <div class="toolbar__title">
-    Dashboard
+    <%= t 'common.dashboard' %>
   </div>
 </div>
 
@@ -9,16 +9,16 @@
     <div class="card card--outlined">
       <div class="toolbar">
         <div class="toolbar__title">
-          Overview
+          <%= t 'common.overview' %>
         </div>
       </div>
       <div class="padding">
         <dl>
-          <dt>Followers</dt>
+          <dt><%= t 'common.followers' %></dt>
           <dd><%= @account.followers_count %></dd>
-          <dt>Likes</dt>
+          <dt><%= t 'common.likes' %></dt>
           <dd><%= @account.posts.sum("likes_count") %></dd>
-          <dt>Comments</dt>
+          <dt><%= t 'common.comments' %></dt>
           <dd><%= @account.posts.sum("comments_count") %></dd>
         </dl>
       </div>
@@ -28,7 +28,7 @@
     <div class="card card--outlined">
       <div class="toolbar">
         <div class="toolbar__title">
-          Comments
+          <%= t 'common.comments' %>
         </div>
       </div>
       <div class="list">
@@ -55,7 +55,7 @@
       <div class="toolbar">
         <div class="toolbar__action">
           <a href="#" class="button button--text">
-            View all
+            <%= t 'common.view_all' %>
           </a>
         </div>
       </div>
@@ -65,7 +65,7 @@
     <div class="card card--outlined">
       <div class="toolbar">
         <div class="toolbar__title">
-          Followers
+          <%= t 'common.followers' %>
         </div>
       </div>
       <div class="list">
@@ -90,7 +90,7 @@
       <div class="toolbar">
         <div class="toolbar__action">
           <a href="<%= account_followers_path(@account) %>" class="button button--text">
-            View all
+            <%= t 'common.view_all' %>
           </a>
         </div>
       </div>

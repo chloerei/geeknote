@@ -3,8 +3,8 @@
     <%= form.text_area :excerpt, data: { action: 'form#submit' } %>
   </div>
   <div class="form__field">
-    <label class="label">Tags</label>
-    <div class="selector tag-selector" data-controller="tag-selector" data-tag-selector-placeholder-value="add tag" data-tag-selector-creatable-value="true" data-tag-selector-max-items-value="5">
+    <label class="label"><%= t 'common.tags' %></label>
+    <div class="selector tag-selector" data-controller="tag-selector" data-tag-selector-placeholder-value="" data-tag-selector-creatable-value="true" data-tag-selector-max-items-value="5">
       <select name="post[tag_list][]" class="selector__select" data-tag-selector-target="select" data-action="form#submit" multiple>
         <% @post.tags.each do |tag| %>
           <option value="<%= tag.name %>" selected><%= tag.name %></option>
@@ -14,7 +14,7 @@
   </div>
   <% if @account.organization? %>
     <div class="form__field">
-      <label class="label">Authors</label>
+      <label class="label"><%= t 'common.authors' %></label>
       <div class="selector" data-controller="selector" data-selector-max-items-value="3">
         <select name="post[author_list][]" class="selector__select" data-selector-target="select" data-action="form#submit" multiple>
           <% @post.author_users.includes(:account).each do |user| %>
@@ -28,17 +28,17 @@
     </div>
   <% end %>
   <div class="form__field">
-    <label class="label">Options</label>
+    <label class="label"><%= t 'common.options' %></label>
     <label class="form__control">
       <%= form.check_box :allow_comments, data: { action: 'form#submit' } %>
       <div class="form__control__label">
-        Allow comments
+        <%= Post.human_attribute_name :allow_comments %>
       </div>
     </label>
     <label class="form__control">
       <%= form.check_box :featured, data: { action: 'form#submit' } %>
       <div class="form__control__label">
-        Feature this post
+        <%= Post.human_attribute_name :featured %>
       </div>
     </label>
   </div>

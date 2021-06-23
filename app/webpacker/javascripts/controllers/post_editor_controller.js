@@ -52,6 +52,7 @@ export default class extends Controller {
     const attachmentsUrl = this.attachmentsUrlValue
     this.editor = new Editor(this.contentEditorTarget, {
       input: this.contentInputTarget,
+      placeholder: this.contentEditorTarget.dataset.placeholder,
       uploadImage: (file) => {
         return new Promise(function(resolve, reject) {
           const upload = new DirectUpload(file, directUploadUrl)

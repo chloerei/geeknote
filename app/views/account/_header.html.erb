@@ -26,7 +26,7 @@
             <div class="dropdown" data-controller="dropdown">
               <button type="button" class="button button--text" data-action="dropdown#toggle">
                 <div class="button__text">
-                  <%= current_member.role %>
+                  <%= Member.human_attribute_name "role.#{current_member.role}" %>
                 </div>
                 <div class="button__icon">
                   <span class="material-icons">expand_more</span>
@@ -38,7 +38,7 @@
                     <span class="material-icons">post_add</span>
                   </div>
                   <div class="dropdown__item__text">
-                    New post
+                    <%= t 'common.new_post' %>
                   </div>
                 </a>
                 <% if current_member.has_permission?(:edit_account_settings) %>
@@ -47,7 +47,7 @@
                       <span class="material-icons">edit</span>
                     </div>
                     <div class="dropdown__item__text">
-                      Edit profile
+                      <%= t 'common.edit_profile' %>
                     </div>
                   </a>
                 <% end %>
@@ -56,7 +56,7 @@
                     <span class="material-icons">dashboard</span>
                   </div>
                   <div class="dropdown__item__text">
-                    Dashboard
+                    <%= t 'common.dashboard' %>
                   </div>
                 </a>
               </div>
@@ -82,25 +82,25 @@
       </div>
       <div class="account-header__info">
         <% if @account.user? %>
-          <a href="<%= account_followings_path(@account) %>" class="link-text margin-right-8"><b><%= @account.owner.followings_count %></b> followings</a>
+          <a href="<%= account_followings_path(@account) %>" class="link-text margin-right-8"><b><%= @account.owner.followings_count %></b> <%= t 'common.followings' %></a>
         <% end %>
-        <a href="<%= account_followers_path(@account) %>" class="link-text"><b><%= @account.followers_count %></b> followers</a>
+        <a href="<%= account_followers_path(@account) %>" class="link-text"><b><%= @account.followers_count %></b> <%= t 'common.followers' %></a>
       </div>
     </div>
   </div>
 
   <div class="tab padding-x margin-bottom">
     <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>">
-      Posts
+      <%= t 'common.posts' %>
     </a>
     <% if @account.user? %>
       <a href="<%= account_likes_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'likes' %>">
-        Likes
+        <%= t 'common.liked_posts' %>
       </a>
     <% end %>
     <% if @account.organization? %>
       <a href="<%= account_members_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'members' %>">
-        Members
+        <%= t 'common.members' %>
       </a>
     <% end %>
   </div>

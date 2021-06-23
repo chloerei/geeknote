@@ -13,14 +13,14 @@
         </div>
         <% if comment.new_record? %>
           <button type="submit" class="button button--contained button--primary">
-            Post
+            <%= t 'common.submit' %>
           </button>
         <% else %>
           <button type="submit" class="button button--contained button--primary">
-            Save
+            <%= t 'common.save_changes' %>
           </button>
           <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="button button--text">
-            Cancel
+            <%= t 'common.cancel' %>
           </a>
         <% end %>
       <% end %>

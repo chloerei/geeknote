@@ -36,7 +36,7 @@
                     <span class="material-icons">account_box</span>
                   </div>
                   <div class="dropdown__item__text">
-                    Profile
+                    <%= t 'common.profile' %>
                   </div>
                 </a>
                 <a href="<%= account_dashboard_root_path(current_user.account) %>" class="dropdown__item">
@@ -44,7 +44,7 @@
                     <span class="material-icons">dashboard</span>
                   </div>
                   <div class="dropdown__item__text">
-                    Dashboard
+                    <%= t 'common.dashboard' %>
                   </div>
                 </a>
                 <a href="<%= organizations_path %>" class="dropdown__item">
@@ -52,7 +52,7 @@
                     <span class="material-icons">switch_account</span>
                   </div>
                   <div class="dropdown__item__text">
-                    Organizations
+                    <%= t 'common.organizations' %>
                   </div>
                 </a>
                 <a href="<%= settings_account_path %>" class="dropdown__item">
@@ -60,7 +60,7 @@
                     <span class="material-icons">settings</span>
                   </div>
                   <div class="dropdown__item__text">
-                    Settings
+                    <%= t 'common.settings' %>
                   </div>
                 </a>
                 <hr class="divider">

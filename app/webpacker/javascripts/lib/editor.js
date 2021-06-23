@@ -29,7 +29,7 @@ class Editor {
           classHighlightStyle,
           bracketMatching(),
           closeBrackets(),
-          placeholder('Write post here'),
+          placeholder(options.placeholder),
           keymap.of([
             ...closeBracketsKeymap,
             ...defaultKeymap,

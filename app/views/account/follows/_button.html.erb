@@ -3,11 +3,11 @@
 <%= form_with url: account_follow_path(account), id: "account-#{account.name}-follow-button", method: (followed ? 'delete' : 'post') do |form| %>
   <% if followed %>
     <button type="submit" class="button button--contained button--primary">
-      Following
+      <%= t 'common.following' %>
     </button>
   <% else %>
     <button type="submit" class="button button--contained">
-      Follow
+      <%= t 'common.follow' %>
     </button>
   <% end %>
 <% end %>

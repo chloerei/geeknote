@@ -1,5 +1,7 @@
 <div id="post-featured-image-form" class="margin-bottom">
-  <label class="label">Feature image</label>
+  <label class="label">
+    <%= t 'common.feature_image' %>
+  </label>
   <div class="image-uploader">
     <div class="image-uploader__preview">
       <% if @post.featured_image.attached? %>

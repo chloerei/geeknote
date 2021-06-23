@@ -1,14 +1,4 @@
 <%= turbo_frame_tag 'settings' do %>
-  <div class="toolbar">
-    <div class="toolbar__title">
-      Post settings
-    </div>
-    <div class="toolbar__action">
-      <button type="button" class="button button--icon" data-action="sheet#close">
-        <span class="material-icons">close</span>
-      </button>
-    </div>
-  </div>
   <div class="padding">
     <%= render 'account/dashboard/posts/featured_images/form' %>
     <%= render 'form' %>
@@ -21,7 +11,7 @@
           <span class="material-icons">delete</span>
         </div>
         <div class="button__label">
-          Delete post
+          <%= t 'common.delete_post' %>
         </div>
       </button>
     <% end %>

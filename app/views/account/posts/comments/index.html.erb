@@ -4,14 +4,14 @@
       <%= @post.title %>
     </a>
     <span class="breadcrumb__item breadcrumb__item--active">
-      Comments
+      <%= t 'common.comments' %>
     </span>
   </div>
   <% if current_user %>
     <%= render 'form', comment: Comment.new %>
   <% else %>
     <div class="padding">
-      <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--contained button--primary" data-turbo-frame="_top">Sign in to comment</a>
+      <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--contained button--primary" data-turbo-frame="_top"><%= t 'common.sign_in_to_comment' %></a>
     </div>
   <% end %>
   <hr class="divider margin-x">

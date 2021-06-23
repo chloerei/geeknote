@@ -10,7 +10,7 @@
           </div>
           <div class="toolbar__title">
             <a href="<%= account_dashboard_root_path(@account) %>">
-              GeekNote Dashboard
+              GeekNote <%= t 'common.dashboard' %>
             </a>
           </div>
           <div class="toolbar__action">
@@ -35,7 +35,7 @@
                   <span class="material-icons">account_box</span>
                 </div>
                 <div class="dropdown__item__text">
-                  Profile
+                  <%= t 'common.profile' %>
                 </div>
               </a>
               <a href="<%= root_path %>" class="dropdown__item">
@@ -43,7 +43,7 @@
                   <span class="material-icons">home</span>
                 </div>
                 <div class="dropdown__item__text">
-                  Home
+                  <%= t 'common.home' %>
                 </div>
               </a>
               <a href="<%= organizations_path %>" class="dropdown__item">
@@ -51,7 +51,7 @@
                   <span class="material-icons">switch_account</span>
                 </div>
                 <div class="dropdown__item__text">
-                  Organizations
+                  <%= t 'common.organizations' %>
                 </div>
               </a>
               <a href="<%= settings_account_path %>" class="dropdown__item">
@@ -59,7 +59,7 @@
                   <span class="material-icons">settings</span>
                 </div>
                 <div class="dropdown__item__text">
-                  Settings
+                  <%= t 'common.settings' %>
                 </div>
               </a>
               <hr class="divider">
@@ -90,7 +90,7 @@
                   <%= @account.owner.name %>
                 </div>
                 <div class="text-secondary">
-                  <%= @account.user? ? 'Personal' : 'Organization' %>
+                  <%= @account.user? ? t('common.personal_account') : t('common.organization_account') %>
                 </div>
               </div>
               <div class="nav">
@@ -99,7 +99,7 @@
                     <span class="material-icons">dashboard</span>
                   </div>
                   <div class="nav__item__text">
-                    Dashboard
+                    <%= t 'common.home' %>
                   </div>
                 </a>
                 <a href="<%= account_dashboard_posts_path(@account) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'posts' %>">
@@ -107,7 +107,7 @@
                     <span class="material-icons">article</span>
                   </div>
                   <div class="nav__item__text">
-                    Posts
+                    <%= t 'common.posts' %>
                   </div>
                 </a>
                 <% if @account.organization? && current_member.has_permission?(:manage_member) %>
@@ -116,7 +116,7 @@
                       <span class="material-icons">people</span>
                     </div>
                     <div class="nav__item__text">
-                      Members
+                      <%= t 'common.members' %>
                     </div>
                   </a>
                 <% end %>
@@ -126,7 +126,7 @@
                       <span class="material-icons">settings</span>
                     </div>
                     <div class="nav__item__text">
-                      Settings
+                      <%= t 'common.settings' %>
                     </div>
                   </a>
                 <% end %>
@@ -135,7 +135,7 @@
                     <span class="material-icons">web</span>
                   </div>
                   <div class="nav__item__text">
-                    View site
+                    <%= t 'common.view_site' %>
                   </div>
                 </a>
               </div>

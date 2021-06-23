@@ -1,9 +1,9 @@
 <div class="container container--medium">
-  <h3 class="padding-x">Reading list</h3>
+  <h3 class="padding-x"><%= t 'common.bookmarks' %></h3>
 
-  <div class="tab border-bottom">
-    <a href="<%= bookmarks_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'index' %>">Saved</a>
-    <a href="<%= archived_bookmarks_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'archived' %>">Archived</a>
+  <div class="tab padding-x">
+    <a href="<%= bookmarks_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'index' %>"><%= t 'common.saved' %></a>
+    <a href="<%= archived_bookmarks_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'archived' %>"><%= t 'common.archived' %></a>
   </div>
 
   <div class="posts">

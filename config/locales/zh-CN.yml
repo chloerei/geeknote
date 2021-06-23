@@ -1,15 +1,63 @@
 ---
 zh-CN:
+  account:
+    dashboard:
+      members:
+        form:
+          role_admin_description: 可以管理所有内容和成员，可以修改组织账号设置。
+          role_contributor_description: 可以创建和编辑自己的文章，但不能发布。
+          role_editor_description: 可以邀请成员，编辑和发布组织内的所有文章。
+          role_owner_description: 拥有组织账号的所有权限。
+          role_writer_description: 可以创建、编辑和发布自己的文章。
+      posts:
+        editor:
+          start_here: 这里开始…
+          title: 标题
+        statuses:
+          button:
+            no_publish_permission_description: 需要联系有编辑权限的成员发布。
+            publish_now: 现在发布
+            publish_now_description: 将文章设为公众可见。
+            unpublished: 取消发布
+            unpublished_description: 将文章设为草稿。
+            update_post_status: 更新文章状态
+          update:
+            post_is_published: 文章已发布
+            post_is_unpublished: 文章已取消发布
+      settings:
+        index:
+          profile: 资料
+          profile_desription: 头像、简介和其它一般信息。
+        profiles:
+          show:
+            profile: 资料
   activerecord:
     attributes:
       account:
         name: 账号名
+      comment:
+        content: 评论
+      member:
+        identifier: 账号或邮箱
+        role: 角色
+        status: 状态
+      member/role:
+        admin: 管理员
+        contributor: 贡献者
+        editor: 编辑
+        owner: 拥有者
+        writer: 作者
       organization:
         name: 名称
+      post:
+        allow_comments: 允许评论
+        excerpt: 摘要
+        featured: 置顶显示
       post/status:
         draft: 草稿
         published: 已发布
       user:
+        current_password: 当前密码
         email: Email
         name: 名称
         password: 密码
@@ -20,19 +68,88 @@ zh-CN:
             name:
               invalid: 只能使用大小写字母、数字和 - 号
   common:
+    account: 账号
+    archived: 已归档
+    authors: 作者
+    avatar: 头像
+    banner_image: 横幅图片
+    bookmarks: 收藏
+    by: 由
+    cancel: 取消
+    change_password: 修改密码
+    comments: 评论
+    dashboard: 管理面板
+    delete: 删除
+    delete_permanently: 永久删除
+    delete_post: 删除文章
+    edit: 编辑
+    edit_profile: 编辑个人资料
     email: Email
+    feature_image: 头图
+    follow: 关注
+    followers: 关注者
     following: 关注中
+    followings: 关注中
+    home: 首页
+    indentifier: 身份
+    info: 信息
+    invite_member: 邀请成员
     latest: 最新
+    liked_posts: 赞过
+    likes: 赞
+    members: 成员
+    name: 名称
+    new_post: 新文章
+    notifications: 通知
+    options: 选项
+    organization_account: 组织账号
+    organizations: 组织
+    overview: 概览
     password: 密码
+    pending: 待确认
+    personal_account: 个人账号
+    posts: 文章
+    preview: 预览
+    profile: 个人资料
+    publish: 发布
     recommend: 推荐
+    remove: 移除
+    replies: 回复
+    reply: 回复
+    resend_invitation: 重新发送邀请
+    restore: 恢复
+    role: 角色
+    save_changes: 保存修改
+    save_failed: 保存失败
+    saved: 已保存
+    saving: 保存中…
+    send_invitation: 发送邀请
+    settings: 设置
     sign_in: 登录
+    sign_in_to_comment: 登录后评论
     sign_out: 登出
     sign_up: 注册
+    status: 状态
+    submit: 提交
+    tags: 标签
+    title: 标题
+    untitled: 无标题
+    update: 更新
+    view: 查看
+    view_all: 查看全部
+    view_site: 查看网站
   errors:
     messages:
       email_or_password_error: Email 或密码错误
   flash:
+    bookmark_added: 已添加书签
+    boomark_removed: 已移除书签
     require_sign_in: 需要登录。
+  posts:
+    index:
+      hot_tags: 热门标签
+      join_geeknote: 加入 GeekNote !
+      join_geeknote_description: GeekNote 是专为 Geek 设计的写作平台。
   users:
     form:
       account_name_helper_text: 可以使用大小写字母、数字和 - 号，全站唯一

@@ -4,7 +4,7 @@
       <%= @post.title %>
     </a>
     <a href="<%= account_post_comments_path(@account, @post) %>" class="breadcrumb__item">
-      Comments
+      <%= t 'common.comments' %>
     </a>
   </div>
   <div class="comment-thread">
@@ -20,7 +20,7 @@
   </div>
   <hr class="divider margin-x">
   <div class="subheader">
-    Replies
+    <%= t 'common.replies' %>
   </div>
   <div id="comments" class="comments">
     <%= render @comment.replies.with_liked(current_user) %>

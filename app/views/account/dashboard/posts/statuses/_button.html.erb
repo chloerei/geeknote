@@ -1,7 +1,7 @@
 <div class="dropdown" data-controller="dropdown">
   <button type="button" class="button button--text" data-action="dropdown#toggle">
     <div class="button__text">
-      Publish
+      <%= t 'common.publish' %>
     </div>
     <div class="button__icon">
       <span class="material-icons">expand_more</span>
@@ -12,7 +12,7 @@
       <%= form_with model: @post, url: account_dashboard_post_status_path(@account, @post), builder: CustomFormBuilder, class: 'form' do |form| %>
         <div class="toolbar border-bottom">
           <div class="toolbar__title">
-            Update post status
+            <%= t '.update_post_status' %>
           </div>
         </div>
         <% if @post.draft? %>
@@ -20,9 +20,9 @@
             <div class="form__control">
               <%= form.radio_button :status, :published, checked: true %>
               <label for="post_status_published" class="form__control__label">
-                Publish now
+                <%= t '.publish_now' %>
                 <div class="text-secondary">
-                  Publish this post immediately
+                  <%= t '.publish_now_description' %>
                 </div>
               </label>
             </div>
@@ -32,18 +32,9 @@
             <div class="form__control">
               <%= form.radio_button :status, :draft, checked: true %>
               <label for="post_status_draft" class="form__control__label">
-                Unpublished
+                <%= t '.unpublished' %>
                 <div class="text-secondary">
-                  Revert this post to private draft
-                </div>
-              </label>
-            </div>
-            <div class="form__control">
-              <%= form.radio_button :status, :published, checked: true %>
-              <label for="post_status_published" class="form__control__label">
-                Published
-                <div class="text-secondary">
-                  Display this post publicly
+                  <%= t '.unpublished_description' %>
                 </div>
               </label>
             </div>
@@ -54,19 +45,19 @@
           </div>
           <div class="toolbar__aciton">
             <button type="button" class="button button--text" data-action="dropdown#close">
-              Cancel
+              <%= t 'common.cancel' %>
             </button>
           </div>
           <div class="toolbar__aciton">
             <button type="submit" class="button button--contained button--primary">
-              <%= @post.draft? ? 'Publish' : 'Update' %>
+              <%= t 'common.update' %>
             </button>
           </div>
         </div>
       <% end %>
     <% else %>
       <div class="padding">
-        You need to request editor to publish post.
+        <%= t '.no_publish_permission_description' %>
       </div>
     <% end %>
   </div>

@@ -5,12 +5,12 @@
     </a>
   </div>
   <div class="toolbar__title">
-    Profile
+    <%= t '.profile' %>
   </div>
   <div class="toolbar__action">
     <a href="<%= account_root_path(@account) %>" class="button button--text">
       <div class="button__text">
-        View
+        <%= t 'common.view' %>
       </div>
     </a>
   </div>
@@ -20,7 +20,6 @@
   <div class="padding">
     <%= render 'account/dashboard/settings/banner_images/form' %>
     <%= render 'account/dashboard/settings/avatars/form' %>
-    <label class="label">Info</label>
     <%= render 'form' %>
   </div>
 </div>

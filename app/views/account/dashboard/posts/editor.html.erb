@@ -4,9 +4,9 @@
     <div class="app-content">
       <div class="post-editor__container">
         <%= form_with model: @post, url: [@account, :dashboard, @post], data: { 'post-editor-target': 'form' }, class: 'post-editor__form', id: 'post-form' do |form| %>
-          <%= form.text_area :title, placeholder: 'Post Title', autocomplete: 'off', class: 'post-editor__title', "data-post-editor-target": 'titleInput' %>
+          <%= form.text_area :title, placeholder: t('.title'), autocomplete: 'off', class: 'post-editor__title', "data-post-editor-target": 'titleInput' %>
           <%= form.hidden_field :content, "data-post-editor-target": 'contentInput' %>
-          <div class="post-editor__content-editor" data-post-editor-target="contentEditor">
+          <div class="post-editor__content-editor" data-post-editor-target="contentEditor" data-placeholder="<%= t '.start_here' %>">
           </div>
         <% end %>
       </div>
@@ -22,6 +22,16 @@
   </div>
   <div id="settings-sheet" class="sheet sheet--modal" data-controller="sheet">
     <div class="sheet__container">
+      <div class="toolbar">
+        <div class="toolbar__title">
+          <%= t 'common.settings' %>
+        </div>
+        <div class="toolbar__action">
+          <button type="button" class="button button--icon" data-action="sheet#close">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+      </div>
       <%= turbo_frame_tag 'settings', src: @post.new_record? ? nil : account_dashboard_post_settings_path(@account, @post), loading: "lazy" %>
     </div>
     <div class="sheet__scrim" data-action="click->sheet#close">
