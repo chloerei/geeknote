@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  test:
+    image: ghcr.io/chloerei/geeknote:ci
+    command: bash -c "bin/rails db:prepare && bin/rails test"
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+      - redis
+  postgres:
+    image: postgres:12
+    environment:
+      POSTGRES_PASSWORD: postgres
+  redis:
+    image: redis:5

@@ -1,4 +1,4 @@
-## base stage
+### base stage ###
 
 FROM ubuntu:20.04 AS base
 
@@ -25,11 +25,31 @@ RUN gem install bundler -v 2.2.0
 
 WORKDIR /app
 
-## production stage
+### CI stage ###
+
+FROM base AS ci
+
+COPY Gemfile Gemfile.lock /app/
+
+RUN bundle install --deployment && \
+  rm vendor/bundle/ruby/2.7.0/cache/*
+
+COPY package.json yarn.lock /app/
+
+RUN yarn install && \
+  yarn cache clean
+
+COPY . /app/
+
+### Budiler stage ###
+
+FROM ci AS builder
+
+RUN SECRET_KEY_BASE=1 bin/rails assets:precompile
+
+### production stage ###
 
 FROM base AS production
-
-ENV RAILS_ENV=production
 
 COPY Gemfile Gemfile.lock /app/
 
@@ -38,6 +58,6 @@ RUN bundle install --deployment --without test development && \
 
 COPY . /app/
 
-RUN SECRET_KEY_BASE=1 bin/rails assets:precompile && \
-  yarn cache clean && \
-  rm -rf node_modules tmp/cache/* /tmp/*
+COPY --from=builder /app/public/packs /app/public/packs
+
+ENV RAILS_ENV=production
