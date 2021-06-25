@@ -1,5 +1,5 @@
 {
-  "name": "Community",
+  "name": "GeekNote",
   "private": true,
   "dependencies": {
     "@codemirror/basic-setup": "^0.18.0",

@@ -21,7 +21,7 @@ Bundler.require(*Rails.groups)
 
 Dotenv::Railtie.load
 
-module Community
+module GeekNote
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1

@@ -13,14 +13,14 @@ development:
   host: postgres
   username: postgres
   password: postgres
-  database: community_development
+  database: geeknote_development
 
 test:
   <<: *default
   host: postgres
   username: postgres
   password: postgres
-  database: community_test
+  database: geeknote_test
 
 production:
   <<: *default

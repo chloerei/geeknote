@@ -10,7 +10,7 @@ services:
     environment:
       WEBPACKER_DEV_SERVER_HOST: webpacker
     volumes:
-      - community-sync:/app:nocopy
+      - geeknote-sync:/app:nocopy
     ports:
       - 3000:3000
     depends_on:
@@ -24,7 +24,7 @@ services:
     environment:
       WEBPACKER_DEV_SERVER_HOST: webpacker
     volumes:
-      - community-sync:/app:nocopy
+      - geeknote-sync:/app:nocopy
     ports:
       - 3035:3035
   worker:
@@ -33,7 +33,7 @@ services:
       target: base
     command: bundle exec sidekiq
     volumes:
-      - community-sync:/app:nocopy
+      - geeknote-sync:/app:nocopy
     depends_on:
       - postgres
       - redis
@@ -45,5 +45,5 @@ services:
     image: redis:5
 
 volumes:
-  community-sync:
+  geeknote-sync:
     external: true
