@@ -45,7 +45,7 @@ COPY . /app/
 
 FROM ci AS builder
 
-RUN SECRET_KEY_BASE=1 bin/rails assets:precompile
+RUN RAILS_ENV=production SECRET_KEY_BASE=1 bin/rails assets:precompile
 
 ### production stage ###
 
