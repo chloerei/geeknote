@@ -25,6 +25,8 @@
 /.env.local
 /.env.*.local
 
+/swarm/.env.*
+
 /.docker-sync
 /.git
 

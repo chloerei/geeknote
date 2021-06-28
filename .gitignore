@@ -36,4 +36,6 @@ yarn-debug.log*
 /.env.local
 /.env.*.local
 
+/swarm/.env.*
+
 /vendor/bundle

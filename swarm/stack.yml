@@ -1,0 +1,44 @@
+version: '3.4'
+
+services:
+  caddy:
+    image: caddy:2.4.3
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+
+  migration:
+    image: geeknote:latest
+    command: bin/rails db:migrate
+    deploy:
+      restart_policy:
+        condition: none
+    secrets:
+      - source: env_file_v2
+        target: /app/.env.production
+  web:
+    image: geeknote:latest
+    command: bin/rails server
+    ports:
+      - 3000:3000
+    secrets:
+      - source: env_file_v2
+        target: /app/.env.production
+  postgres:
+    image: postgres:12
+    environment:
+      POSTGRES_PASSWORD: postgres
+  redis:
+    image: redis:5
+
+secrets:
+  env_file_v2:
+    file: .env.production
+
+volumes:
+  caddy_data:
+  caddy_config:
