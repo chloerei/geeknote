@@ -4,6 +4,7 @@ on: push
 
 jobs:
   test:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,7 +36,6 @@ jobs:
         run: |
           docker-compose -f docker-compose.ci.yml run test
   build:
-    needs: test
     if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
     steps:
@@ -50,18 +50,18 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
-      - name: Log in to GitHub Docker Registry
+      - name: Log in to Aliyun Docker Registry
         uses: docker/login-action@v1
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: registry.cn-hongkong.aliyuncs.com
+          username: geeknote
+          password: ${{ secrets.ALIYUN_ACR_PASSWORD }}
       - name: Build container image
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}:latest
+          tags: registry.cn-hongkong.aliyuncs.com/geeknote/geeknote:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
       - name: Move cache
