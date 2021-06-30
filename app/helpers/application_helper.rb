@@ -8,9 +8,29 @@ module ApplicationHelper
     sanitize doc.to_html([:HARDBREAKS]), tags: MARKDOWN_ALLOW_TAGS, attributes: MARKDOWN_ALLOW_ATTRIBUTES
   end
 
+  def use_aliyun_oss?
+    ENV['STORAGE_SERVICE'] == 'aliyun'
+  end
+
   def avatar_image_tag(avatar)
     if avatar.attached?
-      image_tag avatar.variant(resize_to_fill: [160, 160])
+      if use_aliyun_oss?
+        image_tag avatar.url(params: { 'x-oss-process' => 'image/resize,m_fill,h_160,w_160'})
+      else
+        image_tag avatar.variant(resize_to_fill: [160, 160])
+      end
+    else
+      image_tag asset_pack_path('media/images/avatar.png')
+    end
+  end
+
+  def large_avatar_image_tag(avatar)
+    if avatar.attached?
+      if use_aliyun_oss?
+        image_tag avatar.url(params: { 'x-oss-process' => 'image/resize,m_fill,h_320,w_320'})
+      else
+        image_tag avatar.variant(resize_to_fill: [320, 320])
+      end
     else
       image_tag asset_pack_path('media/images/avatar.png')
     end
@@ -18,7 +38,11 @@ module ApplicationHelper
 
   def banner_image_tag(cover)
     if cover.attached?
-      image_tag cover.variant(resize_to_limit: [1920, 1920])
+      if use_aliyun_oss?
+        image_tag cover.url(params: { 'x-oss-process' => 'image/resize,m_fill,h_1920,w_1920'})
+      else
+        image_tag cover.variant(resize_to_limit: [1920, 1920])
+      end
     else
       content_tag 'div', '', class: 'banner-image-placeholder'
     end
