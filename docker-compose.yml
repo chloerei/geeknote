@@ -5,7 +5,6 @@ services:
     build:
       context: .
       target: base
-    entrypoint: bin/entrypoint.sh
     command: bin/rails server -b 0.0.0.0
     environment:
       WEBPACKER_DEV_SERVER_HOST: webpacker

@@ -55,5 +55,7 @@ module GeekNote
     config.action_view.field_error_proc = Proc.new do |html_tag|
       html_tag.html_safe
     end
+
+    config.active_storage.service = ENV['STORAGE_SERVICE'] || :local
   end
 end
