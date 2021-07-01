@@ -8,9 +8,22 @@
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <% if current_user %>
+      <meta name="current-user-id" content="<%= current_user.id %>">
+    <% end %>
   </head>
 
   <body>
+    <% if current_user %>
+      <style>
+        [data-visible-to-user]:not([data-visible-to-user="<%= current_user.id %>"]),
+        [data-hidden-to-user="<%= current_user.id %>"] {
+          display: none;
+        }
+      </style>
+    <% end %>
+
     <%= content_for?(:body) ? yield(:body) : yield %>
   </body>
 </html>
