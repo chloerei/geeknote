@@ -47,9 +47,25 @@
         <%= render 'account/posts/bookmarks/button', post: @post %>
       </div>
       <div class="toolbar__action">
-        <button type="button" class="button button--icon">
-          <span class="material-icons">more_horiz</span>
-        </button>
+        <div class="dropdown" data-controller="dropdown">
+          <button type="button" class="button button--icon" data-action="dropdown#toggle">
+            <span class="material-icons">more_horiz</span>
+          </button>
+          <div class="dropdown__menu dropdown__menu--top-right">
+            <% if current_member %>
+              <% if current_member.can_edit_post?(@post) %>
+                <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="dropdown__item">
+                  <div class="dropdown__item__icon">
+                    <span class="material-icons">edit</span>
+                  </div>
+                  <div class="dropdown__item__text">
+                    <%= t 'common.edit' %>
+                  </div>
+                </a>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -80,9 +96,25 @@
         <%= render 'account/posts/bookmarks/button', post: @post, suffix: '-bottom' %>
       </div>
       <div class="toolbar__action">
-        <button type="button" class="button button--icon">
-          <span class="material-icons">more_horiz</span>
-        </button>
+        <div class="dropdown" data-controller="dropdown">
+          <button type="button" class="button button--icon" data-action="dropdown#toggle">
+            <span class="material-icons">more_horiz</span>
+          </button>
+          <div class="dropdown__menu dropdown__menu--top-right">
+            <% if current_member %>
+              <% if current_member.can_edit_post?(@post) %>
+                <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="dropdown__item">
+                  <div class="dropdown__item__icon">
+                    <span class="material-icons">edit</span>
+                  </div>
+                  <div class="dropdown__item__text">
+                    <%= t 'common.edit' %>
+                  </div>
+                </a>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -110,7 +142,7 @@
           <% end %>
         </div>
       </div>
-      <% if @post.account != current_user.account %>
+      <% if current_user && @post.account != current_user.account %>
         <div class="list__action">
           <%= render 'account/follows/button', account: @post.account %>
         </div>
@@ -160,7 +192,7 @@
     <div id="comments" class="comments">
       <%= render partial: 'account/posts/comments/comment', collection: @post.comments.with_liked(current_user).order(likes_count: :desc).limit(3) %>
     </div>
-    <div class="margin-y">
+    <div class="padding">
       <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100">
         <div class="button__text">
           <%= t 'common.view_all' %>

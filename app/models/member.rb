@@ -23,6 +23,10 @@ class Member < ApplicationRecord
     PERMISSIONS[role].include?(name)
   end
 
+  def can_edit_post?(post)
+    role.in?(%w(owner admin editor)) || post.authors.include?(user)
+  end
+
   enum status: {
     pending: 0,
     active: 1
