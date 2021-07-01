@@ -72,7 +72,7 @@ module GeekNote
     end
 
     config.action_mailer.default_options = {
-      from: ENV['MAILER_DEFAULT_FROM']
+      from: ENV['MAILER_DEFAULT_FROM'] || "noreply@example.com"
     }
     config.action_mailer.default_url_options = {
       host: ENV['HOST']
