@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete 'sign_out', to: 'sessions#destroy', as: 'sign_out'
   resources :sessions, only: [:create]
 
-  get 'attachments/:key/:filename', to: 'attachments#show', as: :attachment
+  get 'attachments/:key/*filename', to: 'attachments#show', as: :attachment
 
   resources :posts, only: [] do
     collection do
