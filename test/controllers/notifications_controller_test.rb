@@ -12,4 +12,16 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal 0, user.notifications.unread.count
   end
+
+  test "should not raise exception if notify record is deleted" do
+    user = create(:user)
+    comment_notification = create(:comment_notification, user: user)
+    reply_notification = create(:reply_notification, user: user)
+
+    comment_notification.record.commentable.destroy
+    reply_notification.record.destroy
+    sign_in user
+    get notifications_path
+    assert_response :success
+  end
 end

@@ -77,11 +77,13 @@ zh-CN:
     by: 由
     cancel: 取消
     change_password: 修改密码
+    comment_on: 评论于
     comments: 评论
     dashboard: 管理面板
     delete: 删除
     delete_permanently: 永久删除
     delete_post: 删除文章
+    deleted_content: 已删除内容
     edit: 编辑
     edit_profile: 编辑个人资料
     email: Email

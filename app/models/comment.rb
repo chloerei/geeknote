@@ -6,6 +6,7 @@ class Comment < ApplicationRecord
   belongs_to :account
   belongs_to :user
   has_many :replies, class_name: 'Comment', foreign_key: :parent_id
+  has_many :notifications, as: :record, dependent: :destroy
 
   validates :content, presence: true
   validate :check_parent_comment
