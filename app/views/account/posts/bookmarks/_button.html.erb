@@ -1,5 +1,4 @@
-<% suffix ||= '' %>
-<%= form_with url: account_post_bookmark_path(post.account, post), method: (post.saved? ? 'delete' : 'post'), id: "post-#{post.id}-bookmark-button#{suffix}" do |form| %>
+<%= form_with url: account_post_bookmark_path(post.account, post), method: (post.saved? ? 'delete' : 'post'), class: "post-#{post.id}-bookmark-button" do |form| %>
   <button type="submit" class="button button--icon">
     <% if post.saved? %>
       <span class="material-icons">turned_in</span>
