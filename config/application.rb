@@ -21,6 +21,15 @@ Bundler.require(*Rails.groups)
 
 Dotenv::Railtie.load
 
+if ENV['SENTRY_DSN']
+  require 'sentry-ruby'
+  require 'sentry-rails'
+end
+
+if ENV['NEW_RELIC_LICENSE_KEY'].present?
+  require 'newrelic_rpm'
+end
+
 module GeekNote
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

@@ -47,8 +47,10 @@ gem 'local_time'
 
 gem "activestorage-aliyun"
 
-gem "sentry-ruby"
-gem "sentry-rails"
+gem "sentry-ruby", require: false
+gem "sentry-rails", require: false
+
+gem 'newrelic_rpm', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
