@@ -18,9 +18,8 @@ zh-CN:
             no_publish_permission_description: 需要联系有编辑权限的成员发布。
             publish_now: 现在发布
             publish_now_description: 将文章设为公众可见。
-            unpublished: 取消发布
-            unpublished_description: 将文章设为草稿。
-            update_post_status: 更新文章状态
+            unpublish: 取消发布
+            unpublish_description: 将文章设为草稿。
           update:
             post_is_published: 文章已发布
             post_is_unpublished: 文章已取消发布
@@ -114,6 +113,7 @@ zh-CN:
     preview: 预览
     profile: 个人资料
     publish: 发布
+    published: 已发布
     recommend: 推荐
     remove: 移除
     replies: 回复
@@ -136,7 +136,6 @@ zh-CN:
     tags: 标签
     title: 标题
     untitled: 无标题
-    update: 更新
     view: 查看
     view_all: 查看全部
     view_site: 查看网站

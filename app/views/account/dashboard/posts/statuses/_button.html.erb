@@ -1,59 +1,50 @@
 <div class="dropdown" data-controller="dropdown">
   <button type="button" class="button button--text" data-action="dropdown#toggle">
     <div class="button__text">
-      <%= t 'common.publish' %>
+      <% if @post.published? %>
+        <%= t 'common.published' %>
+      <% else %>
+        <%= t 'common.publish' %>
+      <% end %>
     </div>
     <div class="button__icon">
       <span class="material-icons">expand_more</span>
     </div>
   </button>
-  <div class="dropdown__menu dropdown__menu--medium dropdown__menu--paddingless dropdown__menu--top-right">
+  <div class="dropdown__menu dropdown__menu--paddingless dropdown__menu--top-right">
     <% if @current_member.has_permission?(:publish_other_post) || (@current_member.has_permission?(:publish_own_post) && @post.authors.include?(current_user)) %>
       <%= form_with model: @post, url: account_dashboard_post_status_path(@account, @post), builder: CustomFormBuilder, class: 'form' do |form| %>
-        <div class="toolbar border-bottom">
-          <div class="toolbar__title">
-            <%= t '.update_post_status' %>
-          </div>
-        </div>
         <% if @post.draft? %>
-          <div class="padding">
-            <div class="form__control">
-              <%= form.radio_button :status, :published, checked: true %>
-              <label for="post_status_published" class="form__control__label">
+          <%= form.hidden_field :status, value: :published %>
+          <button type="submit" class="dropdown__item">
+            <div class="dropdown__item__icon">
+              <span class="material-icons">publish</span>
+            </div>
+            <div class="dropdown__item__text">
+              <div class="text-primary">
                 <%= t '.publish_now' %>
-                <div class="text-secondary">
-                  <%= t '.publish_now_description' %>
-                </div>
-              </label>
+              </div>
+              <div class="text-secondary">
+                <%= t '.publish_now_description' %>
+              </div>
             </div>
-          </div>
+          </button>
         <% else %>
-          <div class="padding">
-            <div class="form__control">
-              <%= form.radio_button :status, :draft, checked: true %>
-              <label for="post_status_draft" class="form__control__label">
-                <%= t '.unpublished' %>
-                <div class="text-secondary">
-                  <%= t '.unpublished_description' %>
-                </div>
-              </label>
+          <%= form.hidden_field :status, value: :draft %>
+          <button type="submit" class="dropdown__item">
+            <div class="dropdown__item__icon">
+              <span class="material-icons">unpublished</span>
             </div>
-          </div>
+            <div class="dropdown__item__text">
+              <div class="text-primary">
+                <%= t '.unpublish' %>
+              </div>
+              <div class="text-secondary">
+                <%= t '.unpublish_description' %>
+              </div>
+            </div>
+          </button>
         <% end %>
-        <div class="toolbar border-top">
-          <div class="toolbar__space">
-          </div>
-          <div class="toolbar__aciton">
-            <button type="button" class="button button--text" data-action="dropdown#close">
-              <%= t 'common.cancel' %>
-            </button>
-          </div>
-          <div class="toolbar__aciton">
-            <button type="submit" class="button button--contained button--primary">
-              <%= t 'common.update' %>
-            </button>
-          </div>
-        </div>
       <% end %>
     <% else %>
       <div class="padding">
