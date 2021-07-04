@@ -6,7 +6,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   build-essential \
+  curl \
   git \
+  gnupg \
   imagemagick \
   libpq-dev \
   nodejs \
@@ -15,11 +17,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   ruby-dev \
   zlib1g-dev
 
-RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg && \
-  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-  apt-get update && apt-get install -y --no-install-recommends yarn && \
-  apt-get autoremove -y curl gnupg
+  apt-get update && apt-get install -y --no-install-recommends yarn
 
 RUN gem install bundler -v 2.2.0
 
