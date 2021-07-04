@@ -40,8 +40,8 @@
         </div>
       </div>
     </div>
-    <div class="comment__content">
-      <%= simple_format comment.content %>
+    <div class="comment__content typography">
+      <%= markdown_render comment.content %>
     </div>
     <div class="comment__footer">
       <div class="toolbar">
