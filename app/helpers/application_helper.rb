@@ -23,8 +23,6 @@ module ApplicationHelper
       end
     end
 
-    puts doc.to_html
-
     sanitize doc.to_html([:HARDBREAKS, :UNSAFE]), tags: MARKDOWN_ALLOW_TAGS, attributes: MARKDOWN_ALLOW_ATTRIBUTES
   end
 
