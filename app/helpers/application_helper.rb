@@ -5,7 +5,27 @@ module ApplicationHelper
 
   def markdown_render(text)
     doc = CommonMarker.render_doc(text, :DEFAULT, [:table, :tasklist, :strikethrough, :autolink, :tagfilter])
-    sanitize doc.to_html([:HARDBREAKS]), tags: MARKDOWN_ALLOW_TAGS, attributes: MARKDOWN_ALLOW_ATTRIBUTES
+
+    # highlight commonmarker code block with rouge
+    doc.walk do |node|
+      if node.type == :code_block
+        next if node.fence_info == ''
+
+        lang = node.fence_info
+        lexer = Rouge::Lexer.find_fancy(lang) || Rouge::Lexer.find_for('text')
+        formatter = Rouge::Formatters::HTML.new
+        code = formatter.format(lexer.lex(node.string_content))
+        new_node = CommonMarker::Node.new(:html)
+        new_node.string_content = %Q(<pre><code class="language-#{lang} highlight">#{code}</code></pre>)
+
+        node.insert_before(new_node)
+        node.delete
+      end
+    end
+
+    puts doc.to_html
+
+    sanitize doc.to_html([:HARDBREAKS, :UNSAFE]), tags: MARKDOWN_ALLOW_TAGS, attributes: MARKDOWN_ALLOW_ATTRIBUTES
   end
 
   def use_aliyun_oss?

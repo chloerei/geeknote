@@ -244,6 +244,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rouge (3.26.0)
     ruby-enum (0.9.0)
       i18n
     ruby-vips (2.0.17)
@@ -339,6 +340,7 @@ DEPENDENCIES
   rails (~> 6.1)
   rails-i18n (~> 6.0.0)
   redis (~> 4.0)
+  rouge
   selenium-webdriver
   sentry-rails
   sentry-ruby

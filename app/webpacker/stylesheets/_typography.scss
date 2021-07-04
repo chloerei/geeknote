@@ -1,6 +1,21 @@
 .typography {
   word-wrap: break-word;
 
+  code {
+    background-color: #f8f8f8;
+    font-family: Menlo, Consolas, "Liberation Mono", Courier, monospace;
+    font-size: 15px;
+  }
+
+  :not(pre) code {
+    padding: 0 4px;
+    line-height: 24px;
+  }
+
+  pre {
+    border-radius: 4px;
+  }
+
   table {
     width: 100%;
     border-spacing: 0;

@@ -35,6 +35,9 @@ gem 'turbo-rails'
 # markdown
 gem 'commonmarker'
 
+# code highlight
+gem 'rouge'
+
 # pagination
 gem 'kaminari'
 

@@ -11,6 +11,11 @@
 @import 'breadcrumb';
 @import 'comment';
 @import 'material_icons';
+@import 'highlight';
+
+body {
+  font-family: sans-serif;
+}
 
 .app-bar--borderless {
   box-shadow: none;
