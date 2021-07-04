@@ -23,6 +23,14 @@ services:
   web:
     image: geeknote:latest
     command: bin/rails server
+    healthcheck:
+      test: curl -f http://localhost:3000 || exit 1
+      interval: 1m
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    deploy:
+      replicas: 2
     ports:
       - 3000:3000
     secrets:
