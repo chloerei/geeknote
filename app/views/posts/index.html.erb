@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="row margin-top">
-    <div class="col-9 padding-right border-right">
-      <div class="tab padding-x margin-bottom">
+  <div class="row">
+    <div class="col-9">
+      <div class="tab padding">
         <a href="<%= root_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'index' %>">
           <%= t 'common.recommend' %>
         </a>
@@ -20,7 +20,7 @@
       <%= paginate @posts %>
     </div>
 
-    <div class="col-3 padding-left">
+    <div class="col-3 margin-top">
       <% if !current_user %>
         <div class="subheader">
           <%= t '.join_geeknote' %>
@@ -38,7 +38,7 @@
             </a>
           </div>
         </div>
-        <hr class="divider">
+        <hr class="divider margin-x">
       <% end %>
 
       <div class="subheader">
@@ -55,7 +55,7 @@
           <% end %>
         </div>
       </div>
-      <hr class="divider">
+      <hr class="divider margin-x">
 
       <% if current_user %>
         <div class="subheader">

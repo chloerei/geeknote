@@ -6,9 +6,8 @@
       </a>
     </div>
     <div class="toolbar__title">
-      <%= @account.owner.name %>
-      <span class="post-editor__save-status" data-post-editor-target="saveStatus" data-message-status='<%= Post.human_attribute_name("status.#{@post.status}") %>' data-message-saving="<%= t 'common.saving' %>" data-message-save-failed="<%= t 'common.save_failed' %>">
-        <%= Post.human_attribute_name("status.#{@post.status}") %>
+      <span class="hide-on-mobile"><%= @account.owner.name %></span>
+      <span class="post-editor__save-status" data-post-editor-target="saveStatus" data-message-saved='<%= t 'common.saved' %>' data-message-saving="<%= t 'common.saving' %>" data-message-save-failed="<%= t 'common.save_failed' %>">
       </span>
     </div>
     <% if !@post.new_record? %>

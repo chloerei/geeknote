@@ -126,6 +126,7 @@ export default class extends Controller {
   }
 
   displayEditing() {
+    this.saveStatusTarget.textContent = ''
   }
 
   displaySaving() {
@@ -133,7 +134,7 @@ export default class extends Controller {
   }
 
   displaySaved() {
-    this.saveStatusTarget.textContent = this.saveStatusTarget.dataset.messageStatus
+    this.saveStatusTarget.textContent = this.saveStatusTarget.dataset.messageSaved
   }
 
   displaySaveFailed() {

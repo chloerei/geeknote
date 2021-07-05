@@ -1,16 +1,44 @@
 .account-header {
   display: flex;
   padding: 16px;
+
 }
 
 .account-header__avatar {
   z-index: 1;
-  margin-right: 16px;
-  margin-top: -32px;
-  margin-left: -4px;
-  padding: 4px;
-  background: white;
-  border-radius: 50%;
+  flex-shrink: 0;
+
+  .avatar {
+    margin: -32px 16px 0 -4px;
+    padding: 4px;
+    background: white;
+    border-radius: 50%;
+  }
+
+  .avatar img {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+@media (max-width: $mobile-break-point) {
+  .account-header {
+    flex-direction: column;
+  }
+
+  .account-header__avatar {
+    display: flex;
+    justify-content: center;
+
+    .avatar {
+      margin: -64px 0 0 0;
+    }
+
+    .avatar img {
+      width: 80px;
+      height: 80px;
+    }
+  }
 }
 
 .account-header__content {

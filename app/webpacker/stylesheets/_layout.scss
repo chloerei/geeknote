@@ -10,3 +10,31 @@
 .container--medium {
   max-width: 960px;
 }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col {
+  flex-grow: 1;
+}
+
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    flex-grow: 0;
+    width: $i / 12 * 100%;
+  }
+}
+
+@media (max-width: $mobile-break-point) {
+  .row {
+    display: block;
+  }
+
+  @for $i from 1 through 12 {
+    .col-#{$i} {
+      width: 100%;
+    }
+  }
+}
