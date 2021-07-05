@@ -51,7 +51,6 @@ module GeekNote
       expires_in: 1.day
     }
 
-
     config.active_job.queue_adapter = :sidekiq
 
     config.generators do |generate|

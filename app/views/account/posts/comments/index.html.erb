@@ -16,7 +16,7 @@
   <% end %>
   <hr class="divider margin-x">
   <div id="comments" class="comments">
-    <%= render @comments %>
+    <%= render partial: 'comment', collection: @comments, cached: true %>
   </div>
   <%= paginate @comments %>
 </div>

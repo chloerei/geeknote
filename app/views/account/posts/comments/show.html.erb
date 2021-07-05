@@ -23,6 +23,6 @@
     <%= t 'common.replies' %>
   </div>
   <div id="comments" class="comments">
-    <%= render @comment.replies.with_liked(current_user) %>
+    <%= render partial: 'comment', collection: @comment.replies.with_liked(current_user), cached: true %>
   </div>
 </div>

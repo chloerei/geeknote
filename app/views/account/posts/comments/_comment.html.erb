@@ -1,75 +1,77 @@
-<div class="comment" id="comment-<%= comment.id %>">
-  <div class="comment__avatar">
-    <div class="avatar">
-      <a href="<%= account_root_path(comment.user.account) %>">
-        <%= avatar_image_tag comment.user.avatar %>
-      </a>
-    </div>
-  </div>
-  <div class="flex-grow-1">
-    <div class="comment__header">
-      <div class="toolbar">
-        <div class="comment__meta">
-          <a href="<%= account_root_path(comment.user.account) %>" class="link-text text-bold">
-            <%= comment.user.name %>
-          </a>
-          <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="link-text">
-            <span class="text-muted">
-              <%= local_time comment.created_at, format: :short %>
-            </span>
-          </a>
-        </div>
-        <div class="toolbar__action">
-          <div class="dropdown" data-controller="dropdown">
-            <button type="button" class="button button--icon" data-action="dropdown#toggle">
-              <span class="material-icons">more_horiz</span>
-            </button>
-            <div class="dropdown__menu dropdown__menu--top-right">
-              <% if comment.user == current_user %>
-                <a href="<%= edit_account_post_comment_path(@account, @post, comment) %>" class="dropdown__item" data-visible-to-user="<%= comment.user_id %>">
-                  <%= t 'common.edit' %>
-                </a>
-                <%= form_with url: account_post_comment_path(@account, @post, comment), method: 'delete', data: { 'visible-to-user': comment.user_id } do |form| %>
-                  <button type="submit" class="dropdown__item" data-confirm="Are you sure delete this comment?">
-                    <%= t 'common.delete' %>
-                  </button>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        </div>
+<% cache comment do %>
+  <div class="comment" id="comment-<%= comment.id %>">
+    <div class="comment__avatar">
+      <div class="avatar">
+        <a href="<%= account_root_path(comment.user.account) %>">
+          <%= avatar_image_tag comment.user.avatar %>
+        </a>
       </div>
     </div>
-    <div class="comment__content typography">
-      <%= markdown_render comment.content %>
-    </div>
-    <div class="comment__footer">
-      <div class="toolbar">
-        <div class="toolbar__action">
-          <%= render 'account/posts/comments/likes/button', comment: comment %>
-        </div>
-        <div class="toolbar__action">
-          <a href="<%= account_post_comment_path(@account, @post, comment, anchor: 'comment-form') %>" class="button button--text">
-            <div class="button__icon">
-              <span class="material-icons">reply</span>
-            </div>
-            <div class="button__text">
-              <%= t 'common.reply' %>
-            </div>
-          </a>
-        </div>
-        <div class="toolbar__space">
-        </div>
-        <% if comment.replies_count > 0 %>
-          <div class="toolbar__text">
-            <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="link-text text-muted">
+    <div class="flex-grow-1">
+      <div class="comment__header">
+        <div class="toolbar">
+          <div class="comment__meta">
+            <a href="<%= account_root_path(comment.user.account) %>" class="link-text text-bold">
+              <%= comment.user.name %>
+            </a>
+            <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="link-text">
               <span class="text-muted">
-                <%= comment.replies_count %> <%= t 'common.replies' %>
+                <%= local_time comment.created_at, format: :short %>
               </span>
             </a>
           </div>
-        <% end %>
+          <div class="toolbar__action">
+            <div class="dropdown" data-controller="dropdown">
+              <button type="button" class="button button--icon" data-action="dropdown#toggle">
+                <span class="material-icons">more_horiz</span>
+              </button>
+              <div class="dropdown__menu dropdown__menu--top-right">
+                <% if comment.user == current_user %>
+                  <a href="<%= edit_account_post_comment_path(@account, @post, comment) %>" class="dropdown__item" data-visible-to-user="<%= comment.user_id %>">
+                    <%= t 'common.edit' %>
+                  </a>
+                  <%= form_with url: account_post_comment_path(@account, @post, comment), method: 'delete', data: { 'visible-to-user': comment.user_id } do |form| %>
+                    <button type="submit" class="dropdown__item" data-confirm="Are you sure delete this comment?">
+                      <%= t 'common.delete' %>
+                    </button>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="comment__content typography">
+        <%= markdown_render comment.content %>
+      </div>
+      <div class="comment__footer">
+        <div class="toolbar">
+          <div class="toolbar__action">
+            <%= render 'account/posts/comments/likes/button', comment: comment %>
+          </div>
+          <div class="toolbar__action">
+            <a href="<%= account_post_comment_path(@account, @post, comment, anchor: 'comment-form') %>" class="button button--text">
+              <div class="button__icon">
+                <span class="material-icons">reply</span>
+              </div>
+              <div class="button__text">
+                <%= t 'common.reply' %>
+              </div>
+            </a>
+          </div>
+          <div class="toolbar__space">
+          </div>
+          <% if comment.replies_count > 0 %>
+            <div class="toolbar__text">
+              <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="link-text text-muted">
+                <span class="text-muted">
+                  <%= comment.replies_count %> <%= t 'common.replies' %>
+                </span>
+              </a>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
