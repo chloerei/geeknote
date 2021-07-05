@@ -14,7 +14,7 @@
       </div>
 
       <div class="list">
-        <%= render partial: 'account/posts/post', collection: @posts %>
+        <%= render partial: 'account/posts/post', collection: @posts, cached: -> (post) { [post, post.saved] } %>
       </div>
 
       <%= paginate @posts %>

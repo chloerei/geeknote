@@ -1,65 +1,67 @@
-<div class="posts__item">
-  <a href="<%= account_post_path(post.account, post) %>" class="stretched-link"></a>
-  <div class="flex">
-    <div class="flex-grow-1">
-      <div class="flex flex-align-items-center margin-bottom-8">
-        <div class="avatar-group margin-right-8">
-          <div class="avatar avatar--small">
-            <%= avatar_image_tag post.account.owner.avatar %>
-          </div>
-          <% if post.account.organization? && post.author_users.any? %>
-            <% post.author_users.each do |user| %>
-              <div class="avatar avatar--small">
-                <%= avatar_image_tag user.avatar %>
-              </div>
+<% cache [post, post.saved] do %>
+  <div class="posts__item">
+    <a href="<%= account_post_path(post.account, post) %>" class="stretched-link"></a>
+    <div class="flex">
+      <div class="flex-grow-1">
+        <div class="flex flex-align-items-center margin-bottom-8">
+          <div class="avatar-group margin-right-8">
+            <div class="avatar avatar--small">
+              <%= avatar_image_tag post.account.owner.avatar %>
+            </div>
+            <% if post.account.organization? && post.author_users.any? %>
+              <% post.author_users.each do |user| %>
+                <div class="avatar avatar--small">
+                  <%= avatar_image_tag user.avatar %>
+                </div>
+              <% end %>
             <% end %>
+          </div>
+          <div class="text-small">
+            <span class="text-bold"><%= post.account.owner.name %></span>
+            <% if post.account.organization? && post.author_users.any? %>
+              by
+              <span class="text-bold"><%= post.author_users.pluck(:name).join(', ') %></span>
+            <% end %>
+          </div>
+          <% if post.featured %>
+            <span class="material-icons featured-post__icon">push_pin</span>
           <% end %>
         </div>
-        <div class="text-small">
-          <span class="text-bold"><%= post.account.owner.name %></span>
-          <% if post.account.organization? && post.author_users.any? %>
-            by
-            <span class="text-bold"><%= post.author_users.pluck(:name).join(', ') %></span>
-          <% end %>
+        <h3 class="margin-top-0 margin-bottom-8">
+          <%= post.title.presence || 'Untitle' %>
+        </h3>
+        <div class="text-secondary">
+          <%= truncate post.content, length: 100 %>
         </div>
-        <% if post.featured %>
-          <span class="material-icons featured-post__icon">push_pin</span>
-        <% end %>
       </div>
-      <h3 class="margin-top-0 margin-bottom-8">
-        <%= post.title.presence || 'Untitle' %>
-      </h3>
-      <div class="text-secondary">
-        <%= truncate post.content, length: 100 %>
-      </div>
+      <% if post.featured_image.attached? %>
+        <div class="posts__item__feature-image margin-left">
+          <%= image_tag post.featured_image.variant(resize_to_fill: [800, 800]) %>
+        </div>
+      <% end %>
     </div>
-    <% if post.featured_image.attached? %>
-      <div class="posts__item__feature-image margin-left">
-        <%= image_tag post.featured_image.variant(resize_to_fill: [800, 800]) %>
-      </div>
-    <% end %>
-  </div>
-  <div class="toolbar">
-    <div class="toolbar__text">
-      <div class="text-secondary">
-        <%= local_time post.created_at, format: :short %>
-        &centerdot;
-        <%= post.likes_count %> <%= t 'common.likes' %>
-        <% if post.allow_comments %>
+    <div class="toolbar">
+      <div class="toolbar__text">
+        <div class="text-secondary">
+          <%= local_time post.created_at, format: :short %>
           &centerdot;
-          <%= post.comments_count %> <%= t 'common.comments' %>
-        <% end %>
+          <%= post.likes_count %> <%= t 'common.likes' %>
+          <% if post.allow_comments %>
+            &centerdot;
+            <%= post.comments_count %> <%= t 'common.comments' %>
+          <% end %>
+        </div>
+      </div>
+      <div class="toolbar__space">
+      </div>
+      <div class="toolbar__action">
+        <%= render 'account/posts/bookmarks/button', post: post %>
+      </div>
+      <div class="toolbar__action">
+        <button type="button" class="button button--icon">
+          <span class="material-icons">more_horiz</span>
+        </button>
       </div>
     </div>
-    <div class="toolbar__space">
-    </div>
-    <div class="toolbar__action">
-      <%= render 'account/posts/bookmarks/button', post: post %>
-    </div>
-    <div class="toolbar__action">
-      <button type="button" class="button button--icon">
-        <span class="material-icons">more_horiz</span>
-      </button>
-    </div>
   </div>
-</div>
+<% end %>

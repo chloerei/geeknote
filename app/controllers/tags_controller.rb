@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   def show
-    @posts = Post.published.tagged_with(params[:id]).page(params[:page])
+    @posts = Post.published.with_statuses(current_user).tagged_with(params[:id]).page(params[:page])
   end
 
   def search

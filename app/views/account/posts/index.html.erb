@@ -5,7 +5,7 @@
     <% if @posts.current_page == 1 %>
       <%= render @account.posts.featured %>
     <% end %>
-    <%= render @posts %>
+    <%= render partial: 'post', collection: @posts, cached: -> (post) { [post, post.saved] } %>
   </div>
 
   <%= paginate @posts %>
