@@ -14,7 +14,7 @@ class Comment < ApplicationRecord
   scope :no_parent, -> { where(parent_id: nil) }
 
   scope :hot, -> {
-    select("*, (log(10, greatest(3 * likes_count + replies_count, 1)) + (extract(epoch from created_at) / 432000)) as score").order(score: :desc)
+    select("*, (log(10, greatest(3 * likes_count + replies_count, 1)) + (extract(epoch from created_at) / 43200)) as score").order(score: :desc)
   }
 
   def check_parent_comment

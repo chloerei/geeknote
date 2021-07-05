@@ -22,7 +22,7 @@ class Post < ApplicationRecord
   }
 
   scope :hot, -> {
-    select("*, (log(10, greatest(3 * likes_count + comments_count, 1)) + (extract(epoch from published_at) / 432000)) as score").order(score: :desc)
+    select("*, (log(10, greatest(3 * likes_count + comments_count, 1)) + (extract(epoch from published_at) / 43200)) as score").order(score: :desc)
   }
 
   scope :featured, -> { where(featured: true) }
