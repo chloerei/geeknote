@@ -23,6 +23,6 @@
     <%= t 'common.replies' %>
   </div>
   <div id="comments" class="comments">
-    <%= render partial: 'comment', collection: @comment.replies.with_liked(current_user), cached: -> (comment) { [comment, comment.liked] } %>
+    <%= render partial: 'comment', collection: @comment.replies.hot.with_liked(current_user), cached: -> (comment) { [comment, comment.liked] } %>
   </div>
 </div>
