@@ -65,4 +65,16 @@ module ApplicationHelper
       content_tag 'div', '', class: 'banner-image-placeholder'
     end
   end
+
+  def post_summary(post)
+    if post.excerpt.present?
+      truncate post.excerpt, length: 100
+    else
+      truncate strip_tags(markdown_render(post.content)), length: 100
+    end
+  end
+
+  def comment_summary(comment)
+    truncate strip_tags(markdown_render(comment.content)), length: 100
+  end
 end

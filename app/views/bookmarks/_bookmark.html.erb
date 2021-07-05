@@ -29,7 +29,7 @@
         <%= post.title.presence || 'Untitle' %>
       </h3>
       <div class="text-secondary">
-        <%= truncate post.content, length: 100 %>
+        <%= post_summary post %>
       </div>
     </div>
     <% if post.featured_image.attached? %>
