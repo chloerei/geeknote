@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GeekNote</title>
+    <title><%= "#{@page_title} - " if @page_title %>GeekNote</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,6 +12,8 @@
     <% if current_user %>
       <meta name="current-user-id" content="<%= current_user.id %>">
     <% end %>
+
+    <%= yield :head %>
   </head>
 
   <body>
