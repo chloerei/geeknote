@@ -7,7 +7,7 @@
   </div>
 
   <div class="posts">
-    <%= render @bookmarks %>
+    <%= render partial: 'bookmark', collection: @bookmarks %>
   </div>
 
   <%= paginate @bookmarks %>

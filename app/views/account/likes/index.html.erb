@@ -2,7 +2,7 @@
 
 <div class="container container--medium">
   <div class="posts">
-    <%= render @posts %>
+    <%= render partial: 'account/posts/post', collection: @posts, cached: -> (post) { [post, post.saved] } %>
 
     <%= paginate @posts %>
   </div>
