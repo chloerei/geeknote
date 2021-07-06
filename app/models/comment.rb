@@ -2,7 +2,7 @@ class Comment < ApplicationRecord
   include Likable
 
   belongs_to :commentable, polymorphic: true, counter_cache: true, touch: true
-  belongs_to :parent, class_name: 'Comment', optional: true, counter_cache: :replies_count
+  belongs_to :parent, class_name: 'Comment', optional: true, counter_cache: :replies_count, touch: true
   belongs_to :account
   belongs_to :user
   has_many :replies, class_name: 'Comment', foreign_key: :parent_id
