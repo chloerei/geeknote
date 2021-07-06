@@ -33,7 +33,7 @@ module ApplicationHelper
   def avatar_image_tag(avatar)
     if avatar.attached?
       if use_aliyun_oss?
-        image_tag avatar.url(params: { 'x-oss-process' => 'image/resize,m_fill,h_160,w_160'})
+        image_tag avatar.url(params: { 'x-oss-process' => 'image/resize,m_fill,w_160,h_160'})
       else
         image_tag avatar.variant(resize_to_fill: [160, 160])
       end
@@ -45,7 +45,7 @@ module ApplicationHelper
   def large_avatar_image_tag(avatar)
     if avatar.attached?
       if use_aliyun_oss?
-        image_tag avatar.url(params: { 'x-oss-process' => 'image/resize,m_fill,h_320,w_320'})
+        image_tag avatar.url(params: { 'x-oss-process' => 'image/resize,m_fill,w_320,h_320'})
       else
         image_tag avatar.variant(resize_to_fill: [320, 320])
       end
@@ -57,7 +57,7 @@ module ApplicationHelper
   def banner_image_tag(banner_image)
     if banner_image.attached?
       if use_aliyun_oss?
-        image_tag banner_image.url(params: { 'x-oss-process' => 'image/resize,m_lfit,h_1920,w_1920'})
+        image_tag banner_image.url(params: { 'x-oss-process' => 'image/resize,m_lfit,w_1920,h_1920'})
       else
         image_tag banner_image.variant(resize_to_limit: [1920, 1920])
       end
@@ -69,7 +69,7 @@ module ApplicationHelper
   def featured_image_thumb_tag(featured_image)
     if featured_image.attached?
       if use_aliyun_oss?
-        image_tag featured_image.url(params: { 'x-oss-process' => 'image/resize,m_fill,h_400,w_260'})
+        image_tag featured_image.url(params: { 'x-oss-process' => 'image/resize,m_fill,w_400,h_260'})
       else
         image_tag featured_image.variant(resize_to_fill: [400, 260])
       end
@@ -79,7 +79,7 @@ module ApplicationHelper
   def featured_image_tag(featured_image)
     if featured_image.attached?
       if use_aliyun_oss?
-        image_tag featured_image.url(params: { 'x-oss-process' => 'image/resize,m_lfit,h_1920,w_1920'})
+        image_tag featured_image.url(params: { 'x-oss-process' => 'image/resize,m_lfit,w_1920,h_1920'})
       else
         image_tag featured_image.variant(resize_to_limit: [1920, 1920])
       end
