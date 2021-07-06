@@ -132,24 +132,27 @@
 .posts__item {
   padding: 16px;
   position: relative;
-
-  & > .toolbar {
-    margin: -8px -16px;
-  }
+  display: flex;
+  align-items: center;
 }
 
 .posts__item:hover {
   background: rgba(0, 0, 0, 0.03);
 }
 
+.posts__item__content {
+  flex-grow: 1;
+}
+
+.posts__item__toolbar {
+  margin: -8px -16px;
+}
+
 .posts__item__feature-image {
   margin-left: 16px;
-
-  img {
-    max-width: 100px;
-    max-height: 100px;
-    border-radius: 4px;
-  }
+  width: 200px;
+  height: 130px;
+  flex-shrink: 0;
 }
 
 .material-icons.featured-post__icon {

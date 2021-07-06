@@ -2,81 +2,81 @@
 
 <div class="posts__item" id="bookmark-<%= bookmark.id %>">
   <a href="<%= account_post_path(post.account, post) %>" class="stretched-link"></a>
-  <div class="flex">
-    <div class="">
-      <div class="flex flex-align-items-center margin-bottom-8">
-        <div class="avatar-group margin-right-8">
-          <div class="avatar avatar--small">
-            <%= avatar_image_tag post.account.owner.avatar %>
-          </div>
-          <% if post.account.organization? && post.author_users.any? %>
-            <% post.author_users.each do |user| %>
-              <div class="avatar avatar--small">
-                <%= avatar_image_tag user.avatar %>
-              </div>
-            <% end %>
-          <% end %>
+  <div class="posts__item__content">
+    <div class="flex flex-align-items-center margin-bottom-8">
+      <div class="avatar-group margin-right-8">
+        <div class="avatar avatar--small">
+          <%= avatar_image_tag post.account.owner.avatar %>
         </div>
-        <div class="text-small">
-          <span class="text-bold"><%= post.account.owner.name %></span>
-          <% if post.account.organization? && post.author_users.any? %>
-            by
-            <span class="text-bold"><%= post.author_users.pluck(:name).join(', ') %></span>
+        <% if post.account.organization? && post.author_users.any? %>
+          <% post.author_users.each do |user| %>
+            <div class="avatar avatar--small">
+              <%= avatar_image_tag user.avatar %>
+            </div>
           <% end %>
-        </div>
+        <% end %>
       </div>
-      <h3 class="margin-top-0 margin-bottom-8">
-        <%= post.title.presence || 'Untitle' %>
-      </h3>
-      <div class="text-secondary">
-        <%= post_summary post %>
+      <div class="text-small">
+        <span class="text-bold"><%= post.account.owner.name %></span>
+        <% if post.account.organization? && post.author_users.any? %>
+          by
+          <span class="text-bold"><%= post.author_users.pluck(:name).join(', ') %></span>
+        <% end %>
       </div>
     </div>
-    <% if post.featured_image.attached? %>
-      <div class="posts__item__feature-image margin-left">
-        <%= image_tag post.featured_image.variant(resize_to_fill: [800, 800]) %>
-      </div>
-    <% end %>
-  </div>
-  <div class="toolbar">
-    <div class="toolbar__text">
-      <div class="text-secondary">
-        <%= local_time post.created_at, format: :short %>
-        &centerdot;
-        <%= post.likes_count %> likes
-        <% if post.allow_comments %>
+    <h3 class="margin-top-0 margin-bottom-8">
+      <%= post.title.presence || 'Untitle' %>
+    </h3>
+    <div class="text-secondary">
+      <%= post_summary post %>
+    </div>
+
+    <div class="toolbar posts__item__toolbar">
+      <div class="toolbar__text">
+        <div class="text-secondary">
+          <%= local_time post.created_at, format: :short %>
           &centerdot;
-          <%= post.comments_count %> comments
-        <% end %>
+          <%= post.likes_count %> likes
+          <% if post.allow_comments %>
+            &centerdot;
+            <%= post.comments_count %> comments
+          <% end %>
+        </div>
       </div>
-    </div>
-    <div class="toolbar__space">
-    </div>
-    <% if bookmark.archived? %>
-      <div class="toolbar__action">
-        <%= form_with model: bookmark, url: bookmark_path(bookmark) do |form| %>
-          <%= form.hidden_field :status, value: :saved %>
-          <button type="submit" class="button button--icon">
-            <span class="material-icons">unarchive</span>
-          </button>
-        <% end %>
+      <div class="toolbar__space">
       </div>
-    <% else %>
-      <div class="toolbar__action">
-        <%= form_with model: bookmark, url: bookmark_path(bookmark) do |form| %>
-          <%= form.hidden_field :status, value: :archived %>
-          <button type="submit" class="button button--icon">
-            <span class="material-icons">archive</span>
-          </button>
-        <% end %>
-      </div>
-    <% end %>
-    <div class="toolbar__action">
-      <%= form_with model: bookmark, url: bookmark_path(bookmark), method: 'delete' do |form| %>
-        <button type="submit" class="button button--icon">
-          <span class="material-icons">bookmark_remove</span>
-        </button>
+      <% if bookmark.archived? %>
+        <div class="toolbar__action">
+          <%= form_with model: bookmark, url: bookmark_path(bookmark) do |form| %>
+            <%= form.hidden_field :status, value: :saved %>
+            <button type="submit" class="button button--icon">
+              <span class="material-icons">unarchive</span>
+            </button>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="toolbar__action">
+          <%= form_with model: bookmark, url: bookmark_path(bookmark) do |form| %>
+            <%= form.hidden_field :status, value: :archived %>
+            <button type="submit" class="button button--icon">
+              <span class="material-icons">archive</span>
+            </button>
+          <% end %>
+        </div>
       <% end %>
+      <div class="toolbar__action">
+        <%= form_with model: bookmark, url: bookmark_path(bookmark), method: 'delete' do |form| %>
+          <button type="submit" class="button button--icon">
+            <span class="material-icons">bookmark_remove</span>
+          </button>
+        <% end %>
+      </div>
     </div>
+  </div>
+
+  <div class="posts__item__feature-image">
+    <% if post.featured_image.attached? %>
+      <%= featured_image_thumb_tag post.featured_image %>
+    <% end %>
   </div>
 </div>

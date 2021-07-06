@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-9">
+    <div class="col-8">
       <div class="tab padding">
         <a href="<%= root_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'index' %>">
           <%= t 'common.recommend' %>
@@ -20,7 +20,7 @@
       <%= paginate @posts %>
     </div>
 
-    <div class="col-3 margin-top">
+    <div class="col-4 margin-top">
       <% if !current_user %>
         <div class="subheader">
           <%= t '.join_geeknote' %>
@@ -61,16 +61,18 @@
         <div class="subheader">
           <%= t 'common.bookmarks' %>
         </div>
-        <div class="posts">
+        <div class="list">
           <% current_user.bookmarks.includes(:post).each do |bookmark| %>
             <% post = bookmark.post %>
-            <div class="posts__item">
-              <a href="<%= account_post_path(post.account, post) %>" class="stretched-link"></a>
-              <h4 class="margin-top-0 margin-bottom-8">
-                <%= post.title.presence || 'Untitle' %>
-              </h4>
-              <div class="text-secondary">
-                <%= local_time post.created_at, format: :short %>
+            <div class="list__item position-relative">
+              <div class="list__content">
+                <a href="<%= account_post_path(post.account, post) %>" class="stretched-link"></a>
+                <h4 class="margin-top-0 margin-bottom-8">
+                  <%= post.title.presence || 'Untitle' %>
+                </h4>
+                <div class="text-secondary">
+                  <%= local_time post.created_at, format: :short %>
+                </div>
               </div>
             </div>
           <% end %>
