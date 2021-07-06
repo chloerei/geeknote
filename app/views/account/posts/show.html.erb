@@ -21,7 +21,7 @@
   <div class="post">
     <% if @post.featured_image.attached? %>
       <div class="post__feature-image">
-        <%= image_tag @post.featured_image %>
+        <%= featured_image_tag @post.featured_image %>
       </div>
     <% end %>
     <h1 class="post__title"><%= @post.title %></h1>

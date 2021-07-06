@@ -76,6 +76,16 @@ module ApplicationHelper
     end
   end
 
+  def featured_image_tag(featured_image)
+    if featured_image.attached?
+      if use_aliyun_oss?
+        image_tag featured_image.url(params: { 'x-oss-process' => 'image/resize,m_lfit,h_1920,w_1920'})
+      else
+        image_tag featured_image.variant(resize_to_limit: [1920, 1920])
+      end
+    end
+  end
+
   def post_summary(post)
     if post.excerpt.present?
       truncate post.excerpt, length: 100
