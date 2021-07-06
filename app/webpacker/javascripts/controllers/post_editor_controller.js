@@ -146,7 +146,7 @@ export default class extends Controller {
       this.saving = true
       this.clearSaveTimer()
       this.displaySaving()
-      this.formTarget.dispatchEvent(new Event('submit', { bubbles: true }))
+      Turbo.navigator.submitForm(this.formTarget)
     }
   }
 
