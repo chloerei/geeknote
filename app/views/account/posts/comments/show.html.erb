@@ -8,7 +8,7 @@
     </a>
   </div>
   <div class="comment-thread">
-    <%= render partial: 'comment', collection: @comment.ancestors.reverse, cached: -> (comment) { [comment.comment.liked] } %>
+    <%= render partial: 'comment', collection: @comment.ancestors.reverse, cached: -> (comment) { [comment, comment.liked] } %>
     <%= render partial: 'comment', object: @comment %>
     <% if current_user %>
       <%= render 'form', comment: Comment.new(parent: @comment) %>
