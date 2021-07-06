@@ -209,7 +209,7 @@
     <% end %>
     <hr class="divider margin-x">
     <div id="comments" class="comments">
-      <%= render partial: 'account/posts/comments/comment', collection: @post.comments.with_liked(current_user).hot.limit(3), cached: -> (comment) { [comment, comment.liked] } %>
+      <%= render partial: 'account/posts/comments/comment', collection: @post.comments.no_parent.with_liked(current_user).hot.limit(3), cached: -> (comment) { [comment, comment.liked] } %>
     </div>
     <div class="padding">
       <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100">
