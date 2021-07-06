@@ -12,7 +12,7 @@ module ApplicationHelper
         next if node.fence_info == ''
 
         lang = node.fence_info
-        lexer = Rouge::Lexer.find_fancy(lang) || Rouge::Lexer.find_for('text')
+        lexer = Rouge::Lexer.find_fancy(lang) || Rouge::Lexer.find_fancy('text')
         formatter = Rouge::Formatters::HTML.new
         code = formatter.format(lexer.lex(node.string_content))
         new_node = CommonMarker::Node.new(:html)
