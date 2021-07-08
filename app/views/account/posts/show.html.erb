@@ -52,7 +52,9 @@
               <% end %>
             </div>
             <div class="text-secondary">
-              <%= local_time @post.published_at, format: :short %>
+              <% if @post.published_at %>
+                <%= local_time @post.published_at, format: :short %>
+              <% end %>
             </div>
           </div>
         </div>
