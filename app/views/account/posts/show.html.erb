@@ -6,14 +6,14 @@
   <meta property="og:url" content="<%= account_post_url(@account, @post) %>">
   <meta property="og:description" content="<%= post_summary @post %>">
   <% if @post.featured_image.attached? %>
-    <meta property="og:image" content="<%= url_for @post.featured_image %>">
+    <meta property="og:image" content="<%= featured_image_url @post.featured_image %>">
   <% end %>
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="<%= @post.title %>">
   <meta name="twitter:description" content="<%= post_summary @post %>">
   <% if @post.featured_image.attached? %>
-    <meta name="twitter:image" content="<%= url_for @post.featured_image %>">
+    <meta name="twitter:image" content="<%= featured_image_url @post.featured_image %>">
   <% end %>
 <% end %>
 
