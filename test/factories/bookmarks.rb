@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :bookmark do
     user
-    post
+    post factory: :published_post
   end
 end
