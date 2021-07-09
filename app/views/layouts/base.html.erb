@@ -21,8 +21,13 @@
   <body>
     <% if current_user %>
       <style>
-        [data-visible-to-user]:not([data-visible-to-user="<%= current_user.id %>"]),
-        [data-hidden-to-user="<%= current_user.id %>"] {
+        [data-visible-to-user]:not([data-visible-to-user="<%= current_user.id %>"]) {
+          display: none;
+        }
+      </style>
+    <% else %>
+      <style>
+        [data-visible-to-user] {
           display: none;
         }
       </style>
