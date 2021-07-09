@@ -86,6 +86,10 @@
 
 .post-editor__toolbar {
   background: #fafafa;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .post-editor__toolbar-container {
