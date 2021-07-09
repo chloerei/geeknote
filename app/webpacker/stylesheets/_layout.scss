@@ -1,3 +1,36 @@
+.app-bar--fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.body-container {
+  display: flex;
+  padding-top: 56px;
+
+  .drawer {
+    width: 256px;
+    z-index: 90;
+
+    @media (max-width: $tablet-break-point) {
+      width: 0;
+    }
+  }
+
+  .drawer__container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+  }
+}
+
+.content-container {
+  flex-grow: 1;
+}
+
 .container {
   max-width: 1280px;
   margin: 0 auto;

@@ -1,10 +1,100 @@
 <% content_for :body do %>
-  <div class="app">
-    <div class="app-bar-wrapper">
+  <div class="app-bar">
+    <div class="toolbar">
+      <div class="toolbar__action">
+        <button type="button" class="button button--icon" data-controller="toggle" data-toggle-target="#drawer" data-toggle-action="drawer#toggle">
+          <span class="material-icons">menu</span>
+        </button>
+      </div>
+      <div class="toolbar__title">
+        <a href="/">
+          GeekNote
+        </a>
+      </div>
+      <% if current_user %>
+        <div class="toolbar__action">
+          <a href="<%= new_account_dashboard_post_path(current_user.account) %>" class="button button--icon">
+            <span class="material-icons">post_add</span>
+          </a>
+        </div>
+        <div class="toolbar__action">
+          <a href="<%= notifications_path %>" class="button button--icon <%= 'notification-unread' if current_user.notifications.unread.count > 0 %>">
+            <span class="material-icons">notifications</span>
+          </a>
+        </div>
+        <div class="toolbar__action dropdown" data-controller="dropdown">
+          <button type="button" class="button button--icon button--avatar" data-action="dropdown#toggle">
+            <div class="avatar">
+              <%= avatar_image_tag current_user.avatar %>
+            </div>
+          </button>
+          <div class="dropdown__menu dropdown__menu--top-right">
+            <a href="<%= account_root_path(current_user.account) %>" class="dropdown__item">
+              <div class="dropdown__item__icon">
+                <span class="material-icons">account_box</span>
+              </div>
+              <div class="dropdown__item__text">
+                <%= t 'common.profile' %>
+              </div>
+            </a>
+            <a href="<%= account_dashboard_root_path(current_user.account) %>" class="dropdown__item">
+              <div class="dropdown__item__icon">
+                <span class="material-icons">dashboard</span>
+              </div>
+              <div class="dropdown__item__text">
+                <%= t 'common.dashboard' %>
+              </div>
+            </a>
+            <a href="<%= organizations_path %>" class="dropdown__item">
+              <div class="dropdown__item__icon">
+                <span class="material-icons">switch_account</span>
+              </div>
+              <div class="dropdown__item__text">
+                <%= t 'common.organizations' %>
+              </div>
+            </a>
+            <a href="<%= settings_account_path %>" class="dropdown__item">
+              <div class="dropdown__item__icon">
+                <span class="material-icons">settings</span>
+              </div>
+              <div class="dropdown__item__text">
+                <%= t 'common.settings' %>
+              </div>
+            </a>
+            <hr class="divider">
+            <%= form_with url: sign_out_path, method: 'delete' do %>
+              <button type="submit" class="dropdown__item">
+                <div class="dropdown__item__icon">
+                  <span class="material-icons">logout</span>
+                </div>
+                <div class="dropdown__item__text">
+                  <%= t 'common.sign_out' %>
+                </div>
+              </button>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="toolbar__action">
+          <a href="<%= sign_up_path %>" class="button button--text">
+            <%= t 'common.sign_up' %>
+          </a>
+        </div>
+        <div class="toolbar__action">
+          <a href="<%= sign_in_path %>" class="button button--text">
+            <%= t 'common.sign_in' %>
+          </a>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="drawer" class="drawer drawer--modal" data-controller="drawer">
+    <div class="drawer__container">
       <div class="app-bar">
         <div class="toolbar">
           <div class="toolbar__action">
-            <button type="button" class="button button--icon" data-controller="toggle" data-toggle-target="#drawer" data-toggle-action="drawer#toggle">
+            <button type="button" class="button button--icon" data-action="drawer#toggle">
               <span class="material-icons">menu</span>
             </button>
           </div>
@@ -13,142 +103,39 @@
               GeekNote
             </a>
           </div>
-          <% if current_user %>
-            <div class="toolbar__action">
-              <a href="<%= new_account_dashboard_post_path(current_user.account) %>" class="button button--icon">
-                <span class="material-icons">post_add</span>
-              </a>
-            </div>
-            <div class="toolbar__action">
-              <a href="<%= notifications_path %>" class="button button--icon <%= 'notification-unread' if current_user.notifications.unread.count > 0 %>">
-                <span class="material-icons">notifications</span>
-              </a>
-            </div>
-            <div class="toolbar__action dropdown" data-controller="dropdown">
-              <button type="button" class="button button--icon button--avatar" data-action="dropdown#toggle">
-                <div class="avatar">
-                  <%= avatar_image_tag current_user.avatar %>
-                </div>
-              </button>
-              <div class="dropdown__menu dropdown__menu--top-right">
-                <a href="<%= account_root_path(current_user.account) %>" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">account_box</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.profile' %>
-                  </div>
-                </a>
-                <a href="<%= account_dashboard_root_path(current_user.account) %>" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">dashboard</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.dashboard' %>
-                  </div>
-                </a>
-                <a href="<%= organizations_path %>" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">switch_account</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.organizations' %>
-                  </div>
-                </a>
-                <a href="<%= settings_account_path %>" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">settings</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.settings' %>
-                  </div>
-                </a>
-                <hr class="divider">
-                <%= form_with url: sign_out_path, method: 'delete' do %>
-                  <button type="submit" class="dropdown__item">
-                    <div class="dropdown__item__icon">
-                      <span class="material-icons">logout</span>
-                    </div>
-                    <div class="dropdown__item__text">
-                      <%= t 'common.sign_out' %>
-                    </div>
-                  </button>
-                <% end %>
-              </div>
-            </div>
-          <% else %>
-            <div class="toolbar__action">
-              <a href="<%= sign_up_path %>" class="button button--text">
-                <%= t 'common.sign_up' %>
-              </a>
-            </div>
-            <div class="toolbar__action">
-              <a href="<%= sign_in_path %>" class="button button--text">
-                <%= t 'common.sign_in' %>
-              </a>
-            </div>
-          <% end %>
         </div>
       </div>
-
-      <div class="app-bar-wrapper__content">
-        <div class="drawer-wrapper">
-          <div id="drawer" class="drawer drawer--modal" data-controller="drawer">
-            <div class="drawer__container">
-              <div class="app-bar">
-                <div class="toolbar">
-                  <div class="toolbar__action">
-                    <button type="button" class="button button--icon" data-action="drawer#toggle">
-                      <span class="material-icons">menu</span>
-                    </button>
-                  </div>
-                  <div class="toolbar__title">
-                    <a href="/">
-                      GeekNote
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="nav">
-                <a href="/" class="nav__item <%= 'nav__item--active' if controller_name == 'posts' %>">
-                  <div class="nav__item__icon">
-                    <span class="material-icons">home</span>
-                  </div>
-                  <div class="nav__item__text">
-                    Home
-                  </div>
-                </a>
-                <a href="<%= bookmarks_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'bookmarks' %>">
-                  <div class="nav__item__icon">
-                    <span class="material-icons">bookmarks</span>
-                  </div>
-                  <div class="nav__item__text">
-                    Bookmarks
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="drawer__scrim" data-action="click->drawer#close">
-            </div>
+      <div class="nav">
+        <a href="/" class="nav__item <%= 'nav__item--active' if controller_name == 'posts' %>">
+          <div class="nav__item__icon">
+            <span class="material-icons">home</span>
           </div>
-
-          <div class="drawer-wrapper__content">
-            <div class="app-content">
-              <%= yield %>
-            </div>
-
-            <div id="snackbar-container" class="snackbar-container">
-              <% if flash[:notice] %>
-                <div class="snackbar" data-controller="snackbar" data-snackbar-period="5000">
-                  <%= flash[:notice] %>
-                </div>
-              <% end %>
-            </div>
+          <div class="nav__item__text">
+            Home
           </div>
-        </div>
+        </a>
+        <a href="<%= bookmarks_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'bookmarks' %>">
+          <div class="nav__item__icon">
+            <span class="material-icons">bookmarks</span>
+          </div>
+          <div class="nav__item__text">
+            Bookmarks
+          </div>
+        </a>
       </div>
     </div>
+    <div class="drawer__scrim" data-action="click->drawer#close">
+    </div>
+  </div>
 
+  <%= yield %>
+
+  <div id="snackbar-container" class="snackbar-container">
+    <% if flash[:notice] %>
+      <div class="snackbar" data-controller="snackbar" data-snackbar-period="5000">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
   </div>
 <% end %>
 
