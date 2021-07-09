@@ -1,5 +1,5 @@
 <% content_for :body do %>
-  <div class="app-bar">
+  <div class="app-bar app-bar--fixed">
     <div class="toolbar">
       <div class="toolbar__action">
         <button type="button" class="button button--icon" data-controller="toggle" data-toggle-target="#drawer" data-toggle-action="drawer#toggle">
@@ -128,14 +128,18 @@
     </div>
   </div>
 
-  <%= yield %>
+  <div class="body-container">
+    <div class="content-container">
+      <%= yield %>
 
-  <div id="snackbar-container" class="snackbar-container">
-    <% if flash[:notice] %>
-      <div class="snackbar" data-controller="snackbar" data-snackbar-period="5000">
-        <%= flash[:notice] %>
+      <div id="snackbar-container" class="snackbar-container">
+        <% if flash[:notice] %>
+          <div class="snackbar" data-controller="snackbar" data-snackbar-period="5000">
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
 <% end %>
 
