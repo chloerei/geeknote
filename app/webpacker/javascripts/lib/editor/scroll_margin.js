@@ -2,9 +2,22 @@ import { ViewPlugin, PluginField } from "@codemirror/view"
 
 export function scrollMargin() {
   return ViewPlugin.fromClass(class {
-    constructor() {
-      this.margin = {
-        bottom: 160
+    margin = {
+      bottom: 0
+    }
+
+    constructor(view) {
+    }
+
+    update(update) {
+      if (update.docChanged) {
+        this.margin = {
+          bottom: 100
+        }
+      } else {
+        this.margin = {
+          bottom: 0
+        }
       }
     }
   }, {
