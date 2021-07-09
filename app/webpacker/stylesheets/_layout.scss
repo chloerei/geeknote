@@ -8,11 +8,11 @@
 
 .body-container {
   display: flex;
-  padding-top: 56px;
 
   .drawer {
     width: 256px;
     z-index: 90;
+    flex-shrink: 0;
 
     @media (max-width: $tablet-break-point) {
       width: 0;
@@ -32,7 +32,8 @@
 }
 
 .content-container {
-  flex-grow: 1;
+  padding-top: 56px;
+  width: 100%;
 }
 
 .container {
