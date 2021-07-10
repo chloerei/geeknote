@@ -3,6 +3,6 @@ import { Turbo } from '@hotwired/turbo-rails'
 
 export default class extends Controller {
   submit() {
-    Turbo.navigator.submitForm(this.element)
+    this.element.dispatchEvent(new CustomEvent('submit', { bubbles: true, cancelable: true }))
   }
 }

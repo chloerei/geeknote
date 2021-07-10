@@ -13,7 +13,7 @@
         <%= form_with model: @account.owner, url: account_dashboard_settings_banner_image_path(@account), data: { controller: 'form' } do |form| %>
           <label class="button button--icon">
             <span class="material-icons">add_photo_alternate</span>
-            <%= form.file_field :banner_image, direct_upload: true, class: 'image-uploader__input', data: { action: 'change->form#submit' } %>
+            <%= form.file_field :banner_image, direct_upload: true, class: 'image-uploader__input', data: { action: 'form#submit' } %>
           </label>
         <% end %>
       </div>
