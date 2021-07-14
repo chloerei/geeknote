@@ -16,7 +16,7 @@
             </a>
             <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="link-text">
               <span class="text-muted">
-                <%= local_time comment.created_at, format: :short %>
+                <%= format_time comment.created_at %>
               </span>
             </a>
           </div>

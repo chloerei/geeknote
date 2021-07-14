@@ -36,7 +36,7 @@
       <div class="toolbar posts__item__toolbar">
         <div class="toolbar__text">
           <div class="text-secondary">
-            <%= local_time post.published_at, format: :short %>
+            <%= format_time post.published_at %>
             &centerdot;
             <%= post.likes_count %> <%= t 'common.likes' %>
             <% if post.allow_comments %>

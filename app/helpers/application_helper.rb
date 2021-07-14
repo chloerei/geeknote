@@ -107,4 +107,10 @@ module ApplicationHelper
   def comment_summary(comment)
     truncate strip_tags(markdown_render(comment.content)), length: 100
   end
+
+  def format_time(time)
+    if time
+      local_time time, format: :short
+    end
+  end
 end

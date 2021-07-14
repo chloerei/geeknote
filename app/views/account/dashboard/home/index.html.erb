@@ -43,7 +43,7 @@
               <div class="text-primary">
                 <b><%= comment.user.name %></b>
                 <span class="text-muted">&centerdot;</span>
-                <span class="text-muted"><%= local_time comment.created_at, format: :short %></span>
+                <span class="text-muted"><%= format_time comment.created_at %></span>
               </div>
               <div class="text-muted">
                 <%= comment_summary comment %>

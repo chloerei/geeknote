@@ -80,7 +80,7 @@
                     <%= post.tags.pluck(:name).join(', ') %>
                     &centerdot;
                   <% end %>
-                  <%= local_time post.updated_at, format: :short %>
+                  <%= format_time post.updated_at %>
                 </div>
               </td>
               <td class="table__cell--attribute"><%= Post.human_attribute_name "status.#{post.status}" %></td>

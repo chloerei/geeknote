@@ -71,7 +71,7 @@
                   <%= post.title.presence || 'Untitle' %>
                 </h4>
                 <div class="text-secondary">
-                  <%= local_time post.published_at, format: :short %>
+                  <%= format_time post.published_at %>
                 </div>
               </div>
             </div>

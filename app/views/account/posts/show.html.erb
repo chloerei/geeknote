@@ -53,7 +53,7 @@
             </div>
             <div class="text-secondary">
               <% if @post.published_at %>
-                <%= local_time @post.published_at, format: :short %>
+                <%= format_time @post.published_at %>
               <% end %>
             </div>
           </div>
