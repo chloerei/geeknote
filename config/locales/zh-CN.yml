@@ -151,6 +151,7 @@ zh-CN:
     messages:
       email_or_password_error: Email 或密码错误
   flash:
+    account_update_successful: 账号信息更新成功。
     bookmark_added: 已添加书签。
     boomark_removed: 已移除书签。
     password_reset_email_has_been_sent: 重置邮件已发送，请检查收件箱。
@@ -158,6 +159,7 @@ zh-CN:
     password_reset_successful: 密码重置成功，请使用您的新密码登录账号。
     password_reset_token_invliad: 密码重置链接无效或已过期，请重新获取重置链接。
     password_reset_user_does_not_exists: 找不到匹配的用户。
+    password_update_successful: 密码更新成功。
     require_sign_in: 需要登录。
   posts:
     index:

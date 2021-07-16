@@ -7,7 +7,7 @@ class Settings::PasswordsController < Settings::BaseController
     @user = current_user
     if @user.authenticate params[:user][:current_password]
       if @user.update user_params
-        redirect_to settings_password_path, notice: 'Password update successful'
+        redirect_to settings_password_path, notice: t('flash.password_update_successful')
       else
         render turbo_stream: turbo_stream.replace('password-form', partial: 'form')
       end

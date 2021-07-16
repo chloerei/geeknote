@@ -111,7 +111,7 @@
             <span class="material-icons">home</span>
           </div>
           <div class="nav__item__text">
-            Home
+            <%= t 'common.home' %>
           </div>
         </a>
         <a href="<%= bookmarks_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'bookmarks' %>">
@@ -119,7 +119,7 @@
             <span class="material-icons">bookmarks</span>
           </div>
           <div class="nav__item__text">
-            Bookmarks
+            <%= t 'common.bookmarks' %>
           </div>
         </a>
       </div>

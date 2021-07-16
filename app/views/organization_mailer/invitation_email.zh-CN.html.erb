@@ -1,0 +1,17 @@
+<p>
+  @<%= @member.inviter.account.name %> 邀请您加入 @<%= @member.organization.account.name %> 小组。 访问 <a href="<%= account_root_url(@member.organization.account) %>"><%= account_root_url(@member.organization.account) %></a> 查看 @<%= @member.organization.account.name %> 的资料，点击下方链接确认邀请。
+</p>
+
+<p class="aligncenter">
+  <a href="<%= account_invitation_url(@member.organization.account, invitation_token: (@member.user ? nil : @member.invitation_token)) %>" class="btn-primary">
+    加入 @<%= @member.organization.account.name %>
+  </a>
+</p>
+
+<p>邀请链接将于 7 天后过期。</p>
+
+<% if @member.user %>
+  <p>
+    <b>注意：</b> 如果您看到 404 页面，请确认使用 @<%= @member.user.account.name %> 身份登录。
+  </p>
+<% end %>
