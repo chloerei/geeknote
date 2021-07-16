@@ -67,6 +67,10 @@ zh-CN:
           attributes:
             name:
               invalid: 只能使用大小写字母、数字和 - 号
+        user:
+          attributes:
+            current_password:
+              not_match: 密码错误
   common:
     account: 账号
     archived: 已归档

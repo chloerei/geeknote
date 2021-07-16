@@ -5,10 +5,14 @@ class Settings::PasswordsController < Settings::BaseController
 
   def update
     @user = current_user
-    @user.require_password = true
-    if @user.update user_params
-      redirect_to settings_password_path, notice: 'Password update successful'
+    if @user.authenticate params[:user][:current_password]
+      if @user.update user_params
+        redirect_to settings_password_path, notice: 'Password update successful'
+      else
+        render turbo_stream: turbo_stream.replace('password-form', partial: 'form')
+      end
     else
+      @user.errors.add :current_password, :not_match
       render turbo_stream: turbo_stream.replace('password-form', partial: 'form')
     end
   end
