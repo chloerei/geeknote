@@ -10,5 +10,12 @@
       <%= t 'errors.messages.email_or_password_error' %>
     </div>
   <% end %>
-  <%= form.submit t('common.sign_in'), class: 'button button--contained button--primary button--full-width' %>
+  <div class="flex">
+    <%= form.submit t('common.sign_in'), class: 'button button--contained button--primary button--full-width' %>
+    <div class="flex-grow-1">
+    </div>
+    <a href="<%= new_user_password_path %>" class="button button--text">
+      <%= t 'common.forgot_password?' %>
+    </a>
+  </div>
 <% end %>

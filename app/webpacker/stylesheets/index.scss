@@ -52,7 +52,12 @@ body {
   margin-bottom: 16px;
 }
 
+.button--contained {
+  min-width: 88px;
+}
+
 .button--text {
+  color: var(--text-secondary-color);
 }
 
 .button--contained,

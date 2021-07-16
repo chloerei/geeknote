@@ -35,6 +35,10 @@ Rails.application.routes.draw do
     resource :password
   end
 
+  namespace :user do
+    resource :password, only: [:new, :create, :edit, :update]
+  end
+
   scope '/:account_name', module: 'account', as: :account do
     root to: 'posts#index'
 

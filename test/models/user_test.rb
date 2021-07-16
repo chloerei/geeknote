@@ -18,4 +18,23 @@ class UserTest < ActiveSupport::TestCase
     assert_not build(:user, account_attributes: { name: 'abc-' }).valid?
     assert_not build(:user, account_attributes: { name: 'a.bc' }).valid?
   end
+
+  test "should generate and find by password reset token" do
+    user = create(:user)
+
+    token = user.password_reset_token
+
+    assert_equal user, User.find_by_password_reset_token(token)
+
+    # purpose not match
+    assert_nil User.find_by_password_reset_token(User.encryptor.encrypt_and_sign(user.id))
+
+    # expired
+    travel 31.minutes do
+      assert_nil User.find_by_password_reset_token(token)
+    end
+
+    # invalid token
+    assert_nil User.find_by_password_reset_token('notexist')
+  end
 end

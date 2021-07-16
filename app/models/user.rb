@@ -32,4 +32,20 @@ class User < ApplicationRecord
   end
 
   accepts_nested_attributes_for :account, update_only: true
+
+
+  def self.encryptor
+    key = Rails.application.key_generator.generate_key 'user-encryptor', ActiveSupport::MessageEncryptor.key_len
+    ActiveSupport::MessageEncryptor.new(key)
+  end
+
+  def password_reset_token
+    User.encryptor.encrypt_and_sign(id, purpose: :password_reset, expires_in: 30.minutes)
+  end
+
+  def self.find_by_password_reset_token(token)
+    find_by id: User.encryptor.decrypt_and_verify(token, purpose: :password_reset)
+  rescue ActiveSupport::MessageEncryptor::InvalidMessage
+    nil
+  end
 end
