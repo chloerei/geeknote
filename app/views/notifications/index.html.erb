@@ -4,7 +4,11 @@
   </div>
   <div class="list">
     <% @notifications.each do |notification| %>
-      <%= render "notifications/#{notification.type}", notification: notification %>
+      <% begin %>
+        <%= render "notifications/#{notification.type}", notification: notification %>
+      <% rescue %>
+        <% notification.destroy %>
+      <% end %>
     <% end %>
   </div>
 

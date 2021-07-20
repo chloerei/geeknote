@@ -1,6 +1,6 @@
 class Account::Posts::PreviewsController < Account::Posts::BaseController
   def show
-    if ActiveSupport::SecurityUtils.secure_compare(@post.preview_token, params[:token])
+    if ActiveSupport::SecurityUtils.secure_compare(@post.preview_token, params[:token]) && !@post.restricted
       render 'account/posts/show'
     else
       render_not_found

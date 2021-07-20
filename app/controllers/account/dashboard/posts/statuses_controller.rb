@@ -2,7 +2,11 @@ class Account::Dashboard::Posts::StatusesController < Account::Dashboard::Posts:
   before_action :check_permission
 
   def update
-    @post.update post_params
+    if @post.restricted? and post_params[:status] == 'published'
+      redirect_to edit_account_dashboard_post_path(@account, @post), notice: I18n.t('flash.post_is_restricted')
+    else
+      @post.update post_params
+    end
   end
 
   private

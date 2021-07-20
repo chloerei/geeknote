@@ -7,7 +7,8 @@ class Notification < ApplicationRecord
 
   enum type: {
     comment: 0,
-    reply: 1
+    reply: 1,
+    post_restricted: 2
   }
 
   scope :unread, -> { where(read_at: nil) }

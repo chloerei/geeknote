@@ -83,7 +83,12 @@
                   <%= format_time post.updated_at %>
                 </div>
               </td>
-              <td class="table__cell--attribute"><%= Post.human_attribute_name "status.#{post.status}" %></td>
+              <td class="table__cell--attribute">
+                <%= Post.human_attribute_name "status.#{post.status}" %>
+                <% if post.restricted? %>
+                  <span class="text-color-red"><%= t 'common.restricted' %></span>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

@@ -4,4 +4,10 @@ class UserMailerPreview < ActionMailer::Preview
     @user = User.first || FactoryBot.create(:user)
     UserMailer.with(user: @user).password_reset_email
   end
+
+  def post_restricted_email
+    @user = User.first || FactoryBot.create(:user)
+    @post = Post.first || FactoryBot.create(:post)
+    UserMailer.with(user: @user, post: @post).post_restricted_email
+  end
 end

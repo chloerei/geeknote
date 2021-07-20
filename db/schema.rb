@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_18_114817) do
+ActiveRecord::Schema.define(version: 2021_07_20_112144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -176,6 +176,7 @@ ActiveRecord::Schema.define(version: 2021_06_18_114817) do
     t.integer "bookmarks_count", default: 0
     t.boolean "allow_comments", default: true
     t.boolean "featured", default: false
+    t.boolean "restricted", default: false
     t.index ["account_id"], name: "index_posts_on_account_id"
     t.index ["published_at"], name: "index_posts_on_published_at"
   end

@@ -36,3 +36,10 @@
   <div class="sheet__scrim" data-action="click->sheet#close">
   </div>
 </div>
+<div id="snackbar-container" class="snackbar-container">
+  <% if flash[:notice] %>
+    <div class="snackbar" data-controller="snackbar" data-snackbar-period="5000">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+</div>

@@ -56,4 +56,19 @@ class Post < ApplicationRecord
       self.author_users = account.owner.member_users.joins(:account).where(account: { name: list })
     end
   end
+
+  def restricted!
+    update(
+      restricted: true,
+      status: 'draft'
+    )
+
+    PostRestrictedNotificationJob.perform_later(self)
+  end
+
+  def remove_restricted
+    update(
+      restricted: false
+    )
+  end
 end

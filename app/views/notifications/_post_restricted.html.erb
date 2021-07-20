@@ -1,0 +1,12 @@
+<% post = notification.record %>
+
+<div class="list__item position-relative">
+  <div class="list__avatar">
+    <div class="avatar">
+      <%= avatar_image_tag current_user.avatar %>
+    </div>
+  </div>
+  <div class="list__content">
+    根据<a href="https://geeknote.net/policy/posts/190">《社区准则》</a>》您的帖子《<%= post.title.presence || 'Untitile' %>》已被限制发布，您可以在草稿箱查看和导出帖子内容。
+  </div>
+</div>
