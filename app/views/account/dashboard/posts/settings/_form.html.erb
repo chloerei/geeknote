@@ -20,7 +20,7 @@
           <% @post.author_users.includes(:account).each do |user| %>
             <option value="<%= user.account.name %>" selected><%= user.name %></option>
           <% end %>
-          <% @account.owner.members.includes(user: :account).where.not(user: @post.author_users).each do |member| %>
+          <% @account.owner.members.active.includes(user: :account).where.not(user: @post.author_users).each do |member| %>
             <option value="<%= member.user.account.name %>"><%= member.user.name %></option>
           <% end %>
         </select>

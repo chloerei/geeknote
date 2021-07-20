@@ -5,7 +5,12 @@ class Account::Dashboard::Posts::SettingsController < Account::Dashboard::Posts:
   end
 
   def update
-    if @post.update settings_params
+    parsed_params = settings_params
+
+    parsed_params[:tag_list] ||= []
+    parsed_params[:author_list] ||= []
+
+    if @post.update parsed_params
       # render nothing
     else
       render turbo_stream: turbo_stream.replace('settings-form', partial: 'form')
