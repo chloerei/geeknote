@@ -86,6 +86,13 @@
         <% end %>
         <a href="<%= account_followers_path(@account) %>" class="link-text"><b><%= @account.followers_count %></b> <%= t 'common.followers' %></a>
       </div>
+      <div class="toolbar toolbar--breakout">
+        <div class="toolbar__action">
+          <a href="<%= account_feed_url(@account, format: :atom) %>" class="button button--icon" target="_blank" title="Atom Feed">
+            <span class="material-icons">rss_feed</span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 

@@ -55,6 +55,8 @@ Rails.application.routes.draw do
       end
     end
 
+    get '/feed', to: 'feed#index', as: :feed
+
     resource :follow, only: [:create, :destroy]
     resources :followings, only: [:index]
     resources :followers, only: [:index]

@@ -74,4 +74,12 @@ class Account < ApplicationRecord
   def organization?
     owner_type == 'Organization'
   end
+
+  def display_name
+    owner.name
+  end
+
+  def description
+    user? ? owner.bio : owner.description
+  end
 end

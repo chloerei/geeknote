@@ -30,6 +30,18 @@ module ApplicationHelper
     ENV['STORAGE_SERVICE'] == 'aliyun'
   end
 
+  def avatar_url(avatar)
+    if avatar.attached?
+      if use_aliyun_oss?
+        avatar.url(params: { 'x-oss-process' => 'image/resize,m_fill,w_160,h_160'})
+      else
+        url_for avatar.variant(resize_to_fill: [160, 160])
+      end
+    else
+      asset_pack_url('media/images/avatar.png')
+    end
+  end
+
   def avatar_image_tag(avatar)
     if avatar.attached?
       if use_aliyun_oss?

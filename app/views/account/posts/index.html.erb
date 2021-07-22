@@ -1,3 +1,9 @@
+<% @page_title = @account.display_name %>
+
+<% content_for :head do %>
+  <%= auto_discovery_link_tag :atom, account_feed_url(@account, format: :atom) %>
+<% end %>
+
 <%= render 'account/header' %>
 
 <div class="container container--medium">
