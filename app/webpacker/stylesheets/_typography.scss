@@ -25,6 +25,10 @@
     font-size: 18px;
   }
 
+  em {
+    color: var(--text-secondary-color);
+  }
+
   blockquote {
     border-left: 4px solid rgba(0, 0, 0, 0.15);
     background: transparent;

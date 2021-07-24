@@ -24,7 +24,7 @@
   outline: none;
   white-space: pre-wrap;
   word-break: break-word;
-  font-family: monospace;
+  font-family: Menlo, Consolas, "Liberation Mono", Courier, monospace;
   font-size: 18px;
   outline: none;
 }
@@ -52,7 +52,7 @@
     bottom: -2px;
     left: 0;
     right: 0;
-    border-bottom: 1px solid currentColor;
+    border-bottom: 1px solid var(--primary-color);
   }
 }
 
@@ -72,11 +72,11 @@
 
 .cmt-emphasis {
   font-style: italic;
+  color: var(--text-secondary-color);
 }
 
 .cmt-link {
 }
 
 .cmt-url {
-  text-decoration: underline;
 }
