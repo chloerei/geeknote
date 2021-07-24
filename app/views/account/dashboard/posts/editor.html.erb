@@ -1,16 +1,14 @@
 <div class="post-editor" data-controller="post-editor" data-post-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>" data-post-editor-attachments-url-value="<%= account_dashboard_attachments_path %>">
   <%= render 'appbar' %>
-  <div class="app-content">
-    <div class="post-editor__container">
-      <%= form_with model: @post, url: [@account, :dashboard, @post], data: { 'post-editor-target': 'form' }, class: 'post-editor__form', id: 'post-form' do |form| %>
-        <%= form.text_area :title, placeholder: t('.title'), autocomplete: 'off', class: 'post-editor__title', "data-post-editor-target": 'titleInput' %>
-        <%= form.hidden_field :content, "data-post-editor-target": 'contentInput' %>
-        <div class="post-editor__content-editor" data-post-editor-target="contentEditor" data-placeholder="<%= t '.start_here' %>">
-        </div>
-        <div class="post-editor__content-padding" data-action="click->post-editor#focusEnd">
-        </div>
-      <% end %>
-    </div>
+  <div class="post-editor__container">
+    <%= form_with model: @post, url: [@account, :dashboard, @post], data: { 'post-editor-target': 'form' }, class: 'post-editor__form', id: 'post-form' do |form| %>
+      <%= form.text_area :title, placeholder: t('.title'), autocomplete: 'off', class: 'post-editor__title', "data-post-editor-target": 'titleInput' %>
+      <%= form.hidden_field :content, "data-post-editor-target": 'contentInput' %>
+      <div class="post-editor__content-editor" data-post-editor-target="contentEditor" data-placeholder="<%= t '.start_here' %>">
+      </div>
+      <div class="post-editor__content-padding" data-action="click->post-editor#focusEnd">
+      </div>
+    <% end %>
   </div>
   <div class="post-editor__toolbar">
     <div class="post-editor__toolbar-container" data-post-editor-target="toolbarContainer">

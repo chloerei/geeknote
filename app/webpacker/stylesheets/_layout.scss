@@ -31,6 +31,16 @@
   position: fixed;
 }
 
+.sheet--modal {
+  .sheet__container {
+    z-index: 110 !important;
+  }
+
+  .sheet__scrim {
+    z-index: 109 !important;
+  }
+}
+
 .content-container {
   padding-top: 56px;
   width: 100%;
