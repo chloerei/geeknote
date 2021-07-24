@@ -85,6 +85,10 @@ module ApplicationHelper
       else
         image_tag featured_image.variant(resize_to_fill: [400, 260])
       end
+    else
+      content_tag 'div', class: 'featured-image-placeholder' do
+        content_tag 'span', 'article', class: 'material-icons'
+      end
     end
   end
 
