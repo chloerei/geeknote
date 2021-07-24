@@ -38,6 +38,10 @@ export default class extends Controller {
     })
   }
 
+  focusEnd() {
+    this.editor.focusEnd()
+  }
+
   resizeTitle() {
     this.titleInputTarget.style.height = 0
     this.titleInputTarget.style.height = this.titleInputTarget.scrollHeight + 'px'

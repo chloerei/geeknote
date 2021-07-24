@@ -48,6 +48,13 @@ class Editor {
   focus() {
     this.editorView.focus()
   }
+
+  focusEnd() {
+    this.editorView.dispatch({
+      selection: { anchor: this.editorView.state.doc.length }
+    })
+    this.editorView.focus()
+  }
 }
 
 export { Editor }
