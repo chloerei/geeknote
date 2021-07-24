@@ -1,13 +1,43 @@
 .typography {
   word-wrap: break-word;
+  font-size: 18px;
+  line-height: 1.7;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary-color);
+    margin: 1em 0;
+    font-weight: 500;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  h4, h5, h6 {
+    font-size: 18px;
+  }
+
+  blockquote {
+    border-left: 4px solid rgba(0, 0, 0, 0.15);
+    background: transparent;
+    color: #555;
+  }
 
   code {
-    background-color: #f8f8f8;
     font-family: Menlo, Consolas, "Liberation Mono", Courier, monospace;
     font-size: 15px;
   }
 
   :not(pre) code {
+    background-color: rgba(0, 0, 0, 0.05);
     padding: 0 4px;
     line-height: 24px;
   }

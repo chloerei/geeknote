@@ -9,10 +9,12 @@
 }
 
 .post__title {
-  font-size: 3em;
-  font-weight: bold;
+  font-size: 40px;
+  line-height: 1.7;
+  font-weight: 500;
   margin: 0 0 16px;
   padding: 0;
+  letter-spacing: -1.5px;
 }
 
 .post-preview-iframe {
@@ -32,8 +34,7 @@
     align-items: stretch;
   }
 
-  .cm-content {
-    padding-bottom: 160px;
+  .cmt-meta {
   }
 }
 
@@ -67,15 +68,16 @@
 
 .post-editor__title {
   width: 100%;
-  font-size: 3em;
-  line-height: 1.5;
-  font-weight: bold;
+  font-size: 40px;
+  line-height: 1.7;
+  font-weight: 500;
   border: none;
   outline: 0;
-  margin: 60px 0 16px;
+  margin: 80px 0 16px;
   padding: 0;
   resize: none;
-  font-family: sans-serif;
+  font-family: var(--font-family);
+  letter-spacing: -1.5px;
 }
 
 .post-editor__content-editor {
