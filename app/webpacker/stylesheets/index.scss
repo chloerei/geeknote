@@ -154,6 +154,10 @@ body {
   padding-bottom: 16px;
 }
 
+.padding-64 {
+  padding: 64px;
+}
+
 .width-100 {
   width: 100%;
 }
@@ -627,4 +631,27 @@ input:-webkit-autofill {
 
 .text-color-red {
   color: #F44336;
+}
+
+.height-100 {
+  height: 100%;
+}
+
+.content-placeholder {
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #999;
+}
+
+.content-placeholder__icon {
+  .material-icons {
+    font-size: 64px;
+  }
+}
+
+.content-placeholder__label {
+  margin-bottom: 16px;
 }

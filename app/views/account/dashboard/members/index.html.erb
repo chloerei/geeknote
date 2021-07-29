@@ -1,38 +1,80 @@
-<div class="app-bar app-bar--borderless">
-  <div class="app-bar app-bar--borderless">
-    <div class="toolbar">
-      <div class="toolbar__title">
+<div class="container">
+  <div class="padding">
+    <div class="breadcrumb">
+      <a href="<%= account_root_path(@account) %>" class="breadcrumb__item">
+        <%= @account.display_name %>
+      </a>
+      <a href="<%= account_dashboard_root_path(@account) %>" class="breadcrumb__item">
+        <%= t 'common.dashboard' %>
+      </a>
+      <span class="breadcrumb__item breadcrumb__item--active">
         <%= t 'common.members' %>
-      </div>
-      <div class="toolbar__action">
-        <a href="<%= new_account_dashboard_member_path %>" class="button button--text button--primary">
-          <div class="button__icon">
-            <span class="material-icons">person_add</span>
-          </div>
-          <div class="button__text">
-            <%= t 'common.invite_member' %>
-          </div>
-        </a>
-      </div>
+      </span>
     </div>
   </div>
 
-  <div class="app-content">
-    <div class="padding">
+  <div class="toolbar">
+    <div class="toolbar__title">
+      <%= t 'common.members' %>
+    </div>
+    <div class="toolbar__action">
+      <a href="<%= new_account_dashboard_member_path %>" class="button button--text button--primary">
+        <div class="button__icon">
+          <span class="material-icons">person_add</span>
+        </div>
+        <div class="button__text">
+          <%= t 'common.invite_member' %>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="padding">
+    <div class="card card--outlined">
+      <table class="table table--flex">
+        <thead>
+          <tr>
+            <td class="table__cell--title"><%= t 'common.name' %></td>
+            <td class="table__cell--attribute"><%= t 'common.role' %></td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @members.each do |member| %>
+            <tr>
+              <td class="table__cell--title">
+                <a href="<%= account_dashboard_member_path(@account, member) %>" class="table__row-link"></a>
+                <%= member.user.name %>
+              </td>
+              <td class="table__cell--attribute">
+                <%= Member.human_attribute_name "role.#{member.role}" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <% if @pending_members.any? %>
+      <div class="subheader">
+        <%= t 'common.pending' %>
+      </div>
       <div class="card card--outlined">
         <table class="table table--flex">
           <thead>
             <tr>
-              <td class="table__cell--title"><%= t 'common.name' %></td>
+              <td class="table__cell--title"><%= t 'common.indentifier' %></td>
               <td class="table__cell--attribute"><%= t 'common.role' %></td>
             </tr>
           </thead>
           <tbody>
-            <% @members.each do |member| %>
+            <% @pending_members.each do |member| %>
               <tr>
                 <td class="table__cell--title">
                   <a href="<%= account_dashboard_member_path(@account, member) %>" class="table__row-link"></a>
-                  <%= member.user.name %>
+                  <% if member.user %>
+                    <%= member.user.name %>
+                  <% else %>
+                    <%= member.invitation_email %>
+                  <% end %>
                 </td>
                 <td class="table__cell--attribute">
                   <%= Member.human_attribute_name "role.#{member.role}" %>
@@ -42,38 +84,6 @@
           </tbody>
         </table>
       </div>
-      <% if @pending_members.any? %>
-        <div class="subheader">
-          <%= t 'common.pending' %>
-        </div>
-        <div class="card card--outlined">
-          <table class="table table--flex">
-            <thead>
-              <tr>
-                <td class="table__cell--title"><%= t 'common.indentifier' %></td>
-                <td class="table__cell--attribute"><%= t 'common.role' %></td>
-              </tr>
-            </thead>
-            <tbody>
-              <% @pending_members.each do |member| %>
-                <tr>
-                  <td class="table__cell--title">
-                    <a href="<%= account_dashboard_member_path(@account, member) %>" class="table__row-link"></a>
-                    <% if member.user %>
-                      <%= member.user.name %>
-                    <% else %>
-                      <%= member.invitation_email %>
-                    <% end %>
-                  </td>
-                  <td class="table__cell--attribute">
-                    <%= Member.human_attribute_name "role.#{member.role}" %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      <% end %>
-    </div>
+    <% end %>
   </div>
 </div>

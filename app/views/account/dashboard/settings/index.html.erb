@@ -1,10 +1,20 @@
-<div class="toolbar">
-  <div class="toolbar__title">
-    <%= t 'common.settings' %>
+<div class="container">
+  <div class="padding">
+    <div class="breadcrumb">
+      <a href="<%= account_root_path(@account) %>" class="breadcrumb__item">
+        <%= @account.display_name %>
+      </a>
+      <a href="<%= account_dashboard_root_path(@account) %>" class="breadcrumb__item">
+        <%= t 'common.dashboard' %>
+      </a>
+      <span class="breadcrumb__item breadcrumb__item--active">
+        <%= t 'common.settings' %>
+      </span>
+    </div>
   </div>
 </div>
 
-<div class="container container--medium">
+<div class="container container--small">
   <div class="list">
     <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="list__item">
       <div class="list__icon">

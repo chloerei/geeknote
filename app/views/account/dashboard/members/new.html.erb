@@ -1,11 +1,19 @@
-<div class="toolbar">
-  <div class="toolbar__action">
-    <a href="<%= account_dashboard_members_path %>" class="button button--icon">
-      <span class="material-icons">arrow_back</span>
-    </a>
-  </div>
-  <div class="toolbar__title">
-    <%= t 'common.invite_member' %>
+<div class="container">
+  <div class="padding">
+    <div class="breadcrumb">
+      <a href="<%= account_root_path(@account) %>" class="breadcrumb__item">
+        <%= @account.display_name %>
+      </a>
+      <a href="<%= account_dashboard_root_path(@account) %>" class="breadcrumb__item">
+        <%= t 'common.dashboard' %>
+      </a>
+      <a href="<%= account_dashboard_members_path(@account) %>" class="breadcrumb__item">
+        <%= t 'common.members' %>
+      </a>
+      <span class="breadcrumb__item breadcrumb__item--active">
+        <%= t 'common.invite_member' %>
+      </span>
+    </div>
   </div>
 </div>
 

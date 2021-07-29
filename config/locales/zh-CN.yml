@@ -2,6 +2,9 @@
 zh-CN:
   account:
     dashboard:
+      home:
+        index:
+          no_post_yet: 还没有文章
       members:
         form:
           role_admin_description: 可以管理所有内容和成员，可以修改组织账号设置。
@@ -73,6 +76,7 @@ zh-CN:
               not_match: 密码错误
   common:
     account: 账号
+    account_profile: 账号资料
     archived: 已归档
     authors: 作者
     avatar: 头像
@@ -88,6 +92,7 @@ zh-CN:
     delete_permanently: 永久删除
     delete_post: 删除文章
     deleted_content: 已删除内容
+    detail: 详情
     edit: 编辑
     edit_profile: 编辑个人资料
     email: Email

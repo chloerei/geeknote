@@ -1,23 +1,26 @@
-<div class="toolbar">
-  <div class="toolbar__action">
-    <a href="<%= account_dashboard_settings_path(@account) %>" class="button button--icon">
-      <span class="material-icons">arrow_back</span>
-    </a>
-  </div>
-  <div class="toolbar__title">
-    <%= t '.profile' %>
-  </div>
-  <div class="toolbar__action">
-    <a href="<%= account_root_path(@account) %>" class="button button--text">
-      <div class="button__text">
-        <%= t 'common.view' %>
-      </div>
-    </a>
+<div class="container">
+  <div class="padding">
+    <div class="breadcrumb">
+      <a href="<%= account_root_path(@account) %>" class="breadcrumb__item">
+        <%= @account.display_name %>
+      </a>
+      <a href="<%= account_dashboard_root_path(@account) %>" class="breadcrumb__item">
+        <%= t 'common.dashboard' %>
+      </a>
+      <a href="<%= account_dashboard_settings_path(@account) %>" class="breadcrumb__item">
+        <%= t 'common.settings' %>
+      </a>
+      <span class="breadcrumb__item breadcrumb__item--active">
+        <%= t 'common.account_profile' %>
+      </span>
+    </div>
   </div>
 </div>
 
+
 <div class="container container--medium">
   <div class="padding">
+    <h2><%= t 'common.account_profile' %></h2>
     <%= render 'account/dashboard/settings/banner_images/form' %>
     <%= render 'account/dashboard/settings/avatars/form' %>
     <%= render 'form' %>

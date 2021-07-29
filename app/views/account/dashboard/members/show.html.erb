@@ -1,52 +1,20 @@
-<div class="toolbar">
-  <div class="toolbar__action">
-    <a href="<%= account_dashboard_members_path %>" class="button button--icon">
-      <span class="material-icons">arrow_back</span>
-    </a>
-  </div>
-  <div class="toolbar__title">
-    <%= t 'common.members' %>
-  </div>
-  <% if can_manage?(@member) %>
-    <div class="toolbar">
-      <div class="toolbar__action">
-        <a href="<%= edit_account_dashboard_member_path(@account, @member) %>" class="button button--text">
-          <div class="button__icon">
-            <span class="material-icons">edit</span>
-          </div>
-          <div class="button__text">
-            <%= t 'common.edit' %>
-          </div>
-        </a>
-      </div>
-      <% if @member.invitation_exipred? %>
-        <div class="toolbar__action">
-          <%= form_with url: resend_account_dashboard_member_path(@account, @member) do %>
-            <button type="submit" class="button button--text">
-              <div class="button__icon">
-                <span class="material-icons">send</span>
-              </div>
-              <div class="button__text">
-                <%= t 'common.resend_invitation' %>
-              </div>
-            </button>
-          <% end %>
-        </div>
-      <% end %>
-      <div class="toolbar__action">
-        <%= form_with url: account_dashboard_member_path(@account, @member), method: 'delete' do %>
-          <button type="submit" class="button button--text" data-confirm="Are you sure remove this member?">
-            <div class="button__icon">
-              <span class="material-icons">person_remove</span>
-            </div>
-            <div class="button__text">
-              <%= t 'common.remove' %>
-            </div>
-          </button>
-        <% end %>
-      </div>
+<div class="container">
+  <div class="padding">
+    <div class="breadcrumb">
+      <a href="<%= account_root_path(@account) %>" class="breadcrumb__item">
+        <%= @account.display_name %>
+      </a>
+      <a href="<%= account_dashboard_root_path(@account) %>" class="breadcrumb__item">
+        <%= t 'common.dashboard' %>
+      </a>
+      <a href="<%= account_dashboard_members_path(@account) %>" class="breadcrumb__item">
+        <%= t 'common.members' %>
+      </a>
+      <span class="breadcrumb__item breadcrumb__item--active">
+        <%= t 'common.detail' %>
+      </span>
     </div>
-  <% end %>
+  </div>
 </div>
 
 <div class="container container--small">
@@ -91,4 +59,47 @@
       <% end %>
     </dl>
   </div>
+
+  <% if can_manage?(@member) %>
+    <div class="toolbar">
+      <div class="toolbar__action">
+        <a href="<%= edit_account_dashboard_member_path(@account, @member) %>" class="button button--text">
+          <div class="button__icon">
+            <span class="material-icons">edit</span>
+          </div>
+          <div class="button__text">
+            <%= t 'common.edit' %>
+          </div>
+        </a>
+      </div>
+      <% if @member.invitation_exipred? %>
+        <div class="toolbar__action">
+          <%= form_with url: resend_account_dashboard_member_path(@account, @member) do %>
+            <button type="submit" class="button button--text">
+              <div class="button__icon">
+                <span class="material-icons">send</span>
+              </div>
+              <div class="button__text">
+                <%= t 'common.resend_invitation' %>
+              </div>
+            </button>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="toolbar__space">
+      </div>
+      <div class="toolbar__action">
+        <%= form_with url: account_dashboard_member_path(@account, @member), method: 'delete' do %>
+          <button type="submit" class="button button--text" data-confirm="Are you sure remove this member?">
+            <div class="button__icon">
+              <span class="material-icons">person_remove</span>
+            </div>
+            <div class="button__text">
+              <%= t 'common.remove' %>
+            </div>
+          </button>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>

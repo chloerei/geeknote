@@ -1,5 +1,4 @@
 <%= form_with model: @owner, url: account_dashboard_settings_profile_path, builder: CustomFormBuilder, class: 'form', id: 'profile-form', data: { controller: 'form' } do |form| %>
-  <label class="label"><%= t 'common.info' %></label>
   <div class="form__field">
     <%= form.fields_for :account, include_id: false do |account_form| %>
       <%= account_form.text_field :name, prefix_text: ENV['HOST'] + '/' %>
