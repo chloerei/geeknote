@@ -1,9 +1,0 @@
-<%= yield %>
-
-<% if flash[:notice] %>
-  <%= turbo_stream.update 'snackbar-container' do %>
-    <div class="snackbar" data-controller="snackbar" data-snackbar-period="5000">
-      <%= flash[:notice] %>
-    </div>
-  <% end %>
-<% end %>
