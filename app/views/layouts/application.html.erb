@@ -45,6 +45,14 @@
                 <%= t 'common.dashboard' %>
               </div>
             </a>
+            <a href="<%= bookmarks_path %>" class="dropdown__item">
+              <div class="dropdown__item__icon">
+                <span class="material-icons">bookmarks</span>
+              </div>
+              <div class="dropdown__item__text">
+                <%= t 'common.bookmarks' %>
+              </div>
+            </a>
             <a href="<%= organizations_path %>" class="dropdown__item">
               <div class="dropdown__item__icon">
                 <span class="material-icons">switch_account</span>
@@ -112,14 +120,6 @@
           </div>
           <div class="nav__item__text">
             <%= t 'common.home' %>
-          </div>
-        </a>
-        <a href="<%= bookmarks_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'bookmarks' %>">
-          <div class="nav__item__icon">
-            <span class="material-icons">bookmarks</span>
-          </div>
-          <div class="nav__item__text">
-            <%= t 'common.bookmarks' %>
           </div>
         </a>
       </div>
