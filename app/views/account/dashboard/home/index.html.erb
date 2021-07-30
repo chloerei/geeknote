@@ -1,12 +1,14 @@
 <div class="container">
   <div class="padding">
     <div class="breadcrumb">
-      <a href="<%= account_root_path(@account) %>" class="breadcrumb__item">
-        <%= @account.display_name %>
-      </a>
-      <span class="breadcrumb__item breadcrumb__item--active">
+      <div class="breadcrumb__item">
+        <a href="<%= account_root_path(@account) %>">
+          <%= @account.display_name %>
+        </a>
+      </div>
+      <div class="breadcrumb__item breadcrumb__item--active">
         <%= t 'common.dashboard' %>
-      </span>
+      </div>
     </div>
   </div>
 

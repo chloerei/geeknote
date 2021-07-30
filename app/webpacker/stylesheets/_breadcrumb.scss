@@ -1,27 +1,42 @@
 .breadcrumb {
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .breadcrumb__item {
   display: inline-flex;
   align-items: center;
-  color: var(--text--primary);
-  text-decoration: none;
 
-  .avatar {
-    margin-right: 6px;
+  a {
+    text-decoration: none;
+    color: var(--text-secondary-color);
+
+    &:hover {
+      color: var(--text--primary);
+    }
   }
 
   &:not(:last-child)::after {
-    content: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px' fill='currentColor'><path d='M0 0h24v24H0V0z' fill='none'/><path d='M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z'/></svg>");
-    height: 24px;
-    width: 24px;
-    margin: 0 4px;
+    content: 'chevron_right';
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    padding: 0 4px;
+    color: var(--text-secondary-color);
   }
 }
 
 .breadcrumb__item--active {
-  color: var(--text-secondary-color);
+  color: var(--text--primary);
 }
