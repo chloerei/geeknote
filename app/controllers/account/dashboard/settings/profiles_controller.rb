@@ -7,8 +7,7 @@ class Account::Dashboard::Settings::ProfilesController < Account::Dashboard::Set
     @owner = @account.owner
 
     if @owner.update profile_params
-      # do nothing
-      redirect_to account_dashboard_settings_profile_path(@account), notice: 'Profile updated'
+      redirect_to account_dashboard_settings_profile_path(@account), notice: I18n.t('flash.profile_updated')
     else
       render turbo_stream: turbo_stream.replace('profile-form', partial: 'form')
     end
@@ -18,9 +17,9 @@ class Account::Dashboard::Settings::ProfilesController < Account::Dashboard::Set
 
   def profile_params
     if @account.organization?
-      params.require(:organization).permit(:name, :description, :display_post_author, account_attributes: [:name])
+      params.require(:organization).permit(:name, :description, :display_post_author)
     else
-      params.require(:user).permit(:name, :bio, account_attributes: [:name])
+      params.require(:user).permit(:name, :bio)
     end
   end
 end

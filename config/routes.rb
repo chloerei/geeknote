@@ -90,6 +90,7 @@ Rails.application.routes.draw do
         resource :profile, only: [:show, :update]
         resource :avatar, only: [:update]
         resource :banner_image, only: [:update, :destroy]
+        resource :account, only: [:show, :update]
       end
     end
   end

@@ -20,6 +20,19 @@
 
 <div class="container container--small">
   <div class="list">
+    <a href="<%= account_dashboard_settings_account_path(@account) %>" class="list__item">
+      <div class="list__icon">
+        <span class="material-icons">perm_identity</span>
+      </div>
+      <div class="list__content">
+        <div class="text-primary">
+          <%= t '.account_name' %>
+        </div>
+        <div class="text-secondary">
+          <%= t '.account_name_desription' %>
+        </div>
+      </div>
+    </a>
     <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="list__item">
       <div class="list__icon">
         <span class="material-icons">account_box</span>
