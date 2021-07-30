@@ -27,9 +27,10 @@ zh-CN:
             post_is_published: 文章已发布
             post_is_unpublished: 文章已取消发布
       settings:
-        index:
-          profile: 资料
-          profile_desription: 头像、简介和其它一般信息。
+        home:
+          index:
+            profile: 账号资料
+            profile_desription: 头像、简介和其它一般信息。
         profiles:
           show:
             profile: 资料

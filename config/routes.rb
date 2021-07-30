@@ -85,8 +85,8 @@ Rails.application.routes.draw do
 
       resources :attachments, only: [:create]
 
-      resources :settings, only: [:index]
       namespace :settings do
+        root to: 'home#index'
         resource :profile, only: [:show, :update]
         resource :avatar, only: [:update]
         resource :banner_image, only: [:update, :destroy]

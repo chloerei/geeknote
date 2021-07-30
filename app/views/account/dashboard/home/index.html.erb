@@ -124,7 +124,7 @@
 
     <% if current_member.has_permission?(:edit_account_settings) %>
       <div class="toolbar__action">
-        <a href="<%= account_dashboard_settings_path(@account) %>" class="button button--text">
+        <a href="<%= account_dashboard_settings_root_path(@account) %>" class="button button--text">
           <div class="button__icon">
             <span class="material-icons">settings</span>
           </div>
