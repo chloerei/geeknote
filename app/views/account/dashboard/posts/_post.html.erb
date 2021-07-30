@@ -2,23 +2,26 @@
   <td class="table__cell--title">
     <a href="<%= edit_account_dashboard_post_path(@account, post) %>" class="table__row-link">
     </a>
-    <div class="text-primary text-bold">
+    <div class="subtitle-1 text-bold">
       <%= post.title.presence || t('common.untitled') %>
     </div>
     <div class="text-secondary">
       <%= t 'common.by' %> <%= post.author_users.pluck(:name).join(', ') %>
-      &centerdot;
       <% if post.tags.any? %>
-        <%= post.tags.pluck(:name).join(', ') %>
         &centerdot;
+        <%= post.tags.pluck(:name).join(', ') %>
       <% end %>
+      &centerdot;
       <%= format_time post.updated_at %>
+      <% if post.restricted? %>
+        &centerdot;
+        <span class="text-color-red"><%= t 'common.restricted' %></span>
+      <% end %>
     </div>
   </td>
   <td class="table__cell--attribute">
-    <%= Post.human_attribute_name "status.#{post.status}" %>
-    <% if post.restricted? %>
-      <span class="text-color-red"><%= t 'common.restricted' %></span>
-    <% end %>
+    <div class="post-status post-status--<%= post.status %>">
+      <%= Post.human_attribute_name "status.#{post.status}" %>
+    </div>
   </td>
 </tr>

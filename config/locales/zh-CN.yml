@@ -58,6 +58,7 @@ zh-CN:
       post/status:
         draft: 草稿
         published: 已发布
+        trashed: 已废弃
       user:
         current_password: 当前密码
         email: Email
@@ -77,6 +78,7 @@ zh-CN:
   common:
     account: 账号
     account_profile: 账号资料
+    all: 全部
     archived: 已归档
     authors: 作者
     avatar: 头像

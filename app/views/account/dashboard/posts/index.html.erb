@@ -14,7 +14,7 @@
   </div>
 
   <div class="toolbar">
-    <div class="toolbar__title">
+    <div class="toolbar__title headline-4">
       <%= t 'common.posts' %>
     </div>
     <div class="toolbar__action dropdown" data-controller="dropdown">
@@ -31,9 +31,9 @@
         </div>
       </button>
       <div class="dropdown__menu dropdown__menu--top-right">
-        <a href="<%= url_for(post_filter_params.merge(status: nil)) %>" class="dropdown__item">All</a>
+        <a href="<%= url_for(post_filter_params.merge(status: nil)) %>" class="dropdown__item"><%= t "common.all" %></a>
         <% Post.statuses.keys.each do |status| %>
-          <a href="<%= url_for(post_filter_params.merge(status: status)) %>" class="dropdown__item"><%= Post.human_attribute_name(status) %></a>
+          <a href="<%= url_for(post_filter_params.merge(status: status)) %>" class="dropdown__item"><%= Post.human_attribute_name("status.#{status}") %></a>
         <% end %>
       </div>
     </div>
@@ -69,25 +69,19 @@
     </div>
   </div>
 
-  <div class="app-content">
-    <div class="padding">
-      <div class="card card--outlined">
-        <table class="table table--flex">
-          <thead>
-            <tr>
-              <th class="table__cell--title"><%= t 'common.title' %></th>
-              <th class="table__cell--attribute"><%= t 'common.status' %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= render @posts %>
-          </tbody>
-        </table>
-      </div>
+  <table class="table table--flex border-bottom">
+    <thead>
+      <tr>
+        <th class="table__cell--title"><%= t 'common.title' %></th>
+        <th class="table__cell--attribute"><%= t 'common.status' %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'post', collection: @posts %>
+    </tbody>
+  </table>
 
-      <div class="padding">
-        <%= paginate @posts %>
-      </div>
-    </div>
+  <div class="padding">
+    <%= paginate @posts %>
   </div>
 </div>

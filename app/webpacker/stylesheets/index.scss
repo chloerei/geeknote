@@ -34,6 +34,10 @@ body {
   align-items: center;
 }
 
+.toolbar__title {
+  line-height: inherit;
+}
+
 .toolbar__text {
   padding: 12px;
   line-height: 24px;
@@ -174,6 +178,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
 }
 
 .table__cell--action {
@@ -262,18 +267,6 @@ body {
   color: var(--text-secondary-color);
 }
 
-.text-primary {
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--text-primary-color);
-}
-
-.text-secondary {
-  font-size: 14px;
-  line-height: 16px;
-  color: var(--text-secondary-color);
-}
-
 .text-small {
   font-size: 14px;
 }
@@ -281,7 +274,7 @@ body {
 .label {
   font-weight: bold;
   display: block;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5;
   margin-bottom: 8px;
 }
@@ -469,6 +462,11 @@ label.list__item {
 
 .list__action {
   padding: 16px;
+}
+
+.list__status {
+  padding: 16px;
+  text-align: right;
 }
 
 .list__item__thumb {
