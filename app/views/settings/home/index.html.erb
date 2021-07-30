@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="padding">
+    <div class="breadcrumb">
+      <div class="breadcrumb__item breadcrumb__item--active">
+        <%= t 'common.settings' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container container--small">
+  <div class="list">
+    <a href="<%= settings_account_path(@account) %>" class="list__item">
+      <div class="list__icon">
+        <span class="material-icons">perm_identity</span>
+      </div>
+      <div class="list__content">
+        <div class="text-primary">
+          <%= t '.account' %>
+        </div>
+        <div class="text-secondary">
+          <%= t '.account_desription' %>
+        </div>
+      </div>
+    </a>
+    <a href="<%= settings_password_path(@account) %>" class="list__item">
+      <div class="list__icon">
+        <span class="material-icons">password</span>
+      </div>
+      <div class="list__content">
+        <div class="text-primary">
+          <%= t '.password' %>
+        </div>
+        <div class="text-secondary">
+          <%= t '.password_desription' %>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

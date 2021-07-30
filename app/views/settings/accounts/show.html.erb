@@ -1,24 +1,21 @@
-<div class="container container--medium padding">
-  <div class="row">
-    <div class="col-3">
-      <%= render 'settings/nav' %>
-    </div>
-    <div class="col-9">
-      <div class="padding">
-        <h3 class="margin-top-0"><%= t 'common.account' %></h3>
-
-        <div class="margin-bottom">
-          <a href="<%= account_dashboard_settings_profile_path(current_user.account) %>" class="button button--text">
-            <div class="button__icon">
-              <span class="material-icons">edit</span>
-            </div>
-            <div class="button__text">
-              <%= t 'common.edit_profile' %>
-            </div>
-          </a>
-        </div>
-        <%= render 'form' %>
+<div class="container">
+  <div class="padding">
+    <div class="breadcrumb">
+      <div class="breadcrumb__item">
+        <a href="<%= settings_root_path %>">
+          <%= t 'common.settings' %>
+        </a>
+      </div>
+      <div class="breadcrumb__item breadcrumb__item--active">
+        <%= t 'common.account_settings' %>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="container container--small">
+  <div class="padding">
+    <h2 class="headline-4"><%= t 'common.account_settings' %></h2>
+    <%= render 'form' %>
   </div>
 </div>

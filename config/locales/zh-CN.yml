@@ -78,6 +78,7 @@ zh-CN:
   common:
     account: 账号
     account_profile: 账号资料
+    account_settings: 账号设置
     all: 全部
     archived: 已归档
     authors: 作者
@@ -178,6 +179,13 @@ zh-CN:
       hot_tags: 热门标签
       join_geeknote: 加入 GeekNote !
       join_geeknote_description: GeekNote 是专为 Geek 设计的写作平台。
+  settings:
+    home:
+      index:
+        account: 账号设置
+        account_desription: 修改登录邮箱。
+        password: 密码
+        password_desription: 修改登录密码。
   users:
     form:
       account_name_helper_text: 可以使用大小写字母、数字和 - 号，全站唯一
