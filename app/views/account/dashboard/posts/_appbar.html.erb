@@ -10,7 +10,14 @@
       <span class="post-editor__save-status" data-post-editor-target="saveStatus" data-message-saved='<%= t 'common.saved' %>' data-message-saving="<%= t 'common.saving' %>" data-message-save-failed="<%= t 'common.save_failed' %>">
       </span>
     </div>
+    <div class="toolbar__action">
+      <button type="button" class="button button--icon" data-action="post-editor#selectImage">
+        <span class="material-icons">add_photo_alternate</span>
+      </button>
+    </div>
     <% if !@post.new_record? %>
+      <div class="toolbar__divider">
+      </div>
       <% if @post.trashed? %>
         <div class="toolbar__action">
           <%= form_with model: @post, url: account_dashboard_post_status_path(@account, @post) do |form| %>

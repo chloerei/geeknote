@@ -43,6 +43,12 @@ body {
   line-height: 24px;
 }
 
+.toolbar__divider {
+  height: 20px;
+  margin: 0 8px;
+  border-right: 1px solid var(--border-color);
+}
+
 .toobar__author {
   padding: 0 12px;
 }

@@ -13,7 +13,7 @@ export default class extends Controller {
     attachmentsUrl: String
   }
 
-  static targets = ['form', 'titleInput', 'contentEditor', 'contentInput', 'saveStatus', 'toolbarContainer']
+  static targets = ['form', 'titleInput', 'contentEditor', 'contentInput', 'saveStatus']
 
   connect() {
     this.initEditor()
@@ -74,11 +74,21 @@ export default class extends Controller {
             })
           })
         })
-      },
-      toolbar: {
-        parent: this.toolbarContainerTarget
       }
     })
+  }
+
+  selectImage() {
+    let input = document.createElement('input')
+    input.type = 'file'
+    input.multiple = true
+    input.accept = 'image/*'
+
+    input.onchange = (event) => {
+      this.editor.uploadImages(event.target.files)
+    }
+
+    input.click()
   }
 
   autoSave() {

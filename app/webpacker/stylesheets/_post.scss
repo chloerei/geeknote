@@ -36,6 +36,7 @@
 
   .cm-content {
     min-height: 640px;
+    padding-bottom: 120px;
   }
 }
 
@@ -88,7 +89,6 @@
 }
 
 .post-editor__toolbar {
-  background: #fafafa;
   position: fixed;
   bottom: 0;
   left: 0;

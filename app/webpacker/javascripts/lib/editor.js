@@ -11,7 +11,6 @@ import { markdown } from "@codemirror/lang-markdown"
 import { StyleModule } from "style-mod"
 StyleModule.mount = () => { /* Disabled it ! */ }
 
-import { toolbar } from './editor/toolbar'
 import { syncInput } from './editor/sync_input'
 import { scrollMargin } from './editor/scroll_margin'
 
@@ -36,7 +35,6 @@ class Editor {
             ...historyKeymap,
           ]),
           markdown(),
-          toolbar(options),
           syncInput(this.options.input),
           scrollMargin(),
           EditorView.domEventHandlers({
