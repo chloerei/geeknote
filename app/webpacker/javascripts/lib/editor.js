@@ -38,12 +38,6 @@ class Editor {
           syncInput(this.options.input),
           scrollMargin(),
           EditorView.domEventHandlers({
-            drop: (event, view) => {
-              if (event.dataTransfer.files.length) {
-                event.preventDefault()
-                this.uploadImages(event.dataTransfer.files)
-              }
-            },
             paste: (event, view) => {
               if (event.clipboardData.files.length) {
                 event.preventDefault()

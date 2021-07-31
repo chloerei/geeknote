@@ -36,6 +36,18 @@ export default class extends Controller {
     this.formTarget.addEventListener('input', () => {
       this.autoSave()
     })
+
+    this.element.addEventListener('dragover', (event) => {
+      event.preventDefault()
+      event.dataTransfer.dropEffect = "move"
+    })
+
+    this.element.addEventListener('drop', (event) => {
+      if (event.dataTransfer.files.length) {
+        event.preventDefault()
+        this.editor.uploadImages(event.dataTransfer.files)
+      }
+    })
   }
 
   focusEnd() {
