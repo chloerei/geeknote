@@ -56,8 +56,8 @@ zh-CN:
         owner: 拥有者
         writer: 作者
       organization:
-        name: 名称
         description: 简介
+        name: 名称
       post:
         allow_comments: 允许评论
         excerpt: 摘要
@@ -67,10 +67,10 @@ zh-CN:
         published: 已发布
         trashed: 已废弃
       user:
+        bio: 简介
         current_password: 当前密码
         email: Email
         name: 名称
-        bio: 简介
         password: 密码
         password_confirmation: 密码确认
     errors:
@@ -165,6 +165,8 @@ zh-CN:
     view: 查看
     view_all: 查看全部
     view_site: 查看网站
+  editor:
+    image_limit: 只允许 JPG、PNG、GIF 图片，且小于 10MB。
   email:
     reset_your_geeknote_password: 重置 GeekNote 密码
     your_post_is_been_restricted_for_publish: 您的帖子已被限制发布

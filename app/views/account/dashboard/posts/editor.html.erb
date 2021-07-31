@@ -1,4 +1,4 @@
-<div class="post-editor" data-controller="post-editor" data-post-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>" data-post-editor-attachments-url-value="<%= account_dashboard_attachments_path %>">
+<div class="post-editor" data-controller="post-editor" data-post-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>" data-post-editor-attachments-url-value="<%= account_dashboard_attachments_path %>" data-post-editor-message-image-limit-value="<%= t 'editor.image_limit' %>">
   <%= render 'appbar' %>
   <div class="post-editor__container">
     <%= form_with model: @post, url: [@account, :dashboard, @post], data: { 'post-editor-target': 'form' }, class: 'post-editor__form', id: 'post-form' do |form| %>

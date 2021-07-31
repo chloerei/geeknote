@@ -10,7 +10,8 @@ const isMac = /Mac/.test(navigator.platform)
 export default class extends Controller {
   static values = {
     directUploadUrl: String,
-    attachmentsUrl: String
+    attachmentsUrl: String,
+    messageImageLimit: String
   }
 
   static targets = ['form', 'titleInput', 'contentEditor', 'contentInput', 'saveStatus']
@@ -86,6 +87,9 @@ export default class extends Controller {
             })
           })
         })
+      },
+      messages: {
+        imageLimit: this.messageImageLimitValue
       }
     })
   }
