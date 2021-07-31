@@ -33,6 +33,10 @@
     flex-direction: column;
     align-items: stretch;
   }
+
+  .cm-content {
+    min-height: 640px;
+  }
 }
 
 .flex-full-height {
@@ -81,10 +85,6 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-}
-
-.post-editor__content-padding {
-  height: 640px;
 }
 
 .post-editor__toolbar {

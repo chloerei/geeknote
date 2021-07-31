@@ -1,5 +1,5 @@
 import { EditorView, keymap, placeholder } from "@codemirror/view"
-import { Extension, EditorState } from "@codemirror/state"
+import { Extension, EditorState, EditorSelection } from "@codemirror/state"
 import { history, historyKeymap } from "@codemirror/history"
 import { indentOnInput } from "@codemirror/language"
 import { defaultKeymap } from "@codemirror/commands"
@@ -38,11 +38,55 @@ class Editor {
           markdown(),
           toolbar(options),
           syncInput(this.options.input),
-          scrollMargin()
+          scrollMargin(),
+          EditorView.domEventHandlers({
+            drop: (event, view) => {
+              if (event.dataTransfer.files.length) {
+                event.preventDefault()
+                this.uploadImages(event.dataTransfer.files)
+              }
+            },
+            paste: (event, view) => {
+              if (event.clipboardData.files.length) {
+                event.preventDefault()
+                this.uploadImages(event.clipboardData.files)
+              }
+            }
+          })
         ]
       }),
       parent: element
     })
+  }
+
+  uploadImages(files) {
+    this.editorView.dispatch(
+      this.editorView.state.changeByRange(range => {
+        let changes = [{ from: range.from, to: range.to, insert: '' }]
+        let end = range.from
+
+        Array.from(files).forEach((file) => {
+          let placeholder = `![uploading_${file.name}]()`
+          changes.push({ from: range.to, insert: placeholder + "\n" })
+          end += (placeholder.length + 1)
+          this.options.uploadImage(file).then((url) => {
+            let pos = this.editorView.state.doc.toString().indexOf(placeholder)
+            if (pos > -1) {
+              let text = `![${file.name}](${url})`
+              this.editorView.dispatch({
+                changes: { from: pos, to: pos + placeholder.length, insert: text}
+              })
+            }
+          })
+        })
+
+        return {
+          changes: changes,
+          range: EditorSelection.range(end, end)
+        }
+      })
+    )
+    this.editorView.focus()
   }
 
   focus() {
