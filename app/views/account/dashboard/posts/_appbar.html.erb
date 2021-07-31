@@ -15,9 +15,30 @@
         <span class="material-icons">add_photo_alternate</span>
       </button>
     </div>
-    <% if !@post.new_record? %>
-      <div class="toolbar__divider">
+    <div class="toolbar__divider">
+    </div>
+    <% if @post.new_record? %>
+      <div class="toolbar__action">
+        <button type="button" class="button button--text button--disabled">
+          <%= t 'common.preview' %>
+        </button>
       </div>
+      <div class="toolbar__action">
+        <button type="button" class="button button--text button--disabled">
+          <div class="button__text">
+            <%= t 'common.publish' %>
+          </div>
+          <div class="button__icon">
+            <span class="material-icons">expand_more</span>
+          </div>
+        </button>
+      </div>
+      <div class="toolbar__action">
+        <button type="button" class="button button--icon button--disabled">
+          <span class="material-icons">settings</span>
+        </button>
+      </div>
+    <% else %>
       <% if @post.trashed? %>
         <div class="toolbar__action">
           <%= form_with model: @post, url: account_dashboard_post_status_path(@account, @post) do |form| %>
