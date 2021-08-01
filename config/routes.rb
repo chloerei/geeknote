@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get 'attachments/:key/*filename', to: 'attachments#show', as: :attachment
 
+  post '/rails/active_storage/direct_uploads', to: 'direct_uploads#create'
+
   resources :posts, only: [] do
     collection do
       get :following
