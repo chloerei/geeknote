@@ -16,7 +16,7 @@
         <%= form_with model: @post, url: account_dashboard_post_featured_image_path(@account, @post), id: 'post-featured-image-form', data: { controller: 'form' }  do |form| %>
           <label class="button button--icon">
             <span class="material-icons">add_photo_alternate</span>
-            <%= form.file_field :featured_image, direct_upload: true, class: 'image-uploader__input', data: { action: 'form#submit' } %>
+            <%= form.file_field :featured_image, direct_upload: true, class: 'image-uploader__input', data: { action: 'form#submit' }, accept: 'image/png, image/jpeg, image/gif' %>
           </label>
         <% end %>
       </div>
