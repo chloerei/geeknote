@@ -1,0 +1,11 @@
+<button type="button" class="button button--icon" data-controller="toggle" data-toggle-target="#post-<%= post.id %>-collections-dialog" data-toggle-action="dialog#open">
+  <span class="material-icons">bookmark_add</span>
+</button>
+<div id="post-<%= post.id %>-collections-dialog" class="dialog dialog--medium" data-controller="dialog">
+  <div class="dialog__container">
+    <%= turbo_frame_tag "post-#{post.id}-collections", src: account_post_collections_path(post.account, post) do %>
+    <% end %>
+  </div>
+  <div class="dialog__scrim" data-action="click->dialog#close">
+  </div>
+</div>

@@ -36,6 +36,7 @@ body {
 
 .toolbar__title {
   line-height: inherit;
+  font-weight: normal;
 }
 
 .toolbar__text {
@@ -224,6 +225,17 @@ body {
   text-align: left;
 }
 
+.dialog__container {
+  width: auto;
+  min-width: 640px;
+}
+
+.dialog--medium {
+  .dialog__container {
+    min-width: 480px;
+  }
+}
+
 .dialog--full-screen {
   .dialog__container {
     width: 100%;
@@ -347,14 +359,6 @@ dd {
 
 label.list__item {
   cursor: pointer;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.05);
-  }
-
-  &:active {
-    background: rgba(0, 0, 0, 0.075);
-  }
 }
 
 .dropdown__item__avatar {
@@ -468,6 +472,11 @@ label.list__item {
 
 .list__action {
   padding: 16px;
+}
+
+.list__check {
+  padding: 8px;
+  line-height: 1;
 }
 
 .list__status {
@@ -657,5 +666,4 @@ input:-webkit-autofill {
 }
 
 .content-placeholder__label {
-  margin-bottom: 16px;
 }

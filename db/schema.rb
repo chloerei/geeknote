@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_20_112144) do
+ActiveRecord::Schema.define(version: 2021_08_02_090008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -84,6 +84,25 @@ ActiveRecord::Schema.define(version: 2021_07_20_112144) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id", "user_id"], name: "index_bookmarks_on_post_id_and_user_id", unique: true
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "collection_items", force: :cascade do |t|
+    t.bigint "collection_id"
+    t.bigint "post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["collection_id"], name: "index_collection_items_on_collection_id"
+    t.index ["post_id"], name: "index_collection_items_on_post_id"
+  end
+
+  create_table "collections", force: :cascade do |t|
+    t.bigint "account_id"
+    t.string "name"
+    t.text "description"
+    t.integer "visibility", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_collections_on_account_id"
   end
 
   create_table "comments", force: :cascade do |t|

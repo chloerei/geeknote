@@ -50,6 +50,7 @@ Rails.application.routes.draw do
         resource :preview, only: [:show]
         resource :like, only: [:create, :destroy]
         resource :bookmark, only: [:create, :destroy]
+        resources :collections, only: [:index, :new, :create, :update]
         resources :comments do
           scope module: 'comments' do
             resource :like, only: [:create, :destroy]

@@ -1,0 +1,40 @@
+<%= form_with model: @collection, url: account_post_collections_path(@account, @post), builder: CustomFormBuilder, id: "post-#{@post.id}-collection-form", class: 'form' do |form| %>
+  <div class="form__field">
+    <%= form.text_field :name %>
+  </div>
+  <div class="form__field">
+    <%= form.text_area :description %>
+  </div>
+  <div class="form__field">
+    <div class="form__control">
+      <%= form.radio_button :visibility, :private %>
+      <label for="collection_visibility_private" class="form__control__label">
+        <div class="text-primary">
+          <%= t '.visibility_private_label' %>
+        </div>
+        <div class="text-secondary">
+          <%= t '.visibility_private_description' %>
+        </div>
+      </label>
+    </div>
+    <div class="form__control">
+      <%= form.radio_button :visibility, :public %>
+      <label for="collection_visibility_public" class="form__control__label">
+        <div class="text-primary">
+          <%= t '.visibility_public_label' %>
+        </div>
+        <div class="text-secondary">
+          <%= t '.visibility_public_description' %>
+        </div>
+      </label>
+    </div>
+  </div>
+  <div>
+    <button type="submit" class="button button--contained button--primary">
+      <%= t 'common.create_collection' %>
+    </button>
+    <a href="<%= account_post_collections_path %>" class="button button--text">
+      <%= t 'common.cancel' %>
+    </a>
+  </div>
+<% end %>
