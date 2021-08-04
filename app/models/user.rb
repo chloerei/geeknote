@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :author_posts, through: :authors, source: :post
   has_many :members
   has_many :organizations, through: :members
-  has_many :manage_accounts, -> { where(members: { role: Member.roles.values_at(:admin, :owner) })}, through: :organizations, source: :account
+  has_many :manage_accounts, -> { where(members: { role: Member.roles.values_at(:owner, :admin, :editor) })}, through: :organizations, source: :account
   has_many :member_accounts, through: :organizations, source: :account
   has_many :attachments
   has_many :likes

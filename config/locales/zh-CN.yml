@@ -50,11 +50,11 @@ zh-CN:
     attributes:
       account:
         name: 账号名
+      collection:
+        description: 描述
+        name: 名称
       comment:
         content: 评论
-      collection:
-        name: 名称
-        description: 描述
       member:
         identifier: 账号或邮箱
         role: 角色
@@ -190,6 +190,7 @@ zh-CN:
   flash:
     account_update_successful: 账号信息更新成功。
     account_updated: 账号已更新。
+    added_to_collection: 已添加至“%{name}”。
     bookmark_added: 已添加书签。
     boomark_removed: 已移除书签。
     password_reset_email_has_been_sent: 重置邮件已发送，请检查收件箱。
@@ -200,6 +201,7 @@ zh-CN:
     password_update_successful: 密码更新成功。
     post_is_restricted: 该帖子已被限制发布。
     profile_updated: 资料已更新。
+    removed_from_collection: 已从“%{name}”中移除。
     require_sign_in: 需要登录。
   posts:
     index:

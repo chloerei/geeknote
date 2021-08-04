@@ -13,6 +13,7 @@ class Account::Posts::CollectionsController < Account::Posts::BaseController
     @collection = @saved_account.collections.new collection_params
 
     if @collection.save
+      @collection.collection_items.create(post: @post)
       redirect_to account_post_collections_path
     else
       render turbo_stream: turbo_stream.replace("post-#{@post.id}-collection-form", partial: 'form')
@@ -24,9 +25,12 @@ class Account::Posts::CollectionsController < Account::Posts::BaseController
 
     if params[:collection][:added] == '1'
       @collection.collection_items.find_or_create_by(post: @post)
+      flash.now[:notice] = I18n.t("flash.added_to_collection", name: @collection.name)
     else
       @collection.collection_items.find_by(post: @post)&.destroy
+      flash.now[:notice] = I18n.t("flash.removed_from_collection", name: @collection.name)
     end
+    render layout: 'application'
   end
 
   private
