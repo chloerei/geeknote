@@ -1,17 +1,5 @@
 <div class="container container--small">
   <%= turbo_frame_tag "post-#{@post.id}-collections" do %>
-    <div class="toolbar">
-      <div class="toolbar__action">
-        <a href="<%= account_post_collections_path(@account, @post) %>" class="button button--icon">
-          <span class="material-icons">arrow_back</span>
-        </a>
-      </div>
-      <div class="toolbar__title">
-        New Collection
-      </div>
-    </div>
-    <div class="padding">
-      <%= render 'form' %>
-    </div>
+    <%= render 'form' %>
   <% end %>
 </div>
