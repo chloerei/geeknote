@@ -1,8 +1,8 @@
 class Account::Posts::CollectionsController < Account::Posts::BaseController
-  before_action :require_sign_in, :set_saved_account
+  before_action :require_sign_in, :set_collection_account
 
   def index
-    @collections = @saved_account.collections.order(updated_at: :desc).with_post_status(@post)
+    @collections = @collection_account.collections.order(updated_at: :desc).with_post_status(@post)
   end
 
   def new
@@ -10,18 +10,18 @@ class Account::Posts::CollectionsController < Account::Posts::BaseController
   end
 
   def create
-    @collection = @saved_account.collections.new collection_params
+    @collection = @collection_account.collections.new collection_params
 
     if @collection.save
       @collection.collection_items.create(post: @post)
-      redirect_to account_post_collections_path
+      redirect_to account_post_collections_path(@account, @post, account: params[:account])
     else
       render turbo_stream: turbo_stream.replace("post-#{@post.id}-collection-form", partial: 'form')
     end
   end
 
   def update
-    @collection = @saved_account.collections.find params[:id]
+    @collection = @collection_account.collections.find params[:id]
 
     if params[:collection][:added] == '1'
       @collection.collection_items.find_or_create_by(post: @post)
@@ -35,8 +35,14 @@ class Account::Posts::CollectionsController < Account::Posts::BaseController
 
   private
 
-  def set_saved_account
-    @saved_account = current_user.account
+  def set_collection_account
+    @collection_account = find_collection_account || current_user.account
+  end
+
+  def find_collection_account
+    if params[:account]
+      current_user.manage_accounts.find_by name: params[:account]
+    end
   end
 
   def collection_params

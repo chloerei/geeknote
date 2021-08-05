@@ -1,7 +1,7 @@
-<%= form_with model: @collection, url: account_post_collections_path(@account, @post), builder: CustomFormBuilder, id: "post-#{@post.id}-collection-form", class: 'form display-contents' do |form| %>
+<%= form_with model: @collection, url: account_post_collections_path(@account, @post, account: params[:account]), builder: CustomFormBuilder, id: "post-#{@post.id}-collection-form", class: 'form display-contents' do |form| %>
   <div class="toolbar">
     <div class="toolbar__action">
-      <a href="<%= account_post_collections_path(@account, @post) %>" class="button button--icon">
+      <a href="<%= account_post_collections_path(@account, @post, account: params[:account]) %>" class="button button--icon">
         <span class="material-icons">arrow_back</span>
       </a>
     </div>
@@ -43,7 +43,7 @@
     <div class="toolbar__space">
     </div>
     <div class="toolbar__action">
-      <a href="<%= account_post_collections_path %>" class="button button--text button--primary">
+      <a href="<%= account_post_collections_path(@account, @post, account: params[:account]) %>" class="button button--text button--primary">
         <%= t 'common.cancel' %>
       </a>
     </div>

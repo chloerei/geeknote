@@ -4,16 +4,30 @@
       <div class="toolbar__title">
         <%= t 'common.add_to_collection' %>
       </div>
-      <div class="toolbar__action">
-        <button type="button" class="button button--text">
-          <div class="button__text">
-            <%= @saved_account.name %>
+      <% if current_user.manage_accounts.any? %>
+        <div class="toolbar__action">
+          <div class="dropdown" data-controller="dropdown">
+            <button type="button" class="button button--text" data-action="dropdown#toggle">
+              <div class="button__text">
+                <%= @collection_account.display_name %>
+              </div>
+              <div class="button__icon">
+                <span class="material-icons">expand_more</span>
+              </div>
+            </button>
+            <div class="dropdown__menu dropdown__menu--top-right">
+              <a href="<%= account_post_collections_path %>" class="dropdown__item">
+                <%= current_user.account.display_name %>
+              </a>
+              <% current_user.manage_accounts.each do |account| %>
+              <a href="<%= account_post_collections_path(account: account.name) %>" class="dropdown__item">
+                <%= account.display_name %>
+              </a>
+              <% end %>
+            </div>
           </div>
-          <div class="button__icon">
-            <span class="material-icons">expand_more</span>
-          </div>
-        </button>
-      </div>
+        </div>
+      <% end %>
       <div class="toolbar__action">
         <button type="button" class="button button--icon" data-action="dialog#close">
           <span class="material-icons">close</span>
@@ -27,7 +41,7 @@
           <% @collections.each do |collection| %>
             <label class="list__item flex-align-items-center">
               <div class="list__check">
-                <%= form_with model: collection, url: account_post_collection_path(@account, @post, collection), builder: CustomFormBuilder, class: 'form', data: { controller: 'form', action: 'change->form#submit' } do |form| %>
+                <%= form_with model: collection, url: account_post_collection_path(@account, @post, collection, account: params[:account]), builder: CustomFormBuilder, class: 'form', data: { controller: 'form', action: 'change->form#submit' } do |form| %>
                   <%= form.check_box :added %>
                 <% end %>
               </div>
@@ -60,7 +74,7 @@
       <div class="toolbar__space">
       </div>
       <div class="toolbar__action">
-        <a href="<%= new_account_post_collection_path(@account, @post) %>" class="button button--text button--primary">
+        <a href="<%= new_account_post_collection_path(@account, @post, account: params[:account]) %>" class="button button--text button--primary">
           <div class="button__icon">
             <span class="material-icons">add</span>
           </div>
