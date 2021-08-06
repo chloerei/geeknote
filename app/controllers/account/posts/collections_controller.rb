@@ -14,7 +14,7 @@ class Account::Posts::CollectionsController < Account::Posts::BaseController
 
     if @collection.save
       @collection.collection_items.create(post: @post)
-      redirect_to account_post_collections_path(@account, @post, account: params[:account])
+      redirect_to account_post_collections_path(@account, @post)
     else
       render turbo_stream: turbo_stream.replace("post-#{@post.id}-collection-form", partial: 'form')
     end
@@ -33,6 +33,16 @@ class Account::Posts::CollectionsController < Account::Posts::BaseController
     render layout: 'application'
   end
 
+  def switch
+    if params[:account]
+      account = @current_user.manage_accounts.find_by! name: params[:account]
+      session[:collection_account] = account.name
+    else
+      session[:collection_account] = nil
+    end
+    redirect_to account_post_collections_path(@account, @post)
+  end
+
   private
 
   def set_collection_account
@@ -40,8 +50,14 @@ class Account::Posts::CollectionsController < Account::Posts::BaseController
   end
 
   def find_collection_account
-    if params[:account]
-      current_user.manage_accounts.find_by name: params[:account]
+    if session[:collection_account]
+      account = current_user.manage_accounts.find_by name: session[:collection_account]
+
+      if account.nil?
+        session[:collection_account] = nil
+      end
+
+      account
     end
   end
 

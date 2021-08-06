@@ -16,13 +16,13 @@
               </div>
             </button>
             <div class="dropdown__menu dropdown__menu--top-right">
-              <a href="<%= account_post_collections_path %>" class="dropdown__item">
+              <%= button_to switch_account_post_collections_path(@account, @post, account: nil), method: 'put', class: 'dropdown__item' do %>
                 <%= current_user.account.display_name %>
-              </a>
+              <% end %>
               <% current_user.manage_accounts.each do |account| %>
-              <a href="<%= account_post_collections_path(account: account.name) %>" class="dropdown__item">
-                <%= account.display_name %>
-              </a>
+                <%= button_to switch_account_post_collections_path(@account, @post, account: account.name), method: 'put', class: 'dropdown__item' do %>
+                  <%= account.display_name %>
+                <% end %>
               <% end %>
             </div>
           </div>
@@ -41,7 +41,7 @@
           <% @collections.each do |collection| %>
             <label class="list__item flex-align-items-center">
               <div class="list__check">
-                <%= form_with model: collection, url: account_post_collection_path(@account, @post, collection, account: params[:account]), builder: CustomFormBuilder, class: 'form', data: { controller: 'form', action: 'change->form#submit' } do |form| %>
+                <%= form_with model: collection, url: account_post_collection_path(@account, @post, collection), builder: CustomFormBuilder, class: 'form', data: { controller: 'form', action: 'change->form#submit' } do |form| %>
                   <%= form.check_box :added %>
                 <% end %>
               </div>
@@ -74,7 +74,7 @@
       <div class="toolbar__space">
       </div>
       <div class="toolbar__action">
-        <a href="<%= new_account_post_collection_path(@account, @post, account: params[:account]) %>" class="button button--text button--primary">
+        <a href="<%= new_account_post_collection_path(@account, @post) %>" class="button button--text button--primary">
           <div class="button__icon">
             <span class="material-icons">add</span>
           </div>
