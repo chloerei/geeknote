@@ -64,8 +64,8 @@
       <div class="toolbar__action">
         <%= render 'account/posts/share_button', post: @post %>
       </div>
-      <div class="toolbar__action">
-        <%= render 'account/posts/bookmarks/button', post: @post %>
+      <div class="toolbar__action visible-to-user">
+        <%= render 'account/posts/collections/button', post: @post %>
       </div>
       <% if current_member %>
         <% if current_member.can_edit_post?(@post) %>
@@ -113,8 +113,8 @@
       <div class="toolbar__action">
         <%= render 'account/posts/share_button', post: @post %>
       </div>
-      <div class="toolbar__action">
-        <%= render 'account/posts/bookmarks/button', post: @post %>
+      <div class="toolbar__action visible-to-user">
+        <%= render 'account/posts/collections/button', post: @post %>
       </div>
       <% if current_member %>
         <% if current_member.can_edit_post?(@post) %>
