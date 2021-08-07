@@ -318,10 +318,6 @@ dd {
   margin: 0 0 8px;
 }
 
-.card {
-  margin: 0;
-}
-
 .text--failed {
   color: red;
 }
@@ -383,12 +379,6 @@ label.list__item {
     width: 16px;
     fill: currentColor;
   }
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
 }
 
 .banner-image {
@@ -678,4 +668,44 @@ input:-webkit-autofill {
 }
 
 .content-placeholder__label {
+}
+
+.collection-images {
+  display: flex;
+
+  @media (max-width: $mobile-break-point) {
+    display: none;
+  }
+}
+
+.collection-images__item {
+  height: 160px;
+  width: 160px;
+  background: white;
+  box-sizing: content-box;
+
+  &:nth-child(1) {
+    z-index: 3;
+    border-right: 4px solid white;
+  }
+
+  &:nth-child(2) {
+    margin-left: -80px;
+    z-index: 2;
+    border-right: 4px solid white;
+  }
+
+  &:nth-child(3) {
+    margin-left: -120px;
+    z-index: 1;
+  }
+}
+
+a.card {
+  color: var(--text-primary-color);
+  text-decoration: none;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.02);
+  }
 }

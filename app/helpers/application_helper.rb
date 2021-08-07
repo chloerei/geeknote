@@ -92,6 +92,20 @@ module ApplicationHelper
     end
   end
 
+  def featured_image_square_tag(featured_image)
+    if featured_image && featured_image.attached?
+      if use_aliyun_oss?
+        image_tag featured_image.url(params: { 'x-oss-process' => 'image/resize,m_fill,w_400,h_400'})
+      else
+        image_tag featured_image.variant(resize_to_fill: [400, 400])
+      end
+    else
+      content_tag 'div', class: 'featured-image-placeholder' do
+        content_tag 'span', 'article', class: 'material-icons'
+      end
+    end
+  end
+
   def featured_image_tag(featured_image)
     if featured_image.attached?
       if use_aliyun_oss?

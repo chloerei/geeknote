@@ -68,6 +68,7 @@ Rails.application.routes.draw do
     resource :follow, only: [:create, :destroy]
     resources :followings, only: [:index]
     resources :followers, only: [:index]
+    resources :collections, only: [:index, :show]
     resources :likes
     resources :members, only: [:index]
     resources :tags, only: [:show]

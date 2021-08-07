@@ -63,15 +63,6 @@
             </div>
           </div>
         <% end %>
-        <div class="toolbar__action">
-          <div class="dropdown" data-controller="dropdown">
-            <button type="button" class="button button--icon" data-action="dropdown#toggle">
-              <span class="material-icons">more_horiz</span>
-            </button>
-            <div class="dropdown__menu dropdown__menu--top-right">
-            </div>
-          </div>
-        </div>
       </div>
       <div class="account-header__description">
         <% if @account.owner.is_a?(User) %>
@@ -99,6 +90,9 @@
   <div class="tab padding-x margin-bottom">
     <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>">
       <%= t 'common.posts' %>
+    </a>
+    <a href="<%= account_collections_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'collections' %>">
+      <%= t 'common.collections' %>
     </a>
     <% if @account.user? %>
       <a href="<%= account_likes_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'likes' %>">

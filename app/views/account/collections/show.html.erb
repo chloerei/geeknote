@@ -1,0 +1,23 @@
+<div class="container container--medium">
+  <div class="breadcrumb padding">
+    <div class="breadcrumb__item">
+      <a href="<%= account_root_path(@account) %>">
+        <%= @account.display_name %>
+      </a>
+    </div>
+    <div class="breadcrumb__item">
+      <a href="<%= account_collections_path(@account) %>">
+        <%= t 'common.collections' %>
+      </a>
+    </div>
+    <div class="breadcrumb__item breadcrumb__item--active">
+      <%= @collection.name %>
+    </div>
+  </div>
+
+  <div class="list">
+    <%= render partial: 'account/posts/post', collection: @posts, cached: -> (post) { [post, post.saved] } %>
+  </div>
+
+  <%= paginate @posts %>
+</div>

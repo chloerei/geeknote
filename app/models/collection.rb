@@ -1,6 +1,7 @@
 class Collection < ApplicationRecord
   belongs_to :account
   has_many :collection_items
+  has_many :posts, through: :collection_items
 
   enum visibility: {
     private: 0,
