@@ -87,20 +87,20 @@
     </div>
   </div>
 
-  <div class="tab padding-x margin-bottom">
-    <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>">
+  <div class="tab padding-x margin-bottom" data-controller="tab">
+    <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>" data-action="tab#click">
       <%= t 'common.posts' %>
     </a>
-    <a href="<%= account_collections_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'collections' %>">
+    <a href="<%= account_collections_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'collections' %>" data-action="tab#click">
       <%= t 'common.collections' %>
     </a>
     <% if @account.user? %>
-      <a href="<%= account_likes_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'likes' %>">
+      <a href="<%= account_likes_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'likes' %>" data-action="tab#click">
         <%= t 'common.liked_posts' %>
       </a>
     <% end %>
     <% if @account.organization? %>
-      <a href="<%= account_members_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'members' %>">
+      <a href="<%= account_members_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'members' %>" data-action="tab#click">
         <%= t 'common.members' %>
       </a>
     <% end %>
