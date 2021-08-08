@@ -1,8 +1,13 @@
 <%= render 'account/subheader' %>
 
 <div class="container container--medium">
-  <div class="toolbar">
-    <div class="toolbar__title">
+  <div class="breadcrumb padding">
+    <div class="breadcrumb__item">
+      <a href="<%= account_root_path(@account) %>">
+        <%= @account.display_name %>
+      </a>
+    </div>
+    <div class="breadcrumb__item breadcrumb__item--active">
       <%= t 'common.followers' %>
     </div>
   </div>
