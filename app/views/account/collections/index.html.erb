@@ -4,33 +4,7 @@
 
 <div class="container container--medium">
   <div class="padding">
-    <% @collections.each do |collection| %>
-      <a href="<%= account_collection_path(@account, collection) %>" class="card card--outlined flex margin-bottom">
-        <div class="flex-grow-1 padding">
-          <h3 class="margin-top-0 flex flex-align-items-center">
-            <%= collection.name %>
-          </h3>
-          <div class="text-primary">
-            <%= collection.description %>
-          </div>
-          <div class="text-secondary">
-            <%= collection.collection_items_count %> <%= t 'common.posts' %>
-            <% if collection.visibility_private? %>
-              &centerdot;
-              <%= t 'common.private' %>
-            <% end %>
-          </div>
-        </div>
-        <div class="collection-images">
-          <% feature_images = collection.posts.limit(3).map(&:featured_image) %>
-          <% 3.times do |n| %>
-            <div class="collection-images__item">
-              <%= featured_image_square_tag feature_images[n] %>
-            </div>
-          <% end %>
-        </div>
-      </a>
-    <% end %>
+    <%= render partial: 'collection', collection: @collections, cached: true %>
   </div>
 
   <div class="padding">

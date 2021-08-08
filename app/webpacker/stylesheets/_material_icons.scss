@@ -21,6 +21,8 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.material-icons--font-size {
-  font-size: 1em;
+.material-icons--inline {
+  font-size: inherit;
+  line-height: inherit;
+  vertical-align: bottom;
 }
