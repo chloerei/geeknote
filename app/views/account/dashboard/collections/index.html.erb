@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="padding">
+    <div class="breadcrumb">
+      <div class="breadcrumb__item">
+        <a href="<%= account_root_path(@account) %>">
+          <%= @account.display_name %>
+        </a>
+      </div>
+      <div class="breadcrumb__item">
+        <a href="<%= account_dashboard_root_path(@account) %>">
+          <%= t 'common.dashboard' %>
+        </a>
+      </div>
+      <div class="breadcrumb__item breadcrumb__item--active">
+        <%= t 'common.collections' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container container--medium">
+  <div class="toolbar">
+    <div class="toolbar__title headline-4">
+      <%= t 'common.collections' %>
+    </div>
+    <div class="toolbar__action">
+      <a href="<%= new_account_dashboard_collection_path(@account) %>" class="button button--contained button--primary">
+        <div class="button__icon">
+          <span class="material-icons">add</span>
+        </div>
+        <div class="button__text">
+          <%= t 'common.new_collection' %>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <% if @collections.any? %>
+    <table class="table table--flex border-bottom">
+      <thead>
+        <tr>
+          <th class="table__cell--title"><%= t 'common.name' %></th>
+          <th class="table__cell--attribute"><%= t 'common.visibility' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @collections.each do |collection| %>
+          <tr>
+            <td class="table__cell--title">
+              <a href="<%= account_dashboard_collection_path(@account, collection) %>" class="table__row-link">
+              </a>
+              <div class="subtitle-1">
+                <%= collection.name %>
+              </div>
+              <div class="text-secondary">
+                <%= collection.collection_items_count %> <%= t 'common.posts' %>
+              </div>
+            </td>
+            <td class="table__cell--attribute">
+              <div class="nowrap">
+                <% if collection.visibility_private? %>
+                  <span class="material-icons material-icons--inline">lock</span>
+                  <%= t 'common.private' %>
+                <% else %>
+                  <span class="material-icons material-icons--inline">public</span>
+                  <%= t 'common.public' %>
+                <% end %>
+              </div>
+            </div>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="padding">
+      <%= paginate @collections %>
+    </div>
+  <% else %>
+    <div class="content-placeholder">
+      <div class="content-placeholder__icon">
+        <span class="material-icons">library_books</span>
+      </div>
+      <div class="contents-placeholder__label">
+        <%= t '.no_collections' %>
+      </div>
+    </div>
+  <% end %>
+</div>

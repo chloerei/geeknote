@@ -2,6 +2,9 @@
 zh-CN:
   account:
     dashboard:
+      collections:
+        index:
+          no_collections: 还没有合集
       home:
         index:
           no_post_yet: 还没有文章
@@ -150,6 +153,7 @@ zh-CN:
     preview: 预览
     private: 私有
     profile: 个人资料
+    public: 公开
     publish: 发布
     published: 已发布
     recommend: 推荐
@@ -180,6 +184,7 @@ zh-CN:
     view: 查看
     view_all: 查看全部
     view_site: 查看网站
+    visibility: 公开范围
   editor:
     image_limit: 只允许 JPG、PNG、GIF 图片，且小于 10MB。
   email:

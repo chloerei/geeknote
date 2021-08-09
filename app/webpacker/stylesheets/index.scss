@@ -177,19 +177,33 @@ body {
   width: 100%;
 }
 
+.table {
+  td, th {
+    white-space: normal;
+    line-height: 1.5;
+  }
+}
+
 .table__cell--title {
-  flex-grow: 1;
+  flex: 1 1 400px;
+  overflow: hidden;
 }
 
 .table__cell--attribute {
-  width: 120px;
+  flex: 0 0 120px;
 }
 
-.table--flex td {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+.table--flex {
+  td, th {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    &:last-child {
+      align-items: flex-end;
+    }
+  }
 }
 
 .table__cell--action {
@@ -708,4 +722,14 @@ a.card {
   &:hover {
     background: rgba(0, 0, 0, 0.02);
   }
+}
+
+.overflow-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.nowrap {
+  white-space: nowrap;
 }

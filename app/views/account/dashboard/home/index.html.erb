@@ -73,6 +73,41 @@
       <div class="card card--outlined height-full">
         <div class="toolbar">
           <div class="toolbar__title">
+            <%= t 'common.collections' %>
+          </div>
+        </div>
+        <div class="list">
+          <% @account.collections.order(updated_at: :desc).limit(3).each do |collection| %>
+            <div class="list__item">
+              <div class="list__content">
+                <div class="subtitle-1 text-bold overflow-ellipsis">
+                  <%= collection.name %>
+                </div>
+                <div class="text-secondary">
+                  <%= collection.collection_items_count %> <%= t 'common.posts' %>
+                  <% if collection.visibility_private? %>
+                    &centerdot;
+                    <span class="material-icons material-icons--inline">lock</span>
+                    <%= t 'common.private' %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="toolbar">
+          <div class="toolbar__action">
+            <a href="<%= account_dashboard_collections_path(@account) %>" class="button button--text">
+              <%= t 'common.view_all' %>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4 padding">
+      <div class="card card--outlined height-full">
+        <div class="toolbar">
+          <div class="toolbar__title">
             <%= t 'common.comments' %>
           </div>
         </div>

@@ -15,7 +15,7 @@ class Member < ApplicationRecord
   PERMISSIONS = Hash.new([])
   PERMISSIONS['contributor'] = []
   PERMISSIONS['writer'] = PERMISSIONS['contributor'] + [:publish_own_post]
-  PERMISSIONS['editor'] = PERMISSIONS['writer'] + [:edit_other_post, :publish_other_post, :manage_member]
+  PERMISSIONS['editor'] = PERMISSIONS['writer'] + [:edit_other_post, :publish_other_post, :manage_member, :manage_collections]
   PERMISSIONS['admin'] = PERMISSIONS['editor'] + [:edit_account_settings]
   PERMISSIONS['owner'] = PERMISSIONS['admin'] + []
 

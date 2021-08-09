@@ -91,6 +91,8 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :collections
+
       resources :attachments, only: [:create]
 
       namespace :settings do
