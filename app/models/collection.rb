@@ -1,6 +1,6 @@
 class Collection < ApplicationRecord
   belongs_to :account
-  has_many :collection_items
+  has_many :collection_items, dependent: :delete_all
   has_many :posts, through: :collection_items
 
   enum visibility: {

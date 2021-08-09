@@ -24,67 +24,104 @@
 </div>
 
 <div class="container container--medium">
-  <h3 class="headline-4 padding-x">
-    <%= @collection.name %>
-  </h3>
-  <div class="text-primary">
-    <%= @collection.description %>
-  </div>
   <div class="toolbar">
+    <div class="toolbar__title headline-4">
+      <%= @collection.name %>
+    </div>
     <div class="toolbar__action">
-      <a href="<%= edit_account_dashboard_collection_path(@account, @collection) %>" class="button button--text">
-        <div class="button__icon">
-          <span class="material-icons">edit</span>
-        </div>
-        <div class="button__text">
-          <%= t 'common.edit' %>
-        </div>
+      <a href="<%= account_collection_path(@account, @collection) %>" class="button button--icon">
+        <span class="material-icons">launch</span>
       </a>
+    </div>
+    <div class="toolbar__action">
+      <a href="<%= edit_account_dashboard_collection_path(@account, @collection) %>" class="button button--icon">
+        <span class="material-icons">edit</span>
+      </a>
+    </div>
+    <div class="toolbar__action">
+      <div class="dropdown" data-controller="dropdown">
+        <button type="button" class="button button--icon" data-action="dropdown#toggle">
+          <span class="material-icons">more_vert</span>
+        </button>
+        <div class="dropdown__menu dropdown__menu--top-right">
+          <%= button_to account_dashboard_collection_path(@account, @collection), method: 'delete', class: 'dropdown__item', data: { confirm: I18n.t('common.delete_collection_confirm') } do %>
+            <%= t 'common.delete_collection' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="padding">
+    <div class="text-primary margin-bottom">
+      <%= @collection.description.presence || t('common.no_description') %>
+    </div>
+    <div class="text-secondary">
+      <div class="nowrap">
+        <% if @collection.visibility_private? %>
+          <span class="material-icons material-icons--inline">lock</span>
+          <%= t 'common.private' %>
+        <% else %>
+          <span class="material-icons material-icons--inline">public</span>
+          <%= t 'common.public' %>
+        <% end %>
+      </div>
     </div>
   </div>
 
   <h4 class="headline-5 padding-x">
     <%= t 'common.posts' %>
   </h4>
-  <table class="table table--flex border-bottom">
-    <thead>
-      <tr>
-        <th class="table__cell--title"><%= t 'common.title' %></th>
-        <th class="table__cell--attribute flex-align-items-flex-end"><%= t 'common.actions' %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @collection_items.each do |collection_item| %>
-        <tr>
-          <td class="table__cell--title">
-            <div class="subtitle-1">
-              <%= collection_item.post.title %>
-            </div>
-            <div class="text-secondary">
-              <%= collection_item.post.account.name %>
-            </div>
-          </td>
-          <td class="table__cell--attribute flex-align-items-flex-end">
-            <div class="dropdown" data-controller="dropdown">
-              <button type="button" class="button button--icon" data-action="dropdown#toggle">
-                <span class="material-icons">more_vert</span>
-              </button>
-              <div class="dropdown__menu dropdown__menu--top-right">
-                <a href="<%= account_post_path(collection_item.post.account, collection_item.post) %>" class="dropdown__item">
-                  <%= t 'common.view' %>
-                </a>
-                <a href="#" class="dropdown__item">
-                  <%= t 'common.remove' %>
-                </a>
-              </div>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
 
-  <div class="padding">
-    <%= paginate @collection_items %>
-  </div>
+  <% if @collection_items.any? %>
+    <table class="table table--flex border-bottom">
+      <thead>
+        <tr>
+          <th class="table__cell--title"><%= t 'common.title' %></th>
+          <th class="table__cell--attribute flex-align-items-flex-end"><%= t 'common.actions' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @collection_items.each do |collection_item| %>
+          <tr>
+            <td class="table__cell--title">
+              <div class="subtitle-1">
+                <%= collection_item.post.title %>
+              </div>
+              <div class="text-secondary">
+                <%= collection_item.post.account.name %>
+              </div>
+            </td>
+            <td class="table__cell--attribute flex-align-items-flex-end">
+              <div class="dropdown" data-controller="dropdown">
+                <button type="button" class="button button--icon" data-action="dropdown#toggle">
+                  <span class="material-icons">more_vert</span>
+                </button>
+                <div class="dropdown__menu dropdown__menu--top-right">
+                  <a href="<%= account_post_path(collection_item.post.account, collection_item.post) %>" class="dropdown__item">
+                    <%= t 'common.view' %>
+                  </a>
+                  <a href="#" class="dropdown__item">
+                    <%= t 'common.delete_from_collection' %>
+                  </a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="padding">
+      <%= paginate @collection_items %>
+    </div>
+  <% else %>
+    <div class="content-placeholder">
+      <div class="content-placeholder__icon">
+        <span class="material-icons">article</span>
+      </div>
+      <div class="content-placeholder__label">
+        <%= t 'common.no_posts' %>
+      </div>
+    </div>
+  <% end %>
 </div>

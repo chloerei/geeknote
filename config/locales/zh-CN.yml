@@ -96,11 +96,17 @@ zh-CN:
           attributes:
             current_password:
               not_match: 密码错误
+  collection:
+    visibility_private_description: 只有账号成员可以查看。
+    visibility_private_label: 私有
+    visibility_public_description: 任何人都可以查看。
+    visibility_public_label: 公开
   common:
     account: 账号
     account_name: 账号名
     account_profile: 账号资料
     account_settings: 账号设置
+    actions: 动作
     add_to_collection: 添加到合集
     all: 全部
     archived: 已归档
@@ -117,11 +123,15 @@ zh-CN:
     create_collection: 创建合集
     dashboard: 管理面板
     delete: 删除
+    delete_collection: 删除合集
+    delete_collection_confirm: 确认删除合集？
+    delete_from_collection: 从合集移除
     delete_permanently: 永久删除
     delete_post: 删除文章
     deleted_content: 已删除内容
     detail: 详情
     edit: 编辑
+    edit_collection: Edit collection
     edit_profile: 编辑个人资料
     email: Email
     feature_image: 头图
@@ -141,6 +151,8 @@ zh-CN:
     name: 名称
     new_collection: 新合集
     new_post: 新文章
+    no_description: 没有描述
+    no_posts: 没有文章
     notifications: 通知
     options: 选项
     organization_account: 组织账号
@@ -199,6 +211,9 @@ zh-CN:
     added_to_collection: 已添加至“%{name}”。
     bookmark_added: 已添加书签。
     boomark_removed: 已移除书签。
+    collection_created: 已创建合集“%{name}”。
+    collection_deleted: 已删除合集“%{name}”
+    collection_updated: 已更新合集“%{name}”
     password_reset_email_has_been_sent: 重置邮件已发送，请检查收件箱。
     password_reset_email_time_limit: 请等待一分钟后重发邮件。
     password_reset_successful: 密码重置成功，请使用您的新密码登录账号。
