@@ -207,6 +207,11 @@ body {
 }
 
 .table__cell--action {
+  padding: 4px !important;
+
+  &:last-child {
+    padding-right: 8px !important;
+  }
 }
 
 .text-bold {
@@ -373,6 +378,7 @@ dd {
 
 .snackbar-container {
   z-index: 1000;
+  position: fixed;
 }
 
 label.list__item {

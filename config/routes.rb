@@ -91,7 +91,11 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :collections
+      resources :collections do
+        scope module: 'collections' do
+          resources :collection_items, only: [:destroy]
+        end
+      end
 
       resources :attachments, only: [:create]
 

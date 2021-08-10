@@ -125,13 +125,14 @@ zh-CN:
     delete: 删除
     delete_collection: 删除合集
     delete_collection_confirm: 确认删除合集？
-    delete_from_collection: 从合集移除
+    delete_collection_item: 从合集移除
+    delete_collection_item_confirm: 确认从合集移除该文章？
     delete_permanently: 永久删除
     delete_post: 删除文章
     deleted_content: 已删除内容
     detail: 详情
     edit: 编辑
-    edit_collection: Edit collection
+    edit_collection: 编辑合集
     edit_profile: 编辑个人资料
     email: Email
     feature_image: 头图

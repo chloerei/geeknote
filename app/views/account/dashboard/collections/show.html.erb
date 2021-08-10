@@ -29,8 +29,8 @@
       <%= @collection.name %>
     </div>
     <div class="toolbar__action">
-      <a href="<%= account_collection_path(@account, @collection) %>" class="button button--icon">
-        <span class="material-icons">launch</span>
+      <a href="<%= account_collection_path(@account, @collection) %>" class="button button--icon" target="_blank">
+        <span class="material-icons">open_in_new</span>
       </a>
     </div>
     <div class="toolbar__action">
@@ -77,12 +77,13 @@
       <thead>
         <tr>
           <th class="table__cell--title"><%= t 'common.title' %></th>
-          <th class="table__cell--attribute flex-align-items-flex-end"><%= t 'common.actions' %></th>
+          <th class="table__cell--action"></th>
+          <th class="table__cell--action"></th>
         </tr>
       </thead>
       <tbody>
         <% @collection_items.each do |collection_item| %>
-          <tr>
+          <tr id="collection-item-<%= collection_item.id %>">
             <td class="table__cell--title">
               <div class="subtitle-1">
                 <%= collection_item.post.title %>
@@ -91,18 +92,20 @@
                 <%= collection_item.post.account.name %>
               </div>
             </td>
-            <td class="table__cell--attribute flex-align-items-flex-end">
+            <td class="table__cell--action">
+              <a href="<%= account_post_path(collection_item.post.account, collection_item.post) %>" class="button button--icon" target="_blank">
+                <span class="material-icons">open_in_new</span>
+              </a>
+            </td>
+            <td class="table__cell--action">
               <div class="dropdown" data-controller="dropdown">
                 <button type="button" class="button button--icon" data-action="dropdown#toggle">
                   <span class="material-icons">more_vert</span>
                 </button>
                 <div class="dropdown__menu dropdown__menu--top-right">
-                  <a href="<%= account_post_path(collection_item.post.account, collection_item.post) %>" class="dropdown__item">
-                    <%= t 'common.view' %>
-                  </a>
-                  <a href="#" class="dropdown__item">
-                    <%= t 'common.delete_from_collection' %>
-                  </a>
+                  <%= button_to account_dashboard_collection_collection_item_path(@account, @collection, collection_item), method: 'delete', class: 'dropdown__item', data: { confirm: t('common.delete_collection_item_confirm') } do %>
+                    <%= t 'common.delete_collection_item' %>
+                  <% end %>
                 </div>
               </div>
             </td>
