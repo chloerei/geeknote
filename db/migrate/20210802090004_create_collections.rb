@@ -5,6 +5,8 @@ class CreateCollections < ActiveRecord::Migration[6.1]
       t.string :name
       t.text :description
       t.integer :visibility, default: 0
+      t.integer :sort_by, default: 0
+      t.integer :add_to, default: 0
       t.integer :collection_items_count, default: 0
 
       t.timestamps

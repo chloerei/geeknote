@@ -8,6 +8,19 @@ class Collection < ApplicationRecord
     public: 1
   }, _prefix: true
 
+  enum sort_by: {
+    custom: 0,
+    added_asc: 1,
+    added_desc: 2,
+    published_asc: 3,
+    published_desc: 4,
+  }, _prefix: true
+
+  enum add_to: {
+    top: 0,
+    bottom: 1
+  }, _prefix: true
+
   validates :name, presence: true
 
   attribute :added, :boolean, default: false

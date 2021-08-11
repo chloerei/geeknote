@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 2021_08_02_090008) do
   create_table "collection_items", force: :cascade do |t|
     t.bigint "collection_id"
     t.bigint "post_id"
+    t.integer "position"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["collection_id"], name: "index_collection_items_on_collection_id"
@@ -100,6 +101,8 @@ ActiveRecord::Schema.define(version: 2021_08_02_090008) do
     t.string "name"
     t.text "description"
     t.integer "visibility", default: 0
+    t.integer "sort_by", default: 0
+    t.integer "add_to", default: 0
     t.integer "collection_items_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
