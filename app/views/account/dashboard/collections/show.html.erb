@@ -77,7 +77,7 @@
       <% @collection_items.each do |collection_item| %>
         <div id="collection-item-<%= collection_item.id %>" class="list__item flex-align-items-center" data-sortable-target="item" data-controller="draggable">
           <div class="list__item__action">
-            <label class="drag-handle" data-draggable-target="handle">
+            <label class="button button--icon button--drag-handle" data-draggable-target="handle">
               <span class="material-icons">drag_handle</span>
             </label>
           </div>

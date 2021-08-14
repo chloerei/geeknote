@@ -391,6 +391,7 @@ label.list__item {
 
 .list__item__action {
   padding: 8px;
+  flex-shrink: 0;
 }
 
 .list__item__content {
@@ -402,13 +403,12 @@ label.list__item {
   background: white;
 }
 
-.drag-handle {
-  padding: 8px;
-  color: var(--text-secondary-color);
-  cursor: grab;
-
-  &:hover {
-    color: var(--text-primary-color);
+.button--drag-handle {
+  &:hover,
+  &:active {
+    &:after {
+      content: none;
+    }
   }
 }
 
