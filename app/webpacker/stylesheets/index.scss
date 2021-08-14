@@ -209,6 +209,10 @@ body {
 .table__cell--action {
   padding: 4px !important;
 
+  &:first-child {
+    padding-left: 8px !important;
+  }
+
   &:last-child {
     padding-right: 8px !important;
   }
@@ -383,6 +387,44 @@ dd {
 
 label.list__item {
   cursor: pointer;
+}
+
+.list__item__action {
+  padding: 8px;
+}
+
+.list__item__content {
+  padding: 12px;
+  flex-grow: 1;
+}
+
+.list__item[draggable="true"] {
+  background: white;
+}
+
+.drag-handle {
+  padding: 8px;
+  color: var(--text-secondary-color);
+  cursor: grab;
+
+  &:hover {
+    color: var(--text-primary-color);
+  }
+}
+
+.list__item.dragging {
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px dashed var(--border-color);
+    background: rgba(255, 255, 255, 0.3)
+  }
 }
 
 .dropdown__item__avatar {
@@ -728,6 +770,10 @@ a.card {
   &:hover {
     background: rgba(0, 0, 0, 0.02);
   }
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 .overflow-ellipsis {

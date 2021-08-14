@@ -73,46 +73,37 @@
   </h4>
 
   <% if @collection_items.any? %>
-    <table class="table table--flex border-bottom">
-      <thead>
-        <tr>
-          <th class="table__cell--title"><%= t 'common.title' %></th>
-          <th class="table__cell--action"></th>
-          <th class="table__cell--action"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @collection_items.each do |collection_item| %>
-          <tr id="collection-item-<%= collection_item.id %>">
-            <td class="table__cell--title">
-              <div class="subtitle-1">
-                <%= collection_item.post.title %>
+    <div class="list" data-controller="sortable">
+      <% @collection_items.each do |collection_item| %>
+        <div id="collection-item-<%= collection_item.id %>" class="list__item flex-align-items-center" data-sortable-target="item" data-controller="draggable">
+          <div class="list__item__action">
+            <label class="drag-handle" data-draggable-target="handle">
+              <span class="material-icons">drag_handle</span>
+            </label>
+          </div>
+          <div class="list__item__content overflow-hidden">
+            <div class="subtitle-1 overflow-ellipsis">
+              <%= collection_item.post.title %>
+            </div>
+            <div class="text-secondary">
+              <%= collection_item.post.account.name %>
+            </div>
+          </div>
+          <div class="list__item__action">
+            <div class="dropdown" data-controller="dropdown">
+              <button type="button" class="button button--icon" data-action="dropdown#toggle">
+                <span class="material-icons">more_vert</span>
+              </button>
+              <div class="dropdown__menu dropdown__menu--top-right">
+                <%= button_to account_dashboard_collection_collection_item_path(@account, @collection, collection_item), method: 'delete', class: 'dropdown__item', data: { confirm: t('common.delete_collection_item_confirm') } do %>
+                  <%= t 'common.delete_collection_item' %>
+                <% end %>
               </div>
-              <div class="text-secondary">
-                <%= collection_item.post.account.name %>
-              </div>
-            </td>
-            <td class="table__cell--action">
-              <a href="<%= account_post_path(collection_item.post.account, collection_item.post) %>" class="button button--icon" target="_blank">
-                <span class="material-icons">open_in_new</span>
-              </a>
-            </td>
-            <td class="table__cell--action">
-              <div class="dropdown" data-controller="dropdown">
-                <button type="button" class="button button--icon" data-action="dropdown#toggle">
-                  <span class="material-icons">more_vert</span>
-                </button>
-                <div class="dropdown__menu dropdown__menu--top-right">
-                  <%= button_to account_dashboard_collection_collection_item_path(@account, @collection, collection_item), method: 'delete', class: 'dropdown__item', data: { confirm: t('common.delete_collection_item_confirm') } do %>
-                    <%= t 'common.delete_collection_item' %>
-                  <% end %>
-                </div>
-              </div>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
 
     <div class="padding">
       <%= paginate @collection_items %>
