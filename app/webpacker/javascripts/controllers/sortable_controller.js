@@ -84,4 +84,18 @@ export default class extends Controller {
       }
     }
   }
+
+  moveToTop(event) {
+    this.draggingItem = this.findItem(event.target)
+    this.originIndex = this.itemTargets.indexOf(this.draggingItem)
+    this.itemTargets[0].insertAdjacentElement('beforebegin', this.draggingItem)
+    this.triggerChange()
+  }
+
+  moveToBottom(event) {
+    this.draggingItem = this.findItem(event.target)
+    this.originIndex = this.itemTargets.indexOf(this.draggingItem)
+    this.itemTargets[this.itemTargets.length - 1].insertAdjacentElement('afterend', this.draggingItem)
+    this.triggerChange()
+  }
 }
