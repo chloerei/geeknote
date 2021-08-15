@@ -3,6 +3,8 @@ zh-CN:
   account:
     dashboard:
       collections:
+        form:
+          new_post_add_to: 使用自定义排序时，新条目添加至
         index:
           no_collections: 还没有合集
       home:
@@ -57,11 +59,11 @@ zh-CN:
         description: 描述
         name: 名称
       collection/order_type:
-          custom: 自定义
-          added_asc: 添加时间（从早到晚）
-          added_desc: 添加时间（从晚到早）
-          published_asc: 发布时间（从早到晚）
-          published_desc: 发布时间（从晚到早）
+        added_asc: 添加时间（从早到晚）
+        added_desc: 添加时间（从晚到早）
+        custom: 自定义
+        published_asc: 发布时间（从早到晚）
+        published_desc: 发布时间（从晚到早）
       comment:
         content: 评论
       member:
@@ -123,6 +125,8 @@ zh-CN:
     by: 由
     cancel: 取消
     change_password: 修改密码
+    collection_bottom: 合集底部
+    collection_top: 合集顶部
     collections: 合集
     comment_on: 评论于
     comments: 评论
@@ -155,6 +159,8 @@ zh-CN:
     liked_posts: 赞过
     likes: 赞
     members: 成员
+    move_to_bottom: 移到底部
+    move_to_top: 移到顶部
     name: 名称
     new_collection: 新合集
     new_post: 新文章

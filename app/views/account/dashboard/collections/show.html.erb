@@ -29,11 +29,6 @@
       <%= @collection.name %>
     </div>
     <div class="toolbar__action">
-      <a href="<%= account_collection_path(@account, @collection) %>" class="button button--icon" target="_blank">
-        <span class="material-icons">open_in_new</span>
-      </a>
-    </div>
-    <div class="toolbar__action">
       <a href="<%= edit_account_dashboard_collection_path(@account, @collection) %>" class="button button--icon">
         <span class="material-icons">edit</span>
       </a>
@@ -44,8 +39,22 @@
           <span class="material-icons">more_vert</span>
         </button>
         <div class="dropdown__menu dropdown__menu--top-right">
+          <a href="<%= account_collection_path(@account, @collection) %>" class="dropdown__item">
+            <div class="dropdown__item__icon">
+              <span class="material-icons">preview</span>
+            </div>
+            <div class="dropdown__item__text">
+              <%= t 'common.view' %>
+            </div>
+          </a>
+          <hr class="divider">
           <%= button_to account_dashboard_collection_path(@account, @collection), method: 'delete', class: 'dropdown__item', data: { confirm: I18n.t('common.delete_collection_confirm') } do %>
-            <%= t 'common.delete_collection' %>
+            <div class="dropdown__item__icon">
+              <span class="material-icons">delete</span>
+            </div>
+            <div class="dropdown__item__text">
+              <%= t 'common.delete_collection' %>
+            </div>
           <% end %>
         </div>
       </div>
@@ -119,6 +128,14 @@
                 <span class="material-icons">more_vert</span>
               </button>
               <div class="dropdown__menu dropdown__menu--top-right">
+                <a href="<%= account_post_path(collection_item.post.account, collection_item.post) %>" class="dropdown__item">
+                  <div class="dropdown__item__icon">
+                    <span class="material-icons">preview</span>
+                  </div>
+                  <div class="dropdown__item__text">
+                    <%= t 'common.view' %>
+                  </div>
+                </a>
                 <button type="button" class="dropdown__item" data-action="sortable#moveToTop">
                   <div class="dropdown__item__icon">
                     <span class="material-icons">vertical_align_top</span>

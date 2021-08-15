@@ -32,6 +32,27 @@
       </label>
     </div>
   </div>
+  <div class="form__field">
+    <label class="label">
+      <%= t '.new_post_add_to' %>
+    </label>
+    <div class="form__control">
+      <%= form.radio_button :add_to, :top %>
+      <label for="collection_add_to_top" class="form__control__label">
+        <div class="text-primary">
+          <%= t 'common.collection_top' %>
+        </div>
+      </label>
+    </div>
+    <div class="form__control">
+      <%= form.radio_button :add_to, :bottom %>
+      <label for="collection_add_to_bottom" class="form__control__label">
+        <div class="text-primary">
+          <%= t 'common.collection_bottom' %>
+        </div>
+      </label>
+    </div>
+  </div>
   <button type="submit" class="button button--contained button--primary">
     <% if @collection.new_record? %>
       <%= t 'common.create_collection' %>
