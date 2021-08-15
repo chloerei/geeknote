@@ -7,7 +7,7 @@ class Account::Dashboard::CollectionsController < Account::Dashboard::BaseContro
 
   def show
     @collection = @account.collections.find params[:id]
-    @collection_items = @collection.collection_items.order(created_at: :desc).includes(post: :account).page(params[:page])
+    @collection_items = @collection.collection_items.order(position: :asc).includes(post: :account).page(params[:page])
   end
 
   def new

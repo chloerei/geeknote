@@ -93,7 +93,7 @@ Rails.application.routes.draw do
 
       resources :collections do
         scope module: 'collections' do
-          resources :collection_items, only: [:destroy]
+          resources :collection_items, only: [:update, :destroy]
         end
       end
 

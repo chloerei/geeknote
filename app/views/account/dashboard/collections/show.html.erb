@@ -75,7 +75,7 @@
   <% if @collection_items.any? %>
     <div class="list" data-controller="sortable">
       <% @collection_items.each do |collection_item| %>
-        <div id="collection-item-<%= collection_item.id %>" class="list__item flex-align-items-center" data-sortable-target="item" data-controller="draggable">
+        <div id="collection-item-<%= collection_item.id %>" class="list__item flex-align-items-center" data-sortable-target="item" data-controller="draggable collection-item" data-action="sortable:change->collection-item#updatePosition" data-update-url="<%= account_dashboard_collection_collection_item_path(@account, @collection, collection_item) %>">
           <div class="list__item__action">
             <label class="button button--icon button--drag-handle" data-draggable-target="handle">
               <span class="material-icons">drag_handle</span>
