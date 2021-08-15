@@ -8,7 +8,7 @@ class Collection < ApplicationRecord
     public: 1
   }, _prefix: true
 
-  enum sort_by: {
+  enum order_type: {
     custom: 0,
     added_asc: 1,
     added_desc: 2,
@@ -30,4 +30,25 @@ class Collection < ApplicationRecord
       sanitize_sql_array(["*, exists(select 1 from collection_items where collection_items.collection_id = collections.id and collection_items.post_id = :post_id ) as added", post_id: post.id])
     )
   }
+
+  after_update :reorder, if: :saved_change_to_order_type?
+
+  def reorder
+    items = case order_type
+    when 'added_asc'
+      self.collection_items.order(created_at: :asc)
+    when 'added_desc'
+      self.collection_items.order(created_at: :desc)
+    when 'published_asc'
+      self.collection_items.joins(:post).order("posts.published_at asc")
+    when 'published_desc'
+      self.collection_items.joins(:post).order("posts.published_at desc")
+    end
+
+    if items
+      items.each_with_index do |item, index|
+        item.update_attribute :position, index
+      end
+    end
+  end
 end

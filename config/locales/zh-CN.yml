@@ -56,6 +56,12 @@ zh-CN:
       collection:
         description: 描述
         name: 名称
+      collection/order_type:
+          custom: 自定义
+          added_asc: 添加时间（从早到晚）
+          added_desc: 添加时间（从晚到早）
+          published_asc: 发布时间（从早到晚）
+          published_desc: 发布时间（从晚到早）
       comment:
         content: 评论
       member:

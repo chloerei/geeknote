@@ -2,6 +2,7 @@ class Account::Dashboard::Collections::CollectionItemsController < Account::Dash
   before_action :set_collection_item
 
   def update
+    @collection.order_type_custom!
     @collection_item.move_to params[:collection_item][:position].to_i
   end
 

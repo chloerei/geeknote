@@ -53,6 +53,6 @@ class Account::Dashboard::CollectionsController < Account::Dashboard::BaseContro
   end
 
   def collection_params
-    params.require(:collection).permit(:name, :description, :visibility)
+    params.require(:collection).permit(:name, :description, :visibility, :order_type)
   end
 end

@@ -35,8 +35,8 @@ class CollectionItemTest < ActiveSupport::TestCase
     assert_equal 1, third_item.reload.position
   end
 
-  test "should set position when sort_by added_asc" do
-    collection = create(:collection, sort_by: 'added_asc')
+  test "should set position when order_type added_asc" do
+    collection = create(:collection, order_type: 'added_asc')
 
     first_item = create(:collection_item, collection: collection)
     second_item = create(:collection_item, collection: collection)
@@ -47,8 +47,8 @@ class CollectionItemTest < ActiveSupport::TestCase
     assert_equal 2, third_item.reload.position
   end
 
-  test "should set position when sort_by added_desc" do
-    collection = create(:collection, sort_by: 'added_desc')
+  test "should set position when order_type added_desc" do
+    collection = create(:collection, order_type: 'added_desc')
 
     first_item = create(:collection_item, collection: collection)
     second_item = create(:collection_item, collection: collection)
@@ -59,8 +59,8 @@ class CollectionItemTest < ActiveSupport::TestCase
     assert_equal 0, third_item.reload.position
   end
 
-  test "should set position when sort_by published_asc" do
-    collection = create(:collection, sort_by: 'published_asc')
+  test "should set position when order_type published_asc" do
+    collection = create(:collection, order_type: 'published_asc')
 
     first_post = create(:post, published_at: 3.day.ago)
     second_post = create(:post, published_at: 1.day.ago)
@@ -75,8 +75,8 @@ class CollectionItemTest < ActiveSupport::TestCase
     assert_equal 1, third_item.reload.position
   end
 
-  test "should set position when sort_by published_desc" do
-    collection = create(:collection, sort_by: 'published_desc')
+  test "should set position when order_type published_desc" do
+    collection = create(:collection, order_type: 'published_desc')
 
     first_post = create(:post, published_at: 3.day.ago)
     second_post = create(:post, published_at: 1.day.ago)

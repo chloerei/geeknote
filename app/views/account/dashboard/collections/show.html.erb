@@ -68,9 +68,33 @@
     </div>
   </div>
 
-  <h4 class="headline-5 padding-x">
-    <%= t 'common.posts' %>
-  </h4>
+  <div class="toolbar">
+    <div class="toolbar__title headline-5">
+      <%= t 'common.posts' %>
+    </div>
+    <div class="toolbar__action">
+      <div class="dropdown" data-controller="dropdown">
+        <button type="button" class="button button--icon" data-action="dropdown#toggle">
+          <span class="material-icons">sort</span>
+        </button>
+        <div class="dropdown__menu dropdown__menu--top-right">
+          <% Collection.order_types.keys.each do |name| %>
+            <%= button_to account_dashboard_collection_path(@account, @collection), method: 'patch', class: "dropdown__item" do %>
+              <div class="dropdown__item__icon">
+                <% if @collection.order_type == name %>
+                  <span class="material-icons">check</span>
+                <% end %>
+              </div>
+              <div class="dropdown__item__text">
+                <%= Collection.human_attribute_name "order_type.#{name}" %>
+              </div>
+              <%= hidden_field_tag 'collection[order_type]', name %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <% if @collection_items.any? %>
     <div class="list" data-controller="sortable">

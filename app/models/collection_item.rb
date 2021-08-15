@@ -4,7 +4,7 @@ class CollectionItem < ApplicationRecord
 
   after_create do
     collection.with_lock do
-      case collection.sort_by
+      case collection.order_type
       when 'custom'
         case collection.add_to
         when 'top'

@@ -243,8 +243,8 @@ body {
 .dropdown__item__icon {
   color: var(--text-secondary-color);
 
-  svg {
-    fill: currentColor;
+  &:first-child {
+    margin-right: 8px;
   }
 }
 
@@ -429,7 +429,6 @@ label.list__item {
 
 .dropdown__item__avatar {
   margin: 0 8px 0 -8px;
-
 }
 
 .icon {
