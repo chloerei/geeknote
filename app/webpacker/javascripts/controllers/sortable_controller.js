@@ -14,9 +14,10 @@ export default class extends Controller {
   }
 
   clean() {
-    this.draggingItem = null;
-    this.dropItem = null;
-    this.dropPosition = null;
+    this.draggingItem = null
+    this.originIndex = null
+    this.dropItem = null
+    this.dropPosition = null
   }
 
   findItem(target) {
@@ -26,6 +27,7 @@ export default class extends Controller {
   dragstart(event) {
     event.dataTransfer.effectAllowed = "move"
     this.draggingItem = this.findItem(event.target)
+    this.originIndex = this.itemTargets.indexOf(this.draggingItem)
   }
 
   dragend(event) {
@@ -70,5 +72,16 @@ export default class extends Controller {
 
   drop(event) {
     event.preventDefault()
+    this.triggerChange()
+  }
+
+  triggerChange() {
+    if (this.draggingItem) {
+      let index = this.itemTargets.indexOf(this.draggingItem)
+      if (index != this.originIndex) {
+        let event = new CustomEvent('sortable:change', { bubbles: true, detail: { position: index } })
+        this.draggingItem.dispatchEvent(event)
+      }
+    }
   }
 }
