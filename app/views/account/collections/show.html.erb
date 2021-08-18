@@ -1,21 +1,56 @@
-<%= render 'account/subheader' %>
-
 <div class="container container--medium">
-  <div class="breadcrumb padding">
-    <div class="breadcrumb__item">
-      <a href="<%= account_root_path(@account) %>">
-        <%= @account.display_name %>
-      </a>
-    </div>
-    <div class="breadcrumb__item">
-      <a href="<%= account_collections_path(@account) %>">
-        <%= t 'common.collections' %>
-      </a>
-    </div>
-    <div class="breadcrumb__item breadcrumb__item--active">
+  <div class="padding">
+    <h2 class="headline-4 margin-bottom">
       <%= @collection.name %>
+    </h2>
+
+    <div class="text-primary margin-bottom">
+      <%= @collection.description %>
+    </div>
+
+    <div class="toolbar toolbar--breakout">
+      <div class="toolbar__author">
+        <div class="flex">
+          <div class="avatar margin-right">
+            <%= avatar_image_tag @account.owner.avatar %>
+          </div>
+          <div>
+            <div class="text-primary">
+              <a href="<%= account_root_path(@account) %>" class="link-text text-bold"><%= @account.owner.name %></a>
+            </div>
+            <div class="text-secondary">
+              <%= format_time @collection.updated_at %>
+              &centerdot;
+              <%= @collection.collection_items_count %> <%= t 'common.posts' %>
+              <% if @collection.visibility_private? %>
+                &centerdot;
+                <span class="material-icons material-icons--inline">lock</span>
+                <%= t 'common.private' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% if current_member&.has_permission?(:manage_collections) %>
+        <div class="toolbar__action">
+          <div class="dropdown" data-controller="dropdown">
+            <button type="button" class="button button--icon" data-action="dropdown#toggle">
+              <span class="material-icons">more_horiz</span>
+            </button>
+            <div class="dropdown__menu dropdown__menu--top-right">
+              <a href=" <%= account_dashboard_collection_path %>" class="dropdown__item">
+                <%= t 'common.settings' %>
+              </a>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
+
+  <h3 class="headline-5 padding-x">
+    <%= t 'common.posts' %>
+  </h3>
 
   <div class="list">
     <%= render partial: 'account/posts/post', collection: @posts, cached: -> (post) { [post, post.saved] } %>

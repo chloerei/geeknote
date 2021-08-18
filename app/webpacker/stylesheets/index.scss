@@ -50,8 +50,9 @@ body {
   border-right: 1px solid var(--border-color);
 }
 
-.toobar__author {
+.toolbar__author {
   padding: 0 12px;
+  flex-grow: 1;
 }
 
 .app-content {
@@ -444,7 +445,7 @@ label.list__item {
 
 .banner-image {
   width: 100%;
-  height: 25vw;
+  height: 15vw;
   position: relative;
 }
 

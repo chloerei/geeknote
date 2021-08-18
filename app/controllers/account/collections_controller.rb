@@ -5,7 +5,7 @@ class Account::CollectionsController < Account::BaseController
 
   def show
     @collection = collection_scope.find params[:id]
-    @posts = @collection.posts.order("collection_items.created_at desc").page(params[:page])
+    @posts = @collection.posts.order("collection_items.position asc").page(params[:page])
   end
 
   private
