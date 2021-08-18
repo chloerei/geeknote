@@ -51,4 +51,20 @@ class Collection < ApplicationRecord
       end
     end
   end
+
+  def can_read_by_user?(user)
+    if visibility_public?
+      true
+    else
+      if user
+        if account.user?
+          account.owner == user
+        else
+          account.owner.members.where(user: user).exists?
+        end
+      else
+        false
+      end
+    end
+  end
 end

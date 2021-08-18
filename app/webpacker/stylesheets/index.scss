@@ -50,6 +50,10 @@ body {
   border-right: 1px solid var(--border-color);
 }
 
+.toolbar__action .button--text {
+  margin: 0;
+}
+
 .toolbar__author {
   padding: 0 12px;
   flex-grow: 1;
@@ -176,6 +180,10 @@ body {
 
 .width-100 {
   width: 100%;
+}
+
+.width-50 {
+  width: 50%;
 }
 
 .table {
@@ -407,6 +415,17 @@ label.list__item {
 .button--drag-handle {
   &:hover,
   &:active {
+    &:after {
+      content: none;
+    }
+  }
+}
+
+.button--no-background {
+  &:hover,
+  &:active {
+    color: var(--text-primary-color);
+
     &:after {
       content: none;
     }
@@ -784,4 +803,8 @@ a.card {
 
 .nowrap {
   white-space: nowrap;
+}
+
+.margin {
+  margin: 16px;
 }

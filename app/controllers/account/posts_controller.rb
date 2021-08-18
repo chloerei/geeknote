@@ -5,6 +5,12 @@ class Account::PostsController < Account::BaseController
 
   def show
     @post = scoped_posts.find params[:id]
+
+    if params[:collection_id] && (collection = Collection.find_by id: params[:collection_id])
+      if collection.can_read_by_user?(current_user)
+        @collection = collection
+      end
+    end
   end
 
   private

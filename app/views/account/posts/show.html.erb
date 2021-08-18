@@ -142,6 +142,64 @@
     </div>
   </div>
 
+  <% if @collection %>
+    <% collection_item = @collection.collection_items.find_by post: @post %>
+
+    <% if collection_item %>
+      <% prev_post = @collection.posts.where(collection_items: { position: collection_item.position - 1}).first %>
+      <% next_post = @collection.posts.where(collection_items: { position: collection_item.position + 1}).first %>
+
+      <div class="card card--outlined margin">
+        <div class="padding">
+          <h3 class="headline-5 margin-top-0 margin-bottom">
+            <a href="<%= account_collection_path(@collection.account, @collection) %>" class="link-text">
+              <%= @collection.name %>
+            </a>
+          </h3>
+          <div class="text-secondary">
+            <a href="<%= account_root_path(@collection.account) %>" class="link-text">
+              <%= @collection.account.display_name %>
+            </a>
+            &centerdot;
+            <%= @collection.collection_items_count %> <%= t 'common.posts' %>
+            <% if @collection.visibility_private? %>
+              &centerdot;
+              <span class="material-icons material-icons--inline">lock</span>
+              <%= t 'common.private' %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="toolbar__action width-50">
+            <% if prev_post %>
+              <a href="<%= account_post_path(prev_post.account, prev_post, collection_id: @collection.id) %>" class="button button--text button--no-background width-100">
+                <div class="button__icon">
+                  <span class="material-icons">chevron_left</span>
+                </div>
+                <div class="button__text overflow-ellipsis flex-grow-1 text-align-left">
+                  <%= prev_post.title %>
+                </div>
+              </a>
+            <% end %>
+          </div>
+          <div class="toolbar__action width-50">
+            <% if next_post %>
+              <a href="<%= account_post_path(next_post.account, next_post, collection_id: @collection.id) %>" class="button button--text button--no-background width-100">
+                <div class="button__text overflow-ellipsis flex-grow-1 text-align-right">
+                  <%= next_post.title %>
+                </div>
+                <div class="button__icon">
+                  <span class="material-icons">chevron_right</span>
+                </div>
+              </a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
   <hr class="divider margin-x">
 
   <div class="list">
