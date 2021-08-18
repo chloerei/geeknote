@@ -52,8 +52,8 @@
     <%= t 'common.posts' %>
   </h3>
 
-  <div class="list">
-    <%= render partial: 'account/posts/post', collection: @posts, cached: -> (post) { [post, post.saved] } %>
+  <div class="list" data-controller="post-list" data-post-list-collection-id-value="<%= @collection.id %>">
+    <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
   </div>
 
   <%= paginate @posts %>

@@ -1,5 +1,5 @@
-<% cache [post, post.saved] do %>
-  <div class="posts__item">
+<% cache post do %>
+  <div class="posts__item" data-post-list-target="item" data-url="<%= account_post_path(post.account, post) %>">
     <a href="<%= account_post_path(post.account, post) %>" class="stretched-link"></a>
     <div class="posts__item__content">
       <div class="flex flex-align-items-center margin-bottom-8">
