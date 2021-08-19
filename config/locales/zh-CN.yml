@@ -164,6 +164,7 @@ zh-CN:
     name: 名称
     new_collection: 新合集
     new_post: 新文章
+    no_collections_info: 合集用于保存或分享您喜欢的文章。
     no_description: 没有描述
     no_posts: 没有文章
     notifications: 通知
