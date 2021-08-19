@@ -1,11 +1,6 @@
 <% content_for :body do %>
   <div class="app-bar app-bar--borderless">
     <div class="toolbar">
-      <div class="toolbar__action">
-        <button type="button" class="button button--icon" data-controller="toggle" data-toggle-target="#drawer" data-toggle-action="drawer#toggle">
-          <span class="material-icons">menu</span>
-        </button>
-      </div>
       <div class="toolbar__title">
         <a href="/" class="text-bold">
           GeekNote
@@ -94,37 +89,6 @@
           </a>
         </div>
       <% end %>
-    </div>
-  </div>
-
-  <div id="drawer" class="drawer drawer--modal" data-controller="drawer">
-    <div class="drawer__container">
-      <div class="app-bar">
-        <div class="toolbar">
-          <div class="toolbar__action">
-            <button type="button" class="button button--icon" data-action="drawer#toggle">
-              <span class="material-icons">menu</span>
-            </button>
-          </div>
-          <div class="toolbar__title">
-            <a href="/">
-              GeekNote
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="nav">
-        <a href="/" class="nav__item <%= 'nav__item--active' if controller_name == 'posts' %>">
-          <div class="nav__item__icon">
-            <span class="material-icons">home</span>
-          </div>
-          <div class="nav__item__text">
-            <%= t 'common.home' %>
-          </div>
-        </a>
-      </div>
-    </div>
-    <div class="drawer__scrim" data-action="click->drawer#close">
     </div>
   </div>
 
