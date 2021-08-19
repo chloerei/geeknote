@@ -33,6 +33,12 @@ class Collection < ApplicationRecord
 
   after_update :reorder, if: :saved_change_to_order_type?
 
+  def with_order_lock
+    with_advisory_lock("collection_#{id}_order") do
+      yield
+    end
+  end
+
   def reorder
     items = case order_type
     when 'added_asc'
@@ -43,11 +49,15 @@ class Collection < ApplicationRecord
       self.collection_items.joins(:post).order("posts.published_at asc")
     when 'published_desc'
       self.collection_items.joins(:post).order("posts.published_at desc")
+    else
+      self.collection_items.order(position: :asc)
     end
 
-    if items
-      items.each_with_index do |item, index|
-        item.update_attribute :position, index
+    with_order_lock do
+      if items
+        items.each_with_index do |item, index|
+          item.update_attribute :position, index
+        end
       end
     end
   end

@@ -3,7 +3,7 @@ class CollectionItem < ApplicationRecord
   belongs_to :post
 
   after_create do
-    collection.with_lock do
+    collection.with_order_lock do
       case collection.order_type
       when 'custom'
         case collection.add_to
@@ -43,7 +43,7 @@ class CollectionItem < ApplicationRecord
   def move_to_top
     current = self.position
 
-    collection.with_lock do
+    collection.with_order_lock do
       collection.collection_items.where("position < ? and position >= 0", current).update_all("position = position + 1")
       update_attribute :position, 0
     end
@@ -53,7 +53,7 @@ class CollectionItem < ApplicationRecord
     current = self.position
     last = collection.collection_items.maximum("position")
 
-    collection.with_lock do
+    collection.with_order_lock do
       collection.collection_items.where("position > ? and position <= ?", current, last).update_all("position = position - 1")
       update_attribute :position, last
     end
@@ -63,12 +63,12 @@ class CollectionItem < ApplicationRecord
     current = self.position
 
     if current > position
-      collection.with_lock do
+      collection.with_order_lock do
         collection.collection_items.where("position >= ? and position < ?", position, current).update_all("position = position + 1")
         update_attribute :position, position
       end
     elsif current < position
-      collection.with_lock do
+      collection.with_order_lock do
         collection.collection_items.where("position <= ? and position > ?", position, current).update_all("position = position - 1")
         update_attribute :position, position
       end

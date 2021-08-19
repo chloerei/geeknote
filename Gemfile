@@ -56,6 +56,8 @@ gem "sentry-rails", require: false
 
 gem 'newrelic_rpm', require: false
 
+gem 'with_advisory_lock'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
