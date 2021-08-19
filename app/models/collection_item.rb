@@ -2,6 +2,8 @@ class CollectionItem < ApplicationRecord
   belongs_to :collection, touch: true, counter_cache: true
   belongs_to :post
 
+  validates :post_id, uniqueness: { scope: :collection_id }
+
   after_create do
     collection.with_order_lock do
       case collection.order_type

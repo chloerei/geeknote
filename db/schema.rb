@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2021_08_02_090008) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["collection_id"], name: "index_collection_items_on_collection_id"
-    t.index ["post_id"], name: "index_collection_items_on_post_id"
+    t.index ["post_id", "collection_id"], name: "index_collection_items_on_post_id_and_collection_id", unique: true
   end
 
   create_table "collections", force: :cascade do |t|
