@@ -121,7 +121,6 @@ zh-CN:
     authors: 作者
     avatar: 头像
     banner_image: 横幅图片
-    bookmarks: 收藏
     by: 由
     cancel: 取消
     change_password: 修改密码
@@ -223,8 +222,6 @@ zh-CN:
     account_update_successful: 账号信息更新成功。
     account_updated: 账号已更新。
     added_to_collection: 已添加至“%{name}”。
-    bookmark_added: 已添加书签。
-    boomark_removed: 已移除书签。
     collection_created: 已创建合集“%{name}”。
     collection_deleted: 已删除合集“%{name}”
     collection_updated: 已更新合集“%{name}”

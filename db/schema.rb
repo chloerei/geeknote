@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_02_090008) do
+ActiveRecord::Schema.define(version: 2021_08_21_083219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -74,16 +74,6 @@ ActiveRecord::Schema.define(version: 2021_08_02_090008) do
     t.index ["post_id", "user_id"], name: "index_authors_on_post_id_and_user_id", unique: true
     t.index ["post_id"], name: "index_authors_on_post_id"
     t.index ["user_id"], name: "index_authors_on_user_id"
-  end
-
-  create_table "bookmarks", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "post_id"
-    t.integer "status", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id", "user_id"], name: "index_bookmarks_on_post_id_and_user_id", unique: true
-    t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "collection_items", force: :cascade do |t|
@@ -196,7 +186,6 @@ ActiveRecord::Schema.define(version: 2021_08_02_090008) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "likes_count", default: 0
     t.integer "comments_count", default: 0
-    t.integer "bookmarks_count", default: 0
     t.boolean "allow_comments", default: true
     t.boolean "featured", default: false
     t.boolean "restricted", default: false

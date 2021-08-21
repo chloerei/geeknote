@@ -26,11 +26,6 @@ Rails.application.routes.draw do
 
   resources :organizations, only: [:index, :new, :create]
   resources :notifications, only: [:index]
-  resources :bookmarks, only: [:index, :update, :destroy] do
-    collection do
-      get :archived
-    end
-  end
 
   namespace :settings do
     root to: 'home#index'
@@ -49,7 +44,6 @@ Rails.application.routes.draw do
       scope module: 'posts' do
         resource :preview, only: [:show]
         resource :like, only: [:create, :destroy]
-        resource :bookmark, only: [:create, :destroy]
         resources :collections, only: [:index, :new, :create, :update] do
           collection do
             put :switch
