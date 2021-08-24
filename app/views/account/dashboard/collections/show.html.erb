@@ -114,56 +114,64 @@
               <span class="material-icons">drag_handle</span>
             </label>
           </div>
-          <div class="list__item__content overflow-hidden">
-            <div class="subtitle-1 overflow-ellipsis">
-              <%= collection_item.post.title %>
-            </div>
-            <div class="text-secondary">
-              <%= collection_item.post.account.name %>
-            </div>
-          </div>
-          <div class="list__item__action">
-            <div class="dropdown" data-controller="dropdown">
-              <button type="button" class="button button--icon" data-action="dropdown#toggle">
-                <span class="material-icons">more_vert</span>
-              </button>
-              <div class="dropdown__menu dropdown__menu--top-right">
-                <a href="<%= account_post_path(collection_item.post.account, collection_item.post) %>" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">preview</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.view' %>
-                  </div>
-                </a>
-                <button type="button" class="dropdown__item" data-action="sortable#moveToTop">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">vertical_align_top</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.move_to_top' %>
-                  </div>
-                </button>
-                <button type="button" class="dropdown__item" data-action="sortable#moveToBottom">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">vertical_align_bottom</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.move_to_bottom' %>
-                  </div>
-                </button>
-                <hr class="divider">
-                <%= button_to account_dashboard_collection_collection_item_path(@account, @collection, collection_item), method: 'delete', class: 'dropdown__item', data: { confirm: t('common.delete_collection_item_confirm') } do %>
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">delete</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.delete_collection_item' %>
-                  </div>
-                <% end %>
+          <% if collection_item.post %>
+            <div class="list__item__content overflow-hidden">
+              <div class="subtitle-1 overflow-ellipsis">
+                <%= collection_item.post.title %>
+              </div>
+              <div class="text-secondary">
+                <%= collection_item.post.account.name %>
               </div>
             </div>
-          </div>
+            <div class="list__item__action">
+              <div class="dropdown" data-controller="dropdown">
+                <button type="button" class="button button--icon" data-action="dropdown#toggle">
+                  <span class="material-icons">more_vert</span>
+                </button>
+                <div class="dropdown__menu dropdown__menu--top-right">
+                  <a href="<%= account_post_path(collection_item.post.account, collection_item.post) %>" class="dropdown__item">
+                    <div class="dropdown__item__icon">
+                      <span class="material-icons">preview</span>
+                    </div>
+                    <div class="dropdown__item__text">
+                      <%= t 'common.view' %>
+                    </div>
+                  </a>
+                  <button type="button" class="dropdown__item" data-action="sortable#moveToTop">
+                    <div class="dropdown__item__icon">
+                      <span class="material-icons">vertical_align_top</span>
+                    </div>
+                    <div class="dropdown__item__text">
+                      <%= t 'common.move_to_top' %>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown__item" data-action="sortable#moveToBottom">
+                    <div class="dropdown__item__icon">
+                      <span class="material-icons">vertical_align_bottom</span>
+                    </div>
+                    <div class="dropdown__item__text">
+                      <%= t 'common.move_to_bottom' %>
+                    </div>
+                  </button>
+                  <hr class="divider">
+                  <%= button_to account_dashboard_collection_collection_item_path(@account, @collection, collection_item), method: 'delete', class: 'dropdown__item', data: { confirm: t('common.delete_collection_item_confirm') } do %>
+                    <div class="dropdown__item__icon">
+                      <span class="material-icons">delete</span>
+                    </div>
+                    <div class="dropdown__item__text">
+                      <%= t 'common.delete_collection_item' %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% else %>
+            <div class="list__item__content">
+              <div class="text-secondary">
+                <%= t 'common.content_has_expired' %>
+              </div>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
