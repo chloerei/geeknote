@@ -23,6 +23,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   def create
     @post = @account.posts.new post_params.merge(author_users: [current_user])
     @post.save
+    @post.save_revision(user: current_user)
     headers['Location'] = edit_account_dashboard_post_url(@account, @post)
   end
 
@@ -34,6 +35,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   def update
     @post = scoped_posts.find params[:id]
     @post.update post_params
+    @post.save_revision(user: current_user)
 
     if params[:submit] == 'preview'
       render :preview

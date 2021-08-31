@@ -57,4 +57,22 @@ class Post < ApplicationRecord
       restricted: false
     )
   end
+
+  def save_revision(status: 'draft', user:)
+    last_revision = revisions.last
+
+    if last_revision && last_revision.status == status && last_revision.user == user && last_revision.created_at > 1.minutes.ago
+      last_revision.update(
+        title: title,
+        content: content
+      )
+    else
+      revisions.create(
+        user: user,
+        status: status,
+        title: title,
+        content: content
+      )
+    end
+  end
 end

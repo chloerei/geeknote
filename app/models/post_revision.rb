@@ -3,7 +3,7 @@ class PostRevision < ApplicationRecord
   belongs_to :user
 
   enum status: {
-    autosaved: 0,
+    draft: 0,
     published: 1
   }
 end
