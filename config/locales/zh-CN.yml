@@ -21,6 +21,13 @@ zh-CN:
         editor:
           start_here: 这里开始…
           title: 标题
+        publish:
+          post_is_published: 文章已发布。
+        publish_button:
+          publish_description: 将文章发布到公众可见。
+          publish_title: 发布文章
+          update_description: 将内容修改发布到公众可见。
+          update_title: 发布更新
         statuses:
           button:
             no_publish_permission_description: 需要联系有编辑权限的成员发布。
@@ -129,6 +136,7 @@ zh-CN:
     collections: 合集
     comment_on: 评论于
     comments: 评论
+    content_has_expired: 内容已失效
     create_collection: 创建合集
     dashboard: 管理面板
     delete: 删除
@@ -160,6 +168,7 @@ zh-CN:
     members: 成员
     move_to_bottom: 移到底部
     move_to_top: 移到顶部
+    move_to_trash: 移动到回收站
     name: 名称
     new_collection: 新合集
     new_post: 新文章
@@ -205,7 +214,9 @@ zh-CN:
     submit: 提交
     tags: 标签
     title: 标题
+    unpublish: 取消发布
     untitled: 无标题
+    update: 更新
     view: 查看
     view_all: 查看全部
     view_site: 查看网站

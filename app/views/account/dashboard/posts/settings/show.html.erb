@@ -4,6 +4,18 @@
     <%= render 'form' %>
   </div>
   <div class="padding border-top">
+    <% if @post.published? %>
+      <%= form_with model: @post, url: unpublish_account_dashboard_post_path(@account, @post), data: { "turbo-frame": "_top" } do |form| %>
+        <button type="submit" class="button button--text">
+          <div class="button__icon">
+            <span class="material-icons">unpublished</span>
+          </div>
+          <div class="button__label">
+            <%= t 'common.unpublish' %>
+          </div>
+        </button>
+      <% end %>
+    <% end %>
     <%= form_with model: @post, url: account_dashboard_post_status_path(@account, @post), data: { "turbo-frame": "_top", "action": 'turbo:submit-end->sheet#close' } do |form| %>
       <%= form.hidden_field :status, value: 'trashed' %>
       <button type="submit" class="button button--text button--secondary">
@@ -11,7 +23,7 @@
           <span class="material-icons">delete</span>
         </div>
         <div class="button__label">
-          <%= t 'common.delete_post' %>
+          <%= t 'common.move_to_trash' %>
         </div>
       </button>
     <% end %>

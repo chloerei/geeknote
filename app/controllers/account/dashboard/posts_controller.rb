@@ -1,6 +1,8 @@
 class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   helper_method :post_filter_params
 
+  before_action :check_publish_permission, only: [:publish, :unpublish]
+
   def index
     @posts = scoped_posts.preload(:tags).order(updated_at: :desc).page(params[:page])
 
@@ -42,6 +44,18 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
     end
   end
 
+  def publish
+    @post = scoped_posts.find params[:id]
+    @post.published!
+    @post.save_revision(status: 'published', user: current_user)
+  end
+
+  def unpublish
+    @post = scoped_posts.find params[:id]
+    @post.draft!
+    redirect_to edit_account_dashboard_post_url(@account, @post), notice: I18n.t('flash.post_move_to_draft')
+  end
+
   def destroy
     @post = scoped_posts.find params[:id]
     @post.destroy
@@ -63,6 +77,12 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
       @account.posts
     else
       @account.posts.joins(:authors).where(authors: { user: current_user })
+    end
+  end
+
+  def check_publish_permission
+    unless current_member.has_permission?(:publish_other_post) || (current_member.has_permission?(:publish_own_post) && @post.authors.include?(current_user))
+      render_not_found
     end
   end
 end

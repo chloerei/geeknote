@@ -72,6 +72,11 @@ Rails.application.routes.draw do
     namespace :dashboard do
       root to: 'home#index'
       resources :posts do
+        member do
+          patch :publish
+          patch :unpublish
+        end
+
         scope module: 'posts' do
           resource :status, only: [:update]
           resource :settings, only: [:show, :update]
