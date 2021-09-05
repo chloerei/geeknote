@@ -11,7 +11,7 @@ class Account::Dashboard::Posts::SettingsController < Account::Dashboard::Posts:
     parsed_params[:author_list] ||= []
 
     if @post.update parsed_params
-      # render nothing
+      redirect_to account_dashboard_post_settings_path(@account, @post), notice: I18n.t('flash.post_settings_updated')
     else
       render turbo_stream: turbo_stream.replace('settings-form', partial: 'form')
     end

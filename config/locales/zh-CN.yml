@@ -48,16 +48,6 @@ zh-CN:
             account_name_desription: 修改账号名。
             profile: 账号资料
             profile_desription: 头像、简介和其它一般信息。
-        profiles:
-          show:
-            profile: 资料
-    posts:
-      collections:
-        form:
-          visibility_private_description: 只有账号成员可以查看。
-          visibility_private_label: 私有
-          visibility_public_description: 任何人都可以查看。
-          visibility_public_label: 公开
   activerecord:
     attributes:
       account:
@@ -117,14 +107,11 @@ zh-CN:
     visibility_public_description: 任何人都可以查看。
     visibility_public_label: 公开
   common:
-    account: 账号
     account_name: 账号名
     account_profile: 账号资料
     account_settings: 账号设置
-    actions: 动作
     add_to_collection: 添加到合集
     all: 全部
-    archived: 已归档
     authors: 作者
     avatar: 头像
     banner_image: 横幅图片
@@ -145,20 +132,19 @@ zh-CN:
     delete_collection_item: 从合集移除
     delete_collection_item_confirm: 确认从合集移除该文章？
     delete_permanently: 永久删除
-    delete_post: 删除文章
     deleted_content: 已删除内容
     detail: 详情
     edit: 编辑
     edit_collection: 编辑合集
     edit_profile: 编辑个人资料
     email: Email
-    feature_image: 头图
+    featured_image: 特色图片
     follow: 关注
     followers: 关注者
     following: 关注中
     followings: 关注中
     forgot_password?: 忘记密码？
-    home: 首页
+    history_revisions: 历史版本
     indentifier: 身份
     info: 信息
     invite_member: 邀请成员
@@ -177,12 +163,11 @@ zh-CN:
     no_posts: 没有文章
     notifications: 通知
     options: 选项
-    organization_account: 组织账号
     organizations: 组织
     overview: 概览
     password: 密码
     pending: 待确认
-    personal_account: 个人账号
+    post_settings: 文章设置
     posts: 文章
     preview: 预览
     private: 私有
@@ -219,7 +204,6 @@ zh-CN:
     update: 更新
     view: 查看
     view_all: 查看全部
-    view_site: 查看网站
     visibility: 公开范围
   editor:
     image_limit: 只允许 JPG、PNG、GIF 图片，且小于 10MB。
@@ -242,7 +226,10 @@ zh-CN:
     password_reset_token_invliad: 密码重置链接无效或已过期，请重新获取重置链接。
     password_reset_user_does_not_exists: 找不到匹配的用户。
     password_update_successful: 密码更新成功。
-    post_is_restricted: 该帖子已被限制发布。
+    post_is_restricted: 该文章已被限制发布。
+    post_moved_to_draft: 文章已放到回收站
+    post_moved_to_trash: 文章已放到草稿箱
+    post_settings_updated: 文章设置已更新
     profile_updated: 资料已更新。
     removed_from_collection: 已从“%{name}”中移除。
     require_sign_in: 需要登录。

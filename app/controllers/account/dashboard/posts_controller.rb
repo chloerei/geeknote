@@ -1,6 +1,7 @@
 class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   helper_method :post_filter_params
 
+  before_action :set_post, only: [:edit, :update, :publish, :unpublish, :trash, :restore, :destroy]
   before_action :check_publish_permission, only: [:publish, :unpublish]
 
   def index
@@ -30,12 +31,10 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   end
 
   def edit
-    @post = scoped_posts.find params[:id]
     render 'editor', layout: 'base'
   end
 
   def update
-    @post = scoped_posts.find params[:id]
     @post.update post_params
     @post.save_revision(user: current_user)
 
@@ -45,19 +44,26 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   end
 
   def publish
-    @post = scoped_posts.find params[:id]
     @post.published!
     @post.save_revision(status: 'published', user: current_user)
   end
 
   def unpublish
-    @post = scoped_posts.find params[:id]
     @post.draft!
-    redirect_to edit_account_dashboard_post_url(@account, @post), notice: I18n.t('flash.post_move_to_draft')
+    redirect_to edit_account_dashboard_post_url(@account, @post), notice: I18n.t('flash.post_moved_to_draft')
+  end
+
+  def trash
+    @post.trashed!
+    redirect_to edit_account_dashboard_post_url(@account, @post), notice: I18n.t('flash.post_moved_to_trash')
+  end
+
+  def restore
+    @post.draft!
+    redirect_to edit_account_dashboard_post_url(@account, @post), notice: I18n.t('flash.post_moved_to_draft')
   end
 
   def destroy
-    @post = scoped_posts.find params[:id]
     @post.destroy
     redirect_to account_dashboard_posts_url(@account)
   end
@@ -78,6 +84,10 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
     else
       @account.posts.joins(:authors).where(authors: { user: current_user })
     end
+  end
+
+  def set_post
+    @post = scoped_posts.find params[:id]
   end
 
   def check_publish_permission

@@ -2,6 +2,10 @@ import { SelectorController } from "campo-ui/src/js/campo-ui"
 import Rails from "@rails/ujs"
 
 export default class extends SelectorController {
+  disconnect() {
+    this.content.remove()
+  }
+
   onInput() {
     if (this.input.value.length) {
       Rails.ajax({

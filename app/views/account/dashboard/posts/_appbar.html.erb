@@ -25,24 +25,18 @@
       </div>
       <div class="toolbar__action">
         <button type="button" class="button button--text button--disabled">
-          <div class="button__text">
-            <%= t 'common.publish' %>
-          </div>
-          <div class="button__icon">
-            <span class="material-icons">expand_more</span>
-          </div>
+          <%= t 'common.publish' %>
         </button>
       </div>
       <div class="toolbar__action">
         <button type="button" class="button button--icon button--disabled">
-          <span class="material-icons">settings</span>
+          <span class="material-icons">more_vert</span>
         </button>
       </div>
     <% else %>
       <% if @post.trashed? %>
         <div class="toolbar__action">
-          <%= form_with model: @post, url: account_dashboard_post_status_path(@account, @post) do |form| %>
-            <%= form.hidden_field :status, value: 'draft' %>
+          <%= form_with model: @post, url: restore_account_dashboard_post_path(@account, @post) do |form| %>
             <button type="submit" class="button button--text">
               <div class="button__icon">
                 <span class="material-icons">restore</span>
@@ -74,12 +68,58 @@
         <div class="toolbar__action">
           <%= render 'publish_button' %>
         </div>
-        <div class="toolbar__action">
-          <button type="button" class="button button--icon" data-controller="toggle" data-toggle-target="#settings-sheet" data-toggle-action="sheet#toggle">
-            <span class="material-icons">settings</span>
-          </button>
-        </div>
       <% end %>
+
+      <div class="toolbar__action">
+        <div class="dropdown" data-controller="dropdown">
+          <button type="button" class="button button--icon" data-action="dropdown#toggle">
+            <span class="material-icons">more_vert</span>
+          </button>
+          <div class="dropdown__menu dropdown__menu--top-right">
+            <% if @post.published? %>
+              <%= form_with url: unpublish_account_dashboard_post_path(@account, @post), method: 'patch' do |form| %>
+                <button type="submit" class="dropdown__item">
+                  <div class="dropdown__item__icon">
+                    <span class="material-icons">unpublished</span>
+                  </div>
+                  <div class="dropdown__item__text">
+                    <%= t 'common.unpublish' %>
+                  </div>
+                </button>
+              <% end %>
+            <% end %>
+            <a href="#" class="dropdown__item">
+              <div class="dropdown__item__icon">
+                <span class="material-icons">history</span>
+              </div>
+              <div class="dropdown__item__text">
+                <%= t 'common.history_revisions' %>
+              </div>
+            </a>
+            <a href="<%= account_dashboard_post_settings_path(@account, @post) %>" class="dropdown__item">
+              <div class="dropdown__item__icon">
+                <span class="material-icons">settings</span>
+              </div>
+              <div class="dropdown__item__text">
+                <%= t 'common.settings' %>
+              </div>
+            </a>
+            <% if !@post.trashed? %>
+              <hr class="divider">
+              <%= form_with url: trash_account_dashboard_post_path(@account, @post), method: 'patch' do |form| %>
+                <button type="submit" class="dropdown__item">
+                  <div class="dropdown__item__icon">
+                    <span class="material-icons">delete</span>
+                  </div>
+                  <div class="dropdown__item__text">
+                    <%= t 'common.move_to_trash' %>
+                  </div>
+                </button>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>

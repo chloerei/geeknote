@@ -75,10 +75,11 @@ Rails.application.routes.draw do
         member do
           patch :publish
           patch :unpublish
+          patch :trash
+          patch :restore
         end
 
         scope module: 'posts' do
-          resource :status, only: [:update]
           resource :settings, only: [:show, :update]
           resource :featured_image, only: [:update, :destroy]
         end
