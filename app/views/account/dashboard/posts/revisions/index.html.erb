@@ -1,0 +1,74 @@
+<div class="height-100-vh flex">
+  <div class="flex-grow-1 flex flex-direction-column">
+    <div class="app-bar app-bar--borderless">
+      <div class="toolbar">
+        <div class="toolbar__action">
+          <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="button button--icon">
+            <span class="material-icons">arrow_back</span>
+          </a>
+        </div>
+        <div class="toolbar__title">
+          <%= format_time @revision.created_at %>
+        </div>
+        <div class="toolbar__action">
+          <button type="button" class="button button--text button--primary">
+            <div class="button__icon">
+              <span class="material-icons">restore</span>
+            </div>
+            <div class="button__text">
+              Restore
+            </div>
+          </button>
+        </div>
+        <div class="toolbar__action">
+          <button type="button" class="button button--icon">
+            <span class="material-icons">toc</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="overflow-auto">
+      <div class="post-editor" data-controller="post-editor" data-post-editor-readonly-value="true">
+        <div class="post-editor__container">
+          <div class="post-editor__title">
+            <%= @revision.title %>
+          </div>
+          <div class="post-editor__content">
+            <input type="hidden" value="<%= @revision.content %>" data-post-editor-target="contentInput">
+            <div class="post-editor__content-editor" data-post-editor-target="contentEditor">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet">
+    <div class="sheet__container">
+      <div class="toolbar">
+        <div class="toolbar__title">
+          <%= t 'common.history_revisions' %>
+        </div>
+      </div>
+      <div class="flex-grow-1 overflow-auto">
+        <div class="list">
+          <% @revisions.each do |revision| %>
+            <a href="#" class="list__item <%= 'list__item--active' if revision == @revision %>">
+              <div class="list__item__content">
+                <div class="text-primary">
+                  <%= format_time revision.created_at %>
+                </div>
+                <div class="text-secondary">
+                  <%= revision.user.name %>
+                  &centerdot;
+                  <%= revision.status %>
+                </div>
+              </div>
+            </a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

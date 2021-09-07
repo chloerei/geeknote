@@ -11,7 +11,8 @@ export default class extends Controller {
   static values = {
     directUploadUrl: String,
     attachmentsUrl: String,
-    messageImageLimit: String
+    messageImageLimit: String,
+    readonly: Boolean
   }
 
   static targets = ['form', 'titleInput', 'contentEditor', 'contentInput', 'saveStatus']
@@ -19,36 +20,38 @@ export default class extends Controller {
   connect() {
     this.initEditor()
 
-    this.resizeTitle()
-    this.titleInputTarget.addEventListener('keydown', (event) => {
-      // Enter
-      if (event.keyCode == 13) {
+    if (!this.readonlyValue) {
+      this.resizeTitle()
+      this.titleInputTarget.addEventListener('keydown', (event) => {
+        // Enter
+        if (event.keyCode == 13) {
+          event.preventDefault()
+          this.editor.focus()
+        }
+      })
+      this.titleInputTarget.addEventListener('input', this.resizeTitle.bind(this))
+
+      this.formTarget.addEventListener('turbo:submit-end', this.submitEnd.bind(this))
+
+      this.onKeydownHandler = this.onKeydown.bind(this)
+      document.addEventListener('keydown', this.onKeydownHandler)
+
+      this.formTarget.addEventListener('input', () => {
+        this.autoSave()
+      })
+
+      this.element.addEventListener('dragover', (event) => {
         event.preventDefault()
-        this.editor.focus()
-      }
-    })
-    this.titleInputTarget.addEventListener('input', this.resizeTitle.bind(this))
+        event.dataTransfer.dropEffect = "move"
+      })
 
-    this.formTarget.addEventListener('turbo:submit-end', this.submitEnd.bind(this))
-
-    this.onKeydownHandler = this.onKeydown.bind(this)
-    document.addEventListener('keydown', this.onKeydownHandler)
-
-    this.formTarget.addEventListener('input', () => {
-      this.autoSave()
-    })
-
-    this.element.addEventListener('dragover', (event) => {
-      event.preventDefault()
-      event.dataTransfer.dropEffect = "move"
-    })
-
-    this.element.addEventListener('drop', (event) => {
-      if (event.dataTransfer.files.length) {
-        event.preventDefault()
-        this.editor.uploadImages(event.dataTransfer.files)
-      }
-    })
+      this.element.addEventListener('drop', (event) => {
+        if (event.dataTransfer.files.length) {
+          event.preventDefault()
+          this.editor.uploadImages(event.dataTransfer.files)
+        }
+      })
+    }
   }
 
   focusEnd() {
@@ -90,7 +93,8 @@ export default class extends Controller {
       },
       messages: {
         imageLimit: this.messageImageLimitValue
-      }
+      },
+      readonly: this.readonlyValue
     })
   }
 

@@ -44,7 +44,8 @@ class Editor {
                 this.uploadImages(event.clipboardData.files)
               }
             }
-          })
+          }),
+          EditorView.editable.of(!this.options.readonly)
         ]
       }),
       parent: element
