@@ -5,6 +5,7 @@
 @import 'editor';
 @import 'codemirror';
 @import 'post';
+@import 'revision';
 @import 'account';
 @import 'clipboard';
 @import 'avatar';
@@ -12,6 +13,7 @@
 @import 'comment';
 @import 'material_icons';
 @import 'highlight';
+@import 'diff';
 
 :root {
   --font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";

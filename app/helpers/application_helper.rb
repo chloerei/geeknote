@@ -143,4 +143,8 @@ module ApplicationHelper
       local_time time, format: :short
     end
   end
+
+  def diff_html(from, to)
+    sanitize Diffy::Diff.new(from, to, allow_empty_diff: false).to_s(:html)
+  end
 end

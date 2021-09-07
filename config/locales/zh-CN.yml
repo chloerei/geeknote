@@ -144,6 +144,7 @@ zh-CN:
     following: 关注中
     followings: 关注中
     forgot_password?: 忘记密码？
+    hide_changes: 隐藏修改
     history_revisions: 历史版本
     indentifier: 身份
     info: 信息
@@ -191,6 +192,7 @@ zh-CN:
     send_invitation: 发送邀请
     send_password_reset_email: 发送密码重置邮件
     settings: 设置
+    show_changes: 显示修改
     sign_in: 登录
     sign_in_to_comment: 登录后评论
     sign_out: 登出

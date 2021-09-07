@@ -6,4 +6,8 @@ class PostRevision < ApplicationRecord
     draft: 0,
     published: 1
   }
+
+  def prev
+    post.revisions.order(id: :desc).where("id < ?", id).first
+  end
 end

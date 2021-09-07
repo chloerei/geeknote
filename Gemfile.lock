@@ -92,6 +92,7 @@ GEM
     crass (1.0.6)
     css_parser (1.9.0)
       addressable
+    diffy (3.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.7.6)
@@ -330,6 +331,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   commonmarker
+  diffy
   dotenv-rails
   factory_bot_rails
   hiredis

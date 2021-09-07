@@ -1,5 +1,5 @@
 <div class="height-100-vh flex">
-  <div class="flex-grow-1 flex flex-direction-column">
+  <div class="flex-grow-1 flex flex-direction-column revision" data-controller="revision">
     <div class="app-bar app-bar--borderless">
       <div class="toolbar">
         <div class="toolbar__action">
@@ -11,12 +11,20 @@
           <%= format_time @revision.created_at %>
         </div>
         <div class="toolbar__action">
+          <button type="button" class="button button--text revision__hide-changes-button" data-action="revision#hideChanges">
+            <%= t 'common.hide_changes' %>
+          </button>
+          <button type="button" class="button button--text revision__show-changes-button" data-action="revision#showChanges">
+            <%= t 'common.show_changes' %>
+          </button>
+        </div>
+        <div class="toolbar__action">
           <button type="button" class="button button--text button--primary">
             <div class="button__icon">
               <span class="material-icons">restore</span>
             </div>
             <div class="button__text">
-              Restore
+              <%= t 'common.restore' %>
             </div>
           </button>
         </div>
@@ -29,15 +37,21 @@
     </div>
 
     <div class="overflow-auto">
-      <div class="post-editor" data-controller="post-editor" data-post-editor-readonly-value="true">
-        <div class="post-editor__container">
-          <div class="post-editor__title">
-            <%= @revision.title %>
+      <div class="revision__container">
+        <div class="revision__changes-content">
+          <div class="revision__title">
+            <%= diff_html(@revision.prev&.title, @revision.title) %>
           </div>
-          <div class="post-editor__content">
-            <input type="hidden" value="<%= @revision.content %>" data-post-editor-target="contentInput">
-            <div class="post-editor__content-editor" data-post-editor-target="contentEditor">
-            </div>
+          <div class="revision__content">
+            <%= diff_html(@revision.prev&.content, @revision.content) %>
+          </div>
+        </div>
+        <div class="revision__show-content">
+          <div class="revision__title">
+            <%= diff_html(@revision.title, @revision.title) %>
+          </div>
+          <div class="revision__content">
+            <%= diff_html(@revision.content, @revision.content) %>
           </div>
         </div>
       </div>
