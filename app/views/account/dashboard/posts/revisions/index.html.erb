@@ -1,64 +1,10 @@
-<div class="height-100-vh flex">
-  <div class="flex-grow-1 flex flex-direction-column revision" data-controller="revision">
-    <div class="app-bar app-bar--borderless">
-      <div class="toolbar">
-        <div class="toolbar__action">
-          <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="button button--icon">
-            <span class="material-icons">arrow_back</span>
-          </a>
-        </div>
-        <div class="toolbar__title">
-          <%= format_time @revision.created_at %>
-        </div>
-        <div class="toolbar__action">
-          <button type="button" class="button button--text revision__hide-changes-button" data-action="revision#hideChanges">
-            <%= t 'common.hide_changes' %>
-          </button>
-          <button type="button" class="button button--text revision__show-changes-button" data-action="revision#showChanges">
-            <%= t 'common.show_changes' %>
-          </button>
-        </div>
-        <div class="toolbar__action">
-          <button type="button" class="button button--text button--primary">
-            <div class="button__icon">
-              <span class="material-icons">restore</span>
-            </div>
-            <div class="button__text">
-              <%= t 'common.restore' %>
-            </div>
-          </button>
-        </div>
-        <div class="toolbar__action">
-          <button type="button" class="button button--icon">
-            <span class="material-icons">toc</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="overflow-auto">
-      <div class="revision__container">
-        <div class="revision__changes-content">
-          <div class="revision__title">
-            <%= diff_html(@revision.prev&.title, @revision.title) %>
-          </div>
-          <div class="revision__content">
-            <%= diff_html(@revision.prev&.content, @revision.content) %>
-          </div>
-        </div>
-        <div class="revision__show-content">
-          <div class="revision__title">
-            <%= diff_html(@revision.title, @revision.title) %>
-          </div>
-          <div class="revision__content">
-            <%= diff_html(@revision.content, @revision.content) %>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="height-100-vh flex" data-controller="nav-frame" data-nav-frame-nav-item-active-class="list__item--active">
+  <div class="flex-grow-1 flex flex-direction-column">
+    <%= turbo_frame_tag "revision-content", src: (@revision ? account_dashboard_post_revision_path(@account, @post, @revision) : nil), data: { 'nav-frame-target': 'frame', action: 'turbo:frame-load->nav-frame#update' }  do %>
+    <% end %>
   </div>
 
-  <div class="sheet">
+  <div id="revisions-sheet" class="sheet">
     <div class="sheet__container">
       <div class="toolbar">
         <div class="toolbar__title">
@@ -66,22 +12,25 @@
         </div>
       </div>
       <div class="flex-grow-1 overflow-auto">
-        <div class="list">
-          <% @revisions.each do |revision| %>
-            <a href="#" class="list__item <%= 'list__item--active' if revision == @revision %>">
-              <div class="list__item__content">
-                <div class="text-primary">
-                  <%= format_time revision.created_at %>
+        <%= turbo_frame_tag "revision-nav" do %>
+          <div class="list" data-nav-active-item-class="list__item--active">
+            <% @revisions.each do |revision| %>
+              <a href="<%= account_dashboard_post_revision_path(@account, @post, revision) %>" class="list__item" data-turbo-frame="revision-content" data-nav-frame-target="navItem">
+                <div class="list__item__content">
+                  <div class="text-primary">
+                    <%= format_time revision.created_at %>
+                  </div>
+                  <div class="text-secondary">
+                    <%= revision.user.name %>
+                    &centerdot;
+                    <%= revision.status %>
+                  </div>
                 </div>
-                <div class="text-secondary">
-                  <%= revision.user.name %>
-                  &centerdot;
-                  <%= revision.status %>
-                </div>
-              </div>
-            </a>
-          <% end %>
-        </div>
+              </a>
+            <% end %>
+          </div>
+          <%= paginate @revisions %>
+        <% end %>
       </div>
     </div>
   </div>

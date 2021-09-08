@@ -2,7 +2,13 @@ class Account::Dashboard::Posts::RevisionsController < Account::Dashboard::Posts
   layout 'base'
 
   def index
-    @revisions = @post.revisions.order(id: :desc)
-    @revision = @post.revisions.last
+    @revisions = @post.revisions.order(id: :desc).page(params[:page])
+    if params[:page].nil?
+      @revision = @post.revisions.last
+    end
+  end
+
+  def show
+    @revision = @post.revisions.find params[:id]
   end
 end

@@ -1,0 +1,58 @@
+<div class="flex-grow-1 flex flex-direction-column revision" data-controller="revision">
+  <div class="app-bar app-bar--borderless">
+    <div class="toolbar">
+      <div class="toolbar__action">
+        <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="button button--icon">
+          <span class="material-icons">arrow_back</span>
+        </a>
+      </div>
+      <div class="toolbar__title">
+        <%= format_time @revision.created_at %>
+      </div>
+      <div class="toolbar__action">
+        <button type="button" class="button button--text revision__hide-changes-button" data-action="revision#hideChanges">
+          <%= t 'common.hide_changes' %>
+        </button>
+        <button type="button" class="button button--text revision__show-changes-button" data-action="revision#showChanges">
+          <%= t 'common.show_changes' %>
+        </button>
+      </div>
+      <div class="toolbar__action">
+        <button type="button" class="button button--text button--primary">
+          <div class="button__icon">
+            <span class="material-icons">restore</span>
+          </div>
+          <div class="button__text">
+            <%= t 'common.restore' %>
+          </div>
+        </button>
+      </div>
+      <div class="toolbar__action">
+        <button type="button" class="button button--icon">
+          <span class="material-icons">toc</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overflow-auto">
+    <div class="revision__container">
+      <div class="revision__changes-content">
+        <div class="revision__title">
+          <%= diff_html(@revision.prev&.title, @revision.title) %>
+        </div>
+        <div class="revision__content">
+          <%= diff_html(@revision.prev&.content, @revision.content) %>
+        </div>
+      </div>
+      <div class="revision__show-content">
+        <div class="revision__title">
+          <%= diff_html(@revision.title, @revision.title) %>
+        </div>
+        <div class="revision__content">
+          <%= diff_html(@revision.content, @revision.content) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
