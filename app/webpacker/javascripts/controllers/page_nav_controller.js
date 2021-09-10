@@ -3,11 +3,15 @@ import { Controller } from "stimulus"
 export default class extends Controller {
   static targets = ["item"]
 
-  static classes = ["activeItem"]
+  static classes = ["itemActive"]
 
   connect() {
+    this.update()
+  }
+
+  update() {
     this.itemTargets.forEach((item) => {
-      item.classList.toggle(this.activeItemClass, item.href == document.location)
+      item.classList.toggle(this.itemActiveClass, item.href == document.location)
     })
   }
 }

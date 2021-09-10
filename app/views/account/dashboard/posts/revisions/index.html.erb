@@ -1,21 +1,21 @@
-<div class="height-100-vh flex" data-controller="nav-frame" data-nav-frame-nav-item-active-class="list__item--active">
-  <div class="flex-grow-1 flex flex-direction-column">
-    <%= turbo_frame_tag "revision-content", src: (@revision ? account_dashboard_post_revision_path(@account, @post, @revision) : nil), data: { 'nav-frame-target': 'frame', action: 'turbo:frame-load->nav-frame#update' }  do %>
+<div class="height-100-vh flex">
+  <div class="flex-grow-1">
+    <%= turbo_frame_tag "revision-content", src: (@revision ? account_dashboard_post_revision_path(@account, @post, @revision) : nil), data: { controller: 'page-frame', action: 'turbo:frame-load->page-frame#update' }  do %>
     <% end %>
   </div>
 
   <div id="revisions-sheet" class="sheet">
     <div class="sheet__container">
-      <div class="toolbar">
-        <div class="toolbar__title">
-          <%= t 'common.history_revisions' %>
+      <%= turbo_frame_tag "revision-nav", class: 'display-contents', data: { action: 'turbo:frame-load->nav-frame#navLoad' } do %>
+        <div class="toolbar">
+          <div class="toolbar__title">
+            <%= t 'common.history_revisions' %>
+          </div>
         </div>
-      </div>
-      <div class="flex-grow-1 overflow-auto">
-        <%= turbo_frame_tag "revision-nav" do %>
-          <div class="list" data-nav-active-item-class="list__item--active">
+        <div class="flex-grow-1 overflow-auto">
+          <div class="list" data-controller="page-nav" data-action="page-frame:update@window->page-nav#update" data-page-nav-item-active-class="list__item--active">
             <% @revisions.each do |revision| %>
-              <a href="<%= account_dashboard_post_revision_path(@account, @post, revision) %>" class="list__item" data-turbo-frame="revision-content" data-nav-frame-target="navItem">
+              <a href="<%= account_dashboard_post_revision_path(@account, @post, revision) %>" class="list__item" data-turbo-frame="revision-content" data-page-nav-target="item">
                 <div class="list__item__content">
                   <div class="text-primary">
                     <%= format_time revision.created_at %>
@@ -29,9 +29,11 @@
               </a>
             <% end %>
           </div>
-          <%= paginate @revisions %>
-        <% end %>
-      </div>
+          <div class="padding">
+            <%= paginate @revisions %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
