@@ -9,4 +9,14 @@ class Account::PostsControllerTest < ActionDispatch::IntegrationTest
     get account_root_path(account)
     assert_response :success
   end
+
+  test "should get published post" do
+    account = create(:user_account)
+    post = create(:post, account: account, author_users: [account.owner])
+    post.published!
+    post.save_revision(status: 'published', user: account.owner)
+
+    get account_post_path(account, post)
+    assert_response :success
+  end
 end

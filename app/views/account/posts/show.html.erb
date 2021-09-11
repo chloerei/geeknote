@@ -26,7 +26,7 @@
         <%= featured_image_tag @post.featured_image %>
       </div>
     <% end %>
-    <h1 class="post__title"><%= @post.title %></h1>
+    <h1 class="post__title"><%= @revision.title %></h1>
 
     <div class="toolbar toolbar--breakout">
       <div class="toolbar__author">
@@ -93,7 +93,7 @@
     </div>
 
     <div class="post__content typography">
-      <%= markdown_render @post.content %>
+      <%= markdown_render @revision.content %>
     </div>
 
     <% if @post.tags.any? %>
