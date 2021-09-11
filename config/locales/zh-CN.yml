@@ -185,6 +185,8 @@ zh-CN:
     resend_invitation: 重新发送邀请
     reset_password: 重置密码
     restore: 恢复
+    restore_revision: 恢复该版本
+    restore_revision_confirm: 确认恢复到版本%{name}？
     restricted: 限制发布
     role: 角色
     save_changes: 保存修改
@@ -231,8 +233,9 @@ zh-CN:
     password_reset_user_does_not_exists: 找不到匹配的用户。
     password_update_successful: 密码更新成功。
     post_is_restricted: 该文章已被限制发布。
-    post_moved_to_draft: 文章已放到回收站
-    post_moved_to_trash: 文章已放到草稿箱
+    post_moved_to_draft: 文章已放到回收站。
+    post_moved_to_trash: 文章已放到草稿箱。
+    post_restore_to_revision: 已恢复到版本%{name}。
     post_settings_updated: 文章设置已更新
     profile_updated: 资料已更新。
     removed_from_collection: 已从“%{name}”中移除。

@@ -10,4 +10,8 @@ class PostRevision < ApplicationRecord
   def prev
     post.revisions.order(id: :desc).where("id < ?", id).first
   end
+
+  def display_name
+    name || I18n.l(created_at, format: :short)
+  end
 end

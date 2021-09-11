@@ -3,13 +3,13 @@
 }
 
 .diff ul {
-  background:#fff;
-  overflow:auto;
-  list-style:none;
-  margin:0;
-  padding:0;
-  display:table;
-  width:100%;
+  background: #fff;
+  overflow: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: table;
+  width: 100%;
 }
 
 .diff del, .diff ins {
@@ -18,34 +18,33 @@
 }
 
 .diff li {
-  padding:0;
-  display:table-row;
+  padding: 0;
+  display: table-row;
   margin: 0;
-  height:1em;
+  height: 1em;
 }
 
 .diff li.ins {
-  background:#dfd;
-  color:#080
+  background: #dfd;
+  color: #080
 }
 
 .diff li.del {
-  background:#fee;
-  color:#b00
+  background: #fee;
+  color: #b00
 }
 
 .diff del, .diff ins, .diff span {
   white-space: pre-wrap;
   font-family: courier;
-
 }
 
 .diff del strong {
-  background:#fcc;
+  background: #fcc;
 }
 
 .diff ins strong {
-  background:#9f9;
+  background: #9f9;
 
 }
 

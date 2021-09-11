@@ -80,7 +80,11 @@ Rails.application.routes.draw do
         end
 
         scope module: 'posts' do
-          resources :revisions
+          resources :revisions, only: [:index, :show] do
+            member do
+              patch :restore
+            end
+          end
           resource :settings, only: [:show, :update]
           resource :featured_image, only: [:update, :destroy]
         end

@@ -145,6 +145,6 @@ module ApplicationHelper
   end
 
   def diff_html(from, to)
-    sanitize Diffy::Diff.new(from, to, allow_empty_diff: false).to_s(:html)
+    sanitize Diffy::Diff.new(from.to_s, to.to_s, allow_empty_diff: false).to_s(:html)
   end
 end

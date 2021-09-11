@@ -21,14 +21,16 @@
               </button>
             </div>
             <div class="toolbar__action">
-              <button type="button" class="button button--text button--primary">
-                <div class="button__icon">
-                  <span class="material-icons">restore</span>
-                </div>
-                <div class="button__text">
-                  <%= t 'common.restore' %>
-                </div>
-              </button>
+              <%= form_with model: @revision, url: restore_account_dashboard_post_revision_path(@account, @post), data: { 'turbo-frame': '_top' } do |form| %>
+                <button type="submit" class="button button--text button--primary" data-confirm="<%= t 'common.restore_revision_confirm', name: @revision.display_name %>">
+                  <div class="button__icon">
+                    <span class="material-icons">restore</span>
+                  </div>
+                  <div class="button__text">
+                    <%= t 'common.restore_revision' %>
+                  </div>
+                </button>
+              <% end %>
             </div>
             <div class="toolbar__action display-on-mobile">
               <button type="button" class="button button--icon" data-controller="toggle" data-toggle-target="#revision-sheet" data-toggle-action="sheet#toggle">
