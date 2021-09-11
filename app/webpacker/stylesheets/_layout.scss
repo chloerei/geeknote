@@ -35,16 +35,6 @@
   position: fixed;
 }
 
-.sheet--modal {
-  .sheet__container {
-    z-index: 110 !important;
-  }
-
-  .sheet__scrim {
-    z-index: 109 !important;
-  }
-}
-
 .content-container {
   padding-top: 56px;
   width: 100%;
@@ -87,6 +77,33 @@
   @for $i from 1 through 12 {
     .col-#{$i} {
       width: 100%;
+    }
+  }
+}
+
+.sheet {
+  @media (max-width: $mobile-break-point) {
+    .sheet__container {
+      margin-right: -320px;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 201;
+    }
+
+    &.sheet--open {
+      .sheet__container {
+        margin-right: 0;
+      }
+
+      .sheet__scrim {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 200;
+      }
     }
   }
 }

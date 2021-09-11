@@ -112,10 +112,6 @@ body {
   }
 }
 
-.sheet {
-  z-index: 110;
-}
-
 .margin-0 {
   margin: 0;
 }
@@ -594,14 +590,6 @@ label.list__item {
     right: 6px;
     background: var(--primary-color);
   }
-}
-
-.display-on-sheet {
-  display: none;
-}
-
-.sheet .display-on-sheet {
-  display: flex;
 }
 
 .tab__item {

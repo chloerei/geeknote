@@ -1,10 +1,27 @@
 <div class="height-100-vh flex">
   <div class="flex-grow-1">
     <%= turbo_frame_tag "revision-content", src: (@revision ? account_dashboard_post_revision_path(@account, @post, @revision) : nil), data: { controller: 'page-frame', action: 'turbo:frame-load->page-frame#update' }  do %>
+      <div class="app-bar app-bar--borderless">
+        <div class="toolbar">
+          <div class="toolbar__action">
+            <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="button button--icon" data-turbo-frame="_top">
+              <span class="material-icons">arrow_back</span>
+            </a>
+          </div>
+          <div class="toolbar__title">
+            <%= @post.title %>
+          </div>
+          <div class="toolbar__action display-on-mobile">
+            <button type="button" class="button button--icon" data-controller="toggle" data-toggle-target="#revision-sheet" data-toggle-action="sheet#toggle">
+              <span class="material-icons">toc</span>
+            </button>
+          </div>
+        </div>
+      </div>
     <% end %>
   </div>
 
-  <div id="revisions-sheet" class="sheet">
+  <div id="revision-sheet" class="sheet" data-controller="sheet">
     <div class="sheet__container">
       <%= turbo_frame_tag "revision-nav", class: 'display-contents', data: { action: 'turbo:frame-load->nav-frame#navLoad' } do %>
         <div class="toolbar">
@@ -41,6 +58,8 @@
           </div>
         </div>
       <% end %>
+    </div>
+    <div class="sheet__scrim" data-action="click->sheet#close">
     </div>
   </div>
 </div>
