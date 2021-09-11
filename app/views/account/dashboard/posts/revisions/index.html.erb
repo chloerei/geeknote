@@ -30,13 +30,13 @@
             <% end %>
 
             <% if next_page_path = next_page_path(@revisions) %>
-              <a href="<%= next_page_path %>" class="link-text" data-pagination-target="nextPageLink">
-                Loading next page
+              <a href="<%= next_page_path %>" class="button button--text button--disabled text-align-center margin-bottom" data-pagination-target="nextPageLink">
+                <%= t 'common.loading' %>
               </a>
             <% else %>
-              <span>
-                It's the end.
-              </span>
+              <div class="padding text-align-center text-muted margin-bottom">
+                <%= t 'common.no_more_content' %>
+              </div>
             <% end %>
           </div>
         </div>

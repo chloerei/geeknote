@@ -152,6 +152,7 @@ zh-CN:
     latest: 最新
     liked_posts: 赞过
     likes: 赞
+    loading: 加载中……
     members: 成员
     move_to_bottom: 移到底部
     move_to_top: 移到顶部
@@ -161,6 +162,7 @@ zh-CN:
     new_post: 新文章
     no_collections_info: 合集用于保存或分享您喜欢的文章。
     no_description: 没有描述
+    no_more_content: 没有更多内容
     no_posts: 没有文章
     notifications: 通知
     options: 选项
