@@ -38,9 +38,10 @@
                     <%= format_time revision.created_at %>
                   </div>
                   <div class="text-secondary">
+                    <div class="post-status post-status--<%= revision.status %>">
+                      <%= Post.human_attribute_name "status.#{revision.status}" %>
+                    </div>
                     <%= revision.user.name %>
-                    &centerdot;
-                    <%= revision.status %>
                   </div>
                 </div>
               </a>

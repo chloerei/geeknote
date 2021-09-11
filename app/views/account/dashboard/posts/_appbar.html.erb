@@ -77,6 +77,14 @@
           </button>
           <div class="dropdown__menu dropdown__menu--top-right">
             <% if @post.published? %>
+              <a href="<%= account_post_path(@account, @post) %>" class="dropdown__item">
+                <div class="dropdown__item__icon">
+                  <span class="material-icons">preview</span>
+                </div>
+                <div class="dropdown__item__text">
+                  <%= t 'common.view' %>
+                </div>
+              </a>
               <%= form_with url: unpublish_account_dashboard_post_path(@account, @post), method: 'patch' do |form| %>
                 <button type="submit" class="dropdown__item">
                   <div class="dropdown__item__icon">

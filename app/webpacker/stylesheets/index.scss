@@ -249,10 +249,6 @@ body {
 
 .dropdown__item__icon {
   color: var(--text-secondary-color);
-
-  &:first-child {
-    margin-right: 8px;
-  }
 }
 
 .dropdown__item__text {
@@ -393,6 +389,10 @@ label.list__item {
 
 .list__item--active {
   position: relative;
+
+  & > div {
+    z-index: 1;
+  }
 
   &::after {
     content: '';
