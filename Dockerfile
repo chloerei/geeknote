@@ -12,14 +12,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   imagemagick \
   libpq-dev \
   nodejs \
+  npm \
   postgresql-client \
   ruby \
   ruby-dev \
   zlib1g-dev
-
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-  apt-get update && apt-get install -y --no-install-recommends yarn
 
 RUN gem install bundler -v 2.2.0
 
@@ -31,13 +28,11 @@ FROM base AS ci
 
 COPY Gemfile Gemfile.lock /app/
 
-RUN bundle install --deployment && \
-  rm vendor/bundle/ruby/2.7.0/cache/*
+RUN bundle install --deployment
 
-COPY package.json yarn.lock /app/
+COPY package.json package-lock.json /app/
 
-RUN yarn install && \
-  yarn cache clean
+RUN npm install
 
 COPY . /app/
 
@@ -58,6 +53,6 @@ RUN bundle install --deployment --without test development && \
 
 COPY . /app/
 
-COPY --from=builder /app/public/packs /app/public/packs
+COPY --from=builder /app/public/assets /app/public/assets
 
 ENV RAILS_ENV=production

@@ -3,13 +3,13 @@
   <head>
     <title><%= "#{@page_title} - " if @page_title %>GeekNote</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="icon" href="<%= asset_pack_path("media/images/favicon.png") %>">
+    <link rel="icon" href="<%= asset_path("favicon.png") %>">
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 
     <% if current_user %>
       <meta name="current-user-id" content="<%= current_user.id %>">

@@ -38,7 +38,7 @@ module ApplicationHelper
         url_for avatar.variant(resize_to_fill: [160, 160])
       end
     else
-      asset_pack_url('media/images/avatar.png')
+      asset_path('avatar.png')
     end
   end
 
@@ -50,7 +50,7 @@ module ApplicationHelper
         image_tag avatar.variant(resize_to_fill: [160, 160])
       end
     else
-      image_tag asset_pack_path('media/images/avatar.png')
+      image_tag asset_path('avatar.png')
     end
   end
 
@@ -62,7 +62,7 @@ module ApplicationHelper
         image_tag avatar.variant(resize_to_fill: [320, 320])
       end
     else
-      image_tag asset_pack_path('media/images/avatar.png')
+      image_tag asset_path('avatar.png')
     end
   end
 

@@ -39,3 +39,5 @@ yarn-debug.log*
 /swarm/.env.*
 
 /vendor/bundle
+/app/assets/builds/*
+!/app/assets/builds/.keep

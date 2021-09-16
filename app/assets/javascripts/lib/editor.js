@@ -1,5 +1,5 @@
 import { EditorView, keymap, placeholder } from "@codemirror/view"
-import { Extension, EditorState, EditorSelection } from "@codemirror/state"
+import { EditorState, EditorSelection } from "@codemirror/state"
 import { history, historyKeymap } from "@codemirror/history"
 import { indentOnInput } from "@codemirror/language"
 import { defaultKeymap } from "@codemirror/commands"

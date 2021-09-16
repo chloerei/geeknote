@@ -6,8 +6,6 @@ services:
       context: .
       target: base
     command: bin/rails server -b 0.0.0.0
-    environment:
-      WEBPACKER_DEV_SERVER_HOST: webpacker
     volumes:
       - geeknote-sync:/app:nocopy
     ports:
@@ -15,17 +13,21 @@ services:
     depends_on:
       - postgres
       - redis
-  webpacker:
+  build-js:
     build:
       context: .
       target: base
-    command: bin/webpack-dev-server
-    environment:
-      WEBPACKER_DEV_SERVER_HOST: webpacker
+    command: npm run build:js -- --watch
+    tty: true
     volumes:
       - geeknote-sync:/app:nocopy
-    ports:
-      - 3035:3035
+  build-css:
+    build:
+      context: .
+      target: base
+    command: npm run build:css -- --watch
+    volumes:
+      - geeknote-sync:/app:nocopy
   worker:
     build:
       context: .
