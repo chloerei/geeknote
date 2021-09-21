@@ -1,11 +1,11 @@
-<%= form_with model: @post, url: account_dashboard_post_settings_path(@account, @post), builder: CustomFormBuilder, class: 'form', id: 'settings-form', data: { controller: 'form'} do |form| %>
+<%= form_with model: @post, url: account_dashboard_post_settings_path(@account, @post), builder: CustomFormBuilder, class: 'form', id: 'settings-form' do |form| %>
   <div class="form__field">
-    <%= form.text_area :excerpt, data: { action: 'form#submit' } %>
+    <%= form.text_area :excerpt %>
   </div>
   <div class="form__field">
     <label class="label"><%= t 'common.tags' %></label>
     <div class="selector tag-selector" data-controller="tag-selector" data-tag-selector-placeholder-value="" data-tag-selector-creatable-value="true" data-tag-selector-max-items-value="5">
-      <select name="post[tag_list][]" class="selector__select" data-action="form#submit" data-tag-selector-target="select" multiple>
+      <select name="post[tag_list][]" class="selector__select" data-tag-selector-target="select" multiple>
         <% @post.tags.each do |tag| %>
           <option value="<%= tag.name %>" selected><%= tag.name %></option>
         <% end %>
