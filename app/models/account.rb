@@ -35,7 +35,7 @@ class Account < ApplicationRecord
   end
 
   scope :recommend_for, -> (user) {
-    joins(:posts).where("posts.published_at > ?", 3.month.ago).where.not(id: user&.account&.id).order("random()")
+    joins(:posts).where("posts.published_at > ?", 3.month.ago).where("followers_count > 0").where.not(id: user&.account&.id).order("random()")
   }
 
   def to_param
