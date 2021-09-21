@@ -34,6 +34,10 @@ class Account < ApplicationRecord
     end
   end
 
+  scope :recommend_for, -> (user) {
+    joins(:posts).where("posts.published_at > ?", 1.month.ago).where.not(id: user&.account&.id).order("random()")
+  }
+
   def to_param
     name
   end

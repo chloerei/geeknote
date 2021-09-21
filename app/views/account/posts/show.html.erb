@@ -203,54 +203,10 @@
   <hr class="divider margin-x">
 
   <div class="list">
-    <div class="list__item">
-      <div class="list__avatar">
-        <a href="<%= account_root_path(@post.account) %>" class="link-text">
-          <div class="avatar">
-            <%= avatar_image_tag @post.account.owner.avatar %>
-          </div>
-        </a>
-      </div>
-      <div class="list__content">
-        <a href="<%= account_root_path(@post.account) %>" class="link-text text-primary text-bold">
-          <%= @post.account.owner.name %>
-        </a>
-        <div class="text-secondary">
-          <% if @post.account.user? %>
-            <%= @post.account.owner.bio %>
-          <% else %>
-            <%= @post.account.owner.description %>
-          <% end %>
-        </div>
-      </div>
-      <% if current_user && @post.account != current_user.account %>
-        <div class="list__action">
-          <%= render 'account/follows/button', account: @post.account %>
-        </div>
-      <% end %>
-    </div>
+    <%= render 'account/follows/account', account: @post.account %>
     <% if @post.account.organization? %>
       <% @post.author_users.each do |user| %>
-        <div class="list__item">
-          <div class="list__avatar">
-            <a href="<%= account_root_path(user.account) %>" class="link-text">
-              <%= avatar_image_tag user.avatar %>
-            </a>
-          </div>
-          <div class="list__content">
-            <a href="<%= account_root_path(user.account) %>" class="link-text text-primary text-bold">
-              <%= user.name %>
-            </a>
-            <div class="text-secondary">
-              <%= user.bio %>
-            </div>
-          </div>
-          <% if user != current_user %>
-            <div class="list__action">
-              <%= render 'account/follows/button', account: user.account %>
-            </div>
-          <% end %>
-        </div>
+        <%= render 'account/follows/account', account: user.account %>
       <% end %>
     <% end %>
   </div>
