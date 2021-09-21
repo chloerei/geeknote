@@ -7,7 +7,7 @@ class Account::FollowsController < Account::BaseController
   end
 
   def destroy
-    @account.follows.where(user: current_user).delete_all
+    @account.follows.where(user: current_user).destroy_all
     render turbo_stream: turbo_stream.replace("account-#{@account.name}-follow-button", partial: 'button', locals: { account: @account })
   end
 end
