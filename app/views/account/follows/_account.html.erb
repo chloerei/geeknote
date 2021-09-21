@@ -14,7 +14,7 @@
       <%= account.description %>
     </div>
   </div>
-  <% if current_user && account != current_user.account %>
+  <% if account != current_user&.account %>
     <div class="list__action">
       <%= render 'account/follows/button', account: account %>
     </div>
