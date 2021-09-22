@@ -20,7 +20,7 @@
       <%= paginate @posts %>
     </div>
 
-    <div class="col-4 margin-top">
+    <div class="col-4 margin-top padding-left">
       <% if !current_user %>
         <div class="subheader">
           <%= t '.join_geeknote' %>
@@ -65,6 +65,12 @@
         <div class="list">
           <%= render partial: 'account/follows/account', collection: Account.recommend_for(current_user).limit(3).includes(:owner) %>
         </div>
+      </div>
+
+      <div class="padding flex flex-gap text-secondary">
+        <a href="https://geeknote.net/policy/posts/190" class="link-text"><%= t 'common.rules' %></a>
+        <a href="https://geeknote.net/geeknote/" class="link-text"><%= t 'common.blog' %></a>
+        <a href="/contact" class="link-text"><%= t 'common.contact' %></a>
       </div>
     </div>
   </div>

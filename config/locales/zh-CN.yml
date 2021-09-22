@@ -115,6 +115,7 @@ zh-CN:
     authors: 作者
     avatar: 头像
     banner_image: 横幅图片
+    blog: 博客
     by: 由
     cancel: 取消
     change_password: 修改密码
@@ -123,6 +124,7 @@ zh-CN:
     collections: 合集
     comment_on: 评论于
     comments: 评论
+    contact: 联系
     content_has_expired: 内容已失效
     create_collection: 创建合集
     dashboard: 管理面板
@@ -189,6 +191,7 @@ zh-CN:
     restore_revision_confirm: 确认恢复到版本%{name}？
     restricted: 限制发布
     role: 角色
+    rules: 社区准则
     save_changes: 保存修改
     save_failed: 保存失败
     saved: 已保存
