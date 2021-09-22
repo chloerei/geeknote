@@ -9,5 +9,7 @@
     <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
   </div>
 
-  <%= paginate @posts %>
+  <div class="padding">
+    <%= paginate @posts %>
+  </div>
 </div>

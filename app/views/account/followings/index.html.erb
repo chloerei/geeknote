@@ -16,5 +16,7 @@
     <%= render partial: 'account/follows/list_item', collection: @accounts, as: :account %>
   </div>
 
-  <%= paginate @accounts %>
+  <div class="padding">
+    <%= paginate @accounts %>
+  </div>
 </div>

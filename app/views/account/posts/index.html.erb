@@ -14,5 +14,7 @@
     <%= render partial: 'post', collection: @posts, cached: -> (post) { [post, post.saved] } %>
   </div>
 
-  <%= paginate @posts %>
+  <div class="padding">
+    <%= paginate @posts %>
+  </div>
 </div>

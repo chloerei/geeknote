@@ -18,5 +18,7 @@
   <div id="comments" class="comments">
     <%= render partial: 'comment', collection: @comments, cached: -> (comment) { [comment, comment.liked] } %>
   </div>
-  <%= paginate @comments %>
+  <div class="padding">
+    <%= paginate @comments %>
+  </div>
 </div>
