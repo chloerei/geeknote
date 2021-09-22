@@ -246,8 +246,8 @@ zh-CN:
   posts:
     index:
       hot_tags: 热门标签
-      join_geeknote: 加入 GeekNote !
-      join_geeknote_description: GeekNote 是专为 Geek 设计的写作平台。
+      join_geeknote_description: 马上注册以获得专属写作空间。
+      join_geeknote_title: GeekNote 是专为 Geek 设计的写作平台
       who_to_follow: 推荐关注
   settings:
     home:

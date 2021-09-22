@@ -22,23 +22,24 @@
 
     <div class="col-4 margin-top padding-left">
       <% if !current_user %>
-        <div class="subheader">
-          <%= t '.join_geeknote' %>
-        </div>
-        <div class="padding">
-          <div class="text-primary margin-bottom">
-            <%= t '.join_geeknote_description' %>
+        <div class="margin-bottom">
+          <div class="padding-x padding-bottom">
+            <h3 class="subtitle-1">
+              <%= t '.join_geeknote_title' %>
+            </h3>
+            <div class="margin-bottom">
+              <%= t '.join_geeknote_description' %>
+            </div>
+            <div class="flex flex-gap">
+              <a href="<%= sign_up_path %>" class="button button--contained button--primary">
+                <%= t 'common.sign_up' %>
+              </a>
+              <a href="<%= sign_in_path %>" class="button button--text button--primary">
+                <%= t 'common.sign_in' %>
+              </a>
+            </div>
           </div>
-          <div>
-            <a href="<%= sign_up_path %>" class="button button--contained button--primary">
-              <%= t 'common.sign_up' %>
-            </a>
-            <a href="<%= sign_in_path %>" class="button button--text button--primary">
-              <%= t 'common.sign_in' %>
-            </a>
-          </div>
         </div>
-        <hr class="divider margin-x">
       <% end %>
 
       <div class="margin-bottom">
