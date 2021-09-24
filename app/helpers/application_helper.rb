@@ -108,10 +108,12 @@ module ApplicationHelper
 
   def featured_image_tag(featured_image)
     if featured_image.attached?
+      options = featured_image.metadata.slice(:width, :height)
+
       if use_aliyun_oss?
-        image_tag featured_image.url(params: { 'x-oss-process' => 'image/resize,m_lfit,w_1920,h_1920'})
+        image_tag featured_image.url(params: { 'x-oss-process' => 'image/resize,m_lfit,w_1920,h_1920'}), options
       else
-        image_tag featured_image.variant(resize_to_limit: [1920, 1920])
+        image_tag featured_image.variant(resize_to_limit: [1920, 1920]), options
       end
     end
   end

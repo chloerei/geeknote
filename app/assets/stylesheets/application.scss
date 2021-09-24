@@ -23,6 +23,11 @@ body {
   font-family: var(--font-family);
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .app-bar--borderless {
   box-shadow: none;
 }
