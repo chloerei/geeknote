@@ -1,11 +1,18 @@
 <div class="container container--post">
   <div class="breadcrumb padding">
-    <a href="<%= account_post_path(@account, @post) %>" class="breadcrumb__item">
-      <%= @post.title %>
-    </a>
-    <span class="breadcrumb__item breadcrumb__item--active">
+    <div class="breadcrumb__item">
+      <a href="<%= account_root_path(@account) %>" class="breadcrumb__item">
+        <%= @account.display_name %>
+      </a>
+    </div>
+    <div class="breadcrumb__item">
+      <a href="<%= account_post_path(@account, @post) %>" class="breadcrumb__item">
+        <%= @post.title %>
+      </a>
+    </div>
+    <div class="breadcrumb__item breadcrumb__item--active">
       <%= t 'common.comments' %>
-    </span>
+    </div>
   </div>
   <% if current_user %>
     <%= render 'form', comment: Comment.new %>

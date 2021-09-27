@@ -1,3 +1,4 @@
+<% autofocus ||= false %>
 <div class="comment" id="comment-form">
   <div class="comment__avatar">
     <div class="avatar">
@@ -9,7 +10,7 @@
       <%= form_with model: comment, url: [@account, @post, comment], builder: CustomFormBuilder, class: 'form' do |form| %>
         <%= form.hidden_field :parent_id %>
         <div class="form__field">
-          <%= form.text_area :content, rows: 3 %>
+          <%= form.text_area :content, rows: 3, autofocus: autofocus %>
         </div>
         <% if comment.new_record? %>
           <button type="submit" class="button button--contained button--primary">

@@ -92,12 +92,12 @@
       <% end %>
     </div>
 
-    <div class="post__content typography">
+    <div class="post__content typography margin-bottom">
       <%= markdown_render @revision.content %>
     </div>
 
     <% if @post.tags.any? %>
-      <div class="post__tags">
+      <div class="post__tags margin-bottom">
         <% @post.tags.each do |tag| %>
           <a href="<%= account_tag_path(@account, id: tag.name) %>" class="chip">
             <%= tag.name %>

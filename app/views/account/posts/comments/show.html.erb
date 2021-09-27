@@ -1,17 +1,26 @@
 <div class="container container--post">
   <div class="breadcrumb padding">
-    <a href="<%= account_post_path(@account, @post) %>" class="breadcrumb__item">
-      <%= @post.title %>
-    </a>
-    <a href="<%= account_post_comments_path(@account, @post) %>" class="breadcrumb__item">
-      <%= t 'common.comments' %>
-    </a>
+    <div class="breadcrumb__item">
+      <a href="<%= account_root_path(@account) %>" class="breadcrumb__item">
+        <%= @account.display_name %>
+      </a>
+    </div>
+    <div class="breadcrumb__item">
+      <a href="<%= account_post_path(@account, @post) %>" class="breadcrumb__item">
+        <%= @post.title %>
+      </a>
+    </div>
+    <div class="breadcrumb__item">
+      <a href="<%= account_post_comments_path(@account, @post) %>" class="breadcrumb__item">
+        <%= t 'common.comments' %>
+      </a>
+    </div>
   </div>
   <div class="comment-thread">
     <%= render partial: 'comment', collection: @comment.ancestors.reverse, cached: -> (comment) { [comment, comment.liked] } %>
     <%= render partial: 'comment', object: @comment %>
     <% if current_user %>
-      <%= render 'form', comment: Comment.new(parent: @comment) %>
+      <%= render 'form', comment: Comment.new(parent: @comment), autofocus: true %>
     <% else %>
       <div class="padding">
         <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--contained button--primary" data-turbo-frame="_top">Sign in to comment</a>
@@ -19,9 +28,6 @@
     <% end %>
   </div>
   <hr class="divider margin-x">
-  <div class="subheader">
-    <%= t 'common.replies' %>
-  </div>
   <div id="comments" class="comments">
     <%= render partial: 'comment', collection: @comment.replies.hot.with_liked(current_user), cached: -> (comment) { [comment, comment.liked] } %>
   </div>

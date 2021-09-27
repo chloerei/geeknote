@@ -48,7 +48,7 @@
             <%= render 'account/posts/comments/likes/button', comment: comment %>
           </div>
           <div class="toolbar__action">
-            <a href="<%= account_post_comment_path(@account, @post, comment, anchor: 'comment-form') %>" class="button button--text">
+            <a href="<%= account_post_comment_path(@account, @post, comment, anchor: "comment-#{comment.id}") %>" class="button button--text">
               <div class="button__icon">
                 <span class="material-icons">reply</span>
               </div>
