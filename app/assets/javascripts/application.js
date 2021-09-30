@@ -1,4 +1,3 @@
-console.log('hit')
 import Rails from "@rails/ujs"
 Rails.start()
 
@@ -27,6 +26,9 @@ application.register('collection_item', CollectionItemController)
 
 import DraggableController from './controllers/draggable_controller'
 application.register('draggable', DraggableController)
+
+import FocusableController from './controllers/focusable_controller'
+application.register('focusable', FocusableController)
 
 import FormController from './controllers/form_controller'
 application.register('form', FormController)

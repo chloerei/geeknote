@@ -18,15 +18,18 @@
   </div>
   <div class="comment-thread">
     <%= render partial: 'comment', collection: @comment.ancestors.reverse, cached: -> (comment) { [comment, comment.liked] } %>
-    <%= render partial: 'comment', object: @comment %>
-    <% if current_user %>
-      <%= render 'form', comment: Comment.new(parent: @comment), autofocus: true %>
-    <% else %>
-      <div class="padding">
-        <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--contained button--primary" data-turbo-frame="_top">Sign in to comment</a>
-      </div>
-    <% end %>
   </div>
+  <div data-controller="focusable">
+    <%= render partial: 'comment', object: @comment %>
+  </div>
+  <hr class="divider margin-x">
+  <% if current_user %>
+    <%= render 'form', comment: Comment.new(parent: @comment) %>
+  <% else %>
+    <div class="padding">
+      <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--contained button--primary" data-turbo-frame="_top">Sign in to comment</a>
+    </div>
+  <% end %>
   <hr class="divider margin-x">
   <div id="comments" class="comments">
     <%= render partial: 'comment', collection: @comment.replies.hot.with_liked(current_user), cached: -> (comment) { [comment, comment.liked] } %>

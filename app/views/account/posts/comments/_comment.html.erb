@@ -48,7 +48,7 @@
             <%= render 'account/posts/comments/likes/button', comment: comment %>
           </div>
           <div class="toolbar__action">
-            <a href="<%= account_post_comment_path(@account, @post, comment, anchor: "comment-#{comment.id}") %>" class="button button--text">
+            <a href="<%= account_post_comment_path(@account, @post, comment, anchor: "reply") %>" class="button button--text">
               <div class="button__icon">
                 <span class="material-icons">reply</span>
               </div>
@@ -60,11 +60,14 @@
           <div class="toolbar__space">
           </div>
           <% if comment.replies_count > 0 %>
-            <div class="toolbar__text">
-              <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="link-text text-muted">
-                <span class="text-muted">
+            <div class="toolbar__action">
+              <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="button button--text">
+                <div class="button__text">
                   <%= comment.replies_count %> <%= t 'common.replies' %>
-                </span>
+                </div>
+                <div class="button__icon">
+                  <span class="material-icons">arrow_right_alt</span>
+                </div>
               </a>
             </div>
           <% end %>

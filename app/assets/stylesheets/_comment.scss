@@ -39,7 +39,7 @@
 }
 
 .comment-thread {
-  .comment:not(:last-of-type) {
+  .comment {
     &:after {
       content: "";
       position: absolute;
