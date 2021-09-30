@@ -214,8 +214,8 @@
   <hr class="divider margin-x">
 
   <% if @post.allow_comments? %>
-    <h4 class="padding-x">
-      <%= t 'common.comments' %> (<%= @post.comments_count %>)
+    <h4 class="headline-6 padding-x margin-bottom-0">
+      <%= t 'common.comments' %> (<%= @post.comments.no_parent.count %>)
     </h4>
 
     <% if current_user %>
@@ -229,19 +229,21 @@
     <div id="comments" class="comments">
       <%= render partial: 'account/posts/comments/comment', collection: @post.comments.no_parent.with_liked(current_user).hot.limit(3), cached: -> (comment) { [comment, comment.liked] } %>
     </div>
-    <div class="padding">
-      <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100">
-        <div class="button__text">
-          <%= t 'common.view_all' %>
-        </div>
-        <div class="button__icon">
-          <span class="material-icons">expand_more</span>
-        </div>
-      </a>
-    </div>
+    <% if @post.comments.no_parent.count > 3 %>
+      <div class="padding">
+        <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100">
+          <div class="button__text">
+            <%= t 'common.view_more' %>
+          </div>
+          <div class="button__icon">
+            <span class="material-icons">expand_more</span>
+          </div>
+        </a>
+      </div>
+    <% end %>
   <% else %>
     <div class="padding text-muted text-align-center">
-      Comment is disabled.
+      <%= t 'common.comment_is_disabled' %>
     </div>
   <% end %>
 </div>
