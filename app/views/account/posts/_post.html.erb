@@ -1,6 +1,5 @@
 <% cache post do %>
   <div class="posts__item" data-post-list-target="item" data-url="<%= account_post_path(post.account, post) %>">
-    <a href="<%= account_post_path(post.account, post) %>" class="stretched-link"></a>
     <div class="posts__item__content">
       <div class="flex flex-align-items-center margin-bottom-8">
         <div class="avatar-group margin-right-8">
@@ -26,8 +25,10 @@
           <span class="material-icons featured-post__icon">push_pin</span>
         <% end %>
       </div>
-      <h3 class="margin-top-0 margin-bottom-8">
-        <%= post.title.presence || 'Untitle' %>
+      <h3 class="headline-6 margin-top-0 margin-bottom-8">
+        <a href="<%= account_post_path(post.account, post) %>" class="link-stretched link-styleless">
+          <%= post.title.presence || 'Untitle' %>
+        </a>
       </h3>
       <div class="text-secondary">
         <%= post_summary post %>

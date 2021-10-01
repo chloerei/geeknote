@@ -7,16 +7,15 @@
     </div>
   </div>
   <div class="list__content">
-    <% if comment.commentable %>
-      <a href="<%= account_post_comment_path(comment.account, comment.commentable, comment) %>" class="stretched-link"></a>
-    <% end %>
     <div class="text-primary">
       <a href="<%= account_root_path(comment.user.account) %>" class="link-text text-bold">
         <%= comment.user.name %>
       </a>
       <%= t 'common.comment_on' %>
       <% if comment.commentable %>
-        <%= comment.commentable.title %>
+        <a href="<%= account_post_comment_path(comment.account, comment.commentable, comment) %>" class="link-stretched">
+          <%= comment.commentable.title %>
+        </a>
       <% else %>
         <%= t 'common.deleted_content' %>
       <% end %>

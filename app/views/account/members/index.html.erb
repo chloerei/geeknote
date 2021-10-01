@@ -10,9 +10,11 @@
           </div>
         </div>
         <div class="list__content">
-          <a href="<%= account_root_path(member.user.account) %>" class="link-text text-primary text-bold stretched-link">
-            <%= member.user.name %>
-          </a>
+          <div class="text-primary text-bold">
+            <a href="<%= account_root_path(member.user.account) %>" class="link-stretched link-styleless">
+              <%= member.user.name %>
+            </a>
+          </div>
           <div class="text-secondary">
             <%= member.user.bio %>
           </div>

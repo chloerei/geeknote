@@ -5,10 +5,10 @@
     </div>
   </div>
   <div class="list__content">
-    <a href="<%= account_root_path(account) %>" class="stretched-link">
-    </a>
     <div class="text-primary text-bold">
-      <%= account.display_name %>
+      <a href="<%= account_root_path(account) %>" class="link-stretched link-styleless">
+        <%= account.display_name %>
+      </a>
     </div>
     <div class="text-secondary overflow-ellipsis">
       <%= account.description %>

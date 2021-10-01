@@ -15,13 +15,14 @@
   <div class="list">
     <% @members.each do |member| %>
       <div class="list__item position-relative border-bottom">
-        <a href="<%= account_root_path(member.organization.account) %>" class="stretched-link"></a>
         <div class="list__avatar">
           <%= avatar_image_tag member.organization.avatar %>
         </div>
         <div class="list__content">
-          <div class="text-primary">
-            <%= member.organization.name %>
+          <div class="text-primary text-bold">
+            <a href="<%= account_root_path(member.organization.account) %>" class="link-stretched link-styleless">
+              <%= member.organization.name %>
+            </a>
           </div>
           <div class="text-secondary">
             <%= member.organization.description %>

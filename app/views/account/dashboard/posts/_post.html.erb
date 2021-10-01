@@ -1,9 +1,9 @@
-<tr>
-  <td class="table__cell--title">
-    <a href="<%= edit_account_dashboard_post_path(@account, post) %>" class="table__row-link">
-    </a>
+<tr class="position-relative">
+  <td>
     <div class="subtitle-1 text-bold">
-      <%= post.title.presence || t('common.untitled') %>
+      <a href="<%= edit_account_dashboard_post_path(@account, post) %>" class="link-stretched link-styleless">
+        <%= post.title.presence || t('common.untitled') %>
+    </a>
     </div>
     <div class="text-secondary">
       <%= t 'common.by' %> <%= post.author_users.pluck(:name).join(', ') %>
@@ -19,7 +19,7 @@
       <% end %>
     </div>
   </td>
-  <td class="table__cell--attribute">
+  <td class="table__cell--min">
     <div class="post-status post-status--<%= post.status %>">
       <%= Post.human_attribute_name "status.#{post.status}" %>
     </div>

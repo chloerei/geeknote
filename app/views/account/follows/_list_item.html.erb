@@ -5,9 +5,11 @@
     </div>
   </div>
   <div class="list__content">
-    <a href="<%= account_root_path(account) %>" class="link-text text-primary text-bold stretched-link">
-      <%= account.owner.name %>
-    </a>
+    <div class="text-primary text-bold">
+      <a href="<%= account_root_path(account) %>" class="link-stretched link-styleless">
+        <%= account.owner.name %>
+      </a>
+    </div>
     <div class="text-secondary">
       <% if account.user? %>
         <%= account.owner.bio %>

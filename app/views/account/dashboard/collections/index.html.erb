@@ -36,27 +36,27 @@
   </div>
 
   <% if @collections.any? %>
-    <table class="table table--flex border-bottom">
+    <table class="table border-bottom">
       <thead>
         <tr>
-          <th class="table__cell--title"><%= t 'common.name' %></th>
-          <th class="table__cell--attribute"><%= t 'common.visibility' %></th>
+          <th><%= t 'common.name' %></th>
+          <th class="table__cell--min"><%= t 'common.visibility' %></th>
         </tr>
       </thead>
       <tbody>
         <% @collections.each do |collection| %>
-          <tr>
-            <td class="table__cell--title">
-              <a href="<%= account_dashboard_collection_path(@account, collection) %>" class="table__row-link">
-              </a>
+          <tr class="position-relative">
+            <td>
               <div class="subtitle-1">
-                <%= collection.name %>
+                <a href="<%= account_dashboard_collection_path(@account, collection) %>" class="link-stretched link-styleless">
+                  <%= collection.name %>
+                </a>
               </div>
               <div class="text-secondary">
                 <%= collection.collection_items_count %> <%= t 'common.posts' %>
               </div>
             </td>
-            <td class="table__cell--attribute">
+            <td class="table__cell--min">
               <div class="nowrap">
                 <% if collection.visibility_private? %>
                   <span class="material-icons material-icons--inline">lock</span>
