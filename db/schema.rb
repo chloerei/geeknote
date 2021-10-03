@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_28_090841) do
+ActiveRecord::Schema.define(version: 2021_10_03_092111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -233,6 +233,7 @@ ActiveRecord::Schema.define(version: 2021_08_28_090841) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "followings_count", default: 0
+    t.datetime "email_verified_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
