@@ -18,4 +18,14 @@ class UserMailer < ApplicationMailer
       subject: I18n.t('email.your_post_is_been_restricted_for_publish')
     )
   end
+
+  def email_verification
+    @user = params[:user]
+
+    mail(
+      to: @user.email,
+      reply_to: 'support@geeknote.net',
+      subject: I18n.t('email.email_verification')
+    )
+  end
 end

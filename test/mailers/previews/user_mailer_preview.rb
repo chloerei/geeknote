@@ -10,4 +10,9 @@ class UserMailerPreview < ActionMailer::Preview
     @post = Post.first || FactoryBot.create(:post)
     UserMailer.with(user: @user, post: @post).post_restricted_email
   end
+
+  def email_verification
+    @user = User.first || FactoryBot.create(:user)
+    UserMailer.with(user: @user).email_verification
+  end
 end
