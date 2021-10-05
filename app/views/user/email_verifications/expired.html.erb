@@ -1,0 +1,16 @@
+<div class="container container--small">
+  <div class="padding">
+    <h2 class="headline-4"><%= t '.token_expired' %></h2>
+    <p>
+      <%= t '.please_resend_email_veification' %>
+    </p>
+    <a href="<%= settings_account_path %>" class="button button--text button--primary">
+      <div class="button__text">
+        <%= t 'common.account_settings' %>
+      </div>
+      <div class="button__icon">
+        <span class="material-icons">arrow_forward</span>
+      </div>
+    </a>
+  </div>
+</div>

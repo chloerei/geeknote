@@ -42,7 +42,7 @@ class User < ApplicationRecord
   end
 
   def self.find_by_password_reset_token(token)
-    find_by id: User.encryptor.decrypt_and_verify(token, purpose: :password_reset)
+    find_by id: User.encryptor.decrypt_and_verify(token.to_s, purpose: :password_reset)
   rescue ActiveSupport::MessageEncryptor::InvalidMessage
     nil
   end
@@ -52,7 +52,7 @@ class User < ApplicationRecord
   end
 
   def self.find_by_email_verification_token(token)
-    id, email = User.encryptor.decrypt_and_verify(token, purpose: :email_verification)
+    id, email = User.encryptor.decrypt_and_verify(token.to_s, purpose: :email_verification)
     find_by id: id, email: email
   rescue ActiveSupport::MessageEncryptor::InvalidMessage
     nil

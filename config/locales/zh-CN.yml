@@ -28,16 +28,6 @@ zh-CN:
           publish_title: 发布文章
           update_description: 将内容修改发布到公众可见。
           update_title: 发布更新
-        statuses:
-          button:
-            no_publish_permission_description: 需要联系有编辑权限的成员发布。
-            publish_now: 现在发布
-            publish_now_description: 将文章设为公众可见。
-            unpublish: 取消发布
-            unpublish_description: 将文章设为草稿。
-          update:
-            post_is_published: 文章已发布
-            post_is_unpublished: 文章已取消发布
       settings:
         accounts:
           form:
@@ -181,7 +171,6 @@ zh-CN:
     profile: 个人资料
     public: 公开
     publish: 发布
-    published: 已发布
     recommend: 推荐
     remove: 移除
     replies: 回复
@@ -240,7 +229,6 @@ zh-CN:
     password_reset_token_invliad: 密码重置链接无效或已过期，请重新获取重置链接。
     password_reset_user_does_not_exists: 找不到匹配的用户。
     password_update_successful: 密码更新成功。
-    post_is_restricted: 该文章已被限制发布。
     post_moved_to_draft: 文章已放到回收站。
     post_moved_to_trash: 文章已放到草稿箱。
     post_restore_to_revision: 已恢复到版本%{name}。
@@ -261,6 +249,17 @@ zh-CN:
         account_desription: 修改登录邮箱。
         password: 密码
         password_desription: 修改登录密码。
+  user:
+    email_verifications:
+      expired:
+        please_resend_email_veification: 请重新发送验证邮件。
+        token_expired: 链接已过期
+      show:
+        email_verification: 邮箱验证
+        verifying: 验证中，请稍等……
+      success:
+        back_to_homepage: 回到首页
+        your_email_has_been_verified: 您的邮箱已验证成功
   users:
     form:
       account_name_helper_text: 可以使用大小写字母、数字和 - 号，全站唯一

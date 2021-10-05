@@ -1,0 +1,10 @@
+<div class="container container--small">
+  <div class="padding">
+    <div id="main">
+      <h2 class="headline-4"><%= t '.email_verification' %></h2>
+      <%= form_with url: user_email_verification_path(token: params[:token]), method: :put, data: { controller: 'form', action: 'turbo:load@window->form#submit' } do |form| %>
+        <%= t '.verifying' %>
+      <% end %>
+    </div>
+  </div>
+</div>

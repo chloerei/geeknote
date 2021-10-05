@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   namespace :user do
     resource :password, only: [:new, :create, :edit, :update]
+    resource :email_verification, only: [:show, :update]
   end
 
   scope '/:account_name', module: 'account', as: :account do
