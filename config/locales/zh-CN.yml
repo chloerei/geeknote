@@ -246,10 +246,10 @@ zh-CN:
   settings:
     home:
       index:
-        account: 账号设置
-        account_desription: 修改登录邮箱。
+        email: Email
+        email_desription: 登录账号，邮件通知地址。
         password: 密码
-        password_desription: 修改登录密码。
+        password_desription: 登录密码。
   user:
     email_verifications:
       expired:

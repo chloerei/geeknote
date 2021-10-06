@@ -1,4 +1,4 @@
-class Settings::AccountsController < Settings::BaseController
+class Settings::EmailsController < Settings::BaseController
   def show
     @user = current_user
   end
@@ -7,7 +7,7 @@ class Settings::AccountsController < Settings::BaseController
     @user = current_user
     @user.require_password = true
     if @user.update user_params
-      redirect_to settings_account_path, notice: t('flash.account_update_successful')
+      redirect_to settings_email_path, notice: t('flash.account_update_successful')
     else
       render turbo_stream: turbo_stream.replace('account-form', partial: 'form')
     end

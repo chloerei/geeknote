@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   namespace :settings do
     root to: 'home#index'
-    resource :account
+    resource :email
     resource :password
   end
 
