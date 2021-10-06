@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
     if @user.save
       sign_in(@user)
+      UserMailer.with(user: @user).email_verification.deliver_later
       redirect_to session.delete(:return_to) || root_path
     else
       render turbo_stream: turbo_stream.replace('sign-up-form', partial: 'form')
