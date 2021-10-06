@@ -211,7 +211,8 @@ zh-CN:
   editor:
     image_limit: 只允许 JPG、PNG、GIF 图片，且小于 10MB。
   email:
-    reset_your_geeknote_password: 重置 GeekNote 密码
+    email_verification: 验证邮箱地址
+    reset_your_geeknote_password: 重置密码
     your_post_is_been_restricted_for_publish: 您的帖子已被限制发布
   errors:
     messages:
