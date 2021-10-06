@@ -42,6 +42,33 @@
             </div>
           </div>
         </div>
+      <% else %>
+        <% if !current_user.email_verified? %>
+          <div class="padding">
+            <div class="card card--outlined">
+              <div class="padding-x padding-top">
+                <h3 class="subtitle-5 margin-top-0">
+                  <%= t '.verify_email_title' %>
+                </h3>
+                <div class="text-priamry">
+                  <%= t '.verify_email_description' %>
+                </div>
+              </div>
+              <div class="toolbar">
+                <div class="toolbar__action">
+                  <a href="<%= settings_email_path %>" class="button button--text button--primary">
+                    <div class="button__text">
+                      <%= t '.email_settings' %>
+                    </div>
+                    <div class="button__icon">
+                      <span class="material-icons">arrow_forward</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
       <% end %>
 
       <div class="margin-bottom">

@@ -242,9 +242,12 @@ zh-CN:
     require_sign_in: 需要登录。
   posts:
     index:
+      email_settings: 邮件地址设置
       hot_tags: 热门标签
       join_geeknote_description: 马上注册以获得专属写作空间。
       join_geeknote_title: GeekNote 是专为 Geek 设计的写作平台
+      verify_email_description: 为了开启完整功能，收取通知邮件，确保账号安全，需要验证邮件地址。
+      verify_email_title: 验证邮件地址
       who_to_follow: 推荐关注
   settings:
     emails:

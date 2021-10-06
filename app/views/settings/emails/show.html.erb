@@ -18,19 +18,19 @@
     <h2 class="headline-4"><%= t 'common.email' %></h2>
 
     <% if !@user.email_verified? %>
-      <div class="card card--outlined padding">
-        <h3 class="subtitle-5 margin-top-0">
-          <%= t '.verify_email_title' %>
-        </h3>
-        <p>
-          <%= t '.verify_email_description' %>
-        </p>
-        <%= form_with url: resend_settings_email_path do |form| %>
-          <button type="submit" class="button button--contained button--primary">
-            <%= t '.resend_verification_email' %>
-          </button>
-        <% end %>
-      </div>
+      <h3 class="subtitle-5 margin-top-0">
+        <%= t '.verify_email_title' %>
+      </h3>
+      <p>
+        <%= t '.verify_email_description' %>
+      </p>
+      <%= form_with url: resend_settings_email_path do |form| %>
+        <button type="submit" class="button button--contained button--primary">
+          <%= t '.resend_verification_email' %>
+        </button>
+      <% end %>
+
+      <hr class="divider margin-y">
     <% end %>
 
     <%= render 'form' %>
