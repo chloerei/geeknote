@@ -224,6 +224,9 @@ zh-CN:
     collection_created: 已创建合集“%{name}”。
     collection_deleted: 已删除合集“%{name}”
     collection_updated: 已更新合集“%{name}”
+    email_update_successful: 邮件地址已更新。
+    email_verification_sent: 验证邮件已发送，请检查收件箱。
+    email_verification_time_limit: 请等待一分钟后重发邮件。
     password_reset_email_has_been_sent: 重置邮件已发送，请检查收件箱。
     password_reset_email_time_limit: 请等待一分钟后重发邮件。
     password_reset_successful: 密码重置成功，请使用您的新密码登录账号。
@@ -244,6 +247,11 @@ zh-CN:
       join_geeknote_title: GeekNote 是专为 Geek 设计的写作平台
       who_to_follow: 推荐关注
   settings:
+    emails:
+      show:
+        resend_verification_email: 重发验证邮件
+        verify_email_description: 为了开启完整功能，收取通知邮件，确保账号安全，需要验证邮件地址。
+        verify_email_title: 验证邮件地址
     home:
       index:
         email: Email

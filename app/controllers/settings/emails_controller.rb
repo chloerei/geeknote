@@ -7,9 +7,21 @@ class Settings::EmailsController < Settings::BaseController
     @user = current_user
     @user.require_password = true
     if @user.update user_params
-      redirect_to settings_email_path, notice: t('flash.account_update_successful')
+      redirect_to settings_email_path, notice: t('flash.email_update_successful')
     else
       render turbo_stream: turbo_stream.replace('account-form', partial: 'form')
+    end
+  end
+
+  def resend
+    cache_key = "email_verification:#{current_user.email}"
+
+    if Rails.cache.exist?(cache_key)
+      redirect_to settings_email_path, notice: I18n.t('flash.email_verification_time_limit')
+    else
+      Rails.cache.write(cache_key, true, expires_in: 1.minute)
+      UserMailer.with(user: current_user).email_verification.deliver_later
+      redirect_to settings_email_path, notice: I18n.t('flash.email_verification_sent')
     end
   end
 
