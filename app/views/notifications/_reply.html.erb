@@ -1,6 +1,6 @@
 <% comment = notification.record %>
 
-<div class="list__item position-relative">
+<a href="<%= account_post_comment_path(comment.account, comment.commentable, comment) %>" class="list__item">
   <div class="list__avatar">
     <div class="avatar">
       <%= avatar_image_tag comment.user.avatar %>
@@ -8,14 +8,10 @@
   </div>
   <div class="list__content">
     <div class="text-primary">
-      <a href="<%= account_root_path(comment.user.account) %>" class="link-text text-bold">
-        <%= comment.user.name %>
-      </a>
+      <span class="text-bold"><%= comment.user.name %></span>
       <%= t 'common.reply_on' %>
       <% if comment.commentable %>
-        <a href="<%= account_post_comment_path(comment.account, comment.commentable, comment) %>" class="link-stretched">
-          <%= comment.commentable.title %>
-        </a>
+        <%= comment.commentable.title %>
       <% else %>
         <%= t 'common.deleted_content' %>
       <% end %>
@@ -24,4 +20,4 @@
       <%= comment_summary comment %>
     </div>
   </div>
-</div>
+</a>

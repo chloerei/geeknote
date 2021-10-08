@@ -12,5 +12,10 @@ FactoryBot.define do
       record factory: :comment
       type { :reply }
     end
+
+    factory :post_restricted_notification do
+      record factory: :post
+      type { :post_restricted }
+    end
   end
 end
