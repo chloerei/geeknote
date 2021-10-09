@@ -15,4 +15,11 @@ class UserMailerPreview < ActionMailer::Preview
     @user = User.first || FactoryBot.create(:user)
     UserMailer.with(user: @user).email_verification
   end
+
+  def comment_notification
+    user = User.first || FactoryBot.create(:user)
+    comment = Comment.first || FactoryBot.create(:comment)
+
+    UserMailer.with(user: user, comment: comment).comment_notification
+  end
 end

@@ -1,4 +1,6 @@
 class UserMailer < ApplicationMailer
+  helper :application
+
   def password_reset_email
     @user = params[:user]
 
@@ -26,6 +28,17 @@ class UserMailer < ApplicationMailer
       to: @user.email,
       reply_to: 'support@geeknote.net',
       subject: I18n.t('email.email_verification')
+    )
+  end
+
+  def comment_notification
+    @user = params[:user]
+    @comment = params[:comment]
+
+    mail(
+      to: @user.email,
+      from: "#{@comment.user.name} <notifications@geeknote.net>",
+      subject: "Re: #{@comment.commentable.title}"
     )
   end
 end
