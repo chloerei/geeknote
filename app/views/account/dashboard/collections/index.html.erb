@@ -45,8 +45,8 @@
       </thead>
       <tbody>
         <% @collections.each do |collection| %>
-          <tr class="position-relative">
-            <td>
+          <tr>
+            <td class="position-relative">
               <div class="subtitle-1">
                 <a href="<%= account_dashboard_collection_path(@account, collection) %>" class="link-stretched link-styleless">
                   <%= collection.name %>

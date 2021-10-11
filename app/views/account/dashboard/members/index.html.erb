@@ -43,8 +43,8 @@
       </thead>
       <tbody>
         <% @members.each do |member| %>
-          <tr class="position-relative">
-            <td>
+          <tr>
+            <td class="position-relative">
               <a href="<%= account_dashboard_member_path(@account, member) %>" class="link-stretched link-styleless">
                 <%= member.user.name %>
               </a>
@@ -69,8 +69,8 @@
         </thead>
         <tbody>
           <% @pending_members.each do |member| %>
-            <tr class="position-relative">
-              <td>
+            <tr>
+              <td class="position-relative">
                 <a href="<%= account_dashboard_member_path(@account, member) %>" class="link-stretched link-styleless">
                   <% if member.user %>
                     <%= member.user.name %>
