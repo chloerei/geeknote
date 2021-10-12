@@ -1,0 +1,16 @@
+class Settings::NotificationsController < Settings::BaseController
+  def show
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    @user.update settings_params
+  end
+
+  private
+
+  def settings_params
+    params.require(:user).permit(:email_notification_enabled, :email_notification_comment_enabled)
+  end
+end

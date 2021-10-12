@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       post :resend
     end
     resource :password
+    resource :notification
   end
 
   namespace :user do

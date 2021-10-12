@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="padding">
+    <div class="breadcrumb">
+      <div class="breadcrumb__item">
+        <a href="<%= settings_root_path %>">
+          <%= t 'common.settings' %>
+        </a>
+      </div>
+      <div class="breadcrumb__item breadcrumb__item--active">
+        <%= t 'common.notifications' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container container--small">
+  <div class="padding">
+    <h2 class="headline-4"><%= t 'common.notifications' %></h2>
+    <%= render 'form' %>
+  </div>
+</div>
