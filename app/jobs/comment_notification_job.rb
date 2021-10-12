@@ -13,12 +13,20 @@ class CommentNotificationJob < ApplicationJob
     comment.commentable.author_users.each do |user|
       if comment.user != user
         Notification.create(type: :comment, user: user, account: comment.account, record: comment)
+
+        if user.email_verified?
+          UserMailer.with(user: user, comment: comment).comment_notification.deliver_later
+        end
       end
     end
 
     # notify reply comment user
     if comment.parent && !comment.commentable.author_users.include?(comment.parent.user) && comment.parent.user != comment.user
       Notification.create(type: :reply, user: comment.parent.user, account: comment.account, record: comment)
+
+      if comment.parent.user.email_verified?
+        UserMailer.with(user: comment.parent.user, comment: comment).comment_notification.deliver_later
+      end
     end
   end
 end
