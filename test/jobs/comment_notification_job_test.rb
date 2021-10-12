@@ -37,6 +37,12 @@ class CommentNotificationJobTest < ActiveJob::TestCase
     assert_emails 1 do
       CommentNotificationJob.perform_now(comment)
     end
+
+    user.update(email_notification_comment_enabled: false)
+
+    assert_no_emails do
+      CommentNotificationJob.perform_now(comment)
+    end
   end
 
   test "should send email if reply to user enable email notification" do
@@ -51,6 +57,12 @@ class CommentNotificationJobTest < ActiveJob::TestCase
     comment.user.email_verified!
 
     assert_emails 1 do
+      CommentNotificationJob.perform_now(reply_comment)
+    end
+
+    comment.user.update(email_notification_comment_enabled: false)
+
+    assert_no_emails do
       CommentNotificationJob.perform_now(reply_comment)
     end
   end
