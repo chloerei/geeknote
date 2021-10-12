@@ -35,10 +35,18 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     @comment = params[:comment]
 
-    mail(
+    options = {
       to: @user.email,
       from: "#{@comment.user.name} <notifications@geeknote.net>",
-      subject: "Re: #{@comment.commentable.title}"
-    )
+      subject: "Re: #{@comment.commentable.title}",
+      message_id: "#{@comment.account.name}/posts/#{@comment.commentable_id}/comments/#{@comment.id}@geeknote.net",
+      references: "#{@comment.account.name}/posts/#{@comment.commentable_id}@geeknote.net"
+    }
+
+    if @comment.parent
+      options[:in_reply_to] = "#{@comment.account.name}/posts/#{@comment.commentable_id}/comments/#{@comment.parent_id}@geeknote.net"
+    end
+
+    mail(options)
   end
 end
