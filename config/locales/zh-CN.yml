@@ -267,16 +267,17 @@ zh-CN:
         password: 修改密码
         password_desription: 修改登录密码。
   user:
-    email_verifications:
-      expired:
-        please_resend_email_veification: 请重新发送验证邮件。
-        token_expired: 链接已过期
-      show:
-        email_verification: 邮箱验证
-        verifying: 验证中，请稍等……
-      success:
-        back_to_homepage: 回到首页
-        your_email_has_been_verified: 您的邮箱已验证成功
+    email:
+      verifications:
+        expired:
+          please_resend_email_veification: 请重新发送验证邮件。
+          token_expired: 链接已过期
+        show:
+          email_verification: 邮箱验证
+          verifying: 验证中，请稍等……
+        success:
+          back_to_homepage: 回到首页
+          your_email_has_been_verified: 您的邮箱已验证成功
   users:
     form:
       account_name_helper_text: 可以使用大小写字母、数字和 - 号，全站唯一

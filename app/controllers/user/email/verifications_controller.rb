@@ -1,4 +1,4 @@
-class User::EmailVerificationsController < ApplicationController
+class User::Email::VerificationsController < ApplicationController
   before_action :set_user
 
   def show

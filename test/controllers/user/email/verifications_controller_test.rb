@@ -1,6 +1,6 @@
 require "test_helper"
 
-class User::EmailVerificationsControllerTest < ActionDispatch::IntegrationTest
+class User::Email::VerificationsControllerTest < ActionDispatch::IntegrationTest
   test "should get expire page without token" do
     get user_email_verification_path
     assert_response :not_found
