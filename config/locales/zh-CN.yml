@@ -78,6 +78,8 @@ zh-CN:
         bio: 简介
         current_password: 当前密码
         email: Email
+        email_notification_comment_enabled: 收到新评论时发送邮件
+        email_notification_enabled: 开启邮件通知
         name: 名称
         password: 密码
         password_confirmation: 密码确认
@@ -131,6 +133,7 @@ zh-CN:
     edit_collection: 编辑合集
     edit_profile: 编辑个人资料
     email: Email
+    email_notifications: 邮件通知
     featured_image: 特色图片
     feedback: 反馈
     follow: 关注
@@ -227,6 +230,7 @@ zh-CN:
     email_update_successful: 邮件地址已更新。
     email_verification_sent: 验证邮件已发送，请检查收件箱。
     email_verification_time_limit: 请等待一分钟后重发邮件。
+    notification_settings_updated: 通知设置已更新。
     password_reset_email_has_been_sent: 重置邮件已发送，请检查收件箱。
     password_reset_email_time_limit: 请等待一分钟后重发邮件。
     password_reset_successful: 密码重置成功，请使用您的新密码登录账号。
@@ -259,6 +263,8 @@ zh-CN:
       index:
         email: Email
         email_desription: 登录账号，邮件通知地址。
+        notifications: 通知
+        notifications_desription: 通知方式和类型。
         password: 密码
         password_desription: 登录密码。
   user:
