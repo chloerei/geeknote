@@ -12,7 +12,7 @@ class User::Email::VerificationsController < ApplicationController
   private
 
   def set_user
-    @user = User.find_by_email_verification_token(params[:token])
+    @user = User.find_by_email_auth_token(params[:token])
 
     unless @user
       render :expired, status: :not_found

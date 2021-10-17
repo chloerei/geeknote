@@ -40,18 +40,18 @@ class UserTest < ActiveSupport::TestCase
 
   test "should generate and find by email verification token" do
     user = create(:user)
-    token = user.email_verification_token
+    token = user.email_auth_token
 
-    assert_equal user, User.find_by_email_verification_token(token)
+    assert_equal user, User.find_by_email_auth_token(token)
 
     # expired
     travel 8.days do
-      assert_nil User.find_by_email_verification_token(token)
+      assert_nil User.find_by_email_auth_token(token)
     end
 
     # email changed
     user.update(email: 'change@example.com')
-    assert_nil User.find_by_email_verification_token(token)
+    assert_nil User.find_by_email_auth_token(token)
   end
 
   test "should update email verified status" do

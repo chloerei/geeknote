@@ -8,14 +8,14 @@ class User::Email::UnsubscribesControllerTest < ActionDispatch::IntegrationTest
 
   test "should get show page with token" do
     user = create(:user)
-    get user_email_unsubscribe_path(token: user.email_verification_token, type: 'comment')
+    get user_email_unsubscribe_path(token: user.email_auth_token, type: 'comment')
     assert_response :success
   end
 
   test "should unsubscribe comment email" do
     user = create(:user)
     assert user.email_notification_comment_enabled?
-    patch user_email_unsubscribe_path(token: user.email_verification_token, type: 'comment')
+    patch user_email_unsubscribe_path(token: user.email_auth_token, type: 'comment')
     assert_response :success
     user.reload
     assert_not user.email_notification_comment_enabled?

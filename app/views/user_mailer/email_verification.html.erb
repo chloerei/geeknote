@@ -1,7 +1,7 @@
 <p>为了使用 GeekNote 完整功能，请点击下方链接验证邮箱地址：</p>
 
 <p class="aligncenter">
-  <a href="<%= user_email_verification_url(token: @user.email_verification_token) %>" class="btn-primary">
+  <a href="<%= user_email_verification_url(token: @user.email_auth_token) %>" class="btn-primary">
     验证邮箱地址
   </a>
 </p>

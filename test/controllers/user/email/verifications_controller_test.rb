@@ -8,14 +8,14 @@ class User::Email::VerificationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should get show page with token" do
     user = create(:user)
-    get user_email_verification_path(token: user.email_verification_token)
+    get user_email_verification_path(token: user.email_auth_token)
     assert_response :success
   end
 
   test "should verifi email" do
     user = create(:user)
     assert_not user.email_verified?
-    patch user_email_verification_path(token: user.email_verification_token)
+    patch user_email_verification_path(token: user.email_auth_token)
     user.reload
     assert user.email_verified?
   end

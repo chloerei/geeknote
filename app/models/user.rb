@@ -47,11 +47,11 @@ class User < ApplicationRecord
     nil
   end
 
-  def email_verification_token
+  def email_auth_token
     User.encryptor.encrypt_and_sign([id, email], purpose: :email_verification, expires_in: 1.week)
   end
 
-  def self.find_by_email_verification_token(token)
+  def self.find_by_email_auth_token(token)
     id, email = User.encryptor.decrypt_and_verify(token.to_s, purpose: :email_verification)
     find_by id: id, email: email
   rescue ActiveSupport::MessageEncryptor::InvalidMessage
