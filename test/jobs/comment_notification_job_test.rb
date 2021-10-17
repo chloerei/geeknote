@@ -38,7 +38,7 @@ class CommentNotificationJobTest < ActiveJob::TestCase
       CommentNotificationJob.perform_now(comment)
     end
 
-    user.update(email_notification_comment_enabled: false)
+    user.update(comment_email_notification_enabled: false)
 
     assert_no_emails do
       CommentNotificationJob.perform_now(comment)
@@ -60,7 +60,7 @@ class CommentNotificationJobTest < ActiveJob::TestCase
       CommentNotificationJob.perform_now(reply_comment)
     end
 
-    comment.user.update(email_notification_comment_enabled: false)
+    comment.user.update(comment_email_notification_enabled: false)
 
     assert_no_emails do
       CommentNotificationJob.perform_now(reply_comment)

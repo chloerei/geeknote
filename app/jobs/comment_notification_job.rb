@@ -14,7 +14,7 @@ class CommentNotificationJob < ApplicationJob
       if comment.user != user
         Notification.create(type: :comment, user: user, account: comment.account, record: comment)
 
-        if user.email_verified? && user.email_notification_enabled? && user.email_notification_comment_enabled?
+        if user.email_verified? && user.email_notification_enabled? && user.comment_email_notification_enabled?
           UserMailer.with(user: user, comment: comment).comment_notification.deliver_later
         end
       end
@@ -26,7 +26,7 @@ class CommentNotificationJob < ApplicationJob
 
       Notification.create(type: :reply, user: user, account: comment.account, record: comment)
 
-      if user.email_verified? && user.email_notification_enabled? && user.email_notification_comment_enabled?
+      if user.email_verified? && user.email_notification_enabled? && user.comment_email_notification_enabled?
         UserMailer.with(user: comment.parent.user, comment: comment).comment_notification.deliver_later
       end
     end

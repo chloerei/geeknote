@@ -235,7 +235,7 @@ ActiveRecord::Schema.define(version: 2021_10_12_125046) do
     t.integer "followings_count", default: 0
     t.datetime "email_verified_at"
     t.boolean "email_notification_enabled", default: true, null: false
-    t.boolean "email_notification_comment_enabled", default: true, null: false
+    t.boolean "comment_email_notification_enabled", default: true, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

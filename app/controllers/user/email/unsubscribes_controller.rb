@@ -7,7 +7,7 @@ class User::Email::UnsubscribesController < ApplicationController
   def update
     case params[:type]
     when 'comment'
-      @user.update(email_notification_comment_enabled: false)
+      @user.update(comment_email_notification_enabled: false)
     end
     render turbo_stream: turbo_stream.replace('main', partial: 'success')
   end

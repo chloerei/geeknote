@@ -14,10 +14,10 @@ class User::Email::UnsubscribesControllerTest < ActionDispatch::IntegrationTest
 
   test "should unsubscribe comment email" do
     user = create(:user)
-    assert user.email_notification_comment_enabled?
+    assert user.comment_email_notification_enabled?
     patch user_email_unsubscribe_path(token: user.email_auth_token, type: 'comment')
     assert_response :success
     user.reload
-    assert_not user.email_notification_comment_enabled?
+    assert_not user.comment_email_notification_enabled?
   end
 end

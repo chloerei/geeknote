@@ -15,9 +15,9 @@
       <div class="form__field">
         <label class="form__control">
           <div class="form__control__label">
-            <%= User.human_attribute_name(:email_notification_comment_enabled) %>
+            <%= User.human_attribute_name(:comment_email_notification_enabled) %>
           </div>
-          <%= form.check_box :email_notification_comment_enabled, data: { action: 'form#submit' } %>
+          <%= form.check_box :comment_email_notification_enabled, data: { action: 'form#submit' } %>
         </label>
       </div>
     </fieldset>

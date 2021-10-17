@@ -78,7 +78,7 @@ zh-CN:
         bio: 简介
         current_password: 当前密码
         email: Email
-        email_notification_comment_enabled: 收到新评论时发送邮件
+        comment_email_notification_enabled: 收到新评论时发送邮件
         email_notification_enabled: 开启邮件通知
         name: 名称
         password: 密码
