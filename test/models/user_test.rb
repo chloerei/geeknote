@@ -37,4 +37,31 @@ class UserTest < ActiveSupport::TestCase
     # invalid token
     assert_nil User.find_by_password_reset_token('notexist')
   end
+
+  test "should generate and find by email verification token" do
+    user = create(:user)
+    token = user.email_auth_token
+
+    assert_equal user, User.find_by_email_auth_token(token)
+
+    # expired
+    travel 8.days do
+      assert_nil User.find_by_email_auth_token(token)
+    end
+
+    # email changed
+    user.update(email: 'change@example.com')
+    assert_nil User.find_by_email_auth_token(token)
+  end
+
+  test "should update email verified status" do
+    user = create(:user)
+    assert_not user.email_verified?
+
+    user.email_verified!
+    assert user.email_verified?
+
+    user.update(email: 'change@example.com')
+    assert_not user.email_verified?
+  end
 end

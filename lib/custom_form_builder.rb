@@ -28,9 +28,11 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  alias_method :orignal_check_box, :check_box
+
   def check_box(attribute, options = {}, checked_value = '1', unchecked_value = '0')
     @template.content_tag(:label, class: 'checkbox') do
-      super(attribute, options, checked_value, unchecked_value) +
+      orignal_check_box(attribute, options, checked_value, unchecked_value) +
       @template.content_tag(:div, class: 'checkbox__icon') do
         <<~EOF.html_safe
           <svg viewBox="0 0 24 24">
@@ -41,11 +43,21 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  alias_method :orignal_radio_button, :radio_button
+
   def radio_button(attribute, tag_value, options = {})
     @template.content_tag(:label, class: 'radio') do
-      super(attribute, tag_value, options) +
+      orignal_radio_button(attribute, tag_value, options) +
       @template.content_tag(:div, class: 'radio__icon') do
       end
+    end
+  end
+
+  def switch(attribute, options = {}, checked_value = '1', unchecked_value = '0')
+    @template.content_tag(:label, class: 'switch') do
+      orignal_check_box(attribute, options, checked_value, unchecked_value) +
+      @template.content_tag(:div, nil, class: 'switch__track') +
+      @template.content_tag(:div, nil, class: 'switch__thumb')
     end
   end
 end

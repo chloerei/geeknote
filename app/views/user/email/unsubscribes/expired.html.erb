@@ -1,0 +1,16 @@
+<div class="container container--small">
+  <div class="padding">
+    <h2 class="headline-4"><%= t '.token_expired' %></h2>
+    <p>
+      <%= t '.you_can_unsubscribe_email_in_notification_settings' %>
+    </p>
+    <a href="<%= settings_notification_path %>" class="button button--text button--primary">
+      <div class="button__text">
+        <%= t 'common.notification_settings' %>
+      </div>
+      <div class="button__icon">
+        <span class="material-icons">arrow_forward</span>
+      </div>
+    </a>
+  </div>
+</div>

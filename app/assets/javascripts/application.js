@@ -27,6 +27,9 @@ application.register('collection_item', CollectionItemController)
 import DraggableController from './controllers/draggable_controller'
 application.register('draggable', DraggableController)
 
+import FieldsetManagerController from './controllers/fieldset_manager_controller'
+application.register('fieldset-manager', FieldsetManagerController)
+
 import FocusableController from './controllers/focusable_controller'
 application.register('focusable', FocusableController)
 

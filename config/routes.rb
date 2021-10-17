@@ -31,12 +31,19 @@ Rails.application.routes.draw do
 
   namespace :settings do
     root to: 'home#index'
-    resource :account
+    resource :email do
+      post :resend
+    end
     resource :password
+    resource :notification
   end
 
   namespace :user do
     resource :password, only: [:new, :create, :edit, :update]
+    namespace :email do
+      resource :verification, only: [:show, :update]
+      resource :unsubscribe, only: [:show, :update]
+    end
   end
 
   scope '/:account_name', module: 'account', as: :account do

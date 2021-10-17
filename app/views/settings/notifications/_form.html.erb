@@ -1,0 +1,25 @@
+<%= form_with model: @user, url: settings_notification_path(token: params[:token]), builder: CustomFormBuilder, class: 'form', id: 'settings-notification-form', data: { controller: 'form' } do |form| %>
+  <h3 class="headline-5">
+    <%= t 'common.email_notifications' %>
+  </h3>
+  <div data-controller="fieldset-manager">
+    <div class="form__field">
+      <label class="form__control">
+        <div class="form__control__label">
+          <%= User.human_attribute_name(:email_notification_enabled) %>
+        </div>
+        <%= form.switch :email_notification_enabled, data: { action: 'form#submit fieldset-manager#toggle', "fieldset-manager-target": "switch" } %>
+      </label>
+    </div>
+    <fieldset data-fieldset-manager-target="fieldset">
+      <div class="form__field">
+        <label class="form__control">
+          <div class="form__control__label">
+            <%= User.human_attribute_name(:comment_email_notification_enabled) %>
+          </div>
+          <%= form.check_box :comment_email_notification_enabled, data: { action: 'form#submit' } %>
+        </label>
+      </div>
+    </fieldset>
+  </div>
+<% end %>

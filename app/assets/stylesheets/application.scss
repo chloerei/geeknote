@@ -335,9 +335,14 @@ dd {
 
 .form__control {
   .radio,
-  .check_box {
+  .check_box,
+  .switch {
     flex-shrink: 0;
   }
+}
+
+.form__control__label {
+  padding: 8px 0;
 }
 
 .drawer__header {
@@ -821,4 +826,15 @@ a.card {
 
 .flex-gap {
   gap: 16px;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+fieldset[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
 }
