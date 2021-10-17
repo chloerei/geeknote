@@ -161,6 +161,7 @@ zh-CN:
     no_description: 没有描述
     no_more_content: 没有更多内容
     no_posts: 没有文章
+    notification_settings: 通知设置
     notifications: 通知
     options: 选项
     organizations: 组织
@@ -268,6 +269,17 @@ zh-CN:
         password_desription: 修改登录密码。
   user:
     email:
+      unsubscribes:
+        expired:
+          token_expired: 链接已过期
+          you_can_unsubscribe_email_in_notification_settings: 您可以在通知设置中取消邮件通知。
+        show:
+          unsubscribe_email: 退订邮件
+          unsubscribing: 退订中，请稍等…………
+        success:
+          notification_settings: 通知设置
+          unsubscribe_successfully: 成功退订
+          you_can_resubscribe_email_in_notification_settings: 您可以在通知设置中重新打开邮件通知。
       verifications:
         expired:
           please_resend_email_veification: 请重新发送验证邮件。

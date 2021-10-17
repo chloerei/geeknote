@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     resource :password, only: [:new, :create, :edit, :update]
     namespace :email do
       resource :verification, only: [:show, :update]
+      resource :unsubscribe, only: [:show, :update]
     end
   end
 
