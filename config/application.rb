@@ -30,6 +30,10 @@ if ENV['NEW_RELIC_LICENSE_KEY'].present?
   require 'newrelic_rpm'
 end
 
+if ENV['MAILER_DELIVERY_METHOD'] == 'mailgun'
+  require 'mailgun-ruby'
+end
+
 module GeekNote
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -65,7 +69,8 @@ module GeekNote
 
     config.active_storage.service = ENV['STORAGE_SERVICE'] || :local
 
-    if ENV['MAILER_DELIVERY_METHOD'] == 'smtp'
+    case ENV['MAILER_DELIVERY_METHOD']
+    when 'smtp'
       config.action_mailer.delivery_method = :smtp
       config.action_mailer.smtp_settings = {
         address: ENV['SMTP_ADDRESS'],
@@ -76,6 +81,12 @@ module GeekNote
         authentication: 'plain',
         enable_starttls_auto: true,
         ssl: ENV['SMTP_SSL'].present?
+      }
+    when 'mailgun'
+      config.action_mailer.delivery_method = :mailgun
+      config.action_mailer.mailgun_settings = {
+        api_key: ENV['MAILGUN_API_KEY'],
+        domain: ENV['MAILGUN_DOMAIN']
       }
     end
 

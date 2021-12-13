@@ -54,6 +54,8 @@ gem "sentry-rails", require: false
 
 gem 'newrelic_rpm', require: false
 
+gem 'mailgun-ruby', '~>1.2.5', require: false
+
 gem 'with_advisory_lock'
 
 gem 'diffy'
