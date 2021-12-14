@@ -11,12 +11,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new user_params
 
-    if @user.save
+    if verify_recaptcha(model: @user) &&  @user.save
       sign_in(@user)
       UserMailer.with(user: @user).email_verification.deliver_later
       redirect_to session.delete(:return_to) || root_path
     else
-      render turbo_stream: turbo_stream.replace('sign-up-form', partial: 'form')
+      render :new
     end
   end
 

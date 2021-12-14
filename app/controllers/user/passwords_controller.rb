@@ -7,7 +7,7 @@ class User::PasswordsController < ApplicationController
   def create
     user = User.find_by email: params[:email]
 
-    if user
+    if verify_recaptcha() && user
       cache_key = "password_reset:#{user.email}"
       if Rails.cache.exist?(cache_key)
         redirect_to new_user_password_path, notice: t('flash.password_reset_email_time_limit')

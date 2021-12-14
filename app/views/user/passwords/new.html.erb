@@ -1,11 +1,13 @@
 <div class="container container--small">
   <div class="padding">
     <h2><%= t 'common.forgot_password?' %></h2>
-    <%= form_with url: user_password_path, builder: CustomFormBuilder, class: 'form' do |form| %>
+    <%= form_with url: user_password_path, builder: CustomFormBuilder, class: 'form', data: { turbo: 'false' } do |form| %>
       <div class="form__field">
         <%= form.text_field :email, autofocus: true %>
       </div>
-
+      <div class="form__field">
+        <%= recaptcha_tags %>
+      </div>
       <%= form.submit t('common.send_password_reset_email'), class: 'button button--contained button--primary' %>
     <% end %>
   </div>
