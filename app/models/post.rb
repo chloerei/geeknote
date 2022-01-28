@@ -61,7 +61,7 @@ class Post < ApplicationRecord
   def save_revision(status: 'draft', user:)
     last_revision = revisions.last
 
-    if last_revision && last_revision.status == status && last_revision.user == user && last_revision.created_at > 3.minutes.ago
+    if last_revision && last_revision.status == status && last_revision.user == user && last_revision.created_at > 10.minutes.ago
       last_revision.update(
         title: title,
         content: content

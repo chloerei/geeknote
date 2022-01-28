@@ -36,7 +36,7 @@ class PostTest < ActiveSupport::TestCase
       assert_equal 'change_by_user_1', post.revisions.last.title
     end
 
-    travel 4.minutes do
+    travel 11.minutes do
       post.update(title: 'change_by_1_minte_later')
       assert_difference "post.revisions.count" do
         post.save_revision(status: 'draft', user: user_1)
