@@ -37,17 +37,19 @@
 
   code {
     font-family: Menlo, Consolas, "Liberation Mono", Courier, monospace;
-    font-size: 15px;
-  }
-
-  :not(pre) code {
     background-color: rgba(0, 0, 0, 0.05);
-    padding: 0 4px;
-    line-height: 24px;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 85%;
   }
 
   pre {
     border-radius: 4px;
+  }
+
+  pre code {
+    padding: 0;
+    background-color: transparent;
   }
 
   table {
