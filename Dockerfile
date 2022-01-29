@@ -3,6 +3,7 @@
 FROM rubylang/ruby:3.1 AS base
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+  curl \
   libpq-dev \
   libvips42 \
   nodejs \
