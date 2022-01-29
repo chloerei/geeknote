@@ -21,6 +21,26 @@
       "note": ""
     },
     {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "5afbf862a58f78a7f2b84a29391c5fb1222cb2757ffcea069b3b14490645de6b",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/attachments_controller.rb",
+      "line": 5,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(Attachment.find_by!(:key => params[:key]).file.blob.url(:disposition => params[:disposition]), :allow_other_host => true)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "AttachmentsController",
+        "method": "show"
+      },
+      "user_input": "Attachment.find_by!(:key => params[:key]).file.blob.url(:disposition => params[:disposition])",
+      "confidence": "High",
+      "note": ""
+    },
+    {
       "warning_type": "Mass Assignment",
       "warning_code": 105,
       "fingerprint": "c7d0dd03869cd8cc3d1af8a75cfb141d52a0c362a8ae0ff7d8bdfc092d1cd1f0",
@@ -61,6 +81,6 @@
       "note": ""
     }
   ],
-  "updated": "2021-07-06 07:05:28 +0000",
-  "brakeman_version": "5.0.4"
+  "updated": "2022-01-29 15:50:15 +0000",
+  "brakeman_version": "5.2.0"
 }
