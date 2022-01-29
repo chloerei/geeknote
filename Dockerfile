@@ -41,7 +41,7 @@ FROM base AS production
 COPY Gemfile Gemfile.lock /app/
 
 RUN bundle install --deployment --without test development && \
-  rm vendor/bundle/ruby/3.1.0/cache/*
+  rm -r vendor/bundle/ruby/3.1.0/cache/*
 
 COPY . /app/
 
