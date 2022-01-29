@@ -50,7 +50,7 @@ gem 'rails-i18n', '~> 7.0.1'
 
 gem 'local_time'
 
-gem "activestorage-aliyun"
+gem "activestorage-aliyun", github: 'chloerei/activestorage-aliyun', branch: 'metadata'
 
 gem "sentry-ruby", require: false
 gem "sentry-rails", require: false

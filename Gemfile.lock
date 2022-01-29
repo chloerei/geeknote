@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/chloerei/activestorage-aliyun.git
+  revision: 6acf631d6b5fad768f0830ef4d1d2c3184b9de4c
+  branch: metadata
+  specs:
+    activestorage-aliyun (1.0.0)
+      aliyun-sdk (>= 0.6.0)
+      rails (>= 6.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -61,9 +70,6 @@ GEM
       activesupport (= 7.0.1)
       marcel (~> 1.0)
       mini_mime (>= 1.1.0)
-    activestorage-aliyun (1.0.0)
-      aliyun-sdk (>= 0.6.0)
-      rails (>= 6.0.0)
     activesupport (7.0.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
@@ -322,7 +328,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  activestorage-aliyun
+  activestorage-aliyun!
   bcrypt (~> 3.1.7)
   bootsnap
   brakeman
