@@ -10,6 +10,7 @@ const isMac = /Mac/.test(navigator.platform)
 export default class extends Controller {
   static values = {
     directUploadUrl: String,
+    directUploadToken: String,
     attachmentsUrl: String,
     messageImageLimit: String
   }
@@ -66,13 +67,14 @@ export default class extends Controller {
 
   initEditor() {
     const directUploadUrl = this.directUploadUrlValue
+    const directUploadToken = this.directUploadTokenValue
     const attachmentsUrl = this.attachmentsUrlValue
     this.editor = new Editor(this.contentEditorTarget, {
       input: this.contentInputTarget,
       placeholder: this.contentEditorTarget.dataset.placeholder,
       uploadImage: (file) => {
         return new Promise(function(resolve, reject) {
-          const upload = new DirectUpload(file, directUploadUrl)
+          const upload = new DirectUpload(file, directUploadUrl, directUploadToken, 'attachment#file')
           upload.create((error, blob) => {
             // Todo: error handle
             let formData = new FormData()
