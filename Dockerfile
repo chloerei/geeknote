@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   curl \
   git \
   gnupg \
-  imagemagick \
   libpq-dev \
+  libvips42 \
   nodejs \
   npm \
   postgresql-client \
