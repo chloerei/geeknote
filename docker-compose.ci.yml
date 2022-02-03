@@ -2,8 +2,8 @@ version: '3.4'
 
 services:
   test:
-    image: ghcr.io/chloerei/geeknote:ci
-    command: bash -c "bin/rails db:prepare && bin/rails build:all && bin/rails test"
+    image: geeknote:ci
+    command: bash -c "bin/rails db:prepare && bin/rails test"
     ports:
       - 3000:3000
     depends_on:

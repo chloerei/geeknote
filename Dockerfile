@@ -16,11 +16,11 @@ WORKDIR /app
 
 ### CI stage ###
 
-FROM base AS ci
+FROM base AS production
 
 COPY Gemfile Gemfile.lock /app/
 
-RUN bundle install --deployment
+RUN bundle install
 
 COPY package.json package-lock.json /app/
 
@@ -28,23 +28,4 @@ RUN npm install
 
 COPY . /app/
 
-### Budiler stage ###
-
-FROM ci AS builder
-
-RUN RAILS_ENV=production SECRET_KEY_BASE=1 bin/rails assets:precompile
-
-### production stage ###
-
-FROM base AS production
-
-COPY Gemfile Gemfile.lock /app/
-
-RUN bundle install --deployment --without test development && \
-  rm -r vendor/bundle/ruby/3.1.0/cache/*
-
-COPY . /app/
-
-COPY --from=builder /app/public/assets /app/public/assets
-
-ENV RAILS_ENV=production
+RUN bin/rails assets:precompile
