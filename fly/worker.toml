@@ -12,6 +12,3 @@ processes = []
   cmd = ["bundle", "exec", "sidekiq"]
   allowed_public_ports = []
   auto_rollback = true
-
-[deploy]
-  release_command = "bin/rails db:migrate"
