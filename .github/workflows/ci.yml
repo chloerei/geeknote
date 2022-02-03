@@ -72,7 +72,7 @@ jobs:
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
       - uses: superfly/flyctl-actions@1.1
         with:
-          args: "deploy --config fly/web.toml --image ${{ steps.prep.outputs.tagged_image }}"
+          args: "deploy --config fly/web.toml --image ${{ steps.prep.outputs.tagged_image }} --detach"
       - uses: superfly/flyctl-actions@1.1
         with:
-          args: "deploy --config fly/worker.toml --image ${{ steps.prep.outputs.tagged_image }}"
+          args: "deploy --config fly/worker.toml --image ${{ steps.prep.outputs.tagged_image }} --detach"
