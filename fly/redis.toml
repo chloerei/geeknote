@@ -1,0 +1,18 @@
+# fly.toml file generated for geeknote-redis on 2022-02-03T19:05:45+08:00
+
+app = "geeknote-redis"
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[build]
+  image = "flyio/redis:6.2.6"
+
+[[mounts]]
+  destination = "/data"
+  source = "redis_data"
+
+[metrics]
+  port = 9091
+  path = "/metrics"
