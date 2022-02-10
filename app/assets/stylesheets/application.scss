@@ -1,3 +1,6 @@
+$material-icons-font-path: '';
+@import 'material-icons/iconfont/material-icons.scss';
+
 @import 'campo-ui/src/css/campo-ui';
 @import 'layout';
 @import 'typography';
@@ -11,7 +14,6 @@
 @import 'avatar';
 @import 'breadcrumb';
 @import 'comment';
-@import 'material_icons';
 @import 'highlight';
 @import 'diff';
 
@@ -837,4 +839,10 @@ fieldset {
 fieldset[disabled] {
   opacity: 0.5;
   pointer-events: none;
+}
+
+.material-icons--inline {
+  font-size: inherit;
+  line-height: inherit;
+  vertical-align: bottom;
 }

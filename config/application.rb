@@ -32,8 +32,7 @@ module GeekNote
     config.after_initialize do
       config.assets.paths = [
         Rails.root.join("app/assets/builds"),
-        Rails.root.join("app/assets/images"),
-        Rails.root.join("app/assets/fonts")
+        Rails.root.join("app/assets/images")
       ]
     end
 

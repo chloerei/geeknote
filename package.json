@@ -11,12 +11,14 @@
     "campo-ui": "git+https://github.com/getcampo/campo-ui.git",
     "esbuild": "^0.12.27",
     "local-time": "^2.1.0",
+    "material-icons": "^1.10.6",
     "sass": "^1.39.2",
     "stimulus": "^2.0.0"
   },
   "scripts": {
     "build:js": "esbuild app/assets/javascripts/*.* --bundle --outdir=app/assets/builds --sourcemap",
-    "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --load-path=node_modules --source-map --embed-sources"
+    "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --load-path=node_modules --source-map --embed-sources",
+    "build:icon": "cp node_modules/material-icons/iconfont/material-icons*.woff* app/assets/builds"
   },
   "version": "0.1.0"
 }

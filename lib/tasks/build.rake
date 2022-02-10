@@ -16,6 +16,11 @@ namespace :build do
   task :css => :install do
     system "npm run build:css"
   end
+
+  desc "Build Icon"
+  task :icon => :install do
+    system "npm run build:icon"
+  end
 end
 
 Rake::Task["assets:precompile"].enhance(["build:all"])
