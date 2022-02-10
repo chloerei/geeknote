@@ -2,18 +2,18 @@
   "name": "GeekNote",
   "private": true,
   "dependencies": {
+    "@chloerei/material-ui": "0.0.11",
     "@codemirror/basic-setup": "^0.18.0",
     "@codemirror/lang-markdown": "^0.18.0",
+    "@hotwired/stimulus": "^3.0.1",
     "@hotwired/turbo-rails": "^7.1.1",
     "@rails/actioncable": "^7.0.1",
     "@rails/activestorage": "^7.0.1",
     "@rails/ujs": "^7.0.1",
-    "campo-ui": "git+https://github.com/getcampo/campo-ui.git",
     "esbuild": "^0.12.27",
     "local-time": "^2.1.0",
     "material-icons": "^1.10.6",
-    "sass": "^1.39.2",
-    "stimulus": "^2.0.0"
+    "sass": "^1.39.2"
   },
   "scripts": {
     "build:js": "esbuild app/assets/javascripts/*.* --bundle --outdir=app/assets/builds --sourcemap",

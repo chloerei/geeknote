@@ -1,7 +1,7 @@
 import Rails from "@rails/ujs"
 Rails.start()
 
-import "@hotwired/turbo-rails"
+import "@hotwired/turbo"
 
 import * as ActiveStorage from "@rails/activestorage"
 ActiveStorage.start()
@@ -11,11 +11,11 @@ LocalTime.start()
 
 import './channels'
 
-import { Application } from "stimulus"
+import { Application } from "@hotwired/stimulus"
 
 const application = Application.start()
 
-import { init } from "campo-ui/src/js/campo-ui"
+import { init } from "@chloerei/material-ui/dist/material-ui.js"
 init(application)
 
 import ClipboardController from './controllers/clipboard_controller'

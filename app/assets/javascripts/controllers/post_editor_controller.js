@@ -1,4 +1,4 @@
-import { Controller } from "stimulus"
+import { Controller } from "@hotwired/stimulus"
 import { Editor } from "../lib/editor"
 import { DirectUpload } from "@rails/activestorage"
 import { Turbo } from '@hotwired/turbo-rails'
