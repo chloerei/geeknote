@@ -5,5 +5,7 @@
   <div class="form__field">
     <%= form.password_field :password_confirmation %>
   </div>
-  <%= form.submit t('common.submit'), class: 'button button--contained button--primary' %>
+  <button type="submit" class="button button--filled">
+    <%= t('common.submit') %>
+  </button>
 <% end %>

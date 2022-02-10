@@ -8,3 +8,35 @@ $material-icons-font-path: '';
 @import 'breadcrumb';
 @import 'highlight';
 @import 'diff';
+
+:root {
+  @include color-scheme(
+    $neutral: #fff
+  );
+
+  --color-outline: #ccc;
+
+  --space-4: 32px;
+  --space-5: 64px;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.container--medium {
+  max-width: 960px;
+}
+
+.container--micro {
+  max-width: 360px;
+}
+
+.container--small {
+  max-width: 480px;
+}
+
+.container--editor {
+  max-width: 768px;
+}

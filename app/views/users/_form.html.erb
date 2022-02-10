@@ -1,20 +1,22 @@
 <%= form_with model: @user, builder: CustomFormBuilder, html: { class: 'form', id: 'sign-up-form' }, data: { turbo: 'false' } do |form| %>
   <%= form.fields_for :account do |account_form| %>
-    <div class="form__field">
+    <div class="margin-bottom-3">
       <%= account_form.text_field :name, prefix_text: ENV['HOST'] + '/', helper_text: t('.account_name_helper_text') %>
     </div>
   <% end %>
-  <div class="form__field">
+  <div class="margin-bottom-3">
     <%= form.text_field :name %>
   </div>
-  <div class="form__field">
+  <div class="margin-bottom-3">
     <%= form.text_field :email %>
   </div>
-  <div class="form__field">
+  <div class="margin-bottom-3">
     <%= form.password_field :password %>
   </div>
-  <div class="form__field">
+  <div class="margin-bottom-3">
     <%= recaptcha_tags %>
   </div>
-  <%= form.submit t('common.sign_up'), class: 'button button--contained button--primary button--full-width' %>
+  <button type="submit" class="button button--filled justify-content-center width-100">
+    <%= t('common.sign_up') %>
+  </button>
 <% end %>
