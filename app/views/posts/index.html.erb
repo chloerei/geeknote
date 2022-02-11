@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="row">
-    <div class="col-8">
-      <div class="tab padding">
+  <div class="display-flex gap-5 padding-3">
+    <div class="flex-grow-1">
+      <div class="tab margin-bottom-4">
         <a href="<%= root_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'index' %>">
           <%= t 'common.recommend' %>
         </a>
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="col-4 margin-top padding-left">
+    <div class="sidebar">
       <% if !current_user %>
         <div class="margin-bottom">
           <div class="padding-x padding-bottom">

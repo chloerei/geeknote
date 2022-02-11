@@ -81,13 +81,9 @@ module ApplicationHelper
   def featured_image_thumb_tag(featured_image)
     if featured_image.attached?
       if use_aliyun_oss?
-        image_tag featured_image.url(params: { 'x-oss-process' => 'image/resize,m_fill,w_400,h_260'})
+        image_tag featured_image.url(params: { 'x-oss-process' => 'image/resize,m_fill,w_256,h_256'})
       else
-        image_tag featured_image.variant(resize_to_fill: [400, 260])
-      end
-    else
-      content_tag 'div', class: 'featured-image-placeholder' do
-        content_tag 'span', 'article', class: 'material-icons'
+        image_tag featured_image.variant(resize_to_fill: [256, 256])
       end
     end
   end
@@ -130,9 +126,9 @@ module ApplicationHelper
 
   def post_summary(post)
     if post.excerpt.present?
-      truncate post.excerpt, length: 100
+      truncate post.excerpt, length: 140
     else
-      truncate strip_tags(markdown_render(post.content)), length: 100
+      truncate strip_tags(markdown_render(post.content)), length: 140
     end
   end
 

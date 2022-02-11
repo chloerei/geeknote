@@ -1,59 +1,56 @@
-<div class="posts__item" data-post-list-target="item" data-url="<%= account_post_path(post.account, post) %>">
-  <div class="posts__item__content">
-    <div class="flex flex-align-items-center margin-bottom-8">
-      <div class="avatar-group margin-right-8">
-        <div class="avatar avatar--small">
-          <%= avatar_image_tag post.account.owner.avatar %>
-        </div>
-        <% if post.account.organization? && post.author_users.any? %>
-          <% post.author_users.each do |user| %>
-            <div class="avatar avatar--small">
-              <%= avatar_image_tag user.avatar %>
-            </div>
-          <% end %>
+<div class="post-item padding-3 card card--post" data-post-list-target="item" data-url="<%= account_post_path(post.account, post) %>">
+  <div class="display-flex margin-bottom-2">
+    <a href="<%= account_root_path(post.account) %>" class="display-flex link-text">
+      <div class="avatar avatar--small margin-right-1">
+        <%= avatar_image_tag post.account.owner.avatar %>
+      </div>
+      <%= post.account.owner.name %>
+    </a>
+    <% if post.account.organization? && post.author_users.any? %>
+      <div class="margin-x-1">
+        by
+        <% post.author_users.each_with_index do |user, index| %>
+          <a href="<%= account_root_path(user.account) %>" class="link-text"><%= user.name %></a><% if index != post.author_users.size - 1 %>, <% end %>
         <% end %>
       </div>
-      <div class="text-small">
-        <span class="text-bold"><%= post.account.owner.name %></span>
-        <% if post.account.organization? && post.author_users.any? %>
-          by
-          <span class="text-bold"><%= post.author_users.pluck(:name).join(', ') %></span>
-        <% end %>
-      </div>
-      <% if post.featured %>
+    <% end %>
+    <% if post.featured %>
+      <div class="margin-left-1">
         <span class="material-icons featured-post__icon">push_pin</span>
-      <% end %>
-    </div>
-    <h3 class="headline-6 margin-top-0 margin-bottom-8">
-      <a href="<%= account_post_path(post.account, post) %>" class="link-stretched link-styleless">
-        <%= post.title.presence || 'Untitle' %>
-      </a>
-    </h3>
-    <div class="text-secondary">
-      <%= post_summary post %>
-    </div>
-
-    <div class="toolbar posts__item__toolbar">
-      <div class="toolbar__text">
-        <div class="text-secondary">
-          <%= format_time post.published_at %>
-          &centerdot;
-          <%= post.likes_count %> <%= t 'common.likes' %>
-          <% if post.allow_comments %>
-            &centerdot;
-            <%= post.comments_count %> <%= t 'common.comments' %>
-          <% end %>
-        </div>
       </div>
-      <div class="toolbar__space">
-      </div>
-      <div class="toolbar__action visible-to-user">
-        <%= render 'account/posts/collections/button', post: post %>
-      </div>
-    </div>
+    <% end %>
   </div>
 
-  <div class="posts__item__feature-image hide-on-mobile">
-    <%= featured_image_thumb_tag post.featured_image %>
+  <div class="display-flex gap-4 margin-bottom-1">
+    <div class="flex-grow-1">
+      <h3 class="headline-medium margin-top-0 margin-bottom-2">
+        <a href="<%= account_post_path(post.account, post) %>" class="link-title link-expended">
+          <%= post.title.presence || 'Untitle' %>
+        </a>
+      </h3>
+      <div class="text-muted">
+        <%= post_summary post %>
+      </div>
+    </div>
+    <% if post.featured_image.attached? %>
+      <div class="flex-shrink-0">
+        <div class="post-item__featured_image overflow-hidden border-radius-3">
+          <%= featured_image_thumb_tag post.featured_image %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="display-flex gap-1 align-items-center">
+    <div class="flex-grow-1 text-muted">
+      <%= format_time post.published_at %>
+      &centerdot;
+      <%= post.likes_count %> <%= t 'common.likes' %>
+      <% if post.allow_comments %>
+      &centerdot;
+      <%= post.comments_count %> <%= t 'common.comments' %>
+      <% end %>
+    </div>
+    <%= render 'account/posts/collections/button', post: post %>
   </div>
 </div>

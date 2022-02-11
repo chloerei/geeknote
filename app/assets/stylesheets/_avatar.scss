@@ -1,0 +1,52 @@
+.avatar {
+  line-height: 0;
+
+  img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+}
+
+.avatar--small {
+  img {
+    height: 24px;
+    width: 24px;
+  }
+}
+
+.avatar--medium {
+  img {
+    height: 80px;
+    width: 80px;
+  }
+}
+
+.avatar--large {
+  img {
+    height: 160px;
+    width: 160px;
+  }
+}
+
+.button--icon.button--avatar {
+  padding: 4px;
+
+  .avatar img {
+
+    height: 32px;
+    width: 32px;
+  }
+}
+
+.avatar-group {
+  display: flex;
+
+  .avatar:not(:first-child) {
+    margin-left: -20px;
+  }
+
+  .avatar--small:not(:first-child) {
+    margin-left: -12px;
+  }
+}

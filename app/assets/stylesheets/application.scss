@@ -2,6 +2,7 @@ $material-icons-font-path: '';
 @import 'material-icons/iconfont/material-icons.scss';
 
 @import "@chloerei/material-ui/src/css/material-ui";
+@import 'avatar';
 @import 'codemirror';
 @import 'revision';
 @import 'clipboard';
@@ -39,4 +40,54 @@ $material-icons-font-path: '';
 
 .container--editor {
   max-width: 768px;
+}
+
+.sidebar {
+  width: 320px;
+  flex-shrink: 0;
+}
+
+.tab__item {
+  padding: 10px 24px;
+}
+
+.text-muted {
+  color: #777;
+}
+
+.post-item__featured_image {
+  height: 128px;
+  width: 128px;
+}
+
+.link-text {
+  color: inherit;
+  text-decoration: none;
+}
+
+.link-title {
+  color: inherit;
+  text-decoration: none;
+}
+
+.link-expended {
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+}
+
+.card--post {
+  position: relative;
+
+  &:hover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: blue;
+    opacity: 0.05;
+    border-radius: var(--space-3);
+    z-index: -1;
+  }
 }
