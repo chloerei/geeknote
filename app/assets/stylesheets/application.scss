@@ -9,6 +9,7 @@ $material-icons-font-path: '';
 @import 'breadcrumb';
 @import 'highlight';
 @import 'diff';
+@import 'typography';
 
 :root {
   @include color-scheme(
@@ -38,8 +39,8 @@ $material-icons-font-path: '';
   max-width: 480px;
 }
 
-.container--editor {
-  max-width: 768px;
+.container--post {
+  max-width: 800px;
 }
 
 .sidebar {
@@ -98,4 +99,11 @@ $material-icons-font-path: '';
 
 .body-medium {
   font-weight: normal;
+}
+
+.post__feature-image {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }

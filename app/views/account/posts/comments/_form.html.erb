@@ -1,8 +1,6 @@
-<div class="comment" id="comment-form">
-  <div class="comment__avatar">
-    <div class="avatar">
-      <%= avatar_image_tag current_user.avatar %>
-    </div>
+<div class="display-flex gap-3" id="comment-form">
+  <div class="avatar">
+    <%= avatar_image_tag current_user.avatar %>
   </div>
   <div class="flex-grow-1">
     <div class="padding-y padding-right">
@@ -17,11 +15,11 @@
           </script>
         </div>
         <% if comment.new_record? %>
-          <button type="submit" class="button button--contained button--primary">
+          <button type="submit" class="button button--filled">
             <%= t 'common.submit' %>
           </button>
         <% else %>
-          <button type="submit" class="button button--contained button--primary">
+          <button type="submit" class="button button--filled">
             <%= t 'common.save_changes' %>
           </button>
           <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="button button--text">
