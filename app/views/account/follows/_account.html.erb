@@ -1,22 +1,18 @@
-<div class="list__item position-relative">
-  <div class="list__avatar">
-    <div class="avatar">
-      <%= avatar_image_tag account.owner.avatar %>
-    </div>
+<div class="display-flex gap-3 position-relative">
+  <div class="avatar">
+    <%= avatar_image_tag account.owner.avatar %>
   </div>
-  <div class="list__content">
-    <div class="text-primary text-bold">
-      <a href="<%= account_root_path(account) %>" class="link-stretched link-styleless">
+  <div class="flex-grow-1">
+    <div class="title-medium">
+      <a href="<%= account_root_path(account) %>" class="link-text link-expended">
         <%= account.display_name %>
       </a>
     </div>
-    <div class="text-secondary overflow-ellipsis">
-      <%= account.description %>
+    <div class="body-medium text-muted">
+      <%= truncate account.description %>
     </div>
   </div>
   <% if account != current_user&.account %>
-    <div class="list__action">
-      <%= render 'account/follows/button', account: account %>
-    </div>
+    <%= render 'account/follows/button', account: account %>
   <% end %>
 </div>

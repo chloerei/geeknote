@@ -24,62 +24,47 @@
 
     <div class="sidebar">
       <% if !current_user %>
-        <div class="margin-bottom">
-          <div class="padding-x padding-bottom">
-            <h3 class="subtitle-1">
-              <%= t '.join_geeknote_title' %>
-            </h3>
-            <div class="margin-bottom">
-              <%= t '.join_geeknote_description' %>
-            </div>
-            <div class="flex flex-gap">
-              <a href="<%= sign_up_path %>" class="button button--contained button--primary">
-                <%= t 'common.sign_up' %>
-              </a>
-              <a href="<%= sign_in_path %>" class="button button--text button--primary">
-                <%= t 'common.sign_in' %>
-              </a>
-            </div>
+        <div class="card card--outlined padding-3 margin-bottom-4">
+          <h3 class="title-medium margin-top-0">
+            <%= t '.join_geeknote_title' %>
+          </h3>
+          <p>
+            <%= t '.join_geeknote_description' %>
+          </p>
+          <div class="display-flex gap-2">
+            <a href="<%= sign_up_path %>" class="button button--filled">
+              <%= t 'common.sign_up' %>
+            </a>
+            <a href="<%= sign_in_path %>" class="button button--outlined">
+              <%= t 'common.sign_in' %>
+            </a>
           </div>
         </div>
       <% else %>
         <% if !current_user.email_verified? %>
-          <div class="padding">
-            <div class="card card--outlined">
-              <div class="padding-x padding-top">
-                <h3 class="subtitle-5 margin-top-0">
-                  <%= t '.verify_email_title' %>
-                </h3>
-                <div class="text-priamry">
-                  <%= t '.verify_email_description' %>
-                </div>
-              </div>
-              <div class="toolbar">
-                <div class="toolbar__action">
-                  <a href="<%= settings_email_path %>" class="button button--text button--primary">
-                    <div class="button__text">
-                      <%= t '.email_settings' %>
-                    </div>
-                    <div class="button__icon">
-                      <span class="material-icons">arrow_forward</span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
+          <div class="card card--outlined padding-3 margin-bottom-4">
+            <h3 class="title-medium margin-top-0">
+              <%= t '.verify_email_title' %>
+            </h3>
+            <p>
+              <%= t '.verify_email_description' %>
+            </p>
+            <a href="<%= settings_email_path %>" class="button button--filled">
+              <%= t '.email_settings' %>
+            </a>
           </div>
         <% end %>
       <% end %>
 
-      <div class="margin-bottom">
-        <h3 class="subtitle-1 padding-x">
+      <div class="margin-bottom-4">
+        <h3 class="title-medium margin-top-0">
           <%= t '.hot_tags' %>
         </h3>
         <div class="padding">
-          <div class="flex flex-wrap">
+          <div class="display-flex flex-wrap gap-2">
             <% Tag.order(taggings_count: :desc).limit(9).each do |tag| %>
-              <a href="<%= tag_path(id: tag.name) %>" class="chip margin-right-8 margin-bottom-8">
-                <div class="chip__text">
+              <a href="<%= tag_path(id: tag.name) %>" class="chip chip--assist">
+                <div class="chip__label">
                   <%= tag.name %>
                 </div>
               </a>
@@ -88,21 +73,15 @@
         </div>
       </div>
 
-      <div class="margin-bottom">
-        <h3 class="subtitle-1 padding-x">
+      <div class="margin-bottom-4">
+        <h3 class="title-medium margin-top-0">
           <%= t '.who_to_follow' %>
         </h3>
-        <div class="list">
+        <div class="display-flex flex-direction-column gap-3">
           <%= render partial: 'account/follows/account', collection: Account.recommend_for(current_user).limit(3).includes(:owner) %>
         </div>
       </div>
 
-      <div class="padding flex flex-gap text-secondary">
-        <a href="https://geeknote.net/policy/posts/190" class="link-text"><%= t 'common.rules' %></a>
-        <a href="https://geeknote.net/geeknote/" class="link-text"><%= t 'common.blog' %></a>
-        <a href="/contact" class="link-text"><%= t 'common.contact' %></a>
-        <a href="https://github.com/geeknote-net/feedback/discussions" class="link-text" target="_blank"><%= t 'common.feedback' %></a>
-      </div>
     </div>
   </div>
 </div>
