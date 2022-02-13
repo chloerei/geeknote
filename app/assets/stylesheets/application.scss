@@ -119,3 +119,29 @@ $material-icons-font-path: '';
 .button--liked {
   color: #f44336;
 }
+
+.banner-image {
+  width: 100%;
+  height: 25vw;
+  position: relative;
+}
+
+.banner-image--small {
+  height: 15vw;
+}
+
+.banner-image__inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+  }
+}

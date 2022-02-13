@@ -1,93 +1,91 @@
-<div class="banner-image <%= 'banner-image--small' unless @account.owner.banner_image.attached? %>">
-  <div class="banner-image__inner">
-    <%= banner_image_tag @account.owner.banner_image %>
+<% if @account.owner.banner_image.attached? %>
+  <div class="banner-image <%= 'banner-image--small' unless @account.owner.banner_image.attached? %>">
+    <div class="banner-image__inner">
+      <%= banner_image_tag @account.owner.banner_image %>
+    </div>
   </div>
-</div>
+<% end %>
 
 <div class="container container--medium">
-  <div class="account-header">
-    <div class="account-header__avatar">
-      <div class="avatar">
-        <%= large_avatar_image_tag @account.owner.avatar %>
-      </div>
+  <div class="display-flex padding-x-3 padding-y-4">
+    <div class="avatar avatar--medium margin-right-3">
+      <%= large_avatar_image_tag @account.owner.avatar %>
     </div>
-    <div class="account-header__content">
-      <div class="toolbar">
-        <div class="account-header__name">
-          <%= @account.owner.name %>
+    <div class="flex-grow-1">
+      <div class="display-flex gap-2 align-items-center margin-bottom-2">
+        <div class="flex-grow-1">
+          <div class="headline-medium">
+            <%= @account.owner.name %>
+          </div>
         </div>
         <% if @account.owner != current_user %>
-          <div class="toolbar__action">
-            <%= render 'account/follows/button', account: @account %>
-          </div>
+          <%= render 'account/follows/button', account: @account %>
         <% end %>
         <% if current_member %>
-          <div class="toolbar__action">
-            <div class="dropdown" data-controller="dropdown">
-              <button type="button" class="button button--text" data-action="dropdown#toggle">
-                <div class="button__text">
-                  <%= Member.human_attribute_name "role.#{current_member.role}" %>
-                </div>
-                <div class="button__icon">
-                  <span class="material-icons">expand_more</span>
-                </div>
-              </button>
-              <div class="dropdown__menu dropdown__menu--top-right">
-                <a href="<%= new_account_dashboard_post_path(@account) %>" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">post_add</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.new_post' %>
-                  </div>
-                </a>
-                <% if current_member.has_permission?(:edit_account_settings) %>
-                  <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="dropdown__item">
-                    <div class="dropdown__item__icon">
-                      <span class="material-icons">edit</span>
-                    </div>
-                    <div class="dropdown__item__text">
-                      <%= t 'common.edit_profile' %>
-                    </div>
-                  </a>
-                <% end %>
-                <a href="<%= account_dashboard_root_path(@account) %>" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">dashboard</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.dashboard' %>
-                  </div>
-                </a>
+          <div class="dropdown" data-controller="dropdown">
+            <button type="button" class="button button--outlined" data-action="dropdown#toggle">
+              <div class="button__text">
+                <%= Member.human_attribute_name "role.#{current_member.role}" %>
               </div>
+              <div class="button__icon">
+                <span class="material-icons">expand_more</span>
+              </div>
+            </button>
+            <div class="dropdown__container dropdown__container--top-right">
+              <a href="<%= new_account_dashboard_post_path(@account) %>" class="dropdown__item">
+                <div class="dropdown__item__icon">
+                  <span class="material-icons">post_add</span>
+                </div>
+                <div class="dropdown__item__text">
+                  <%= t 'common.new_post' %>
+                </div>
+              </a>
+              <% if current_member.has_permission?(:edit_account_settings) %>
+                <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="dropdown__item">
+                  <div class="dropdown__item__icon">
+                    <span class="material-icons">edit</span>
+                  </div>
+                  <div class="dropdown__item__text">
+                    <%= t 'common.edit_profile' %>
+                  </div>
+                </a>
+              <% end %>
+              <a href="<%= account_dashboard_root_path(@account) %>" class="dropdown__item">
+                <div class="dropdown__item__icon">
+                  <span class="material-icons">dashboard</span>
+                </div>
+                <div class="dropdown__item__text">
+                  <%= t 'common.dashboard' %>
+                </div>
+              </a>
             </div>
           </div>
         <% end %>
       </div>
-      <div class="account-header__description">
+      <div class="margin-y-2">
         <% if @account.owner.is_a?(User) %>
           <%= @account.owner.bio %>
         <% else %>
           <%= @account.owner.description %>
         <% end %>
       </div>
-      <div class="account-header__info">
+      <div class="display-flex gap-2 align-items-center margin-top-2">
         <% if @account.user? %>
-          <a href="<%= account_followings_path(@account) %>" class="link-text margin-right-8"><b><%= @account.owner.followings_count %></b> <%= t 'common.followings' %></a>
-        <% end %>
-        <a href="<%= account_followers_path(@account) %>" class="link-text"><b><%= @account.followers_count %></b> <%= t 'common.followers' %></a>
-      </div>
-      <div class="toolbar toolbar--breakout">
-        <div class="toolbar__action">
-          <a href="<%= account_feed_url(@account, format: :atom) %>" class="button button--icon" target="_blank" title="Atom Feed">
-            <span class="material-icons">rss_feed</span>
+          <a href="<%= account_followings_path(@account) %>" class="link-text margin-right-8">
+            <b><%= @account.owner.followings_count %></b> <%= t 'common.followings' %>
           </a>
-        </div>
+        <% end %>
+        <a href="<%= account_followers_path(@account) %>" class="link-text">
+          <b><%= @account.followers_count %></b> <%= t 'common.followers' %>
+        </a>
+        <a href="<%= account_feed_url(@account, format: :atom) %>" class="button button--icon" target="_blank" title="Atom Feed">
+          <span class="material-icons">rss_feed</span>
+        </a>
       </div>
     </div>
   </div>
 
-  <div class="tab padding-x margin-bottom" data-controller="tab">
+  <div class="tab padding-x-3 margin-bottom-3" data-controller="tab">
     <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>" data-action="tab#click">
       <%= t 'common.posts' %>
     </a>
