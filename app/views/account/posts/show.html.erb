@@ -22,29 +22,43 @@
 <div class="container container--post padding-3">
   <div class="post">
     <% if @post.featured_image.attached? %>
-      <div class="post__feature-image">
+      <div class="post__feature-image margin-y-4">
         <%= featured_image_tag @post.featured_image %>
       </div>
     <% end %>
-    <h1 class="display-large margin-bottom-4"><%= @revision.title %></h1>
+    <h1 class="display-large margin-y-4"><%= @revision.title %></h1>
 
-    <div class="display-flex gap-2 align-items-center margin-bottom-2">
+    <div class="display-flex gap-2 align-items-center margin-y-4">
       <div class="flex-grow-1">
-        <div class="display-flex">
-          <a href="<%= account_root_path(@post.account) %>" class="display-inline-flex link-text">
-            <div class="avatar avatar--small margin-right-1">
+        <div class="display-flex align-items-center">
+          <div class="avatar-group margin-right-2">
+            <a href="<%= account_root_path(@post.account) %>" class="avatar">
               <%= avatar_image_tag @post.account.owner.avatar %>
-            </div>
-            <%= @post.account.owner.name %>
-          </a>
-          <% if @post.account.organization? && @post.author_users.any? %>
-            <div class="margin-x-1">
-              by
-              <% @post.author_users.each_with_index do |user, index| %>
-                <a href="<%= account_root_path(user.account) %>" class="link-text"><%= user.name %></a><% if index != @post.author_users.size - 1 %>, <% end %>
+            </a>
+            <% if @post.account.organization? %>
+              <% @post.author_users.each do |user| %>
+                <a href="<%= account_root_path(user.account) %>" class="avatar">
+                  <%= avatar_image_tag user.account.owner.avatar %>
+                </a>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="">
+            <div class="">
+              <a href="<%= account_root_path(@post.account) %>" class="link-text"><%= @post.account.owner.name %></a>
+              <% if @post.account.organization? %>
+                <% @post.author_users.each do |user| %>
+                  &
+                  <a href="<%= account_root_path(user.account) %>" class="link-text"><%= user.name %></a>
+                <% end %>
               <% end %>
             </div>
-          <% end %>
+            <div class="text-muted">
+              <% if @post.published_at %>
+                <%= format_time @post.published_at %>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
       <div class="">
@@ -55,7 +69,7 @@
       </div>
       <% if current_member %>
         <% if current_member.can_edit_post?(@post) %>
-          <div class="toolbar__action">
+          <div class="">
             <div class="dropdown" data-controller="dropdown">
               <button type="button" class="button button--icon" data-action="dropdown#toggle">
                 <span class="material-icons">more_horiz</span>
@@ -81,7 +95,7 @@
     </div>
 
     <% if @post.tags.any? %>
-      <div class="post__tags margin-bottom-3">
+      <div class="post__tags margin-y-4">
         <% @post.tags.each do |tag| %>
           <a href="<%= account_tag_path(@account, id: tag.name) %>" class="chip chip--assist">
             <%= tag.name %>
@@ -90,7 +104,7 @@
       </div>
     <% end %>
 
-    <div class="display-flex gap-2 margin-y-3">
+    <div class="display-flex gap-2 margin-y-4">
       <div class="flex-grow-1">
         <%= render 'account/posts/likes/button', post: @post %>
       </div>
@@ -182,7 +196,7 @@
     <% end %>
   <% end %>
 
-  <div class="display-flex flex-direction-column gap-3 border-top padding-y-3 border-bottom margin-y-3">
+  <div class="display-flex flex-direction-column gap-3 border-top padding-y-4 border-bottom margin-y-4">
     <%= render 'account/follows/account', account: @post.account %>
     <% if @post.account.organization? %>
       <% @post.author_users.each do |user| %>
