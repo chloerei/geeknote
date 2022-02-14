@@ -3,8 +3,8 @@
   border-radius: 50%;
 
   img {
-    height: 40px;
-    width: 40px;
+    height: 48px;
+    width: 48px;
     border-radius: 50%;
   }
 }
@@ -18,15 +18,15 @@
 
 .avatar--medium {
   img {
-    height: 80px;
-    width: 80px;
+    height: 96px;
+    width: 96px;
   }
 }
 
 .avatar--large {
   img {
-    height: 160px;
-    width: 160px;
+    height: 192px;
+    width: 192px;
   }
 }
 
@@ -34,7 +34,6 @@
   padding: 4px;
 
   .avatar img {
-
     height: 32px;
     width: 32px;
   }

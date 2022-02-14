@@ -9,8 +9,8 @@
     <% if post.account.organization? && post.author_users.any? %>
       <div class="margin-x-1">
         by
-        <% post.author_users.each_with_index do |user, index| %>
-          <a href="<%= account_root_path(user.account) %>" class="link-text"><%= user.name %></a><% if index != post.author_users.size - 1 %>, <% end %>
+        <% post.author_users.each do |user| %>
+          <a href="<%= account_root_path(user.account) %>" class="link-text"><%= user.name %></a><% if user != post.author_users.last %>, <% end %>
         <% end %>
       </div>
     <% end %>

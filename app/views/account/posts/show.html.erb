@@ -31,25 +31,16 @@
     <div class="display-flex gap-2 align-items-center margin-y-4">
       <div class="flex-grow-1">
         <div class="display-flex align-items-center">
-          <div class="avatar-group margin-right-2">
-            <a href="<%= account_root_path(@post.account) %>" class="avatar">
-              <%= avatar_image_tag @post.account.owner.avatar %>
-            </a>
-            <% if @post.account.organization? %>
-              <% @post.author_users.each do |user| %>
-                <a href="<%= account_root_path(user.account) %>" class="avatar">
-                  <%= avatar_image_tag user.account.owner.avatar %>
-                </a>
-              <% end %>
-            <% end %>
-          </div>
+          <a href="<%= account_root_path(@post.account) %>" class="avatar margin-right-2">
+            <%= avatar_image_tag @post.account.owner.avatar %>
+          </a>
           <div class="">
             <div class="">
               <a href="<%= account_root_path(@post.account) %>" class="link-text"><%= @post.account.owner.name %></a>
-              <% if @post.account.organization? %>
+              <% if @post.account.organization? && @post.author_users.any? %>
+                by
                 <% @post.author_users.each do |user| %>
-                  &
-                  <a href="<%= account_root_path(user.account) %>" class="link-text"><%= user.name %></a>
+                  <a href="<%= account_root_path(user.account) %>" class="link-text"><%= user.name %></a><% if user != @post.author_users.last %>, <% end %>
                 <% end %>
               <% end %>
             </div>
