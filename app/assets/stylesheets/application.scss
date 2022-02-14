@@ -11,6 +11,8 @@ $material-icons-font-path: '';
 @import 'diff';
 @import 'typography';
 
+@import 'post';
+
 :root {
   @include color-scheme(
     $neutral: #fff
@@ -117,6 +119,10 @@ $material-icons-font-path: '';
   color: var(--color-on-surface-variant);
 }
 
+.button--muted {
+  color: var(--color-on-surface-variant);
+}
+
 .button--liked {
   color: #f44336;
 }
@@ -144,5 +150,13 @@ $material-icons-font-path: '';
 
   img {
     width: 100%;
+  }
+}
+
+.dialog--full-screen {
+  .dialog__container {
+    width: 100%;
+    height: 100%;
+    max-width: none;
   }
 }
