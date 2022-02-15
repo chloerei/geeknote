@@ -13,7 +13,7 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
     sign_in user
     get account_dashboard_posts_url(user.account)
     assert_response :success
-    assert_select 'tbody tr', 1
+    assert_select '.post-item', 1
   end
 
   test "should get org account posts" do
@@ -31,12 +31,12 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
     sign_in writer
     get account_dashboard_posts_url(organization.account)
     assert_response :success
-    assert_select 'tbody tr', 1
+    assert_select '.post-item', 1
 
     sign_in editor
     get account_dashboard_posts_url(organization.account)
     assert_response :success
-    assert_select 'tbody tr', 2
+    assert_select '.post-item', 2
   end
 
   test "should get new page as user" do
