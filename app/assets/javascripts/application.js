@@ -36,9 +36,6 @@ application.register('focusable', FocusableController)
 import FormController from './controllers/form_controller'
 application.register('form', FormController)
 
-import PageFrameController from './controllers/page_frame_controller'
-application.register('page-frame', PageFrameController)
-
 import PageNavController from './controllers/page_nav_controller'
 application.register('page-nav', PageNavController)
 

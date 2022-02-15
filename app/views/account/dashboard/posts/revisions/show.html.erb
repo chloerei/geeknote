@@ -1,6 +1,6 @@
 <div class="display-flex height-100vh" data-nav-frame-nav-item-active-class="list__item--active">
   <div class="flex-grow-1">
-    <%= turbo_frame_tag "revision-content", data: { controller: 'page-frame', action: 'turbo:frame-load->page-frame#update' }  do %>
+    <%= turbo_frame_tag "revision-content", data: { turbo_action: 'advance' }  do %>
       <div class="revision display-flex flex-direction-column height-100" data-controller="revision">
         <div class="app-bar app-bar--borderless">
           <div class="top-app-bar">

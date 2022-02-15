@@ -1,6 +1,6 @@
 <div class="display-flex height-100vh">
   <div class="flex-grow-1">
-    <%= turbo_frame_tag "revision-content", src: (@revision ? account_dashboard_post_revision_path(@account, @post, @revision) : nil), data: { controller: 'page-frame', action: 'turbo:frame-load->page-frame#update' }  do %>
+    <%= turbo_frame_tag "revision-content", src: (@revision ? account_dashboard_post_revision_path(@account, @post, @revision) : nil), data: { turbo_action: 'advance' }  do %>
       <div class="top-app-bar">
         <div class="top-app-bar__action">
           <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="button button--icon" data-turbo-frame="_top">
@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="flex-grow-1 overflow-auto">
-          <div id="revisions-nav" class="list" data-controller="page-nav pagination" data-action="page-frame:update@window->page-nav#update" data-page-nav-item-active-class="background-primary-container" data-pagination-root-margin-value="120px">
+          <div id="revisions-nav" class="list" data-controller="page-nav pagination" data-action="turbo:load@window->page-nav#update" data-page-nav-item-active-class="background-primary-container" data-pagination-root-margin-value="120px">
             <% @revisions.each do |revision| %>
               <a href="<%= account_dashboard_post_revision_path(@account, @post, revision) %>" class="link-block padding-3" data-turbo-frame="revision-content" data-page-nav-target="item">
                 <div class="text-primary">
