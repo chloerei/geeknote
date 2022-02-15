@@ -1,27 +1,27 @@
-<tr>
-  <td class="position-relative">
-    <div class="subtitle-1 text-bold">
-      <a href="<%= edit_account_dashboard_post_path(@account, post) %>" class="link-stretched link-styleless">
+<a href="<%= edit_account_dashboard_post_path(@account, post) %>" class="link-block">
+  <div class="display-flex gap-3 padding-3 border-bottom position-relative">
+    <div class="flex-grow-1">
+      <div class="title-medium">
         <%= post.title.presence || t('common.untitled') %>
-    </a>
-    </div>
-    <div class="text-secondary">
-      <%= t 'common.by' %> <%= post.author_users.pluck(:name).join(', ') %>
-      <% if post.tags.any? %>
+      </div>
+      <div class="">
+        <%= t 'common.by' %> <%= post.author_users.pluck(:name).join(', ') %>
+        <% if post.tags.any? %>
+          &centerdot;
+          <%= post.tags.pluck(:name).join(', ') %>
+        <% end %>
         &centerdot;
-        <%= post.tags.pluck(:name).join(', ') %>
-      <% end %>
-      &centerdot;
-      <%= format_time post.updated_at %>
-      <% if post.restricted? %>
-        &centerdot;
-        <span class="text-color-red"><%= t 'common.restricted' %></span>
-      <% end %>
+        <%= format_time post.updated_at %>
+        <% if post.restricted? %>
+          &centerdot;
+          <span class="text-color-red"><%= t 'common.restricted' %></span>
+        <% end %>
+      </div>
     </div>
-  </td>
-  <td class="table__cell--min">
-    <div class="post-status post-status--<%= post.status %>">
-      <%= Post.human_attribute_name "status.#{post.status}" %>
+    <div class="">
+      <div class="post-status post-status--<%= post.status %>">
+        <%= Post.human_attribute_name "status.#{post.status}" %>
+      </div>
     </div>
-  </td>
-</tr>
+  </div>
+</a>

@@ -78,6 +78,7 @@ $material-icons-font-path: '';
 }
 
 .link-block {
+  display: block;
   color: inherit;
   text-decoration: none;
 
@@ -224,4 +225,16 @@ $material-icons-font-path: '';
     color: #ccc;
     font-size: 4em;
   }
+}
+
+.display-grid {
+  display: grid;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.material-icons--inline {
+  font-size: inherit;
 }

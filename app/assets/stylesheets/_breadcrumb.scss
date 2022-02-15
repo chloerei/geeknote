@@ -1,8 +1,8 @@
 .breadcrumb {
   display: flex;
   align-items: center;
-  font-size: 18px;
   flex-wrap: wrap;
+  gap: var(--space-3);
 }
 
 .breadcrumb__item {
@@ -34,7 +34,7 @@
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
     padding: 0 4px;
-    color: var(--text-secondary-color);
+    color: var(--color-on-surface-variant);
   }
 }
 
