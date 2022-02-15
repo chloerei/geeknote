@@ -1,19 +1,15 @@
-<div class="app-bar app-bar--borderless app-bar--fixed">
-  <div class="toolbar">
-    <div class="toolbar__action">
-      <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="button button--icon">
-        <span class="material-icons">arrow_back</span>
-      </a>
-    </div>
-    <div class="toolbar__title">
-      <%= t 'common.post_settings' %>
-    </div>
+<div class="top-app-bar position-sticky top-0 z-index-10">
+  <div class="top-app-bar__action">
+    <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="button button--icon">
+      <span class="material-icons">arrow_back</span>
+    </a>
+  </div>
+  <div class="top-app-bar__title">
+    <%= t 'common.post_settings' %>
   </div>
 </div>
 
-<div class="container container--small app-bar-padding">
-  <div class="padding">
-    <%= render 'account/dashboard/posts/featured_images/form' %>
-    <%= render 'form' %>
-  </div>
+<div class="container container--small padding-3">
+  <%= render 'account/dashboard/posts/featured_images/form' %>
+  <%= render 'form' %>
 </div>
