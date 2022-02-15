@@ -35,3 +35,21 @@
   width: 100%;
   border: none;
 }
+
+.post-status {
+  display: inline-block;
+  padding: 0 8px;
+  font-size: 14px;
+  line-height: 24px;
+  color: white;
+  background: #aaa;
+  border-radius: 12px;
+}
+
+.post-status--published {
+  background: #4caf50;
+}
+
+.post-status--trashed {
+  background: #f44336;
+}

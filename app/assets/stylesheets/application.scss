@@ -77,6 +77,16 @@ $material-icons-font-path: '';
   text-decoration: none;
 }
 
+.link-block {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--color-surface-variant);
+    color: var(--color-on-surface-variant);
+  }
+}
+
 .link-expended {
   &::after {
     content: '';

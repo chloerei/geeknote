@@ -1,48 +1,44 @@
-<div class="height-100-vh flex">
+<div class="display-flex height-100vh">
   <div class="flex-grow-1">
     <%= turbo_frame_tag "revision-content", src: (@revision ? account_dashboard_post_revision_path(@account, @post, @revision) : nil), data: { controller: 'page-frame', action: 'turbo:frame-load->page-frame#update' }  do %>
-      <div class="app-bar app-bar--borderless">
-        <div class="toolbar">
-          <div class="toolbar__action">
-            <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="button button--icon" data-turbo-frame="_top">
-              <span class="material-icons">arrow_back</span>
-            </a>
-          </div>
-          <div class="toolbar__title">
-            <%= @post.title %>
-          </div>
-          <div class="toolbar__action display-on-mobile">
-            <button type="button" class="button button--icon" data-controller="toggle" data-toggle-target="#revision-sheet" data-toggle-action="sheet#toggle">
-              <span class="material-icons">toc</span>
-            </button>
-          </div>
+      <div class="top-app-bar">
+        <div class="top-app-bar__action">
+          <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="button button--icon" data-turbo-frame="_top">
+            <span class="material-icons">arrow_back</span>
+          </a>
+        </div>
+        <div class="top-app-bar__title">
+          <%= @post.title %>
+        </div>
+        <div class="top-app-bar__action display-on-mobile">
+          <button type="button" class="button button--icon" data-controller="toggle" data-toggle-target="#revision-sheet" data-toggle-action="sheet#toggle">
+            <span class="material-icons">toc</span>
+          </button>
         </div>
       </div>
     <% end %>
   </div>
 
-  <div id="revision-sheet" class="sheet" data-controller="sheet">
-    <div class="sheet__container">
+  <div id="revision-sheet" class="sheet sheet--permanently" data-controller="sheet">
+    <div class="sheet__container padding-0 border-left@laptop">
       <%= turbo_frame_tag "revision-nav", class: 'display-contents', data: { action: 'turbo:frame-load->nav-frame#navLoad' } do %>
-        <div class="toolbar">
-          <div class="toolbar__title">
+        <div class="top-app-bar">
+          <div class="top-app-bar__title">
             <%= t 'common.history_revisions' %>
           </div>
         </div>
-        <div class="flex-grow-1 overflow-auto position-relative">
-          <div id="revisions-nav" class="list" data-controller="page-nav pagination" data-action="page-frame:update@window->page-nav#update" data-page-nav-item-active-class="list__item--active" data-pagination-root-margin-value="120px">
+        <div class="flex-grow-1 overflow-auto">
+          <div id="revisions-nav" class="list" data-controller="page-nav pagination" data-action="page-frame:update@window->page-nav#update" data-page-nav-item-active-class="background-primary-container" data-pagination-root-margin-value="120px">
             <% @revisions.each do |revision| %>
-              <a href="<%= account_dashboard_post_revision_path(@account, @post, revision) %>" class="list__item" data-turbo-frame="revision-content" data-page-nav-target="item">
-                <div class="list__item__content">
-                  <div class="text-primary">
-                    <%= format_time revision.created_at %>
+              <a href="<%= account_dashboard_post_revision_path(@account, @post, revision) %>" class="link-block padding-3" data-turbo-frame="revision-content" data-page-nav-target="item">
+                <div class="text-primary">
+                  <%= format_time revision.created_at %>
+                </div>
+                <div class="text-secondary">
+                  <div class="post-status post-status--<%= revision.status %>">
+                    <%= Post.human_attribute_name "status.#{revision.status}" %>
                   </div>
-                  <div class="text-secondary">
-                    <div class="post-status post-status--<%= revision.status %>">
-                      <%= Post.human_attribute_name "status.#{revision.status}" %>
-                    </div>
-                    <%= revision.user.name %>
-                  </div>
+                  <%= revision.user.name %>
                 </div>
               </a>
             <% end %>
@@ -52,7 +48,7 @@
                 <%= t 'common.loading' %>
               </a>
             <% else %>
-              <div class="padding text-align-center text-muted margin-bottom">
+              <div class="padding-3 text-align-center text-muted margin-bottom-3">
                 <%= t 'common.no_more_content' %>
               </div>
             <% end %>
