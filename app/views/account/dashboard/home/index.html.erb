@@ -1,7 +1,12 @@
 <div class="container container--medium padding-3">
-  <div class="headline-medium display-flex gap-2 align-items-center margin-bottom-4">
+  <div class="display-flex gap-2 align-items-center margin-bottom-4">
     <a href="<%= account_root_path(@account) %>" class="link-text">
-      <%= @account.display_name %>
+      <div class="display-flex align-items-center gap-2">
+        <div class="avatar avatar--small">
+          <%= avatar_image_tag @account.owner.avatar %>
+        </div>
+        <%= @account.display_name %>
+      </div>
     </a>
     <span class="material-icons">chevron_right</span>
     <div class="">
@@ -11,7 +16,7 @@
 
   <% posts = @account.posts.not_trashed.order(updated_at: :desc).limit(3) %>
   <div class="card card--outlined margin-bottom-4">
-    <div class="padding-3 headline-small border-bottom">
+    <div class="padding-3 title-medium border-bottom">
       <%= t 'common.posts' %>
     </div>
     <% if posts.any? %>
@@ -38,7 +43,7 @@
 
   <div class="display-grid grid-cols-2 gap-4">
     <div class="card card--outlined padding-3">
-      <div class="headline-small">
+      <div class="title-medium">
         <%= t 'common.overview' %>
       </div>
       <dl>
@@ -52,7 +57,7 @@
     </div>
 
     <div class="card card--outlined padding-3">
-      <div class="headline-small">
+      <div class="title-medium">
         <%= t 'common.collections' %>
       </div>
       <div class="">

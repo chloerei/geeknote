@@ -1,27 +1,28 @@
-<div class="container">
-  <div class="padding">
-    <div class="breadcrumb">
-      <div class="breadcrumb__item">
-        <a href="<%= account_root_path(@account) %>">
-          <%= @account.display_name %>
-        </a>
+<div class="container container--medium padding-3">
+  <div class="display-flex gap-2 align-items-center margin-bottom-4">
+    <a href="<%= account_root_path(@account) %>" class="link-text">
+      <div class="display-flex align-items-center gap-2">
+        <div class="avatar avatar--small">
+          <%= avatar_image_tag @account.owner.avatar %>
+        </div>
+        <%= @account.display_name %>
       </div>
-      <div class="breadcrumb__item">
-        <a href="<%= account_dashboard_root_path(@account) %>">
-          <%= t 'common.dashboard' %>
-        </a>
-      </div>
-      <div class="breadcrumb__item breadcrumb__item--active">
-        <%= t 'common.posts' %>
-      </div>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <a href="<%= account_dashboard_root_path(@account) %>" class="link-text">
+      <%= t 'common.dashboard' %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <div class="">
+      <%= t 'common.posts' %>
     </div>
   </div>
 
-  <div class="toolbar">
-    <div class="toolbar__title headline-4">
+  <div class="display-flex align-items-center gap-2 margin-bottom-3">
+    <div class="flex-grow-1 headline-small">
       <%= t 'common.posts' %>
     </div>
-    <div class="toolbar__action dropdown" data-controller="dropdown">
+    <div class="dropdown" data-controller="dropdown">
       <button type="button" class="button button--text" data-action="dropdown#toggle">
         <div class="button__label">
           <% if Post.statuses.include?(params[:status]) %>
@@ -34,14 +35,14 @@
           <span class="material-icons">expand_more</span>
         </div>
       </button>
-      <div class="dropdown__menu dropdown__menu--top-right">
+      <div class="dropdown__container dropdown__menu--top-right">
         <a href="<%= url_for(post_filter_params.merge(status: nil)) %>" class="dropdown__item"><%= t "common.all" %></a>
         <% Post.statuses.keys.each do |status| %>
           <a href="<%= url_for(post_filter_params.merge(status: status)) %>" class="dropdown__item"><%= Post.human_attribute_name("status.#{status}") %></a>
         <% end %>
       </div>
     </div>
-    <div class="toolbar__action dropdown" data-controller="dropdown">
+    <div class="dropdown" data-controller="dropdown">
       <button type="button" class="button button--text" data-action="dropdown#toggle">
         <div class="button__label">
           <% if params[:tag] %>
@@ -54,36 +55,24 @@
           <span class="material-icons">expand_more</span>
         </div>
       </button>
-      <div class="dropdown__menu dropdown__menu--top-right">
+      <div class="dropdown__container dropdown__menu--top-right">
         <a href="<%= url_for(post_filter_params.merge(tag: nil)) %>" class="dropdown__item">All</a>
         <% @account.post_tags.each do |tag| %>
           <a href="<%= url_for(post_filter_params.merge(tag: tag.name)) %>" class="dropdown__item"><%= tag.name %></a>
         <% end %>
       </div>
     </div>
-    <div class="toolbar__action">
-      <a href="<%= new_account_dashboard_post_path(@account) %>" class="button button--contained button--primary button--last">
-        <div class="button__icon">
-          <span class="material-icons">post_add</span>
-        </div>
-        <div class="button__text">
-          <%= t 'common.new_post' %>
-        </div>
-      </a>
-    </div>
+    <a href="<%= new_account_dashboard_post_path(@account) %>" class="button button--outlined">
+      <div class="button__icon">
+        <span class="material-icons">post_add</span>
+      </div>
+      <div class="button__text">
+        <%= t 'common.new_post' %>
+      </div>
+    </a>
   </div>
 
-  <table class="table border-bottom">
-    <thead>
-      <tr>
-        <th><%= t 'common.title' %></th>
-        <th class="table__cell--min"><%= t 'common.status' %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render partial: 'post', collection: @posts %>
-    </tbody>
-  </table>
+  <%= render partial: 'post', collection: @posts %>
 
   <div class="padding">
     <%= paginate @posts %>

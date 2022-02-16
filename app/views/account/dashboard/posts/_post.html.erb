@@ -1,27 +1,27 @@
-<a href="<%= edit_account_dashboard_post_path(@account, post) %>" class="link-block">
-  <div class="post-item display-flex gap-3 padding-3 border-bottom position-relative">
-    <div class="flex-grow-1">
-      <div class="title-medium">
+<div class="post-item display-flex gap-3 padding-y-3 padding-right-3 border-bottom position-relative">
+  <div class="flex-grow-1">
+    <div class="title-medium">
+      <a href="<%= edit_account_dashboard_post_path(@account, post) %>" class="link-title link-expended">
         <%= post.title.presence || t('common.untitled') %>
-      </div>
-      <div class="">
-        <%= t 'common.by' %> <%= post.author_users.pluck(:name).join(', ') %>
-        <% if post.tags.any? %>
-          &centerdot;
-          <%= post.tags.pluck(:name).join(', ') %>
-        <% end %>
-        &centerdot;
-        <%= format_time post.updated_at %>
-        <% if post.restricted? %>
-          &centerdot;
-          <span class="text-color-red"><%= t 'common.restricted' %></span>
-        <% end %>
-      </div>
+      </a>
     </div>
-    <div class="">
-      <div class="post-status post-status--<%= post.status %>">
-        <%= Post.human_attribute_name "status.#{post.status}" %>
-      </div>
+    <div class="text-muted">
+      <%= t 'common.by' %> <%= post.author_users.pluck(:name).join(', ') %>
+      <% if post.tags.any? %>
+        &centerdot;
+        <%= post.tags.pluck(:name).join(', ') %>
+      <% end %>
+      &centerdot;
+      <%= format_time post.updated_at %>
+      <% if post.restricted? %>
+        &centerdot;
+        <span class="text-color-red"><%= t 'common.restricted' %></span>
+      <% end %>
     </div>
   </div>
-</a>
+  <div class="">
+    <div class="post-status post-status--<%= post.status %>">
+      <%= Post.human_attribute_name "status.#{post.status}" %>
+    </div>
+  </div>
+</div>

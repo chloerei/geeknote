@@ -1,6 +1,10 @@
 $material-icons-font-path: '';
 @import 'material-icons/iconfont/material-icons.scss';
 
+.material-icons {
+  font-family: "Material Icons Outlined";
+}
+
 @import "@chloerei/material-ui/src/css/material-ui";
 @import 'avatar';
 @import 'codemirror';
@@ -75,6 +79,10 @@ $material-icons-font-path: '';
 .link-title {
   color: inherit;
   text-decoration: none;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 .link-block {
