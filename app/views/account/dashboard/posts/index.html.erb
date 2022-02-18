@@ -17,7 +17,7 @@
           <span class="material-icons">expand_more</span>
         </div>
       </button>
-      <div class="dropdown__container dropdown__menu--top-right">
+      <div class="dropdown__container dropdown__container--top-right">
         <a href="<%= url_for(post_filter_params.merge(status: nil)) %>" class="dropdown__item"><%= t "common.all" %></a>
         <% Post.statuses.keys.each do |status| %>
           <a href="<%= url_for(post_filter_params.merge(status: status)) %>" class="dropdown__item"><%= Post.human_attribute_name("status.#{status}") %></a>
@@ -40,7 +40,7 @@
           <span class="material-icons">expand_more</span>
         </div>
       </button>
-      <div class="dropdown__container dropdown__menu--top-right">
+      <div class="dropdown__container dropdown__container--top-right">
         <a href="<%= url_for(post_filter_params.merge(tag: nil)) %>" class="dropdown__item">All</a>
         <% @account.post_tags.each do |tag| %>
           <a href="<%= url_for(post_filter_params.merge(tag: tag.name)) %>" class="dropdown__item"><%= tag.name %></a>

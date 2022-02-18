@@ -246,3 +246,18 @@ $material-icons-font-path: '';
 .material-icons--inline {
   font-size: inherit;
 }
+
+.dragging {
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px dashed var(--color-outline);
+    background: rgba(255, 255, 255, 0.3)
+  }
+}

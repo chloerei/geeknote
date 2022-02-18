@@ -15,7 +15,7 @@
                 <span class="material-icons">expand_more</span>
               </div>
             </button>
-            <div class="dropdown__menu dropdown__menu--top-right">
+            <div class="dropdown__container dropdown__container--top-right">
               <%= button_to switch_account_post_collections_path(@account, @post, account: nil), method: 'put', class: 'dropdown__item' do %>
                 <%= current_user.account.display_name %>
               <% end %>

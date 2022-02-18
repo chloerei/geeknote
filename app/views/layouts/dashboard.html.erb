@@ -16,40 +16,48 @@
             <div class="navigation-drawer__item__icon">
               <span class="material-icons">dashboard</span>
             </div>
-            <div class="navigation-drawer__item__icon">
-              Dashboard
+            <div class="navigation-drawer__item__label">
+              <%= t 'common.dashboard' %>
             </div>
           </a>
           <a href="<%= account_dashboard_posts_path(@account) %>" class="navigation-drawer__item <%= 'navigation-drawer__item--active' if controller_name == 'posts'  %>">
             <div class="navigation-drawer__item__icon">
               <span class="material-icons">article</span>
             </div>
-            <div class="navigation-drawer__item__icon">
-              Posts
+            <div class="navigation-drawer__item__label">
+              <%= t 'common.posts' %>
             </div>
           </a>
-          <a href="#" class="navigation-drawer__item">
+          <a href="<%= account_dashboard_collections_path(@account) %>" class="navigation-drawer__item <%= 'navigation-drawer__item--active' if controller_name == 'collections'  %>">
             <div class="navigation-drawer__item__icon">
               <span class="material-icons">library_books</span>
             </div>
-            <div class="navigation-drawer__item__icon">
-              Collection
+            <div class="navigation-drawer__item__label">
+              <%= t 'common.collections' %>
             </div>
           </a>
           <a href="#" class="navigation-drawer__item">
             <div class="navigation-drawer__item__icon">
               <span class="material-icons">comment</span>
             </div>
-            <div class="navigation-drawer__item__icon">
-              Comments
+            <div class="navigation-drawer__item__label">
+              <%= t 'common.comments' %>
             </div>
           </a>
           <a href="#" class="navigation-drawer__item">
             <div class="navigation-drawer__item__icon">
               <span class="material-icons">settings</span>
             </div>
+            <div class="navigation-drawer__item__label">
+              <%= t 'common.settings' %>
+            </div>
+          </a>
+          <a href="<%= account_root_path(@account) %>" class="navigation-drawer__item">
             <div class="navigation-drawer__item__icon">
-              Settings
+              <span class="material-icons">web</span>
+            </div>
+            <div class="navigation-drawer__item__label">
+              <%= t 'common.visit_site' %>
             </div>
           </a>
         </div>

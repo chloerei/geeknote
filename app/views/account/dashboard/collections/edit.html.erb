@@ -1,39 +1,17 @@
-<div class="container">
-  <div class="padding">
-    <div class="breadcrumb">
-      <div class="breadcrumb__item">
-        <a href="<%= account_root_path(@account) %>">
-          <%= @account.display_name %>
-        </a>
-      </div>
-      <div class="breadcrumb__item">
-        <a href="<%= account_dashboard_root_path(@account) %>">
-          <%= t 'common.dashboard' %>
-        </a>
-      </div>
-      <div class="breadcrumb__item">
-        <a href="<%= account_dashboard_collections_path(@account) %>">
-          <%= t 'common.collections' %>
-        </a>
-      </div>
-      <div class="breadcrumb__item">
-        <a href="<%= account_dashboard_collection_path(@account, @collection) %>">
-          <%= @collection.name %>
-        </a>
-      </div>
-      <div class="breadcrumb__item breadcrumb__item--active">
-        <%= t 'common.edit' %>
-      </div>
-    </div>
+<div class="top-app-bar position-sticky top-0 z-index-10">
+  <div class="top-app-bar__title display-flex gap-2 align-items-center">
+    <a href="<%= account_dashboard_collections_path(@account) %>">
+      <%= t 'common.collections' %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <a href="<%= account_dashboard_collection_path(@account, @collection) %>">
+      <%= @collection.name %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <%= t 'common.edit' %>
   </div>
 </div>
 
-<div class="container container--small">
-  <div class="padding">
-    <h3 class="headline-4">
-      <%= t 'common.edit_collection' %>
-    </h3>
-
+<div class="container container--small padding-3">
     <%= render 'form' %>
-  </div>
 </div>
