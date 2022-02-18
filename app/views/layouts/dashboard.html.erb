@@ -1,0 +1,64 @@
+<% content_for :body do %>
+  <div class="display-flex">
+    <div class="navigation-drawer navigation-drawer--permanently">
+      <div class="navigation-drawer__container">
+        <div class="display-flex gap-2 align-items-center margin-bottom-3">
+          <div class="avatar padding-1">
+            <%= avatar_image_tag @account.owner.avatar %>
+          </div>
+          <div class="headline-small">
+            <%= @account.display_name %>
+          </div>
+        </div>
+
+        <div class="display-flex flex-direction-column gap-1">
+          <a href="<%= account_dashboard_root_path(@account) %>" class="navigation-drawer__item <%= 'navigation-drawer__item--active' if controller_name == 'home'  %>">
+            <div class="navigation-drawer__item__icon">
+              <span class="material-icons">dashboard</span>
+            </div>
+            <div class="navigation-drawer__item__icon">
+              Dashboard
+            </div>
+          </a>
+          <a href="<%= account_dashboard_posts_path(@account) %>" class="navigation-drawer__item <%= 'navigation-drawer__item--active' if controller_name == 'posts'  %>">
+            <div class="navigation-drawer__item__icon">
+              <span class="material-icons">article</span>
+            </div>
+            <div class="navigation-drawer__item__icon">
+              Posts
+            </div>
+          </a>
+          <a href="#" class="navigation-drawer__item">
+            <div class="navigation-drawer__item__icon">
+              <span class="material-icons">library_books</span>
+            </div>
+            <div class="navigation-drawer__item__icon">
+              Collection
+            </div>
+          </a>
+          <a href="#" class="navigation-drawer__item">
+            <div class="navigation-drawer__item__icon">
+              <span class="material-icons">comment</span>
+            </div>
+            <div class="navigation-drawer__item__icon">
+              Comments
+            </div>
+          </a>
+          <a href="#" class="navigation-drawer__item">
+            <div class="navigation-drawer__item__icon">
+              <span class="material-icons">settings</span>
+            </div>
+            <div class="navigation-drawer__item__icon">
+              Settings
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="flex-grow-1">
+      <%= yield %>
+    </div>
+  </div>
+<% end %>
+
+<%= render template: 'layouts/base' %>
