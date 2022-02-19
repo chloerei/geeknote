@@ -3,11 +3,11 @@
 <%= render 'account/header' %>
 
 <div class="container container--medium">
-  <div class="padding">
+  <div class="padding-3 display-flex flex-direction-column gap-3">
     <%= render partial: 'collection', collection: @collections, cached: true %>
   </div>
 
-  <div class="padding">
+  <div class="padding-3">
     <%= paginate @collections %>
   </div>
 </div>

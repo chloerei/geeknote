@@ -1,4 +1,4 @@
-<div class="post-item padding-3 card card--post" data-post-list-target="item" data-url="<%= account_post_path(post.account, post) %>">
+<div class="post-item padding-y-3 position-relative" data-post-list-target="item" data-url="<%= account_post_path(post.account, post) %>">
   <div class="display-flex margin-bottom-2">
     <a href="<%= account_root_path(post.account) %>" class="display-flex link-text">
       <div class="avatar avatar--small margin-right-1">
@@ -12,11 +12,6 @@
         <% post.author_users.each do |user| %>
           <a href="<%= account_root_path(user.account) %>" class="link-text"><%= user.name %></a><% if user != post.author_users.last %>, <% end %>
         <% end %>
-      </div>
-    <% end %>
-    <% if post.featured %>
-      <div class="margin-left-1">
-        <span class="material-icons featured-post__icon">push_pin</span>
       </div>
     <% end %>
   </div>

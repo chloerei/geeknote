@@ -6,7 +6,7 @@
 
 <%= render 'account/header' %>
 
-<div class="container container--medium">
+<div class="container container--medium padding-3">
   <div class="posts posts--profile">
     <% if @posts.current_page == 1 %>
       <%= render @account.posts.featured %>
@@ -14,7 +14,5 @@
     <%= render partial: 'post', collection: @posts, cached: true %>
   </div>
 
-  <div class="padding">
-    <%= paginate @posts %>
-  </div>
+  <%= paginate @posts %>
 </div>
