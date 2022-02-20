@@ -49,7 +49,7 @@
       <%= t 'common.posts' %>
     </h3>
 
-    <div class="display-flex flex-direction-column gap-3" data-controller="post-list" data-post-list-collection-id-value="<%= @collection.id %>">
+    <div class="" data-controller="post-list" data-post-list-collection-id-value="<%= @collection.id %>">
       <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
     </div>
 

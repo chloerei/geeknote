@@ -8,12 +8,7 @@
 
 <div class="container container--medium padding-3">
   <% if @posts.current_page == 1 %>
-    <div class="border-top border-bottom margin-bottom-3">
-      <h4 class="headline-small margin-top-3 margin-bottom-0">
-        <%= t 'common.featured' %>
-      </h4>
-      <%= render @account.posts.featured %>
-    </div>
+    <%= render @account.posts.featured %>
   <% end %>
 
   <%= render partial: 'post', collection: @posts, cached: true %>
