@@ -10,7 +10,7 @@ export default class extends Controller {
   connect() {
     if (this.collectionIdValue) {
       this.itemTargets.forEach((item) => {
-        let link = item.querySelector('a')
+        let link = item.querySelector('.post-link')
         link.href = item.dataset.url + `?collection_id=${this.collectionIdValue}`
       })
     }
