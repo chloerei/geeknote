@@ -1,8 +1,10 @@
-<div id="avatar-form" class="margin-bottom">
-  <label class="label"><%= t 'common.avatar' %></label>
+<div id="avatar-form" class="margin-bottom-3">
+  <label class="display-block title-medium margin-bottom-3">
+    <%= t 'common.avatar' %>
+  </label>
   <div class="image-uploader display-inline-block">
     <div class="image-uploader__preview">
-      <div class="avatar avatar--large">
+      <div class="avatar avatar--medium">
         <%= large_avatar_image_tag(@account.owner.avatar) %>
       </div>
     </div>

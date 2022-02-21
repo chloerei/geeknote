@@ -1,12 +1,15 @@
-<div id="banner-image-form" class="margin-bottom">
-  <label class="label"><%= t 'common.banner_image' %></label>
+<div id="banner-image-form" class="margin-bottom-3">
+  <label class="display-block title-medium margin-bottom-3">
+    <%= t 'common.banner_image' %>
+  </label>
   <div class="image-uploader">
     <div class="image-uploader__preview">
-      <div class="banner-image">
-        <div class="banner-image__inner">
-          <%= banner_image_tag @account.owner.banner_image %>
+      <% if @account.owner.banner_image.attached? %>
+        <%= banner_image_tag @account.owner.banner_image %>
+      <% else %>
+        <div class="featured-image-placeholder">
         </div>
-      </div>
+      <% end %>
     </div>
     <div class="image-uploader__toolbar">
       <div class="image-uploader__toolbar__action">

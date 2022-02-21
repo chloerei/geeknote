@@ -1,32 +1,19 @@
-<div class="container">
-  <div class="padding">
-    <div class="breadcrumb">
-      <div class="breadcrumb__item">
-        <a href="<%= account_root_path(@account) %>">
-          <%= @account.display_name %>
-        </a>
-      </div>
-      <div class="breadcrumb__item">
-        <a href="<%= account_dashboard_root_path(@account) %>">
-          <%= t 'common.dashboard' %>
-        </a>
-      </div>
-      <div class="breadcrumb__item">
-        <a href="<%= account_dashboard_settings_root_path(@account) %>">
-          <%= t 'common.settings' %>
-        </a>
-      </div>
-      <div class="breadcrumb__item breadcrumb__item--active">
-        <%= t 'common.account_name' %>
-      </div>
-    </div>
+<div class="container container--small padding-3">
+  <div class="headline-medium display-flex align-items-center gap-2 margin-bottom-4">
+    <a href="<%= account_root_path(@account) %>" class="link-title">
+      <%= @account.display_name %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <a href="<%= account_dashboard_root_path(@account) %>" class="link-title">
+      <%= t 'common.dashboard' %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <a href="<%= account_dashboard_settings_root_path(@account) %>" class="link-title">
+      <%= t 'common.settings' %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <%= t 'common.account_name' %>
   </div>
-</div>
 
-
-<div class="container container--small">
-  <div class="padding">
-    <h2 class="headline-4"><%= t 'common.account_name' %></h2>
-    <%= render 'form' %>
-  </div>
+  <%= render 'form' %>
 </div>

@@ -1,48 +1,40 @@
-<div class="container">
-  <div class="padding">
-    <div class="breadcrumb">
-      <div class="breadcrumb__item">
-        <a href="<%= account_root_path(@account) %>">
-          <%= @account.display_name %>
-        </a>
-      </div>
-      <div class="breadcrumb__item">
-        <a href="<%= account_dashboard_root_path(@account) %>">
-          <%= t 'common.dashboard' %>
-        </a>
-      </div>
-      <div class="breadcrumb__item breadcrumb__item--active">
-        <%= t 'common.settings' %>
-      </div>
-    </div>
+<div class="container container--small padding-3">
+  <div class="headline-medium display-flex align-items-center gap-2 margin-bottom-4">
+    <a href="<%= account_root_path(@account) %>" class="link-title">
+      <%= @account.display_name %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <a href="<%= account_dashboard_root_path(@account) %>" class="link-title">
+      <%= t 'common.dashboard' %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <%= t 'common.settings' %>
   </div>
-</div>
 
-<div class="container container--small">
-  <div class="list">
-    <a href="<%= account_dashboard_settings_account_path(@account) %>" class="list__item">
-      <div class="list__icon">
+  <div class="">
+    <a href="<%= account_dashboard_settings_account_path(@account) %>" class="link-block border-radius-3">
+      <div class="display-flex gap-3 padding-3">
         <span class="material-icons">perm_identity</span>
-      </div>
-      <div class="list__content">
-        <div class="text-primary">
-          <%= t '.account_name' %>
-        </div>
-        <div class="text-secondary">
-          <%= t '.account_name_desription' %>
+        <div class="flex-grow-1">
+          <div class="title-medium">
+            <%= t '.account_name' %>
+          </div>
+          <div class="">
+            <%= t '.account_name_desription' %>
+          </div>
         </div>
       </div>
     </a>
-    <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="list__item">
-      <div class="list__icon">
-        <span class="material-icons">account_box</span>
-      </div>
-      <div class="list__content">
-        <div class="text-primary">
-          <%= t '.profile' %>
-        </div>
-        <div class="text-secondary">
-          <%= t '.profile_desription' %>
+    <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="link-block border-radius-3">
+      <div class="display-flex gap-3 padding-3">
+        <span class="material-icons">account_circle</span>
+        <div class="flex-grow-1">
+          <div class="title-medium">
+            <%= t '.profile' %>
+          </div>
+          <div class="">
+            <%= t '.profile_desription' %>
+          </div>
         </div>
       </div>
     </a>

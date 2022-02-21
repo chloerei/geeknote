@@ -1,11 +1,8 @@
 <%= form_with model: @account, url: account_dashboard_settings_account_path, builder: CustomFormBuilder, class: 'form', id: 'account-form' do |form| %>
   <div class="margin-bottom-3">
-    <%= form.text_field :name, prefix_text: ENV['HOST'] + '/' %>
+    <%= form.text_field :name, prefix_text: ENV['HOST'] + '/', helper_text: t('.account_name_warning') %>
   </div>
-  <p class="text-warning">
-    <%= t '.account_name_warning' %>
-  </p>
-  <button type="submit" class="button button--contained button--primary">
+  <button type="submit" class="button button--filled">
     <%= t 'common.save_changes' %>
   </button>
 <% end %>
