@@ -85,20 +85,20 @@
     </div>
   </div>
 
-  <div class="tab padding-x-3 margin-bottom-3" data-controller="tab">
-    <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>" data-action="tab#click">
+  <div class="tab padding-x-3 margin-bottom-3">
+    <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>" data-turbo-preserve-scroll>
       <%= t 'common.posts' %>
     </a>
-    <a href="<%= account_collections_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'collections' %>" data-action="tab#click">
+    <a href="<%= account_collections_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'collections' %>" data-turbo-preserve-scroll>
       <%= t 'common.collections' %>
     </a>
     <% if @account.user? %>
-      <a href="<%= account_likes_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'likes' %>" data-action="tab#click">
+      <a href="<%= account_likes_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'likes' %>" data-turbo-preserve-scroll>
         <%= t 'common.liked_posts' %>
       </a>
     <% end %>
     <% if @account.organization? %>
-      <a href="<%= account_members_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'members' %>" data-action="tab#click">
+      <a href="<%= account_members_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'members' %>" data-turbo-preserve-scroll>
         <%= t 'common.members' %>
       </a>
     <% end %>

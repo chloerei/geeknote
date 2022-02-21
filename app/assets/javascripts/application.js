@@ -54,11 +54,10 @@ application.register('revision', RevisionController)
 import SortableController from './controllers/sortable_controller'
 application.register('sortable', SortableController)
 
-import TabController from './controllers/tab_controller'
-application.register('tab', TabController)
-
 import TagSelectorController from './controllers/tag_selector_controller'
 application.register('tag-selector', TagSelectorController)
+
+import './lib/turbo_preserve_scroll'
 
 // clean snackbar content
 document.addEventListener('turbo:before-cache', () => {
