@@ -1,5 +1,5 @@
 <%= form_with model: @member, url: [@account, :dashboard, @member], builder: CustomFormBuilder, class: 'form', id: 'member-form' do |form| %>
-  <div class="form__field">
+  <div class="margin-bottom-3">
     <% if @member.new_record? %>
       <%= form.text_field :identifier %>
     <% else %>
@@ -7,7 +7,7 @@
       <%= @member.user ? @member.user.name : @member.invitation_email %>
     <% end %>
   </div>
-  <div class="form__field">
+  <div class="margin-bottom-3">
     <label class="label"><%= t 'common.role' %></label>
     <div class="form__control">
       <%= form.radio_button :role, :contributor %>

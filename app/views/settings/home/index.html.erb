@@ -1,51 +1,57 @@
-<div class="container">
-  <div class="padding">
-    <div class="breadcrumb">
-      <div class="breadcrumb__item breadcrumb__item--active">
-        <%= t 'common.settings' %>
-      </div>
-    </div>
+<div class="container container--small padding-3">
+  <div class="headline-medium margin-bottom-4">
+    <%= t 'common.settings' %>
   </div>
-</div>
-
-<div class="container container--small">
-  <div class="list">
-    <a href="<%= settings_email_path(@account) %>" class="list__item">
-      <div class="list__icon">
+  <div class="">
+    <a href="<%= account_dashboard_settings_profile_path(current_user.account) %>" class="link-block border-radius-3">
+      <div class="display-flex gap-3 padding-3">
+        <span class="material-icons">account_circle</span>
+        <div class="display-grow">
+          <div class="title-medium">
+            <%= t '.profile' %>
+          </div>
+          <div class="">
+            <%= t '.profile_desription' %>
+          </div>
+        </div>
+      </div>
+    </a>
+    <a href="<%= settings_email_path %>" class="link-block border-radius-3">
+      <div class="display-flex gap-3 padding-3">
         <span class="material-icons">email</span>
-      </div>
-      <div class="list__content">
-        <div class="text-primary">
-          <%= t '.email' %>
-        </div>
-        <div class="text-secondary">
-          <%= t '.email_desription' %>
+        <div class="display-grow">
+          <div class="title-medium">
+            <%= t '.email' %>
+          </div>
+          <div class="">
+            <%= t '.email_desription' %>
+          </div>
         </div>
       </div>
     </a>
-    <a href="<%= settings_password_path(@account) %>" class="list__item">
-      <div class="list__icon">
+    <a href="<%= settings_password_path %>" class="link-block border-radius-3">
+      <div class="display-flex gap-3 padding-3">
         <span class="material-icons">password</span>
-      </div>
-      <div class="list__content">
-        <div class="text-primary">
-          <%= t '.password' %>
-        </div>
-        <div class="text-secondary">
-          <%= t '.password_desription' %>
+        <div class="display-grow">
+          <div class="title-medium">
+            <%= t '.password' %>
+          </div>
+          <div class="">
+            <%= t '.password_desription' %>
+          </div>
         </div>
       </div>
     </a>
-    <a href="<%= settings_notification_path(@account) %>" class="list__item">
-      <div class="list__icon">
+    <a href="<%= settings_notification_path %>" class="link-block border-radius-3">
+      <div class="display-flex gap-3 padding-3">
         <span class="material-icons">notifications</span>
-      </div>
-      <div class="list__content">
-        <div class="text-primary">
-          <%= t '.notifications' %>
-        </div>
-        <div class="text-secondary">
-          <%= t '.notifications_desription' %>
+        <div class="display-grow">
+          <div class="title-medium">
+            <%= t '.notifications' %>
+          </div>
+          <div class="">
+            <%= t '.notifications_desription' %>
+          </div>
         </div>
       </div>
     </a>

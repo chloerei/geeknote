@@ -1,8 +1,8 @@
 <%= form_with model: @user, url: user_password_path(token: params[:token]), builder: CustomFormBuilder, class: 'form', id: 'password-reset-form' do |form| %>
-  <div class="form__field">
+  <div class="margin-bottom-3">
     <%= form.password_field :password %>
   </div>
-  <div class="form__field">
+  <div class="margin-bottom-3">
     <%= form.password_field :password_confirmation %>
   </div>
   <button type="submit" class="button button--filled">

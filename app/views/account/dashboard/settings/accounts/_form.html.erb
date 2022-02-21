@@ -1,5 +1,5 @@
 <%= form_with model: @account, url: account_dashboard_settings_account_path, builder: CustomFormBuilder, class: 'form', id: 'account-form' do |form| %>
-  <div class="form__field">
+  <div class="margin-bottom-3">
     <%= form.text_field :name, prefix_text: ENV['HOST'] + '/' %>
   </div>
   <p class="text-warning">

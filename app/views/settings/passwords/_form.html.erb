@@ -1,14 +1,14 @@
 <%= form_with model: @user, url: settings_password_path, builder: CustomFormBuilder, class: 'form', id: 'password-form', data: { controller: 'form' } do |form| %>
-  <div class="form__field">
+  <div class="margin-bottom-3">
     <%= form.password_field :current_password %>
   </div>
-  <div class="form__field">
+  <div class="margin-bottom-3">
     <%= form.password_field :password %>
   </div>
-  <div class="form__field">
+  <div class="margin-bottom-3">
     <%= form.password_field :password_confirmation %>
   </div>
-  <button type="submit" class="button button--contained button--primary">
+  <button type="submit" class="button button--filled">
     <%= t 'common.save_changes' %>
   </button>
 <% end %>

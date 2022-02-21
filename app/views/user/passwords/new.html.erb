@@ -4,10 +4,10 @@
       <%= t 'common.forgot_password?' %>
     </h2>
     <%= form_with url: user_password_path, builder: CustomFormBuilder, class: 'form', data: { turbo: 'false' } do |form| %>
-      <div class="form__field">
+      <div class="margin-bottom-3">
         <%= form.text_field :email, autofocus: true %>
       </div>
-      <div class="form__field">
+      <div class="margin-bottom-3">
         <%= recaptcha_tags %>
       </div>
       <button type="submit" class="button button--filled">

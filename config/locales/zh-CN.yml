@@ -76,9 +76,9 @@ zh-CN:
         trashed: 已废弃
       user:
         bio: 简介
+        comment_email_notification_enabled: 收到新评论时发送邮件
         current_password: 当前密码
         email: Email
-        comment_email_notification_enabled: 收到新评论时发送邮件
         email_notification_enabled: 开启邮件通知
         name: 名称
         password: 密码
@@ -186,6 +186,7 @@ zh-CN:
     restore_revision: 恢复该版本
     restore_revision_confirm: 确认恢复到版本%{name}？
     restricted: 限制发布
+    revision: Revision
     role: 角色
     rules: 社区准则
     save_changes: 保存修改
@@ -212,6 +213,7 @@ zh-CN:
     view_all: 查看全部
     view_more: 查看更多
     visibility: 公开范围
+    visit_site: Visit site
   editor:
     image_limit: 只允许 JPG、PNG、GIF 图片，且小于 10MB。
   email:
@@ -267,6 +269,8 @@ zh-CN:
         notifications_desription: 修改通知方式和类型。
         password: 修改密码
         password_desription: 修改登录密码。
+        profile: 个人资料
+        profile_desription: 头像、名称、简介。
   user:
     email:
       unsubscribes:

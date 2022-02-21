@@ -1,23 +1,14 @@
-<div class="container">
-  <div class="padding">
-    <div class="breadcrumb">
-      <div class="breadcrumb__item">
-        <a href="<%= settings_root_path %>">
-          <%= t 'common.settings' %>
-        </a>
-      </div>
-      <div class="breadcrumb__item breadcrumb__item--active">
-        <%= t 'common.email' %>
-      </div>
-    </div>
+<div class="container container--small padding-3">
+  <div class="headline-medium display-flex align-items-center gap-2 margin-bottom-4">
+    <a href="<%= settings_root_path %>" class="link-title">
+      <%= t 'common.settings' %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <%= t 'common.email' %>
   </div>
-</div>
 
-<div class="container container--small">
-  <div class="padding">
-    <h2 class="headline-4"><%= t 'common.email' %></h2>
-
-    <% if !@user.email_verified? %>
+  <% if !@user.email_verified? %>
+    <div class="card card--outlined padding-3 margin-bottom-4">
       <h3 class="subtitle-5 margin-top-0">
         <%= t '.verify_email_title' %>
       </h3>
@@ -25,14 +16,12 @@
         <%= t '.verify_email_description' %>
       </p>
       <%= form_with url: resend_settings_email_path do |form| %>
-        <button type="submit" class="button button--contained button--primary">
+        <button type="submit" class="button button--outlined">
           <%= t '.resend_verification_email' %>
         </button>
       <% end %>
+    </div>
+  <% end %>
 
-      <hr class="divider margin-y">
-    <% end %>
-
-    <%= render 'form' %>
-  </div>
+  <%= render 'form' %>
 </div>

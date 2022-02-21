@@ -1,13 +1,13 @@
 <%= form_with model: @organization, builder: CustomFormBuilder, html: { class: 'form', id: 'organization-form' } do |form| %>
   <%= form.fields_for :account do |account_form| %>
-    <div class="form__field">
+    <div class="margin-bottom-3">
       <%= account_form.text_field :name, prefix_text: ENV['HOST'] + '/', autofocus: true %>
     </div>
   <% end %>
-  <div class="form__field">
+  <div class="margin-bottom-3">
     <%= form.text_field :name %>
   </div>
-  <div class="form__field">
+  <div class="margin-bottom-3">
     <%= form.text_area :description %>
   </div>
   <%= form.submit 'Create Organization', class: 'button button--contained button--primary' %>

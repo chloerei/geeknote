@@ -289,3 +289,14 @@ $material-icons-font-path: '';
     z-index: 1;
   }
 }
+
+.fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+
+  &:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}

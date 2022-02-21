@@ -6,7 +6,7 @@
     <div class="padding-y padding-right">
       <%= form_with model: comment, url: [@account, @post, comment], builder: CustomFormBuilder, class: 'form' do |form| %>
         <%= form.hidden_field :parent_id %>
-        <div class="form__field">
+        <div class="margin-bottom-3">
           <%= form.text_area :content, rows: 3 %>
           <script>
             if (document.location.hash == '#reply') {
