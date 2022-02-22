@@ -1,5 +1,5 @@
-<div class="container container--small padding-3">
-  <div class="headline-medium display-flex align-items-center gap-2 margin-bottom-4">
+<div class="container container--medium padding-3">
+  <div class="title-medium display-flex align-items-center gap-2 margin-bottom-4">
     <a href="<%= account_root_path(@account) %>" class="link-title">
       <%= @account.display_name %>
     </a>
@@ -11,7 +11,7 @@
     <%= t 'common.settings' %>
   </div>
 
-  <div class="">
+  <div class="container container--small">
     <a href="<%= account_dashboard_settings_account_path(@account) %>" class="link-block border-radius-3">
       <div class="display-flex gap-3 padding-3">
         <span class="material-icons">perm_identity</span>

@@ -1,5 +1,5 @@
-<div class="container container--small padding-3">
-  <div class="headline-medium display-flex align-items-center gap-2 margin-bottom-4">
+<div class="container container--medium padding-3">
+  <div class="title-medium display-flex align-items-center gap-2 margin-bottom-4">
     <a href="<%= account_root_path(@account) %>" class="link-title">
       <%= @account.display_name %>
     </a>
@@ -14,8 +14,11 @@
     <span class="material-icons">chevron_right</span>
     <%= t 'common.account_profile' %>
   </div>
-  <%= render 'account/dashboard/settings/banner_images/form' %>
-  <%= render 'account/dashboard/settings/avatars/form' %>
 
-  <%= render 'form' %>
+  <div class="container container--small">
+    <%= render 'account/dashboard/settings/banner_images/form' %>
+    <%= render 'account/dashboard/settings/avatars/form' %>
+
+    <%= render 'form' %>
+  </div>
 </div>
