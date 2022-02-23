@@ -6,8 +6,8 @@
   <% end %>
 </button>
 <div id="publish-dialog" class="dialog" data-controller="dialog">
-  <div class="dialog__container">
-    <div class="padding">
+  <div class="dialog__container padding-3">
+    <div class="margin-bottom-2">
       <% if @post.draft? %>
         <h3 class="subtitle-1">
           <%= t '.publish_title' %>
@@ -24,21 +24,15 @@
         </div>
       <% end %>
     </div>
-    <div class="toolbar">
-      <div class="toolbar__space">
-      </div>
-      <div class="toolbar__action">
-        <button type="button" class="button button--text button--primary" data-action="dialog#close">
-          <%= t 'common.cancel' %>
+    <div class="display-flex gap-2 justify-content-flex-end">
+      <button type="button" class="button button--text button--primary" data-action="dialog#close">
+        <%= t 'common.cancel' %>
+      </button>
+      <%= form_with model: @post, url: publish_account_dashboard_post_path(@account, @post) do |form| %>
+        <button type="submit" class="button button--text button--primary">
+          <%= t 'common.publish' %>
         </button>
-      </div>
-      <div class="toolbar__action">
-        <%= form_with model: @post, url: publish_account_dashboard_post_path(@account, @post) do |form| %>
-          <button type="submit" class="button button--text button--primary">
-            <%= t 'common.publish' %>
-          </button>
-        <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
   <div class="dialog__scrim" data-action="click->dialog#close">
