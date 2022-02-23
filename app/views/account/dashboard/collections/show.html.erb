@@ -1,50 +1,60 @@
-<div class="top-app-bar position-sticky top-0 z-index-10">
-  <div class="top-app-bar__title display-flex gap-2 align-items-center">
-    <a href="<%= account_dashboard_collections_path(@account) %>">
+<div class="container container--medium padding-3">
+  <div class="title-medium display-flex align-items-center gap-2 margin-bottom-4">
+    <a href="<%= account_root_path(@account) %>" class="link-title display-inline-flex gap-1">
+      <div class="avatar avatar--small">
+        <%= avatar_image_tag @account.owner.avatar %>
+      </div>
+      <%= @account.display_name %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <a href="<%= account_dashboard_root_path(@account) %>" class="link-title">
+      <%= t 'common.dashboard' %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <a href="<%= account_dashboard_collections_path(@account) %>" class="link-title">
       <%= t 'common.collections' %>
     </a>
     <span class="material-icons">chevron_right</span>
     <%= @collection.name %>
   </div>
-  <div class="top-app-bar__action">
-    <a href="<%= edit_account_dashboard_collection_path(@account, @collection) %>" class="button button--icon">
-      <span class="material-icons">edit</span>
-    </a>
-  </div>
-  <div class="top-app-bar__action">
-    <div class="dropdown" data-controller="dropdown">
-      <button type="button" class="button button--icon" data-action="dropdown#toggle">
-        <span class="material-icons">more_vert</span>
-      </button>
-      <div class="dropdown__container dropdown__container--top-right">
-        <a href="<%= account_collection_path(@account, @collection) %>" class="dropdown__item">
-          <div class="dropdown__item__icon">
-            <span class="material-icons">preview</span>
-          </div>
-          <div class="dropdown__item__text">
-            <%= t 'common.view' %>
-          </div>
-        </a>
-        <hr class="divider">
-        <%= button_to account_dashboard_collection_path(@account, @collection), method: 'delete', class: 'dropdown__item', data: { confirm: I18n.t('common.delete_collection_confirm') } do %>
-          <div class="dropdown__item__icon">
-            <span class="material-icons">delete</span>
-          </div>
-          <div class="dropdown__item__text">
-            <%= t 'common.delete_collection' %>
-          </div>
-        <% end %>
+
+  <div class="card card--outlined padding-3 margin-bottom-3">
+    <div class="display-flex align-items-center gap-2 margin-bottom-3">
+      <div class="flex-grow-1 headline-small">
+        <%= @collection.name %>
+      </div>
+      <a href="<%= edit_account_dashboard_collection_path(@account, @collection) %>" class="button button--icon">
+        <span class="material-icons">edit</span>
+      </a>
+      <div class="dropdown" data-controller="dropdown">
+        <button type="button" class="button button--icon" data-action="dropdown#toggle">
+          <span class="material-icons">more_vert</span>
+        </button>
+        <div class="dropdown__container dropdown__container--top-right">
+          <a href="<%= account_collection_path(@account, @collection) %>" class="dropdown__item">
+            <div class="dropdown__item__icon">
+              <span class="material-icons">preview</span>
+            </div>
+            <div class="dropdown__item__text">
+              <%= t 'common.view' %>
+            </div>
+          </a>
+          <hr class="divider">
+          <%= button_to account_dashboard_collection_path(@account, @collection), method: 'delete', class: 'dropdown__item', data: { confirm: I18n.t('common.delete_collection_confirm') } do %>
+            <div class="dropdown__item__icon">
+              <span class="material-icons">delete</span>
+            </div>
+            <div class="dropdown__item__text">
+              <%= t 'common.delete_collection' %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="padding-3">
-  <div class="card card--outlined padding-3 margin-bottom-3">
     <div class="margin-bottom-3">
       <%= @collection.description.presence || t('common.no_description') %>
     </div>
-    <div class="text-muted">
+    <div class="text-muted display-flex align-items-center gap-1">
       <% if @collection.visibility_private? %>
         <span class="material-icons material-icons--inline">lock</span>
         <%= t 'common.private' %>

@@ -1,8 +1,23 @@
-<div class="top-app-bar position-sticky top-0 z-index-10">
-  <div class="top-app-bar__title">
+<div class="container container--medium padding-3">
+  <div class="title-medium display-flex align-items-center gap-2 margin-bottom-4">
+    <a href="<%= account_root_path(@account) %>" class="link-title display-inline-flex gap-1">
+      <div class="avatar avatar--small">
+        <%= avatar_image_tag @account.owner.avatar %>
+      </div>
+      <%= @account.display_name %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <a href="<%= account_dashboard_root_path(@account) %>" class="link-title">
+      <%= t 'common.dashboard' %>
+    </a>
+    <span class="material-icons">chevron_right</span>
     <%= t 'common.collections' %>
   </div>
-  <div class="top-app-bar__action">
+
+  <div class="display-flex gap-2 align-items-center margin-bottom-3">
+    <div class="flex-grow-1 headline-medium">
+      <%= t 'common.collections' %>
+    </div>
     <a href="<%= new_account_dashboard_collection_path(@account) %>" class="button button--outlined">
       <div class="button__icon">
         <span class="material-icons">add</span>
@@ -12,9 +27,7 @@
       </div>
     </a>
   </div>
-</div>
 
-<div class="padding-3">
   <% if @collections.any? %>
     <% @collections.each do |collection| %>
       <div class="display-flex align-items-center padding-y-3 padding-right-3 border-bottom position-relative">

@@ -1,13 +1,24 @@
-<div class="top-app-bar position-sticky top-0 z-index-10">
-  <div class="top-app-bar__title display-flex gap-2 align-items-center">
-    <a href="<%= account_dashboard_collections_path(@account) %>">
+<div class="container container--medium padding-3">
+  <div class="title-medium display-flex align-items-center gap-2 margin-bottom-4">
+    <a href="<%= account_root_path(@account) %>" class="link-title display-inline-flex gap-1">
+      <div class="avatar avatar--small">
+        <%= avatar_image_tag @account.owner.avatar %>
+      </div>
+      <%= @account.display_name %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <a href="<%= account_dashboard_root_path(@account) %>" class="link-title">
+      <%= t 'common.dashboard' %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <a href="<%= account_dashboard_collections_path(@account) %>" class="link-title">
       <%= t 'common.collections' %>
     </a>
     <span class="material-icons">chevron_right</span>
     <%= t 'common.new_collection' %>
   </div>
-</div>
 
-<div class="container container--small padding-3">
-    <%= render 'form' %>
+  <div class="container container--small">
+      <%= render 'form' %>
+  </div>
 </div>

@@ -1,6 +1,9 @@
 <div class="container container--medium padding-3">
   <div class="title-medium display-flex align-items-center gap-2 margin-bottom-4">
-    <a href="<%= account_root_path(@account) %>" class="link-title">
+    <a href="<%= account_root_path(@account) %>" class="link-title display-inline-flex gap-1">
+      <div class="avatar avatar--small">
+        <%= avatar_image_tag @account.owner.avatar %>
+      </div>
       <%= @account.display_name %>
     </a>
     <span class="material-icons">chevron_right</span>

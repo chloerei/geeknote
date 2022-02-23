@@ -9,7 +9,12 @@ zh-CN:
           no_collections: 还没有合集
       home:
         index:
-          no_post_yet: 还没有文章
+          collections: 合集
+          collections_desription: 文章合集。
+          posts: 文章
+          posts_desription: 草稿和已发布文章。
+          settings: 设置
+          settings_desription: 账号设置。
       members:
         form:
           role_admin_description: 可以管理所有内容和成员，可以修改组织账号设置。
@@ -120,7 +125,7 @@ zh-CN:
     contact: 联系
     content_has_expired: 内容已失效
     create_collection: 创建合集
-    dashboard: 管理面板
+    dashboard: 内容管理
     delete: 删除
     delete_collection: 删除合集
     delete_collection_confirm: 确认删除合集？
@@ -130,10 +135,8 @@ zh-CN:
     deleted_content: 已删除内容
     detail: 详情
     edit: 编辑
-    edit_collection: 编辑合集
     edit_profile: 编辑个人资料
     email: 邮件地址
-    email_notifications: 邮件通知
     featured_image: 特色图片
     feedback: 反馈
     follow: 关注
@@ -144,7 +147,6 @@ zh-CN:
     hide_changes: 隐藏修改
     history_revisions: 历史版本
     indentifier: 身份
-    info: 信息
     invite_member: 邀请成员
     latest: 最新
     liked_posts: 赞过
@@ -163,9 +165,7 @@ zh-CN:
     no_posts: 没有文章
     notification_settings: 通知设置
     notifications: 通知
-    options: 选项
     organizations: 组织
-    overview: 概览
     password: 密码
     pending: 待确认
     post_settings: 文章设置
@@ -205,12 +205,10 @@ zh-CN:
     status: 状态
     submit: 提交
     tags: 标签
-    title: 标题
     unpublish: 取消发布
     untitled: 无标题
     update: 更新
     view: 查看
-    view_all: 查看全部
     view_more: 查看更多
     visibility: 公开范围
     visit_site: Visit site
