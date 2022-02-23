@@ -1,74 +1,68 @@
-<div class="container">
-  <div class="padding">
-    <div class="breadcrumb">
-      <div class="breadcrumb__item">
-        <a href="<%= account_root_path(@account) %>">
-          <%= @account.display_name %>
-        </a>
+<div class="container container--medium padding-3">
+  <div class="title-medium display-flex align-items-center gap-2 margin-bottom-4">
+    <a href="<%= account_root_path(@account) %>" class="link-title display-inline-flex gap-1">
+      <div class="avatar avatar--small">
+        <%= avatar_image_tag @account.owner.avatar %>
       </div>
-      <div class="breadcrumb__item">
-        <a href="<%= account_dashboard_root_path(@account) %>">
-          <%= t 'common.dashboard' %>
-        </a>
-      </div>
-      <div class="breadcrumb__item">
-        <a href="<%= account_dashboard_members_path(@account) %>">
-          <%= t 'common.members' %>
-        </a>
-      </div>
-      <div class="breadcrumb__item breadcrumb__item--active">
-        <%= t 'common.detail' %>
-      </div>
-    </div>
+      <%= @account.display_name %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <a href="<%= account_dashboard_root_path(@account) %>" class="link-title">
+      <%= t 'common.dashboard' %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <a href="<%= account_dashboard_members_path(@account) %>" class="link-title">
+      <%= t 'common.members' %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <%= t 'common.detail' %>
   </div>
-</div>
 
-<div class="container container--small">
-  <div class="padding">
-    <dl class="row">
-      <dt class="col-3">
-        <%= Member.human_attribute_name 'identifier' %>
-      </dt>
-      <dd class="col-9">
-        <%= @member.user ? @member.user.name : @member.invitation_email %>
-      </dd>
-      <dt class="col-3">
-        <%= Member.human_attribute_name 'role' %>
-      </dt>
-      <dd class="col-9">
-        <%= Member.human_attribute_name "role.#{@member.role}" %>
-      </dd>
-      <dt class="col-3">
-        <%= Member.human_attribute_name 'status' %>
-      </dt>
-      <dd class="col-9">
-        <%= Member.human_attribute_name "status.#{@member.status}" %>
-        <% if @member.invitation_exipred? %>
-          <span class="text--failed">(Invitation Expired)</span>
+  <div class="card card--outlined padding-3">
+    <div class="padding">
+      <dl class="row">
+        <dt class="col-3">
+          <%= Member.human_attribute_name 'identifier' %>
+        </dt>
+        <dd class="col-9">
+          <%= @member.user ? @member.user.name : @member.invitation_email %>
+        </dd>
+        <dt class="col-3">
+          <%= Member.human_attribute_name 'role' %>
+        </dt>
+        <dd class="col-9">
+          <%= Member.human_attribute_name "role.#{@member.role}" %>
+        </dd>
+        <dt class="col-3">
+          <%= Member.human_attribute_name 'status' %>
+        </dt>
+        <dd class="col-9">
+          <%= Member.human_attribute_name "status.#{@member.status}" %>
+          <% if @member.invitation_exipred? %>
+            <span class="text--failed">(Invitation Expired)</span>
+          <% end %>
+        </dd>
+        <% if @member.invited_at %>
+          <dt class="col-3">
+            <%= Member.human_attribute_name 'invited_at' %>
+          </dt>
+          <dd class="col-9">
+            <%= format_time @member.invited_at %>
+          </dd>
         <% end %>
-      </dd>
-      <% if @member.invited_at %>
-        <dt class="col-3">
-          <%= Member.human_attribute_name 'invited_at' %>
-        </dt>
-        <dd class="col-9">
-          <%= format_time @member.invited_at %>
-        </dd>
-      <% end %>
-      <% if @member.actived_at %>
-        <dt class="col-3">
-          <%= Member.human_attribute_name 'accepted_at' %>
-        </dt>
-        <dd class="col-9">
-          <%= format_time @member.actived_at %>
-        </dd>
-      <% end %>
-    </dl>
-  </div>
+        <% if @member.actived_at %>
+          <dt class="col-3">
+            <%= Member.human_attribute_name 'accepted_at' %>
+          </dt>
+          <dd class="col-9">
+            <%= format_time @member.actived_at %>
+          </dd>
+        <% end %>
+      </dl>
+    </div>
 
-  <% if can_manage?(@member) %>
-    <div class="toolbar">
-      <div class="toolbar__action">
+    <% if can_manage?(@member) %>
+      <div class="display-flex gap-2">
         <a href="<%= edit_account_dashboard_member_path(@account, @member) %>" class="button button--text">
           <div class="button__icon">
             <span class="material-icons">edit</span>
@@ -77,9 +71,7 @@
             <%= t 'common.edit' %>
           </div>
         </a>
-      </div>
-      <% if @member.invitation_exipred? %>
-        <div class="toolbar__action">
+        <% if @member.invitation_exipred? %>
           <%= form_with url: resend_account_dashboard_member_path(@account, @member) do %>
             <button type="submit" class="button button--text">
               <div class="button__icon">
@@ -90,11 +82,9 @@
               </div>
             </button>
           <% end %>
+        <% end %>
+        <div class="flex-grow-1">
         </div>
-      <% end %>
-      <div class="toolbar__space">
-      </div>
-      <div class="toolbar__action">
         <%= form_with url: account_dashboard_member_path(@account, @member), method: 'delete' do %>
           <button type="submit" class="button button--text" data-confirm="Are you sure remove this member?">
             <div class="button__icon">
@@ -106,6 +96,6 @@
           </button>
         <% end %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>

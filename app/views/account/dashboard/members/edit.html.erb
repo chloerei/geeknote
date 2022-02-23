@@ -1,35 +1,28 @@
-<div class="container">
-  <div class="padding">
-    <div class="breadcrumb">
-      <div class="breadcrumb__item">
-        <a href="<%= account_root_path(@account) %>">
-          <%= @account.display_name %>
-        </a>
+<div class="container container--medium padding-3">
+  <div class="title-medium display-flex align-items-center gap-2 margin-bottom-4">
+    <a href="<%= account_root_path(@account) %>" class="link-title display-inline-flex gap-1">
+      <div class="avatar avatar--small">
+        <%= avatar_image_tag @account.owner.avatar %>
       </div>
-      <div class="breadcrumb__item">
-        <a href="<%= account_dashboard_root_path(@account) %>">
-          <%= t 'common.dashboard' %>
-        </a>
-      </div>
-      <div class="breadcrumb__item">
-        <a href="<%= account_dashboard_members_path(@account) %>">
-          <%= t 'common.members' %>
-        </a>
-      </div>
-      <div class="breadcrumb__item">
-        <a href="<%= account_dashboard_member_path(@account, @member) %>">
-          <%= t 'common.detail' %>
-        </a>
-      </div>
-      <div class="breadcrumb__item breadcrumb__item--active">
-        <%= t 'common.edit' %>
-      </div>
-    </div>
+      <%= @account.display_name %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <a href="<%= account_dashboard_root_path(@account) %>" class="link-title">
+      <%= t 'common.dashboard' %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <a href="<%= account_dashboard_members_path(@account) %>" class="link-title">
+      <%= t 'common.members' %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <a href="<%= account_dashboard_member_path(@account, @member) %>" class="link-title">
+      <%= t 'common.detail' %>
+    </a>
+    <span class="material-icons">chevron_right</span>
+    <%= t 'common.edit' %>
   </div>
-</div>
 
-<div class="container container--small">
-  <div class="padding">
+  <div class="container container--small">
     <%= render 'form' %>
   </div>
 </div>

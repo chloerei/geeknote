@@ -299,3 +299,9 @@ $material-icons-font-path: '';
     pointer-events: none;
   }
 }
+
+.divider {
+  margin: var(--space-1) 0;
+  border: none;
+  border-bottom: 1px solid var(--color-outline);
+}

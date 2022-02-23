@@ -1,64 +1,38 @@
-<div class="container container--medium">
-  <div class="toolbar">
-    <div class="toolbar__title">
-      <h3>
-        Organizations
-      </h3>
+<div class="container container--small padding-3">
+  <div class="card card--outlined">
+    <div class="padding-3 border-bottom">
+      <div class="headline-small">
+        <%= t 'common.organizations' %>
+      </div>
     </div>
-    <div class="toolbar__action">
-      <a href="<%= new_organization_path %>" class="button button--contained button--primary">
-        New organization
-      </a>
-    </div>
-  </div>
 
-  <div class="list">
-    <% @members.each do |member| %>
-      <div class="list__item position-relative border-bottom">
-        <div class="list__avatar">
-          <%= avatar_image_tag member.organization.avatar %>
-        </div>
-        <div class="list__content">
-          <div class="text-primary text-bold">
-            <a href="<%= account_root_path(member.organization.account) %>" class="link-stretched link-styleless">
+    <div class="">
+      <% @members.each do |member| %>
+        <div class="display-flex padding-3 gap-3 align-items-center border-bottom position-relative">
+          <div class="avatar">
+            <%= avatar_image_tag member.organization.avatar %>
+          </div>
+          <div class="title-medium flex-grow-1">
+            <a href="<%= account_root_path(member.organization.account) %>" class="link-title link-expended">
               <%= member.organization.name %>
             </a>
           </div>
-          <div class="text-secondary">
-            <%= member.organization.description %>
+          <div class="text-muted">
+            <%= Member.human_attribute_name "role.#{member.role}" %>
           </div>
         </div>
-        <div class="list__action">
-          <div class="dropdown" data-controller="dropdown">
-            <button type="button" class="button button--text" data-action="dropdown#toggle">
-              <div class="button__text">
-                <%= member.role %>
-              </div>
-              <div class="button__icon">
-                <span class="material-icons">expand_more</span>
-              </div>
-            </button>
-            <div class="dropdown__container dropdown__container--top-right">
-              <a href="<%= account_root_path(member.organization.account) %>" class="dropdown__item">
-                <div class="dropdown__item__icon">
-                  <span class="material-icons">account_box</span>
-                </div>
-                <div class="dropdown__item__text">
-                  Profile
-                </div>
-              </a>
-              <a href="<%= account_dashboard_root_path(member.organization.account) %>" class="dropdown__item">
-                <div class="dropdown__item__icon">
-                  <span class="material-icons">dashboard</span>
-                </div>
-                <div class="dropdown__item__text">
-                  Dashboard
-                </div>
-              </a>
-            </div>
-          </div>
+      <% end %>
+    </div>
+
+    <div class="padding-2">
+      <a href="<%= new_organization_path %>" class="button button--text">
+        <div class="button__icon">
+          <span class="material-icons">add</span>
         </div>
-      </div>
-    <% end %>
+        <div class="button__label">
+          <%= t 'common.new_organization' %>
+        </div>
+      </a>
+    </div>
   </div>
 </div>

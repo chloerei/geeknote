@@ -98,6 +98,10 @@ zh-CN:
           attributes:
             current_password:
               not_match: 密码错误
+        member:
+          attributes:
+            identifier:
+              invalid_format: 不是有效的账号名或邮箱地址。
   collection:
     visibility_private_description: 只有账号成员可以查看。
     visibility_private_label: 私有
@@ -125,7 +129,8 @@ zh-CN:
     contact: 联系
     content_has_expired: 内容已失效
     create_collection: 创建合集
-    dashboard: 内容管理
+    create_organization: 创建组织
+    dashboard: 管理面版
     delete: 删除
     delete_collection: 删除合集
     delete_collection_confirm: 确认删除合集？
@@ -158,6 +163,7 @@ zh-CN:
     move_to_trash: 移动到回收站
     name: 名称
     new_collection: 新合集
+    new_organization: 新组织
     new_post: 新文章
     no_collections_info: 合集用于保存或分享您喜欢的文章。
     no_description: 没有描述

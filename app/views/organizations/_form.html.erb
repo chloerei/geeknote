@@ -10,5 +10,7 @@
   <div class="margin-bottom-3">
     <%= form.text_area :description %>
   </div>
-  <%= form.submit 'Create Organization', class: 'button button--contained button--primary' %>
+  <button type="submit" class="button button--filled">
+    <%= t 'common.create_organization' %>
+  </button>
 <% end %>
