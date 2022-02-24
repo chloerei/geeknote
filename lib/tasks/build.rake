@@ -4,8 +4,9 @@ namespace :build do
     system "npm install"
   end
 
+  # icon must build before css
   desc "Build Javascript and CSS"
-  task :all => [:javascript, :css, :icon]
+  task :all => [:icon, :javascript, :css]
 
   desc "Build JavaScript"
   task :javascript => :install do
