@@ -1,12 +1,12 @@
 <% post = notification.record %>
 
-<a href="<%= account_dashboard_posts_path(post.account) %>" class="list__item">
-  <div class="list__avatar">
-    <div class="avatar">
+<a href="<%= account_dashboard_posts_path(post.account) %>" class="link-block border-radius-2">
+  <div class="display-flex padding-3 gap-3">
+    <div class="avatar flex-shrink-0">
       <%= avatar_image_tag current_user.avatar %>
     </div>
-  </div>
-  <div class="list__content">
-    根据《社区准则》，文章《<%= post.title.presence || 'Untitile' %>》已被限制发布，您可以在草稿箱查看和导出帖子内容。
+    <div class="flex-grow-1">
+      根据《社区准则》，文章《<%= post.title.presence || 'Untitile' %>》已被限制发布，您可以在草稿箱查看和导出帖子内容。
+    </div>
   </div>
 </a>

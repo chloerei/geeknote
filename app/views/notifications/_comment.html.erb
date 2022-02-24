@@ -1,23 +1,23 @@
 <% comment = notification.record %>
 
-<a href="<%= account_post_comment_path(comment.account, comment.commentable, comment) %>" class="list__item">
-  <div class="list__avatar">
-    <div class="avatar">
+<a href="<%= account_post_comment_path(comment.account, comment.commentable, comment) %>" class="link-block border-radius-2">
+  <div class="display-flex padding-3 gap-3">
+    <div class="avatar flex-shrink-0">
       <%= avatar_image_tag comment.user.avatar %>
     </div>
-  </div>
-  <div class="list__content">
-    <div class="text-primary">
-      <span class="text-bold"><%= comment.user.name %></span>
-      <%= t 'common.comment_on' %>
-      <% if comment.commentable %>
-        <%= comment.commentable.title %>
-      <% else %>
-        <%= t 'common.deleted_content' %>
-      <% end %>
-    </div>
-    <div class="text-secondary">
-      <%= comment_summary comment %>
+    <div class="flex-grow-1">
+      <div class="">
+        <b><%= comment.user.name %></b>
+        <%= t 'common.comment_on' %>
+        <% if comment.commentable %>
+          <%= comment.commentable.title %>
+        <% else %>
+          <%= t 'common.deleted_content' %>
+        <% end %>
+      </div>
+      <div class="text-muted">
+        <%= comment_summary comment %>
+      </div>
     </div>
   </div>
 </a>

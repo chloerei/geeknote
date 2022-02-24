@@ -1,8 +1,8 @@
-<div class="container container--medium">
-  <div class="subheader">
+<div class="container container--medium padding-3">
+  <div class="headline-medium margin-bottom-3">
     <%= t 'common.notifications' %>
   </div>
-  <div class="list">
+  <div class="margin-bottom-3">
     <% @notifications.each do |notification| %>
       <% begin %>
         <%= render "notifications/#{notification.type}", notification: notification %>
@@ -12,7 +12,5 @@
     <% end %>
   </div>
 
-  <div class="padding">
-    <%= paginate @notifications %>
-  </div>
+  <%= paginate @notifications %>
 </div>
