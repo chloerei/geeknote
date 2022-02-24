@@ -11,6 +11,8 @@ zh-CN:
         index:
           collections: 合集
           collections_desription: 文章合集。
+          members: 成员
+          members_desription: 邀请其他人加入写作。
           posts: 文章
           posts_desription: 草稿和已发布文章。
           settings: 设置
@@ -94,14 +96,14 @@ zh-CN:
           attributes:
             name:
               invalid: 只能使用大小写字母、数字和 - 号
-        user:
-          attributes:
-            current_password:
-              not_match: 密码错误
         member:
           attributes:
             identifier:
               invalid_format: 不是有效的账号名或邮箱地址。
+        user:
+          attributes:
+            current_password:
+              not_match: 密码错误
   collection:
     visibility_private_description: 只有账号成员可以查看。
     visibility_private_label: 私有

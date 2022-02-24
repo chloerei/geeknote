@@ -25,7 +25,9 @@
     <% if current_user %>
       <%= render 'form', comment: Comment.new(parent: @comment) %>
     <% else %>
-      <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">Sign in to comment</a>
+      <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">
+        <%= t 'common.sign_in_to_comment' %>
+      </a>
     <% end %>
   </div>
   <div id="comments" class="comments">

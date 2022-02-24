@@ -206,7 +206,9 @@
         <%= render 'account/posts/comments/form', comment: Comment.new %>
       <% else %>
         <div class="padding">
-          <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--contained button--primary" data-turbo-frame="_top">Sign in to comment</a>
+          <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">
+            <%= t 'common.sign_in_to_comment' %>
+          </a>
         </div>
       <% end %>
     </div>
