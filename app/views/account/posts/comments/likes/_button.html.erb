@@ -1,6 +1,6 @@
 <%= form_with url: account_post_comment_like_path(@post.account, @post, comment), method: (comment.liked ? 'delete' : 'post'), data: { controller: 'form' }, id: "comment-#{comment.id}-like-button" do |form| %>
   <div class="flex flex-align-items-center">
-    <button type="submit" class="button button--text <%= 'button--liked' if comment.liked %>">
+    <button type="submit" class="button button--text <%= comment.liked ? 'button--liked' : 'button--muted' %>">
       <div class="button__icon">
         <% if comment.liked %>
           <span class="material-icons">favorite</span>

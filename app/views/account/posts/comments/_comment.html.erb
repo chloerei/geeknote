@@ -1,4 +1,4 @@
-<div class="display-flex gap-3" id="comment-<%= comment.id %>">
+<div class="display-flex gap-3 padding-y-3 border-bottom" id="comment-<%= comment.id %>">
   <div class="avatar">
     <a href="<%= account_root_path(comment.user.account) %>">
       <%= avatar_image_tag comment.user.avatar %>
@@ -41,7 +41,7 @@
 
     <div class="display-flex justify-content-center">
       <%= render 'account/posts/comments/likes/button', comment: comment %>
-      <a href="<%= account_post_comment_path(@account, @post, comment, anchor: "reply") %>" class="button button--text">
+      <a href="<%= account_post_comment_path(@account, @post, comment, anchor: "reply") %>" class="button button--text button--muted">
         <div class="button__icon">
           <span class="material-icons">reply</span>
         </div>
@@ -52,7 +52,7 @@
       <div class="flex-grow-1">
       </div>
       <% if comment.replies_count > 0 %>
-        <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="button button--text">
+        <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="button button--text button--muted">
           <div class="button__label">
             <%= comment.replies_count %> <%= t 'common.replies' %>
           </div>
