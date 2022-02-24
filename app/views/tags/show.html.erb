@@ -1,15 +1,11 @@
 <div class="container container--medium">
-  <div class="toolbar">
-    <div class="toolbar__title">
-      Tagged: <%= params[:id] %>
-    </div>
+  <div class="headline-medium margin-bottom-4">
+    Tagged: <%= params[:id] %>
   </div>
 
-  <div class="list">
+  <div class="">
     <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
   </div>
 
-  <div class="padding">
-    <%= paginate @posts %>
-  </div>
+  <%= paginate @posts %>
 </div>

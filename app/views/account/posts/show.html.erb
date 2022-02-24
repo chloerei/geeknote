@@ -88,7 +88,7 @@
     <% if @post.tags.any? %>
       <div class="post__tags margin-y-4">
         <% @post.tags.each do |tag| %>
-          <a href="<%= account_tag_path(@account, id: tag.name) %>" class="chip chip--assist">
+          <a href="<%= tag_path(id: tag.name) %>" class="chip chip--assist">
             <%= tag.name %>
           </a>
         <% end %>
