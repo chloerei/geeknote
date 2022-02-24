@@ -5,7 +5,7 @@ namespace :build do
   end
 
   desc "Build Javascript and CSS"
-  task :all => [:javascript, :css]
+  task :all => [:javascript, :css, :icon]
 
   desc "Build JavaScript"
   task :javascript => :install do
