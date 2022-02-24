@@ -30,7 +30,9 @@
   }
 
   blockquote {
+    padding-left: var(--space-3);
     border-left: 4px solid rgba(0, 0, 0, 0.15);
+    margin: 0;
     background: transparent;
     color: #555;
   }
@@ -38,13 +40,18 @@
   code {
     font-family: Menlo, Consolas, "Liberation Mono", Courier, monospace;
     background-color: rgba(0, 0, 0, 0.05);
-    padding: 0.2em 0.4em;
-    border-radius: 4px;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--space-1);
     font-size: 85%;
   }
 
   pre {
-    border-radius: 4px;
+    border-radius: var(--space-2);
+    line-height: 1.2;
+    margin: var(--space-3) 0;
+    background: #f8f8f8;
+    padding: var(--space-3);
+    white-space: pre-wrap;
   }
 
   pre code {
