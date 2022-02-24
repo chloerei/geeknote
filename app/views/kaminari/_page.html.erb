@@ -1,5 +1,7 @@
 <div class="pagination__item ">
   <a href="<%= url %>" class="button button--icon <%= 'button--active' if page.current? %>">
-    <%= page %>
+    <div class="pagination__number">
+      <%= page %>
+    </div>
   </a>
 </div>

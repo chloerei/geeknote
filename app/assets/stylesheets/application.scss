@@ -305,3 +305,16 @@ $material-icons-font-path: '';
   border: none;
   border-bottom: 1px solid var(--color-outline);
 }
+
+.pagination {
+  padding: var(--space-3);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-1);
+}
+
+.pagination__number {
+  min-width: 24px;
+  font-size: 16px;
+  line-height: 24px;
+}
