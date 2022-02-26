@@ -1,4 +1,4 @@
-<div class="post-editor" data-controller="post-editor" data-post-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>" data-post-editor-direct-upload-token-value="<%= ActiveStorage::DirectUploadToken.generate_direct_upload_token("attachment#file", ActiveStorage::Blob.service.name, session) %>" data-post-editor-attachments-url-value="<%= account_dashboard_attachments_path %>" data-post-editor-message-image-limit-value="<%= t 'editor.image_limit' %>">
+<div class="post-editor" data-controller="post-editor" data-post-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>" data-post-editor-attachments-url-value="<%= account_dashboard_attachments_path %>" data-post-editor-message-image-limit-value="<%= t 'editor.image_limit' %>">
   <%= render 'appbar' %>
   <div class="container container--post padding-3">
     <%= form_with model: @post, url: [@account, :dashboard, @post], data: { 'post-editor-target': 'form' }, class: 'post-editor__form', id: 'post-form' do |form| %>
