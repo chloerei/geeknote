@@ -1,7 +1,7 @@
 <div class="post-item display-flex gap-3 padding-y-3 padding-right-3 border-bottom position-relative">
   <div class="flex-grow-1">
     <div class="title-medium">
-      <a href="<%= edit_account_dashboard_post_path(@account, post) %>" class="link-title link-expended">
+      <a href="<%= edit_account_dashboard_post_path(@account, post) %>" class="link-title link-expended break-word">
         <%= post.title.presence || t('common.untitled') %>
       </a>
     </div>
@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="">
-    <div class="post-status post-status--<%= post.status %>">
+    <div class="post-status post-status--<%= post.status %> text-nowrap">
       <%= Post.human_attribute_name "status.#{post.status}" %>
     </div>
   </div>

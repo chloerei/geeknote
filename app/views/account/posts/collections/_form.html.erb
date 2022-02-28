@@ -1,15 +1,13 @@
 <%= form_with model: @collection, url: account_post_collections_path(@account, @post), builder: CustomFormBuilder, id: "post-#{@post.id}-collection-form", class: 'form display-contents' do |form| %>
-  <div class="toolbar">
-    <div class="toolbar__action">
-      <a href="<%= account_post_collections_path(@account, @post) %>" class="button button--icon">
-        <span class="material-icons">arrow_back</span>
-      </a>
-    </div>
-    <div class="toolbar__title">
+  <div class="display-flex align-items-center gap-2 padding-3 border-bottom">
+    <a href="<%= account_post_collections_path(@account, @post) %>" class="button button--icon">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <div class="flex-grow-1">
       <%= t 'common.new_collection' %>
     </div>
   </div>
-  <div class="padding-x overflow-auto">
+  <div class="padding-3 overflow-auto">
     <div class="margin-bottom-3">
       <%= form.text_field :name, autocomplete: 'off', autofocus: true %>
     </div>
@@ -39,18 +37,12 @@
       </label>
     </div>
   </div>
-  <div class="toolbar">
-    <div class="toolbar__space">
-    </div>
-    <div class="toolbar__action">
-      <a href="<%= account_post_collections_path(@account, @post) %>" class="button button--text button--primary">
-        <%= t 'common.cancel' %>
-      </a>
-    </div>
-    <div class="toolbar__action">
-      <button type="submit" class="button button--text button--primary">
-        <%= t 'common.create_collection' %>
-      </button>
-    </div>
+  <div class="display-flex justify-content-flex-end padding-3">
+    <a href="<%= account_post_collections_path(@account, @post) %>" class="button button--text button--primary">
+      <%= t 'common.cancel' %>
+    </a>
+    <button type="submit" class="button button--text button--primary">
+      <%= t 'common.create_collection' %>
+    </button>
   </div>
 <% end %>
