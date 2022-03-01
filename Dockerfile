@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   npm \
   postgresql-client
 
-RUN gem install bundler -v 2.3.6
+RUN gem install bundler -v 2.3.6 && \
+  bundle config set --global path vendor/bundle
 
 WORKDIR /app
 
