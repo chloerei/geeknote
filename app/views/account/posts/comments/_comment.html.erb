@@ -1,5 +1,5 @@
 <div class="display-flex gap-3 padding-y-3 border-bottom" id="comment-<%= comment.id %>">
-  <div class="avatar">
+  <div class="avatar flex-shrink-0">
     <a href="<%= account_root_path(comment.user.account) %>">
       <%= avatar_image_tag comment.user.avatar %>
     </a>
