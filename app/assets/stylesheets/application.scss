@@ -19,10 +19,17 @@ $material-icons-font-path: '';
 
 :root {
   @include color-scheme(
-    $neutral: #fff
+    $primary: #543A93,
+    $secondary: #4F485E,
+    $tertiary: #69404D,
+    $neutral: #FFFFFF,
+    $neutral-variant: #FFFFFF,
+    $error: #DB3229
   );
 
-  --color-outline: #ccc;
+  .light-scheme {
+    --color-outline: #ccc;
+  }
 
   --space-4: 32px;
   --space-5: 64px;

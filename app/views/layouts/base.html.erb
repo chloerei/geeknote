@@ -19,7 +19,7 @@
     <%= yield :head %>
   </head>
 
-  <body>
+  <body class="light-scheme">
     <% if current_user %>
       <style>
         [data-visible-to-user]:not([data-visible-to-user="<%= current_user.id %>"]) {
