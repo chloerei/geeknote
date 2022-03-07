@@ -15,7 +15,7 @@ import { Application } from "@hotwired/stimulus"
 
 const application = Application.start()
 
-import { init } from "@chloerei/material-ui/dist/material-ui.js"
+import { init } from "@chloerei/material-ui/src/js/material-ui.js"
 init(application)
 
 import ClipboardController from './controllers/clipboard_controller'
@@ -68,6 +68,10 @@ document.addEventListener('turbo:before-cache', () => {
 })
 
 // color scheme
-document.addEventListener('turbo:load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   document.body.dataset.colorScheme = localStorage.getItem('color_scheme')
+})
+
+document.addEventListener('turbo:before-render', (event) => {
+  event.detail.newBody.dataset.colorScheme = localStorage.getItem('color_scheme')
 })

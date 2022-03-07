@@ -1,4 +1,4 @@
-import { SelectorController } from "@chloerei/material-ui/dist/material-ui.js"
+import { SelectorController } from "@chloerei/material-ui/src/js/material-ui.js"
 import Rails from "@rails/ujs"
 
 export default class extends SelectorController {
