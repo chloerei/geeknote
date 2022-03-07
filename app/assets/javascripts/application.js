@@ -69,9 +69,9 @@ document.addEventListener('turbo:before-cache', () => {
 
 // color scheme
 document.addEventListener('DOMContentLoaded', () => {
-  document.body.dataset.colorScheme = localStorage.getItem('color_scheme') || 'default'
+  document.body.dataset.colorScheme = localStorage.getItem('color-scheme') || 'default'
 })
 
 document.addEventListener('turbo:before-render', (event) => {
-  event.detail.newBody.dataset.colorScheme = localStorage.getItem('color_scheme') || 'default'
+  event.detail.newBody.dataset.colorScheme = localStorage.getItem('color-scheme') || 'default'
 })

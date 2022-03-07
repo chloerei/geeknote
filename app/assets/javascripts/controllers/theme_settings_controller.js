@@ -10,7 +10,7 @@ export default class extends Controller {
   }
 
   selectColorScheme(event) {
-    localStorage.setItem('color_scheme', event.target.value)
+    localStorage.setItem('color-scheme', event.target.value)
     document.body.dataset.colorScheme = event.target.value
   }
 }
