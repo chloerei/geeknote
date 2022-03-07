@@ -57,9 +57,17 @@ application.register('sortable', SortableController)
 import TagSelectorController from './controllers/tag_selector_controller'
 application.register('tag-selector', TagSelectorController)
 
+import ThemeSettingsController from './controllers/theme_settings_controller'
+application.register('theme-settings', ThemeSettingsController)
+
 import './lib/turbo_preserve_scroll'
 
 // clean snackbar content
 document.addEventListener('turbo:before-cache', () => {
   document.getElementById('snackbar-container').innerHTML = ''
+})
+
+// color scheme
+document.addEventListener('turbo:load', () => {
+  document.body.dataset.colorScheme = localStorage.getItem('color_scheme')
 })

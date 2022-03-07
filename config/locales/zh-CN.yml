@@ -132,6 +132,7 @@ zh-CN:
     content_has_expired: 内容已失效
     create_collection: 创建合集
     create_organization: 创建组织
+    dark_theme: 深色主题
     dashboard: 管理面版
     delete: 删除
     delete_collection: 删除合集
@@ -141,6 +142,8 @@ zh-CN:
     delete_permanently: 永久删除
     deleted_content: 已删除内容
     detail: 详情
+    devise_theme: 设备主题（默认)
+    done: 完成
     edit: 编辑
     edit_profile: 编辑个人资料
     email: 邮件地址
@@ -153,9 +156,9 @@ zh-CN:
     forgot_password?: 忘记密码？
     hide_changes: 隐藏修改
     history_revisions: 历史版本
-    indentifier: 身份
     invite_member: 邀请成员
     latest: 最新
+    light_theme: 浅色主题
     liked_posts: 赞过
     likes: 赞
     loading: 加载中……
@@ -163,7 +166,6 @@ zh-CN:
     move_to_bottom: 移到底部
     move_to_top: 移到顶部
     move_to_trash: 移动到回收站
-    name: 名称
     new_collection: 新合集
     new_organization: 新组织
     new_post: 新文章
@@ -187,7 +189,6 @@ zh-CN:
     remove: 移除
     replies: 回复
     reply: 回复
-    reply_on: 回复了
     resend_invitation: 重新发送邀请
     reset_password: 重置密码
     restore: 恢复
@@ -213,6 +214,7 @@ zh-CN:
     status: 状态
     submit: 提交
     tags: 标签
+    theme: 主题
     unpublish: 取消发布
     untitled: 无标题
     update: 更新
@@ -275,8 +277,6 @@ zh-CN:
         notifications_desription: 修改通知方式和类型。
         password: 修改密码
         password_desription: 修改登录密码。
-        profile: 个人资料
-        profile_desription: 头像、名称、简介。
   user:
     email:
       unsubscribes:

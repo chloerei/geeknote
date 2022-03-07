@@ -18,7 +18,7 @@ $material-icons-font-path: '';
 @import 'post';
 
 :root {
-  @include color-scheme(
+  @include light-scheme (
     $primary: #543A93,
     $secondary: #4F485E,
     $tertiary: #69404D,
@@ -27,12 +27,31 @@ $material-icons-font-path: '';
     $error: #DB3229
   );
 
-  .light-scheme {
-    --color-outline: #ccc;
-  }
-
   --space-4: 32px;
   --space-5: 64px;
+
+}
+
+body[data-color-scheme="light"] {
+  @include light-scheme (
+    $primary: #543A93,
+    $secondary: #4F485E,
+    $tertiary: #69404D,
+    $neutral: #FFFFFF,
+    $neutral-variant: #FFFFFF,
+    $error: #DB3229
+  );
+}
+
+body[data-color-scheme="dark"] {
+  @include dark-scheme (
+    $primary: #543A93,
+    $secondary: #4F485E,
+    $tertiary: #69404D,
+    $neutral: #FFFFFF,
+    $neutral-variant: #FFFFFF,
+    $error: #DB3229
+  );
 }
 
 .container {
@@ -336,4 +355,9 @@ $material-icons-font-path: '';
 
 .dialog__container {
   min-width: 360px;
+}
+
+.label-state {
+  cursor: pointer;
+  @include state-layer;
 }

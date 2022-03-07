@@ -55,6 +55,14 @@
               <%= t 'common.organizations' %>
             </div>
           </a>
+          <button type="button" class="dropdown__item" data-controller="toggle" data-toggle-target="#theme-dialog" data-toggle-action="dialog#open" data-action="dropdown#close">
+            <div class="dropdown__item__icon">
+              <span class="material-icons">dark_mode</span>
+            </div>
+            <div class="dropdown__item__text">
+              <%= t 'common.theme' %>
+            </div>
+          </button>
           <a href="<%= settings_root_path %>" class="dropdown__item">
             <div class="dropdown__item__icon">
               <span class="material-icons">settings</span>
@@ -97,6 +105,56 @@
     <a href="https://geeknote.net/geeknote/" class="link-text"><%= t 'common.blog' %></a>
     <a href="/contact" class="link-text"><%= t 'common.contact' %></a>
     <a href="https://github.com/geeknote-net/feedback/discussions" class="link-text" target="_blank"><%= t 'common.feedback' %></a>
+  </div>
+
+  <div class="dialog" data-controller="dialog" id="theme-dialog">
+    <div class="dialog__container">
+      <div class="headline-small margin-x-1 margin-top-1 padding-3">
+        <%= t 'common.theme' %>
+      </div>
+      <div class="overflow-auto" data-controller="theme-settings">
+        <label class="display-flex align-items-center gap-3 padding-x-3 padding-y-2 label-state">
+          <label class="radio">
+            <input type="radio" name="color_scheme" value="default" data-action="theme-settings#selectColorScheme">
+            <div class="radio__icon"></div>
+          </label>
+          <div class="flex-grow-1">
+            <div class="label-large">
+              <%= t 'common.devise_theme' %>
+            </div>
+          </div>
+        </label>
+        <label class="display-flex align-items-center gap-3 padding-x-3 padding-y-2 label-state">
+          <label class="radio">
+            <input type="radio" name="color_scheme" value="light" data-action="theme-settings#selectColorScheme">
+            <div class="radio__icon"></div>
+          </label>
+          <div class="flex-grow-1">
+            <div class="label-large">
+              <%= t 'common.light_theme' %>
+            </div>
+          </div>
+        </label>
+        <label class="display-flex align-items-center gap-3 padding-x-3 padding-y-2 label-state">
+          <label class="radio">
+            <input type="radio" name="color_scheme" value="dark" data-action="theme-settings#selectColorScheme">
+            <div class="radio__icon"></div>
+          </label>
+          <div class="flex-grow-1">
+            <div class="label-large">
+              <%= t 'common.dark_theme' %>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div class="display-flex justify-content-flex-end padding-3">
+        <button type="button" class="button button--text" data-action="dialog#close">
+          <%= t 'common.done' %>
+        </button>
+      </div>
+    </div>
+    <div class="dialog__scrim" data-action="click->dialog#close">
+    </div>
   </div>
 <% end %>
 
