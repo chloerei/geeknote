@@ -16,7 +16,7 @@ module ApplicationHelper
         formatter = Rouge::Formatters::HTML.new
         code = formatter.format(lexer.lex(node.string_content))
         new_node = CommonMarker::Node.new(:html)
-        new_node.string_content = %Q(<pre><code class="language-#{lang} highlight">#{code}</code></pre>)
+        new_node.string_content = %Q(<pre class="language-#{lang} highlight"><code>#{code}</code></pre>)
 
         node.insert_before(new_node)
         node.delete

@@ -18,21 +18,11 @@ $material-icons-font-path: '';
 @import 'post';
 
 :root {
-  @include light-scheme (
-    $primary: #543A93,
-    $secondary: #4F485E,
-    $tertiary: #69404D,
-    $neutral: #FFFFFF,
-    $neutral-variant: #FFFFFF,
-    $error: #DB3229
-  );
-
   --space-4: 32px;
   --space-5: 64px;
-
 }
 
-body[data-color-scheme="light"] {
+@mixin custom-light-scheme {
   @include light-scheme (
     $primary: #543A93,
     $secondary: #4F485E,
@@ -41,9 +31,11 @@ body[data-color-scheme="light"] {
     $neutral-variant: #FFFFFF,
     $error: #DB3229
   );
+
+  --color-outline: #ccc;
 }
 
-body[data-color-scheme="dark"] {
+@mixin custom-dark-scheme {
   @include dark-scheme (
     $primary: #543A93,
     $secondary: #4F485E,
@@ -52,6 +44,30 @@ body[data-color-scheme="dark"] {
     $neutral-variant: #FFFFFF,
     $error: #DB3229
   );
+
+  --color-outline: #555;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    @include custom-light-scheme;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    @include custom-dark-scheme;
+  }
+}
+
+body[data-color-scheme="light"] {
+  color-scheme: light;
+  @include custom-light-scheme;
+}
+
+body[data-color-scheme="dark"] {
+  color-scheme: dark;
+  @include custom-dark-scheme;
 }
 
 .container {
@@ -85,7 +101,7 @@ body[data-color-scheme="dark"] {
 }
 
 .text-muted {
-  color: #777;
+  color: var(--color-on-surface-variant);
 }
 
 .post-item__featured_image {
@@ -107,7 +123,6 @@ body[data-color-scheme="dark"] {
   text-decoration: none;
 
   &:hover {
-    opacity: 0.7;
   }
 }
 
@@ -215,14 +230,8 @@ body[data-color-scheme="dark"] {
 }
 
 .image-uploader__preview {
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.5);
+  img {
+    opacity: 0.7;
   }
 }
 
@@ -249,15 +258,10 @@ body[data-color-scheme="dark"] {
   width: 100%;
   height: 100%;
   min-height: 100px;
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--color-surface-variant);
   display: flex;
   align-items: center;
   justify-content: center;
-
-  span.material-icons {
-    color: #ccc;
-    font-size: 4em;
-  }
 }
 
 .display-grid {

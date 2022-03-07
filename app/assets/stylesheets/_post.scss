@@ -28,6 +28,11 @@
   font-family: var(--font-family);
   letter-spacing: -1.5px;
   background: transparent;
+  color: var(--color-on-surface);
+
+  &::placeholder {
+    opacity: 0.7;
+  }
 }
 
 .post-preview-iframe {
@@ -41,15 +46,17 @@
   padding: 0 8px;
   font-size: 14px;
   line-height: 24px;
-  color: white;
-  background: #aaa;
   border-radius: 12px;
+  background: var(--color-surface-variant);
+  color: var(--color-on-surface-variant);
 }
 
 .post-status--published {
-  background: #4caf50;
+  background: var(--color-primary-container);
+  color: var(--color-on-primary-container);
 }
 
 .post-status--trashed {
-  background: #f44336;
+  background: var(--color-tertiary);
+  color: var(--color-on-tertiary);
 }

@@ -31,15 +31,14 @@
 
   blockquote {
     padding-left: var(--space-3);
-    border-left: 4px solid rgba(0, 0, 0, 0.15);
+    border-left: 4px solid var(--color-outline);
     margin: 0;
     background: transparent;
-    color: #555;
+    color: var(--color-on-surface-variant);
   }
 
   code {
     font-family: Menlo, Consolas, "Liberation Mono", Courier, monospace;
-    background-color: rgba(0, 0, 0, 0.05);
     padding: var(--space-1) var(--space-2);
     border-radius: var(--space-1);
     font-size: 85%;
@@ -49,14 +48,12 @@
     border-radius: var(--space-2);
     line-height: 1.2;
     margin: var(--space-3) 0;
-    background: #f8f8f8;
     padding: var(--space-3);
     white-space: pre-wrap;
   }
 
   pre code {
     padding: 0;
-    background-color: transparent;
   }
 
   table {
