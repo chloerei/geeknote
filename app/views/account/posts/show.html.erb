@@ -30,17 +30,17 @@
 
     <div class="display-flex gap-2 align-items-center margin-y-4">
       <div class="flex-grow-1">
-        <div class="display-flex align-items-center">
-          <a href="<%= account_root_path(@post.account) %>" class="avatar margin-right-2">
+        <div class="display-flex align-items-center gap-3">
+          <a href="<%= account_root_path(@post.account) %>" class="avatar">
             <%= avatar_image_tag @post.account.owner.avatar %>
           </a>
           <div class="">
             <div class="">
-              <a href="<%= account_root_path(@post.account) %>" class="link-text"><%= @post.account.owner.name %></a>
+              <a href="<%= account_root_path(@post.account) %>" class="link-text"><b><%= @post.account.owner.name %></b></a>
               <% if @post.account.organization? && @post.author_users.any? %>
-                by
+                <span class="text-muted">by</span>
                 <% @post.author_users.each do |user| %>
-                  <a href="<%= account_root_path(user.account) %>" class="link-text"><%= user.name %></a><% if user != @post.author_users.last %>, <% end %>
+                  <a href="<%= account_root_path(user.account) %>" class="link-text"><b><%= user.name %></b></a><% if user != @post.author_users.last %>, <% end %>
                 <% end %>
               <% end %>
             </div>
@@ -187,7 +187,7 @@
     <% end %>
   <% end %>
 
-  <div class="display-flex flex-direction-column gap-3 border-top padding-y-4 border-bottom margin-y-4">
+  <div class="display-flex flex-direction-column gap-3 border-top padding-y-3 border-bottom margin-y-3">
     <%= render 'account/follows/account', account: @post.account %>
     <% if @post.account.organization? %>
       <% @post.author_users.each do |user| %>

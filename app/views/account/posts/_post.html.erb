@@ -1,16 +1,20 @@
 <div class="post-item padding-bottom-3 border-bottom margin-bottom-4" data-post-list-target="item" data-url="<%= account_post_path(post.account, post) %>">
-  <div class="display-flex margin-bottom-2">
+  <div class="display-flex margin-bottom-2 gap-2">
     <a href="<%= account_root_path(post.account) %>" class="display-flex link-text">
-      <div class="avatar avatar--small margin-right-1">
-        <%= avatar_image_tag post.account.owner.avatar %>
+      <div class="display-flex gap-2">
+        <div class="avatar avatar--small">
+          <%= avatar_image_tag post.account.owner.avatar %>
+        </div>
+        <b>
+          <%= post.account.owner.name %>
+        </b>
       </div>
-      <%= post.account.owner.name %>
     </a>
     <% if post.account.organization? && post.author_users.any? %>
-      <div class="margin-x-1">
-        by
+      <div>
+        <span class="text-muted">by</span>
         <% post.author_users.each do |user| %>
-          <a href="<%= account_root_path(user.account) %>" class="link-text"><%= user.name %></a><% if user != post.author_users.last %>, <% end %>
+          <a href="<%= account_root_path(user.account) %>" class="link-text"><b><%= user.name %></b></a><% if user != post.author_users.last %>, <% end %>
         <% end %>
       </div>
     <% end %>
