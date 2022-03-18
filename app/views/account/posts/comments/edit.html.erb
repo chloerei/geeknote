@@ -1,11 +1,22 @@
-<div class="container container--post">
-  <div class="breadcrumb padding">
-    <a href="<%= account_post_path(@account, @post) %>" class="breadcrumb__item">
+<div class="container container--post padding-3">
+  <div class="headline-medium margin-bottom-3">
+    <a href="<%= account_post_path(@account, @post) %>" class="link-title">
       <%= @post.title %>
     </a>
-    <a href="<%= account_post_comments_path(@account, @post) %>" class="breadcrumb__item">
-      Comments
+  </div>
+
+  <div class="margin-bottom-3">
+    <a href="<%= account_post_comment_path(@account, @post, @comment) %>" class="button button--outlined">
+      <div class="button__icon">
+        <span class="material-icons">arrow_back</span>
+      </div>
+      <div class="button__label">
+        <%= t 'common.back_to_comment' %>
+      </div>
     </a>
   </div>
-  <%= render 'form', comment: @comment %>
+
+  <div class="padding-y-3">
+    <%= render 'form', comment: @comment %>
+  </div>
 </div>

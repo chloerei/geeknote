@@ -365,3 +365,25 @@ body[data-color-scheme="dark"] {
   cursor: pointer;
   @include state-layer;
 }
+
+.comment {
+  .typography {
+    font-size: 16px;
+  }
+}
+
+.comments .comment:not(:last-child) {
+  border-bottom: 1px solid var(--color-outline);
+}
+
+.comment-replies .comment__reply-to {
+  display: none;
+}
+
+.comment__actions {
+  margin: -8px;
+}
+
+.material-icons--inline {
+  font-size: inherit;
+}

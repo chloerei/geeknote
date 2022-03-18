@@ -1,36 +1,40 @@
 <div class="container container--post padding-3">
-  <div class="title-medium display-flex align-items-center gap-2 margin-bottom-4">
-    <a href="<%= account_root_path(@account) %>" class="link-title display-inline-flex gap-1">
-      <div class="avatar avatar--small">
-        <%= avatar_image_tag @account.owner.avatar %>
-      </div>
-      <%= @account.display_name %>
-    </a>
-    <span class="material-icons">chevron_right</span>
+  <div class="headline-medium margin-bottom-3">
     <a href="<%= account_post_path(@account, @post) %>" class="link-title">
       <%= @post.title %>
     </a>
-    <span class="material-icons">chevron_right</span>
-    <a href="<%= account_post_comments_path(@account, @post) %>" class="link-title">
-      <%= t 'common.comments' %>
+  </div>
+
+  <div class="margin-bottom-3">
+    <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--outlined">
+      <div class="button__icon">
+        <span class="material-icons">arrow_back</span>
+      </div>
+      <div class="button__label">
+        <%= t 'common.show_all_comments' %>
+      </div>
     </a>
   </div>
-  <div class="comment-thread">
-    <%= render partial: 'comment', collection: @comment.ancestors.reverse, cached: -> (comment) { [comment, comment.liked] } %>
-  </div>
-  <div data-controller="focusable">
+
+  <div class="border-bottom">
     <%= render partial: 'comment', object: @comment %>
   </div>
-  <div class="padding-y-3 border-bottom">
+
+  <div class="padding-y-3">
     <% if current_user %>
-      <%= render 'form', comment: Comment.new(parent: @comment) %>
+      <%= render 'form', comment: @comment.replies.new %>
     <% else %>
-      <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">
-        <%= t 'common.sign_in_to_comment' %>
-      </a>
+      <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled"><%= t 'common.sign_in_to_comment' %></a>
     <% end %>
   </div>
-  <div id="comments" class="comments">
-    <%= render partial: 'comment', collection: @comment.replies.hot.with_liked(current_user), cached: -> (comment) { [comment, comment.liked] } %>
+
+  <div class="padding-y-2 border-bottom">
+    <div class="title-medium">
+      <%= t 'comment.replies' %>
+    </div>
+  </div>
+
+  <div id="comments" class="comments comment-replies">
+    <%= render partial: 'comment', collection: @comment.replies.with_liked(current_user).order(created_at: :desc), cached: -> (comment) { [comment, comment.liked] } %>
   </div>
 </div>

@@ -197,29 +197,31 @@
   </div>
 
   <% if @post.allow_comments? %>
-    <h4 class="title-medium">
-      <%= t 'common.comments' %> (<%= @post.comments.no_parent.count %>)
-    </h4>
-
-    <div class="padding-bottom-3 border-bottom margin-bottom-3">
+    <div class="padding-y-3">
       <% if current_user %>
         <%= render 'account/posts/comments/form', comment: Comment.new %>
       <% else %>
-        <div class="padding">
-          <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">
-            <%= t 'common.sign_in_to_comment' %>
-          </a>
-        </div>
+        <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">
+          <%= t 'common.sign_in_to_comment' %>
+        </a>
       <% end %>
     </div>
 
-    <div id="comments" class="comments">
-      <%= render partial: 'account/posts/comments/comment', collection: @post.comments.no_parent.with_liked(current_user).hot.limit(3), cached: -> (comment) { [comment, comment.liked] } %>
+    <div class="display-flex padding-y-2 border-bottom align-items-center">
+      <div class="flex-grow-1">
+        <div class="title-medium">
+          <%= t 'common.comments' %> <%= @post.comments_count %>
+        </div>
+      </div>
     </div>
-    <% if @post.comments.no_parent.count > 3 %>
-      <div class="padding-3">
-        <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100 justify-content-center">
-          <%= t 'common.view_more' %>
+
+    <div id="comments" class="comments">
+      <%= render partial: 'account/posts/comments/comment', collection: @post.comments.with_liked(current_user).order(created_at: :desc).limit(3), cached: -> (comment) { [comment, comment.liked] } %>
+    </div>
+    <% if @post.comments_count > 3 %>
+      <div class="padding-y-3">
+        <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--outlined width-100 justify-content-center">
+          <%= t 'common.show_all_comments' %>
         </a>
       </div>
     <% end %>

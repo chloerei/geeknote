@@ -109,6 +109,8 @@ zh-CN:
     visibility_private_label: 私有
     visibility_public_description: 任何人都可以查看。
     visibility_public_label: 公开
+  comment:
+    replies: 回复
   common:
     account_name: 账号名
     account_profile: 账号资料
@@ -117,6 +119,7 @@ zh-CN:
     all: 全部
     authors: 作者
     avatar: 头像
+    back_to_comment: 回到评论
     banner_image: 横幅图片
     blog: 博客
     by: 由
@@ -189,6 +192,7 @@ zh-CN:
     remove: 移除
     replies: 回复
     reply: 回复
+    reply_to: 回复
     resend_invitation: 重新发送邀请
     reset_password: 重置密码
     restore: 恢复
@@ -205,6 +209,7 @@ zh-CN:
     send_invitation: 发送邀请
     send_password_reset_email: 发送密码重置邮件
     settings: 设置
+    show_all_comments: 查看所有评论
     show_changes: 显示修改
     sign_in: 登录
     sign_in_to_comment: 登录后评论
@@ -219,7 +224,7 @@ zh-CN:
     untitled: 无标题
     update: 更新
     view: 查看
-    view_more: 查看更多
+    view_post: 查看文章
     visibility: 公开范围
     visit_site: Visit site
   editor:

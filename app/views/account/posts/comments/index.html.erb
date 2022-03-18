@@ -1,27 +1,35 @@
-<div class="container container--post">
-  <div class="breadcrumb padding">
-    <div class="breadcrumb__item">
-      <a href="<%= account_root_path(@account) %>" class="breadcrumb__item">
-        <%= @account.display_name %>
-      </a>
-    </div>
-    <div class="breadcrumb__item">
-      <a href="<%= account_post_path(@account, @post) %>" class="breadcrumb__item">
-        <%= @post.title %>
-      </a>
-    </div>
-    <div class="breadcrumb__item breadcrumb__item--active">
-      <%= t 'common.comments' %>
+<div class="container container--post padding-3">
+  <div class="headline-medium margin-bottom-3">
+    <a href="<%= account_post_path(@account, @post) %>" class="link-title">
+      <%= @post.title %>
+    </a>
+  </div>
+
+  <div class="margin-bottom-3">
+    <a href="<%= account_post_path(@account, @post) %>" class="button button--outlined">
+      <div class="button__icon">
+        <span class="material-icons">arrow_back</span>
+      </div>
+      <div class="button__label">
+        <%= t 'common.view_post' %>
+      </div>
+    </a>
+  </div>
+
+  <div class="padding-y-3">
+    <% if current_user %>
+      <%= render 'form', comment: Comment.new %>
+    <% else %>
+      <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled"><%= t 'common.sign_in_to_comment' %></a>
+    <% end %>
+  </div>
+
+  <div class="padding-y-2 border-bottom">
+    <div class="title-medium">
+      <%= t 'common.comments' %> <%= @post.comments_count %>
     </div>
   </div>
-  <% if current_user %>
-    <%= render 'form', comment: Comment.new %>
-  <% else %>
-    <div class="padding">
-      <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--contained button--primary" data-turbo-frame="_top"><%= t 'common.sign_in_to_comment' %></a>
-    </div>
-  <% end %>
-  <hr class="divider margin-x">
+
   <div id="comments" class="comments">
     <%= render partial: 'comment', collection: @comments, cached: -> (comment) { [comment, comment.liked] } %>
   </div>
