@@ -138,7 +138,7 @@ module ApplicationHelper
 
   def format_time(time)
     if time
-      local_time time, format: :short
+      local_time time, format: :long
     end
   end
 
