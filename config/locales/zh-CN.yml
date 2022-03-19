@@ -95,7 +95,7 @@ zh-CN:
         account:
           attributes:
             name:
-              invalid: 只能使用大小写字母、数字和 - 号
+              invalid: 只能使用大小写字母、数字和 - 号，不少于 3 字符。
         member:
           attributes:
             identifier:
