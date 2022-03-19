@@ -13,6 +13,11 @@
   <div class="margin-bottom-3">
     <%= form.password_field :password %>
   </div>
+  <% if @user.errors[:base].any? %>
+    <div class="padding-3 background-error-container margin-bottom-3">
+      <%= @user.errors[:base].first %>
+    </div>
+  <% end %>
   <div class="margin-bottom-3">
     <%= recaptcha_tags %>
   </div>

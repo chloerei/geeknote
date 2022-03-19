@@ -268,6 +268,10 @@ zh-CN:
       verify_email_description: 为了开启完整功能，收取通知邮件，确保账号安全，需要验证邮件地址。
       verify_email_title: 验证邮件地址
       who_to_follow: 推荐关注
+  recaptcha:
+    errors:
+      verification_failed: 人机验证失败，请重试。
+      recaptcha_unreachable: 人机验证服务端错误，请稍后重试。
   settings:
     emails:
       show:
