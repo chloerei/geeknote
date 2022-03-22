@@ -26,8 +26,8 @@
             <a href="<%= edit_account_post_comment_path(@account, @post, comment) %>" class="dropdown__item" data-visible-to-user="<%= comment.user_id %>">
               <%= t 'common.edit' %>
             </a>
-            <%= form_with url: account_post_comment_path(@account, @post, comment), method: 'delete', data: { 'visible-to-user': comment.user_id } do |form| %>
-              <button type="submit" class="dropdown__item" data-confirm="Are you sure delete this comment?">
+            <%= form_with url: account_post_comment_path(@account, @post, comment), method: 'delete', data: { 'visible-to-user': comment.user_id, 'turbo-confirm': "Are you sure delete this comment?" } do |form| %>
+              <button type="submit" class="dropdown__item">
                 <%= t 'common.delete' %>
               </button>
             <% end %>

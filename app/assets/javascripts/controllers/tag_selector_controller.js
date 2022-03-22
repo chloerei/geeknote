@@ -1,22 +1,25 @@
 import { SelectorController } from "@chloerei/material-ui/src/js/material-ui.js"
-import Rails from "@rails/ujs"
+import { get } from "@rails/request.js"
 
 export default class extends SelectorController {
   disconnect() {
     this.content.remove()
   }
 
-  onInput() {
+  async onInput() {
     if (this.input.value.length) {
-      Rails.ajax({
-        url: '/tags/search?q=' + this.input.value,
-        type: 'get',
-        content_type: 'json',
-        success: (data) => {
-          this.options = data.tags.map(tag => ({ text: tag.name, value: tag.name }))
-          this.renderMenu()
-        }
+      const response = await get('/tags/search', {
+        query: {
+          q: this.input.value
+        },
+        responseKind: "json"
       })
+
+      if (response.ok) {
+        const json = await response.json
+        this.options = json.tags.map(tag => ({ text: tag.name, value: tag.name }))
+        this.renderMenu()
+      }
     } else {
       this.options = []
       this.renderMenu()

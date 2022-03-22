@@ -44,7 +44,7 @@
             <% end %>
 
             <% if next_page_path = next_page_path(@revisions) %>
-              <a href="<%= next_page_path %>" class="button button--text button--disabled text-align-center margin-bottom" data-pagination-target="nextPageLink">
+              <a href="<%= next_page_path %>" class="button button--text button--disabled width-100 justify-content-center margin-y-3" data-pagination-target="nextPageLink">
                 <%= t 'common.loading' %>
               </a>
             <% else %>

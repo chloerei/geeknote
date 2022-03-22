@@ -24,8 +24,8 @@
               </button>
             </div>
             <div class="top-app-bar__action">
-              <%= form_with model: @revision, url: restore_account_dashboard_post_revision_path(@account, @post), data: { 'turbo-frame': '_top' } do |form| %>
-                <button type="submit" class="button button--text button--primary" data-confirm="<%= t 'common.restore_revision_confirm', name: @revision.display_name %>">
+              <%= form_with model: @revision, url: restore_account_dashboard_post_revision_path(@account, @post), data: { 'turbo-frame': '_top', 'turbo-confirm': t('common.restore_revision_confirm', name: @revision.display_name) } do |form| %>
+                <button type="submit" class="button button--text button--primary">
                   <div class="button__icon">
                     <span class="material-icons">restore</span>
                   </div>

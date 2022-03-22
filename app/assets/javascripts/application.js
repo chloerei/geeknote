@@ -1,6 +1,3 @@
-import Rails from "@rails/ujs"
-Rails.start()
-
 import "@hotwired/turbo"
 
 import * as ActiveStorage from "@rails/activestorage"
@@ -22,7 +19,7 @@ import ClipboardController from './controllers/clipboard_controller'
 application.register('clipboard', ClipboardController)
 
 import CollectionItemController from './controllers/collection_item_controller'
-application.register('collection_item', CollectionItemController)
+application.register('collection-item', CollectionItemController)
 
 import DraggableController from './controllers/draggable_controller'
 application.register('draggable', DraggableController)

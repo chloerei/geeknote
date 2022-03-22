@@ -3,7 +3,7 @@ import { Editor } from "../lib/editor"
 import { DirectUpload } from "@rails/activestorage"
 import { Turbo } from '@hotwired/turbo-rails'
 import { Snackbar } from '../lib/snackbar'
-import Rails from "@rails/ujs"
+import { post } from "@rails/request.js"
 
 const isMac = /Mac/.test(navigator.platform)
 
@@ -75,18 +75,19 @@ export default class extends Controller {
       uploadImage: (file) => {
         return new Promise(function(resolve, reject) {
           const upload = new DirectUpload(file, directUploadUrl, directUploadToken, 'attachment#file')
-          upload.create((error, blob) => {
+          upload.create(async (error, blob) => {
             // Todo: error handle
             let formData = new FormData()
             formData.append('attachment[file]', blob.signed_id)
-            Rails.ajax({
-              url: attachmentsUrl,
-              data: formData,
-              type: 'post',
-              success: (data) => {
-                resolve(data.url)
+            const response = await post(
+              attachmentsUrl, {
+                body: formData
               }
-            })
+            )
+            if (response.ok) {
+              const json = await response.json
+              resolve(json.url)
+            }
           })
         })
       },

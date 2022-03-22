@@ -57,22 +57,24 @@ class Editor {
         let changes = [{ from: range.from, to: range.to, insert: '' }]
         let end = range.from
 
-        Array.from(files).forEach((file) => {
+        Array.from(files).forEach(async (file) => {
           if ((file.size > 10 * 1024 * 1024) || (!["image/jpeg", "image/png", "image/gif"].includes(file.type))) {
             alert(this.options.messages.imageLimit)
           } else {
             let placeholder = `![uploading_${file.name}]()`
             changes.push({ from: range.to, insert: placeholder + "\n" })
             end += (placeholder.length + 1)
-            this.options.uploadImage(file).then((url) => {
-              let pos = this.editorView.state.doc.toString().indexOf(placeholder)
-              if (pos > -1) {
-                let text = `![${file.name}](${url})`
-                this.editorView.dispatch({
-                  changes: { from: pos, to: pos + placeholder.length, insert: text}
-                })
-              }
-            })
+
+            const url = await this.options.uploadImage(file)
+
+            console.log(url)
+            let pos = this.editorView.state.doc.toString().indexOf(placeholder)
+            if (pos > -1) {
+              let text = `![${file.name}](${url})`
+              this.editorView.dispatch({
+                changes: { from: pos, to: pos + placeholder.length, insert: text}
+              })
+            }
           }
         })
 

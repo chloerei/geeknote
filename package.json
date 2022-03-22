@@ -9,7 +9,7 @@
     "@hotwired/turbo-rails": "^7.1.1",
     "@rails/actioncable": "^7.0.1",
     "@rails/activestorage": "^7.0.1",
-    "@rails/ujs": "^7.0.1",
+    "@rails/request.js": "0.0.6",
     "esbuild": "^0.12.27",
     "local-time": "^2.1.0",
     "material-icons": "^1.10.6",

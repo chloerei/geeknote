@@ -47,8 +47,8 @@
         <% end %>
       </div>
       <div class="top-app-bar__action">
-        <%= form_with model: @post, url: account_dashboard_post_path(@account, @post), method: 'delete' do |form| %>
-          <button type="submit" class="button button--text" data-confirm="Are you sure delete permanently?">
+        <%= form_with model: @post, url: account_dashboard_post_path(@account, @post), method: 'delete', data: { 'turbo-confirm': "Are you sure delete permanently?" } do |form| %>
+          <button type="submit" class="button button--text">
             <div class="button__icon">
               <span class="material-icons">delete_forever</span>
             </div>

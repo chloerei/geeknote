@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import Rails from "@rails/ujs"
+import { get } from "@rails/request.js"
 
 export default class extends Controller {
   static targets = ["nextPageLink"]
@@ -27,16 +27,14 @@ export default class extends Controller {
     }
   }
 
-  loadNextPage() {
-    Rails.ajax({
-      url: this.nextPageLinkTarget.href,
-      type: 'get',
-      success: (data) => {
-        let content = data.getElementById(this.element.id)
-        this.nextPageLinkTarget.outerHTML = content.innerHTML
-        this.observeNextPageLink()
-      }
-    })
+  async loadNextPage() {
+    const response = await get(this.nextPageLinkTarget.href)
+    if (response.ok) {
+      const html = await response.html
+      const dom = new DOMParser().parseFromString(html, 'text/html')
+      this.nextPageLinkTarget.outerHTML = dom.getElementById(this.element.id).innerHTML
+      this.observeNextPageLink()
+    }
   }
 
   get scrollableOffsetParent() {
