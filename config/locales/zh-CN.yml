@@ -66,8 +66,8 @@ zh-CN:
       comment:
         content: 评论
       export/status:
-        pending: 等待处理
         completed: 处理完成
+        pending: 等待处理
       member:
         identifier: 账号或邮箱
         role: 角色
@@ -273,6 +273,9 @@ zh-CN:
     profile_updated: 资料已更新。
     removed_from_collection: 已从“%{name}”中移除。
     require_sign_in: 需要登录。
+  mailer:
+    account_mailer:
+      export_complted_subject: 数据导出已完成
   posts:
     index:
       email_settings: 邮件地址设置

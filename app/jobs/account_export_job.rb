@@ -54,6 +54,13 @@ class AccountExportJob < ApplicationJob
     end
 
     export.completed!
-  end
 
+    if export.account.user?
+      AccountMailer.with(account: export.account, user: export.account.owner).export_completed.deliver_later
+    else
+      export.account.members.where(role: ['owner', 'admin']).each do |user|
+        AccountMailer.with(account: export.account, user: user).export_completed.deliver_later
+      end
+    end
+  end
 end
