@@ -1,0 +1,24 @@
+<div id="export-<%= export.id %>" class="display-flex gap-3 padding-y-3 padding-right-3 border-bottom align-items-center">
+  <div class="flex-grow-1">
+    <div class="title-medium">
+      <%= format_time export.created_at %>
+    </div>
+  </div>
+  <% if export.pending? %>
+    <div class="">
+      <%= Export.human_attribute_name "status.#{export.status}" %>
+    </div>
+  <% elsif export.completed? %>
+    <div class="text-muted">
+      <%= number_to_human_size export.file.byte_size %>
+    </div>
+    <a href="<%= url_for(export.file) %>" class="button button--text">
+      <%= t 'common.download' %>
+    </a>
+    <%= form_with url: account_dashboard_settings_export_path(@account, export), method: 'delete', data: { turbo_confirm: t('common.delete_export_confirm') } do %>
+      <button type="submit" class="button button--icon">
+        <span class="material-icons">delete</span>
+      </button>
+    <% end %>
+  <% end %>
+</div>

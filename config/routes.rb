@@ -119,6 +119,7 @@ Rails.application.routes.draw do
         resource :avatar, only: [:update]
         resource :banner_image, only: [:update, :destroy]
         resource :account, only: [:show, :update]
+        resources :exports, only: [:index, :create, :destroy]
       end
     end
   end

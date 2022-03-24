@@ -39,10 +39,15 @@ zh-CN:
         accounts:
           form:
             account_name_warning: 修改账号名会使以往的文章链接、RSS 订阅链接失效，请慎重修改！
+        exports:
+          index:
+            no_data_exported_yet: 还没有创建数据导出。
         home:
           index:
             account_name: 账号名
             account_name_desription: 修改账号名。
+            exports: 导出数据
+            exports_desription: 导出文章、草稿和附件。
             profile: 账号资料
             profile_desription: 头像、简介和其它一般信息。
   activerecord:
@@ -60,6 +65,9 @@ zh-CN:
         published_desc: 发布时间（从晚到早）
       comment:
         content: 评论
+      export/status:
+        pending: 等待处理
+        completed: 处理完成
       member:
         identifier: 账号或邮箱
         role: 角色
@@ -134,6 +142,7 @@ zh-CN:
     contact: 联系
     content_has_expired: 内容已失效
     create_collection: 创建合集
+    create_export: 创建导出
     create_organization: 创建组织
     dark_theme: 深色主题
     dashboard: 管理面版
@@ -142,14 +151,17 @@ zh-CN:
     delete_collection_confirm: 确认删除合集？
     delete_collection_item: 从合集移除
     delete_collection_item_confirm: 确认从合集移除该文章？
+    delete_export_confirm: 确认删除导出内容？
     delete_permanently: 永久删除
     deleted_content: 已删除内容
     detail: 详情
     devise_theme: 设备主题（默认)
     done: 完成
+    download: 下载
     edit: 编辑
     edit_profile: 编辑个人资料
     email: 邮件地址
+    exports: 导出数据
     featured_image: 特色图片
     feedback: 反馈
     follow: 关注
@@ -245,6 +257,8 @@ zh-CN:
     email_update_successful: 邮件地址已更新。
     email_verification_sent: 验证邮件已发送，请检查收件箱。
     email_verification_time_limit: 请等待一分钟后重发邮件。
+    export_task_already_exists: 已有导出任务正在运行。
+    export_task_processing: 导出任务处理中。
     notification_settings_updated: 通知设置已更新。
     password_reset_email_has_been_sent: 重置邮件已发送，请检查收件箱。
     password_reset_email_time_limit: 请等待一分钟后重发邮件。
@@ -270,8 +284,8 @@ zh-CN:
       who_to_follow: 推荐关注
   recaptcha:
     errors:
-      verification_failed: 人机验证失败，请重试。
       recaptcha_unreachable: 人机验证服务端错误，请稍后重试。
+      verification_failed: 人机验证失败，请重试。
   settings:
     emails:
       show:

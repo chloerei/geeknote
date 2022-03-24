@@ -1,13 +1,13 @@
-class AccountBackupJob < ApplicationJob
+class AccountExportJob < ApplicationJob
   queue_as :default
 
-  def perform(backup)
-    return unless backup.pending?
+  def perform(export)
+    return unless export.pending?
 
-    Dir.mktmpdir('backup') do |dir|
+    Dir.mktmpdir('export') do |dir|
       Dir.chdir(dir) do
         Dir.mkdir('drafts')
-        backup.account.posts.draft.find_each do |post|
+        export.account.posts.draft.find_each do |post|
           File.open(File.join(dir, 'drafts', "#{post.id}.md"), 'w') do |file|
             file.write <<~EOF
               ---
@@ -23,7 +23,7 @@ class AccountBackupJob < ApplicationJob
         end
 
         Dir.mkdir('posts')
-        backup.account.posts.published.find_each do |post|
+        export.account.posts.published.find_each do |post|
           File.open(File.join(dir, 'posts', "#{post.id}.md"), 'w') do |file|
             file.write <<~EOF
               ---
@@ -40,20 +40,20 @@ class AccountBackupJob < ApplicationJob
         end
 
         Dir.mkdir('attachments')
-        backup.account.attachments.find_each do |attachment|
+        export.account.attachments.find_each do |attachment|
           Dir.mkdir(File.join('attachments', attachment.key))
           attachment.file.open do |file|
             system 'cp', file.path, File.join(dir, 'attachments', attachment.key, attachment.file.filename.to_s)
           end
         end
 
-        system 'tar', '-czf', 'backup.tar.gz', 'posts', 'drafts', 'attachments'
+        system 'tar', '-czf', 'export.tar.gz', 'posts', 'drafts', 'attachments'
 
-        backup.file.attach io: File.open('backup.tar.gz'), filename: 'backup.tar.gz'
+        export.file.attach io: File.open('export.tar.gz'), filename: 'export.tar.gz'
       end
     end
 
-    backup.completed!
+    export.completed!
   end
 
 end

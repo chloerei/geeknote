@@ -1,4 +1,4 @@
-class Backup < ApplicationRecord
+class Export < ApplicationRecord
   enum status: {
     pending: 0,
     completed: 1

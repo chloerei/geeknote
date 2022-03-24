@@ -1,6 +1,6 @@
-class CreateBackups < ActiveRecord::Migration[7.0]
+class CreateExports < ActiveRecord::Migration[7.0]
   def change
-    create_table :backups do |t|
+    create_table :exports do |t|
       t.belongs_to :account
       t.integer :status, default: 0
 

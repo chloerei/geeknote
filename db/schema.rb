@@ -75,14 +75,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_23_141312) do
     t.index ["user_id"], name: "index_authors_on_user_id"
   end
 
-  create_table "backups", force: :cascade do |t|
-    t.bigint "account_id"
-    t.integer "status", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_backups_on_account_id"
-  end
-
   create_table "collection_items", force: :cascade do |t|
     t.bigint "collection_id"
     t.bigint "post_id"
@@ -121,6 +113,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_23_141312) do
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "exports", force: :cascade do |t|
+    t.bigint "account_id"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_exports_on_account_id"
   end
 
   create_table "follows", force: :cascade do |t|
