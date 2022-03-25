@@ -49,7 +49,7 @@ class AccountExportJob < ApplicationJob
 
         system 'tar', '-czf', 'export.tar.gz', 'posts', 'drafts', 'attachments'
 
-        export.file.attach io: File.open('export.tar.gz'), filename: 'export.tar.gz'
+        export.file.attach io: File.open('export.tar.gz'), filename: "#{export.account.name}_export_#{export.created_at.to_fs :number}.tar.gz"
       end
     end
 
