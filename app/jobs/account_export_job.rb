@@ -13,7 +13,7 @@ class AccountExportJob < ApplicationJob
               ---
               layout: post
               title: #{post.title}
-              author: [#{post.author_users.pluck(:name).join(', ')}]
+              authors: [#{post.author_users.pluck(:name).join(', ')}]
               tags: [#{post.tags.pluck(:name).join(', ')}]
               ---
 
@@ -30,7 +30,7 @@ class AccountExportJob < ApplicationJob
               layout: post
               title: #{post.title}
               date: #{post.published_at.to_s}
-              author: [#{post.author_users.pluck(:name).join(', ')}]
+              authors: [#{post.author_users.pluck(:name).join(', ')}]
               tags: [#{post.tags.pluck(:name).join(', ')}]
               ---
 

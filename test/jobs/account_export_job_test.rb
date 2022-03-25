@@ -37,7 +37,7 @@ class AccountExportDataJobTest < ActiveJob::TestCase
           ---
           layout: post
           title: post title 1
-          author: [User Name]
+          authors: [User Name]
           tags: []
           ---
 
@@ -50,7 +50,7 @@ class AccountExportDataJobTest < ActiveJob::TestCase
           layout: post
           title: post title 2
           date: 2022-01-01 00:00:00 UTC
-          author: [User Name]
+          authors: [User Name]
           tags: [Ruby, JavaScript]
           ---
 
