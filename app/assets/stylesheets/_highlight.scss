@@ -1,10 +1,12 @@
 @mixin light-highlight {
   .typography {
     pre {
+      color: var(--color-on-background);
       background-color: #f8f8f8;
     }
 
     code {
+      color: var(--color-on-background);
       background-color: #f8f8f8;
     }
   }
