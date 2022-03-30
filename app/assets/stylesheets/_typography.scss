@@ -38,7 +38,7 @@
   }
 
   code {
-    font-family: Menlo, Consolas, "Liberation Mono", Courier, monospace;
+    font-family: var(--font-family-monospace);
     padding: var(--space-1) var(--space-2);
     border-radius: var(--space-1);
     font-size: 85%;

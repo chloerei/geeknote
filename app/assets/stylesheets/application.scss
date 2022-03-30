@@ -20,6 +20,8 @@ $material-icons-font-path: '';
 :root {
   --space-4: 32px;
   --space-5: 64px;
+
+  --font-family-monospace: Menlo, Consolas, "Liberation Mono", Courier, "Microsoft YaHei", monospace;
 }
 
 @mixin custom-light-scheme {
