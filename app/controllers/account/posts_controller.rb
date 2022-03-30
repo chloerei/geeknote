@@ -4,7 +4,7 @@ class Account::PostsController < Account::BaseController
   end
 
   def show
-    @post = scoped_posts.find params[:id]
+    @post = @account.posts.published.find params[:id]
     @revision = @post.revisions.published.last
 
     if params[:collection_id] && (collection = Collection.find_by id: params[:collection_id])
