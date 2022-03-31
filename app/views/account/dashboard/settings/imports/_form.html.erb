@@ -1,0 +1,8 @@
+<%= form_with model: @account, url: account_dashboard_settings_import_path, builder: CustomFormBuilder, id: 'settings-form' do |form| %>
+  <div class="margin-bottom-3">
+    <%= form.text_field :feed_url %>
+  </div>
+  <button type="submit" class="button button--filled">
+    <%= t 'common.save_and_fetch' %>
+  </button>
+<% end %>

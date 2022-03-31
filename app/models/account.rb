@@ -11,6 +11,7 @@ class Account < ApplicationRecord
 
   NAME_REGEXP = /\A[a-zA-Z0-9][a-zA-Z0-9\-]{1,61}[a-zA-Z0-9]\z/
   validates :name, uniqueness: true, format: { with: NAME_REGEXP }, presence: true
+  validates :feed_url, format: { with: URI.regexp }, allow_blank: true
 
   NAME_EXCLUSION_LIST = %w(
     admin

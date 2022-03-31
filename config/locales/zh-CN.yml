@@ -54,6 +54,7 @@ zh-CN:
     attributes:
       account:
         name: 账号名
+        feed_url: RSS/Atom Feed URL
       collection:
         description: 描述
         name: 名称

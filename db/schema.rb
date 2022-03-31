@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_23_141312) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_31_082506) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_23_141312) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "followers_count", default: 0
+    t.string "feed_url"
+    t.datetime "feed_fetched_at"
     t.index ["name"], name: "index_accounts_on_name", unique: true
     t.index ["owner_type", "owner_id"], name: "index_accounts_on_owner"
   end
@@ -209,7 +211,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_23_141312) do
     t.boolean "allow_comments", default: true
     t.boolean "featured", default: false
     t.boolean "restricted", default: false
+    t.string "feed_source_url"
     t.index ["account_id"], name: "index_posts_on_account_id"
+    t.index ["feed_source_url"], name: "index_posts_on_feed_source_url"
     t.index ["published_at"], name: "index_posts_on_published_at"
   end
 
