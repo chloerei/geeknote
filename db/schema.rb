@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_31_082506) do
     t.integer "followers_count", default: 0
     t.string "feed_url"
     t.datetime "feed_fetched_at"
+    t.boolean "feed_mark_canonical", default: false
     t.index ["name"], name: "index_accounts_on_name", unique: true
     t.index ["owner_type", "owner_id"], name: "index_accounts_on_owner"
   end
@@ -211,9 +212,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_31_082506) do
     t.boolean "allow_comments", default: true
     t.boolean "featured", default: false
     t.boolean "restricted", default: false
+    t.string "canonical_url"
+    t.string "feed_source_id"
     t.string "feed_source_url"
     t.index ["account_id"], name: "index_posts_on_account_id"
-    t.index ["feed_source_url"], name: "index_posts_on_feed_source_url"
+    t.index ["canonical_url"], name: "index_posts_on_canonical_url", unique: true
+    t.index ["feed_source_id"], name: "index_posts_on_feed_source_id", unique: true
+    t.index ["feed_source_url"], name: "index_posts_on_feed_source_url", unique: true
     t.index ["published_at"], name: "index_posts_on_published_at"
   end
 

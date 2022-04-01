@@ -4,7 +4,7 @@ class Account::Dashboard::Settings::ImportsController < Account::Dashboard::Sett
 
   def update
     if @account.update account_params
-      redirect_to account_dashboard_settings_import_path(@account), notice: I18n.t('flash.feed_url_updated')
+      redirect_to account_dashboard_settings_import_path(@account), notice: I18n.t('flash.import_settings_updated')
     else
       render turbo_stream: turbo_stream.replace('settings-form', partial: 'form')
     end
@@ -13,6 +13,6 @@ class Account::Dashboard::Settings::ImportsController < Account::Dashboard::Sett
   private
 
   def account_params
-    params.require(:account).permit(:feed_url)
+    params.require(:account).permit(:feed_url, :feed_mark_canonical)
   end
 end

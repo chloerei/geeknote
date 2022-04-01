@@ -2,6 +2,21 @@
   <div class="margin-bottom-3">
     <%= form.text_field :feed_url %>
   </div>
+  <div class="margin-bottom-3">
+    <label class="display-flex gap-3">
+      <div class="">
+        <%= form.check_box :feed_mark_canonical %>
+      </div>
+      <div class="flex-grow-1 padding-y-2">
+        <div class="title-medium">
+          <%= t '.feed_mark_canonical_label' %>
+        </div>
+        <div class="body-medium">
+          <%= t '.feed_mark_canonical_description' %>
+        </div>
+      </div>
+    </label>
+  </div>
   <button type="submit" class="button button--filled">
     <%= t 'common.save_and_fetch' %>
   </button>
