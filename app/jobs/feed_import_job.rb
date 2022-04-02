@@ -71,7 +71,7 @@ class FeedImportJob < ApplicationJob
         attachment = account.attachments.new
         attachment.file.attach(io: uri.open, filename: File.basename(uri.path))
         attachment.save!
-        node['src'] = "/attachements/#{attachment.key}/#{attachment.file.filename.to_s}"
+        node['src'] = "/attachments/#{attachment.key}/#{attachment.file.filename.to_s}"
       end
     rescue URI::InvalidURIError
       next

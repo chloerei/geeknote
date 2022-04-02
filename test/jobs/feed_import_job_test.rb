@@ -137,7 +137,7 @@ class FeedImportJobTest < ActiveJob::TestCase
     attachment = account.attachments.last
 
     assert_equal <<~EOF, result
-      ![](/attachements/#{attachment.key}/image.png)
+      ![](/attachments/#{attachment.key}/image.png)
 
     EOF
   end
