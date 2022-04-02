@@ -35,7 +35,7 @@ class FeedImportJobTest < ActiveJob::TestCase
     end
     post = account.posts.last
     assert_equal 'Post Title', post.title
-    assert_equal 'Post content.', post.content
+    assert_equal "Post content.\n\n", post.content
     assert_equal 'urn:uuid:5d563d8d-65f4-44c4-b7d9-f2af8fc012b5', post.feed_source_id
     assert_equal 'https://example.com/2022/01/01/post-title', post.feed_source_url
     assert_equal 'https://example.com/2022/01/01/post-title', post.canonical_url
@@ -76,7 +76,7 @@ class FeedImportJobTest < ActiveJob::TestCase
     end
     post = account.posts.last
     assert_equal 'Post Title', post.title
-    assert_equal 'Post content.', post.content
+    assert_equal "Post content.\n\n", post.content
     assert_equal '5d563d8d-65f4-44c4-b7d9-f2af8fc012b5', post.feed_source_id
     assert_equal 'https://example.com/2022/01/01/post-title', post.feed_source_url
     assert_equal 'https://example.com/2022/01/01/post-title', post.canonical_url
@@ -86,5 +86,65 @@ class FeedImportJobTest < ActiveJob::TestCase
     assert_no_difference "account.posts.count" do
       FeedImportJob.perform_now(account)
     end
+  end
+
+  test "should covert html content to markdown" do
+    result = FeedImportJob.new.convert_content(<<~EOF, "https://example.com/path/to/post")
+      <h2>Headline</h2>
+
+      <p>paragraph <b>bold</b>.</p>
+    EOF
+
+    assert_equal <<~EOF, result
+      ## Headline
+
+      paragraph **bold**.
+
+    EOF
+  end
+
+  test "should convert relative path to absolute url" do
+    result = FeedImportJob.new.convert_content(<<~EOF, "https://example.com/path/to/post")
+      <p><a href="other">inner link</a></p>
+
+      <p><img src="image.png"></p>
+    EOF
+
+    assert_equal <<~EOF, result
+     [inner link](https://example.com/path/to/other)
+
+     ![](https://example.com/path/to/image.png)
+
+    EOF
+  end
+
+  test "should convert absolute path to absolute url" do
+    result = FeedImportJob.new.convert_content(<<~EOF, "https://example.com/path/to/post")
+      <p><a href="/path/to/other">inner link</a></p>
+
+      <p><img src="/path/to/image.png"></p>
+    EOF
+
+    assert_equal <<~EOF, result
+     [inner link](https://example.com/path/to/other)
+
+     ![](https://example.com/path/to/image.png)
+
+    EOF
+  end
+
+  test "should convert content ignore invalid url" do
+    result = FeedImportJob.new.convert_content(<<~EOF, "https://example.com/path/to/post")
+      <p><a href="bad url">inner link</a></p>
+
+      <p><img src="bad url"></p>
+    EOF
+
+    assert_equal <<~EOF, result
+     [inner link](bad%20url)
+
+     ![](bad%20url)
+
+    EOF
   end
 end

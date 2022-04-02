@@ -37,6 +37,9 @@ gem 'turbo-rails'
 # markdown
 gem 'commonmarker'
 
+# Html to Markdown
+gem 'reverse_markdown'
+
 # code highlight
 gem 'rouge'
 
