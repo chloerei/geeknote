@@ -22,7 +22,7 @@ class FeedImportJobTest < ActiveJob::TestCase
           <title>Post Title</title>
           <link type="text/html" href="https://example.com/2022/01/01/post-title" />
           <id>urn:uuid:5d563d8d-65f4-44c4-b7d9-f2af8fc012b5</id>
-          <updated>2022-01-01T00:00:00+00:00</updated>
+          <published>2022-01-01T00:00:00+00:00</published>
           <summary>Post summary.</summary>
           <content>Post content.</content>
         </entry>

@@ -14,7 +14,14 @@ class FeedImportJob < ApplicationJob
     end
 
     entries.each do |entry|
-      account.posts.create!(entry)
+      account.posts.create!(
+        title: entry[:title],
+        content: convert_content(entry[:content], entry[:url]),
+        feed_source_id: entry[:id],
+        feed_source_url: entry[:url],
+        canonical_url: account.feed_mark_canonical? ? entry[:url]: nil,
+        published_at: entry[:published_at]
+      )
     rescue ActiveRecord::RecordNotUnique
       next
     end
@@ -24,15 +31,12 @@ class FeedImportJob < ApplicationJob
     xml = Nokogiri::XML(body)
 
     xml.css('entry').map do |entry|
-      feed_source_url = entry.at('link[type="text/html"]').attribute('href')
-
       {
+        id: entry.at('id').content,
         title: entry.at('title').content,
-        content: convert_content(entry.at('content').content, feed_source_url),
-        feed_source_id: entry.at('id').content,
-        feed_source_url: feed_source_url,
-        canonical_url: (account.feed_mark_canonical? ? feed_source_url : nil),
-        published_at: DateTime.parse(entry.at('updated').content)
+        content: entry.at('content').content,
+        url: entry.at('link[type="text/html"]').attribute('href'),
+        published_at: DateTime.parse(entry.at('published').content)
       }
     end
   end
@@ -41,14 +45,11 @@ class FeedImportJob < ApplicationJob
     xml = Nokogiri::XML(body)
 
     xml.css('item').map do |item|
-      feed_source_url = item.at('link').content
-
       {
+        id: item.at('guid').content,
         title: item.at('title').content,
-        content: convert_content(item.at('description').content, feed_source_url),
-        feed_source_id: item.at('guid').content,
-        feed_source_url: feed_source_url,
-        canonical_url: (account.feed_mark_canonical? ? feed_source_url : nil),
+        content: item.at('description').content,
+        url: item.at('link').content,
         published_at: DateTime.parse(item.at('pubDate').content)
       }
     end
