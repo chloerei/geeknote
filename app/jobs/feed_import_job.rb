@@ -16,7 +16,7 @@ class FeedImportJob < ApplicationJob
     entries.each do |entry|
       account.posts.create!(
         title: entry[:title],
-        content: convert_content(entry[:content], entry[:url]),
+        content: convert_content(entry[:content], entry[:url], account),
         feed_source_id: entry[:id],
         feed_source_url: entry[:url],
         canonical_url: account.feed_mark_canonical? ? entry[:url]: nil,
@@ -55,7 +55,7 @@ class FeedImportJob < ApplicationJob
     end
   end
 
-  def convert_content(html, url_base)
+  def convert_content(html, url_base, account)
     doc = Nokogiri::HTML.fragment(html)
 
     doc.css("a").each do |node|
@@ -65,7 +65,14 @@ class FeedImportJob < ApplicationJob
     end
 
     doc.css("img").each do |node|
-      node['src'] = URI.join(url_base, node['src'])
+      uri = URI.join(url_base, node['src'])
+
+      if uri.scheme.in? %w(http https)
+        attachment = account.attachments.new
+        attachment.file.attach(io: uri.open, filename: File.basename(uri.path))
+        attachment.save!
+        node['src'] = "/attachements/#{attachment.key}/#{attachment.file.filename.to_s}"
+      end
     rescue URI::InvalidURIError
       next
     end

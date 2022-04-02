@@ -89,7 +89,9 @@ class FeedImportJobTest < ActiveJob::TestCase
   end
 
   test "should covert html content to markdown" do
-    result = FeedImportJob.new.convert_content(<<~EOF, "https://example.com/path/to/post")
+    account = create(:user_account)
+
+    result = FeedImportJob.new.convert_content(<<~EOF, "https://example.com/path/to/post", account)
       <h2>Headline</h2>
 
       <p>paragraph <b>bold</b>.</p>
@@ -103,47 +105,55 @@ class FeedImportJobTest < ActiveJob::TestCase
     EOF
   end
 
-  test "should convert relative path to absolute url" do
-    result = FeedImportJob.new.convert_content(<<~EOF, "https://example.com/path/to/post")
-      <p><a href="other">inner link</a></p>
+  test "should convert relative link to absolute link" do
+    account = create(:user_account)
 
+    result = FeedImportJob.new.convert_content(<<~EOF, "https://example.com/path/to/post", account)
+      <p><a href="other">link</a></p>
+      <p><a href="/path/to/other">link</a></p>
+      <p><a href="mailto:user@example.com">link</a></p>
+    EOF
+
+    assert_equal <<~EOF, result
+     [link](https://example.com/path/to/other)
+
+     [link](https://example.com/path/to/other)
+
+     [link](mailto:user@example.com)
+
+    EOF
+  end
+
+  test "should convert image to attachment" do
+    account = create(:user_account)
+
+    stub_request(:get, "https://example.com/path/to/image.png").
+      to_return(body: "")
+
+    result = FeedImportJob.new.convert_content(<<~EOF, "https://example.com/path/to/post", account)
       <p><img src="image.png"></p>
     EOF
 
-    assert_equal <<~EOF, result
-     [inner link](https://example.com/path/to/other)
+    attachment = account.attachments.last
 
-     ![](https://example.com/path/to/image.png)
+    assert_equal <<~EOF, result
+      ![](/attachements/#{attachment.key}/image.png)
 
     EOF
   end
 
-  test "should convert absolute path to absolute url" do
-    result = FeedImportJob.new.convert_content(<<~EOF, "https://example.com/path/to/post")
-      <p><a href="/path/to/other">inner link</a></p>
+  test "should convert ignore danger url" do
+    account = create(:user_account)
 
-      <p><img src="/path/to/image.png"></p>
+    result = FeedImportJob.new.convert_content(<<~EOF, "file://", account)
+      <p><img src="| ls"></p>
+      <p><img src="/etc/passwd"></p>
     EOF
 
     assert_equal <<~EOF, result
-     [inner link](https://example.com/path/to/other)
+     ![](%7C%20ls)
 
-     ![](https://example.com/path/to/image.png)
-
-    EOF
-  end
-
-  test "should convert content ignore invalid url" do
-    result = FeedImportJob.new.convert_content(<<~EOF, "https://example.com/path/to/post")
-      <p><a href="bad url">inner link</a></p>
-
-      <p><img src="bad url"></p>
-    EOF
-
-    assert_equal <<~EOF, result
-     [inner link](bad%20url)
-
-     ![](bad%20url)
+     ![](/etc/passwd)
 
     EOF
   end
