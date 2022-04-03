@@ -91,4 +91,8 @@ class Account < ApplicationRecord
   def description
     user? ? owner.bio : owner.description
   end
+
+  def feed_url=(value)
+    write_attribute :feed_url, value.presence
+  end
 end

@@ -26,6 +26,7 @@ gem 'image_processing', '~> 1.2'
 # Job Queue
 gem 'sidekiq', '~> 6.0'
 gem 'hiredis'
+gem 'sidekiq-cron', '~> 1.2'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
