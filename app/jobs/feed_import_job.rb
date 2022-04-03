@@ -68,10 +68,19 @@ class FeedImportJob < ApplicationJob
       uri = URI.join(url_base, node['src'])
 
       if uri.scheme.in? %w(http https)
-        attachment = account.attachments.new
-        attachment.file.attach(io: uri.open, filename: File.basename(uri.path))
-        attachment.save!
-        node['src'] = "/attachments/#{attachment.key}/#{attachment.file.filename.to_s}"
+        node['src'] = uri
+
+        begin
+          file = uri.open
+          if file.size < 10 * 1024 * 1024
+            attachment = account.attachments.new
+            attachment.file.attach(io: file, filename: File.basename(uri.path))
+            attachment.save!
+            node['src'] = "/attachments/#{attachment.key}/#{attachment.file.filename.to_s}"
+          end
+        rescue OpenURI::HTTPError
+          next
+        end
       end
     rescue URI::InvalidURIError
       next
