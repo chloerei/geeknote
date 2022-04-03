@@ -71,4 +71,9 @@ class User < ApplicationRecord
   def reset_email_veification
     self.email_verified_at = nil
   end
+
+  ADMIN_EMAILS = ENV.fetch('ADMIN_EMAILS', '').split(',')
+  def admin?
+    ADMIN_EMAILS.include?(email)
+  end
 end

@@ -1,3 +1,14 @@
+require 'sidekiq/web'
+require 'sidekiq/cron/web'
+
+class AdminConstraint
+  def matches?(request)
+    return false unless request.cookies['auth_token']
+    user = User.find_by auth_token: request.cookies['auth_token']
+    user && user.admin?
+  end
+end
+
 Rails.application.routes.draw do
   root to: 'posts#index'
 
@@ -44,6 +55,10 @@ Rails.application.routes.draw do
       resource :verification, only: [:show, :update]
       resource :unsubscribe, only: [:show, :update]
     end
+  end
+
+  namespace :admin do
+    mount Sidekiq::Web => "/sidekiq", constraints: AdminConstraint.new
   end
 
   scope '/:account_name', module: 'account', as: :account do
