@@ -73,14 +73,18 @@ class FeedImportJob < ApplicationJob
         node['src'] = uri
 
         begin
-          file = uri.open
-          if file.size < 10 * 1024 * 1024
+          response = RestClient.head uri.to_s
+
+          if response.headers[:content_length].to_i < 10 * 1024 * 1024
+            raw = RestClient::Request.execute method: :get, url: uri.to_s, raw_response: true
             attachment = account.attachments.new
-            attachment.file.attach(io: file, filename: File.basename(uri.path))
+            attachment.file.attach(io: raw.file, filename: File.basename(uri.path))
             attachment.save!
             node['src'] = "/attachments/#{attachment.key}/#{attachment.file.filename.to_s}"
           end
-        rescue OpenURI::HTTPError
+        rescue RestClient::Exception,
+               SystemCallError,
+               OpenSSL::SSL::SSLError
           next
         end
       end

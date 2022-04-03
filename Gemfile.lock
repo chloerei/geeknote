@@ -357,6 +357,7 @@ DEPENDENCIES
   rails-i18n (~> 7.0.1)
   recaptcha
   redis (~> 4.0)
+  rest-client
   reverse_markdown
   rouge
   selenium-webdriver

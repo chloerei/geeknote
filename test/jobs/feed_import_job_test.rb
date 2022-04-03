@@ -127,6 +127,8 @@ class FeedImportJobTest < ActiveJob::TestCase
   test "should convert image to attachment" do
     account = create(:user_account)
 
+    stub_request(:head, "https://example.com/path/to/image.png").
+      to_return(headers: { 'Content-Length': '0' })
     stub_request(:get, "https://example.com/path/to/image.png").
       to_return(body: "")
 
