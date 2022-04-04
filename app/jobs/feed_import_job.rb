@@ -1,5 +1,5 @@
 class FeedImportJob < ApplicationJob
-  queue_as :default
+  queue_as :low
 
   def perform(account)
     body = Net::HTTP.get(URI(account.feed_url))
