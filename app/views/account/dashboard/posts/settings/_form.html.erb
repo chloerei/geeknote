@@ -34,6 +34,9 @@
     </div>
   <% end %>
   <div class="margin-bottom-3">
+    <%= form.text_field :canonical_url, helper_text: t('.canonical_url_hepler_text') %>
+  </div>
+  <div class="margin-bottom-3">
     <label class="display-flex gap-2 align-items-center">
       <%= form.check_box :allow_comments %>
       <div class="">

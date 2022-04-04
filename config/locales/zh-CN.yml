@@ -35,6 +35,9 @@ zh-CN:
           publish_title: 发布文章
           update_description: 将内容修改发布到公众可见。
           update_title: 发布更新
+        settings:
+          form:
+            canonical_url_hepler_text: 如果文章曾经发布在别处，希望搜索引擎索引原先的文章地址为正式地址，则将原文地址填写在此处。
       settings:
         accounts:
           form:
@@ -90,6 +93,7 @@ zh-CN:
         name: 名称
       post:
         allow_comments: 允许评论
+        canonical_url: Canonical URL
         excerpt: 摘要
         featured: 置顶显示
       post/status:

@@ -21,9 +21,9 @@ class Account::Dashboard::Posts::SettingsController < Account::Dashboard::Posts:
 
   def settings_params
     if @account.user?
-      params.require(:post).permit(:excerpt, :allow_comments, :featured, tag_list: [])
+      params.require(:post).permit(:excerpt, :allow_comments, :featured, :canonical_url, tag_list: [])
     else
-      params.require(:post).permit(:excerpt, :allow_comments, :featured, tag_list: [], author_list: [])
+      params.require(:post).permit(:excerpt, :allow_comments, :featured, :canonical_url, tag_list: [], author_list: [])
     end
   end
 end
