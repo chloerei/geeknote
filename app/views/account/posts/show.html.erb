@@ -16,7 +16,7 @@
     <meta name="twitter:image" content="<%= featured_image_url @post.featured_image %>">
   <% end %>
 
-  <link rel="canonical" href="<%= account_post_url(@account, @post) %>">
+  <link rel="canonical" href="<%= @post.canonical_url || account_post_url(@account, @post) %>">
 <% end %>
 
 <div class="container container--post padding-3">
@@ -48,37 +48,13 @@
               <% if @post.published_at %>
                 <%= format_time @post.published_at %>
               <% end %>
+              <% if @post.canonical_url %>
+                &centerdot; <%= t 'common.originally_published_at' %> <%= link_to URI(@post.canonical_url).host, @post.canonical_url %>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
-      <div class="">
-        <%= render 'account/posts/share_button', post: @post %>
-      </div>
-      <div class="visible-to-user">
-        <%= render 'account/posts/collections/button', post: @post %>
-      </div>
-      <% if current_member %>
-        <% if current_member.can_edit_post?(@post) %>
-          <div class="">
-            <div class="dropdown" data-controller="dropdown">
-              <button type="button" class="button button--icon" data-action="dropdown#toggle">
-                <span class="material-icons">more_horiz</span>
-              </button>
-              <div class="dropdown__container dropdown__container--top-right">
-                    <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="dropdown__item">
-                      <div class="dropdown__item__icon">
-                        <span class="material-icons">edit</span>
-                      </div>
-                      <div class="dropdown__item__text">
-                        <%= t 'common.edit' %>
-                      </div>
-                    </a>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
     </div>
 
     <div class="post__content typography margin-bottom">

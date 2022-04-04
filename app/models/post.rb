@@ -78,4 +78,8 @@ class Post < ApplicationRecord
       )
     end
   end
+
+  def canonical_url=(value)
+    write_attribute :canonical_url, value.presence
+  end
 end
