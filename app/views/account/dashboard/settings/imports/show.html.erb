@@ -17,12 +17,15 @@
     <span class="material-icons">chevron_right</span>
     <%= t 'common.import' %>
   </div>
-</div>
 
-<div class="container container--small padding-3">
-  <div class="padding-bottom-3 border-bottom margin-bottom-3">
-    <%= render 'form' %>
+  <div class="container container--small">
+    <h2 class="headline-medium margin-top-0 margin-bottom-4">
+      <%= t 'common.import_from_rss_atom' %>
+    </h2>
+    <div class="padding-bottom-3 border-bottom margin-bottom-3">
+      <%= render 'form' %>
+    </div>
+
+    <%= render 'rules' %>
   </div>
-
-  <%= render 'rules' %>
 </div>

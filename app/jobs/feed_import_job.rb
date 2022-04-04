@@ -24,6 +24,8 @@ class FeedImportJob < ApplicationJob
         )
       end
     end
+
+    account.update feed_fetched_at: Time.now
   end
 
   def parse_as_atom(account, body)

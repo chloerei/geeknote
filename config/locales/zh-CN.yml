@@ -119,14 +119,14 @@ zh-CN:
           attributes:
             identifier:
               invalid_format: 不是有效的账号名或邮箱地址。
-        user:
-          attributes:
-            current_password:
-              not_match: 密码错误
         post:
           attributes:
             canonical_url:
               invalid: 不是有效的 URL。
+        user:
+          attributes:
+            current_password:
+              not_match: 密码错误
   collection:
     visibility_private_description: 只有账号成员可以查看。
     visibility_private_label: 私有
@@ -187,7 +187,9 @@ zh-CN:
     hide_changes: 隐藏修改
     history_revisions: 历史版本
     import: 导入
+    import_from_rss_atom: 从 RSS/Atom 导入
     invite_member: 邀请成员
+    last_fetched_at: 最后抓取于
     latest: 最新
     light_theme: 浅色主题
     liked_posts: 赞过
