@@ -29,7 +29,7 @@ class FeedImportJob < ApplicationJob
   def parse_as_atom(account, body)
     xml = Nokogiri::XML(body)
 
-    xml.css('entry').map do |entry|
+    xml.css('entry').take(100).map do |entry|
       {
         id: entry.at_css('id')&.content,
         title: entry.at_css('title')&.content,
@@ -43,7 +43,7 @@ class FeedImportJob < ApplicationJob
   def parse_as_rss(account, body)
     xml = Nokogiri::XML(body)
 
-    xml.css('item').map do |item|
+    xml.css('item').take(100).map do |item|
       {
         id: item.at_css('guid')&.content,
         title: item.at_css('title')&.content,
