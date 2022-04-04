@@ -17,7 +17,8 @@ class Post < ApplicationRecord
     trashed: 2
   }
 
-  validates :canonical_url, format: { with: URI.regexp(['http', 'https']) }
+  validates :canonical_url, format: { with: URI.regexp(['http', 'https']) }, allow_blank: true
+  validates :feed_source_id, uniqueness: { scope: :account_id }, allow_blank: true
 
   scope :following_by, -> (user) {
     joins(:authors).where(account: user.followings).or(where(authors: { user: user.following_users } )).distinct

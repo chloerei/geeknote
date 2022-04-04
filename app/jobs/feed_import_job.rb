@@ -19,13 +19,10 @@ class FeedImportJob < ApplicationJob
           title: entry[:title],
           content: convert_content(entry[:content], entry[:url], account),
           feed_source_id: entry[:id],
-          feed_source_url: entry[:url],
           canonical_url: account.feed_mark_canonical? ? entry[:url]: nil,
           published_at: entry[:published_at]
         )
       end
-    rescue ActiveRecord::RecordNotUnique
-      next
     end
   end
 

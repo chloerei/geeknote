@@ -214,11 +214,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_31_082506) do
     t.boolean "restricted", default: false
     t.string "canonical_url"
     t.string "feed_source_id"
-    t.string "feed_source_url"
     t.index ["account_id"], name: "index_posts_on_account_id"
-    t.index ["canonical_url"], name: "index_posts_on_canonical_url", unique: true
-    t.index ["feed_source_id"], name: "index_posts_on_feed_source_id", unique: true
-    t.index ["feed_source_url"], name: "index_posts_on_feed_source_url", unique: true
+    t.index ["feed_source_id", "account_id"], name: "index_posts_on_feed_source_id_and_account_id", unique: true, where: "(feed_source_id IS NOT NULL)"
     t.index ["published_at"], name: "index_posts_on_published_at"
   end
 

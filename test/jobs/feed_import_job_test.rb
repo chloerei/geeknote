@@ -37,7 +37,6 @@ class FeedImportJobTest < ActiveJob::TestCase
     assert_equal 'Post Title', post.title
     assert_equal "Post content.\n\n", post.content
     assert_equal 'urn:uuid:5d563d8d-65f4-44c4-b7d9-f2af8fc012b5', post.feed_source_id
-    assert_equal 'https://example.com/2022/01/01/post-title', post.feed_source_url
     assert_equal 'https://example.com/2022/01/01/post-title', post.canonical_url
     assert_equal DateTime.new(2022, 1, 1), post.published_at
 
@@ -78,7 +77,6 @@ class FeedImportJobTest < ActiveJob::TestCase
     assert_equal 'Post Title', post.title
     assert_equal "Post content.\n\n", post.content
     assert_equal '5d563d8d-65f4-44c4-b7d9-f2af8fc012b5', post.feed_source_id
-    assert_equal 'https://example.com/2022/01/01/post-title', post.feed_source_url
     assert_equal 'https://example.com/2022/01/01/post-title', post.canonical_url
     assert_equal DateTime.new(2022, 1, 1), post.published_at
 
