@@ -17,6 +17,8 @@ class Post < ApplicationRecord
     trashed: 2
   }
 
+  validates :canonical_url, format: { with: URI.regexp(['http', 'https']) }
+
   scope :following_by, -> (user) {
     joins(:authors).where(account: user.followings).or(where(authors: { user: user.following_users } )).distinct
   }

@@ -15,7 +15,7 @@ class FeedImportJob < ApplicationJob
 
     entries.each do |entry|
       if !account.posts.exists?(feed_source_id: entry[:id])
-        account.posts.create!(
+        account.posts.create(
           title: entry[:title],
           content: convert_content(entry[:content], entry[:url], account),
           feed_source_id: entry[:id],

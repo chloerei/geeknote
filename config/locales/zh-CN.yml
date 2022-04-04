@@ -123,6 +123,10 @@ zh-CN:
           attributes:
             current_password:
               not_match: 密码错误
+        post:
+          attributes:
+            canonical_url:
+              invalid: 不是有效的 URL。
   collection:
     visibility_private_description: 只有账号成员可以查看。
     visibility_private_label: 私有
