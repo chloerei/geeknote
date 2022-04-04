@@ -26,6 +26,10 @@ class FeedImportJob < ApplicationJob
     end
 
     account.update feed_fetched_at: Time.now
+  rescue RestClient::Exception,
+         SystemCallError,
+         OpenSSL::SSL::SSLError
+    # ignore
   end
 
   def parse_as_atom(account, body)

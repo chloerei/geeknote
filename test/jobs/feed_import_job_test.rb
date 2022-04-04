@@ -88,6 +88,16 @@ class FeedImportJobTest < ActiveJob::TestCase
     end
   end
 
+  test "ignore network error when fetch feed" do
+    account = create(:user_account, feed_url: 'https://example.com/feed.xml', feed_mark_canonical: true)
+
+    stub_request(:get, 'https://example.com/feed.xml').to_return(status: 404, body: '')
+
+    assert_nothing_raised do
+      FeedImportJob.perform_now(account)
+    end
+  end
+
   test "should covert html content to markdown" do
     account = create(:user_account)
 
