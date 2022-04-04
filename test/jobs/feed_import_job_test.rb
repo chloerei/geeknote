@@ -39,6 +39,7 @@ class FeedImportJobTest < ActiveJob::TestCase
     assert_equal 'urn:uuid:5d563d8d-65f4-44c4-b7d9-f2af8fc012b5', post.feed_source_id
     assert_equal 'https://example.com/2022/01/01/post-title', post.canonical_url
     assert_equal DateTime.new(2022, 1, 1), post.published_at
+    assert post.author_users.include?(account.owner)
     assert_not_nil account.feed_fetched_at
 
     # Will not create duplicate post
@@ -80,6 +81,7 @@ class FeedImportJobTest < ActiveJob::TestCase
     assert_equal '5d563d8d-65f4-44c4-b7d9-f2af8fc012b5', post.feed_source_id
     assert_equal 'https://example.com/2022/01/01/post-title', post.canonical_url
     assert_equal DateTime.new(2022, 1, 1), post.published_at
+    assert post.author_users.include?(account.owner)
     assert_not_nil account.feed_fetched_at
 
     # Will not create duplicate post

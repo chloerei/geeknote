@@ -15,13 +15,17 @@ class FeedImportJob < ApplicationJob
 
     entries.each do |entry|
       if !account.posts.exists?(feed_source_id: entry[:id])
-        account.posts.create(
+        post = account.posts.create(
           title: entry[:title],
           content: convert_content(entry[:content], entry[:url], account),
           feed_source_id: entry[:id],
           canonical_url: account.feed_mark_canonical? ? entry[:url]: nil,
           published_at: entry[:published_at]
         )
+
+        if account.user?
+          post.author_users << account.owner
+        end
       end
     end
 

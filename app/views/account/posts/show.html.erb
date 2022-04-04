@@ -31,9 +31,11 @@
     <div class="display-flex gap-2 align-items-center margin-y-4">
       <div class="flex-grow-1">
         <div class="display-flex align-items-center gap-3">
-          <a href="<%= account_root_path(@post.account) %>" class="avatar">
-            <%= avatar_image_tag @post.account.owner.avatar %>
-          </a>
+          <div class="flex-shrink-0">
+            <a href="<%= account_root_path(@post.account) %>" class="avatar">
+              <%= avatar_image_tag @post.account.owner.avatar %>
+            </a>
+          </div>
           <div class="">
             <div class="">
               <a href="<%= account_root_path(@post.account) %>" class="link-text"><b><%= @post.account.owner.name %></b></a>

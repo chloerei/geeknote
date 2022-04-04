@@ -49,15 +49,15 @@ zh-CN:
           index:
             account_name: 账号名
             account_name_desription: 修改账号名。
-            exports: 导出数据
-            exports_desription: 导出文章、草稿和附件。
+            exports: 导出
+            exports_desription: 导出 Markdown 格式的文章和附件。
             import: 导入
             import_desription: 从 RSS/Atom Feed 导入文章。
             profile: 账号资料
             profile_desription: 头像、简介和其它一般信息。
         imports:
           form:
-            feed_mark_canonical_description: 如果选中，将设置 Feed 的文章 URL 为 Canonical Link。
+            feed_mark_canonical_description: 设置 Feed 的文章 URL 为 Canonical Link。希望原博客作为正式地址时勾选此项。
             feed_mark_canonical_label: 设置 Canonical Link
   activerecord:
     attributes:
