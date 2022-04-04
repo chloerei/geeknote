@@ -2,7 +2,7 @@ class FeedImportJob < ApplicationJob
   queue_as :low
 
   def perform(account)
-    body = Net::HTTP.get(URI(account.feed_url))
+    body = RestClient.get(account.feed_url).body
 
     entries = case body
     when /<feed/
@@ -31,11 +31,11 @@ class FeedImportJob < ApplicationJob
 
     xml.css('entry').map do |entry|
       {
-        id: entry.at('id').content,
-        title: entry.at('title').content,
-        content: entry.at('content').content,
-        url: entry.at('link[type="text/html"]').attribute('href'),
-        published_at: DateTime.parse(entry.at('published').content)
+        id: entry.at_css('id')&.content,
+        title: entry.at_css('title')&.content,
+        content: entry.at_css('content')&.content,
+        url: entry.at_css('link[type="text/html"]')&.attribute('href'),
+        published_at: (DateTime.parse(entry.at_css('published')&.content) rescue nil)
       }
     end
   end
@@ -45,11 +45,11 @@ class FeedImportJob < ApplicationJob
 
     xml.css('item').map do |item|
       {
-        id: item.at('guid').content,
-        title: item.at('title').content,
-        content: item.at('description').content,
-        url: item.at('link').content,
-        published_at: DateTime.parse(item.at('pubDate').content)
+        id: item.at_css('guid')&.content,
+        title: item.at_css('title')&.content,
+        content: item.at_css('description')&.content,
+        url: item.at_css('link')&.content,
+        published_at: (DateTime.parse(item.at_css('pubDate')&.content) rescue nil)
       }
     end
   end
