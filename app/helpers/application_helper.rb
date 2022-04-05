@@ -145,4 +145,11 @@ module ApplicationHelper
   def diff_html(from, to)
     sanitize Diffy::Diff.new(from.to_s, to.to_s, allow_empty_diff: false).to_s(:html)
   end
+
+  def link_to_canonical_url(url)
+    uri = URI.parse(url) rescue nil
+    if uri.kind_of?(URI::HTTP) || uri.kind_of?(URI::HTTPS)
+      link_to uri.host, uri.to_s
+    end
+  end
 end

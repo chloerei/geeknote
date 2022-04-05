@@ -51,7 +51,7 @@
                 <%= format_time @post.published_at %>
               <% end %>
               <% if @post.canonical_url %>
-                &centerdot; <%= t 'common.originally_published_at' %> <%= link_to URI(@post.canonical_url).host, @post.canonical_url %>
+                &centerdot; <%= t 'common.originally_published_at' %> <%= link_to_canonical_url @post.canonical_url %>
               <% end %>
             </div>
           </div>
