@@ -17,7 +17,7 @@ class Post < ApplicationRecord
     trashed: 2
   }
 
-  validates :canonical_url, format: { with: URI.regexp(['http', 'https']) }, allow_blank: true
+  validates :canonical_url, url: true, allow_blank: true
   validates :feed_source_id, uniqueness: { scope: :account_id }, allow_blank: true
 
   scope :following_by, -> (user) {

@@ -115,6 +115,8 @@ zh-CN:
           attributes:
             name:
               invalid: 只能使用大小写字母、数字和 - 号，不少于 3 字符。
+            feed_url:
+              invalid_url: 不是有效的 URL。
         member:
           attributes:
             identifier:
@@ -122,7 +124,7 @@ zh-CN:
         post:
           attributes:
             canonical_url:
-              invalid: 不是有效的 URL。
+              invalid_url: 不是有效的 URL。
         user:
           attributes:
             current_password:

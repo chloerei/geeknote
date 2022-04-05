@@ -57,4 +57,14 @@ class PostTest < ActiveSupport::TestCase
       assert_equal 'published', post.revisions.last.status
     end
   end
+
+  test "should validate canonical_url is valid URL" do
+    post = create(:post)
+    post.update(canonical_url: "https://example.com")
+    assert post.valid?
+
+    post.update(canonical_url: "javascript:alert('https://example.com')")
+    assert_not post.valid?
+    assert post.errors.added?(:canonical_url, :invalid_url)
+  end
 end
