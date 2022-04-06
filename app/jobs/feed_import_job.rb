@@ -68,7 +68,9 @@ class FeedImportJob < ApplicationJob
     doc = Nokogiri::HTML.fragment(html)
 
     doc.css("a").each do |node|
-      node['href'] = URI.join(url_base, node['href'])
+      if node['href'] !~ /\A#/
+        node['href'] = URI.join(url_base, node['href'])
+      end
     rescue URI::InvalidURIError
       next
     end
