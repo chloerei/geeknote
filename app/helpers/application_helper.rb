@@ -128,12 +128,12 @@ module ApplicationHelper
     if post.excerpt.present?
       truncate post.excerpt, length: 140
     else
-      truncate sanitize(markdown_render(post.content), tags: []), length: 140
+      truncate strip_tags(markdown_render(post.content)), length: 140, escape: false
     end
   end
 
   def comment_summary(comment)
-    truncate sanitize(markdown_render(comment.content), tags: []), length: 100
+    truncate strip_tags(markdown_render(comment.content)), length: 100, escape: false
   end
 
   def format_time(time)
