@@ -4,11 +4,12 @@ class FeedImportJob < ApplicationJob
   def perform(account)
     body = RestClient.get(account.feed_url).body
 
+    # parse as rss first because feedburner use <feedburner tag and atom namespace but can't parse as atom
     entries = case body
-    when /<feed/
-      parse_as_atom(account, body)
     when /<rss/
       parse_as_rss(account, body)
+    when /<feed/
+      parse_as_atom(account, body)
     else
       []
     end
