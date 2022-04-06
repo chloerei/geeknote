@@ -44,7 +44,7 @@ class FeedImportJob < ApplicationJob
         id: entry.at_css('id')&.content,
         title: entry.at_css('title')&.content,
         content: entry.at_css('content')&.content,
-        url: entry.at_css('link[type="text/html"]')&.attribute('href'),
+        url: entry.at_css('link')&.attribute('href'),
         published_at: (DateTime.parse(entry.at_css('published')&.content) rescue nil)
       }
     end
