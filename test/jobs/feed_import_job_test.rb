@@ -125,6 +125,7 @@ class FeedImportJobTest < ActiveJob::TestCase
       <p><a href="/path/to/other">link</a></p>
       <p><a href="mailto:user@example.com">link</a></p>
       <p><a href="#anchor">link</a></p>
+      <p><a id="link">link</a></p>
     EOF
 
     assert_equal <<~EOF, result
@@ -135,6 +136,8 @@ class FeedImportJobTest < ActiveJob::TestCase
      [link](mailto:user@example.com)
 
      [link](#anchor)
+
+     link
 
     EOF
   end
