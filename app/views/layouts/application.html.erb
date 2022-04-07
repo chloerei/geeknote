@@ -12,8 +12,12 @@
         </a>
       </div>
       <div class="top-app-bar__action">
-        <a href="<%= notifications_path %>" class="button button--icon <%= 'notification-unread' if current_user.notifications.unread.count > 0 %>">
+        <a href="<%= notifications_path %>" class="button button--icon">
           <span class="material-icons">notifications</span>
+          <% if current_user.notifications.unread.any? %>
+            <div class="badge badge--small margin-1">
+            </div>
+          <% end %>
         </a>
       </div>
       <div class="top-app-bar__action">
