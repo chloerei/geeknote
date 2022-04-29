@@ -1,6 +1,6 @@
 ### base stage ###
 
-FROM rubylang/ruby:3.1 AS base
+FROM rubylang/ruby:3.1.2-focal AS base
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   curl \
