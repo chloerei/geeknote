@@ -1,12 +1,17 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
 
+  rescue_from StandardError, with: :render_server_error
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   private
 
   def render_not_found
-    render file: Rails.root.join('public/404.html'), layout: false, status: :not_found
+    render 'errors/404', layout: 'base', status: 404
+  end
+
+  def render_server_error
+    render 'errors/500', layout: 'base', status: 500
   end
 
   def require_sign_in
