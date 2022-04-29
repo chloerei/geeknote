@@ -10,7 +10,15 @@ class ApplicationController < ActionController::Base
     render 'errors/404', layout: 'base', status: 404
   end
 
-  def render_server_error
+  def render_server_error(exception)
+    if defined?(Sentry)
+      Sentry.capture_exception(exception)
+    end
+
+    if defined?(NewRelic)
+      NewRelic::Agent.notice_error(exception)
+    end
+
     render 'errors/500', layout: 'base', status: 500
   end
 
