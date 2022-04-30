@@ -7,7 +7,10 @@ class ApplicationController < ActionController::Base
   private
 
   def render_not_found
-    render 'errors/404', layout: 'base', status: 404
+    respond_to do |format|
+      format.html { render 'errors/404', layout: 'base', status: 404 }
+      format.json { render json: { status: 404, error: 'Not Found' }, status: 404 }
+    end
   end
 
   def render_server_error(exception)
@@ -19,7 +22,10 @@ class ApplicationController < ActionController::Base
       NewRelic::Agent.notice_error(exception)
     end
 
-    render 'errors/500', layout: 'base', status: 500
+    respond_to do |format|
+      format.html { render 'errors/500', layout: 'base', status: 500 }
+      format.json { render json: { status: 500, error: 'Internal Server Error' }, status: 500 }
+    end
   end
 
   def require_sign_in
