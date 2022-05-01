@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <title><%= "#{@page_title} - " if @page_title %>GeekNote</title>
     <meta name="description" content="<%= t 'common.site_description' %>">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="<%= asset_path("favicon.png") %>">
 
     <%= csrf_meta_tags %>
