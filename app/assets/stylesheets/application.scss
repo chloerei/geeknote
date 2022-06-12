@@ -34,6 +34,8 @@ $material-icons-font-path: '';
     $error: #DB3229
   );
 
+  --color-background: #f1f1f1;
+  --color-surface: #ffffff;
   --color-outline: #ccc;
 }
 
@@ -93,9 +95,62 @@ body[data-color-scheme="dark"] {
   max-width: 800px;
 }
 
+.background-white {
+  background-color: white;
+}
+
+.navbar {
+  width: 240px;
+}
+
 .sidebar {
   width: 320px;
   flex-shrink: 0;
+}
+
+.top-app-bar__container {
+  display: flex;
+  flex-grow: 1;
+}
+
+.card--surface {
+  background-color: var(--color-surface);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav__item {
+  padding: 8px 16px;
+  display: flex;
+  gap: 8px;
+  text-decoration: none;
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  align-items: center;
+  border-radius: 28px;
+  position: relative;
+  overflow: hidden;
+  color: var(--color-on-surface-variant);
+  outline: none;
+  background-color: var(--color-surface);
+  cursor: pointer;
+
+  @include state-layer();
+}
+
+.nav__item__icon {
+  width: 24px;
+  height: 24px;
+}
+
+.nav__item--active {
+  color: var(--color-on-primary-container);
+  background-color: var(--color-primary-container);
 }
 
 .tab__item {

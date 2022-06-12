@@ -1,5 +1,68 @@
 <div class="container">
-  <div class="display-flex gap-5 padding-3">
+  <div class="display-flex gap-4 padding-3">
+    <div class="navbar">
+      <div class="card card--surface padding-2 margin-bottom-3">
+        <div class="nav">
+          <a href="" class="nav__item nav__item--active">
+            <div class="nav__item__icon">
+              <span class="material-icons">home</span>
+            </div>
+            <div class="nav__item__label">
+              Home
+            </div>
+          </a>
+          <a href="" class="nav__item">
+            <div class="nav__item__icon">
+              <span class="material-icons">feed</span>
+            </div>
+            <div class="nav__item__label">
+              Feed
+            </div>
+          </a>
+          <a href="" class="nav__item">
+            <div class="nav__item__icon">
+              <span class="material-icons">explore</span>
+            </div>
+            <div class="nav__item__label">
+              Explore
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="card card--surface padding-2">
+        <div class="title-medium padding-y-2 padding-x-3">
+          Saved Tags
+        </div>
+        <div class="nav">
+          <a href="" class="nav__item">
+            <div class="nav__item__icon">
+              <span class="material-icons">tag</span>
+            </div>
+            <div class="nav__item__label">
+              Ruby
+            </div>
+          </a>
+          <a href="" class="nav__item">
+            <div class="nav__item__icon">
+              <span class="material-icons">tag</span>
+            </div>
+            <div class="nav__item__label">
+              JavaScript
+            </div>
+          </a>
+          <a href="" class="nav__item">
+            <div class="nav__item__icon">
+              <span class="material-icons">tag</span>
+            </div>
+            <div class="nav__item__label">
+              Java
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
     <div class="flex-grow-1">
       <div class="tab margin-bottom-4">
         <a href="<%= root_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'index' %>">

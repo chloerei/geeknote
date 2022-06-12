@@ -1,124 +1,126 @@
 <% content_for :body do %>
   <div class="top-app-bar">
-    <div class="top-app-bar__title">
-      <a href="/" class="text-bold">
-        GeekNote
-      </a>
-    </div>
-    <% if current_user %>
-      <div class="top-app-bar__action">
-        <a href="<%= new_account_dashboard_post_path(current_user.account) %>" class="button button--icon">
-          <span class="material-icons">post_add</span>
+    <div class="top-app-bar__container container">
+      <div class="top-app-bar__title">
+        <a href="/" class="text-bold">
+          GeekNote
         </a>
       </div>
-      <div class="top-app-bar__action">
-        <a href="<%= notifications_path %>" class="button button--icon">
-          <span class="material-icons">notifications</span>
-          <% if current_user.notifications.unread.any? %>
-            <div class="badge badge--small margin-1">
-            </div>
-          <% end %>
-        </a>
-      </div>
-      <div class="top-app-bar__action">
-        <div class="dropdown" data-controller="dropdown">
-          <button type="button" class="button button--icon button--avatar" data-action="dropdown#toggle">
-            <div class="avatar">
-              <%= avatar_image_tag current_user.avatar %>
-            </div>
-          </button>
-          <div class="dropdown__container dropdown__container--top-right">
-            <a href="<%= account_root_path(current_user.account) %>" class="dropdown__item">
-              <div class="dropdown__item__icon">
-                <span class="material-icons">account_box</span>
+      <% if current_user %>
+        <div class="top-app-bar__action">
+          <a href="<%= new_account_dashboard_post_path(current_user.account) %>" class="button button--icon">
+            <span class="material-icons">post_add</span>
+          </a>
+        </div>
+        <div class="top-app-bar__action">
+          <a href="<%= notifications_path %>" class="button button--icon">
+            <span class="material-icons">notifications</span>
+            <% if current_user.notifications.unread.any? %>
+              <div class="badge badge--small margin-1">
               </div>
-              <div class="dropdown__item__text">
-                <%= t 'common.profile' %>
-              </div>
-            </a>
-            <a href="<%= account_collections_path(current_user.account) %>" class="dropdown__item">
-              <div class="dropdown__item__icon">
-                <span class="material-icons">library_books</span>
-              </div>
-              <div class="dropdown__item__text">
-                <%= t 'common.collections' %>
-              </div>
-            </a>
-            <a href="<%= account_dashboard_root_path(current_user.account) %>" class="dropdown__item">
-              <div class="dropdown__item__icon">
-                <span class="material-icons">dashboard</span>
-              </div>
-              <div class="dropdown__item__text">
-                <%= t 'common.dashboard' %>
-              </div>
-            </a>
-            <a href="<%= organizations_path %>" class="dropdown__item">
-              <div class="dropdown__item__icon">
-                <span class="material-icons">switch_account</span>
-              </div>
-              <div class="dropdown__item__text">
-                <%= t 'common.organizations' %>
-              </div>
-            </a>
-            <button type="button" class="dropdown__item" data-controller="toggle" data-toggle-target="#theme-dialog" data-toggle-action="dialog#open" data-action="dropdown#close">
-              <div class="dropdown__item__icon">
-                <span class="material-icons">dark_mode</span>
-              </div>
-              <div class="dropdown__item__text">
-                <%= t 'common.theme' %>
+            <% end %>
+          </a>
+        </div>
+        <div class="top-app-bar__action">
+          <div class="dropdown" data-controller="dropdown">
+            <button type="button" class="button button--icon button--avatar" data-action="dropdown#toggle">
+              <div class="avatar">
+                <%= avatar_image_tag current_user.avatar %>
               </div>
             </button>
-            <a href="<%= settings_root_path %>" class="dropdown__item">
-              <div class="dropdown__item__icon">
-                <span class="material-icons">settings</span>
-              </div>
-              <div class="dropdown__item__text">
-                <%= t 'common.settings' %>
-              </div>
-            </a>
-            <hr class="divider">
-            <%= form_with url: sign_out_path, method: 'delete' do %>
-              <button type="submit" class="dropdown__item">
+            <div class="dropdown__container dropdown__container--top-right">
+              <a href="<%= account_root_path(current_user.account) %>" class="dropdown__item">
                 <div class="dropdown__item__icon">
-                  <span class="material-icons">logout</span>
+                  <span class="material-icons">account_box</span>
                 </div>
                 <div class="dropdown__item__text">
-                  <%= t 'common.sign_out' %>
+                  <%= t 'common.profile' %>
+                </div>
+              </a>
+              <a href="<%= account_collections_path(current_user.account) %>" class="dropdown__item">
+                <div class="dropdown__item__icon">
+                  <span class="material-icons">library_books</span>
+                </div>
+                <div class="dropdown__item__text">
+                  <%= t 'common.collections' %>
+                </div>
+              </a>
+              <a href="<%= account_dashboard_root_path(current_user.account) %>" class="dropdown__item">
+                <div class="dropdown__item__icon">
+                  <span class="material-icons">dashboard</span>
+                </div>
+                <div class="dropdown__item__text">
+                  <%= t 'common.dashboard' %>
+                </div>
+              </a>
+              <a href="<%= organizations_path %>" class="dropdown__item">
+                <div class="dropdown__item__icon">
+                  <span class="material-icons">switch_account</span>
+                </div>
+                <div class="dropdown__item__text">
+                  <%= t 'common.organizations' %>
+                </div>
+              </a>
+              <button type="button" class="dropdown__item" data-controller="toggle" data-toggle-target="#theme-dialog" data-toggle-action="dialog#open" data-action="dropdown#close">
+                <div class="dropdown__item__icon">
+                  <span class="material-icons">dark_mode</span>
+                </div>
+                <div class="dropdown__item__text">
+                  <%= t 'common.theme' %>
                 </div>
               </button>
-            <% end %>
+              <a href="<%= settings_root_path %>" class="dropdown__item">
+                <div class="dropdown__item__icon">
+                  <span class="material-icons">settings</span>
+                </div>
+                <div class="dropdown__item__text">
+                  <%= t 'common.settings' %>
+                </div>
+              </a>
+              <hr class="divider">
+              <%= form_with url: sign_out_path, method: 'delete' do %>
+                <button type="submit" class="dropdown__item">
+                  <div class="dropdown__item__icon">
+                    <span class="material-icons">logout</span>
+                  </div>
+                  <div class="dropdown__item__text">
+                    <%= t 'common.sign_out' %>
+                  </div>
+                </button>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
-    <% else %>
-      <div class="top-app-bar__action">
-        <a href="<%= sign_up_path %>" class="button button--text">
-          <%= t 'common.sign_up' %>
-        </a>
-      </div>
-      <div class="top-app-bar__action">
-        <a href="<%= sign_in_path %>" class="button button--text">
-          <%= t 'common.sign_in' %>
-        </a>
-      </div>
-      <div class="top-app-bar__action">
-        <div class="dropdown" data-controller="dropdown">
-          <button type="button" class="button button--icon" data-action="dropdown#toggle">
-            <span class="material-icons">more_vert</span>
-          </button>
-          <div class="dropdown__container dropdown__container--top-right">
-            <button type="button" class="dropdown__item" data-controller="toggle" data-toggle-target="#theme-dialog" data-toggle-action="dialog#open" data-action="dropdown#close">
-              <div class="dropdown__item__icon">
-                <span class="material-icons">dark_mode</span>
-              </div>
-              <div class="dropdown__item__text">
-                <%= t 'common.theme' %>
-              </div>
+      <% else %>
+        <div class="top-app-bar__action">
+          <a href="<%= sign_up_path %>" class="button button--text">
+            <%= t 'common.sign_up' %>
+          </a>
+        </div>
+        <div class="top-app-bar__action">
+          <a href="<%= sign_in_path %>" class="button button--text">
+            <%= t 'common.sign_in' %>
+          </a>
+        </div>
+        <div class="top-app-bar__action">
+          <div class="dropdown" data-controller="dropdown">
+            <button type="button" class="button button--icon" data-action="dropdown#toggle">
+              <span class="material-icons">more_vert</span>
             </button>
+            <div class="dropdown__container dropdown__container--top-right">
+              <button type="button" class="dropdown__item" data-controller="toggle" data-toggle-target="#theme-dialog" data-toggle-action="dialog#open" data-action="dropdown#close">
+                <div class="dropdown__item__icon">
+                  <span class="material-icons">dark_mode</span>
+                </div>
+                <div class="dropdown__item__text">
+                  <%= t 'common.theme' %>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
+      <% end %>
       </div>
-    <% end %>
   </div>
 
   <%= content_for?(:main) ? yield(:main) : yield %>
