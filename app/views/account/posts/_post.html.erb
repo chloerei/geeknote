@@ -1,55 +1,61 @@
-<div class="post-item padding-bottom-3 border-bottom margin-bottom-4" data-post-list-target="item" data-url="<%= account_post_path(post.account, post) %>">
-  <div class="display-flex margin-bottom-2 gap-2">
-    <a href="<%= account_root_path(post.account) %>" class="display-flex link-text">
-      <div class="display-flex gap-2">
-        <div class="avatar avatar--small">
-          <%= avatar_image_tag post.account.owner.avatar %>
-        </div>
-        <b>
-          <%= post.account.owner.name %>
-        </b>
-      </div>
-    </a>
-    <% if post.account.organization? && post.author_users.any? %>
-      <div>
-        <span class="text-muted">by</span>
-        <% post.author_users.each do |user| %>
-          <a href="<%= account_root_path(user.account) %>" class="link-text"><b><%= user.name %></b></a><% if user != post.author_users.last %>, <% end %>
+<div class="card card--filled position-relative">
+  <div class="display-flex padding-3 gap-3">
+    <div class="flex-grow-1">
+      <div class="post-card__header">
+        <h3 class="title-medium margin-top-0 margin-bottom-3">
+          <a href="<%= account_post_path(post.account, post) %>" class="link-expended link-title">
+            <%= post.title %>
+          </a>
+        </h3>
+        <% if post.tags.any? %>
+          <div class="display-flex gap-2 margin-bottom-3">
+            <% post.tags.each do |tag| %>
+              <div class="chip">
+                <div class="chip__icon">
+                  <span class="material-icons">tag</span>
+                </div>
+                <div class="chip__label">
+                  <%= tag.name %>
+                </div>
+              </div>
+            <% end %>
+          </div>
         <% end %>
       </div>
-    <% end %>
-  </div>
-
-  <div class="display-flex gap-4 margin-bottom-1 position-relative">
-    <div class="flex-grow-1 break-word">
-      <h3 class="headline-medium margin-top-0 margin-bottom-2">
-        <a href="<%= account_post_path(post.account, post) %>" class="link-title link-expended">
-          <%= post.title.presence || 'Untitle' %>
-        </a>
-      </h3>
-      <div class="text-muted">
-        <%= post_summary post %>
-      </div>
-    </div>
-    <% if post.featured_image.attached? %>
-      <div class="flex-shrink-0 display-none display-block@tablet">
-        <div class="post-item__featured_image overflow-hidden border-radius-3">
-          <%= featured_image_thumb_tag post.featured_image %>
+      <div class="display-flex align-items-center gap-3">
+        <div class="flex-grow-1">
+          <div class="display-flex gap-2 align-items-center">
+            <div class="avatar">
+              <%= avatar_image_tag post.account.owner.avatar %>
+            </div>
+            <div class="">
+              <div class="label-large">
+                <%= post.account.owner.name %>
+              </div>
+              <div class="body-small">
+                <%= format_time post.published_at %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="display-flex align-items-center gap-1 text-muted">
+          <span class="material-icons material-icons--inline">favorite</span>
+          <span><%= post.likes_count %></span>
+        </div>
+        <div class="display-flex align-items-center gap-1 text-muted">
+          <span class="material-icons material-icons--inline">comment</span>
+          <span><%= post.comments_count %></span>
         </div>
       </div>
-    <% end %>
-  </div>
-
-  <div class="display-flex gap-1 align-items-center">
-    <div class="flex-grow-1 text-muted">
-      <%= format_time post.published_at %>
-      &centerdot;
-      <%= post.likes_count %> <%= t 'common.likes' %>
-      <% if post.allow_comments %>
-      &centerdot;
-      <%= post.comments_count %> <%= t 'common.comments' %>
+    </div>
+    <div class="featured-image-thumb">
+      <% if post.featured_image.attached? %>
+        <%= featured_image_thumb_tag post.featured_image %>
+      <% else %>
+        <div class="featured-image-thumb__placeholder">
+          <span class="material-icons">article</span>
+        </div>
       <% end %>
     </div>
-    <%= render 'account/posts/collections/button', post: post %>
   </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="display-flex gap-4 padding-3">
+  <div class="display-flex gap-3 padding-3">
     <div class="navbar">
-      <div class="card card--surface padding-2 margin-bottom-3">
+      <div class="card card--filled padding-2 margin-bottom-3">
         <div class="nav">
           <a href="" class="nav__item nav__item--active">
             <div class="nav__item__icon">
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <div class="card card--surface padding-2">
+      <div class="card card--filled padding-2">
         <div class="title-medium padding-y-2 padding-x-3">
           Saved Tags
         </div>
@@ -64,19 +64,7 @@
     </div>
 
     <div class="flex-grow-1">
-      <div class="tab margin-bottom-4">
-        <a href="<%= root_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'index' %>">
-          <%= t 'common.recommend' %>
-        </a>
-        <a href="<%= following_posts_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'following' %>">
-          <%= t 'common.following' %>
-        </a>
-        <a href="<%= latest_posts_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'latest' %>">
-          <%= t 'common.latest' %>
-        </a>
-      </div>
-
-      <div class="list">
+      <div class="display-flex flex-direction-column gap-3">
         <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
       </div>
 
