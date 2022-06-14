@@ -4,13 +4,119 @@
   <%= auto_discovery_link_tag :atom, account_feed_url(@account, format: :atom) %>
 <% end %>
 
-<%= render 'account/header' %>
+<div class="container">
+  <div class="display-flex gap-3 padding-3">
+    <div class="navbar display-flex flex-direction-column gap-3">
+      <div class="card card--filled profile-card">
+        <% if @account.owner.banner_image.attached? %>
+          <div class="banner-image">
+            <div class="banner-image__inner">
+              <%= banner_image_tag @account.owner.banner_image %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="profile-card__avatar">
+          <div class="avatar avatar--medium">
+            <%= avatar_image_tag @account.owner.avatar %>
+          </div>
+        </div>
+
+        <div class="display-flex flex-direction-column gap-3 padding-3">
+          <div class="text-align-center">
+            <div class="title-large margin-bottom-3">
+              <%= @account.display_name %>
+            </div>
+
+            <div class="">
+              <%= @account.description %>
+            </div>
+          </div>
+
+          <% if @account.owner != current_user %>
+            <%= render 'account/follows/button', account: @account %>
+          <% end %>
+
+          <div class="display-flex gap-3 justify-content-center">
+            <% if @account.user? %>
+              <a href="<%= account_followings_path(@account) %>" class="link-text margin-right-8">
+                <b><%= @account.owner.followings_count %></b> <%= t 'common.followings' %>
+              </a>
+            <% end %>
+            <a href="<%= account_followers_path(@account) %>" class="link-text">
+              <b><%= @account.followers_count %></b> <%= t 'common.followers' %>
+            </a>
+          </div>
+
+          <div class="text-align-center">
+            <%= local_date @account.created_at.to_date %> <%= t 'common.joined' %>
+          </div>
+
+          <div class="display-flex gap-2 justify-content-center">
+            <a href="<%= account_feed_url(@account, format: :atom) %>" class="button button--icon" target="_blank" title="Atom Feed">
+              <span class="material-icons">rss_feed</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="flex-grow-1">
+      <div class="card card--filled padding-3 margin-bottom-3">
+        <div class="tab">
+          <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>" data-turbo-preserve-scroll>
+            <%= t 'common.posts' %>
+          </a>
+          <a href="<%= account_collections_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'collections' %>" data-turbo-preserve-scroll>
+            <%= t 'common.collections' %>
+          </a>
+          <% if @account.user? %>
+            <a href="<%= account_likes_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'likes' %>" data-turbo-preserve-scroll>
+              <%= t 'common.liked_posts' %>
+            </a>
+          <% end %>
+          <% if @account.organization? %>
+            <a href="<%= account_members_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'members' %>" data-turbo-preserve-scroll>
+              <%= t 'common.members' %>
+            </a>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="display-flex flex-direction-column gap-3">
+        <% if @posts.current_page == 1 %>
+          <%= render @account.posts.featured %>
+        <% end %>
+
+        <%= render partial: 'post', collection: @posts, cached: true %>
+      </div>
+      <%= paginate @posts %>
+    </div>
+
+    <div class="sidebar display-flex flex-direction-column gap-3">
+      <div class="card card--filled padding-2">
+        <div class="title-medium padding-y-2 padding-x-3">
+          Tags
+        </div>
+        <div class="nav">
+          <% @account.used_tags.first(10).each do |name, count| %>
+            <a href="<%= tag_path(id: name) %>" class="nav__item">
+              <div class="nav__item__icon">
+                <span class="material-icons">tag</span>
+              </div>
+              <div class="nav__item__label">
+                <%= name %>
+              </div>
+            </a>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
 <div class="container container--medium padding-3">
-  <% if @posts.current_page == 1 %>
-    <%= render @account.posts.featured %>
-  <% end %>
-
-  <%= render partial: 'post', collection: @posts, cached: true %>
-  <%= paginate @posts %>
 </div>

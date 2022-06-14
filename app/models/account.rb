@@ -95,4 +95,8 @@ class Account < ApplicationRecord
   def feed_url=(value)
     write_attribute :feed_url, value.presence
   end
+
+  def used_tags
+    Tag.joins(:posts).where(posts: { account_id: id }).group("tags.name").order("count_all desc").count()
+  end
 end
