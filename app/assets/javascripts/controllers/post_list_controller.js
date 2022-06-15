@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["item"]
+  static targets = ["postLink"]
 
   static values = {
     collectionId: String
@@ -9,9 +9,9 @@ export default class extends Controller {
 
   connect() {
     if (this.collectionIdValue) {
-      this.itemTargets.forEach((item) => {
-        let link = item.querySelector('.post-link')
-        link.href = item.dataset.url + `?collection_id=${this.collectionIdValue}`
+      this.postLinkTargets.forEach((link) => {
+        let url = new URL(link.href)
+        link.href = url.pathname + `?collection_id=${this.collectionIdValue}`
       })
     }
   }

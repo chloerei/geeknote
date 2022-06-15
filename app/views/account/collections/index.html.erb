@@ -1,13 +1,21 @@
 <% @page_title = @account.display_name %>
 
-<%= render 'account/header' %>
+<div class="container">
+  <div class="display-flex gap-3 padding-3">
+    <%= render 'account/navbar' %>
 
-<div class="container container--medium">
-  <div class="padding-3 display-flex flex-direction-column gap-3">
-    <%= render partial: 'collection', collection: @collections, cached: true %>
-  </div>
+    <div class="flex-grow-1">
+      <%= render 'account/tab' %>
 
-  <div class="padding-3">
-    <%= paginate @collections %>
+      <div class="display-flex flex-direction-column gap-3">
+        <%= render partial: 'collection', collection: @collections, cached: true %>
+      </div>
+
+      <div class="padding-3">
+        <%= paginate @collections %>
+      </div>
+    </div>
+
+    <%= render 'account/sidebar' %>
   </div>
 </div>

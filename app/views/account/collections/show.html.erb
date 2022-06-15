@@ -1,58 +1,43 @@
-<div class="container container--medium">
-  <div class="padding-3">
-    <h2 class="display-small margin-bottom-4">
-      <%= @collection.name %>
-    </h2>
+<% @page_title = "#{@collection.name} - #{@account.display_name}" %>
 
-    <div class="margin-bottom-3">
-      <%= @collection.description %>
-    </div>
+<div class="container">
+  <div class="display-flex gap-3 padding-3">
+    <%= render 'account/navbar' %>
 
-    <div class="display-flex margin-bottom-4">
-      <div class="flex-grow-1">
-        <div class="display-flex">
-          <div class="avatar margin-right-3">
-            <%= avatar_image_tag @account.owner.avatar %>
+    <div class="flex-grow-1">
+      <%= render 'account/tab' %>
+
+      <div class="card card--filled padding-3 margin-bottom-3">
+        <div class="title-medium margin-bottom-2">
+          <%= @collection.name %>
+        </div>
+
+        <div class="text-muted margin-bottom-2">
+          <%= @collection.description %>
+        </div>
+
+        <div class="text-muted display-flex gap-3 align-items-center">
+          <div class="">
+            <%= @collection.collection_items_count %> <%= t 'common.posts' %>
           </div>
-          <div>
-            <div class="title-medium">
-              <a href="<%= account_root_path(@account) %>" class="link-text text-bold"><%= @account.owner.name %></a>
+          <% if @collection.visibility_private? %>
+            <div class="display-flex align-items-center">
+              <span class="material-icons material-icons--inline">lock</span>
+              <%= t 'common.private' %>
             </div>
-            <div class="">
-              <%= format_time @collection.updated_at %>
-              &centerdot;
-              <%= @collection.collection_items_count %> <%= t 'common.posts' %>
-              <% if @collection.visibility_private? %>
-                &centerdot;
-                <span class="material-icons material-icons--inline">lock</span>
-                <%= t 'common.private' %>
-              <% end %>
-            </div>
-          </div>
+          <% end %>
         </div>
       </div>
-      <% if current_member&.has_permission?(:manage_collections) %>
-        <div class="dropdown" data-controller="dropdown">
-          <button type="button" class="button button--icon" data-action="dropdown#toggle">
-            <span class="material-icons">more_horiz</span>
-          </button>
-          <div class="dropdown__container dropdown__container--top-right">
-            <a href=" <%= account_dashboard_collection_path %>" class="dropdown__item">
-              <%= t 'common.settings' %>
-            </a>
-          </div>
-        </div>
-      <% end %>
+
+      <div class="display-flex flex-direction-column gap-3" data-controller="post-list" data-post-list-collection-id-value="<%= @collection.id %>">
+        <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
+      </div>
+
+      <div class="padding-3">
+        <%= paginate @posts %>
+      </div>
     </div>
 
-    <h3 class="headline-small">
-      <%= t 'common.posts' %>
-    </h3>
-
-    <div class="" data-controller="post-list" data-post-list-collection-id-value="<%= @collection.id %>">
-      <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
-    </div>
-
-    <%= paginate @posts %>
+    <%= render 'account/sidebar' %>
   </div>
 </div>
