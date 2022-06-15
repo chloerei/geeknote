@@ -8,13 +8,13 @@
   <div class="display-flex gap-3 padding-3">
     <div class="navbar display-flex flex-direction-column gap-3">
       <div class="card card--filled profile-card">
-        <% if @account.owner.banner_image.attached? %>
-          <div class="banner-image">
-            <div class="banner-image__inner">
+        <div class="banner-image">
+          <div class="banner-image__inner">
+            <% if @account.owner.banner_image.attached? %>
               <%= banner_image_tag @account.owner.banner_image %>
-            </div>
+            <% end %>
           </div>
-        <% end %>
+        </div>
 
         <div class="profile-card__avatar">
           <div class="avatar avatar--medium">
@@ -60,25 +60,53 @@
         </div>
       </div>
 
+      <% if @account.user? && @account.owner.organizations.any? %>
+        <div class="card card--filled padding-3">
+          <div class="title-medium margin-bottom-3">
+            <%= t 'common.organizations' %>
+          </div>
+          <div class="display-flex gap-2">
+            <% @account.owner.organizations.order('members.created_at asc').each do |organization| %>
+              <a href="<%= account_root_path(organization.account) %>" title="<%= organization.name %>">
+                <div class="avatar">
+                  <%= avatar_image_tag organization.avatar %>
+                </div>
+              </a>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @account.organization? && @account.owner.member_users.any? %>
+        <div class="card card--filled padding-3">
+          <div class="title-medium margin-bottom-3">
+            <%= t 'common.members' %>
+          </div>
+          <div class="display-flex gap-2">
+            <% @account.owner.member_users.order('members.created_at asc').each do |user| %>
+              <a href="<%= account_root_path(user.account) %>" title="<%= user.name %>">
+                <div class="avatar">
+                  <%= avatar_image_tag user.avatar %>
+                </div>
+              </a>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
 
     <div class="flex-grow-1">
       <div class="card card--filled padding-3 margin-bottom-3">
         <div class="tab">
-          <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>" data-turbo-preserve-scroll>
+          <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>">
             <%= t 'common.posts' %>
           </a>
-          <a href="<%= account_collections_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'collections' %>" data-turbo-preserve-scroll>
+          <a href="<%= account_collections_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'collections' %>">
             <%= t 'common.collections' %>
           </a>
           <% if @account.user? %>
-            <a href="<%= account_likes_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'likes' %>" data-turbo-preserve-scroll>
+            <a href="<%= account_likes_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'likes' %>">
               <%= t 'common.liked_posts' %>
-            </a>
-          <% end %>
-          <% if @account.organization? %>
-            <a href="<%= account_members_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'members' %>" data-turbo-preserve-scroll>
-              <%= t 'common.members' %>
             </a>
           <% end %>
         </div>
@@ -115,8 +143,4 @@
 
     </div>
   </div>
-</div>
-
-
-<div class="container container--medium padding-3">
 </div>

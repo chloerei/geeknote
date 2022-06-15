@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
 
-  rescue_from StandardError, with: :render_server_error
-  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+  if Rails.env.production?
+    rescue_from StandardError, with: :render_server_error
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+  end
 
   private
 
