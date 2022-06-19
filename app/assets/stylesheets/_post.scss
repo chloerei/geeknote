@@ -1,3 +1,45 @@
+.post {
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr max(768px) 1fr;
+  grid-template-areas:
+    ". header ."
+    "left-sidebar main right-sidebar"
+    ". comments .";
+  gap: 16px;
+}
+
+.post__header {
+  grid-area: header;
+}
+
+.post__main {
+  grid-area: main;
+}
+
+.post__left-sidebar {
+  grid-area: left-sidebar;
+  justify-self: end;
+}
+
+.post__right-sidebar {
+  grid-area: right-sidebar;
+}
+
+.post__feature-image {
+  margin: 32px -32px 32px -32px;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--space-3);
+  }
+}
+
+.post__comments {
+  grid-area: comments;
+}
+
 .post-editor {
   .cm-editor {
     flex-grow: 1;
