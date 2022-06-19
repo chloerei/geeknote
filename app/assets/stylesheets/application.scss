@@ -75,7 +75,7 @@ body[data-color-scheme="dark"] {
 }
 
 .container {
-  max-width: 1240px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 
@@ -95,13 +95,35 @@ body[data-color-scheme="dark"] {
   max-width: 800px;
 }
 
+.layout {
+  display: grid;
+  grid-template-columns: 240px auto 320px;
+  grid-template-areas:
+    "navbar main sidebar";
+  padding: 16px;
+  gap: 16px;
+}
+
 .navbar {
-  width: 240px;
+  grid-area: navbar;
+
+}
+
+.main {
+  grid-area: main;
 }
 
 .sidebar {
-  width: 320px;
-  flex-shrink: 0;
+  grid-area: sidebar;
+}
+
+.feature-image {
+  margin: auto -16px;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
 }
 
 .card--filled {

@@ -19,8 +19,60 @@
   <link rel="canonical" href="<%= @post.canonical_url || account_post_url(@account, @post) %>">
 <% end %>
 
-<div class="background-surface">
+<div class="">
   <div class="container">
+    <div class="layout">
+      <div class="navbar">
+        <%= render 'account/profile_card', account: @account %>
+
+      </div>
+
+      <div class="main">
+        <div class="card card--filled padding-3">
+          <h1 class="title-large margin-y-4"><%= @revision.title %></h1>
+
+          <div class="display-flex align-items-center gap-2 margin-y-3">
+            <% if @post.published_at %>
+              <div class="text-muted">
+                <%= format_time @post.published_at %>
+              </div>
+            <% end %>
+
+            <% if @post.canonical_url %>
+              &centerdot;
+              <div class="text-muted">
+                <%= t 'common.originally_published_at' %> <%= link_to_canonical_url @post.canonical_url %>
+              </div>
+            <% end %>
+          </div>
+
+          <% if @post.featured_image.attached? %>
+            <div class="feature-image">
+              <%= featured_image_tag @post.featured_image %>
+            </div>
+          <% end %>
+
+          <div class="typography">
+            <%= markdown_render @revision.content %>
+          </div>
+
+          <% if @post.tags.any? %>
+            <div class="post__tags margin-y-4">
+              <% @post.tags.each do |tag| %>
+                <a href="<%= tag_path(id: tag.name) %>" class="chip chip--assist">
+                  <%= tag.name %>
+                </a>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+
+      </div>
+    </div>
     <div class="post">
       <div class="post__header">
         <h1 class="display-small margin-y-4"><%= @revision.title %></h1>
