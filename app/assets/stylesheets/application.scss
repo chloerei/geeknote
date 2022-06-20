@@ -97,10 +97,10 @@ body[data-color-scheme="dark"] {
 
 .layout {
   display: grid;
-  grid-template-columns: 240px auto 320px;
+  grid-template-columns: 240px auto 280px;
   grid-template-areas:
     "navbar main sidebar";
-  padding: 16px;
+  margin: 16px;
   gap: 16px;
 }
 
@@ -451,7 +451,8 @@ body[data-color-scheme="dark"] {
 }
 
 .comment__actions {
-  margin: -8px;
+  margin-top: 8px;
+  margin-left: -8px;
 }
 
 .material-icons--inline {

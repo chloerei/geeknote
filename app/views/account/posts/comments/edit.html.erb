@@ -1,22 +1,30 @@
-<div class="container container--post padding-3">
-  <div class="headline-medium margin-bottom-3">
-    <a href="<%= account_post_path(@account, @post) %>" class="link-title">
-      <%= @post.title %>
-    </a>
-  </div>
-
-  <div class="margin-bottom-3">
-    <a href="<%= account_post_comment_path(@account, @post, @comment) %>" class="button button--outlined">
-      <div class="button__icon">
-        <span class="material-icons">arrow_back</span>
+<div class="container">
+  <div class="layout">
+    <div class="main">
+      <div class="card card--filled padding-3 margin-bottom-3">
+        <div class="breadcrumb">
+          <div class="breadcrumb__item">
+            <a href="<%= account_post_path(@account, @post) %>">
+              <%= @post.title %>
+            </a>
+          </div>
+          <div class="breadcrumb__item">
+            <a href="<%= account_post_comments_path(@account, @post) %>">
+              <%= t 'common.comments' %>
+            </a>
+          </div>
+          <div class="breadcrumb__item">
+            <a href="<%= account_post_comment_path(@account, @post, @comment) %>">
+              <%= @comment.id %>
+            </a>
+          </div>
+          <div class="breadcrumb__item breadcrumb__item--active">
+            <%= t 'common.edit' %>
+          </div>
+        </div>
       </div>
-      <div class="button__label">
-        <%= t 'common.back_to_comment' %>
-      </div>
-    </a>
-  </div>
 
-  <div class="padding-y-3">
-    <%= render 'form', comment: @comment %>
+      <%= render 'form', comment: @comment %>
+    </div>
   </div>
 </div>

@@ -1,40 +1,42 @@
-<div class="container container--post padding-3">
-  <div class="headline-medium margin-bottom-3">
-    <a href="<%= account_post_path(@account, @post) %>" class="link-title">
-      <%= @post.title %>
-    </a>
-  </div>
-
-  <div class="margin-bottom-3">
-    <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--outlined">
-      <div class="button__icon">
-        <span class="material-icons">arrow_back</span>
+<div class="container">
+  <div class="layout">
+    <div class="main">
+      <div class="card card--filled padding-3 margin-bottom-3">
+        <div class="breadcrumb">
+          <div class="breadcrumb__item">
+            <a href="<%= account_post_path(@account, @post) %>">
+              <%= @post.title %>
+            </a>
+          </div>
+          <div class="breadcrumb__item">
+            <a href="<%= account_post_comments_path(@account, @post) %>">
+              <%= t 'common.comments' %>
+            </a>
+          </div>
+          <div class="breadcrumb__item breadcrumb__item--active">
+            <%= @comment.id %>
+          </div>
+        </div>
       </div>
-      <div class="button__label">
-        <%= t 'common.show_all_comments' %>
+
+      <div class="margin-bottom-3">
+        <%= render partial: 'comment', object: @comment %>
       </div>
-    </a>
-  </div>
 
-  <div class="border-bottom">
-    <%= render partial: 'comment', object: @comment %>
-  </div>
+      <div class="margin-bottom-3">
+        <% if current_user %>
+          <%= render 'form', comment: @comment.replies.new %>
+        <% else %>
+          <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">
+            <%= t 'common.sign_in_to_comment' %>
+          </a>
+        <% end %>
+      </div>
 
-  <div class="padding-y-3">
-    <% if current_user %>
-      <%= render 'form', comment: @comment.replies.new %>
-    <% else %>
-      <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled"><%= t 'common.sign_in_to_comment' %></a>
-    <% end %>
-  </div>
-
-  <div class="padding-y-2 border-bottom">
-    <div class="title-medium">
-      <%= t 'comment.replies' %>
+      <div id="comments" class="display-flex flex-direction-column gap-3 comment-replies">
+        <%= render partial: 'comment', collection: @comment.replies.with_liked(current_user).order(created_at: :desc), cached: -> (comment) { [comment, comment.liked] } %>
+      </div>
     </div>
   </div>
 
-  <div id="comments" class="comments comment-replies">
-    <%= render partial: 'comment', collection: @comment.replies.with_liked(current_user).order(created_at: :desc), cached: -> (comment) { [comment, comment.liked] } %>
-  </div>
 </div>
