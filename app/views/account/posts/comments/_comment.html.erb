@@ -59,18 +59,7 @@
 
       <div class="display-flex justify-content-center comment__actions">
         <%= render 'account/posts/comments/likes/button', comment: comment %>
-        <% if comment.replies_count > 0 %>
-          <a href="<%= account_post_comment_path(@account, @post, comment, anchor: 'comments') %>" class="button button--text button--muted">
-            <div class="button__icon">
-              <span class="material-icons">comment</span>
-            </div>
-            <div class="button__label">
-              <%= comment.replies_count %> <%= t 'common.replies' %>
-            </div>
-          </a>
-        <% end %>
-        <div class="flex-grow-1">
-        </div>
+
         <a href="<%= account_post_comment_path(@account, @post, comment, anchor: "reply") %>" class="button button--text button--muted">
           <div class="button__icon">
             <span class="material-icons">reply</span>
@@ -79,6 +68,20 @@
             <%= t 'common.reply' %>
           </div>
         </a>
+
+        <div class="flex-grow-1">
+        </div>
+
+        <% if comment.replies_count > 0 %>
+          <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="button button--text button--muted">
+            <div class="button__label">
+              <%= comment.replies_count %> <%= t 'common.replies' %>
+            </div>
+            <div class="button__icon">
+              <span class="material-icons">expand_more</span>
+            </div>
+          </a>
+        <% end %>
       </div>
     </div>
   </div>
