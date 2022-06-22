@@ -97,7 +97,7 @@ body[data-color-scheme="dark"] {
 
 .layout {
   display: grid;
-  grid-template-columns: 240px auto 280px;
+  grid-template-columns: 240px minmax(0, 1fr) 280px;
   grid-template-areas:
     "navbar main sidebar";
   margin: 16px;
@@ -144,7 +144,7 @@ body[data-color-scheme="dark"] {
 .nav__item {
   padding: 8px 16px;
   display: flex;
-  gap: 8px;
+  gap: 16px;
   text-decoration: none;
   line-height: 20px;
   font-size: 14px;
@@ -407,7 +407,6 @@ body[data-color-scheme="dark"] {
 }
 
 .pagination {
-  padding: var(--space-3);
   display: flex;
   justify-content: center;
   gap: var(--space-1);

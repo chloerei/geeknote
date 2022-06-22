@@ -1,0 +1,38 @@
+<%= form_with model: @post, url: [@account, :dashboard, @post], builder: CustomFormBuilder, html: { id: 'post-form' } do |form| %>
+  <div class="margin-bottom-3">
+    <%= form.text_field :title %>
+  </div>
+  <div class="margin-bottom-3">
+    <%= form.text_area :content, rows: 10 %>
+  </div>
+  <div class="margin-bottom-3">
+    <div class="text-field text-field--outlined">
+      <div class="text-field__container">
+        <div class="selector tag-selector text-field__input" data-controller="tag-selector" data-tag-selector-placeholder-value="" data-tag-selector-creatable-value="true" data-tag-selector-max-items-value="5">
+          <select name="post[tag_list][]" class="selector__select" data-tag-selector-target="select" multiple>
+            <% @post.tags.each do |tag| %>
+              <option value="<%= tag.name %>" selected><%= tag.name %></option>
+            <% end %>
+          </select>
+        </div>
+        <label class="text-field__label">
+          <%= t 'common.tags' %>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="display-flex gap-2">
+    <% if @post.published? %>
+      <button type="submit" class="button button--filled" name="submit" value="update">
+        Save changes
+      </button>
+    <% else %>
+      <button type="submit" class="button button--filled" name="submit" value="publish">
+        Publish
+      </button>
+      <button type="submit" class="button button--filled-tonal" name="submit" value="draft">
+        Save Draft
+      </button>
+    <% end %>
+  </div>
+<% end %>

@@ -20,26 +20,31 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
 
   def new
     @post = @account.posts.new
-    render 'editor', layout: 'base'
   end
 
   def create
-    @post = @account.posts.new post_params.merge(author_users: [current_user])
+    @post = @account.posts.new post_params
     @post.save
-    @post.save_revision(user: current_user)
-    headers['Location'] = edit_account_dashboard_post_url(@account, @post)
+
+    if params[:submit] == 'draft'
+      redirect_to edit_account_dashboard_post_url(@account, @post), notice: 'Draft saved.'
+    else
+      @post.published!
+      redirect_to account_post_url(@account, @post), notice: 'Post published.'
+    end
   end
 
   def edit
-    render 'editor', layout: 'base'
   end
 
   def update
     @post.update post_params
-    @post.save_revision(user: current_user)
 
-    if params[:submit] == 'preview'
-      render :preview
+    if params[:submit] == 'draft'
+      redirect_to edit_account_dashboard_post_url(@account, @post), notice: 'Draft saved.'
+    else
+      @post.published!
+      redirect_to account_post_url(@account, @post), notice: 'Post published.'
     end
   end
 
@@ -71,7 +76,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, tag_list: [])
   end
 
   def post_filter_params

@@ -6,11 +6,7 @@
       </a>
     </div>
     <div class="text-muted">
-      <%= t 'common.by' %> <%= post.author_users.pluck(:name).join(', ') %>
-      <% if post.tags.any? %>
-        &centerdot;
-        <%= post.tags.pluck(:name).join(', ') %>
-      <% end %>
+      <%= post.author_users.pluck(:name).join(', ') %>
       &centerdot;
       <%= format_time post.updated_at %>
       <% if post.restricted? %>
