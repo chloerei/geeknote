@@ -76,7 +76,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, tag_list: [])
+    params.require(:post).permit(:title, :content, :featured_image, :remove_featured_image, tag_list: [])
   end
 
   def post_filter_params

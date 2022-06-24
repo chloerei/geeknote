@@ -82,4 +82,10 @@ class Post < ApplicationRecord
   def canonical_url=(value)
     write_attribute :canonical_url, value.presence
   end
+
+  def remove_featured_image=(value)
+    if value && featured_image.attached?
+      self.featured_image = nil
+    end
+  end
 end

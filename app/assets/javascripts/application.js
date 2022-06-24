@@ -57,6 +57,9 @@ application.register('tag-selector', TagSelectorController)
 import ThemeSettingsController from './controllers/theme_settings_controller'
 application.register('theme-settings', ThemeSettingsController)
 
+import ImageUploaderController from './controllers/image_uploader_controller'
+application.register('image-uploader', ImageUploaderController)
+
 import './lib/turbo_preserve_scroll'
 
 // clean snackbar content

@@ -3,6 +3,25 @@
     <%= form.text_field :title %>
   </div>
   <div class="margin-bottom-3">
+    <div class="image-uploader <%= 'image-uploader--active' if @post.featured_image.attached? %>" data-controller="image-uploader">
+      <div class="image-uploader__preview" data-image-uploader-target="preview">
+        <% if @post.featured_image.attached? %>
+          <%= featured_image_tag @post.featured_image %>
+        <% end %>
+      </div>
+      <div class="image-uploader__toolbar">
+        <label class="button button--icon">
+          <span class="material-icons">add_photo_alternate</span>
+          <%= form.file_field :featured_image, direct_upload: true, data: { 'image-uploader-target': 'input', action: 'image-uploader#update' } %>
+        </label>
+        <label class="button button--icon image-uploader__show-on-active">
+          <span class="material-icons">delete</span>
+          <input type="checkbox" name="post[remove_featured_image]" data-image-uploader-target="removeCheckbox" data-action="image-uploader#remove">
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="margin-bottom-3">
     <%= form.text_area :content, rows: 10 %>
   </div>
   <div class="margin-bottom-3">
