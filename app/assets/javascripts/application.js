@@ -60,6 +60,9 @@ application.register('theme-settings', ThemeSettingsController)
 import ImageUploaderController from './controllers/image_uploader_controller'
 application.register('image-uploader', ImageUploaderController)
 
+import MarkdownEditorController from './controllers/markdown_editor_controller'
+application.register('markdown-editor', MarkdownEditorController)
+
 import './lib/turbo_preserve_scroll'
 
 // clean snackbar content

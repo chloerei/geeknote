@@ -22,7 +22,9 @@
     </div>
   </div>
   <div class="margin-bottom-3">
-    <%= form.text_area :content, rows: 10 %>
+    <%= form.hidden_field :content, id: 'post-content' %>
+    <div class="markdown-editor" data-controller="markdown-editor" data-markdown-editor-input-value="post-content">
+    </div>
   </div>
   <div class="margin-bottom-3">
     <div class="text-field text-field--outlined">

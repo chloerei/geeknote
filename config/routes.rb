@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :preview, only: [:create]
+
   resources :tags, only: [:show] do
     collection do
       get :search

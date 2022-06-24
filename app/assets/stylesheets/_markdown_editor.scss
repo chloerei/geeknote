@@ -1,0 +1,72 @@
+.markdown-editor {
+  border-radius: var(--space-1);
+  border: 1px solid var(--color-outline);
+  position: relative;
+}
+
+.markdown-editor__toolbar {
+  display: flex;
+  background: var(--color-outline);
+  padding: var(--space-1);
+  gap: var(--space-1);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  .button--text {
+    padding: 8px;
+    color: var(--color-on-surface-variant);
+    border-radius: var(--space-1);
+  }
+
+  .button__icon {
+    width: 24px;
+    height: 24px;
+
+    .material-icons {
+      font-size: 24px;
+    }
+  }
+
+  .button--icon {
+    border-radius: var(--space-1);
+    color: var(--color-on-surface-variant);
+  }
+
+  .button--active {
+    color: var(--color-primary);
+  }
+
+  .markdown-editor__write-button {
+    color: var(--color-primary);
+  }
+}
+
+.markdown-editor__content {
+  padding: 12px 16px;
+  min-height: 240px;
+}
+
+.markdown-editor__preview {
+  display: none;
+  padding: 12px 16px;
+  min-height: 240px;
+}
+
+.markdown-editor--previewing {
+  .markdown-editor__content {
+    display: none;
+  }
+
+  .markdown-editor__preview {
+    display: inherit;
+  }
+
+  .markdown-editor__write-button {
+    color: inherit;
+  }
+
+  .markdown-editor__preview-button {
+    color: var(--color-primary);
+  }
+}
