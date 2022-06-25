@@ -39,31 +39,31 @@ export default class extends Controller {
         </button>
         <div class="flex-grow-1">
         </div>
-        <button type="button" class="button button--icon" tabindex="-1">
+        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatBold">
           <span class="material-icons">format_bold</span>
         </button>
-        <button type="button" class="button button--icon" tabindex="-1">
+        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatItalic">
           <span class="material-icons">format_italic</span>
         </button>
-        <button type="button" class="button button--icon" tabindex="-1">
+        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatTitle">
           <span class="material-icons">title</span>
         </button>
-        <button type="button" class="button button--icon" tabindex="-1">
+        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatCode">
           <span class="material-icons">code</span>
         </button>
-        <button type="button" class="button button--icon" tabindex="-1">
+        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatQuote">
           <span class="material-icons">format_quote</span>
         </button>
-        <button type="button" class="button button--icon" tabindex="-1">
+        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatListBulleted">
           <span class="material-icons">format_list_bulleted</span>
         </button>
-        <button type="button" class="button button--icon" tabindex="-1">
+        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatListNumbered">
           <span class="material-icons">format_list_numbered</span>
         </button>
-        <button type="button" class="button button--icon" tabindex="-1">
+        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatLink">
           <span class="material-icons">insert_link</span>
         </button>
-        <button type="button" class="button button--icon" tabindex="-1">
+        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatUploadImage">
           <span class="material-icons">add_photo_alternate</span>
         </button>
       </div>
@@ -124,5 +124,114 @@ export default class extends Controller {
 
   write() {
     this.element.classList.remove('markdown-editor--previewing')
+  }
+
+  formatBold() {
+    this.wrapSelection('**')
+  }
+
+  formatItalic() {
+    this.wrapSelection('*')
+  }
+
+  formatTitle() {
+    this.linePrepend('## ')
+  }
+
+  formatCode() {
+    this.editorView.dispatch(
+      this.editorView.state.changeByRange(range => {
+        let lineFrom = this.editorView.state.doc.lineAt(range.from)
+        let lineTo = this.editorView.state.doc.lineAt(range.to)
+
+        if (lineFrom.number != lineTo.number || (lineFrom.from == range.from && lineTo.to == range.to)) {
+          return {
+            changes: [{ from: lineFrom.from, insert: "```\n" }, { from: lineTo.to, insert: "\n```"}],
+            range: EditorSelection.range(lineFrom.from + 3, lineFrom.from + 3)
+          }
+        } else {
+          return {
+            changes: [{ from: range.from, insert: '`' }, { from: range.to, insert: '`'}],
+            range: EditorSelection.range(range.from + 1, range.to + 1)
+          }
+        }
+      })
+    )
+    this.editorView.focus()
+  }
+
+  formatQuote() {
+    this.linePrepend('> ')
+  }
+
+  formatListBulleted() {
+    this.linePrepend('- ')
+  }
+
+  formatListNumbered() {
+    let number = 1
+    this.editorView.dispatch(this.editorView.state.changeByRange(range => {
+      let changes = []
+      for (let pos = range.from; pos <= range.to;) {
+        let line = this.editorView.state.doc.lineAt(pos)
+        changes.push({ from: line.from, insert: number + '. ' })
+        pos = line.to + 1
+        number = number + 1
+      }
+
+      let changeSet = this.editorView.state.changes(changes)
+
+      return {
+        changes,
+        range: EditorSelection.range(changeSet.mapPos(range.anchor, 1), changeSet.mapPos(range.head, 1))
+      }
+    }))
+    this.editorView.focus()
+  }
+
+  formatLink() {
+    this.editorView.dispatch(
+      this.editorView.state.changeByRange(range => {
+        let text = this.editorView.state.sliceDoc(range.from, range.to)
+        if (text == '') {
+          text = 'text'
+        }
+
+        let url = 'url'
+
+        return {
+          changes: [{ from: range.from, to: range.to, insert: `[${text}](${url})` }],
+          range: EditorSelection.range(range.from + text.length + 3, range.from + text.length + url.length + 3)
+        }
+      })
+    )
+    this.editorView.focus()
+  }
+
+  wrapSelection(mark) {
+    this.editorView.dispatch(this.editorView.state.changeByRange(range => ({
+      changes: [{ from: range.from, insert: mark }, { from: range.to, insert: mark}],
+      range: EditorSelection.range(range.from + mark.length, range.to + mark.length)
+    })))
+    this.editorView.focus()
+  }
+
+  linePrepend(mark) {
+    this.editorView.dispatch(this.editorView.state.changeByRange(range => {
+      let changes = []
+      for (let pos = range.from; pos <= range.to;) {
+        let line = this.editorView.state.doc.lineAt(pos)
+        changes.push({ from: line.from, insert: mark })
+        pos = line.to + 1
+      }
+
+      let changeSet = this.editorView.state.changes(changes)
+
+      return {
+        changes,
+        range: EditorSelection.range(changeSet.mapPos(range.anchor, 1), changeSet.mapPos(range.head, 1))
+      }
+    }))
+    this.editorView.focus()
   }
 }
