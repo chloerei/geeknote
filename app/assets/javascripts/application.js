@@ -39,9 +39,9 @@ application.register('page-nav', PageNavController)
 import PaginationController from './controllers/pagination_controller'
 application.register('pagination', PaginationController)
 
-import PostEditorController from './controllers/post_editor_controller'
-application.register('post-editor', PostEditorController)
-
+// import PostEditorController from './controllers/post_editor_controller'
+// application.register('post-editor', PostEditorController)
+//
 import PostListController from './controllers/post_list_controller'
 application.register('post-list', PostListController)
 

@@ -4,13 +4,47 @@ import { DirectUpload } from "@rails/activestorage"
 
 import { EditorView, ViewPlugin, keymap, placeholder } from "@codemirror/view"
 import { EditorState, EditorSelection } from "@codemirror/state"
-import { history, historyKeymap } from "@codemirror/history"
-import { indentOnInput } from "@codemirror/language"
-import { defaultKeymap } from "@codemirror/commands"
-import { bracketMatching } from "@codemirror/matchbrackets"
-import { closeBrackets, closeBracketsKeymap } from "@codemirror/closebrackets"
-import { classHighlightStyle } from "@codemirror/highlight"
+import { indentOnInput, bracketMatching, syntaxHighlighting, HighlightStyle } from "@codemirror/language"
+import { defaultKeymap, history, historyKeymap } from "@codemirror/commands"
+import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete"
 import { markdown } from "@codemirror/lang-markdown"
+import { tags } from "@lezer/highlight"
+
+import { StyleModule } from "style-mod"
+StyleModule.mount = () => { /* Disabled it ! */ }
+
+const classHighlightStyle = HighlightStyle.define([
+  {tag: tags.link, class: "cmt-link"},
+  {tag: tags.heading, class: "cmt-heading"},
+  {tag: tags.emphasis, class: "cmt-emphasis"},
+  {tag: tags.strong, class: "cmt-strong"},
+  {tag: tags.keyword, class: "cmt-keyword"},
+  {tag: tags.atom, class: "cmt-atom"},
+  {tag: tags.bool, class: "cmt-bool"},
+  {tag: tags.url, class: "cmt-url"},
+  {tag: tags.labelName, class: "cmt-labelName"},
+  {tag: tags.inserted, class: "cmt-inserted"},
+  {tag: tags.deleted, class: "cmt-deleted"},
+  {tag: tags.literal, class: "cmt-literal"},
+  {tag: tags.string, class: "cmt-string"},
+  {tag: tags.number, class: "cmt-number"},
+  {tag: [tags.regexp, tags.escape, tags.special(tags.string)], class: "cmt-string2"},
+  {tag: tags.variableName, class: "cmt-variableName"},
+  {tag: tags.local(tags.variableName), class: "cmt-variableName cmt-local"},
+  {tag: tags.definition(tags.variableName), class: "cmt-variableName cmt-definition"},
+  {tag: tags.special(tags.variableName), class: "cmt-variableName2"},
+  {tag: tags.definition(tags.propertyName), class: "cmt-propertyName cmt-definition"},
+  {tag: tags.typeName, class: "cmt-typeName"},
+  {tag: tags.namespace, class: "cmt-namespace"},
+  {tag: tags.className, class: "cmt-className"},
+  {tag: tags.macroName, class: "cmt-macroName"},
+  {tag: tags.propertyName, class: "cmt-propertyName"},
+  {tag: tags.operator, class: "cmt-operator"},
+  {tag: tags.comment, class: "cmt-comment"},
+  {tag: tags.meta, class: "cmt-meta"},
+  {tag: tags.invalid, class: "cmt-invalid"},
+  {tag: tags.punctuation, class: "cmt-punctuation"}
+])
 
 export default class extends Controller {
   static values = {
@@ -80,13 +114,14 @@ export default class extends Controller {
       this.inputElement = document.getElementById(this.inputValue)
     }
 
+
     this.editorView = new EditorView({
       state: EditorState.create({
         doc: this.inputElement ? this.inputElement.value : '',
         extensions: [
           history(),
           indentOnInput(),
-          classHighlightStyle,
+          syntaxHighlighting(classHighlightStyle, { fallback: true }),
           bracketMatching(),
           closeBrackets(),
           placeholder(this.inputElement ? this.inputElement.placeholder : ''),

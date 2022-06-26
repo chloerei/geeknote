@@ -30,7 +30,7 @@
 
 .cm-line {
   display: block;
-  padding: 0;
+  padding: 0 1px;
 }
 
 .cm-lineWrapping {
@@ -78,4 +78,10 @@
 }
 
 .cmt-url {
+}
+
+.cm-widgetBuffer {
+    vertical-align: text-top;
+    height: 1em;
+    display: inline;
 }
