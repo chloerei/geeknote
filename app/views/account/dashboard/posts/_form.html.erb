@@ -23,7 +23,7 @@
   </div>
   <div class="margin-bottom-3">
     <%= form.hidden_field :content, id: 'post-content' %>
-    <div class="markdown-editor" data-controller="markdown-editor" data-markdown-editor-input-value="post-content">
+    <div class="markdown-editor" data-controller="markdown-editor" data-markdown-editor-input-value="post-content" data-markdown-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>">
     </div>
   </div>
   <div class="margin-bottom-3">

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   delete 'sign_out', to: 'sessions#destroy', as: 'sign_out'
   resources :sessions, only: [:create]
 
+  resources :attachments, only: [:create]
   get 'attachments/:key/*filename', to: 'attachments#show', as: :attachment
 
   post '/rails/active_storage/direct_uploads', to: 'direct_uploads#create'

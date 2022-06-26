@@ -1,7 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 import { post } from '@rails/request.js'
+import { DirectUpload } from "@rails/activestorage"
 
-import { EditorView, keymap, placeholder } from "@codemirror/view"
+import { EditorView, ViewPlugin, keymap, placeholder } from "@codemirror/view"
 import { EditorState, EditorSelection } from "@codemirror/state"
 import { history, historyKeymap } from "@codemirror/history"
 import { indentOnInput } from "@codemirror/language"
@@ -13,7 +14,8 @@ import { markdown } from "@codemirror/lang-markdown"
 
 export default class extends Controller {
   static values = {
-    input: String
+    input: String,
+    directUploadUrl: String
   }
 
   static targets = ["content", "preview"]
@@ -63,8 +65,9 @@ export default class extends Controller {
         <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatLink">
           <span class="material-icons">insert_link</span>
         </button>
-        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatUploadImage">
+        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatImage">
           <span class="material-icons">add_photo_alternate</span>
+          <input type="file" class="display-none" data-action="markdown-editor#formatImage">
         </button>
       </div>
       <div class="markdown-editor__content" data-markdown-editor-target="content">
@@ -86,22 +89,39 @@ export default class extends Controller {
           classHighlightStyle,
           bracketMatching(),
           closeBrackets(),
-          // placeholder('placeholder'),
+          placeholder(this.inputElement ? this.inputElement.placeholder : ''),
           keymap.of([
             ...closeBracketsKeymap,
             ...defaultKeymap,
             ...historyKeymap,
           ]),
           markdown(),
-          // syncInput(this.options.input),
-          // EditorView.domEventHandlers({
-          //   paste: (event, view) => {
-          //     if (event.clipboardData.files.length) {
-          //       event.preventDefault()
-          //       this.uploadImages(event.clipboardData.files)
-          //     }
-          //   }
-          // })
+          // sync doc value to inputElement
+          ViewPlugin.define((view) => {
+            return {
+              update: (viewUpdate) => {
+                if (this.inputElement && viewUpdate.docChanged) {
+                  this.inputElement.value = view.state.doc.toString()
+                  this.inputElement.dispatchEvent(new Event('input', { bubbles: true }))
+                }
+              }
+            }
+          }),
+          EditorView.domEventHandlers({
+            focus: (event, view) => {
+              this.element.classList.add('markdown-editor--focus')
+            },
+            blur: (event, view) => {
+              this.element.classList.remove('markdown-editor--focus')
+            },
+            // Uplaod image from clipboard
+            paste: (event, view) => {
+              if (event.clipboardData.files.length) {
+                event.preventDefault()
+                this.uploadImages(event.clipboardData.files)
+              }
+            }
+          })
         ]
       }),
       parent: this.contentTarget
@@ -119,7 +139,6 @@ export default class extends Controller {
       this.previewTarget.innerHTML = await response.text
       this.element.classList.add('markdown-editor--previewing')
     }
-
   }
 
   write() {
@@ -206,6 +225,78 @@ export default class extends Controller {
       })
     )
     this.editorView.focus()
+  }
+
+  formatImage() {
+    let input = document.createElement('input')
+    input.type = 'file'
+    input.multiple = true
+    input.accept = 'image/*'
+
+    input.onchange = (event) => {
+      console.log(event)
+      this.uploadImages(event.target.files)
+    }
+
+    input.click()
+  }
+
+  uploadImages(files) {
+    this.editorView.dispatch(
+      this.editorView.state.changeByRange(range => {
+        let changes = [{ from: range.from, to: range.to, insert: '' }]
+        let end = range.from
+
+        Array.from(files).forEach(async (file) => {
+          if ((file.size > 10 * 1024 * 1024) || (!["image/jpeg", "image/png", "image/gif"].includes(file.type))) {
+            // File size limit
+          } else {
+            let placeholder = `![uploading_${file.name}]()`
+            changes.push({ from: range.to, insert: placeholder + "\n" })
+            end += (placeholder.length + 1)
+
+            const url = await this.uploadImage(file)
+
+            let pos = this.editorView.state.doc.toString().indexOf(placeholder)
+            if (pos > -1) {
+              let text = `![${file.name}](${url})`
+              this.editorView.dispatch({
+                changes: { from: pos, to: pos + placeholder.length, insert: text}
+              })
+            }
+          }
+        })
+
+        return {
+          changes: changes,
+          range: EditorSelection.range(end, end)
+        }
+      })
+    )
+    this.editorView.focus()
+  }
+
+  uploadImage(file) {
+    const directUploadUrl = this.directUploadUrlValue
+    return new Promise(function(resolve, reject) {
+      const upload = new DirectUpload(file, directUploadUrl)
+      upload.create(async (error, blob) => {
+        if (error) {
+          // error
+        } else {
+          let formData = new FormData()
+          formData.append('attachment[file]', blob.signed_id)
+          const response = await post('/attachments', {
+              body: formData
+            }
+          )
+          if (response.ok) {
+            const json = await response.json
+            resolve(json.url)
+          }
+        }
+      })
+    })
   }
 
   wrapSelection(mark) {
