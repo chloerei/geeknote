@@ -1,18 +1,32 @@
 .markdown-editor {
-  border-radius: var(--space-1);
-  border: 1px solid var(--color-outline);
+  z-index: 0;
   position: relative;
   min-height: 240px;
+  display: flex;
+  flex-direction: column;
+
+  // outline
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--color-outline);
+    border-radius: var(--space-1);
+    z-index: 1;
+    pointer-events: none;
+  }
 }
 
 .markdown-editor__toolbar {
   display: flex;
-  background: var(--color-outline);
+  border-radius: var(--space-1) var(--space-1) 0 0;
+  background: var(--color-surface-variant);
   padding: var(--space-1);
   gap: var(--space-1);
   position: sticky;
   top: 0;
   z-index: 1;
+  flex-shrink: 0;
 
   .button--text {
     padding: 8px;
@@ -45,11 +59,24 @@
 
 .markdown-editor__content {
   padding: 12px 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  .cm-editor {
+    flex-grow: 1;
+  }
+
+  .cm-scroller {
+    align-items: stretch;
+    flex-grow: 1;
+  }
 }
 
 .markdown-editor__preview {
   display: none;
   padding: 12px 16px;
+  flex-grow: 1;
 }
 
 .markdown-editor--previewing {
@@ -58,7 +85,7 @@
   }
 
   .markdown-editor__preview {
-    display: inherit;
+    display: block;
   }
 
   .markdown-editor__write-button {
@@ -76,5 +103,7 @@
 }
 
 .markdown-editor--focus {
-  border-color: var(--color-primary);
+  &::after {
+    border: 2px solid var(--color-primary);
+  }
 }
