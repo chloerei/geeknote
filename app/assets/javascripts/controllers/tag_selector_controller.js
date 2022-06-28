@@ -3,7 +3,9 @@ import { get } from "@rails/request.js"
 
 export default class extends SelectorController {
   disconnect() {
-    this.content.remove()
+    this.blur()
+    this.container.remove()
+    this.menu.remove()
   }
 
   async onInput() {
