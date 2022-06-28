@@ -29,8 +29,8 @@
   <div class="margin-bottom-3">
     <div class="text-field text-field--outlined">
       <div class="text-field__container">
-        <div class="selector tag-selector text-field__input" data-controller="tag-selector" data-tag-selector-placeholder-value="" data-tag-selector-creatable-value="true" data-tag-selector-max-items-value="5">
-          <select name="post[tag_list][]" class="selector__select" data-tag-selector-target="select" multiple>
+        <div class="selector text-field__input" data-controller="selector tag-selector" data-selector-placeholder-value="" data-selector-creatable-value="true" data-selector-max-items-value="5" data-action="selector:input->tag-selector#update">
+          <select name="post[tag_list][]" class="selector__select" data-selector-target="select" multiple>
             <% @post.tags.each do |tag| %>
               <option value="<%= tag.name %>" selected><%= tag.name %></option>
             <% end %>

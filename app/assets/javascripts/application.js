@@ -15,6 +15,9 @@ const application = Application.start()
 import { init } from "@chloerei/material-ui/src/js/material-ui.js"
 init(application)
 
+import SelectorController from './controllers/selector_controller'
+application.register('selector', SelectorController)
+
 import ClipboardController from './controllers/clipboard_controller'
 application.register('clipboard', ClipboardController)
 
