@@ -10,7 +10,15 @@
         <% end %>
       </div>
       <div class="image-uploader__toolbar">
-        <label class="button button--icon">
+        <label for="post_featured_image" class="button button--text image-uploader__hide-on-active">
+          <div class="button__icon">
+            <span class="material-icons">add_photo_alternate</span>
+          </div>
+          <div class="button__label">
+            Feature Image
+          </div>
+        </label>
+        <label class="button button--icon image-uploader__show-on-active">
           <span class="material-icons">add_photo_alternate</span>
           <%= form.file_field :featured_image, direct_upload: true, data: { 'image-uploader-target': 'input', action: 'image-uploader#update' } %>
         </label>

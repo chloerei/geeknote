@@ -1,9 +1,9 @@
 .image-uploader {
   position: relative;
   min-height: 80px;
-  background-color: var(--color-surface-variant);
   overflow: hidden;
   border-radius: var(--space-1);
+  border: 1px dashed var(--color-outline);
 
   input {
     display: none;
@@ -25,11 +25,6 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-
-  .button--icon {
-    background: var(--color-surface-variant);
-    color: var(--color-on-surface-variant);
-  }
 }
 
 .image-uploader__show-on-active {
@@ -41,11 +36,18 @@
 }
 
 .image-uploader--active {
+  border: none;
+
   .image-uploader__show-on-active {
     display: inherit;
   }
 
   .image-uploader__hide-on-active {
     display: none;
+  }
+
+  .button--icon {
+    background: var(--color-surface-variant);
+    color: var(--color-on-surface-variant);
   }
 }
