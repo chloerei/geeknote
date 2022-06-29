@@ -1,8 +1,10 @@
 <div class="card card--filled padding-3" id="comment-<%= comment.id %>">
   <div class="display-flex gap-3">
-    <div class="avatar flex-shrink-0">
+    <div class="flex-shrink-0">
       <a href="<%= account_root_path(comment.user.account) %>">
-        <%= avatar_image_tag comment.user.avatar %>
+        <div class="avatar">
+          <%= avatar_image_tag comment.user.avatar %>
+        </div>
       </a>
     </div>
     <div class="flex-grow-1">
@@ -38,7 +40,7 @@
       </div>
 
       <% if comment.parent %>
-        <div class="comment__reply-to body-medium">
+        <div class="comment__reply-to body-medium margin-bottom-3">
           <a href="<%= account_post_comment_path(@account, @post, comment.parent) %>" class="card card--outlined padding-3 background-surface-variant">
             <div class="display-flex align-items-center gap-1">
               <span><%= t 'common.reply_to' %></span>
