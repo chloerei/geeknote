@@ -1,4 +1,4 @@
-<%= form_with model: @post, url: [@account, :dashboard, @post], builder: CustomFormBuilder, html: { id: 'post-form' } do |form| %>
+<%= form_with model: @post, url: [@account, :dashboard, @post], builder: CustomFormBuilder, html: { id: 'post-form', autocomplete: "off" } do |form| %>
   <div class="margin-bottom-3">
     <%= form.text_field :title %>
   </div>
@@ -15,7 +15,7 @@
           <%= form.file_field :featured_image, direct_upload: true, data: { 'image-uploader-target': 'input', action: 'image-uploader#update' } %>
         </label>
         <label class="button button--icon image-uploader__show-on-active">
-          <span class="material-icons">delete</span>
+          <span class="material-icons">close</span>
           <input type="checkbox" name="post[remove_featured_image]" data-image-uploader-target="removeCheckbox" data-action="image-uploader#remove">
         </label>
       </div>
@@ -42,6 +42,17 @@
       </div>
     </div>
   </div>
+
+  <details>
+    <summary class="padding-1 margin-bottom-3">
+      <%= t 'common.settings' %>
+    </summary>
+
+    <div class="margin-bottom-3">
+      <%= form.text_field :canonical_url %>
+    </div>
+  </details>
+
   <div class="display-flex gap-2">
     <% if @post.published? %>
       <button type="submit" class="button button--filled" name="submit" value="update">

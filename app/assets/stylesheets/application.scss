@@ -456,3 +456,7 @@ body[data-color-scheme="dark"] {
   background-color: var(--color-surface-variant);
   color: var(--color-on-surface-variant);
 }
+
+summary {
+  cursor: pointer;
+}

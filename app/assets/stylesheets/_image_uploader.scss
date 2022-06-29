@@ -36,8 +36,16 @@
   display: none;
 }
 
+.image-uploader__hide-on-active {
+  display: inherit;
+}
+
 .image-uploader--active {
   .image-uploader__show-on-active {
     display: inherit;
+  }
+
+  .image-uploader__hide-on-active {
+    display: none;
   }
 }
