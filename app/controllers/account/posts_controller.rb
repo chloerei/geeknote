@@ -4,7 +4,12 @@ class Account::PostsController < Account::BaseController
   end
 
   def show
-    @post = @account.posts.published.find params[:id]
+    # member can read draft post
+    @post = if current_member
+      @account.posts.find params[:id]
+    else
+      @account.posts.published.find params[:id]
+    end
 
     if params[:collection_id] && (collection = Collection.find_by id: params[:collection_id])
       if collection.can_read_by_user?(current_user)

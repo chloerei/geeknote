@@ -23,15 +23,14 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   end
 
   def create
-    @post = @account.posts.new post_params
+    @post = @account.posts.new post_params.merge(author_users: [current_user])
     @post.save
 
-    if params[:submit] == 'draft'
-      redirect_to edit_account_dashboard_post_url(@account, @post), notice: 'Draft saved.'
-    else
+    if params[:submit] == 'publish'
       @post.published!
-      redirect_to account_post_url(@account, @post), notice: 'Post published.'
     end
+
+    redirect_to account_post_url(@account, @post)
   end
 
   def edit
@@ -40,32 +39,11 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   def update
     @post.update post_params
 
-    if params[:submit] == 'draft'
-      redirect_to edit_account_dashboard_post_url(@account, @post), notice: 'Draft saved.'
-    else
+    if params[:submit] == 'publish'
       @post.published!
-      redirect_to account_post_url(@account, @post), notice: 'Post published.'
     end
-  end
 
-  def publish
-    @post.published!
-    @post.save_revision(status: 'published', user: current_user)
-  end
-
-  def unpublish
-    @post.draft!
-    redirect_to edit_account_dashboard_post_url(@account, @post), notice: I18n.t('flash.post_moved_to_draft')
-  end
-
-  def trash
-    @post.trashed!
-    redirect_to edit_account_dashboard_post_url(@account, @post), notice: I18n.t('flash.post_moved_to_trash')
-  end
-
-  def restore
-    @post.draft!
-    redirect_to edit_account_dashboard_post_url(@account, @post), notice: I18n.t('flash.post_moved_to_draft')
+    redirect_to account_post_url(@account, @post)
   end
 
   def destroy
@@ -80,7 +58,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   end
 
   def post_filter_params
-    request.params.slice(:status)
+    request.params.slice(:status, :tag)
   end
 
   def scoped_posts

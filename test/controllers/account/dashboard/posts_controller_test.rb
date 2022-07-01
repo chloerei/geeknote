@@ -61,9 +61,8 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
     assert_difference "user.account.posts.count" do
       post account_dashboard_posts_path(user.account), params: { post: { title: '' }}, as: :turbo_stream
     end
-    assert_response :success
     last_post = user.account.posts.last
-    assert_equal edit_account_dashboard_post_url(user.account, last_post), @response.headers['Location']
+    assert_redirected_to account_post_url(user.account, last_post)
     assert_equal user, last_post.author_users.first
   end
 
@@ -75,9 +74,8 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
     assert_difference "organization.account.posts.count" do
       post account_dashboard_posts_path(organization.account), params: { post: { title: '' }}, as: :turbo_stream
     end
-    assert_response :success
     last_post = organization.account.posts.last
-    assert_equal edit_account_dashboard_post_url(organization.account, last_post), @response.headers['Location']
+    assert_redirected_to account_post_url(organization.account, last_post)
     assert_equal user, last_post.author_users.first
   end
 
@@ -108,8 +106,9 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
     sign_in writer
     get edit_account_dashboard_post_path(organization.account, writer_post)
     assert_response :success
-    get edit_account_dashboard_post_path(organization.account, other_post)
-    assert_response :not_found
+    assert_raise(ActiveRecord::RecordNotFound) do
+      get edit_account_dashboard_post_path(organization.account, other_post)
+    end
 
     sign_in editor
     get edit_account_dashboard_post_path(organization.account, writer_post)
@@ -136,14 +135,15 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in writer
     patch account_dashboard_post_path(organization.account, writer_post), params: { post: { title: 'change by writer' }}, as: :turbo_stream
-    assert_response :success
-    patch account_dashboard_post_path(organization.account, other_post), params: { post: { title: 'change by writer' }}, as: :turbo_stream
-    assert_response :not_found
+    assert_redirected_to account_post_url(organization.account, writer_post)
+    assert_raise ActiveRecord::RecordNotFound do
+      patch account_dashboard_post_path(organization.account, other_post), params: { post: { title: 'change by writer' }}, as: :turbo_stream
+    end
 
     sign_in editor
     patch account_dashboard_post_path(organization.account, writer_post), params: { post: { title: 'change by editor' }}, as: :turbo_stream
-    assert_response :success
+    assert_redirected_to account_post_url(organization.account, writer_post)
     patch account_dashboard_post_path(organization.account, other_post), params: { post: { title: 'change by editor' }}, as: :turbo_stream
-    assert_response :success
+    assert_redirected_to account_post_url(organization.account, other_post)
   end
 end

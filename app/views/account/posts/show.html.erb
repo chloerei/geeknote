@@ -64,8 +64,19 @@
       </div>
 
       <div class="main">
+        <% if @post.draft? %>
+          <div class="card card--filled  padding-3 margin-bottom-3">
+            <div class="title-medium">
+              <%= t 'common.unpublished_post' %>
+              <a href="<%= edit_account_dashboard_post_path(@post.account, @post) %>">
+                <%= t 'common.continute_editing' %>
+              </a>
+            </div>
+          </div>
+        <% end %>
+
         <div class="card card--filled padding-3 margin-bottom-3">
-          <h1 class="headline-small margin-top-0 margin-bottom-3"><%= @post.title %></h1>
+          <h1 class="headline-small margin-top-0 margin-bottom-3"><%= @post.title.presence || t('common.untitled') %></h1>
 
           <div class="display-flex align-items-center gap-2 margin-y-3">
             <a href="<%= account_root_path(@post.account) %>" class="link-title">
