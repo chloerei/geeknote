@@ -38,8 +38,9 @@ class Account::Posts::CollectionsControllerTest < ActionDispatch::IntegrationTes
     post = create(:post)
 
     sign_in user
-    put switch_account_post_collections_path(post.account, post, account: organization.account.name)
-    assert_response :not_found
+    assert_raise ActiveRecord::RecordNotFound do
+      put switch_account_post_collections_path(post.account, post, account: organization.account.name)
+    end
 
     organization.members.create(user: user, role: 'editor')
     put switch_account_post_collections_path(post.account, post, account: organization.account.name)

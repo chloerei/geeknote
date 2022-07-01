@@ -38,8 +38,9 @@ class Account::Posts::CommentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should edit comment" do
     sign_in create(:user)
-    get edit_account_post_comment_path(@account, @post, @comment)
-    assert_response :not_found
+    assert_raise ActiveRecord::RecordNotFound do
+      get edit_account_post_comment_path(@account, @post, @comment)
+    end
 
     sign_in @comment.user
     get edit_account_post_comment_path(@account, @post, @comment)
@@ -48,8 +49,9 @@ class Account::Posts::CommentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update comment" do
     sign_in create(:user)
-    patch account_post_comment_path(@account, @post, @comment), params: { comment: { content: 'change' } }
-    assert_response :not_found
+    assert_raise ActiveRecord::RecordNotFound do
+      patch account_post_comment_path(@account, @post, @comment), params: { comment: { content: 'change' } }
+    end
 
     sign_in @comment.user
     patch account_post_comment_path(@account, @post, @comment), params: { comment: { content: 'change' } }
@@ -58,8 +60,9 @@ class Account::Posts::CommentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should destroy comment" do
     sign_in create(:user)
-    delete account_post_comment_path(@account, @post, @comment)
-    assert_response :not_found
+    assert_raise ActiveRecord::RecordNotFound do
+      delete account_post_comment_path(@account, @post, @comment)
+    end
 
     sign_in @comment.user
     delete account_post_comment_path(@account, @post, @comment)

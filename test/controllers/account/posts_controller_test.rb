@@ -30,7 +30,8 @@ class Account::PostsControllerTest < ActionDispatch::IntegrationTest
     get account_post_path(account, post)
     assert_response :success
 
-    get account_post_path(user.account, post)
-    assert_response :not_found
+    assert_raise ActiveRecord::RecordNotFound do
+      get account_post_path(user.account, post)
+    end
   end
 end
