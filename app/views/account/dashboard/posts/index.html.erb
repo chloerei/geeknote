@@ -1,44 +1,6 @@
 <div class="container">
   <div class="layout">
-    <div class="navbar">
-      <div class="card card--filled padding-2">
-        <div class="display-flex padding-2 margin-bottom-3 gap-2 align-items-center">
-          <div class="avatar">
-            <%= avatar_image_tag @account.owner.avatar %>
-          </div>
-          <div class="title-large flex-grow-1">
-            <%= @account.owner.name %>
-          </div>
-        </div>
-
-        <div class="nav">
-          <a href="" class="nav__item nav__item--active">
-            <div class="nav__item__icon">
-              <span class="material-icons">article</span>
-            </div>
-            <div class="nav__item__label">
-              Posts
-            </div>
-          </a>
-          <a href="" class="nav__item">
-            <div class="nav__item__icon">
-              <span class="material-icons">library_books</span>
-            </div>
-            <div class="nav__item__label">
-              Collections
-            </div>
-          </a>
-          <a href="" class="nav__item">
-            <div class="nav__item__icon">
-              <span class="material-icons">settings</span>
-            </div>
-            <div class="nav__item__label">
-              Settings
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
+    <%= render 'account/dashboard/navbar' %>
 
     <div class="main">
       <div class="card card--filled padding-3">
