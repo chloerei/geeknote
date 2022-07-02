@@ -24,7 +24,7 @@
     <div class="layout">
       <div class="navbar">
 
-        <div class="card card--filled padding-3 display-flex flex-direction-column gap-2 position-sticky top-3 z-index-1">
+        <div class="card card--surface padding-3 display-flex flex-direction-column gap-2 position-sticky top-3 z-index-1">
           <%= render 'account/posts/likes/button', post: @post %>
 
           <a href="#comments" class="button button--text width-100">
@@ -37,21 +37,12 @@
           </a>
 
           <%= render 'account/posts/collections/button', post: @post %>
-
-          <button type="button" class="button button--text">
-            <div class="button__icon">
-              <span class="material-icons">report_problem</span>
-            </div>
-            <div class="button__label">
-              Report
-            </div>
-          </button>
         </div>
       </div>
 
       <div class="main">
         <% if @post.draft? %>
-          <div class="card card--filled  padding-3 margin-bottom-3">
+          <div class="card card--filled padding-3 margin-bottom-3">
             <div class="title-medium">
               <%= t 'common.unpublished_post' %>
               <a href="<%= edit_account_dashboard_post_path(@post.account, @post) %>">
@@ -61,7 +52,7 @@
           </div>
         <% end %>
 
-        <div class="card card--filled padding-3 margin-bottom-3">
+        <div class="card card--surface padding-3 margin-bottom-3">
           <h1 class="headline-small margin-top-0 margin-bottom-3"><%= @post.title.presence || t('common.untitled') %></h1>
 
           <div class="display-flex align-items-center gap-2 margin-y-3">

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="layout">
     <div class="navbar display-flex flex-direction-column gap-3">
-      <div class="card card--filled padding-2">
+      <div class="card card--surface padding-2">
         <div class="nav">
           <a href="" class="nav__item nav__item--active">
             <div class="nav__item__icon">
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <div class="card card--filled padding-2">
+      <div class="card card--surface padding-2">
         <div class="title-medium padding-y-2 padding-x-3">
           Popular Tags
         </div>
@@ -61,7 +61,7 @@
 
     <div class="sidebar display-none display-flex@laptop flex-direction-column gap-3">
       <% if !current_user %>
-        <div class="card card--filled padding-3">
+        <div class="card card--surface padding-3">
           <h3 class="title-medium margin-top-0">
             <%= t '.join_geeknote_title' %>
           </h3>
@@ -93,7 +93,7 @@
         <% end %>
       <% end %>
 
-      <div class="card card--filled padding-3">
+      <div class="card card--surface padding-3">
         <h3 class="title-medium margin-top-0">
           <%= t '.who_to_follow' %>
         </h3>
