@@ -1,17 +1,15 @@
 <% liked = post.liked_by? current_user %>
 <%= form_with url: account_post_like_path(post.account, post), method: (liked ? 'delete' : 'post'), data: { controller: 'form' }, id: "post-#{post.id}-like-button" do |form| %>
-  <div class="display-flex align-items-center">
-    <button type="submit" class="button button--icon <%= 'button--liked' if liked %>">
+  <button type="submit" class="button button--text <%= 'button--liked' if liked %> width-100">
+    <div class="button__icon">
       <% if liked %>
         <span class="material-icons">favorite</span>
       <% else %>
         <span class="material-icons">favorite_border</span>
       <% end %>
-    </button>
-    <% if post.likes_count > 0 %>
-      <div class="margin-left-1 <%= 'button--liked' if liked %>">
-        <%= post.likes_count %>
-      </div>
-    <% end %>
-  </div>
+    </div>
+    <div class="button__label">
+      <%= post.likes_count %> <%= t 'common.likes' %>
+    </div>
+  </button>
 <% end %>

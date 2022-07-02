@@ -24,33 +24,19 @@
     <div class="layout">
       <div class="navbar">
 
-        <div class="card card--filled padding-3 display-flex flex-direction-column gap-2 position-sticky top-3">
-          <button type="button" class="button button--text">
-            <div class="button__icon">
-              <span class="material-icons">favorite</span>
-            </div>
-            <div class="button__label">
-              0 likes
-            </div>
-          </button>
+        <div class="card card--filled padding-3 display-flex flex-direction-column gap-2 position-sticky top-3 z-index-1">
+          <%= render 'account/posts/likes/button', post: @post %>
 
-          <button type="button" class="button button--text">
+          <a href="#comments" class="button button--text width-100">
             <div class="button__icon">
               <span class="material-icons">comments</span>
             </div>
             <div class="button__label">
-              0 comments
+              <%= @post.comments_count %> <%= t 'common.comments' %>
             </div>
-          </button>
+          </a>
 
-          <button type="button" class="button button--text">
-            <div class="button__icon">
-              <span class="material-icons">bookmark_add</span>
-            </div>
-            <div class="button__label">
-              Bookmark
-            </div>
-          </button>
+          <%= render 'account/posts/collections/button', post: @post %>
 
           <button type="button" class="button button--text">
             <div class="button__icon">
