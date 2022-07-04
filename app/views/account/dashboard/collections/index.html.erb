@@ -1,65 +1,58 @@
-<div class="container container--medium padding-3">
-  <div class="title-medium display-flex align-items-center gap-2 margin-bottom-4">
-    <a href="<%= account_root_path(@account) %>" class="link-title display-inline-flex gap-1">
-      <div class="avatar avatar--small">
-        <%= avatar_image_tag @account.owner.avatar %>
-      </div>
-      <%= @account.display_name %>
-    </a>
-    <span class="material-icons">chevron_right</span>
-    <a href="<%= account_dashboard_root_path(@account) %>" class="link-title">
-      <%= t 'common.dashboard' %>
-    </a>
-    <span class="material-icons">chevron_right</span>
-    <%= t 'common.collections' %>
-  </div>
+<div class="container">
+  <div class="layout">
+    <%= render 'account/dashboard/navbar' %>
 
-  <div class="display-flex gap-2 align-items-center margin-bottom-3">
-    <div class="flex-grow-1 headline-medium">
-      <%= t 'common.collections' %>
-    </div>
-    <a href="<%= new_account_dashboard_collection_path(@account) %>" class="button button--outlined">
-      <div class="button__icon">
-        <span class="material-icons">add</span>
-      </div>
-      <div class="button__label">
-        <%= t 'common.new_collection' %>
-      </div>
-    </a>
-  </div>
-
-  <% if @collections.any? %>
-    <% @collections.each do |collection| %>
-      <div class="display-flex align-items-center padding-y-3 padding-right-3 border-bottom position-relative">
-        <div class="flex-grow-1">
-          <div class="title-medium">
-            <a href="<%= account_dashboard_collection_path(@account, collection) %>" class="link-title link-expended">
-              <%= collection.name %>
-            </a>
+    <div class="main">
+      <div class="card card--surface padding-3">
+        <div class="display-flex gap-2 align-items-center margin-bottom-3">
+          <div class="flex-grow-1 headline-medium">
+            <%= t 'common.collections' %>
           </div>
-          <div class="text-muted">
-            <%= collection.collection_items_count %> <%= t 'common.posts' %>
-          </div>
+          <a href="<%= new_account_dashboard_collection_path(@account) %>" class="button button--outlined">
+            <div class="button__icon">
+              <span class="material-icons">add</span>
+            </div>
+            <div class="button__label">
+              <%= t 'common.new_collection' %>
+            </div>
+          </a>
         </div>
-        <div class="">
-          <% if collection.visibility_private? %>
-            <span class="material-icons material-icons--inline">lock</span>
-            <%= t 'common.private' %>
-          <% else %>
-            <span class="material-icons material-icons--inline">public</span>
-            <%= t 'common.public' %>
+
+        <% if @collections.any? %>
+          <% @collections.each do |collection| %>
+            <div class="display-flex align-items-center padding-y-3 padding-right-3 border-bottom position-relative">
+              <div class="flex-grow-1">
+                <div class="title-medium">
+                  <a href="<%= account_dashboard_collection_path(@account, collection) %>" class="link-title link-expended">
+                    <%= collection.name %>
+                  </a>
+                </div>
+                <div class="text-muted">
+                  <%= collection.collection_items_count %> <%= t 'common.posts' %>
+                </div>
+              </div>
+              <div class="">
+                <% if collection.visibility_private? %>
+                  <span class="material-icons material-icons--inline">lock</span>
+                  <%= t 'common.private' %>
+                <% else %>
+                  <span class="material-icons material-icons--inline">public</span>
+                  <%= t 'common.public' %>
+                <% end %>
+              </div>
+            </div>
           <% end %>
-        </div>
-      </div>
-    <% end %>
-  <% else %>
-    <div class="content-placeholder">
-      <div class="content-placeholder__icon">
-        <span class="material-icons">library_books</span>
-      </div>
-      <div class="contents-placeholder__label">
-        <%= t '.no_collections' %>
+        <% else %>
+          <div class="content-placeholder">
+            <div class="content-placeholder__icon">
+              <span class="material-icons">library_books</span>
+            </div>
+            <div class="contents-placeholder__label">
+              <%= t '.no_collections' %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
-  <% end %>
+  </div>
 </div>
