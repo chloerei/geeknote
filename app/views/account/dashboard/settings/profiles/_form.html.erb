@@ -1,5 +1,51 @@
 <%= form_with model: @owner, url: account_dashboard_settings_profile_path, builder: CustomFormBuilder, class: 'form', id: 'profile-form' do |form| %>
   <div class="margin-bottom-3">
+    <div class="label-large margin-bottom-2">
+      <%= t 'common.banner_image' %>
+    </div>
+    <div class="image-uploader image-uploader--banner-image <%= 'image-uploader--active' if @owner.banner_image.attached? %>" data-controller="image-uploader">
+      <div class="image-uploader__preview" data-image-uploader-target="preview">
+        <% if @owner.banner_image.attached? %>
+          <%= image_tag @owner.banner_image %>
+        <% end %>
+      </div>
+      <div class="image-uploader__toolbar">
+        <label for="banner-image" class="button button--text image-uploader__hide-on-active">
+          <div class="button__icon">
+            <span class="material-icons">add_photo_alternate</span>
+          </div>
+          <div class="button__label">
+            <%= t 'common.banner_image' %>
+          </div>
+        </label>
+        <label class="button button--icon image-uploader__show-on-active">
+          <span class="material-icons">add_photo_alternate</span>
+          <%= form.file_field :banner_image, direct_upload: true, id: 'banner-image', data: { 'image-uploader-target': 'input', action: 'image-uploader#update' } %>
+        </label>
+        <label class="button button--icon image-uploader__show-on-active">
+          <span class="material-icons">close</span>
+          <input type="checkbox" name="remove_banner_image" data-image-uploader-target="removeCheckbox" data-action="image-uploader#remove">
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="margin-bottom-3">
+    <div class="label-large margin-bottom-2">
+      <%= t 'common.avatar' %>
+    </div>
+    <div class="image-uploader image-uploader--avatar <%= 'image-uploader--active' if @owner.avatar.attached? %>" data-controller="image-uploader">
+      <div class="image-uploader__preview" data-image-uploader-target="preview">
+        <%= avatar_image_tag @owner.avatar %>
+      </div>
+      <div class="image-uploader__toolbar">
+        <label class="button button--icon">
+          <span class="material-icons">add_photo_alternate</span>
+          <%= form.file_field :avatar, direct_upload: true, id: 'banner-image', data: { 'image-uploader-target': 'input', action: 'image-uploader#update' } %>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="margin-bottom-3">
     <%= form.text_field :name %>
   </div>
   <% if @owner.is_a? Organization %>

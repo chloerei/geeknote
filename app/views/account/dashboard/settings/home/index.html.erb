@@ -1,71 +1,62 @@
-<div class="container container--medium padding-3">
-  <div class="title-medium display-flex align-items-center gap-2 margin-bottom-4">
-    <a href="<%= account_root_path(@account) %>" class="link-title display-inline-flex gap-1">
-      <div class="avatar avatar--small">
-        <%= avatar_image_tag @account.owner.avatar %>
-      </div>
-      <%= @account.display_name %>
-    </a>
-    <span class="material-icons">chevron_right</span>
-    <a href="<%= account_dashboard_root_path(@account) %>" class="link-title">
-      <%= t 'common.dashboard' %>
-    </a>
-    <span class="material-icons">chevron_right</span>
-    <%= t 'common.settings' %>
-  </div>
+<div class="container">
+  <div class="layout">
+    <%= render 'account/dashboard/navbar' %>
 
-  <div class="container container--small">
-    <a href="<%= account_dashboard_settings_account_path(@account) %>" class="link-block border-radius-3">
-      <div class="display-flex gap-3 padding-3">
-        <span class="material-icons">perm_identity</span>
-        <div class="flex-grow-1">
-          <div class="title-medium">
-            <%= t '.account_name' %>
+    <div class="main">
+      <div class="card card--surface padding-3">
+        <a href="<%= account_dashboard_settings_account_path(@account) %>" class="link-block border-radius-3">
+          <div class="display-flex gap-3 padding-3">
+            <span class="material-icons">perm_identity</span>
+            <div class="flex-grow-1">
+              <div class="title-medium">
+                <%= t '.account_name' %>
+              </div>
+              <div class="">
+                <%= t '.account_name_desription' %>
+              </div>
+            </div>
           </div>
-          <div class="">
-            <%= t '.account_name_desription' %>
+        </a>
+        <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="link-block border-radius-3">
+          <div class="display-flex gap-3 padding-3">
+            <span class="material-icons">account_circle</span>
+            <div class="flex-grow-1">
+              <div class="title-medium">
+                <%= t '.profile' %>
+              </div>
+              <div class="">
+                <%= t '.profile_desription' %>
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
+        <a href="<%= account_dashboard_settings_import_path(@account) %>" class="link-block border-radius-3">
+          <div class="display-flex gap-3 padding-3">
+            <span class="material-icons">upload</span>
+            <div class="flex-grow-1">
+              <div class="title-medium">
+                <%= t '.import' %>
+              </div>
+              <div class="">
+                <%= t '.import_desription' %>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a href="<%= account_dashboard_settings_exports_path(@account) %>" class="link-block border-radius-3">
+          <div class="display-flex gap-3 padding-3">
+            <span class="material-icons">download</span>
+            <div class="flex-grow-1">
+              <div class="title-medium">
+                <%= t '.exports' %>
+              </div>
+              <div class="">
+                <%= t '.exports_desription' %>
+              </div>
+            </div>
+          </div>
+        </a>
       </div>
-    </a>
-    <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="link-block border-radius-3">
-      <div class="display-flex gap-3 padding-3">
-        <span class="material-icons">account_circle</span>
-        <div class="flex-grow-1">
-          <div class="title-medium">
-            <%= t '.profile' %>
-          </div>
-          <div class="">
-            <%= t '.profile_desription' %>
-          </div>
-        </div>
-      </div>
-    </a>
-    <a href="<%= account_dashboard_settings_import_path(@account) %>" class="link-block border-radius-3">
-      <div class="display-flex gap-3 padding-3">
-        <span class="material-icons">upload</span>
-        <div class="flex-grow-1">
-          <div class="title-medium">
-            <%= t '.import' %>
-          </div>
-          <div class="">
-            <%= t '.import_desription' %>
-          </div>
-        </div>
-      </div>
-    </a>
-    <a href="<%= account_dashboard_settings_exports_path(@account) %>" class="link-block border-radius-3">
-      <div class="display-flex gap-3 padding-3">
-        <span class="material-icons">download</span>
-        <div class="flex-grow-1">
-          <div class="title-medium">
-            <%= t '.exports' %>
-          </div>
-          <div class="">
-            <%= t '.exports_desription' %>
-          </div>
-        </div>
-      </div>
-    </a>
+    </div>
   </div>
 </div>

@@ -1,42 +1,44 @@
-<div class="container container--medium padding-3">
-  <div class="title-medium display-flex align-items-center gap-2 margin-bottom-4">
-    <a href="<%= account_root_path(@account) %>" class="link-title display-inline-flex gap-1">
-      <div class="avatar avatar--small">
-        <%= avatar_image_tag @account.owner.avatar %>
+<div class="container">
+  <div class="layout">
+    <%= render 'account/dashboard/navbar' %>
+
+    <div class="main">
+      <div class="card card--surface padding-3 margin-bottom-3">
+        <div class="breadcrumb">
+          <div class="breadcrumb__item">
+            <a href="<%= account_dashboard_settings_root_path %>">
+              <%= t 'common.settings' %>
+            </a>
+          </div>
+          <div class="breadcrumb__item breadcrumb__item--active">
+            <%= t 'common.exports' %>
+          </div>
+        </div>
       </div>
-      <%= @account.display_name %>
-    </a>
-    <span class="material-icons">chevron_right</span>
-    <a href="<%= account_dashboard_root_path(@account) %>" class="link-title">
-      <%= t 'common.dashboard' %>
-    </a>
-    <span class="material-icons">chevron_right</span>
-    <a href="<%= account_dashboard_settings_root_path(@account) %>" class="link-title">
-      <%= t 'common.settings' %>
-    </a>
-    <span class="material-icons">chevron_right</span>
-    <%= t 'common.exports' %>
-  </div>
 
-  <div class="display-flex gap-2 align-items-center margin-bottom-3">
-    <div class="flex-grow-1 headline-medium">
-      <%= t 'common.exports' %>
-    </div>
-    <%= form_with url: account_dashboard_settings_exports_path do %>
-      <button type="submit" class="button button--outlined">
-        <%= t 'common.create_export' %>
-      </button>
-    <% end %>
-  </div>
+      <div class="card card--surface padding-3">
+        <div class="display-flex gap-2 align-items-center margin-bottom-3">
+          <div class="flex-grow-1 headline-medium">
+            <%= t 'common.exports' %>
+          </div>
+          <%= form_with url: account_dashboard_settings_exports_path do %>
+            <button type="submit" class="button button--outlined">
+              <%= t 'common.create_export' %>
+            </button>
+          <% end %>
+        </div>
 
-  <% if @exports.any? %>
-    <div class="margin-bottom-3">
-      <%= render partial: 'export', collection: @exports %>
+        <% if @exports.any? %>
+          <div class="margin-bottom-3">
+            <%= render partial: 'export', collection: @exports %>
+          </div>
+          <%= paginate @exports %>
+        <% else %>
+          <div class="padding-5 text-muted text-align-center">
+            <%= t '.no_data_exported_yet' %>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <%= paginate @exports %>
-  <% else %>
-    <div class="padding-5 text-muted text-align-center">
-      <%= t '.no_data_exported_yet' %>
-    </div>
-  <% end %>
+  </div>
 </div>

@@ -51,3 +51,29 @@
     color: var(--color-on-surface-variant);
   }
 }
+
+.image-uploader--banner-image.image-uploader--active {
+  width: 100%;
+  padding-bottom: 40%;
+
+  .image-uploader__preview {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.image-uploader--avatar {
+  display: inline-block;
+
+  .image-uploader__preview {
+    height: 120px;
+    width: 120px;
+
+    img {
+      border-radius: 50%;
+    }
+  }
+}
