@@ -1,23 +1,26 @@
 <% @page_title = "#{@collection.name} - #{@account.display_name}" %>
 
 <div class="container">
-  <div class="display-flex gap-3 padding-3">
-    <div class="navbar display-flex flex-direction-column gap-3">
-      <div class="card card--surface padding-3">
-        <div class="margin-bottom-3">
-          <a href="<%= account_collections_path(@account) %>" class="link-title">
-            <div class="display-flex gap-2 align-items-center">
-              <div class="avatar">
-                <%= avatar_image_tag @account.owner.avatar %>
-              </div>
-              <div class="title-medium">
-                <%= @account.owner.name %>
-              </div>
-            </div>
-          </a>
+  <div class="layout">
+    <%= render 'account/navbar' %>
+
+    <div class="main">
+      <div class="card card--surface padding-3 margin-bottom-3">
+        <div class="breadcrumb">
+          <div class="breadcrumb__item">
+            <a href="<%= account_collections_path(@account) %>">
+              <%= t 'common.collections' %>
+            </a>
+          </div>
+          <div class="breadcrumb__item breadcrumb__item--active">
+            <%= @collection.name %>
+          </div>
         </div>
 
-        <div class="title-medium margin-bottom-3">
+      </div>
+
+      <div class="card card--surface padding-3 margin-bottom-3">
+        <div class="title-large margin-bottom-3">
           <%= @collection.name %>
         </div>
 
@@ -38,9 +41,6 @@
         </div>
       </div>
 
-    </div>
-
-    <div class="flex-grow-1">
       <div class="display-flex flex-direction-column gap-3" data-controller="post-list" data-post-list-collection-id-value="<%= @collection.id %>">
         <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
       </div>
@@ -50,7 +50,6 @@
       </div>
     </div>
 
-    <div class="sidebar display-flex flex-direction-column gap-3">
-    </div>
+    <%= render 'account/sidebar' %>
   </div>
 </div>
