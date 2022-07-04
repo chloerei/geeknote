@@ -1,11 +1,22 @@
-<div class="container container--small padding-3">
-  <div class="headline-medium display-flex align-items-center gap-2 margin-bottom-4">
-    <a href="<%= settings_root_path %>" class="link-title">
-      <%= t 'common.settings' %>
-    </a>
-    <span class="material-icons">chevron_right</span>
-    <%= t 'common.change_password' %>
-  </div>
+<div class="container">
+  <div class="layout">
+    <div class="main">
+      <div class="card card--surface padding-3 margin-bottom-3">
+        <div class="breadcrumb">
+          <div class="breadcrumb__item">
+            <a href="<%= settings_root_path %>">
+              <%= t 'common.settings' %>
+            </a>
+          </div>
+          <div class="breadcrumb__item breadcrumb__item--active">
+            <%= t 'common.change_password' %>
+          </div>
+        </div>
+      </div>
 
-  <%= render 'form' %>
+      <div class="card card--surface padding-3">
+        <%= render 'form' %>
+      </div>
+    </div>
+  </div>
 </div>
