@@ -1,6 +1,6 @@
-<div class="container container--micro">
-  <div class="padding">
-    <h2 class="headline-medium margin-y-4">
+<div class="container container--small padding-3">
+  <div class="card card--surface padding-3">
+    <h2 class="headline-medium margin-top-0 margin-bottom-3">
       <%= t 'common.forgot_password?' %>
     </h2>
     <%= form_with url: user_password_path, builder: CustomFormBuilder, class: 'form', data: { turbo: 'false' } do |form| %>

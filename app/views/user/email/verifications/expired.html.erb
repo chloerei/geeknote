@@ -1,11 +1,13 @@
-<div class="container container--small">
-  <div class="padding">
-    <h2 class="headline-4"><%= t '.token_expired' %></h2>
+<div class="container container--small padding-3">
+  <div class="card card--surface padding-3">
+    <h2 class="headline-medium margin-top-0 margin-bottom-3">
+      <%= t '.token_expired' %>
+    </h2>
     <p>
       <%= t '.please_resend_email_veification' %>
     </p>
-    <a href="<%= settings_email_path %>" class="button button--text button--primary">
-      <div class="button__text">
+    <a href="<%= settings_email_path %>" class="button button--outlined">
+      <div class="button__label">
         <%= t 'common.account_settings' %>
       </div>
       <div class="button__icon">
