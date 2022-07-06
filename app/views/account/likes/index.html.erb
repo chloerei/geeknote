@@ -1,11 +1,20 @@
-<%= render 'account/header' %>
+<div class="container">
+  <div class="layout">
+    <%= render 'account/navbar' %>
 
-<div class="container container--medium">
-  <div class="posts">
-    <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
+    <div class="main">
+      <%= render 'account/tab' %>
 
-    <div class="padding">
+      <div class="display-flex flex-direction-column gap-3">
+        <% if @posts.current_page == 1 %>
+          <%= render @account.posts.featured %>
+        <% end %>
+
+        <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
+      </div>
       <%= paginate @posts %>
     </div>
+
+    <%= render 'account/sidebar' %>
   </div>
 </div>

@@ -1,16 +1,21 @@
-<div class="container container--medium padding-3">
-  <div class="headline-medium margin-bottom-3">
-    <%= t 'common.notifications' %>
+<div class="container">
+  <div class="layout">
+    <div class="main">
+      <div class="card card--surface padding-3">
+        <div class="headline-medium margin-top-0 margin-bottom-3">
+          <%= t 'common.notifications' %>
+        </div>
+        <div class="margin-bottom-3">
+          <% @notifications.each do |notification| %>
+            <% begin %>
+              <%= render "notifications/#{notification.type}", notification: notification %>
+            <% rescue %>
+              <% notification.destroy %>
+            <% end %>
+          <% end %>
+        </div>
+        <%= paginate @notifications %>
+      </div>
+    </div>
   </div>
-  <div class="margin-bottom-3">
-    <% @notifications.each do |notification| %>
-      <% begin %>
-        <%= render "notifications/#{notification.type}", notification: notification %>
-      <% rescue %>
-        <% notification.destroy %>
-      <% end %>
-    <% end %>
-  </div>
-
-  <%= paginate @notifications %>
 </div>

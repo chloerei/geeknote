@@ -28,6 +28,12 @@
       <%= render 'account/follows/button', account: account %>
     <% end %>
 
+    <% if current_member %>
+      <a href="<%= account_dashboard_posts_path(@account) %>" class="button button--filled width-100 justify-content-center">
+        <%= t 'common.dashboard' %>
+      </a>
+    <% end %>
+
     <div class="display-flex gap-3 justify-content-center">
       <% if account.user? %>
         <a href="<%= account_followings_path(account) %>" class="link-text margin-right-8">
