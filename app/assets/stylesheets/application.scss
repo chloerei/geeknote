@@ -450,13 +450,6 @@ body[data-color-scheme="dark"] {
   min-height: 88px;
 }
 
-.chip {
-  box-shadow: none;
-  border-radius: 16px;
-  background-color: var(--color-surface-variant);
-  color: var(--color-on-surface-variant);
-}
-
 summary {
   cursor: pointer;
 }
