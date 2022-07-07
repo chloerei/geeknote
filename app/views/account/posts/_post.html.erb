@@ -10,14 +10,11 @@
         <% if post.tags.any? %>
           <div class="display-flex gap-2 margin-bottom-3">
             <% post.tags.each do |tag| %>
-              <div class="chip">
-                <div class="chip__icon">
-                  <span class="material-icons">tag</span>
-                </div>
+              <a href="<%= tag_path(id: tag.name) %>" class="chip">
                 <div class="chip__label">
                   <%= tag.name %>
                 </div>
-              </div>
+              </a>
             <% end %>
           </div>
         <% end %>
