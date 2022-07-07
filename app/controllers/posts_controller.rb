@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     render :index
   end
 
-  def latest
+  def newest
     @posts = Post.published.order(published_at: :desc).page(params[:page])
     render :index
   end

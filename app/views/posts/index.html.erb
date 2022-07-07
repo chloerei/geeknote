@@ -3,48 +3,30 @@
     <div class="navbar display-flex flex-direction-column gap-3">
       <div class="card card--surface padding-2">
         <div class="nav">
-          <a href="" class="nav__item nav__item--active">
+          <a href="<%= root_path %>" class="nav__item <%= 'nav__item--active' if action_name == 'index' %>">
             <div class="nav__item__icon">
-              <span class="material-icons">trending_up</span>
+              <span class="material-icons">whatshot</span>
             </div>
             <div class="nav__item__label">
-              Popular
+              <%= t 'common.hot' %>
             </div>
           </a>
-          <a href="" class="nav__item">
+          <a href="<%= following_posts_path %>" class="nav__item <%= 'nav__item--active' if action_name == 'following' %>">
             <div class="nav__item__icon">
               <span class="material-icons">feed</span>
             </div>
             <div class="nav__item__label">
-              Feed
+              <%= t 'common.feed' %>
             </div>
           </a>
-          <a href="" class="nav__item">
+          <a href="<%= newest_posts_path %>" class="nav__item <%= 'nav__item--active' if action_name == 'newest' %>">
             <div class="nav__item__icon">
               <span class="material-icons">auto_awesome</span>
             </div>
             <div class="nav__item__label">
-              Newest
+              <%= t 'common.newest' %>
             </div>
           </a>
-        </div>
-      </div>
-
-      <div class="card card--surface padding-2">
-        <div class="title-medium padding-y-2 padding-x-3">
-          Popular Tags
-        </div>
-        <div class="nav">
-          <% Tag.order(taggings_count: :desc).limit(9).each do |tag| %>
-            <a href="<%= tag_path(id: tag.name) %>" class="nav__item">
-              <div class="nav__item__icon">
-                <span class="material-icons">tag</span>
-              </div>
-              <div class="nav__item__label">
-                <%= tag.name %>
-              </div>
-            </a>
-          <% end %>
         </div>
       </div>
     </div>
@@ -92,6 +74,24 @@
           </div>
         <% end %>
       <% end %>
+
+      <div class="card card--surface padding-2">
+        <div class="title-medium padding-2">
+          <%= t 'common.popular_tags' %>
+        </div>
+        <div class="nav">
+          <% Tag.order(taggings_count: :desc).limit(5).each do |tag| %>
+            <a href="<%= tag_path(id: tag.name) %>" class="nav__item">
+              <div class="nav__item__icon">
+                <span class="material-icons">tag</span>
+              </div>
+              <div class="nav__item__label">
+                <%= tag.name %>
+              </div>
+            </a>
+          <% end %>
+        </div>
+      </div>
 
       <div class="card card--surface padding-3">
         <h3 class="title-medium margin-top-0">

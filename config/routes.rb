@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   resources :posts, only: [] do
     collection do
       get :following
-      get :latest
+      get :newest
     end
   end
 
