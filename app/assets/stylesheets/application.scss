@@ -254,8 +254,30 @@ body[data-color-scheme="dark"] {
   color: var(--color-on-surface-variant);
 }
 
-.button--liked {
+.button--like {
+  color: var(--color-on-surface-variant);
+}
+
+.button--like.button--active {
   color: #f44336;
+}
+
+.button__show-on-active {
+  display: none;
+}
+
+.button__hdie-on-active {
+  display: inherit;
+}
+
+.button--active {
+  .button__show-on-active {
+    display: inherit;
+  }
+
+  .button__hide-on-active {
+    display: none;
+  }
 }
 
 .banner-image {

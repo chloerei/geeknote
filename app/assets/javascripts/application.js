@@ -66,6 +66,9 @@ application.register('image-uploader', ImageUploaderController)
 import MarkdownEditorController from './controllers/markdown_editor_controller'
 application.register('markdown-editor', MarkdownEditorController)
 
+import CommentController from './controllers/comment_controller'
+application.register('comment', CommentController)
+
 import './lib/turbo_preserve_scroll'
 
 // clean snackbar content

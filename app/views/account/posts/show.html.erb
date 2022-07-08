@@ -127,8 +127,8 @@
           </div>
         <% end %>
 
-        <div id="comments" class="display-flex flex-direction-column gap-3">
-          <%= render partial: 'account/posts/comments/comment', collection: @post.comments.with_liked(current_user).order(created_at: :desc).limit(3).reverse, cached: -> (comment) { [comment, comment.liked] } %>
+        <div id="comments" class="display-flex flex-direction-column gap-3" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
+          <%= render partial: 'account/posts/comments/comment', collection: @comments, cached: true %>
         </div>
 
         <% if @post.allow_comments? %>

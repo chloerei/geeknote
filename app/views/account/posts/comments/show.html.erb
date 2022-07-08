@@ -25,8 +25,8 @@
         <%= t 'common.replies' %>
       </div>
 
-      <div id="comments" class="display-flex flex-direction-column gap-3 comment-replies">
-        <%= render partial: 'comment', collection: @replies, cached: -> (comment) { [comment, comment.liked] } %>
+      <div id="comments" class="display-flex flex-direction-column gap-3 comment-replies" data-liked-ids="<%= "[#{@replies.filter(&:liked).map(&:id).join(',')}]" %>">
+        <%= render partial: 'comment', collection: @replies, cached: true %>
       </div>
 
       <div class="margin-3">
