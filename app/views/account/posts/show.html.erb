@@ -27,7 +27,7 @@
         <div class="card card--surface padding-3 display-flex flex-direction-column gap-2 position-sticky top-3 z-index-1">
           <%= render 'account/posts/likes/button', post: @post %>
 
-          <a href="#comments" class="button button--text width-100">
+          <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100">
             <div class="button__icon">
               <span class="material-icons">comments</span>
             </div>
@@ -119,8 +119,20 @@
           <% end %>
         </div>
 
+        <% if @post.comments_count > 3 %>
+          <div class="margin-y-3">
+            <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100 justify-content-center">
+              <%= t 'common.show_all_comments' %> (<%= @post.comments_count %>)
+            </a>
+          </div>
+        <% end %>
+
+        <div id="comments" class="display-flex flex-direction-column gap-3">
+          <%= render partial: 'account/posts/comments/comment', collection: @post.comments.with_liked(current_user).order(created_at: :desc).limit(3).reverse, cached: -> (comment) { [comment, comment.liked] } %>
+        </div>
+
         <% if @post.allow_comments? %>
-          <div class="margin-bottom-3">
+          <div class="margin-top-3">
             <% if current_user %>
               <%= render 'account/posts/comments/form', comment: Comment.new %>
             <% else %>
@@ -129,17 +141,6 @@
               </a>
             <% end %>
           </div>
-
-          <div id="comments" class="display-flex flex-direction-column gap-3">
-            <%= render partial: 'account/posts/comments/comment', collection: @post.comments.with_liked(current_user).order(created_at: :desc).limit(3), cached: -> (comment) { [comment, comment.liked] } %>
-          </div>
-          <% if @post.comments_count > 3 %>
-            <div class="margin-y-3">
-              <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100 justify-content-center">
-                <%= t 'common.show_all_comments' %> (<%= @post.comments_count %>)
-              </a>
-            </div>
-          <% end %>
         <% else %>
           <div class="padding-3 text-muted text-align-center">
             <%= t 'common.comment_is_disabled' %>

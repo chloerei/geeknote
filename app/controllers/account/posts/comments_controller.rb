@@ -2,11 +2,12 @@ class Account::Posts::CommentsController < Account::Posts::BaseController
   before_action :require_sign_in, except: [:index, :show]
 
   def index
-    @comments = @post.comments.with_liked(current_user).order(created_at: :desc).page(params[:page])
+    @comments = @post.comments.with_liked(current_user).order(created_at: :asc).page(params[:page])
   end
 
   def show
     @comment = @post.comments.find params[:id]
+    @replies = @comment.replies.with_liked(current_user).order(created_at: :asc).page(params[:page])
   end
 
   def create
