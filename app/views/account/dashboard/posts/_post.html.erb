@@ -1,4 +1,4 @@
-<div class="post-item display-flex gap-3 padding-y-3 padding-right-3 border-bottom position-relative">
+<div id="post-item-<%= post.id %>" class="post-item display-flex align-items-center gap-3 padding-y-3 border-bottom position-relative">
   <div class="flex-grow-1">
     <div class="title-medium">
       <a href="<%= edit_account_dashboard_post_path(@account, post) %>" class="link-title link-expended break-word">
@@ -15,9 +15,38 @@
       <% end %>
     </div>
   </div>
-  <div class="">
+  <div class="flex-shrink-0">
     <div class="post-status post-status--<%= post.status %> text-nowrap">
       <%= Post.human_attribute_name "status.#{post.status}" %>
     </div>
+  </div>
+  <div class="flex-shrink-0">
+    <div class="dropdown" data-controller="dropdown">
+      <button type="button" class="button button--icon" data-action="dropdown#toggle">
+        <span class="material-icons">more_horiz</span>
+      </button>
+      <div class="dropdown__container dropdown__container--top-right">
+        <a href="<%= account_post_path(@account, post) %>" class="dropdown__item">
+          <div class="dropdown__item__icon">
+            <span class="material-icons">preview</span>
+          </div>
+          <div class="dropdown__item__label">
+            <%= t 'common.view' %>
+          </div>
+        </a>
+        <hr class="divider">
+        <%= form_with url: account_dashboard_post_path(@account, post), method: :delete, data: { turbo_confirm: t('common.post_delete_confirm') } do %>
+          <button type="submit" class="dropdown__item">
+            <div class="dropdown__item__icon">
+              <span class="material-icons">delete</span>
+            </div>
+            <div class="dropdown__item__label">
+              <%= t 'common.delete' %>
+            </div>
+          </button>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 </div>

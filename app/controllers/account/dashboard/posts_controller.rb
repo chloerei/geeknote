@@ -5,17 +5,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   before_action :check_publish_permission, only: [:publish, :unpublish]
 
   def index
-    @posts = scoped_posts.preload(:tags).order(updated_at: :desc).page(params[:page])
-
-    if Post.statuses.include?(params[:status])
-      @posts = @posts.where(status: params[:status])
-    else
-      @posts = @posts.not_trashed
-    end
-
-    if params[:tag]
-      @posts = @posts.tagged_with(params[:tag])
-    end
+    @posts = scoped_posts.where(status: [:draft, :published]).order(updated_at: :desc).page(params[:page])
   end
 
   def new
@@ -48,17 +38,13 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
 
   def destroy
     @post.destroy
-    redirect_to account_dashboard_posts_url(@account)
+    render turbo_stream: turbo_stream.remove("post-item-#{@post.id}")
   end
 
   private
 
   def post_params
     params.require(:post).permit(:title, :content, :featured_image, :remove_featured_image, tag_list: [])
-  end
-
-  def post_filter_params
-    request.params.slice(:status, :tag)
   end
 
   def scoped_posts

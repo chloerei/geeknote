@@ -11,6 +11,7 @@ class Post < ApplicationRecord
   has_secure_token :preview_token
   has_one_attached :featured_image
 
+  # TODO: remove and clean trashed post
   enum status: {
     draft: 0,
     published: 1,

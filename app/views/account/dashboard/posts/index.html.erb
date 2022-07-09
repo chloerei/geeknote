@@ -9,48 +9,6 @@
             <%= t 'common.posts' %>
           </div>
 
-          <div class="dropdown" data-controller="dropdown">
-            <button type="button" class="button button--text" data-action="dropdown#toggle">
-              <div class="button__label">
-                <% if Post.statuses.include?(params[:status]) %>
-                  <%= Post.human_attribute_name("status.#{params[:status]}") %>
-                <% else %>
-                  <%= t 'common.status' %>
-                <% end %>
-              </div>
-              <div class="button__icon">
-                <span class="material-icons">expand_more</span>
-              </div>
-            </button>
-            <div class="dropdown__container dropdown__container--top-right">
-              <a href="<%= url_for(post_filter_params.merge(status: nil)) %>" class="dropdown__item"><%= t "common.all" %></a>
-              <% Post.statuses.keys.each do |status| %>
-                <a href="<%= url_for(post_filter_params.merge(status: status)) %>" class="dropdown__item"><%= Post.human_attribute_name("status.#{status}") %></a>
-              <% end %>
-            </div>
-          </div>
-
-          <div class="dropdown" data-controller="dropdown">
-            <button type="button" class="button button--text" data-action="dropdown#toggle">
-              <div class="button__label">
-                <% if params[:tag] %>
-                  <%= params[:tag] %>
-                <% else %>
-                  <%= t 'common.tags' %>
-                <% end %>
-              </div>
-              <div class="button__icon">
-                <span class="material-icons">expand_more</span>
-              </div>
-            </button>
-            <div class="dropdown__container dropdown__container--top-right">
-              <a href="<%= url_for(post_filter_params.merge(tag: nil)) %>" class="dropdown__item">All</a>
-              <% @account.post_tags.each do |tag| %>
-                <a href="<%= url_for(post_filter_params.merge(tag: tag.name)) %>" class="dropdown__item"><%= tag.name %></a>
-              <% end %>
-            </div>
-          </div>
-
           <a href="<%= new_account_dashboard_post_path(@account) %>" class="button button--outlined">
             <div class="button__icon">
               <span class="material-icons">post_add</span>
