@@ -1,6 +1,6 @@
 class Account::FeedController < Account::BaseController
   def index
-    @posts = scoped_posts.order(published_at: :desc).includes(:author_users).limit(20)
+    @posts = scoped_posts.order(published_at: :desc).limit(20)
 
     respond_to do |format|
       format.atom
@@ -11,7 +11,7 @@ class Account::FeedController < Account::BaseController
 
   def scoped_posts
     if @account.user?
-      @account.owner.author_posts.published
+      @account.owner.posts.published
     else
       @account.posts.published
     end

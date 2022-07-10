@@ -3,6 +3,7 @@ FactoryBot.define do
     title { 'Title' }
     content { 'Content' }
     account factory: :user_account
+    user
 
     factory :published_post do
       status { 'published' }

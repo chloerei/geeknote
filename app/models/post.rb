@@ -4,8 +4,7 @@ class Post < ApplicationRecord
   include Commentable
 
   belongs_to :account
-  has_many :authors
-  has_many :author_users, through: :authors, source: :user
+  belongs_to :user
   has_many :revisions, class_name: 'PostRevision', dependent: :delete_all
 
   has_secure_token :preview_token
@@ -22,7 +21,7 @@ class Post < ApplicationRecord
   validates :feed_source_id, uniqueness: { scope: :account_id }, allow_blank: true
 
   scope :following_by, -> (user) {
-    joins(:authors).where(account: user.followings).or(where(authors: { user: user.following_users } )).distinct
+    where(account: user.followings).or(where(user: user.following_users)).distinct
   }
 
   scope :hot, -> {
@@ -38,12 +37,6 @@ class Post < ApplicationRecord
   def set_published_at
     if published_at.nil? && status_changed? && status == 'published'
       self.published_at = Time.now
-    end
-  end
-
-  def author_list=(list)
-    if account.organization?
-      self.author_users = account.owner.member_users.joins(:account).where(account: { name: list })
     end
   end
 

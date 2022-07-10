@@ -4,7 +4,7 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
   test "should not get other account posts" do
     user = create(:user)
     other = create(:user)
-    create(:post, account: user.account, author_users: [user])
+    create(:post, account: user.account, user: user)
 
     sign_in other
     get account_dashboard_posts_url(user.account)
@@ -21,7 +21,7 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
     nobody = create(:user)
     writer = create(:member, organization: organization, role: 'writer').user
     editor = create(:member, organization: organization, role: 'editor').user
-    create(:post, account: organization.account, author_users: [writer])
+    create(:post, account: organization.account, user: writer)
     create(:post, account: organization.account)
 
     sign_in nobody
@@ -63,7 +63,7 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
     end
     last_post = user.account.posts.last
     assert_redirected_to account_post_url(user.account, last_post)
-    assert_equal user, last_post.author_users.first
+    assert_equal user, last_post.user
   end
 
   test "should create post as member" do
@@ -76,12 +76,12 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
     end
     last_post = organization.account.posts.last
     assert_redirected_to account_post_url(organization.account, last_post)
-    assert_equal user, last_post.author_users.first
+    assert_equal user, last_post.user
   end
 
   test "should get edit page as user" do
     user = create(:user)
-    one_post = create(:post, account: user.account, author_users: [user])
+    one_post = create(:post, account: user.account, user: user)
     sign_in user
     get edit_account_dashboard_post_path(user.account, one_post)
     assert_response :success
@@ -93,7 +93,7 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
     writer = create(:member, organization: organization, role: 'writer').user
     editor = create(:member, organization: organization, role: 'editor').user
 
-    writer_post = create(:post, account: organization.account, author_users: [writer])
+    writer_post = create(:post, account: organization.account, user: writer)
     other_post = create(:post, account: organization.account)
 
     get edit_account_dashboard_post_path(organization.account, writer_post)
@@ -123,7 +123,7 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
     writer = create(:member, organization: organization, role: 'writer').user
     editor = create(:member, organization: organization, role: 'editor').user
 
-    writer_post = create(:post, account: organization.account, author_users: [writer])
+    writer_post = create(:post, account: organization.account, user: writer)
     other_post = create(:post, account: organization.account)
 
     patch account_dashboard_post_path(organization.account, writer_post), params: { post: { title: 'change by none' }}, as: :turbo_stream

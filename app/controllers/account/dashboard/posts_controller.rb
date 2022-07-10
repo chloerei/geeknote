@@ -13,7 +13,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   end
 
   def create
-    @post = @account.posts.new post_params.merge(author_users: [current_user])
+    @post = @account.posts.new post_params.merge(user: current_user)
     @post.save
 
     if params[:submit] == 'publish'
@@ -51,7 +51,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
     if current_member.has_permission?(:edit_other_post)
       @account.posts
     else
-      @account.posts.joins(:authors).where(authors: { user: current_user })
+      @account.posts.where(user: current_user )
     end
   end
 
@@ -60,7 +60,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   end
 
   def check_publish_permission
-    unless current_member.has_permission?(:publish_other_post) || (current_member.has_permission?(:publish_own_post) && @post.authors.include?(current_user))
+    unless current_member.has_permission?(:publish_other_post) || (current_member.has_permission?(:publish_own_post) && @post.user == current_user)
       render_not_found
     end
   end

@@ -17,11 +17,9 @@ atom_feed(root_url: account_root_url(@account), id: account_root_url(@account)) 
         entry.content(markdown_render(post.content), type: 'html')
         entry.summary(post_summary(post))
 
-        post.author_users.each do |user|
-          entry.author do |author|
-            author.name user.name
-            author.uri account_root_url(user.account)
-          end
+        entry.author do |author|
+          author.name post.user.name
+          author.uri account_root_url(post.user.account)
         end
       end
     end

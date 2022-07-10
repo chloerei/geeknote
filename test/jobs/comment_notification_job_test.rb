@@ -5,7 +5,7 @@ class CommentNotificationJobTest < ActiveJob::TestCase
 
   test "should create notification for post author" do
     user = create(:user)
-    post = create(:post, author_users: [user])
+    post = create(:post, user: user)
     comment = create(:comment, commentable: post)
 
     assert_difference "user.notifications.count" do
@@ -25,7 +25,7 @@ class CommentNotificationJobTest < ActiveJob::TestCase
 
   test "should send email if author enable email notification" do
     user = create(:user)
-    post = create(:post, author_users: [user])
+    post = create(:post, user: user)
     comment = create(:comment, commentable: post)
 
     assert_no_emails do

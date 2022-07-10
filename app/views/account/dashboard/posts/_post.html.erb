@@ -6,7 +6,7 @@
       </a>
     </div>
     <div class="text-muted">
-      <%= post.author_users.pluck(:name).join(', ') %>
+      <%= post.user.name %>
       &centerdot;
       <%= format_time post.updated_at %>
       <% if post.restricted? %>

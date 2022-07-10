@@ -58,7 +58,7 @@
               <%= @post.title.presence || t('common.untitled') %>
             </h1>
 
-            <div class="dropdown" data-controller="dropdown" data-visible-to-user="<%= @post.author_users.pluck(:id).first %>">
+            <div class="dropdown" data-controller="dropdown" data-visible-to-user="<%= @post.user.id %>">
               <button type="button" class="button button--icon" data-action="dropdown#toggle">
                 <span class="material-icons">more_horiz</span>
               </button>

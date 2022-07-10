@@ -4,7 +4,7 @@ namespace :data do
     Post.find_each do |post|
       post.save_revision(
         status: post.published? ? 'published' : 'draft',
-        user: post.author_users.first
+        user: post.user
       )
     end
   end

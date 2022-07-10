@@ -8,14 +8,14 @@ class AccountExportDataJobTest < ActiveJob::TestCase
     post_1 = account.posts.create(
       title: 'post title 1',
       content:  'post content 1',
-      author_users: [account.owner],
+      user: account.owner,
       status: 'draft'
     )
 
     post_2 = account.posts.create(
       title: 'post title 2',
       content:  'post content 2',
-      author_users: [account.owner],
+      user: account.owner,
       status: 'published',
       published_at: DateTime.new(2022, 1, 1),
       tag_list: ['Ruby', 'JavaScript']
@@ -37,7 +37,7 @@ class AccountExportDataJobTest < ActiveJob::TestCase
           ---
           layout: post
           title: post title 1
-          authors: [User Name]
+          author: User Name
           tags: []
           ---
 
@@ -50,7 +50,7 @@ class AccountExportDataJobTest < ActiveJob::TestCase
           layout: post
           title: post title 2
           date: 2022-01-01 00:00:00 UTC
-          authors: [User Name]
+          author: User Name
           tags: [Ruby, JavaScript]
           ---
 

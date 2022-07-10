@@ -24,7 +24,7 @@ class Member < ApplicationRecord
   end
 
   def can_edit_post?(post)
-    role.in?(%w(owner admin editor)) || post.authors.include?(user)
+    role.in?(%w(owner admin editor)) || post.user == user
   end
 
   enum status: {

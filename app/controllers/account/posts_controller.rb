@@ -24,7 +24,7 @@ class Account::PostsController < Account::BaseController
 
   def scoped_posts
     if @account.user?
-      @account.owner.author_posts.published
+      @account.owner.posts.published
     else
       @account.posts.published
     end
