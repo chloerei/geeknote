@@ -47,7 +47,7 @@ class Account::Dashboard::CollectionsController < Account::Dashboard::BaseContro
   private
 
   def check_manage_permission
-    unless current_member.has_permission?(:manage_collections)
+    unless current_member.role.in?(%w(owner admin))
       render_not_found
     end
   end

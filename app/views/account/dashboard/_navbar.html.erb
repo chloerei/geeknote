@@ -18,22 +18,32 @@
           <%= t 'common.posts' %>
         </div>
       </a>
-      <a href="<%= account_dashboard_collections_path(@account) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'collections' %>">
-        <div class="nav__item__icon">
-          <span class="material-icons">library_books</span>
-        </div>
-        <div class="nav__item__label">
-          <%= t 'common.collections' %>
-        </div>
-      </a>
-      <a href="<%= account_dashboard_settings_root_path(@account) %>" class="nav__item <%= 'nav__item--active' if request.path.include?('dashboard/settings') %>">
-        <div class="nav__item__icon">
-          <span class="material-icons">settings</span>
-        </div>
-        <div class="nav__item__label">
-          <%= t 'common.settings' %>
-        </div>
-      </a>
+      <% if current_member.role.in?(%w(owner admin)) %>
+        <a href="<%= account_dashboard_collections_path(@account) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'collections' %>">
+          <div class="nav__item__icon">
+            <span class="material-icons">library_books</span>
+          </div>
+          <div class="nav__item__label">
+            <%= t 'common.collections' %>
+          </div>
+        </a>
+        <a href="<%= account_dashboard_members_path(@account) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'members' %>">
+          <div class="nav__item__icon">
+            <span class="material-icons">people</span>
+          </div>
+          <div class="nav__item__label">
+            <%= t 'common.members' %>
+          </div>
+        </a>
+        <a href="<%= account_dashboard_settings_root_path(@account) %>" class="nav__item <%= 'nav__item--active' if request.path.include?('dashboard/settings') %>">
+          <div class="nav__item__icon">
+            <span class="material-icons">settings</span>
+          </div>
+          <div class="nav__item__label">
+            <%= t 'common.settings' %>
+          </div>
+        </a>
+      <% end %>
     </div>
   </div>
 </div>

@@ -2,7 +2,6 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   helper_method :post_filter_params
 
   before_action :set_post, only: [:edit, :update, :publish, :unpublish, :trash, :restore, :destroy]
-  before_action :check_publish_permission, only: [:publish, :unpublish]
 
   def index
     @posts = scoped_posts.where(status: [:draft, :published]).order(updated_at: :desc).page(params[:page])
@@ -48,7 +47,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   end
 
   def scoped_posts
-    if current_member.has_permission?(:edit_other_post)
+    if current_member.role.in?(%w(owner admin))
       @account.posts
     else
       @account.posts.where(user: current_user )
@@ -57,11 +56,5 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
 
   def set_post
     @post = scoped_posts.find params[:id]
-  end
-
-  def check_publish_permission
-    unless current_member.has_permission?(:publish_other_post) || (current_member.has_permission?(:publish_own_post) && @post.user == current_user)
-      render_not_found
-    end
   end
 end

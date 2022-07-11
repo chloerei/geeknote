@@ -10,20 +10,16 @@ class Account::InvitationsController < Account::BaseController
     if @member.update(user: current_user, status: :active, actived_at: Time.now)
       redirect_to account_dashboard_posts_path(@member.organization.account)
     else
-      redirect_to account_invitation_path(invitation_token: @member.user_id_was ? nil : @member.invitation_token)
+      redirect_to account_invitation_path(invitation_token: @member.invitation_token)
     end
   end
 
   private
 
   def set_member
-    @member = if params[:invitation_token]
-      @account.owner.members.invitations.find_by user:nil, invitation_token: params[:invitation_token]
-    elsif current_user
-      @account.owner.members.invitations.find_by user: current_user
-    end
+    @member = @account.owner.members.pending.find_by user: nil, invitation_token: params[:invitation_token]
 
-    unless @member
+    unless @member && @member.invited_at > 7.days.ago
       render 'expired', status: :not_found
     end
   end

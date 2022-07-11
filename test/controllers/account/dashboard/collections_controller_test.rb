@@ -10,17 +10,17 @@ class Account::Dashboard::CollectionsControllerTest < ActionDispatch::Integratio
   end
 
   test "should check manage permission" do
-    writer = create(:user)
-    editor = create(:user)
     organization = create(:organization)
-    organization.members.create(user: writer, role: 'writer')
-    organization.members.create(user: editor, role: 'editor')
+    member = create(:user)
+    admin = create(:user)
+    organization.members.create(user: member, role: 'member')
+    organization.members.create(user: admin, role: 'admin')
 
-    sign_in writer
+    sign_in member
     get account_dashboard_collections_path(organization.account)
     assert_response :not_found
 
-    sign_in editor
+    sign_in admin
     get account_dashboard_collections_path(organization.account)
     assert_response :success
   end

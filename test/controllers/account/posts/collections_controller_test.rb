@@ -42,7 +42,7 @@ class Account::Posts::CollectionsControllerTest < ActionDispatch::IntegrationTes
       put switch_account_post_collections_path(post.account, post, account: organization.account.name)
     end
 
-    organization.members.create(user: user, role: 'editor')
+    organization.members.create(user: user, role: 'admin')
     put switch_account_post_collections_path(post.account, post, account: organization.account.name)
     assert_redirected_to account_post_collections_path(post.account, post)
 

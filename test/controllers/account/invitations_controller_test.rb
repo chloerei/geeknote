@@ -23,14 +23,6 @@ class Account::InvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
-  test "should get invitation by invited user" do
-    user = create(:user)
-    invitation = create(:invitation, organization: @organization, user: user)
-    sign_in user
-    get account_invitation_path(@organization.account)
-    assert_response :success
-  end
-
   test "should not get invitation by not invited user" do
     user = create(:user)
     sign_in user
@@ -55,38 +47,5 @@ class Account::InvitationsControllerTest < ActionDispatch::IntegrationTest
     invitation.reload
     assert invitation.active?
     assert current_user, invitation.user
-  end
-
-  test "should accept invitation by user" do
-    user = create(:user)
-    invitation = create(:invitation, organization: @organization, user: user)
-    sign_in user
-    assert_difference "@organization.members.active.count" do
-      patch account_invitation_path(@organization.account)
-    end
-    assert_redirected_to account_dashboard_posts_path(@organization.account)
-  end
-
-  test "should not accept invitation if user not match" do
-    user = create(:user)
-    invitation = create(:invitation, organization: @organization, user: user)
-    other_user = create(:user)
-    sign_in other_user
-
-    assert_no_difference "@organization.members.active.count" do
-      patch account_invitation_path(@organization.account, invitation_token: invitation.invitation_token)
-    end
-    assert_response :not_found
-  end
-
-  test "should not accept invitation by member" do
-    user = create(:member, organization: @organization).user
-    invitation = create(:invitation, organization: @organization)
-    sign_in user
-
-    assert_no_difference "@organization.members.active.count" do
-      patch account_invitation_path(@organization.account, invitation_token: invitation.invitation_token)
-    end
-    assert_redirected_to account_invitation_path(@organization.account, invitation_token: invitation.invitation_token)
   end
 end
