@@ -50,7 +50,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
     if current_member.role.in?(%w(owner admin))
       @account.posts
     else
-      @account.posts.where(user: current_user )
+      @account.posts.where(user: current_user)
     end
   end
 
