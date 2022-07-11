@@ -72,14 +72,6 @@ class Account::Dashboard::MembersController < Account::Dashboard::BaseController
     end
   end
 
-  def new_member_params
-    params.require(:member).permit(:identifier, :role)
-  end
-
-  def edit_member_params
-    params.require(:member).permit(:role)
-  end
-
   def require_manage_permission
     unless current_member.role.in?(%w(owner admin))
       render_not_found
