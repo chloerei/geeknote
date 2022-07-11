@@ -9,14 +9,18 @@
 
   <div class="profile-card__avatar">
     <div class="avatar avatar--medium">
-      <%= avatar_image_tag account.owner.avatar %>
+      <a href="<%= account_root_path(account) %>">
+        <%= avatar_image_tag account.owner.avatar %>
+      </a>
     </div>
   </div>
 
   <div class="display-flex flex-direction-column gap-3 padding-3">
     <div class="text-align-center">
       <div class="title-large margin-bottom-3">
-        <%= account.display_name %>
+        <a href="<%= account_root_path(account) %>" class="link-title">
+          <%= account.display_name %>
+        </a>
       </div>
 
       <div class="">

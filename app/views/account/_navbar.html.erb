@@ -18,16 +18,16 @@
     </div>
   <% end %>
 
-  <% if @account.organization? && @account.owner.member_users.any? %>
+  <% if @account.organization? && @account.owner.members.active.any? %>
     <div class="card card--surface padding-3">
       <div class="title-medium margin-bottom-3">
         <%= t 'common.members' %>
       </div>
       <div class="display-flex gap-2">
-        <% @account.owner.member_users.order('members.created_at asc').each do |user| %>
-          <a href="<%= account_root_path(user.account) %>" title="<%= user.name %>">
+        <% @account.owner.members.active.order('created_at asc').each do |member| %>
+          <a href="<%= account_root_path(member.user.account) %>" title="<%= member.user.name %>">
             <div class="avatar">
-              <%= avatar_image_tag user.avatar %>
+              <%= avatar_image_tag member.user.avatar %>
             </div>
           </a>
         <% end %>
