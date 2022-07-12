@@ -27,11 +27,13 @@
   top: 0;
   z-index: 1;
   flex-shrink: 0;
+  overflow-x: auto;
 
   .button--text {
     padding: 8px;
     color: var(--color-on-surface-variant);
     border-radius: var(--space-1);
+    flex-shrink: 0;
   }
 
   .button__icon {
@@ -46,6 +48,7 @@
   .button--icon {
     border-radius: var(--space-1);
     color: var(--color-on-surface-variant);
+    flex-shrink: 0;
   }
 
   .button--active {
