@@ -475,3 +475,11 @@ body[data-color-scheme="dark"] {
 summary {
   cursor: pointer;
 }
+
+.show-on-empty {
+  display: none;
+}
+
+.show-on-empty:last-child {
+  display: block;
+}
