@@ -1,3 +1,5 @@
+@use "sass:map";
+
 $material-icons-font-path: '';
 @import 'material-icons/iconfont/material-icons.scss';
 
@@ -98,12 +100,26 @@ body[data-color-scheme="dark"] {
 }
 
 .layout {
-  display: grid;
-  grid-template-columns: 240px minmax(0, 1fr) 280px;
-  grid-template-areas:
-    "navbar main sidebar";
-  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
   gap: 16px;
+
+  @media (min-width: map.get($breakpoints, 'tablet')) {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    grid-template-areas:
+      "navbar main"
+      "sidebar main"
+      ". main";
+  }
+
+  @media (min-width: map.get($breakpoints, 'laptop')) {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr) 280px;
+    grid-template-areas:
+      "navbar main sidebar";
+  }
 }
 
 .navbar {
