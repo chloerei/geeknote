@@ -50,7 +50,7 @@
     </div>
 
     <div class="text-align-center">
-      <%= local_date account.created_at.to_date %> <%= t 'common.joined' %>
+      <%= local_time account.created_at.to_date, format: I18n.t("date.formats.long") %> <%= t 'common.joined' %>
     </div>
 
     <div class="display-flex gap-2 justify-content-center">

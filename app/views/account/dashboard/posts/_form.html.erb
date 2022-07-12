@@ -15,7 +15,7 @@
             <span class="material-icons">add_photo_alternate</span>
           </div>
           <div class="button__label">
-            Feature Image
+            <%= t Post.human_attribute_name :featured_image %>
           </div>
         </label>
         <label class="button button--icon image-uploader__show-on-active">
@@ -57,7 +57,7 @@
     </summary>
 
     <div class="margin-bottom-3">
-      <%= form.text_field :canonical_url %>
+      <%= form.text_field :canonical_url, helper_text: I18n.t('common.canonical_url_helper') %>
     </div>
   </details>
 
