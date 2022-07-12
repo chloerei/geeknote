@@ -49,7 +49,14 @@ const classHighlightStyle = HighlightStyle.define([
 export default class extends Controller {
   static values = {
     input: String,
-    directUploadUrl: String
+    directUploadUrl: String,
+    i18n: {
+      type: Object,
+      default: {
+        write: 'Write',
+        preview: 'Preview'
+      }
+    }
   }
 
   static targets = ["content", "preview"]
@@ -62,7 +69,7 @@ export default class extends Controller {
             <span class="material-icons">edit</span>
           </div>
           <div class="button__label">
-            Write
+            ${this.i18nValue.write}
           </div>
         </button>
         <button type="button" class="button button--text markdown-editor__preview-button" data-action="markdown-editor#preview" tabindex="-1">
@@ -70,7 +77,7 @@ export default class extends Controller {
             <span class="material-icons">preview</span>
           </div>
           <div class="button__label">
-            Preview
+            ${this.i18nValue.preview}
           </div>
         </button>
         <div class="flex-grow-1">

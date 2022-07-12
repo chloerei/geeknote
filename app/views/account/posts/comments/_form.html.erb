@@ -11,7 +11,7 @@
           <%= form.hidden_field :parent_id %>
           <div class="margin-bottom-3">
             <%= form.hidden_field :content, id: 'comment-content' %>
-            <div class="markdown-editor" data-controller="markdown-editor" data-markdown-editor-input-value="comment-content" data-markdown-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>">
+            <div class="markdown-editor" data-controller="markdown-editor" data-markdown-editor-input-value="comment-content" data-markdown-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>" data-markdown-editor-i18n-value="<%= { write: I18n.t('markdown_editor.write'), preview: I18n.t('markdown_editor.preview') }.to_json %>">
             </div>
           </div>
           <% if comment.new_record? %>

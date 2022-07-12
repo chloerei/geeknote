@@ -299,6 +299,9 @@ zh-CN:
   mailer:
     account_mailer:
       export_complted_subject: 数据导出已完成
+  markdown_editor:
+    write: 编辑
+    preview: 预览
   posts:
     index:
       email_settings: 邮件地址设置
