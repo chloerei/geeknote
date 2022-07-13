@@ -4,7 +4,7 @@
       <div class="post-card__header">
         <h3 class="title-medium margin-top-0 margin-bottom-3">
           <a href="<%= account_post_path(post.account, post) %>" class="link-expended link-title" data-post-list-target="postLink">
-            <%= post.title %>
+            <%= post.title.presence || t('common.untitled') %>
           </a>
         </h3>
         <% if post.tags.any? %>
@@ -22,7 +22,7 @@
       <div class="display-flex align-items-center gap-3">
         <div class="flex-grow-1">
           <div class="display-flex gap-2 align-items-center">
-            <div class="avatar">
+            <div class="avatar flex-shrink-0">
               <%= avatar_image_tag post.account.owner.avatar %>
             </div>
             <div class="">
@@ -45,14 +45,16 @@
         </div>
       </div>
     </div>
-    <div class="featured-image-thumb">
-      <% if post.featured_image.attached? %>
-        <%= featured_image_thumb_tag post.featured_image %>
-      <% else %>
-        <div class="featured-image-thumb__placeholder">
-          <span class="material-icons">article</span>
-        </div>
-      <% end %>
+    <div class="flex-shrink-0">
+      <div class="featured-image-thumb">
+        <% if post.featured_image.attached? %>
+          <%= featured_image_thumb_tag post.featured_image %>
+        <% else %>
+          <div class="featured-image-thumb__placeholder">
+            <span class="material-icons">article</span>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
