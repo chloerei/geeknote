@@ -273,10 +273,9 @@ export default class extends Controller {
     let input = document.createElement('input')
     input.type = 'file'
     input.multiple = true
-    input.accept = 'image/*'
+    input.accept = 'image/jpeg, image/png, image/gif'
 
     input.onchange = (event) => {
-      console.log(event)
       this.uploadImages(event.target.files)
     }
 
