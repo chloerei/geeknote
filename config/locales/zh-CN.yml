@@ -77,9 +77,11 @@ zh-CN:
       post:
         allow_comments: 允许评论
         canonical_url: Canonical URL
+        content: 内容
         excerpt: 摘要
         featured: 置顶显示
         featured_image: 封面
+        title: 标题
       post/status:
         draft: 草稿
         published: 已发布
