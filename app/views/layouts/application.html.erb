@@ -23,13 +23,13 @@
             </a>
           </div>
           <div class="top-app-bar__action">
-            <div class="dropdown" data-controller="dropdown">
-              <button type="button" class="button button--icon button--avatar" data-action="dropdown#toggle">
+            <div class="dropdown dropdown--right">
+              <label tabindex="0" class="button button--icon button--avatar">
                 <div class="avatar">
                   <%= avatar_image_tag current_user.avatar %>
                 </div>
-              </button>
-              <div class="dropdown__container dropdown__container--top-right">
+              </label>
+              <div tabindex="0" class="dropdown__container">
                 <a href="<%= account_root_path(current_user.account) %>" class="dropdown__item">
                   <div class="dropdown__item__icon">
                     <span class="material-icons">account_box</span>
@@ -62,14 +62,14 @@
                     <%= t 'common.organizations' %>
                   </div>
                 </a>
-                <button type="button" class="dropdown__item" data-controller="toggle" data-toggle-target="#theme-dialog" data-toggle-action="dialog#open" data-action="dropdown#close">
+                <label for="theme-dialog-toggle" class="dropdown__item">
                   <div class="dropdown__item__icon">
                     <span class="material-icons">dark_mode</span>
                   </div>
                   <div class="dropdown__item__text">
                     <%= t 'common.theme' %>
                   </div>
-                </button>
+                </label>
                 <a href="<%= settings_root_path %>" class="dropdown__item">
                   <div class="dropdown__item__icon">
                     <span class="material-icons">settings</span>
@@ -104,19 +104,19 @@
             </a>
           </div>
           <div class="top-app-bar__action">
-            <div class="dropdown" data-controller="dropdown">
-              <button type="button" class="button button--icon" data-action="dropdown#toggle">
+            <div class="dropdown dropdown--right">
+              <label tabindex="0" class="button button--icon" data-action="dropdown#toggle">
                 <span class="material-icons">more_vert</span>
-              </button>
-              <div class="dropdown__container dropdown__container--top-right">
-                <button type="button" class="dropdown__item" data-controller="toggle" data-toggle-target="#theme-dialog" data-toggle-action="dialog#open" data-action="dropdown#close">
+              </label>
+              <div tabindex="0" class="dropdown__container">
+                <label for="theme-dialog-toggle" class="dropdown__item">
                   <div class="dropdown__item__icon">
                     <span class="material-icons">dark_mode</span>
                   </div>
                   <div class="dropdown__item__text">
                     <%= t 'common.theme' %>
                   </div>
-                </button>
+                </label>
               </div>
             </div>
           </div>
@@ -135,7 +135,8 @@
     <a href="https://geeknote.statuspage.io/" class="link-text" target="_blank"><%= t 'common.status' %></a>
   </div>
 
-  <div class="dialog" data-controller="dialog" id="theme-dialog">
+  <input type="checkbox" id="theme-dialog-toggle" class="dialog-toggle">
+  <div class="dialog">
     <div class="dialog__container">
       <div class="headline-small margin-x-1 margin-top-1 padding-3">
         <%= t 'common.theme' %>
@@ -176,14 +177,15 @@
         </label>
       </div>
       <div class="display-flex justify-content-flex-end padding-3">
-        <button type="button" class="button button--text" data-action="dialog#close">
+        <label for="theme-dialog-toggle" class="button button--text">
           <%= t 'common.done' %>
-        </button>
+        </label>
       </div>
     </div>
-    <div class="dialog__scrim" data-action="click->dialog#close">
+    <label for="theme-dialog-toggle" class="dialog__scrim"></label>
     </div>
   </div>
+
 <% end %>
 
 <%= render template: 'layouts/base' %>

@@ -12,9 +12,6 @@ import { Application } from "@hotwired/stimulus"
 
 const application = Application.start()
 
-import { init } from "@chloerei/material-ui/src/js/material-ui.js"
-init(application)
-
 import SelectorController from './controllers/selector_controller'
 application.register('selector', SelectorController)
 
@@ -68,6 +65,9 @@ application.register('markdown-editor', MarkdownEditorController)
 
 import CommentController from './controllers/comment_controller'
 application.register('comment', CommentController)
+
+import SnackbarController from './controllers/snackbar_controller'
+application.register('snackbar', SnackbarController)
 
 import './lib/turbo_preserve_scroll'
 

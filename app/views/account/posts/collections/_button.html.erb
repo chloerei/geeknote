@@ -1,16 +1,16 @@
-<button type="button" class="button button--text" data-controller="toggle" data-toggle-target="#post-<%= post.id %>-collections-dialog" data-toggle-action="dialog#open">
+<label for="post-<%= post.id %>-collections-dialog-toggle" class="button button--text">
   <div class="button__icon">
     <span class="material-icons">bookmark_add</span>
   </div>
   <div class="button__label">
     <%= t 'common.add_to_collection' %>
   </div>
-</button>
-<div id="post-<%= post.id %>-collections-dialog" class="dialog dialog--medium" data-controller="dialog">
+</label>
+<input type="checkbox" id="post-<%= post.id %>-collections-dialog-toggle" class="dialog-toggle">
+<div id="post-<%= post.id %>-collections-dialog" class="dialog dialog--medium">
   <div class="dialog__container">
     <%= turbo_frame_tag "post-#{post.id}-collections", src: account_post_collections_path(post.account, post), loading: 'lazy', class: 'flex flex-direction-column overflow-auto' do %>
     <% end %>
   </div>
-  <div class="dialog__scrim" data-action="click->dialog#close">
-  </div>
+  <label for="post-<%= post.id %>-collections-dialog-toggle" class="dialog__scrim"></label>
 </div>

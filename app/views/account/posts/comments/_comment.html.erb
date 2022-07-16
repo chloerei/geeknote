@@ -21,11 +21,11 @@
           </div>
         </div>
         <div class="toolbar__action" data-visible-to-user="<%= comment.user_id %>">
-          <div class="dropdown" data-controller="dropdown">
-            <button type="button" class="button button--icon" data-action="dropdown#toggle">
+          <div class="dropdown dropdown--right">
+            <label tabindex="0" class="button button--icon">
               <span class="material-icons">more_horiz</span>
-            </button>
-            <div class="dropdown__container dropdown__container--top-right">
+            </label>
+            <div tabindex="0" class="dropdown__container">
               <a href="<%= edit_account_post_comment_path(@account, @post, comment) %>" class="dropdown__item" data-visible-to-user="<%= comment.user_id %>">
                 <%= t 'common.edit' %>
               </a>

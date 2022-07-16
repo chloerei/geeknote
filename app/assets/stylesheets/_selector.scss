@@ -1,0 +1,107 @@
+.selector {
+  position: relative;
+  padding: 8px 16px;
+  flex-grow: 1;
+
+  select {
+    display: none;
+  }
+}
+
+.selector__container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.selector__text {
+  font-size: 16px;
+  line-height: 20px;
+  padding: 6px 0;
+  margin-right: -8px;
+}
+
+.selector__input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 6px 0;
+  flex-grow: 1;
+  background: transparent;
+  color: var(--color-on-surface);
+}
+
+.selector__menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  z-index: 1;
+  background: var(--color-surface);
+  color: var(--color-on-surface);
+  box-shadow: var(--shadow-1);
+  border-radius: 4px;
+}
+
+.selector--focus {
+  .selector--content {
+  }
+
+  .selector__menu {
+    display: flex;
+  }
+}
+
+
+.selector__item {
+  border: none;
+  padding: 8px 16px;
+  line-height: 24px;
+  font-size: 16px;
+  text-align: left;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+
+  @include state-layer;
+
+  &::after {
+    background-color: var(--color-primary);
+  }
+}
+
+.selector__item--focus {
+  &::after {
+    opacity: var(--opacity-state-focus);
+  }
+}
+
+.text-field {
+  .selector__container {
+    position: relative;
+    padding-right: 24px;
+
+    &::after {
+      content: '';
+      width: 12px;
+      height: 6px;
+      background-color: var(--color-on-surface-variant);
+      clip-path: polygon(100% 0%, 0% 0%, 50% 100%);
+      position: absolute;
+      top: 50%;
+      right: 0;
+      margin-top: -3px;
+      pointer-events: none;
+    }
+  }
+}
+
+.text-field--filled {
+  .selector__container {
+    padding-top: 4px;
+  }
+}

@@ -24,11 +24,11 @@
           <a href="<%= edit_account_dashboard_collection_path(@account, @collection) %>" class="button button--icon">
             <span class="material-icons">edit</span>
           </a>
-          <div class="dropdown" data-controller="dropdown">
-            <button type="button" class="button button--icon" data-action="dropdown#toggle">
+          <div class="dropdown dropdown--right">
+            <label tabindex="0" class="button button--icon">
               <span class="material-icons">more_vert</span>
-            </button>
-            <div class="dropdown__container dropdown__container--top-right">
+            </label>
+            <div tabindex="0" class="dropdown__container">
               <a href="<%= account_collection_path(@account, @collection) %>" class="dropdown__item">
                 <div class="dropdown__item__icon">
                   <span class="material-icons">preview</span>
@@ -69,11 +69,11 @@
             <%= t 'common.posts' %>
           </div>
           <div class="padding-1">
-            <div class="dropdown" data-controller="dropdown">
-              <button type="button" class="button button--icon" data-action="dropdown#toggle">
+            <div class="dropdown dropdown--right">
+              <label tabindex="0" class="button button--icon">
                 <span class="material-icons">sort</span>
-              </button>
-              <div class="dropdown__container dropdown__container--top-right">
+              </label>
+              <div tabindex="0" class="dropdown__container">
                 <% Collection.order_types.keys.each do |name| %>
                   <%= button_to account_dashboard_collection_path(@account, @collection), method: 'patch', class: "dropdown__item" do %>
                     <div class="dropdown__item__icon">
@@ -111,11 +111,11 @@
                     </div>
                   </div>
                   <div class="list__item__action">
-                    <div class="dropdown" data-controller="dropdown">
-                      <button type="button" class="button button--icon" data-action="dropdown#toggle">
+                    <div class="dropdown dropdown--right">
+                      <label tabindex="0" class="button button--icon">
                         <span class="material-icons">more_vert</span>
-                      </button>
-                      <div class="dropdown__container dropdown__container--top-right">
+                      </label>
+                      <div class="dropdown__container">
                         <a href="<%= account_post_path(collection_item.post.account, collection_item.post) %>" class="dropdown__item">
                           <div class="dropdown__item__icon">
                             <span class="material-icons">preview</span>

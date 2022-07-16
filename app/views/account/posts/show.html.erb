@@ -44,15 +44,17 @@
               <%= @post.title.presence || t('common.untitled') %>
             </h1>
 
-            <div class="dropdown" data-controller="dropdown" data-visible-to-user="<%= @post.user.id %>">
-              <button type="button" class="button button--icon" data-action="dropdown#toggle">
-                <span class="material-icons">more_horiz</span>
-              </button>
+            <div class="flex-shrink-0" data-visible-to-user="<%= @post.user.id %>">
+              <div class="dropdown dropdown--right">
+                <label tabindex="0" class="button button--icon">
+                  <span class="material-icons">more_horiz</span>
+                </label>
 
-              <div class="dropdown__container dropdown__container--top-right">
-                <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="dropdown__item">
-                  <%= t 'common.edit' %>
-                </a>
+                <div tabindex="0" class="dropdown__container">
+                  <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="dropdown__item">
+                    <%= t 'common.edit' %>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

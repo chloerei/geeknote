@@ -5,16 +5,16 @@
         <%= t 'common.add_to_collection' %>
       </div>
       <% if current_user.manage_accounts.any? %>
-        <div class="dropdown" data-controller="dropdown">
-          <button type="button" class="button button--text" data-action="dropdown#toggle">
+        <div class="dropdown dropdown--right">
+          <label tabindex="0" class="button button--text">
             <div class="button__text">
               <%= @collection_account.display_name %>
             </div>
             <div class="button__icon">
               <span class="material-icons">expand_more</span>
             </div>
-          </button>
-          <div class="dropdown__container dropdown__container--top-right">
+          </label>
+          <div tabindex="0" class="dropdown__container">
             <%= button_to switch_account_post_collections_path(@account, @post, account: nil), method: 'put', class: 'dropdown__item' do %>
               <%= current_user.account.display_name %>
             <% end %>
@@ -26,9 +26,9 @@
           </div>
         </div>
       <% end %>
-      <button type="button" class="button button--icon" data-action="dialog#close">
+      <label for="post-<%= @post.id %>-collections-dialog-toggle" class="button button--icon">
         <span class="material-icons">close</span>
-      </button>
+      </label>
     </div>
 
     <div class="overflow-auto">
