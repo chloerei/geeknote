@@ -8,13 +8,9 @@
           </a>
         </h3>
         <% if post.tags.any? %>
-          <div class="display-flex gap-2 margin-bottom-3">
+          <div class="display-flex flex-wrap gap-2 margin-bottom-3">
             <% post.tags.each do |tag| %>
-              <a href="<%= tag_path(id: tag.name) %>" class="chip chip--assist">
-                <div class="chip__label">
-                  <%= tag.name %>
-                </div>
-              </a>
+              <span class="text-muted">#<%= tag.name %></span>
             <% end %>
           </div>
         <% end %>
