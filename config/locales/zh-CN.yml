@@ -202,6 +202,7 @@ zh-CN:
     private: 私有
     profile: 个人资料
     public: 公开
+    publish: 发布
     remove: 移除
     replies: 回复
     reply: 回复
@@ -213,6 +214,7 @@ zh-CN:
     rules: 社区准则
     save_and_fetch: 保存并抓取
     save_changes: 保存修改
+    save_draft: 保存草稿
     send_invitation: 发送邀请
     send_password_reset_email: 发送密码重置邮件
     settings: 设置

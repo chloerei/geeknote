@@ -64,14 +64,14 @@
   <div class="display-flex gap-2">
     <% if @post.published? %>
       <button type="submit" class="button button--filled" name="submit" value="update">
-        Save changes
+        <%= t 'common.save_changes' %>
       </button>
     <% else %>
       <button type="submit" class="button button--filled" name="submit" value="publish">
-        Publish
+        <%= t 'common.publish' %>
       </button>
       <button type="submit" class="button button--filled-tonal" name="submit" value="draft">
-        Save Draft
+        <%= t 'common.save_draft' %>
       </button>
     <% end %>
   </div>
