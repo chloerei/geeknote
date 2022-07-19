@@ -31,7 +31,7 @@ $material-icons-font-path: '';
 
 @mixin custom-light-scheme {
   @include light-scheme (
-    $primary: #543A93,
+    $primary: #2196f3,
     $secondary: #4F485E,
     $tertiary: #69404D,
     $neutral: #FFFFFF,
@@ -46,7 +46,7 @@ $material-icons-font-path: '';
 
 @mixin custom-dark-scheme {
   @include dark-scheme (
-    $primary: #543A93,
+    $primary: #2196f3,
     $secondary: #4F485E,
     $tertiary: #69404D,
     $neutral: #FFFFFF,
