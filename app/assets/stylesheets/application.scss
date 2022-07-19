@@ -227,10 +227,7 @@ body[data-color-scheme="dark"] {
   color: inherit;
   text-decoration: none;
 
-  &:hover {
-    background: var(--color-surface-variant);
-    color: var(--color-on-surface-variant);
-  }
+  @include state-layer;
 }
 
 .link-expended {

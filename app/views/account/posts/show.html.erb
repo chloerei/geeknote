@@ -155,14 +155,16 @@
       </div>
 
       <div class="sidebar">
-        <div class="card card--surface padding-3">
-          <div class="title-medium margin-bottom-3">
+        <div class="card card--surface">
+          <div class="title-medium padding-x-3 padding-top-3 padding-bottom-2">
             <%= t 'common.more_from', name: @account.name %>
           </div>
-          <div class="">
+          <div class="padding-bottom-2">
             <% @account.posts.published.order(created_at: :desc).where.not(id: @post.id).limit(3).each do |post| %>
-              <a href="<%= account_post_path(@account, post) %>" class="display-block padding-y-3 link-title">
-                <%= post.title.presence || t('common.untitled') %>
+              <a href="<%= account_post_path(@account, post) %>" class="link-block padding-3">
+                <div class="">
+                  <%= post.title.presence || t('common.untitled') %>
+                </div>
               </a>
             <% end %>
           </div>

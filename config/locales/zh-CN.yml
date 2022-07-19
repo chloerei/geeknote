@@ -199,10 +199,13 @@ zh-CN:
     popular_tags: 热门标签
     post_delete_confirm: 确认删除文章？
     posts: 文章
+    posts_count: "%{count} 篇文章"
     private: 私有
     profile: 个人资料
     public: 公开
     publish: 发布
+    related_tags: 相关标签
+    related_users: 相关用户
     remove: 移除
     replies: 回复
     reply: 回复

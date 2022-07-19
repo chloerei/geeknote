@@ -75,30 +75,46 @@
         <% end %>
       <% end %>
 
-      <div class="card card--surface padding-2">
-        <div class="title-medium padding-2">
-          <%= t 'common.popular_tags' %>
+      <div class="card card--surface">
+        <div class="title-medium padding-x-3 padding-top-3 padding-bottom-2">
+          <%= t 'common.related_tags' %>
         </div>
-        <div class="nav">
-          <% Tag.order(taggings_count: :desc).limit(5).each do |tag| %>
-            <a href="<%= tag_path(id: tag.name) %>" class="nav__item">
-              <div class="nav__item__icon">
-                <span class="material-icons">tag</span>
+        <div class="padding-bottom-2">
+          <% @posts.map(&:tags).flatten.tally.sort_by{ |tag, count| -count }.first(5).each do |tag, count| %>
+            <a href="<%= tag_path(id: tag.name) %>" class="link-block padding-x-3 padding-y-2">
+              <div class="title-medium">
+                #<%= tag.name %>
               </div>
-              <div class="nav__item__label">
-                <%= tag.name %>
+              <div class="body-medium">
+                <%= t 'common.posts_count', count: tag.taggings_count %>
               </div>
             </a>
           <% end %>
         </div>
       </div>
 
-      <div class="card card--surface padding-3">
-        <h3 class="title-medium margin-top-0">
-          <%= t '.who_to_follow' %>
-        </h3>
-        <div class="display-flex flex-direction-column gap-3">
-          <%= render partial: 'account/follows/account', collection: Account.recommend_for(current_user).limit(3).includes(:owner) %>
+      <div class="card card--surface">
+        <div class="title-medium padding-x-3 padding-top-3 padding-bottom-2">
+          <%= t 'common.related_users' %>
+        </div>
+        <div class="padding-bottom-2">
+          <% @posts.map(&:account).tally.sort_by{ |account, count| -count }.first(3).each do |account, count| %>
+            <a href="<%= account_root_path(account) %>" class="link-block padding-x-3 padding-y-2">
+              <div class="display-flex gap-2">
+                <div class="avatar flex-shrink-0">
+                  <%= avatar_image_tag account.owner.avatar %>
+                </div>
+                <div class="felx-grow-1">
+                  <div class="title-medium">
+                    <%= account.display_name %>
+                  </div>
+                  <div class="body-medium">
+                    <%= account.description %>
+                  </div>
+                </div>
+              </div>
+            </a>
+          <% end %>
         </div>
       </div>
 

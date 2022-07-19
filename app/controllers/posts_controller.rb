@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :require_sign_in, only: [:following]
 
   def index
-    @posts = Post.published.hot.where("published_at > ?", 3.month.ago).page(params[:page])
+    @posts = Post.published.hot.where("published_at > ?", 3.month.ago).includes(:tags, :account).page(params[:page])
   end
 
   def following

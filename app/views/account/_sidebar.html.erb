@@ -1,16 +1,16 @@
 <div class="sidebar display-flex flex-direction-column gap-3">
-  <div class="card card--surface padding-2">
-    <div class="title-medium padding-2">
-      Tags
+  <div class="card card--surface">
+    <div class="title-medium padding-x-3 padding-top-3 padding-bottom-2">
+      <%= t 'common.tags' %>
     </div>
-    <div class="nav">
+    <div class="padding-bottom-2">
       <% @account.used_tags.first(10).each do |name, count| %>
-        <a href="<%= tag_path(id: name) %>" class="nav__item">
-          <div class="nav__item__icon">
-            <span class="material-icons">tag</span>
+        <a href="<%= tag_path(id: name) %>" class="link-block padding-x-3 padding-y-2">
+          <div class="title-medium">
+            #<%= name %>
           </div>
-          <div class="nav__item__label">
-            <%= name %>
+          <div class="body-medium">
+            <%= t 'common.posts_count', count: count %>
           </div>
         </a>
       <% end %>
