@@ -10,7 +10,7 @@
         <% if post.tags.any? %>
           <div class="display-flex flex-wrap gap-2 margin-bottom-3">
             <% post.tags.each do |tag| %>
-              <span class="text-muted">#<%= tag.name %></span>
+              <span class="text-muted body-medium">#<%= tag.name %></span>
             <% end %>
           </div>
         <% end %>
@@ -22,10 +22,10 @@
               <%= avatar_image_tag post.account.owner.avatar %>
             </div>
             <div class="">
-              <div class="label-large">
+              <div class="title-small">
                 <%= post.account.owner.name %>
               </div>
-              <div class="body-small">
+              <div class="body-medium">
                 <%= format_time post.published_at %>
               </div>
             </div>

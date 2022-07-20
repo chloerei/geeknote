@@ -82,10 +82,10 @@
         <div class="padding-bottom-2">
           <% @posts.map(&:tags).flatten.tally.sort_by{ |tag, count| -count }.first(5).each do |tag, count| %>
             <a href="<%= tag_path(id: tag.name) %>" class="link-block padding-x-3 padding-y-2">
-              <div class="title-medium">
+              <div class="title-small">
                 #<%= tag.name %>
               </div>
-              <div class="body-medium">
+              <div class="body-medium text-muted">
                 <%= t 'common.posts_count', count: tag.taggings_count %>
               </div>
             </a>
@@ -105,7 +105,7 @@
                   <%= avatar_image_tag account.owner.avatar %>
                 </div>
                 <div class="felx-grow-1">
-                  <div class="title-medium">
+                  <div class="title-small">
                     <%= account.display_name %>
                   </div>
                   <div class="body-medium">
