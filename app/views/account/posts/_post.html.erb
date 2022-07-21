@@ -19,11 +19,17 @@
         <div class="flex-grow-1">
           <div class="display-flex gap-2 align-items-center">
             <div class="avatar flex-shrink-0">
-              <%= avatar_image_tag post.account.owner.avatar %>
+              <%= avatar_image_tag post.user.avatar %>
             </div>
             <div class="">
               <div class="title-small">
-                <%= post.account.owner.name %>
+                <%= post.user.name %>
+                <% if post.account != post.user.account %>
+                  <span class="text-muted">
+                    <%= t 'common.in' %>
+                  </span>
+                  <%= post.account.display_name %>
+                <% end %>
               </div>
               <div class="body-medium">
                 <%= format_time post.published_at %>

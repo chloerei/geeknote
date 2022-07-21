@@ -60,13 +60,13 @@
           </div>
 
           <div class="display-flex align-items-center flex-wrap gap-2 margin-y-3">
-            <a href="<%= account_root_path(@post.account) %>" class="link-title">
+            <a href="<%= account_root_path(@post.user.account) %>" class="link-title">
               <div class="display-flex gap-2 align-items-center">
                 <div class="avatar">
-                  <%= avatar_image_tag @post.account.owner.avatar %>
+                  <%= avatar_image_tag @post.user.avatar %>
                 </div>
                 <div class="">
-                  <b><%= @post.account.owner.name %></b>
+                  <b><%= @post.user.name %></b>
                 </div>
               </div>
             </a>
