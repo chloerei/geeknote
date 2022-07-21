@@ -8,9 +8,9 @@
           </a>
         </h3>
         <% if post.tags.any? %>
-          <div class="display-flex flex-wrap gap-2 margin-bottom-3">
+          <div class="display-flex flex-wrap gap-2">
             <% post.tags.each do |tag| %>
-              <span class="text-muted body-medium">#<%= tag.name %></span>
+              <span class="text-muted">#<%= tag.name %></span>
             <% end %>
           </div>
         <% end %>

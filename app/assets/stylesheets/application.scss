@@ -137,9 +137,10 @@ body[data-color-scheme="dark"] {
 }
 
 .feature-image {
-  margin: auto -16px;
+  margin: 16px -16px;
 
   img {
+    display: block;
     width: 100%;
     height: auto;
   }
@@ -174,7 +175,7 @@ body[data-color-scheme="dark"] {
 }
 
 .text-muted {
-  color: var(--color-on-surface-variant);
+  opacity: 0.8;
 }
 
 .post-item__featured_image {
@@ -476,6 +477,7 @@ body[data-color-scheme="dark"] {
 
 .post-card__header {
   min-height: 88px;
+  padding-bottom: 16px;
 }
 
 summary {
