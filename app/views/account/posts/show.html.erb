@@ -38,7 +38,7 @@
           </div>
         <% end %>
 
-        <div class="card card--surface padding-3 margin-bottom-3">
+        <div class="card card--surface padding-3">
           <div class="display-flex margin-bottom-3">
             <h1 class="headline-small margin-0 flex-grow-1">
               <%= @post.title.presence || t('common.untitled') %>
@@ -109,36 +109,16 @@
           <div class="display-flex gap-1">
             <%= render 'account/posts/likes/button', post: @post %>
 
-            <a href="#reply" class="button button--text button--muted">
-              <div class="button__icon">
-                <span class="material-icons">reply</span>
-              </div>
-              <div class="button_label">
-                <%= t 'common.reply' %>
-              </div>
-            </a>
-
             <%= render 'account/posts/collections/button', post: @post %>
           </div>
         </div>
 
-        <% if @post.comments_count > 3 %>
-          <div class="margin-bottom-3">
-            <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100 justify-content-center">
-              <%= t 'common.show_all_comments' %> (<%= @post.comments_count %>)
-            </a>
-          </div>
-        <% end %>
-
-        <div id="comments" class="display-flex flex-direction-column gap-3 margin-bottom-3" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
-          <div class="show-on-empty padding-3 text-muted text-align-center">
-            <%= t 'common.no_comments_yet' %>
-          </div>
-          <%= render partial: 'account/posts/comments/comment', collection: @comments, cached: true %>
+        <div class="title-medium padding-3">
+          <%= t 'common.comments' %>
         </div>
 
-        <% if @post.allow_comments? %>
-          <div id="reply">
+        <div id="reply" class="margin-bottom-3">
+          <% if @post.allow_comments? %>
             <% if current_user %>
               <%= render 'account/posts/comments/form', comment: Comment.new %>
             <% else %>
@@ -146,11 +126,21 @@
                 <%= t 'common.sign_in_to_comment' %>
               </a>
             <% end %>
-          </div>
-        <% else %>
-          <div class="padding-3 text-muted text-align-center">
-            <%= t 'common.comment_is_disabled' %>
-          </div>
+          <% else %>
+            <div class="padding-3 text-muted text-align-center">
+              <%= t 'common.comment_is_disabled' %>
+            </div>
+          <% end %>
+        </div>
+
+        <div id="comments" class="display-flex flex-direction-column gap-3 margin-bottom-3" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
+          <%= render partial: 'account/posts/comments/comment', collection: @comments, cached: true %>
+        </div>
+
+        <% if @post.comments_count > 3 %>
+          <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100 justify-content-center">
+            <%= t 'common.show_all_comments' %> (<%= @post.comments_count %>)
+          </a>
         <% end %>
       </div>
 

@@ -17,7 +17,7 @@ class Account::PostsController < Account::BaseController
       end
     end
 
-    @comments = @post.comments.with_liked(current_user).order(created_at: :desc).limit(3).reverse
+    @comments = @post.comments.with_liked(current_user).order(created_at: :desc).limit(3)
   end
 
   private

@@ -1,4 +1,4 @@
-<%= turbo_stream.append 'comments' do %>
+<%= turbo_stream.prepend 'comments' do %>
   <%= render 'comment', comment: @comment %>
 <% end %>
 

@@ -14,16 +14,8 @@
         </div>
       </div>
 
-      <div id="comments" class="display-flex flex-direction-column gap-3" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
-        <%= render partial: 'account/posts/comments/comment', collection: @comments, cached: true %>
-      </div>
-
-      <div class="margin-3">
-        <%= paginate @comments %>
-      </div>
-
-      <% if @post.allow_comments? %>
-        <div class="margin-top-3">
+      <div id="reply" class="margin-bottom-3">
+        <% if @post.allow_comments? %>
           <% if current_user %>
             <%= render 'account/posts/comments/form', comment: Comment.new %>
           <% else %>
@@ -31,12 +23,20 @@
               <%= t 'common.sign_in_to_comment' %>
             </a>
           <% end %>
-        </div>
-      <% else %>
-        <div class="padding-3 text-muted text-align-center">
-          <%= t 'common.comment_is_disabled' %>
-        </div>
-      <% end %>
+        <% else %>
+          <div class="padding-3 text-muted text-align-center">
+            <%= t 'common.comment_is_disabled' %>
+          </div>
+        <% end %>
+      </div>
+
+      <div id="comments" class="display-flex flex-direction-column gap-3" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
+        <%= render partial: 'account/posts/comments/comment', collection: @comments, cached: true %>
+      </div>
+
+      <div class="margin-3">
+        <%= paginate @comments %>
+      </div>
     </div>
 
   </div>
