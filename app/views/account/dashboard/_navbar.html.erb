@@ -9,39 +9,39 @@
       </div>
     </div>
 
-    <div class="nav">
-      <a href="<%= account_dashboard_posts_path(@account) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'posts' %>">
-        <div class="nav__item__icon">
+    <div class="tab flex-direction-column@tablet">
+      <a href="<%= account_dashboard_posts_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>">
+        <div class="tab__item__icon">
           <span class="material-icons">article</span>
         </div>
-        <div class="nav__item__label">
+        <div class="tab__item__label">
           <%= t 'common.posts' %>
         </div>
       </a>
       <% if current_member.role.in?(%w(owner admin)) %>
-        <a href="<%= account_dashboard_collections_path(@account) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'collections' %>">
-          <div class="nav__item__icon">
+        <a href="<%= account_dashboard_collections_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'collections' %>">
+          <div class="tab__item__icon">
             <span class="material-icons">library_books</span>
           </div>
-          <div class="nav__item__label">
+          <div class="tab__item__label">
             <%= t 'common.collections' %>
           </div>
         </a>
         <% if @account.organization? %>
-          <a href="<%= account_dashboard_members_path(@account) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'members' %>">
-            <div class="nav__item__icon">
+          <a href="<%= account_dashboard_members_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'members' %>">
+            <div class="tab__item__icon">
               <span class="material-icons">people</span>
             </div>
-            <div class="nav__item__label">
+            <div class="tab__item__label">
               <%= t 'common.members' %>
             </div>
           </a>
         <% end %>
-        <a href="<%= account_dashboard_settings_root_path(@account) %>" class="nav__item <%= 'nav__item--active' if request.path.include?('dashboard/settings') %>">
-          <div class="nav__item__icon">
+        <a href="<%= account_dashboard_settings_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if request.path.include?('dashboard/settings') %>">
+          <div class="tab__item__icon">
             <span class="material-icons">settings</span>
           </div>
-          <div class="nav__item__label">
+          <div class="tab__item__label">
             <%= t 'common.settings' %>
           </div>
         </a>

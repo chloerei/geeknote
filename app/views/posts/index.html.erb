@@ -2,28 +2,28 @@
   <div class="layout">
     <div class="navbar display-flex flex-direction-column gap-3">
       <div class="card card--surface padding-2">
-        <div class="nav">
-          <a href="<%= root_path %>" class="nav__item <%= 'nav__item--active' if action_name == 'index' %>">
-            <div class="nav__item__icon">
+        <div class="tab flex-direction-column@tablet">
+          <a href="<%= root_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'index' %>">
+            <div class="tab__item__icon">
               <span class="material-icons">whatshot</span>
             </div>
-            <div class="nav__item__label">
+            <div class="tab__item__label">
               <%= t 'common.hot' %>
             </div>
           </a>
-          <a href="<%= following_posts_path %>" class="nav__item <%= 'nav__item--active' if action_name == 'following' %>">
-            <div class="nav__item__icon">
+          <a href="<%= following_posts_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'following' %>">
+            <div class="tab__item__icon">
               <span class="material-icons">feed</span>
             </div>
-            <div class="nav__item__label">
+            <div class="tab__item__label">
               <%= t 'common.feed' %>
             </div>
           </a>
-          <a href="<%= newest_posts_path %>" class="nav__item <%= 'nav__item--active' if action_name == 'newest' %>">
-            <div class="nav__item__icon">
+          <a href="<%= newest_posts_path %>" class="tab__item <%= 'tab__item--active' if action_name == 'newest' %>">
+            <div class="tab__item__icon">
               <span class="material-icons">auto_awesome</span>
             </div>
-            <div class="nav__item__label">
+            <div class="tab__item__label">
               <%= t 'common.newest' %>
             </div>
           </a>
