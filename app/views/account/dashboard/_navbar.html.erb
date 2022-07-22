@@ -2,10 +2,14 @@
   <div class="card card--surface padding-2">
     <div class="display-flex padding-2 margin-bottom-3 gap-2 align-items-center">
       <div class="avatar">
-        <%= avatar_image_tag @account.owner.avatar %>
+        <a href="<%= account_root_path %>">
+          <%= avatar_image_tag @account.owner.avatar %>
+        </a>
       </div>
       <div class="title-large flex-grow-1">
-        <%= @account.owner.name %>
+        <a href="<%= account_root_path %>" class="link-title">
+          <%= @account.owner.name %>
+        </a>
       </div>
     </div>
 

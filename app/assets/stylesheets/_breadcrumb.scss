@@ -10,11 +10,6 @@
 
   a {
     text-decoration: none;
-    color: var(--color-on-surface);
-
-    &:hover {
-      color: var(--color-primary);
-    }
   }
 
   &:not(:last-child)::after {
