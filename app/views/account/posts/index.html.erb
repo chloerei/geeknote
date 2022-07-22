@@ -18,7 +18,10 @@
 
         <%= render partial: 'post', collection: @posts, cached: true %>
       </div>
-      <%= paginate @posts %>
+
+      <div class="padding-3">
+        <%= paginate @posts %>
+      </div>
     </div>
 
     <%= render 'account/sidebar' %>

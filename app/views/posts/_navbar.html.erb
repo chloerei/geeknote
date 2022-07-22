@@ -1,0 +1,30 @@
+<div class="navbar display-flex flex-direction-column gap-3">
+  <div class="card card--surface padding-2">
+    <div class="tab flex-direction-column@tablet">
+      <a href="<%= root_path %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' && action_name == 'index' %>">
+        <div class="tab__item__icon">
+          <span class="material-icons">whatshot</span>
+        </div>
+        <div class="tab__item__label">
+          <%= t 'common.hot' %>
+        </div>
+      </a>
+      <a href="<%= following_posts_path %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' && action_name == 'following' %>">
+        <div class="tab__item__icon">
+          <span class="material-icons">feed</span>
+        </div>
+        <div class="tab__item__label">
+          <%= t 'common.feed' %>
+        </div>
+      </a>
+      <a href="<%= newest_posts_path %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' && action_name == 'newest' %>">
+        <div class="tab__item__icon">
+          <span class="material-icons">auto_awesome</span>
+        </div>
+        <div class="tab__item__label">
+          <%= t 'common.newest' %>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

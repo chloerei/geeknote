@@ -1,0 +1,35 @@
+<% @page_title = "#{params[:id]} - #{@account.display_name}" %>
+
+<div class="container">
+  <div class="layout">
+    <%= render 'account/navbar' %>
+
+    <div class="main">
+      <div class="card card--surface padding-3 margin-bottom-3">
+        <div class="breadcrumb">
+          <div class="breadcrumb__item">
+            <a href="<%= account_root_path(@account) %>">
+              <%= @account.display_name %>
+            </a>
+          </div>
+          <div class="breadcrumb__item">
+            <a href="<%= account_tags_path(@account) %>">
+              <%= t 'common.tags' %>
+            </a>
+          </div>
+          <div class="breadcrumb__item breadcrumb__item--active">
+            <%= params[:id] %>
+          </div>
+        </div>
+      </div>
+
+      <div class="display-flex flex-direction-column gap-3">
+        <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
+      </div>
+
+      <div class="padding-3">
+        <%= paginate @posts %>
+      </div>
+    </div>
+  </div>
+</div>
