@@ -28,7 +28,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   def update
     @post.update post_params
 
-    if params[:submit] == 'publish'
+    if params[:submit] == 'publish' && !@post.restricted?
       @post.published!
     end
 

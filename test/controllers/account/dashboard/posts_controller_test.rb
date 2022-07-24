@@ -146,4 +146,15 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
     patch account_dashboard_post_path(organization.account, other_post), params: { post: { title: 'change by admin' }}, as: :turbo_stream
     assert_redirected_to account_post_url(organization.account, other_post)
   end
+
+  test "should not publish restricted post" do
+    account = create(:user_account)
+    post = create(:post, account: account, user: account.owner, restricted: true)
+
+    sign_in account.owner
+
+    patch account_dashboard_post_path(account, post), params: { post: { title: 'title' }, submit: 'publish'}
+    post.reload
+    assert_not post.published?
+  end
 end
