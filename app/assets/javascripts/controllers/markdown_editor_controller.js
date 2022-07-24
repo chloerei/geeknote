@@ -144,7 +144,6 @@ export default class extends Controller {
               update: (viewUpdate) => {
                 if (this.inputElement && viewUpdate.docChanged) {
                   this.inputElement.value = view.state.doc.toString()
-                  this.inputElement.dispatchEvent(new Event('input', { bubbles: true }))
                 }
               }
             }

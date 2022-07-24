@@ -1,4 +1,4 @@
-<%= form_with model: @post, url: [@account, :dashboard, @post], builder: CustomFormBuilder, html: { id: 'post-form', class: 'post-form', autocomplete: "off" } do |form| %>
+<%= form_with model: @post, url: [@account, :dashboard, @post], builder: CustomFormBuilder, html: { id: 'post-form', class: 'post-form', autocomplete: "off" }, data: { controller: "form", form_unsave_confirm_value: I18n.t('common.form_unsave_confirm') } do |form| %>
   <div class="margin-bottom-3">
     <%= form.text_field :title %>
   </div>

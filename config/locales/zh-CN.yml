@@ -166,6 +166,7 @@ zh-CN:
     following: 关注中
     followings: 关注中
     forgot_password?: 忘记密码？
+    form_unsave_confirm: 改动未保存，确认离开当前页面？
     hot: 热门
     import: 导入
     in: 于
