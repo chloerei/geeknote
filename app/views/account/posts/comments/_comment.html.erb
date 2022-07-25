@@ -1,3 +1,5 @@
+<% liked ||= false %>
+
 <div class="card card--surface padding-3" id="comment-<%= comment.id %>" data-controller="comment" data-comment-id-value="<%= comment.id %>">
   <div class="display-flex gap-3">
     <div class="flex-shrink-0">
@@ -60,7 +62,7 @@
       </div>
 
       <div class="display-flex justify-content-center comment__actions">
-        <%= render 'account/posts/comments/likes/button', comment: comment %>
+        <%= render 'account/posts/comments/likes/button', comment: comment, liked: liked %>
 
         <a href="<%= account_post_comment_path(@account, @post, comment, anchor: "reply") %>" class="button button--text button--muted">
           <div class="button__icon">

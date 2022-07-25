@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <%= render partial: 'comment', object: @comment %>
+      <%= render 'comment', comment: @comment, liked: @comment.liked_by?(current_user) %>
 
       <div class="title-medium padding-3">
         <%= t 'common.replies' %>
