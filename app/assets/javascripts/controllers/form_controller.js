@@ -39,4 +39,8 @@ export default class extends Controller {
     window.removeEventListener("beforeunload", this.beforeUnloadListener)
     document.removeEventListener("turbo:before-visit", this.beforeVisitListener)
   }
+
+  submit() {
+    this.element.dispatchEvent(new CustomEvent('submit', { bubbles: true, cancelable: true }))
+  }
 }
