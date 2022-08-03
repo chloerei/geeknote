@@ -61,6 +61,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    root to: 'home#index'
+
     mount Sidekiq::Web => "/sidekiq", constraints: AdminConstraint.new
   end
 

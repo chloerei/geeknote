@@ -1,0 +1,12 @@
+<div class="tabbar">
+    <div class="tab flex-direction-column@tablet">
+      <a href="<%= admin_root_path %>" class="tab__item <%= 'tab__item--active' if controller_name == 'home' %>">
+        <div class="tab__item__icon">
+          <span class="material-icons">dashboard</span>
+        </div>
+        <div class="tab__item__label">
+          <%= t 'common.home' %>
+        </div>
+      </a>
+    </div>
+</div>

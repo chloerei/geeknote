@@ -1,0 +1,36 @@
+<% content_for :body do %>
+  <div class="background-primary">
+    <div class="container">
+      <div class="top-app-bar top-app-bar--primary">
+        <div class="top-app-bar__title">
+          <a href="/" class="text-bold">
+            GeekNote Admin
+          </a>
+        </div>
+        <div class="top-app-bar__action">
+          <div class="dropdown dropdown--right">
+            <label tabindex="0" class="button button--icon button--avatar">
+              <div class="avatar">
+                <%= avatar_image_tag current_user.avatar %>
+              </div>
+            </label>
+            <div tabindex="0" class="dropdown__container">
+              <a href="<%= root_path %>" class="dropdown__item">
+                <div class="dropdown__item__icon">
+                  <span class="material-icons">exit_to_app</span>
+                </div>
+                <div class="dropdown__item__text">
+                  <%= t 'common.back_to_home' %>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%= yield %>
+<% end %>
+
+<%= render template: 'layouts/base' %>

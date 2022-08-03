@@ -124,6 +124,15 @@ body[data-color-scheme="dark"] {
   }
 }
 
+.top-app-bar--primary {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+
+  .button--icon {
+    color: var(--color-on-primary);
+  }
+}
+
 .navbar {
   grid-area: navbar;
 }
