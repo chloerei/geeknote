@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_action :set_site
+
   helper_method :current_user
 
   if Rails.env.production?
@@ -7,6 +9,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_site
+    @site = Site.first_or_create
+  end
 
   def render_not_found
     respond_to do |format|

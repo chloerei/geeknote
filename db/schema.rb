@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_10_085602) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_04_120542) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -219,6 +219,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_10_085602) do
     t.index ["feed_source_id", "account_id"], name: "index_posts_on_feed_source_id_and_account_id", unique: true, where: "(feed_source_id IS NOT NULL)"
     t.index ["published_at"], name: "index_posts_on_published_at"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "sites", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "taggings", force: :cascade do |t|

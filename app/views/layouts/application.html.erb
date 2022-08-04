@@ -4,7 +4,7 @@
       <div class="top-app-bar">
         <div class="top-app-bar__title">
           <a href="/" class="text-bold">
-            GeekNote
+            <%= @site.name || 'GeekNote' %>
           </a>
         </div>
         <% if current_user %>

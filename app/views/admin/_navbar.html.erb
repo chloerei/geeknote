@@ -1,6 +1,7 @@
 <div class="tabbar">
+  <div class="card card--surface padding-2">
     <div class="tab flex-direction-column@tablet">
-      <a href="<%= admin_root_path %>" class="tab__item <%= 'tab__item--active' if controller_name == 'home' %>">
+      <a href="<%= admin_root_path %>" class="tab__item <%= 'tab__item--active' if request.path == '/admin' %>">
         <div class="tab__item__icon">
           <span class="material-icons">dashboard</span>
         </div>
@@ -8,5 +9,14 @@
           <%= t 'common.home' %>
         </div>
       </a>
+      <a href="<%= admin_settings_root_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/settings') %>">
+        <div class="tab__item__icon">
+          <span class="material-icons">settings</span>
+        </div>
+        <div class="tab__item__label">
+          <%= t 'common.settings' %>
+        </div>
+      </a>
     </div>
+  </div>
 </div>
