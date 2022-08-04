@@ -5,7 +5,10 @@
     <title><%= "#{@page_title} - " if @page_title %><%= @site.name %></title>
     <meta name="description" content="<%= t 'common.site_description' %>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="<%= asset_path("favicon.png") %>">
+
+    <% if @site.icon.attached? %>
+      <link rel="icon" href="<%= url_for @site.icon.variant(:normal) %>">
+    <% end %>
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>

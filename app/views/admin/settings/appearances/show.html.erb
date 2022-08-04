@@ -21,9 +21,80 @@
           <div class="margin-bottom-3">
             <%= form.text_field :name %>
           </div>
+
           <div class="margin-bottom-3">
             <%= form.text_area :description %>
           </div>
+
+          <div class="margin-bottom-3">
+            <div class="label-large margin-bottom-2">
+              <%= t 'common.icon' %>
+            </div>
+            <div class="image-uploader image-uploader--icon <%= 'image-uploader--active' if @site.icon.attached? %>" data-controller="image-uploader">
+              <div class="image-uploader__preview" data-image-uploader-target="preview">
+                <% if @site.icon.attached? %>
+                  <%= image_tag @site.icon.variant(:normal) %>
+                <% end %>
+              </div>
+              <div class="image-uploader__toolbar">
+                <label class="button button--icon">
+                  <span class="material-icons">add_photo_alternate</span>
+                  <%= form.file_field :icon, direct_upload: true, data: { 'image-uploader-target': 'input', action: 'image-uploader#update' } %>
+                </label>
+                <label class="button button--icon image-uploader__show-on-active">
+                  <span class="material-icons">close</span>
+                  <input type="checkbox" name="remove_icon" data-image-uploader-target="removeCheckbox" data-action="image-uploader#remove">
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="margin-bottom-3">
+            <div class="label-large margin-bottom-2">
+              <%= t 'common.logo' %>
+            </div>
+            <div class="image-uploader image-uploader--logo <%= 'image-uploader--active' if @site.logo.attached? %>" data-controller="image-uploader">
+              <div class="image-uploader__preview" data-image-uploader-target="preview">
+                <% if @site.logo.attached? %>
+                  <%= image_tag @site.logo.variant(:normal) %>
+                <% end %>
+              </div>
+              <div class="image-uploader__toolbar">
+                <label class="button button--icon">
+                  <span class="material-icons">add_photo_alternate</span>
+                  <%= form.file_field :logo, direct_upload: true, data: { 'image-uploader-target': 'input', action: 'image-uploader#update' } %>
+                </label>
+                <label class="button button--icon image-uploader__show-on-active">
+                  <span class="material-icons">close</span>
+                  <input type="checkbox" name="remove_logo" data-image-uploader-target="removeCheckbox" data-action="image-uploader#remove">
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="margin-bottom-3">
+            <div class="label-large margin-bottom-2">
+              <%= t 'common.logo_alt' %>
+            </div>
+            <div class="image-uploader image-uploader--logo <%= 'image-uploader--active' if @site.logo_alt.attached? %>" data-controller="image-uploader">
+              <div class="image-uploader__preview" data-image-uploader-target="preview">
+                <% if @site.logo_alt.attached? %>
+                  <%= image_tag @site.logo_alt.variant(:normal) %>
+                <% end %>
+              </div>
+              <div class="image-uploader__toolbar">
+                <label class="button button--icon">
+                  <span class="material-icons">add_photo_alternate</span>
+                  <%= form.file_field :logo_alt, direct_upload: true, data: { 'image-uploader-target': 'input', action: 'image-uploader#update' } %>
+                </label>
+                <label class="button button--icon image-uploader__show-on-active">
+                  <span class="material-icons">close</span>
+                  <input type="checkbox" name="remove_logo_alt" data-image-uploader-target="removeCheckbox" data-action="image-uploader#remove">
+                </label>
+              </div>
+            </div>
+          </div>
+
           <button type="submit" class="button button--filled">
             <%= t 'common.save_changes' %>
           </button>

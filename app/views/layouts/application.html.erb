@@ -3,9 +3,26 @@
     <div class="container">
       <div class="top-app-bar">
         <div class="top-app-bar__title">
-          <a href="/" class="text-bold">
-            <%= @site.name || 'GeekNote' %>
-          </a>
+          <% if @site.logo.attached? %>
+            <div class="logo">
+              <a href="/" class="display-inline-block">
+                <div class="display-block@light">
+                  <%= image_tag @site.logo.variant(:normal) %>
+                </div>
+                <div class="display-block@dark">
+                  <% if @site.logo_alt.attached? %>
+                    <%= image_tag @site.logo_alt.variant(:normal) %>
+                  <% else %>
+                    <%= image_tag @site.logo.variant(:normal) %>
+                  <% end %>
+                </div>
+              </a>
+            </div>
+          <% else %>
+            <a href="/">
+              <%= @site.name || 'GeekNote' %>
+            </a>
+          <% end %>
         </div>
         <% if current_user %>
           <div class="top-app-bar__action">

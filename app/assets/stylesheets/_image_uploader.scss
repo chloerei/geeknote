@@ -77,3 +77,32 @@
     }
   }
 }
+
+.image-uploader--icon {
+  display: inline-block;
+
+  .image-uploader__preview {
+    height: 128px;
+    width: 128px;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.image-uploader--logo {
+  display: inline-block;
+
+  .image-uploader__preview {
+    height: 128px;
+    min-width: 256px;
+
+    img {
+      height: 100%;
+      width: auto;
+    }
+  }
+}
