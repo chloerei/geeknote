@@ -74,6 +74,13 @@ zh-CN:
       organization:
         description: 简介
         name: 名称
+      site:
+        name: 名称
+        description: 描述
+        header_html: 头部 HTML
+        footer_html: 尾部 HTML
+        sidebar_header_html: 侧栏头部 HTML
+        sidebar_footer_html: 侧栏尾部 HTML
       post:
         allow_comments: 允许评论
         canonical_url: Canonical URL
@@ -115,6 +122,12 @@ zh-CN:
           attributes:
             current_password:
               not_match: 密码错误
+  admin:
+    settings:
+      home:
+        index:
+          appearance: 外观
+          appearance_desription: 网站名称、Logo、页面 HTML 等。
   collection:
     visibility_private_description: 只有账号成员可以查看。
     visibility_private_label: 私有
@@ -125,7 +138,10 @@ zh-CN:
     account_profile: 账号资料
     account_settings: 账号设置
     add_to_collection: 添加收藏
+    admin: 管理
+    appearance: 外观
     avatar: 头像
+    back_to_home: 返回首页
     banner_image: 横幅图片
     blog: 博客
     cancel: 取消
@@ -168,6 +184,7 @@ zh-CN:
     forgot_password?: 忘记密码？
     form_unsave_confirm: 改动未保存，确认离开当前页面？
     hot: 热门
+    icon: 图标
     import: 导入
     in: 于
     invite_member: 邀请成员
@@ -176,6 +193,8 @@ zh-CN:
     light_theme: 浅色主题
     liked_posts: 赞过
     likes: 赞
+    logo: Logo
+    logo_alt: Logo 替换
     members: 成员
     more_from: "%{name} 的文章"
     move_to_bottom: 移到底部
@@ -196,6 +215,7 @@ zh-CN:
     notifications: 通知
     organizations: 组织
     originally_published_at: 最初发布于
+    overview: 概览
     password: 密码
     pending: 待确认
     popular_tags: 热门标签
@@ -250,6 +270,7 @@ zh-CN:
   flash:
     account_updated: 账号已更新。
     added_to_collection: 已添加至“%{name}”。
+    appearance_update_successful: Appearance update successful
     collection_created: 已创建合集“%{name}”。
     collection_deleted: 已删除合集“%{name}”
     collection_updated: 已更新合集“%{name}”

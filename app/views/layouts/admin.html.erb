@@ -2,10 +2,10 @@
   <div class="background-surface">
     <div class="container">
       <div class="top-app-bar">
-        <div class="top-app-bar__title display-flex gap-3">
+        <div class="top-app-bar__title display-flex align-items-center gap-3">
           <% if @site.logo.attached? %>
             <div class="logo">
-              <a href="/" class="display-inline-block">
+              <a href="<%= admin_root_path %>" class="display-inline-block">
                 <div class="display-block@light">
                   <%= image_tag @site.logo.variant(:normal) %>
                 </div>
@@ -19,13 +19,13 @@
               </a>
             </div>
           <% else %>
-            <a href="/">
+            <a href="<%= admin_root_path %>">
               <%= @site.name || 'GeekNote' %>
             </a>
           <% end %>
-          <a href="<%= admin_root_path %>">
+          <div class="title-medium text-muted">
             <%= t 'common.admin' %>
-          </a>
+          </div>
         </div>
         <div class="top-app-bar__action">
           <div class="dropdown dropdown--right">

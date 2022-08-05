@@ -12,8 +12,6 @@ end
 Rails.application.routes.draw do
   root to: 'posts#index'
 
-  get 'contact', to: 'pages#contact'
-
   get 'sign_up', to: 'users#new', as: 'sign_up'
   resources :users, only: [:create]
   get 'sign_in', to: 'sessions#new', as: 'sign_in'
