@@ -224,6 +224,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_120542) do
   create_table "sites", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.text "header_html"
+    t.text "footer_html"
+    t.text "sidebar_header_html"
+    t.text "sidebar_footer_html"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

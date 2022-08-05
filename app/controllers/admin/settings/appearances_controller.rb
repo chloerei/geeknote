@@ -13,6 +13,6 @@ class Admin::Settings::AppearancesController < Admin::Settings::BaseController
   private
 
   def site_params
-    params.require(:site).permit(:name, :description, :icon, :logo, :logo_alt, :remove_icon, :remove_logo, :remove_logo_alt)
+    params.require(:site).permit(:name, :description, :icon, :logo, :logo_alt, :remove_icon, :remove_logo, :remove_logo_alt, :header_html, :footer_html, :sidebar_header_html, :sidebar_footer_html)
   end
 end

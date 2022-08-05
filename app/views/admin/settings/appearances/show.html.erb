@@ -95,6 +95,22 @@
             </div>
           </div>
 
+          <div class="margin-bottom-3">
+            <%= form.text_area :header_html, rows: 3 %>
+          </div>
+
+          <div class="margin-bottom-3">
+            <%= form.text_area :footer_html, rows: 3 %>
+          </div>
+
+          <div class="margin-bottom-3">
+            <%= form.text_area :sidebar_header_html, rows: 3 %>
+          </div>
+
+          <div class="margin-bottom-3">
+            <%= form.text_area :sidebar_footer_html, rows: 3 %>
+          </div>
+
           <button type="submit" class="button button--filled">
             <%= t 'common.save_changes' %>
           </button>

@@ -13,6 +13,8 @@
     </div>
 
     <div class="sidebar display-none display-flex@laptop flex-direction-column gap-3">
+      <%= raw @site.sidebar_header_html %>
+
       <% if !current_user %>
         <div class="card card--surface padding-3">
           <h3 class="title-medium margin-top-0">
@@ -89,6 +91,7 @@
         </div>
       </div>
 
+      <%= raw @site.sidebar_footer_html %>
     </div>
   </div>
 </div>
