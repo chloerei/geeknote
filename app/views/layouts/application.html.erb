@@ -1,5 +1,5 @@
 <% content_for :body do %>
-  <%= raw @site.header_html %>
+  <%= sanitize @site.header_html %>
 
   <div class="background-surface">
     <div class="container">
@@ -146,7 +146,7 @@
 
   <%= content_for?(:main) ? yield(:main) : yield %>
 
-  <%= raw @site.footer_html %>
+  <%= sanitize @site.footer_html %>
 
   <%= render 'layouts/theme_dialog' %>
 <% end %>
