@@ -10,4 +10,22 @@ class Site < ApplicationRecord
   has_one_attached :logo_alt do |attachable|
     attachable.variant :normal, resize_to_limit: [256, 256]
   end
+
+  def remove_icon=(value)
+    if value
+      self.icon = nil
+    end
+  end
+
+  def remove_logo=(value)
+    if value
+      self.logo = nil
+    end
+  end
+
+  def remove_logo_alt=(value)
+    if value
+      self.logo_alt = nil
+    end
+  end
 end
