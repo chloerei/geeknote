@@ -5,7 +5,7 @@ class Site < ApplicationRecord
 
   has_one_attached :logo
 
-  has_one_attached :logo_alt
+  has_one_attached :logo_dark
 
   def remove_icon=(value)
     if value
@@ -19,9 +19,9 @@ class Site < ApplicationRecord
     end
   end
 
-  def remove_logo_alt=(value)
+  def remove_logo_dark=(value)
     if value
-      self.logo_alt = nil
+      self.logo_dark = nil
     end
   end
 end

@@ -194,7 +194,7 @@ zh-CN:
     liked_posts: 赞过
     likes: 赞
     logo: Logo
-    logo_alt: Logo 替换
+    logo_dark: Logo 暗色调
     members: 成员
     more_from: "%{name} 的文章"
     move_to_bottom: 移到底部
