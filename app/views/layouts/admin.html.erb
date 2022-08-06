@@ -7,13 +7,13 @@
             <div class="logo">
               <a href="<%= admin_root_path %>" class="display-inline-block">
                 <div class="display-block@light">
-                  <%= image_tag @site.logo.variant(:normal) %>
+                  <%= image_tag @site.logo %>
                 </div>
                 <div class="display-block@dark">
                   <% if @site.logo_alt.attached? %>
-                    <%= image_tag @site.logo_alt.variant(:normal) %>
+                    <%= image_tag @site.logo_alt %>
                   <% else %>
-                    <%= image_tag @site.logo.variant(:normal) %>
+                    <%= image_tag @site.logo %>
                   <% end %>
                 </div>
               </a>

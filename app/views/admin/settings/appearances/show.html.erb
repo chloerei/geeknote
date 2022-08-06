@@ -56,7 +56,7 @@
             <div class="image-uploader image-uploader--logo <%= 'image-uploader--active' if @site.logo.attached? %>" data-controller="image-uploader">
               <div class="image-uploader__preview" data-image-uploader-target="preview">
                 <% if @site.logo.attached? %>
-                  <%= image_tag @site.logo.variant(:normal) %>
+                  <%= image_tag @site.logo %>
                 <% end %>
               </div>
               <div class="image-uploader__toolbar">
@@ -79,7 +79,7 @@
             <div class="image-uploader image-uploader--logo <%= 'image-uploader--active' if @site.logo_alt.attached? %>" data-controller="image-uploader">
               <div class="image-uploader__preview" data-image-uploader-target="preview">
                 <% if @site.logo_alt.attached? %>
-                  <%= image_tag @site.logo_alt.variant(:normal) %>
+                  <%= image_tag @site.logo_alt %>
                 <% end %>
               </div>
               <div class="image-uploader__toolbar">
