@@ -69,6 +69,9 @@ application.register('comment', CommentController)
 import SnackbarController from './controllers/snackbar_controller'
 application.register('snackbar', SnackbarController)
 
+import TextFieldController from './controllers/text_field_controller'
+application.register('text-field', TextFieldController)
+
 import './lib/turbo_preserve_scroll'
 
 // clean snackbar content

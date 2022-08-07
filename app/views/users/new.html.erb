@@ -3,17 +3,46 @@
     <h2 class="headline-medium margin-top-0 margin-bottom-3">
       <%= t 'common.sign_up' %>
     </h2>
-    <%= form_with model: @user, builder: CustomFormBuilder, html: { class: 'form', id: 'sign-up-form' } do |form| %>
+    <%= form_with model: @user, builder: CustomFormBuilder, html: { class: 'form', id: 'sign-up-form', autocomplete: 'off' } do |form| %>
       <%= form.fields_for :account do |account_form| %>
         <div class="margin-bottom-3">
-          <%= account_form.text_field :name, prefix_text: ENV['HOST'] + '/', helper_text: t('.account_name_helper_text') %>
+          <div class="text-field text-field--outlined text-field--with-prefix-text <%= 'text-field--error' if @user.errors[:name].any? %>" data-controller="text-field" data-text-field-validate-url-value="<%= validate_users_path %>" data-text-field-error-key-value="account.name">
+            <div class="text-field__container">
+              <div class="text-field__prefix-text">
+                <%= ENV['HOST'].to_s + '/' %>
+              </div>
+              <%= account_form.orignal_text_field :name, class: 'text-field__input', data: { text_field_target: 'input',  action: 'change->text-field#validate' } %>
+              <div class="text-field__label">
+                <%= Account.human_attribute_name :name %>
+              </div>
+            </div>
+            <div class="text-field__helper-text" data-text-field-target="helperText">
+              <% if @user.errors.any? %>
+                <%= @user.errors[:name].first %>
+              <% else %>
+                <%= t('.account_name_helper_text') %>
+              <% end %>
+            </div>
+          </div>
         </div>
       <% end %>
       <div class="margin-bottom-3">
         <%= form.text_field :name %>
       </div>
       <div class="margin-bottom-3">
-        <%= form.text_field :email %>
+        <div class="text-field text-field--outlined <%= 'text-field--error' if @user.errors[:email].any? %>" data-controller="text-field" data-text-field-validate-url-value="<%= validate_users_path %>" data-text-field-error-key-value="email">
+          <div class="text-field__container">
+            <%= form.orignal_text_field :email, class: 'text-field__input', data: { text_field_target: 'input',  action: 'change->text-field#validate' } %>
+            <div class="text-field__label">
+              <%= User.human_attribute_name :email %>
+            </div>
+          </div>
+          <div class="text-field__helper-text" data-text-field-target="helperText">
+            <% if @user.errors.any? %>
+              <%= @user.errors[:name].first %>
+            <% end %>
+          </div>
+        </div>
       </div>
       <div class="margin-bottom-3">
         <%= form.password_field :password %>

@@ -20,6 +20,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def validate
+    @user = User.new user_params
+    @user.valid?
+
+    render json: {
+      errors: @user.errors.messages
+    }
+  end
+
   private
 
   def user_params

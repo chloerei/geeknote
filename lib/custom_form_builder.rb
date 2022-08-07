@@ -1,5 +1,7 @@
 class CustomFormBuilder < ActionView::Helpers::FormBuilder
   [:text_field, :password_field, :text_area, :number_field].each do |method|
+    alias_method "orignal_#{method}", method
+
     define_method(method) do |attribute, options = {}|
       klass = ['text-field', 'text-field--outlined']
       klass << 'text-field--error' if object && object.errors[attribute].any?
