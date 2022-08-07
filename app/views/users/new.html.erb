@@ -1,6 +1,34 @@
 <div class="container container--small padding-3">
   <div class="card card--surface padding-3">
-    <h2 class="headline-medium margin-top-0 margin-bottom-3"><%= t 'common.sign_up' %></h2>
-    <%= render 'form' %>
+    <h2 class="headline-medium margin-top-0 margin-bottom-3">
+      <%= t 'common.sign_up' %>
+    </h2>
+    <%= form_with model: @user, builder: CustomFormBuilder, html: { class: 'form', id: 'sign-up-form' } do |form| %>
+      <%= form.fields_for :account do |account_form| %>
+        <div class="margin-bottom-3">
+          <%= account_form.text_field :name, prefix_text: ENV['HOST'] + '/', helper_text: t('.account_name_helper_text') %>
+        </div>
+      <% end %>
+      <div class="margin-bottom-3">
+        <%= form.text_field :name %>
+      </div>
+      <div class="margin-bottom-3">
+        <%= form.text_field :email %>
+      </div>
+      <div class="margin-bottom-3">
+        <%= form.password_field :password %>
+      </div>
+      <% if @user.errors[:base].any? %>
+        <div class="padding-3 background-error-container margin-bottom-3">
+          <%= @user.errors[:base].first %>
+        </div>
+      <% end %>
+      <div class="margin-bottom-3">
+        <%= optional_recaptcha_tags %>
+      </div>
+      <button type="submit" class="button button--filled justify-content-center width-100">
+        <%= t('common.sign_up') %>
+      </button>
+    <% end %>
   </div>
 </div>

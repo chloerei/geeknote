@@ -3,13 +3,18 @@
     <h2 class="headline-medium margin-top-0 margin-bottom-3">
       <%= t 'common.forgot_password?' %>
     </h2>
-    <%= form_with url: user_password_path, builder: CustomFormBuilder, class: 'form', data: { turbo: 'false' } do |form| %>
+    <%= form_with model: @user, url: user_password_path, builder: CustomFormBuilder, class: 'form' do |form| %>
       <div class="margin-bottom-3">
         <%= form.text_field :email, autofocus: true %>
       </div>
       <div class="margin-bottom-3">
         <%= optional_recaptcha_tags %>
       </div>
+      <% if @user.errors[:base].any? %>
+        <div class="padding-3 background-error-container margin-bottom-3">
+          <%= @user.errors[:base].first %>
+        </div>
+      <% end %>
       <button type="submit" class="button button--filled">
         <%= t('common.send_password_reset_email') %>
       </button>

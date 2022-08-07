@@ -155,7 +155,7 @@ module ApplicationHelper
 
   def optional_recaptcha_tags(options = {})
     if defined?(Recaptcha)
-      recaptcha_tags(options)
+      recaptcha_tags(options.merge(noscript: false))
     end
   end
 end

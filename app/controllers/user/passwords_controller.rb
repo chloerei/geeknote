@@ -2,22 +2,28 @@ class User::PasswordsController < ApplicationController
   before_action :set_user, only: [:edit, :update]
 
   def new
+    @user = User.new
   end
 
   def create
-    user = User.find_by email: params[:email]
+    @user = User.find_or_initialize_by email: params[:email]
 
-    if optional_verify_recaptcha() && user
-      cache_key = "password_reset:#{user.email}"
+    if optional_verify_recaptcha(model: @user) && @user.persisted?
+      cache_key = "password_reset:#{@user.email}"
       if Rails.cache.exist?(cache_key)
-        redirect_to new_user_password_path, notice: t('flash.password_reset_email_time_limit')
+        @user.errors.add :base, t('flash.password_reset_email_time_limit')
+        render :new, status: :unprocessable_entity
       else
-        UserMailer.with(user: user).password_reset_email.deliver_later
+        UserMailer.with(user: @user).password_reset_email.deliver_later
         Rails.cache.write(cache_key, true, expires_in: 1.minute)
         redirect_to sign_in_path, notice: t('flash.password_reset_email_has_been_sent')
       end
     else
-      redirect_to new_user_password_path, notice: t('flash.password_reset_user_does_not_exists')
+      if @user.new_record?
+        @user.errors.add :email, :not_exists
+      end
+
+      render :new, status: :unprocessable_entity
     end
   end
 

@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       UserMailer.with(user: @user).email_verification.deliver_later
       redirect_to session.delete(:return_to) || root_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

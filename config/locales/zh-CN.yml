@@ -122,6 +122,8 @@ zh-CN:
           attributes:
             current_password:
               not_match: 密码错误
+            email:
+              not_exists: 不存在
   admin:
     settings:
       home:
@@ -344,5 +346,5 @@ zh-CN:
           back_to_homepage: 回到首页
           your_email_has_been_verified: 您的邮箱已验证成功
   users:
-    form:
+    new:
       account_name_helper_text: 可以使用大小写字母、数字和 - 号，全站唯一
