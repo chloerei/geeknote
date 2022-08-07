@@ -67,7 +67,7 @@ gem 'with_advisory_lock'
 
 gem 'diffy'
 
-gem "recaptcha"
+gem "recaptcha", require: false
 
 gem 'rest-client'
 

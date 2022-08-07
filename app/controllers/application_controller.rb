@@ -66,4 +66,12 @@ class ApplicationController < ActionController::Base
     @current_user = nil
     cookies[:auth_token] = nil
   end
+
+  def optional_verify_recaptcha(options = {})
+    if defined?(Recaptcha)
+      verify_recaptcha(options)
+    else
+      true
+    end
+  end
 end

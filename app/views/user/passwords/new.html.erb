@@ -8,7 +8,7 @@
         <%= form.text_field :email, autofocus: true %>
       </div>
       <div class="margin-bottom-3">
-        <%= recaptcha_tags %>
+        <%= optional_recaptcha_tags %>
       </div>
       <button type="submit" class="button button--filled">
         <%= t('common.send_password_reset_email') %>

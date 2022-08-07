@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 Dotenv::Railtie.load
 
-if ENV['SENTRY_DSN']
+if ENV['SENTRY_DSN'].present?
   require 'sentry-ruby'
   require 'sentry-rails'
 end
@@ -19,6 +19,10 @@ end
 
 if ENV['MAILER_DELIVERY_METHOD'] == 'mailgun'
   require 'mailgun-ruby'
+end
+
+if ENV['RECAPTCHA_SITE_KEY'].present?
+  require 'recaptcha'
 end
 
 module GeekNote
