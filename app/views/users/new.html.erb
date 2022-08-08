@@ -53,7 +53,7 @@
         </div>
       <% end %>
       <div class="margin-bottom-3">
-        <%= optional_recaptcha_tags %>
+        <div class="g-recaptcha" data-controller="recaptcha" data-sitekey="<%= ENV['RECAPTCHA_SITE_KEY'] %>"></div>
       </div>
       <button type="submit" class="button button--filled justify-content-center width-100">
         <%= t('common.sign_up') %>

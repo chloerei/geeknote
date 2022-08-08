@@ -8,7 +8,7 @@
         <%= form.text_field :email, autofocus: true %>
       </div>
       <div class="margin-bottom-3">
-        <%= optional_recaptcha_tags %>
+        <div class="g-recaptcha" data-controller="recaptcha" data-sitekey="<%= ENV['RECAPTCHA_SITE_KEY'] %>"></div>
       </div>
       <% if @user.errors[:base].any? %>
         <div class="padding-3 background-error-container margin-bottom-3">

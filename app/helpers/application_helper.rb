@@ -152,10 +152,4 @@ module ApplicationHelper
       link_to uri.host, uri.to_s
     end
   end
-
-  def optional_recaptcha_tags(options = {})
-    if defined?(Recaptcha)
-      recaptcha_tags(options.merge(noscript: false))
-    end
-  end
 end
