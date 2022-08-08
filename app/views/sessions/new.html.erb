@@ -3,7 +3,25 @@
     <h2 class="headline-medium margin-top-0 margin-bottom-3">
       <%= t 'common.sign_in' %>
     </h2>
-    <%= render 'form' %>
+    <%= form_with model: @user, url: sessions_path, method: :post, builder: CustomFormBuilder do |form| %>
+      <div class="margin-bottom-3">
+        <%= form.text_field :email, label: t('common.email') %>
+      </div>
+      <div class="margin-bottom-3">
+        <%= form.password_field :password, label: t('common.password') %>
+      </div>
+      <div class="margin-bottom-3">
+        <div class="g-recaptcha" data-controller="recaptcha" data-sitekey="<%= ENV['RECAPTCHA_SITE_KEY'] %>"></div>
+      </div>
+      <% if @user.errors[:base].any? %>
+        <div class="padding-3 background-error-container margin-bottom-3">
+          <%= @user.errors[:base].first %>
+        </div>
+      <% end %>
+      <button type="submit" class="button button--filled width-100 justify-content-center">
+        <%= t('common.sign_in') %>
+      </button>
+    <% end %>
   </div>
 
   <div class="padding-x-3">
