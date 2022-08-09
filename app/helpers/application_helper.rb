@@ -154,7 +154,7 @@ module ApplicationHelper
   end
 
   def recaptcha_tag
-    if ENV['RECAPTCHA_SITE_KEY']
+    if defined?(Recaptcha)
       content_tag 'div', '', class: 'g-recaptcha', data: { sitekey: ENV['RECAPTCHA_SITE_KEY'], controller: 'recaptcha' }
     end
   end
