@@ -3,7 +3,7 @@
     <h2 class="headline-medium margin-top-0 margin-bottom-3">
       <%= t 'common.sign_up' %>
     </h2>
-    <%= form_with model: @user, builder: CustomFormBuilder, html: { class: 'form', id: 'sign-up-form', autocomplete: 'off' } do |form| %>
+    <%= form_with model: @user, builder: CustomFormBuilder do |form| %>
       <%= form.fields_for :account do |account_form| %>
         <div class="margin-bottom-3">
           <div class="text-field text-field--outlined text-field--with-prefix-text <%= 'text-field--error' if @user.errors[:name].any? %>" data-controller="text-field" data-text-field-validate-url-value="<%= validate_users_path %>" data-text-field-error-key-value="account.name">
@@ -53,7 +53,7 @@
         </div>
       <% end %>
       <div class="margin-bottom-3">
-        <div class="g-recaptcha" data-controller="recaptcha" data-sitekey="<%= ENV['RECAPTCHA_SITE_KEY'] %>"></div>
+        <%= recaptcha_tag %>
       </div>
       <button type="submit" class="button button--filled justify-content-center width-100">
         <%= t('common.sign_up') %>

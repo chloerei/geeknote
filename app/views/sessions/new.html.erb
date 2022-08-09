@@ -11,7 +11,7 @@
         <%= form.password_field :password, label: t('common.password') %>
       </div>
       <div class="margin-bottom-3">
-        <div class="g-recaptcha" data-controller="recaptcha" data-sitekey="<%= ENV['RECAPTCHA_SITE_KEY'] %>"></div>
+        <%= recaptcha_tag %>
       </div>
       <% if @user.errors[:base].any? %>
         <div class="padding-3 background-error-container margin-bottom-3">
