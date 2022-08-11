@@ -126,9 +126,9 @@ module ApplicationHelper
 
   def post_summary(post)
     if post.excerpt.present?
-      truncate post.excerpt, length: 140
+      truncate post.excerpt, length: 100
     else
-      truncate strip_tags(markdown_render(post.content)), length: 140, escape: false
+      truncate strip_tags(markdown_render(post.content)), length: 100, escape: false
     end
   end
 

@@ -23,3 +23,12 @@
   background: var(--color-tertiary);
   color: var(--color-on-tertiary);
 }
+
+.post-card__feature-image {
+  img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 12px;
+  }
+}
