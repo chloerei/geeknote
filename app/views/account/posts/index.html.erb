@@ -12,10 +12,6 @@
       <%= render 'account/tab' %>
 
       <div class="display-flex flex-direction-column gap-3">
-        <% if @posts.current_page == 1 %>
-          <%= render @account.posts.featured %>
-        <% end %>
-
         <%= render partial: 'post', collection: @posts, cached: true %>
       </div>
 
