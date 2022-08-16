@@ -1,67 +1,63 @@
-<div class="card card--surface post-card position-relative">
-  <div class="display-flex padding-3 gap-3">
-    <div class="flex-grow-1">
-      <div class="display-flex gap-2 align-items-center margin-bottom-3">
-        <div class="avatar avatar--small">
-          <%= avatar_image_tag post.user.avatar %>
-        </div>
-        <div class="">
-          <b><%= post.user.name %></b>
-          <% if post.account != post.user.account %>
-            <span class="text-muted">
-              <%= t 'common.in' %>
-            </span>
-            <b><%= post.account.display_name %></b>
-          <% end %>
-        </div>
-        <div class="text-muted">
-          <%= format_time post.published_at %>
-        </div>
+<div class="card card--surface post-card position-relative padding-3">
+  <div class="display-flex gap-2 align-items-center margin-bottom-3">
+    <div class="avatar avatar--small">
+      <%= avatar_image_tag post.user.avatar %>
+    </div>
+    <div class="">
+      <b><%= post.user.name %></b>
+      <% if post.account != post.user.account %>
+        <span class="text-muted">
+          <%= t 'common.in' %>
+        </span>
+        <b><%= post.account.display_name %></b>
+      <% end %>
+    </div>
+    <div class="text-muted">
+      <%= format_time post.published_at %>
+    </div>
+  </div>
+
+  <div class="display-flex gap-3 margin-bottom-3">
+    <div class="flex-grow-1 text-break-word overflow-hidden">
+      <h3 class="title-large margin-top-0 margin-bottom-2">
+        <a href="<%= account_post_path(post.account, post) %>" class="link-expended link-title" data-post-list-target="postLink">
+          <%= post.title.presence || t('common.untitled') %>
+        </a>
+      </h3>
+
+      <div class="body-medium text-muted">
+        <%= post_summary post %>
       </div>
 
-      <div class="display-flex gap-3 margin-bottom-3">
-        <div class="flex-grow-1">
-          <h3 class="title-large margin-top-0 margin-bottom-2">
-            <a href="<%= account_post_path(post.account, post) %>" class="link-expended link-title" data-post-list-target="postLink">
-              <%= post.title.presence || t('common.untitled') %>
-            </a>
-          </h3>
+    </div>
 
-          <div class="body-medium text-muted">
-            <%= post_summary post %>
-          </div>
-
+    <% if post.featured_image.attached? %>
+      <div class="flex-shrink-0 display-none display-block@tablet">
+        <div class="post-card__feature-image">
+          <%= featured_image_thumb_tag post.featured_image %>
         </div>
+      </div>
+    <% end %>
+  </div>
 
-        <% if post.featured_image.attached? %>
-          <div class="flex-shrink-0 display-none display-block@tablet">
-            <div class="post-card__feature-image">
-              <%= featured_image_thumb_tag post.featured_image %>
-            </div>
-          </div>
+  <div class="display-flex flex-wrap gap-3">
+    <% if post.tags.any? %>
+      <div class="display-flex flex-wrap gap-2">
+        <% post.tags.each do |tag| %>
+          <a href="<%= tag_path(id: tag.name) %>" class="chip">
+            <%= tag.name %>
+          </a>
         <% end %>
       </div>
+    <% end %>
 
-      <div class="display-flex flex-wrap gap-3">
-        <% if post.tags.any? %>
-          <div class="display-flex flex-wrap gap-2">
-            <% post.tags.each do |tag| %>
-              <a href="<%= tag_path(id: tag.name) %>" class="chip">
-                <%= tag.name %>
-              </a>
-            <% end %>
-          </div>
-        <% end %>
-
-        <div class="display-flex align-items-center gap-1">
-          <span class="material-icons material-icons--inline">favorite</span>
-          <span><%= post.likes_count %></span>
-        </div>
-        <div class="display-flex align-items-center gap-1">
-          <span class="material-icons material-icons--inline">comment</span>
-          <span><%= post.comments_count %></span>
-        </div>
-      </div>
+    <div class="display-flex align-items-center gap-1">
+      <span class="material-icons material-icons--inline">favorite</span>
+      <span><%= post.likes_count %></span>
+    </div>
+    <div class="display-flex align-items-center gap-1">
+      <span class="material-icons material-icons--inline">comment</span>
+      <span><%= post.comments_count %></span>
     </div>
   </div>
 </div>
