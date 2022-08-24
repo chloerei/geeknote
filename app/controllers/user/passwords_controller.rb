@@ -6,7 +6,7 @@ class User::PasswordsController < ApplicationController
   end
 
   def create
-    @user = User.find_or_initialize_by email: params[:email]
+    @user = User.find_or_initialize_by email: params[:user][:email]
 
     if optional_verify_recaptcha(model: @user) && @user.persisted?
       cache_key = "password_reset:#{@user.email}"

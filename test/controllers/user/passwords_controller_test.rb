@@ -8,7 +8,7 @@ class User::PasswordsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not create reset if email not exists" do
     assert_emails 0 do
-      post user_password_path, params: { email: 'account@example.com' }
+      post user_password_path, params: { user: { email: 'account@example.com' } }
     end
     assert_response :unprocessable_entity
   end
@@ -17,7 +17,7 @@ class User::PasswordsControllerTest < ActionDispatch::IntegrationTest
     user = create(:user)
 
     assert_emails 1 do
-      post user_password_path, params: { email: user.email }
+      post user_password_path, params: { user: { email: user.email } }
     end
     assert_redirected_to sign_in_path
   end
