@@ -61,7 +61,9 @@ gem "sentry-rails", require: false
 
 gem 'newrelic_rpm', require: false
 
+# Mailer deliver method
 gem 'mailgun-ruby', '~>1.2.5', require: false
+gem 'postal-rails', '~> 1.0', require: false
 
 gem 'with_advisory_lock'
 

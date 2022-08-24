@@ -17,10 +17,6 @@ if ENV['NEW_RELIC_LICENSE_KEY'].present?
   require 'newrelic_rpm'
 end
 
-if ENV['MAILER_DELIVERY_METHOD'] == 'mailgun'
-  require 'mailgun-ruby'
-end
-
 if ENV['RECAPTCHA_SITE_KEY'].present?
   require 'recaptcha'
 end
@@ -68,32 +64,5 @@ module GeekNote
 
     config.active_storage.service = ENV['STORAGE_SERVICE'] || :local
 
-    case ENV['MAILER_DELIVERY_METHOD']
-    when 'smtp'
-      config.action_mailer.delivery_method = :smtp
-      config.action_mailer.smtp_settings = {
-        address: ENV['SMTP_ADDRESS'],
-        port: ENV['SMTP_PORT'],
-        domain: ENV['SMTP_DOMAIN'],
-        user_name: ENV['SMTP_USERNAME'],
-        password: ENV['SMTP_PASSWORD'],
-        authentication: 'plain',
-        enable_starttls_auto: true,
-        ssl: ENV['SMTP_SSL'].present?
-      }
-    when 'mailgun'
-      config.action_mailer.delivery_method = :mailgun
-      config.action_mailer.mailgun_settings = {
-        api_key: ENV['MAILGUN_API_KEY'],
-        domain: ENV['MAILGUN_DOMAIN']
-      }
-    end
-
-    config.action_mailer.default_options = {
-      from: ENV['MAILER_DEFAULT_FROM'] || "noreply@example.com"
-    }
-    config.action_mailer.default_url_options = {
-      host: ENV['HOST']
-    }
   end
 end
