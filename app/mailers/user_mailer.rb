@@ -16,7 +16,6 @@ class UserMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      reply_to: 'support@geeknote.net',
       subject: I18n.t('email.your_post_is_been_restricted_for_publish')
     )
   end
@@ -26,7 +25,6 @@ class UserMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      reply_to: 'support@geeknote.net',
       subject: I18n.t('email.email_verification')
     )
   end
@@ -37,7 +35,7 @@ class UserMailer < ApplicationMailer
 
     options = {
       to: @user.email,
-      from: "#{@comment.user.name} <notifications@geeknote.net>",
+      from: "#{@comment.user.name} <#{ENV['MAILER_FROM']}>",
       subject: "Re: #{@comment.commentable.title}",
       message_id: "#{@comment.account.name}/posts/#{@comment.commentable_id}/comments/#{@comment.id}@geeknote.net",
       references: "#{@comment.account.name}/posts/#{@comment.commentable_id}@geeknote.net"

@@ -29,10 +29,6 @@ when 'smtp'
   }
 end
 
-ActionMailer::Base.default_options = {
-  from: ENV['MAILER_DEFAULT_FROM'] || "noreply@example.com"
-}
-
 ActionMailer::Base.default_url_options = {
   host: ENV['HOST']
 }
