@@ -47,4 +47,15 @@ class UserMailer < ApplicationMailer
 
     mail(options)
   end
+
+  def weekly_summary
+    @user = params[:user]
+
+    @posts = Post.published.where(published_at: [Date.today - 7 .. Date.today]).where("likes_count > 0").order(likes_count: :desc).limit(10)
+
+    mail(
+      to: @user.email,
+      subject: "#{@site.name} Weekly Summary"
+    )
+  end
 end

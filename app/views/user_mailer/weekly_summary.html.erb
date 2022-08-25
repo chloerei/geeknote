@@ -1,0 +1,20 @@
+<h2 class="first content-block">热门文章</h2>
+
+<% @posts.each do |post| %>
+  <div class="content-block">
+    <h3 class="first">
+      <a href="<%= account_post_url(post.account, post) %>">
+        <%= post.title %>
+      </a>
+    </h3>
+    <div>
+      <%= post.user.name %>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :footer do %>
+  <p>
+    不想收到同类邮件？<a href="<%= user_email_unsubscribe_url(token: @user.email_auth_token, type: 'weekly') %>">退订邮件</a>或<a href="<%= settings_notification_url %>">修改设置</a>。
+  </p>
+<% end %>

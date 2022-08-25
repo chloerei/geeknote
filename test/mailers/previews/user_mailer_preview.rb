@@ -22,4 +22,10 @@ class UserMailerPreview < ActionMailer::Preview
 
     UserMailer.with(user: user, comment: comment).comment_notification
   end
+
+  def weekly_summary
+    user = User.first || FactoryBot.create(:user)
+
+    UserMailer.with(user: user).weekly_summary
+  end
 end
