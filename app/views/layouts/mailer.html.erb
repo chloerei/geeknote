@@ -309,7 +309,8 @@
               <table width="100%">
                 <tr>
                   <td class="aligncenter content-block">
-                    <a href="https://geeknote.net">GeekNote</a> - 为 Geek 设计的博客服务
+                    <%= yield :footer %>
+                    <a href="<%= root_url %>"><%= @site.name %></a> - <%= @site.description %>
                   </td>
                 </tr>
               </table>

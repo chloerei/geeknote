@@ -2,12 +2,13 @@
 
 <%= markdown_render @comment.content %>
 
-<p class="aligncenter">
-  <a href="<%= account_post_comment_url(@comment.commentable.account, @comment.commentable, @comment) %>" class="btn-primary">
-    回复评论
-  </a>
-</p>
+<a href="<%= account_post_comment_url(@comment.commentable.account, @comment.commentable, @comment) %>" class="btn-primary">
+  回复评论
+</a>
 
-<hr>
 
-<p>您收到此邮件是因为开启了评论邮件通知，您可以在<a href="<%= settings_notification_url %>">通知设置</a>页面更改设置，或者点击<a href="<%= user_email_unsubscribe_url(token: @user.email_auth_token, type: 'comment') %>">退订链接</a>退订同类邮件。请勿直接回复此邮件。</p>
+<% content_for :footer do %>
+  <p>
+    不想收到同类邮件？<a href="<%= user_email_unsubscribe_url(token: @user.email_auth_token, type: 'comment') %>">退订邮件</a>或<a href="<%= settings_notification_url %>">修改设置</a>。
+  </p>
+<% end %>
