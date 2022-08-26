@@ -8,7 +8,7 @@ export default class extends Controller {
     const value = event.detail.value
 
     if (value.length) {
-      const response = await get('/tags/search', {
+      const response = await get('/suggest/tags', {
         query: {
           q: value
         },

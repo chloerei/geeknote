@@ -36,10 +36,10 @@ Rails.application.routes.draw do
 
   resource :preview, only: [:create]
 
-  resources :tags, only: [:show] do
-    collection do
-      get :search
-    end
+  resources :tags, only: [:show], id: /.+/, format: false, defaults: { format: :html }
+
+  namespace :suggest do
+    resources :tags, only: [:index]
   end
 
   resources :organizations, only: [:index, :new, :create]

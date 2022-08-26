@@ -15,6 +15,7 @@ class Account < ApplicationRecord
 
   NAME_EXCLUSION_LIST = %w(
     admin
+    api
     attachments
     bookmarks
     login
@@ -24,6 +25,7 @@ class Account < ApplicationRecord
     rails
     sessions
     settings
+    suggest
     tags
     users
   ) + ENV.fetch('ACCOUNT_NAME_EXCLUSION_LIST', '').split(',')
