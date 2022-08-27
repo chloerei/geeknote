@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <div class="card card--surface padding-3">
+      <div class="card card--surface padding-3 margin-bottom-3">
         <%= form_with url: admin_settings_weekly_summary_path, model: @site, builder: CustomFormBuilder do |form| %>
           <div class="margin-bottom-3">
             <label class="display-flex gap-3 align-items-center">
@@ -38,6 +38,20 @@
             <%= t 'common.save_changes' %>
           </button>
         <% end %>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="card card--surface padding-y-2">
+        <a href="<%= admin_settings_weekly_summary_preview_path %>" class="link-block padding-y-2 padding-x-3">
+          <div class="display-flex align-items-center gap-3">
+            <span class="material-icons">email</span>
+
+            <div class="">
+              <%= t 'common.send_preview' %>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
   </div>

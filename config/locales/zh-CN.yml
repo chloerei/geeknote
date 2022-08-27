@@ -248,8 +248,10 @@ zh-CN:
     save_and_fetch: 保存并抓取
     save_changes: 保存修改
     save_draft: 保存草稿
+    send_email: 发送邮件
     send_invitation: 发送邀请
     send_password_reset_email: 发送密码重置邮件
+    send_preview: 发送预览
     settings: 设置
     show_all_comments: 查看所有评论
     sign_in: 登录
@@ -301,7 +303,8 @@ zh-CN:
     profile_updated: 资料已更新。
     removed_from_collection: 已从“%{name}”中移除。
     require_sign_in: 需要登录。
-    settings_update_successful: 设置更新成功
+    settings_updated_successful: 设置更新成功。
+    weekly_summary_preview_sent_successful: 每周摘要邮件预览发送成功。
   mailer:
     account_mailer:
       export_complted_subject: 数据导出已完成

@@ -4,7 +4,7 @@ class Admin::Settings::WeeklySummariesController < Admin::Settings::BaseControll
 
   def update
     if @site.update site_params
-      redirect_to admin_settings_weekly_summary_path, notice: I18n.t('flash.settings_update_successful')
+      redirect_to admin_settings_weekly_summary_path, notice: I18n.t('flash.settings_updated_successful')
     else
       render :new, status: :unprocessable_entity
     end
