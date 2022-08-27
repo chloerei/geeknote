@@ -20,4 +20,13 @@ class User::Email::UnsubscribesControllerTest < ActionDispatch::IntegrationTest
     user.reload
     assert_not user.comment_email_notification_enabled?
   end
+
+  test "should unsubscribe weekly summary email" do
+    user = create(:user)
+    assert user.weekly_summary_email_enabled?
+    patch user_email_unsubscribe_path(token: user.email_auth_token, type: 'weekly_summary')
+    assert_response :success
+    user.reload
+    assert_not user.weekly_summary_email_enabled?
+  end
 end
