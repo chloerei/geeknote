@@ -68,6 +68,7 @@ Rails.application.routes.draw do
     namespace :settings do
       root to: 'home#index'
       resource :appearance, only: [:show, :update]
+      resource :weekly_summary, only: [:show, :update]
     end
 
     mount Sidekiq::Web => "/sidekiq", constraints: AdminConstraint.new

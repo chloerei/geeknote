@@ -74,13 +74,6 @@ zh-CN:
       organization:
         description: 简介
         name: 名称
-      site:
-        name: 名称
-        description: 描述
-        header_html: 头部 HTML
-        footer_html: 尾部 HTML
-        sidebar_header_html: 侧栏头部 HTML
-        sidebar_footer_html: 侧栏尾部 HTML
       post:
         allow_comments: 允许评论
         canonical_url: Canonical URL
@@ -93,16 +86,26 @@ zh-CN:
         draft: 草稿
         published: 已发布
         trashed: 已废弃
+      site:
+        description: 描述
+        footer_html: 尾部 HTML
+        header_html: 头部 HTML
+        name: 名称
+        sidebar_footer_html: 侧栏尾部 HTML
+        sidebar_header_html: 侧栏头部 HTML
+        weekly_summary_email_enabled: 开启每周摘要邮件
+        weekly_summary_footer_html: 每周摘要尾部 HTML
+        weekly_summary_header_html: 每周摘要头部 HTML
       user:
         bio: 简介
         comment_email_notification_enabled: 评论通知邮件
-        weekly_summary_email_enabled: 每周摘要邮件
         current_password: 当前密码
         email: Email
         email_notification_enabled: 开启邮件通知
         name: 名称
         password: 密码
         password_confirmation: 密码确认
+        weekly_summary_email_enabled: 每周摘要邮件
     errors:
       models:
         account:
@@ -130,7 +133,9 @@ zh-CN:
       home:
         index:
           appearance: 外观
-          appearance_desription: 网站名称、Logo、页面 HTML 等。
+          appearance_desription: 网站名称、Logo 和页面 HTML 等。
+          weekly_summary: 每周摘要
+          weekly_summary_desription: 每周摘要邮件开关和内容 HTML。
   collection:
     visibility_private_description: 只有账号成员可以查看。
     visibility_private_label: 私有
@@ -263,6 +268,7 @@ zh-CN:
     view_more: 查看更多
     visibility: 公开范围
     visit_site: Visit site
+    weekly_summary: 每周摘要
   email:
     email_verification: 验证邮箱地址
     reset_your_geeknote_password: 重置密码
@@ -295,6 +301,7 @@ zh-CN:
     profile_updated: 资料已更新。
     removed_from_collection: 已从“%{name}”中移除。
     require_sign_in: 需要登录。
+    settings_update_successful: 设置更新成功
   mailer:
     account_mailer:
       export_complted_subject: 数据导出已完成
@@ -311,8 +318,8 @@ zh-CN:
       who_to_follow: 推荐关注
   recaptcha:
     errors:
-      verification_failed: reCAPTCHA 验证错误，请重试。
       recaptcha_unreachable: reCAPTCHA 验证服务器错误，请重试。
+      verification_failed: reCAPTCHA 验证错误，请重试。
   settings:
     emails:
       show:
