@@ -12,6 +12,6 @@ class Settings::NotificationsController < Settings::BaseController
   private
 
   def settings_params
-    params.require(:user).permit(:email_notification_enabled, :comment_email_notification_enabled)
+    params.require(:user).permit(:email_notification_enabled, :comment_email_notification_enabled, :weekly_summary_email_enabled)
   end
 end

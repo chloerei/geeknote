@@ -95,7 +95,8 @@ zh-CN:
         trashed: 已废弃
       user:
         bio: 简介
-        comment_email_notification_enabled: 收到新评论时发送邮件
+        comment_email_notification_enabled: 评论通知邮件
+        weekly_summary_email_enabled: 每周摘要邮件
         current_password: 当前密码
         email: Email
         email_notification_enabled: 开启邮件通知

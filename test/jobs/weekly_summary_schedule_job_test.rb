@@ -29,4 +29,13 @@ class WeeklySummaryScheduleJobTest < ActiveJob::TestCase
       WeeklySummaryScheduleJob.perform_now
     end
   end
+
+  test "should not deliver if user disable notification" do
+    user = create(:user, email_verified_at: Time.now, weekly_summary_email_enabled: false)
+    create(:post, status: :published, published_at: 1.day.ago)
+
+    assert_no_enqueued_emails do
+      WeeklySummaryScheduleJob.perform_now
+    end
+  end
 end
