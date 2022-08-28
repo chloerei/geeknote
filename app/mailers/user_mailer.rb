@@ -52,7 +52,13 @@ class UserMailer < ApplicationMailer
   def weekly_digest
     @user = params[:user]
 
-    @posts = Post.published.where(published_at: [Date.today - 7 .. Date.today]).where("likes_count > 0").order(likes_count: :desc).limit(10)
+    @posts = Post
+      .from(Post.select("*, rank() over (partition by account_id order by likes_count desc, published_at desc)")
+      .published
+      .where(published_at: [Date.today - 7 .. Date.today])
+      .where("likes_count > 0"), :posts)
+      .where(rank: 1)
+      .limit(5)
 
     mail(
       from: "#{@site.name} Weekly <#{ENV['MAILER_FROM_DIGEST']}>",
