@@ -68,8 +68,8 @@ Rails.application.routes.draw do
     namespace :settings do
       root to: 'home#index'
       resource :appearance, only: [:show, :update]
-      resource :weekly_summary, only: [:show, :update] do
-        scope module: :weekly_summaries do
+      resource :weekly_digest, only: [:show, :update] do
+        scope module: :weekly_digests do
           resource :preview, only: [:show, :create]
         end
       end

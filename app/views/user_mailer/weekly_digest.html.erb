@@ -1,4 +1,4 @@
-<%= sanitize @site.weekly_summary_header_html %>
+<%= sanitize @site.weekly_digest_header_html %>
 
 <h2 class="first content-block">热门文章</h2>
 
@@ -15,10 +15,10 @@
   </div>
 <% end %>
 
-<%= sanitize @site.weekly_summary_footer_html %>
+<%= sanitize @site.weekly_digest_footer_html %>
 
 <% content_for :footer do %>
   <p>
-    不想收到同类邮件？<a href="<%= user_email_unsubscribe_url(token: @user.email_auth_token, type: 'weekly_summary') %>">退订邮件</a>或<a href="<%= settings_notification_url %>">修改设置</a>。
+    不想收到同类邮件？<a href="<%= user_email_unsubscribe_url(token: @user.email_auth_token, type: 'weekly_digest') %>">退订邮件</a>或<a href="<%= settings_notification_url %>">修改设置</a>。
   </p>
 <% end %>

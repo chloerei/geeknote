@@ -230,9 +230,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_27_083404) do
     t.text "sidebar_footer_html"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "weekly_summary_email_enabled", default: true, null: false
-    t.text "weekly_summary_header_html"
-    t.text "weekly_summary_footer_html"
+    t.boolean "weekly_digest_email_enabled", default: true, null: false
+    t.text "weekly_digest_header_html"
+    t.text "weekly_digest_footer_html"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -265,7 +265,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_27_083404) do
     t.datetime "email_verified_at", precision: nil
     t.boolean "email_notification_enabled", default: true, null: false
     t.boolean "comment_email_notification_enabled", default: true, null: false
-    t.boolean "weekly_summary_email_enabled", default: true, null: false
+    t.boolean "weekly_digest_email_enabled", default: true, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

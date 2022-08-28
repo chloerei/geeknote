@@ -49,7 +49,7 @@ class UserMailer < ApplicationMailer
     mail(options)
   end
 
-  def weekly_summary
+  def weekly_digest
     @user = params[:user]
 
     @posts = Post.published.where(published_at: [Date.today - 7 .. Date.today]).where("likes_count > 0").order(likes_count: :desc).limit(10)
@@ -57,7 +57,7 @@ class UserMailer < ApplicationMailer
     mail(
       from: "#{@site.name} Weekly <#{ENV['MAILER_FROM_DIGEST']}>",
       to: @user.email,
-      subject: I18n.t('common.weekly_summary_subject', title: @posts.first.title, count: @posts.count)
+      subject: I18n.t('common.weekly_digest_subject', title: @posts.first.title, count: @posts.count)
     )
   end
 end

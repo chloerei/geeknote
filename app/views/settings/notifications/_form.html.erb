@@ -15,12 +15,12 @@
         </div>
         <%= form.check_box :comment_email_notification_enabled %>
       </label>
-      <% if @site.weekly_summary_email_enabled? %>
+      <% if @site.weekly_digest_email_enabled? %>
         <label class="display-flex gap-3 align-items-center">
           <div class="flex-grow-1">
-            <%= User.human_attribute_name(:weekly_summary_email_enabled) %>
+            <%= User.human_attribute_name(:weekly_digest_email_enabled) %>
           </div>
-          <%= form.check_box :weekly_summary_email_enabled %>
+          <%= form.check_box :weekly_digest_email_enabled %>
         </label>
       <% end %>
     </fieldset>

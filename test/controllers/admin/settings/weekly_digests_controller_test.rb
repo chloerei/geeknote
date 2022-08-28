@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Admin::Settings::WeeklySummariesControllerTest < ActionDispatch::IntegrationTest
+class Admin::Settings::WeeklyDigestsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @site = Site.create
     @admin = create(:user, email: ENV['ADMIN_EMAILS'])
@@ -14,9 +14,9 @@ class Admin::Settings::WeeklySummariesControllerTest < ActionDispatch::Integrati
 
   test "should update site" do
     sign_in @admin
-    patch admin_settings_weekly_summary_path, params: { site: { weekly_summary_email_enabled: false } }
-    assert_redirected_to admin_settings_weekly_summary_path
+    patch admin_settings_weekly_digest_path, params: { site: { weekly_digest_email_enabled: false } }
+    assert_redirected_to admin_settings_weekly_digest_path
     @site.reload
-    assert_equal false, @site.weekly_summary_email_enabled
+    assert_equal false, @site.weekly_digest_email_enabled
   end
 end

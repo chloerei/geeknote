@@ -11,8 +11,8 @@
             </a>
           </div>
           <div class="breadcrumb__item">
-            <a href="<%= admin_settings_weekly_summary_path %>">
-              <%= t 'common.weekly_summary' %>
+            <a href="<%= admin_settings_weekly_digest_path %>">
+              <%= t 'common.weekly_digest' %>
             </a>
           </div>
           <div class="breadcrumb__item breadcrumb__item--active">
@@ -22,7 +22,7 @@
       </div>
 
       <div class="card card--surface padding-3">
-        <%= form_with model: @user, url: admin_settings_weekly_summary_preview_path, builder: CustomFormBuilder do |form| %>
+        <%= form_with model: @user, url: admin_settings_weekly_digest_preview_path, builder: CustomFormBuilder do |form| %>
           <div class="margin-bottom-3">
             <%= form.text_field :email %>
           </div>

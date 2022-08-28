@@ -93,9 +93,9 @@ zh-CN:
         name: 名称
         sidebar_footer_html: 侧栏尾部 HTML
         sidebar_header_html: 侧栏头部 HTML
-        weekly_summary_email_enabled: 开启每周摘要邮件
-        weekly_summary_footer_html: 每周摘要尾部 HTML
-        weekly_summary_header_html: 每周摘要头部 HTML
+        weekly_digest_email_enabled: 开启每周摘要邮件
+        weekly_digest_footer_html: 每周摘要尾部 HTML
+        weekly_digest_header_html: 每周摘要头部 HTML
       user:
         bio: 简介
         comment_email_notification_enabled: 评论通知邮件
@@ -105,7 +105,7 @@ zh-CN:
         name: 名称
         password: 密码
         password_confirmation: 密码确认
-        weekly_summary_email_enabled: 每周摘要邮件
+        weekly_digest_email_enabled: 每周摘要邮件
     errors:
       models:
         account:
@@ -134,8 +134,8 @@ zh-CN:
         index:
           appearance: 外观
           appearance_desription: 网站名称、Logo 和页面 HTML 等。
-          weekly_summary: 每周摘要
-          weekly_summary_desription: 每周摘要邮件开关和内容 HTML。
+          weekly_digest: 每周摘要
+          weekly_digest_desription: 每周摘要邮件开关和内容 HTML。
   collection:
     visibility_private_description: 只有账号成员可以查看。
     visibility_private_label: 私有
@@ -270,8 +270,8 @@ zh-CN:
     view_more: 查看更多
     visibility: 公开范围
     visit_site: Visit site
-    weekly_summary: 每周摘要
-    weekly_summary_subject: '"%{title}" - %{count} 篇热门文章'
+    weekly_digest: 每周摘要
+    weekly_digest_subject: '"%{title}" - %{count} 篇热门文章'
   email:
     email_verification: 验证邮箱地址
     reset_your_geeknote_password: 重置密码
@@ -305,7 +305,7 @@ zh-CN:
     removed_from_collection: 已从“%{name}”中移除。
     require_sign_in: 需要登录。
     settings_updated_successful: 设置更新成功。
-    weekly_summary_preview_sent_successful: 每周摘要邮件预览发送成功。
+    weekly_digest_preview_sent_successful: 每周摘要邮件预览发送成功。
   mailer:
     account_mailer:
       export_complted_subject: 数据导出已完成

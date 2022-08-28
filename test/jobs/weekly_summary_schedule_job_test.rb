@@ -25,13 +25,13 @@ class WeeklySummaryScheduleJobTest < ActiveJob::TestCase
     user = create(:user, email_verified_at: Time.now)
     create(:post, status: :published, published_at: 1.day.ago)
 
-    assert_enqueued_email_with UserMailer, :weekly_summary, args: { user: user } do
+    assert_enqueued_email_with UserMailer, :weekly_digest, args: { user: user } do
       WeeklySummaryScheduleJob.perform_now
     end
   end
 
   test "should not deliver if user disable notification" do
-    user = create(:user, email_verified_at: Time.now, weekly_summary_email_enabled: false)
+    user = create(:user, email_verified_at: Time.now, weekly_digest_email_enabled: false)
     create(:post, status: :published, published_at: 1.day.ago)
 
     assert_no_enqueued_emails do
