@@ -271,6 +271,7 @@ zh-CN:
     visibility: 公开范围
     visit_site: Visit site
     weekly_summary: 每周摘要
+    weekly_summary_subject: '"%{title}" - %{count} 篇热门文章'
   email:
     email_verification: 验证邮箱地址
     reset_your_geeknote_password: 重置密码

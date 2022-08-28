@@ -3,7 +3,7 @@ class ApplicationMailer < ActionMailer::Base
 
   before_action :set_site
 
-  default from: -> { "#{@site.name} <#{ENV['MAILER_FROM']}>" }
+  default from: -> { "#{@site.name} <#{ENV['MAILER_FROM_DEFAULT']}>" }
 
   private
 
