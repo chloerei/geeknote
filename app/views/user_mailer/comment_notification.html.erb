@@ -3,12 +3,11 @@
 <%= markdown_render @comment.content %>
 
 <a href="<%= account_post_comment_url(@comment.commentable.account, @comment.commentable, @comment) %>" class="btn-primary">
-  回复评论
+  查看评论
 </a>
 
-
-<% content_for :footer do %>
-  <p>
+<div class="body-sub">
+  <p class="sub">
     不想收到同类邮件？<a href="<%= user_email_unsubscribe_url(token: @user.email_auth_token, type: 'comment') %>">退订邮件</a>或<a href="<%= settings_notification_url %>">修改设置</a>。
   </p>
-<% end %>
+</div>

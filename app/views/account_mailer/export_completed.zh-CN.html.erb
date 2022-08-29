@@ -1,3 +1,9 @@
 <p>
-  账号 @<%= @account.name %> 的数据导出已完成，请访问 <a href="<%= account_dashboard_settings_exports_url(@account) %>"><%= account_dashboard_settings_exports_url(@account) %></a> 下载数据文件。
+  账号 @<%= @account.name %> 的数据导出已完成，点击下方按钮获取下载链接。
 </p>
+
+<div class="body-action">
+  <a href="<%= account_dashboard_settings_exports_url(@account) %>" class="button">
+    获取下载链接
+  </a>
+</div>

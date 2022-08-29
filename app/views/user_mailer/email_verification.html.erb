@@ -1,9 +1,11 @@
-<p>为了使用 GeekNote 完整功能，请点击下方链接验证邮箱地址：</p>
-
 <p>
-  <a href="<%= user_email_verification_url(token: @user.email_auth_token) %>" class="btn-primary">
-    验证邮箱地址
-  </a>
+  为了使用 GeekNote 完整功能，请点击下方链接验证邮箱地址。<b>链接将在一周后过期。</b>
 </p>
 
-<p>收到此邮件是因为该邮件地址曾经在 GeekNote 注册，如果这不是您预期的请忽略此邮件。链接将在一周后过期。</p>
+<div class="body-action">
+  <a href="<%= user_email_verification_url(token: @user.email_auth_token) %>" class="button">
+    验证邮箱地址
+  </a>
+</div>
+
+<p>收到此邮件是因为该邮箱地址曾经在 GeekNote 注册，如果这不是您预期的，请忽略此邮件。</p>

@@ -1,11 +1,9 @@
 <p>
-  <a href="<%= account_root_url(@member.inviter.account) %>"><%= @member.inviter.name %></a> 邀请您加入组织 <a href="<%= account_root_url(@member.organization.account) %>"><%= @member.organization.name %></a>。点击下方链接确认邀请：
+  <a href="<%= account_root_url(@member.inviter.account) %>"><%= @member.inviter.name %></a> 邀请您加入组织 <a href="<%= account_root_url(@member.organization.account) %>"><%= @member.organization.name %></a>。点击下方按钮确认邀请。<b>邀请链接将于 7 天后过期。</b>
 </p>
 
-<p>
-  <a href="<%= account_invitation_url(@member.organization.account, invitation_token: (@member.user ? nil : @member.invitation_token)) %>" class="btn-primary">
-    加入 @<%= @member.organization.account.name %>
+<div class="body-action">
+  <a href="<%= account_invitation_url(@member.organization.account, invitation_token: (@member.user ? nil : @member.invitation_token)) %>" class="button button--green">
+    加入 <%= @member.organization.name %>
   </a>
-</p>
-
-<p>邀请链接将于 7 天后过期。</p>
+</div>
