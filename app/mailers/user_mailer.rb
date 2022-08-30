@@ -58,12 +58,14 @@ class UserMailer < ApplicationMailer
       .where(published_at: [Date.today - 7 .. Date.today])
       .where("likes_count > 0"), :posts)
       .where(rank: 1)
+      .order(likes_count: :desc, published_at: :desc)
       .limit(5)
+      .to_a
 
     mail(
       from: "#{@site.name} Weekly <#{ENV['MAILER_FROM_DIGEST']}>",
       to: @user.email,
-      subject: I18n.t('common.weekly_digest_subject', title: @posts.first.title, count: @posts.count)
+      subject: I18n.t('common.weekly_digest_subject', title: @posts.first.title, count: @posts.length)
     )
   end
 end
