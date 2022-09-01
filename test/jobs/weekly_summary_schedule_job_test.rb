@@ -25,7 +25,7 @@ class WeeklySummaryScheduleJobTest < ActiveJob::TestCase
     user = create(:user, email_verified_at: Time.now)
     create(:post, status: :published, published_at: 1.day.ago, likes_count: 1)
 
-    assert_enqueued_email_with UserMailer, :weekly_digest, args: { user: user } do
+    assert_enqueued_email_with UserMailer, :weekly_digest, args: { user: user }, queue: :low do
       WeeklySummaryScheduleJob.perform_now
     end
   end
