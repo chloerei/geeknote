@@ -316,7 +316,7 @@
     }
 
     .email-masthead_logo {
-      width: 94px;
+      height: 36px;
     }
 
     .email-masthead_name {
@@ -428,7 +428,11 @@
             <tr>
               <td class="email-masthead">
                 <a href="<%= root_url %>" class="email-masthead_name">
-                  <%= @site.name %>
+                  <% if @site.logo.attached? %>
+                    <%= image_tag @site.logo, class: 'email-masthead_logo' %>
+                  <% else %>
+                    <%= @site.name %>
+                  <% end %>
                 </a>
               </td>
             </tr>
