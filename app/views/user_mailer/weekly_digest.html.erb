@@ -8,7 +8,9 @@
     &mdash;
     <%= post_summary post, length: 70 %>
     <br>
-    <span class="text-muted"><%= post.account.display_name %></span>
+    <span class="text-muted">
+      <%= post.account.display_name %><% if post.account.organization? %> / <%= post.user.name %><% end %>
+    </span>
   </p>
 <% end %>
 
