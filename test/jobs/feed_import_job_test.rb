@@ -39,13 +39,51 @@ class FeedImportJobTest < ActiveJob::TestCase
     assert_equal 'urn:uuid:5d563d8d-65f4-44c4-b7d9-f2af8fc012b5', post.feed_source_id
     assert_equal 'https://example.com/2022/01/01/post-title', post.canonical_url
     assert_equal DateTime.new(2022, 1, 1), post.published_at
-    assert post.user == account.owner
+    assert_equal account.owner, post.user
     assert_not_nil account.feed_fetched_at
 
     # Will not create duplicate post
     assert_no_difference "account.posts.count" do
       FeedImportJob.perform_now(account)
     end
+  end
+
+  test "should import atom feed by organization account" do
+    account = create(:organization_account, feed_url: 'https://example.com/feed.xml', feed_mark_canonical: true)
+    user = create(:user)
+    account.owner.members.create(user: user, role: :owner)
+
+    stub_request(:get, 'https://example.com/feed.xml').to_return(body: <<~EOF)
+      <?xml version="1.0" encoding="utf-8"?>
+      <feed xmlns="http://www.w3.org/2005/Atom">
+        <title>Site Title</title>
+        <subtitle>Subtitle</subtitle>
+        <link href="https://example.com/feed.xml" rel="self" />
+        <link href="http://example.com/" />
+        <id>urn:uuid:417c8563-3ddd-41a6-a58b-cc0f1d47e643</id>
+        <updated>2022-01-01T00:00:00+00:00</updated>
+        <author>
+          <name>Author</name>
+          <email>author@example.com</email>
+        </author>
+
+        <entry>
+          <title>Post Title</title>
+          <link type="text/html" href="https://example.com/2022/01/01/post-title" />
+          <id>urn:uuid:5d563d8d-65f4-44c4-b7d9-f2af8fc012b5</id>
+          <published>2022-01-01T00:00:00+00:00</published>
+          <summary>Post summary.</summary>
+          <content>Post content.</content>
+        </entry>
+
+      </feed>
+    EOF
+
+    assert_difference "account.posts.count" do
+      FeedImportJob.perform_now(account)
+    end
+    post = account.posts.last
+    assert_equal user, post.user
   end
 
   test "should import rss feed" do

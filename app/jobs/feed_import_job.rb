@@ -22,7 +22,7 @@ class FeedImportJob < ApplicationJob
           feed_source_id: entry[:id],
           canonical_url: account.feed_mark_canonical? ? entry[:url]: nil,
           published_at: entry[:published_at],
-          user: account.user? ? account.owner : account.owner.member.find_by(role: 'owner').user
+          user: account.user? ? account.owner : account.owner.members.find_by(role: 'owner').user
         )
       end
     end
