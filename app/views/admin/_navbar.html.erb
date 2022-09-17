@@ -9,6 +9,14 @@
           <%= t 'common.overview' %>
         </div>
       </a>
+      <a href="<%= admin_posts_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/posts') %>">
+        <div class="tab__item__icon">
+          <span class="material-icons">article</span>
+        </div>
+        <div class="tab__item__label">
+          <%= t 'common.posts' %>
+        </div>
+      </a>
       <a href="<%= admin_settings_root_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/settings') %>">
         <div class="tab__item__icon">
           <span class="material-icons">settings</span>

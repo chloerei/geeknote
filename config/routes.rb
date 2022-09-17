@@ -65,6 +65,13 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'home#index'
 
+    resources :posts do
+      member do
+        patch :restrict
+        patch :unrestrict
+      end
+    end
+
     namespace :settings do
       root to: 'home#index'
       resource :appearance, only: [:show, :update]

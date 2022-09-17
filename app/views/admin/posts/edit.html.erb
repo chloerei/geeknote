@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="layout">
+    <%= render 'admin/navbar' %>
+
+    <div class="main">
+      <div class="card card--surface padding-3 margin-bottom-3">
+        <div class="breadcrumb">
+          <div class="breadcrumb__item">
+            <a href="<%= admin_posts_path %>">
+              <%= t 'common.posts' %>
+            </a>
+          </div>
+          <div class="breadcrumb__item breadcrumb__item--active">
+            <%= @post.id %>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card--surface padding-3">
+        <%= form_with model: @post, url: admin_post_path(@post), builder: CustomFormBuilder do |form| %>
+          <div class="margin-bottom-3">
+            <%= form.text_field :title %>
+          </div>
+          <div class="margin-bottom-3">
+            <%= form.hidden_field :content, id: 'post-content' %>
+            <div class="markdown-editor" data-controller="markdown-editor" data-markdown-editor-input-value="post-content" data-markdown-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>" data-markdown-editor-i18n-value="<%= { write: I18n.t('markdown_editor.write'), preview: I18n.t('markdown_editor.preview') }.to_json %>">
+            </div>
+          </div>
+          <div class="margin-bottom-3">
+            <div class="text-field text-field--outlined">
+              <div class="text-field__container">
+                <div class="selector text-field__input" data-controller="selector tag-selector" data-selector-placeholder-value="" data-selector-creatable-value="true" data-selector-max-items-value="5" data-action="selector:input->tag-selector#update">
+                  <select name="post[tag_list][]" class="selector__select" data-selector-target="select" multiple>
+                    <% @post.tags.each do |tag| %>
+                      <option value="<%= tag.name %>" selected><%= tag.name %></option>
+                    <% end %>
+                  </select>
+                </div>
+                <label class="text-field__label">
+                  <%= t 'common.tags' %>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <details>
+            <summary class="padding-1 margin-bottom-3">
+              <%= t 'common.settings' %>
+            </summary>
+
+            <div class="margin-bottom-3">
+              <%= form.text_field :canonical_url, helper_text: I18n.t('common.canonical_url_helper') %>
+            </div>
+          </details>
+
+          <button type="submit" class="button button--filled">
+            <%= t 'common.save_changes' %>
+          </button>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="card card--surface padding-3 margin-bottom-3">
+        <div class="title-medium margin-bottom-3">
+          <%= t 'common.meta' %>
+        </div>
+
+        <div class="margin-bottom-2">
+          <div class="label-large margin-bottom-1">
+            <%= t 'common.account' %>
+          </div>
+          <div>
+            <%= @post.account.name %>
+          </div>
+        </div>
+
+        <div class="margin-bottom-2">
+          <div class="label-large margin-bottom-1">
+            <%= t 'common.user' %>
+          </div>
+          <div>
+            <%= @post.user.name %>
+          </div>
+        </div>
+
+        <div class="margin-bottom-2">
+          <div class="label-large margin-bottom-1">
+            <%= t 'common.status' %>
+          </div>
+          <div>
+            <%= @post.status %>
+          </div>
+        </div>
+
+        <div class="margin-bottom-2">
+          <div class="label-large margin-bottom-1">
+            <%= t 'common.restricted' %>
+          </div>
+          <div>
+            <%= @post.restricted %>
+          </div>
+        </div>
+
+        <div class="margin-bottom-2">
+          <div class="label-large margin-bottom-1">
+            <%= t 'common.created_at' %>
+          </div>
+          <div>
+            <%= @post.created_at %>
+          </div>
+        </div>
+
+        <div class="margin-bottom-2">
+          <div class="label-large margin-bottom-1">
+            <%= t 'common.published_at' %>
+          </div>
+          <div>
+            <%= @post.published_at %>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card--surface padding-3 margin-bottom-3">
+        <% if @post.restricted? %>
+          <%= form_with model: @post, url: unrestrict_admin_post_path(@post) do %>
+            <button type="submit" class="button button--outlined">
+              <%= t 'common.remove_restricted' %>
+            </button>
+          <% end %>
+        <% else  %>
+          <%= form_with model: @post, url: restrict_admin_post_path(@post) do %>
+            <button type="submit" class="button button--outlined button--danger">
+              <%= t 'common.restricted' %>
+            </button>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

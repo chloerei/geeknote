@@ -1,0 +1,26 @@
+<div class="display-flex align-items-center gap-3 padding-y-3 border-bottom position-relative">
+  <div class="flex-grow-1">
+    <div class="title-medium">
+      <a href="<%= edit_admin_post_path(post) %>" class="link-title link-expended break-word">
+        <%= post.title.presence || t('common.untitled') %>
+      </a>
+    </div>
+    <div class="text-muted">
+      <%= post.account.display_name %>
+      <% if post.account.organization? %>
+        / <%= post.user.name %>
+      <% end %>
+      &centerdot;
+      <%= format_time post.updated_at %>
+      <% if post.restricted? %>
+        &centerdot;
+        <span class="text-color-red"><%= t 'common.restricted' %></span>
+      <% end %>
+    </div>
+  </div>
+  <div class="flex-shrink-0">
+    <div class="post-status post-status--<%= post.status %> text-nowrap">
+      <%= Post.human_attribute_name "status.#{post.status}" %>
+    </div>
+  </div>
+</div>
