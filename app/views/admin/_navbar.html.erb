@@ -25,6 +25,16 @@
           <%= t 'common.comments' %>
         </div>
       </a>
+
+      <a href="<%= admin_accounts_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/accounts') %>">
+        <div class="tab__item__icon">
+          <span class="material-icons">account_circle</span>
+        </div>
+        <div class="tab__item__label">
+          <%= t 'common.account' %>
+        </div>
+      </a>
+
       <a href="<%= admin_settings_root_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/settings') %>">
         <div class="tab__item__icon">
           <span class="material-icons">settings</span>
