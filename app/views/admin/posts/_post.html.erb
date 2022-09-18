@@ -14,7 +14,7 @@
       <%= format_time post.updated_at %>
       <% if post.restricted? %>
         &centerdot;
-        <span class="text-color-red"><%= t 'common.restricted' %></span>
+        <span class="text-error"><%= t 'common.restricted' %></span>
       <% end %>
     </div>
   </div>
