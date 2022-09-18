@@ -72,6 +72,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :comments
+
     namespace :settings do
       root to: 'home#index'
       resource :appearance, only: [:show, :update]
