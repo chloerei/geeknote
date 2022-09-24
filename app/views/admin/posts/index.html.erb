@@ -9,21 +9,23 @@
         </div>
 
         <table class="table border-top border-bottom">
-          <% @posts.each do |post| %>
-            <tr>
-              <td>
-                <a href="<%= admin_post_path(post) %>">
-                  <%= post.title.presence || 'Untitile' %>
-                </a>
-              </td>
-              <td>
-                <%= post.account.name %>
-              </td>
-              <td>
-                <%= format_time post.created_at %>
-              </td>
-            </tr>
-          <% end %>
+          <tbody>
+            <% @posts.each do |post| %>
+              <tr>
+                <td>
+                  <a href="<%= admin_post_path(post) %>">
+                    <%= post.title.presence || 'Untitile' %>
+                  </a>
+                </td>
+                <td>
+                  <%= post.account.name %>
+                </td>
+                <td>
+                  <%= format_time post.created_at %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
         </table>
 
         <div class="padding-3">

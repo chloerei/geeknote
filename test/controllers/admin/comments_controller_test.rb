@@ -12,14 +12,19 @@ class Admin::CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get edit post" do
+  test "should get post" do
+    get admin_comment_path(@comment)
+    assert_response :success
+  end
+
+  test "should edit post" do
     get edit_admin_comment_path(@comment)
     assert_response :success
   end
 
   test "should update post" do
     patch admin_comment_path(@comment), params: { comment: { content: 'changed' } }
-    assert_redirected_to edit_admin_comment_path(@comment)
+    assert_redirected_to admin_comment_path(@comment)
     @comment.reload
     assert_equal 'changed', @comment.content
   end

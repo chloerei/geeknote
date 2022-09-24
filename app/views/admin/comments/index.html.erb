@@ -4,15 +4,29 @@
 
     <div class="main">
       <div class="card card--surface padding-3">
-        <div class="display-flex gap-2 align-items-center margin-bottom-3">
-          <div class="flex-grow-1 headline-medium">
-            <%= t 'common.comments' %>
-          </div>
+        <div class="headline-medium padding-y-2 padding-x-3">
+          <%= t 'common.comments' %>
         </div>
 
-        <div class="margin-bottom-3">
-          <%= render partial: 'comment', collection: @comments %>
-        </div>
+        <table class="table">
+          <tbody>
+            <% @comments.each do |comment| %>
+              <tr>
+                <td>
+                  <a href="<%= admin_comment_path(comment) %>">
+                    <%= truncate comment.content, length: 35 %>
+                  </a>
+                </td>
+                <td>
+                  <%= comment.user.name %>
+                </td>
+                <td>
+                  <%= format_time comment.created_at %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
 
         <%= paginate @comments %>
       </div>

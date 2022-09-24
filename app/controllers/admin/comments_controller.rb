@@ -1,8 +1,11 @@
 class Admin::CommentsController < Admin::BaseController
-  before_action :set_comment, only: [:edit, :update]
+  before_action :set_comment, only: [:show, :edit, :update]
 
   def index
     @comments = Comment.order(id: :desc).includes(:user).page(params[:page])
+  end
+
+  def show
   end
 
   def edit
@@ -10,7 +13,7 @@ class Admin::CommentsController < Admin::BaseController
 
   def update
     if @comment.update comment_params
-      redirect_to edit_admin_comment_path(@comment), notice: 'Comment updated.'
+      redirect_to admin_comment_path(@comment), notice: 'Comment updated.'
     else
       render :edit, status: :unprocessable_entity
     end
