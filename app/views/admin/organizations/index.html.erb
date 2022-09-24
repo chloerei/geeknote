@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="layout">
+    <%= render 'admin/navbar' %>
+
+    <div class="main">
+      <div class="card card--surface padding-3">
+        <div class="display-flex gap-2 align-items-center margin-bottom-3">
+          <div class="flex-grow-1 headline-medium">
+            <%= t 'common.organizations' %>
+          </div>
+        </div>
+
+        <div class="margin-bottom-3">
+          <%= render partial: 'organization', collection: @organizations %>
+        </div>
+
+        <%= paginate @organizations %>
+      </div>
+    </div>
+  </div>
+</div>

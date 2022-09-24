@@ -75,6 +75,7 @@ Rails.application.routes.draw do
     resources :comments
     resources :accounts
     resources :users
+    resources :organizations
 
     namespace :settings do
       root to: 'home#index'

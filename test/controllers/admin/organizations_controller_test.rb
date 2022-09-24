@@ -1,0 +1,26 @@
+require "test_helper"
+
+class Admin::OrganizationsControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @admin = create(:user, email: ENV['ADMIN_EMAILS'])
+    @organization = create(:organization)
+    sign_in @admin
+  end
+
+  test "should get index" do
+    get admin_organizations_path
+    assert_response :success
+  end
+
+  test "should get edit post" do
+    get edit_admin_organization_path(@organization)
+    assert_response :success
+  end
+
+  test "should update post" do
+    patch admin_organization_path(@organization), params: { organization: { name: 'changed' } }
+    assert_redirected_to edit_admin_organization_path(@organization)
+    @organization.reload
+    assert_equal 'changed', @organization.name
+  end
+end
