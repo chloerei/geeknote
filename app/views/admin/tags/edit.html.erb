@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="layout">
+    <%= render 'admin/navbar' %>
+
+    <div class="main">
+      <div class="card card--surface padding-3 margin-bottom-3">
+        <div class="breadcrumb">
+          <div class="breadcrumb__item">
+            <a href="<%= admin_tags_path %>">
+              <%= t 'common.tags' %>
+            </a>
+          </div>
+          <div class="breadcrumb__item breadcrumb__item--active">
+            <a href="<%= admin_tag_path(@tag) %>">
+              <%= @tag.id %>
+            </a>
+          </div>
+          <div class="breadcrumb__item breadcrumb__item--active">
+            <%= t 'common.edit' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card--surface padding-3">
+        <%= form_with model: @tag, url: admin_tag_path(@tag), builder: CustomFormBuilder do |form| %>
+          <div class="margin-bottom-3">
+            <%= form.text_field :name %>
+          </div>
+
+          <button type="submit" class="button button--filled">
+            <%= t 'common.save_changes' %>
+          </button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

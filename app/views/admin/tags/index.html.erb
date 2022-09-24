@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="layout">
+    <%= render 'admin/navbar' %>
+
+    <div class="main">
+      <div class="card card--surface">
+        <div class="headline-small padding-3">
+          <%= t 'common.tags' %>
+        </div>
+
+        <table class="table border-top border-bottom">
+          <tbody>
+            <% @tags.each do |tag| %>
+              <tr>
+                <td>
+                  <a href="<%= admin_tag_path(tag) %>">
+                    <%= tag.name %>
+                  </a>
+                </td>
+                <td>
+                  <%= tag.taggings_count %>
+                </td>
+                <td>
+                  <%= format_time tag.created_at %>
+                </td>
+              </tr>
+            <% end %>
+        </table>
+
+        <div class="padding-3">
+          <%= paginate @tags %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

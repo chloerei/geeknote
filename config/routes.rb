@@ -73,6 +73,7 @@ Rails.application.routes.draw do
     end
 
     resources :collections
+    resources :tags
     resources :comments
     resources :accounts
     resources :users

@@ -28,6 +28,15 @@
         </div>
       </a>
 
+      <a href="<%= admin_tags_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/tags') %>">
+        <div class="tab__item__icon">
+          <span class="material-icons">tag</span>
+        </div>
+        <div class="tab__item__label">
+          <%= t 'common.tags' %>
+        </div>
+      </a>
+
       <a href="<%= admin_comments_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/comments') %>">
         <div class="tab__item__icon">
           <span class="material-icons">comment</span>
