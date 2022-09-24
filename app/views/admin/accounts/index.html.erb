@@ -17,5 +17,19 @@
         <%= paginate @accounts %>
       </div>
     </div>
+
+    <div class="sidebar">
+      <div class="card card--surface padding-3">
+        <%= form_with method: :get, builder: CustomFormBuilder do |form| %>
+          <div class="margin-bottom-3">
+            <%= form.text_field :name, value: params[:name] %>
+          </div>
+
+          <button type="submit" class="button button--filled">
+            <%= t 'common.filter' %>
+          </button>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

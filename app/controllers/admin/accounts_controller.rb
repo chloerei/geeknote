@@ -3,6 +3,10 @@ class Admin::AccountsController < Admin::BaseController
 
   def index
     @accounts = Account.order(id: :desc).page(params[:page])
+
+    if params[:name]
+      @accounts = @accounts.where(name: params[:name])
+    end
   end
 
   def edit
