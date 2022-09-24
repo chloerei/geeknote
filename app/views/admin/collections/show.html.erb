@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="layout">
+    <%= render 'admin/navbar' %>
+
+    <div class="main">
+      <div class="card card--surface padding-3 margin-bottom-3">
+        <div class="breadcrumb">
+          <div class="breadcrumb__item">
+            <a href="<%= admin_collections_path %>">
+              <%= t 'common.collections' %>
+            </a>
+          </div>
+          <div class="breadcrumb__item breadcrumb__item--active">
+            <%= @collection.id %>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card--surface margin-bottom-3">
+        <div class="title-medium padding-3">
+          <%= t 'common.attributes' %>
+        </div>
+
+        <table class="table border-top">
+          <tr>
+            <th>
+              <%= t 'common.account' %>
+            </th>
+            <td>
+              <a href="<%= admin_account_path(@collection.account.id) %>">
+                <%= admin_account_path(@collection.account.id) %>
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <th>
+              <%= t 'common.public_link' %>
+            </th>
+            <td>
+              <a href="<%= account_collection_path(@collection.account, @collection) %>">
+                <%= account_collection_path(@collection.account, @collection) %>
+              </a>
+            </td>
+          </tr>
+
+          <% @collection.attributes.except('password_digest', 'auth_token').each do |name, value| %>
+            <tr>
+              <th>
+                <%= name %>
+              </th>
+              <td class="text-break-all">
+                <%= value %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+
+      <div class="card card--surface">
+        <div class="title-medium padding-3">
+          <%= t 'common.posts' %>
+        </div>
+
+        <table class="table border-top">
+          <tbody>
+            <% @collection.posts.each do |post| %>
+              <tr>
+                <td>
+                  <a href="<%= admin_post_path(post) %>">
+                    <%= post.title %>
+                  </a>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="card card--surface padding-3">
+        <div class="">
+          <a href="<%= edit_admin_collection_path(@collection) %>" class="button button--outlined">
+            <%= t 'common.edit' %>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

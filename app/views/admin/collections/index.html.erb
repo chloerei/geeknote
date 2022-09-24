@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="layout">
+    <%= render 'admin/navbar' %>
+
+    <div class="main">
+      <div class="card card--surface">
+        <div class="headline-small padding-3">
+          <%= t 'common.collections' %>
+        </div>
+
+        <table class="table border-top border-bottom">
+          <tbody>
+            <% @collections.each do |collection| %>
+              <tr>
+                <td>
+                  <a href="<%= admin_collection_path(collection) %>">
+                    <%= collection.name %>
+                  </a>
+                </td>
+                <td>
+                  <%= collection.account.name %>
+                </td>
+                <td>
+                  <%= format_time collection.created_at %>
+                </td>
+              </tr>
+            <% end %>
+        </table>
+
+        <div class="padding-3">
+          <%= paginate @collections %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
