@@ -1,8 +1,11 @@
 class Admin::PostsController < Admin::BaseController
-  before_action :set_post, only: [:edit, :update, :restrict, :unrestrict]
+  before_action :set_post, only: [:show, :edit, :update, :restrict, :unrestrict]
 
   def index
     @posts = Post.order(id: :desc).includes(:account, :user).page(params[:page])
+  end
+
+  def show
   end
 
   def edit
@@ -18,12 +21,12 @@ class Admin::PostsController < Admin::BaseController
 
   def restrict
     @post.restricted!
-    redirect_to edit_admin_post_path(@post), notice: 'Post restricted.'
+    redirect_to admin_post_path(@post), notice: 'Post restricted.'
   end
 
   def unrestrict
     @post.remove_restricted
-    redirect_to edit_admin_post_path(@post), notice: 'Post remove restricted.'
+    redirect_to admin_post_path(@post), notice: 'Post remove restricted.'
   end
 
   private

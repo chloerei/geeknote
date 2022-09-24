@@ -14,7 +14,12 @@ class Admin::PostsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get edit post" do
+  test "should get post" do
+    get admin_post_path(@post)
+    assert_response :success
+  end
+
+  test "should edit post" do
     get edit_admin_post_path(@post)
     assert_response :success
   end
@@ -28,7 +33,7 @@ class Admin::PostsControllerTest < ActionDispatch::IntegrationTest
 
   test "should restrict post" do
     patch restrict_admin_post_path(@post)
-    assert_redirected_to edit_admin_post_path(@post)
+    assert_redirected_to admin_post_path(@post)
     @post.reload
     assert @post.restricted?
   end
@@ -37,7 +42,7 @@ class Admin::PostsControllerTest < ActionDispatch::IntegrationTest
     @post.restricted!
 
     patch unrestrict_admin_post_path(@post)
-    assert_redirected_to edit_admin_post_path(@post)
+    assert_redirected_to admin_post_path(@post)
     @post.reload
     assert_not @post.restricted?
   end

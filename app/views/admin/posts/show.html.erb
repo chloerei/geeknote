@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="layout">
+    <%= render 'admin/navbar' %>
+
+    <div class="main">
+      <div class="card card--surface padding-3 margin-bottom-3">
+        <div class="breadcrumb">
+          <div class="breadcrumb__item">
+            <a href="<%= admin_posts_path %>">
+              <%= t 'common.posts' %>
+            </a>
+          </div>
+          <div class="breadcrumb__item breadcrumb__item--active">
+            <%= @post.id %>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card--surface">
+        <table class="table">
+          <tr>
+            <th>
+              <%= t 'common.account' %>
+            </th>
+            <td>
+              <a href="<%= edit_admin_account_path(@post.account.id) %>">
+                <%= @post.account.name %>
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <th>
+              <%= t 'common.user' %>
+            </th>
+            <td>
+              <a href="<%= edit_admin_user_path(@post.user) %>">
+                <%= @post.user.name %>
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <th>
+              <%= t 'common.public_link' %>
+            </th>
+            <td>
+              <a href="<%= account_post_path(@post.account, @post) %>">
+                <%= account_post_path(@post.account, @post) %>
+              </a>
+            </td>
+          </tr>
+
+          <% @post.attributes.each do |name, value| %>
+            <tr>
+              <th>
+                <%= name %>
+              </th>
+              <td>
+                <%= value %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="card card--surface padding-3">
+        <div class="margin-bottom-3">
+          <a href="<%= edit_admin_post_path(@post) %>" class="button button--outlined">
+            <%= t 'common.edit' %>
+          </a>
+        </div>
+
+        <% if @post.restricted? %>
+          <%= form_with model: @post, url: unrestrict_admin_post_path(@post) do %>
+            <button type="submit" class="button button--outlined">
+              <%= t '.unrestrict' %>
+            </button>
+          <% end %>
+        <% else  %>
+          <%= form_with model: @post, url: restrict_admin_post_path(@post), data: { turbo_confirm: t('.restrict_post_confirm') } do %>
+            <button type="submit" class="button button--outlined button--danger">
+              <%= t '.restrict_post' %>
+            </button>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

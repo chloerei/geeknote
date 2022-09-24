@@ -479,3 +479,10 @@ summary {
 .g-recaptcha {
   height: 78px;
 }
+
+.table {
+  th, td {
+    white-space: normal;
+    vertical-align: top;
+  }
+}

@@ -3,18 +3,32 @@
     <%= render 'admin/navbar' %>
 
     <div class="main">
-      <div class="card card--surface padding-3">
-        <div class="display-flex gap-2 align-items-center margin-bottom-3">
-          <div class="flex-grow-1 headline-medium">
-            <%= t 'common.posts' %>
-          </div>
+      <div class="card card--surface">
+        <div class="headline-medium padding-y-2 padding-x-3">
+          <%= t 'common.posts' %>
         </div>
 
-        <div class="margin-bottom-3">
-          <%= render partial: 'post', collection: @posts %>
-        </div>
+        <table class="table border-top border-bottom">
+          <% @posts.each do |post| %>
+            <tr>
+              <td>
+                <a href="<%= admin_post_path(post) %>">
+                  <%= post.title.presence || 'Untitile' %>
+                </a>
+              </td>
+              <td>
+                <%= post.account.name %>
+              </td>
+              <td>
+                <%= format_time post.created_at %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
 
-        <%= paginate @posts %>
+        <div class="padding-3">
+          <%= paginate @posts %>
+        </div>
       </div>
     </div>
   </div>

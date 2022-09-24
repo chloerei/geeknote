@@ -10,8 +10,13 @@
               <%= t 'common.posts' %>
             </a>
           </div>
+          <div class="breadcrumb__item">
+            <a href="<%= admin_post_path(@post) %>">
+              <%= @post.id %>
+            </a>
+          </div>
           <div class="breadcrumb__item breadcrumb__item--active">
-            <%= @post.id %>
+            <%= t 'common.edit' %>
           </div>
         </div>
       </div>
@@ -56,88 +61,6 @@
           <button type="submit" class="button button--filled">
             <%= t 'common.save_changes' %>
           </button>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="sidebar">
-      <div class="card card--surface padding-3 margin-bottom-3">
-        <div class="title-medium margin-bottom-3">
-          <%= t 'common.meta' %>
-        </div>
-
-        <div class="margin-bottom-2">
-          <div class="label-large margin-bottom-1">
-            <%= t 'common.account' %>
-          </div>
-          <div>
-            <a href="<%= edit_admin_account_path(@post.account.id) %>">
-              <%= @post.account.name %>
-            </a>
-          </div>
-        </div>
-
-        <div class="margin-bottom-2">
-          <div class="label-large margin-bottom-1">
-            <%= t 'common.user' %>
-          </div>
-          <div>
-            <a href="<%= edit_admin_user_path(@post.user) %>">
-              <%= @post.user.name %>
-            </a>
-          </div>
-        </div>
-
-        <div class="margin-bottom-2">
-          <div class="label-large margin-bottom-1">
-            <%= t 'common.status' %>
-          </div>
-          <div>
-            <%= @post.status %>
-          </div>
-        </div>
-
-        <div class="margin-bottom-2">
-          <div class="label-large margin-bottom-1">
-            <%= t 'common.restricted' %>
-          </div>
-          <div>
-            <%= @post.restricted %>
-          </div>
-        </div>
-
-        <div class="margin-bottom-2">
-          <div class="label-large margin-bottom-1">
-            <%= t 'common.created_at' %>
-          </div>
-          <div>
-            <%= @post.created_at %>
-          </div>
-        </div>
-
-        <div class="margin-bottom-2">
-          <div class="label-large margin-bottom-1">
-            <%= t 'common.published_at' %>
-          </div>
-          <div>
-            <%= @post.published_at %>
-          </div>
-        </div>
-      </div>
-
-      <div class="card card--surface padding-3 margin-bottom-3">
-        <% if @post.restricted? %>
-          <%= form_with model: @post, url: unrestrict_admin_post_path(@post) do %>
-            <button type="submit" class="button button--outlined">
-              <%= t 'common.remove_restricted' %>
-            </button>
-          <% end %>
-        <% else  %>
-          <%= form_with model: @post, url: restrict_admin_post_path(@post) do %>
-            <button type="submit" class="button button--outlined button--danger">
-              <%= t 'common.restricted' %>
-            </button>
-          <% end %>
         <% end %>
       </div>
     </div>
