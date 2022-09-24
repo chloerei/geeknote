@@ -9,6 +9,7 @@
           <%= t 'common.overview' %>
         </div>
       </a>
+
       <a href="<%= admin_posts_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/posts') %>">
         <div class="tab__item__icon">
           <span class="material-icons">article</span>
@@ -17,6 +18,7 @@
           <%= t 'common.posts' %>
         </div>
       </a>
+
       <a href="<%= admin_comments_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/comments') %>">
         <div class="tab__item__icon">
           <span class="material-icons">comment</span>
@@ -32,6 +34,15 @@
         </div>
         <div class="tab__item__label">
           <%= t 'common.account' %>
+        </div>
+      </a>
+
+      <a href="<%= admin_users_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/users') %>">
+        <div class="tab__item__icon">
+          <span class="material-icons">person</span>
+        </div>
+        <div class="tab__item__label">
+          <%= t 'common.user' %>
         </div>
       </a>
 

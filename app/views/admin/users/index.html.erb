@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="layout">
+    <%= render 'admin/navbar' %>
+
+    <div class="main">
+      <div class="card card--surface padding-3">
+        <div class="display-flex gap-2 align-items-center margin-bottom-3">
+          <div class="flex-grow-1 headline-medium">
+            <%= t 'common.users' %>
+          </div>
+        </div>
+
+        <div class="margin-bottom-3">
+          <%= render partial: 'user', collection: @users %>
+        </div>
+
+        <%= paginate @users %>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="card card--surface padding-3">
+        <%= form_with method: :get, builder: CustomFormBuilder do |form| %>
+          <div class="margin-bottom-3">
+            <%= form.text_field :email, value: params[:email] %>
+          </div>
+
+          <button type="submit" class="button button--filled">
+            <%= t 'common.filter' %>
+          </button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
