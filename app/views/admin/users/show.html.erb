@@ -6,12 +6,12 @@
       <div class="card card--surface padding-3 margin-bottom-3">
         <div class="breadcrumb">
           <div class="breadcrumb__item">
-            <a href="<%= admin_comments_path %>">
-              <%= t 'common.comments' %>
+            <a href="<%= admin_users_path %>">
+              <%= t 'common.users' %>
             </a>
           </div>
           <div class="breadcrumb__item breadcrumb__item--active">
-            <%= @comment.id %>
+            <%= @user.id %>
           </div>
         </div>
       </div>
@@ -24,27 +24,16 @@
         <table class="table border-top">
           <tr>
             <th>
-              <%= t 'common.user' %>
+              <%= t 'common.account' %>
             </th>
             <td>
-              <a href="<%= edit_admin_user_path(@comment.user) %>">
-                <%= @comment.user.name %>
+              <a href="<%= admin_account_path(@user.account.id) %>">
+                <%= admin_account_path(@user.account.id) %>
               </a>
             </td>
           </tr>
 
-          <tr>
-            <th>
-              <%= t 'common.commentable' %>
-            </th>
-            <td>
-              <a href="<%= url_for([:admin, @comment.commentable]) %>">
-                <%= url_for([:admin, @comment.commentable]) %>
-              </a>
-            </td>
-          </tr>
-
-          <% @comment.attributes.each do |name, value| %>
+          <% @user.attributes.except('password_digest', 'auth_token').each do |name, value| %>
             <tr>
               <th>
                 <%= name %>
@@ -61,7 +50,7 @@
     <div class="sidebar">
       <div class="card card--surface padding-3">
         <div class="">
-          <a href="<%= edit_admin_comment_path(@comment) %>" class="button button--outlined">
+          <a href="<%= edit_admin_user_path(@user) %>" class="button button--outlined">
             <%= t 'common.edit' %>
           </a>
         </div>

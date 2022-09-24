@@ -3,12 +3,12 @@
     <%= render 'admin/navbar' %>
 
     <div class="main">
-      <div class="card card--surface padding-3">
-        <div class="headline-medium padding-y-2 padding-x-3">
+      <div class="card card--surface">
+        <div class="headline-small padding-3">
           <%= t 'common.comments' %>
         </div>
 
-        <table class="table">
+        <table class="table border-top border-bottom">
           <tbody>
             <% @comments.each do |comment| %>
               <tr>
@@ -28,7 +28,9 @@
           </tbody>
         </table>
 
-        <%= paginate @comments %>
+        <div class="padding-3">
+          <%= paginate @comments %>
+        </div>
       </div>
     </div>
   </div>

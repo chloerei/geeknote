@@ -6,12 +6,12 @@
       <div class="card card--surface padding-3 margin-bottom-3">
         <div class="breadcrumb">
           <div class="breadcrumb__item">
-            <a href="<%= admin_comments_path %>">
-              <%= t 'common.comments' %>
+            <a href="<%= admin_accounts_path %>">
+              <%= t 'common.accounts' %>
             </a>
           </div>
           <div class="breadcrumb__item breadcrumb__item--active">
-            <%= @comment.id %>
+            <%= @account.id %>
           </div>
         </div>
       </div>
@@ -24,27 +24,27 @@
         <table class="table border-top">
           <tr>
             <th>
-              <%= t 'common.user' %>
+              <%= t 'common.owner' %>
             </th>
             <td>
-              <a href="<%= edit_admin_user_path(@comment.user) %>">
-                <%= @comment.user.name %>
+              <a href="<%= url_for([:admin, @account.owner]) %>">
+                <%= url_for([:admin, @account.owner]) %>
               </a>
             </td>
           </tr>
 
           <tr>
             <th>
-              <%= t 'common.commentable' %>
+              <%= t 'common.public_link' %>
             </th>
             <td>
-              <a href="<%= url_for([:admin, @comment.commentable]) %>">
-                <%= url_for([:admin, @comment.commentable]) %>
+              <a href="<%= account_root_path(@account) %>">
+                <%= account_root_path(@account) %>
               </a>
             </td>
           </tr>
 
-          <% @comment.attributes.each do |name, value| %>
+          <% @account.attributes.each do |name, value| %>
             <tr>
               <th>
                 <%= name %>
@@ -61,7 +61,7 @@
     <div class="sidebar">
       <div class="card card--surface padding-3">
         <div class="">
-          <a href="<%= edit_admin_comment_path(@comment) %>" class="button button--outlined">
+          <a href="<%= edit_admin_account_path(@account.id) %>" class="button button--outlined">
             <%= t 'common.edit' %>
           </a>
         </div>

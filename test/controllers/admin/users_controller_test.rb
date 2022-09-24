@@ -12,14 +12,19 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get edit post" do
+  test "should get post" do
+    get admin_user_path(@user)
+    assert_response :success
+  end
+
+  test "should edit post" do
     get edit_admin_user_path(@user)
     assert_response :success
   end
 
   test "should update post" do
     patch admin_user_path(@user), params: { user: { name: 'changed' } }
-    assert_redirected_to edit_admin_user_path(@user)
+    assert_redirected_to admin_user_path(@user)
     @user.reload
     assert_equal 'changed', @user.name
   end

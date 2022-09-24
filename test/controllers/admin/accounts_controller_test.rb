@@ -12,14 +12,19 @@ class Admin::AccountsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get edit post" do
+  test "should get post" do
+    get admin_account_path(@account.id)
+    assert_response :success
+  end
+
+  test "should edit post" do
     get edit_admin_account_path(@account.id)
     assert_response :success
   end
 
   test "should update post" do
     patch admin_account_path(@account.id), params: { account: { name: 'changed' } }
-    assert_redirected_to edit_admin_account_path(@account.id)
+    assert_redirected_to admin_account_path(@account.id)
     @account.reload
     assert_equal 'changed', @account.name
   end

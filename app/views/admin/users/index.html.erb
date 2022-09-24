@@ -3,18 +3,33 @@
     <%= render 'admin/navbar' %>
 
     <div class="main">
-      <div class="card card--surface padding-3">
-        <div class="display-flex gap-2 align-items-center margin-bottom-3">
-          <div class="flex-grow-1 headline-medium">
-            <%= t 'common.users' %>
-          </div>
+      <div class="card card--surface">
+        <div class="headline-small padding-3">
+          <%= t 'common.users' %>
         </div>
 
-        <div class="margin-bottom-3">
-          <%= render partial: 'user', collection: @users %>
-        </div>
+        <table class="table border-top border-bottom">
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td>
+                  <a href="<%= admin_user_path(user) %>">
+                    <%= user.name %>
+                  </a>
+                </td>
+                <td>
+                  <%= user.email %>
+                </td>
+                <td>
+                  <%= format_time user.created_at %>
+                </td>
+              </tr>
+            <% end %>
+        </table>
 
-        <%= paginate @users %>
+        <div class="padding-3">
+          <%= paginate @users %>
+        </div>
       </div>
     </div>
 

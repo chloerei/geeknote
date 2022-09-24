@@ -1,5 +1,5 @@
 class Admin::AccountsController < Admin::BaseController
-  before_action :set_account, only: [:edit, :update]
+  before_action :set_account, only: [:show, :edit, :update]
 
   def index
     @accounts = Account.order(id: :desc).page(params[:page])
@@ -9,12 +9,15 @@ class Admin::AccountsController < Admin::BaseController
     end
   end
 
+  def show
+  end
+
   def edit
   end
 
   def update
     if @account.update account_params
-      redirect_to edit_admin_account_path(@account.id), notice: 'Account updated.'
+      redirect_to admin_account_path(@account.id), notice: 'Account updated.'
     else
       render :edit, status: :unprocessable_entity
     end
