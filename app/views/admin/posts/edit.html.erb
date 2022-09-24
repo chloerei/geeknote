@@ -71,7 +71,9 @@
             <%= t 'common.account' %>
           </div>
           <div>
-            <%= @post.account.name %>
+            <a href="<%= edit_admin_account_path(@post.account.id) %>">
+              <%= @post.account.name %>
+            </a>
           </div>
         </div>
 
@@ -80,7 +82,9 @@
             <%= t 'common.user' %>
           </div>
           <div>
-            <%= @post.user.name %>
+            <a href="<%= edit_admin_user_path(@post.user) %>">
+              <%= @post.user.name %>
+            </a>
           </div>
         </div>
 

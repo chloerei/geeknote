@@ -63,6 +63,17 @@
 
         <div class="margin-bottom-2">
           <div class="label-large margin-bottom-1">
+            <%= t 'common.account' %>
+          </div>
+          <div>
+            <a href="<%= edit_admin_account_path(@organization.account.id) %>">
+              <%= @organization.account.name %>
+            </a>
+          </div>
+        </div>
+
+        <div class="margin-bottom-2">
+          <div class="label-large margin-bottom-1">
             <%= t 'common.created_at' %>
           </div>
           <div>

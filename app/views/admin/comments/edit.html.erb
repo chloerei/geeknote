@@ -43,7 +43,7 @@
           </div>
           <div>
             <% if @comment.commentable %>
-              <a href="<%= admin_post_path(@comment.commentable) %>">
+              <a href="<%= edit_admin_post_path(@comment.commentable) %>">
                 <%= @comment.commentable.title %>
               </a>
             <% end %>
@@ -55,7 +55,9 @@
             <%= t 'common.user' %>
           </div>
           <div>
-            <%= @comment.user.name %>
+            <a href="<%= edit_admin_user_path(@comment.user) %>">
+              <%= @comment.user.name %>
+            </a>
           </div>
         </div>
 

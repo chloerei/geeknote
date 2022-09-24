@@ -51,7 +51,9 @@
             <%= t 'common.owner' %>
           </div>
           <div>
-            <%= @account.owner.name %>
+            <a href="<%= url_for([:edit, :admin, @account.owner]) %>">
+              <%= @account.owner.name %>
+            </a>
           </div>
         </div>
 
