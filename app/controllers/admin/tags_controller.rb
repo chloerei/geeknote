@@ -2,7 +2,11 @@ class Admin::TagsController < Admin::BaseController
   before_action :set_tag, only: [:show, :edit, :update]
 
   def index
-    @tags = Tag.order(id: :desc).page(params[:page])
+    @tags = Tag.order(taggings_count: :desc).page(params[:page])
+
+    if params[:name]
+      @tags = @tags.where("name like ?", "%#{Tag.sanitize_sql_like(params[:name])}%")
+    end
   end
 
   def show
