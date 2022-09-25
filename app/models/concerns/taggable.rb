@@ -12,7 +12,7 @@ module Taggable
     end
 
     def tag_list=(list)
-      self.tags = list.map {|name| Tag.find_or_initialize_by name: name }
+      self.tags = list.uniq.map {|name| Tag.find_or_initialize_by name: name }
     end
   end
 end

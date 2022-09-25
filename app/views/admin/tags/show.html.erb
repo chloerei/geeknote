@@ -38,9 +38,14 @@
 
     <div class="sidebar">
       <div class="card card--surface padding-3">
-        <div class="">
+        <div class="margin-bottom-3">
           <a href="<%= edit_admin_tag_path(@tag) %>" class="button button--outlined">
             <%= t 'common.edit' %>
+          </a>
+        </div>
+        <div class="">
+          <a href="<%= new_admin_tag_merge_path(@tag) %>" class="button button--outlined">
+            <%= t 'common.merge' %>
           </a>
         </div>
       </div>

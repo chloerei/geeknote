@@ -73,7 +73,13 @@ Rails.application.routes.draw do
     end
 
     resources :collections
-    resources :tags
+
+    resources :tags do
+      scope module: :tags do
+        resource :merge, only: [:new, :create]
+      end
+    end
+
     resources :comments
     resources :accounts
     resources :users

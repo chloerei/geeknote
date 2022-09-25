@@ -141,6 +141,11 @@ zh-CN:
           appearance_desription: 网站名称、Logo 和页面 HTML 等。
           weekly_digest: 每周摘要
           weekly_digest_desription: 每周摘要邮件开关和内容 HTML。
+    tags:
+      merges:
+        new:
+          merge: 合并
+          merge_to: 将以下标签合并到“%{name}”
   collection:
     visibility_private_description: 只有账号成员可以查看。
     visibility_private_label: 私有
@@ -209,6 +214,7 @@ zh-CN:
     logo: Logo
     logo_dark: Logo 暗色调
     members: 成员
+    merge: 合并
     more_from: "%{name} 的文章"
     move_to_bottom: 移到底部
     move_to_top: 移到顶部
