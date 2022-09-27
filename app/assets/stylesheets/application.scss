@@ -25,6 +25,7 @@ $material-icons-font-path: '';
 :root {
   --space-4: 32px;
   --space-5: 64px;
+  --space-6: 128px;
 
   --font-family-monospace: Menlo, Consolas, "Liberation Mono", Courier, "Microsoft YaHei", monospace;
 }
@@ -39,7 +40,6 @@ $material-icons-font-path: '';
     $error: #DB3229
   );
 
-  --color-background: #f1f1f1;
   --color-surface: #ffffff;
   --color-outline: #ccc;
 
@@ -86,6 +86,20 @@ $material-icons-font-path: '';
   }
 }
 
+.padding-6 {
+  padding: var(--space-6);
+}
+
+.padding-x-6 {
+  padding-left: var(--space-6);
+  padding-right: var(--space-6);
+}
+
+.padding-y-6 {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
+}
+
 body[data-color-scheme="light"] {
   color-scheme: light;
   @include custom-light-scheme;
@@ -115,6 +129,66 @@ body[data-color-scheme="dark"] {
 
 .container--post {
   max-width: 768px;
+}
+
+.top-app-bar {
+  background-color: transparent;
+  padding: 8px;
+}
+
+.hero-form {
+  display: flex;
+  gap: var(--space-3);
+  flex-direction: column;
+  max-width: 100%;
+}
+
+.hero-form__text-field {
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  overflow: hidden;
+  padding: var(--space-2) var(--space-3);
+  border: 2px solid var(--color-outline);
+  border-radius: var(--space-5);
+  max-width: 100%;
+}
+
+.hero-form__prefix {
+  font-weight: bold;
+}
+
+.hero-form__input {
+  background: transparent;
+  border: none;
+  padding: 0;
+  outline: 0;
+  font-size: 20px;
+  line-height: 1.5;
+  font-family: sans-serif;
+  flex-grow: 1;
+}
+
+.hero-form__button {
+  justify-content: center;
+}
+
+@media (min-width: map.get($breakpoints, 'tablet')) {
+  .hero-form {
+    flex-direction: row;
+    border: 2px solid var(--color-outline);
+    background: var(--color-surface);
+    color: var(--color-on-surface);
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-3);
+    border-radius: var(--space-5);
+  }
+
+  .hero-form__text-field {
+    border: none;
+    padding: 0 var(--space-2);
+    max-width: 280px;
+    border-radius: 0;
+  }
 }
 
 .layout {

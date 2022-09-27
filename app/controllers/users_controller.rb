@@ -4,8 +4,8 @@ class UsersController < ApplicationController
       uri = URI(params[:return_to])
       session[:return_to] = [uri.path, uri.query].compact.join('?')
     end
-    @user = User.new
-    @user.build_account
+
+    @user = User.new account_attributes: { name: params[:account_name] }
   end
 
   def create

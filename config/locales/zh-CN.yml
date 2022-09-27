@@ -257,6 +257,7 @@ zh-CN:
     save_and_fetch: 保存并抓取
     save_changes: 保存修改
     save_draft: 保存草稿
+    search: Search
     send_email: 发送邮件
     send_invitation: 发送邀请
     send_password_reset_email: 发送密码重置邮件
@@ -314,6 +315,12 @@ zh-CN:
     require_sign_in: 需要登录。
     settings_updated_successful: 设置更新成功。
     weekly_digest_preview_sent_successful: 每周摘要邮件预览发送成功。
+  home:
+    index:
+      hero_description: 免费，一分钟内完成注册。
+      hero_subtitle: 记录和分享您的知识。
+      hero_title: 属于 Geek 的写作空间
+      start_my_page: 创建空间
   mailer:
     account_mailer:
       export_complted_subject: 数据导出已完成

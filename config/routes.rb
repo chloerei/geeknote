@@ -10,7 +10,7 @@ class AdminConstraint
 end
 
 Rails.application.routes.draw do
-  root to: 'posts#index'
+  root to: 'home#index'
 
   get 'sign_up', to: 'users#new', as: 'sign_up'
   resources :users, only: [:create] do
