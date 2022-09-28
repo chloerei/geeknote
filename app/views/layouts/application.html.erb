@@ -26,6 +26,13 @@
             </a>
           <% end %>
         </div>
+        <div class="top-app-bar__action">
+          <a href="<%= explore_root_path %>" class="button button--text button--muted">
+            <%= t 'common.explore' %>
+          </a>
+        </div>
+        <div class="flex-grow-1">
+        </div>
         <% if current_user %>
           <div class="top-app-bar__action">
             <a href="<%= new_account_dashboard_post_path(current_user.account) %>" class="button button--icon">
@@ -113,31 +120,14 @@
           </div>
         <% else %>
           <div class="top-app-bar__action">
-            <a href="<%= sign_up_path %>" class="button button--text">
-              <%= t 'common.sign_up' %>
-            </a>
-          </div>
-          <div class="top-app-bar__action">
-            <a href="<%= sign_in_path %>" class="button button--text">
+            <a href="<%= sign_in_path %>" class="button button--text button--muted">
               <%= t 'common.sign_in' %>
             </a>
           </div>
           <div class="top-app-bar__action">
-            <div class="dropdown dropdown--right">
-              <label tabindex="0" class="button button--icon" data-action="dropdown#toggle">
-                <span class="material-icons">more_vert</span>
-              </label>
-              <div tabindex="0" class="dropdown__container">
-                <label for="theme-dialog-toggle" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">dark_mode</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.theme' %>
-                  </div>
-                </label>
-              </div>
-            </div>
+            <a href="<%= sign_up_path %>" class="button button--filled">
+              <%= t 'common.sign_up' %>
+            </a>
           </div>
         <% end %>
       </div>

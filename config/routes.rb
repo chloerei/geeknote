@@ -27,11 +27,10 @@ Rails.application.routes.draw do
 
   post '/rails/active_storage/direct_uploads', to: 'direct_uploads#create'
 
-  resources :posts, only: [] do
-    collection do
-      get :following
-      get :newest
-    end
+  namespace :explore do
+    root to: 'posts#index'
+    get 'feed', to: 'posts#feed'
+    get 'newest', to: 'posts#newest'
   end
 
   resource :preview, only: [:create]

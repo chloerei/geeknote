@@ -40,7 +40,6 @@ $material-icons-font-path: '';
     $error: #DB3229
   );
 
-  --color-surface: #ffffff;
   --color-outline: #ccc;
 
   .display-block\@light {
@@ -62,7 +61,6 @@ $material-icons-font-path: '';
     $error: #DB3229
   );
 
-  --color-background: #0e0e0e;
   --color-outline: #555;
 
   .display-block\@light {
@@ -134,6 +132,10 @@ body[data-color-scheme="dark"] {
 .top-app-bar {
   background-color: transparent;
   padding: 8px;
+}
+
+.top-app-bar__title {
+  flex-grow: 0;
 }
 
 .hero-form {
