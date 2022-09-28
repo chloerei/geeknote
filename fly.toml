@@ -29,7 +29,7 @@ kill_timeout = 5
     type = "connections"
 
   [[services.ports]]
-    force_https = true
+    # force_https = true
     handlers = ["http"]
     port = 80
 
