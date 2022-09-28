@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container container--medium">
   <div class="display-flex flex-direction-column align-items-center padding-y-6 padding-x-4">
     <h1 class="display-medium margin-top-0 margin-bottom-3 text-align-center">
       <%= t '.hero_title' %>
@@ -9,12 +9,12 @@
     <div class="margin-bottom-3 max-width-100">
       <%= form_with url: sign_up_path, method: :get do |form| %>
         <div class="hero-form">
-          <div class="hero-form__text-field">
+          <label class="hero-form__text-field">
             <div class="hero-form__prefix">
               <%= ENV['HOST'] %>/
             </div>
             <input type="text" name="account_name" value="" placeholder="yourname" autocomplete="off" class="hero-form__input">
-          </div>
+          </label>
           <button type="submit" class="button button--filled hero-form__button">
             <%= t '.start_my_page' %>
           </button>

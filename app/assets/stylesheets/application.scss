@@ -167,6 +167,7 @@ body[data-color-scheme="dark"] {
   line-height: 1.5;
   font-family: sans-serif;
   flex-grow: 1;
+  min-width: 0;
 }
 
 .hero-form__button {
