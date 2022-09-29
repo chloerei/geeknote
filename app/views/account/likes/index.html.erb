@@ -1,20 +1,35 @@
+<% @page_title = @account.display_name %>
+
+<div class="banner-image">
+  <div class="banner-image__inner">
+    <% if @account.owner.banner_image.attached? %>
+      <%= image_tag @account.owner.banner_image.variant(resize_to_limit: [1920, 1920]) %>
+    <% end %>
+  </div>
+</div>
+
 <div class="container">
-  <div class="layout">
+  <div class="display-flex gap-3 padding-3">
     <%= render 'account/navbar' %>
 
-    <div class="main">
+    <div class="flex-grow-1 min-width-0">
       <%= render 'account/tab' %>
 
-      <div class="display-flex flex-direction-column gap-3">
-        <% if @posts.current_page == 1 %>
-          <%= render @account.posts.featured %>
-        <% end %>
+      <div class="display-flex gap-3">
+        <div class="flex-grow-1 min-width-0">
+          <div class="display-flex flex-direction-column gap-3">
+            <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
+          </div>
 
-        <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
+          <div class="padding-3">
+            <%= paginate @posts %>
+          </div>
+        </div>
+
+        <div class="sidebar display-flex flex-direction-column gap-3">
+        </div>
       </div>
-      <%= paginate @posts %>
     </div>
 
-    <%= render 'account/sidebar' %>
   </div>
 </div>

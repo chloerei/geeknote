@@ -19,7 +19,7 @@
   <% end %>
 
   <% if @account.organization? && @account.owner.members.active.any? %>
-    <div class="card card--surface padding-3">
+    <div class="card card--elevated background-surface padding-3">
       <div class="title-medium margin-bottom-3">
         <%= t 'common.members' %>
       </div>
