@@ -40,6 +40,7 @@ $material-icons-font-path: '';
     $error: #DB3229
   );
 
+  --color-surface: #ffffff;
   --color-outline: #ccc;
 
   .display-block\@light {
@@ -61,6 +62,7 @@ $material-icons-font-path: '';
     $error: #DB3229
   );
 
+  --color-background: #0e0e0e;
   --color-outline: #555;
 
   .display-block\@light {
@@ -260,6 +262,11 @@ body[data-color-scheme="dark"] {
   gap: 8px;
   align-items: center;
   flex-shrink: 0;
+  background: transparent;
+}
+
+.tab__item--active {
+  background: var(--color-primary-container);
 }
 
 .tab__item__icon {
