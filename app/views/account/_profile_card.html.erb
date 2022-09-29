@@ -1,31 +1,19 @@
-<div class="card card--surface profile-card">
-  <div class="banner-image">
-    <div class="banner-image__inner">
-      <% if account.owner.banner_image.attached? %>
-        <%= banner_image_tag account.owner.banner_image %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="profile-card__avatar">
+<div class="card card--elevated background-surface profile-card">
+  <div class="display-flex flex-direction-column align-items-center gap-3 padding-3">
     <div class="avatar avatar--medium">
       <a href="<%= account_root_path(account) %>">
         <%= avatar_image_tag account.owner.avatar %>
       </a>
     </div>
-  </div>
 
-  <div class="display-flex flex-direction-column gap-3 padding-3">
-    <div class="text-align-center">
-      <div class="title-large margin-bottom-3">
-        <a href="<%= account_root_path(account) %>" class="link-title">
-          <%= account.display_name %>
-        </a>
-      </div>
+    <div class="title-large">
+      <a href="<%= account_root_path(account) %>" class="link-title">
+        <%= account.display_name %>
+      </a>
+    </div>
 
-      <div class="">
-        <%= account.description %>
-      </div>
+    <div class="">
+      <%= account.description %>
     </div>
 
     <% if account.owner != current_user %>
@@ -38,7 +26,7 @@
       </a>
     <% end %>
 
-    <div class="display-flex gap-3 justify-content-center">
+    <div class="display-flex gap-3">
       <% if account.user? %>
         <a href="<%= account_followings_path(account) %>" class="link-text margin-right-8">
           <b><%= account.owner.followings_count %></b> <%= t 'common.followings' %>
@@ -49,11 +37,11 @@
       </a>
     </div>
 
-    <div class="text-align-center">
+    <div class="">
       <%= local_time account.created_at.to_date, format: I18n.t("date.formats.long") %> <%= t 'common.joined' %>
     </div>
 
-    <div class="display-flex gap-2 justify-content-center">
+    <div class="display-flex gap-2">
       <a href="<%= account_feed_url(account, format: :atom) %>" class="button button--icon" target="_blank" title="Atom Feed">
         <span class="material-icons">rss_feed</span>
       </a>

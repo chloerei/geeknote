@@ -2,7 +2,7 @@
   <%= render 'account/profile_card', account: @account %>
 
   <% if @account.user? && @account.owner.organizations.any? %>
-    <div class="card card--surface padding-3">
+    <div class="card card--elevated background-surface padding-3">
       <div class="title-medium margin-bottom-3">
         <%= t 'common.organizations' %>
       </div>

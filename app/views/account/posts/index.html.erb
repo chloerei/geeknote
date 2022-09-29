@@ -4,22 +4,58 @@
   <%= auto_discovery_link_tag :atom, account_feed_url(@account, format: :atom) %>
 <% end %>
 
+<div class="banner-image">
+  <div class="banner-image__inner">
+    <% if @account.owner.banner_image.attached? %>
+      <%= image_tag @account.owner.banner_image.variant(resize_to_limit: [1920, 1920]) %>
+    <% end %>
+  </div>
+</div>
+
 <div class="container">
-  <div class="layout">
+  <div class="display-flex gap-3 padding-3">
     <%= render 'account/navbar' %>
 
-    <div class="main">
+    <div class="flex-grow-1 min-width-0">
       <%= render 'account/tab' %>
 
-      <div class="display-flex flex-direction-column gap-3">
-        <%= render partial: 'post', collection: @posts, cached: true %>
-      </div>
+      <div class="display-flex gap-3">
+        <div class="flex-grow-1 min-width-0">
+          <div class="display-flex flex-direction-column gap-3">
+            <%= render partial: 'post', collection: @posts, cached: true %>
+          </div>
 
-      <div class="padding-3">
-        <%= paginate @posts %>
+          <div class="padding-3">
+            <%= paginate @posts %>
+          </div>
+        </div>
+
+        <div class="sidebar display-flex flex-direction-column gap-3">
+          <div class="">
+            <div class="title-medium padding-x-3 margin-bottom-2">
+              <%= t 'common.tags' %>
+            </div>
+            <div class="">
+              <% @account.used_tags.first(5).each do |name, count| %>
+                <a href="<%= account_tag_path(id: name) %>" class="link-block padding-x-3 padding-y-2 border-radius-2">
+                  <div class="title-small">
+                    #<%= name %>
+                  </div>
+                  <div class="body-medium text-muted">
+                    <%= t 'common.posts_count', count: count %>
+                  </div>
+                </a>
+              <% end %>
+              <% if @account.used_tags.count > 5 %>
+                <a href="<%= account_tags_path(@account) %>" class="link-block padding-x-3 padding-y-2 border-radius-2">
+                  <%= t 'common.view_more' %>
+                </a>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <%= render 'account/sidebar' %>
   </div>
 </div>
