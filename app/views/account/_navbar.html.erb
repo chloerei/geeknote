@@ -1,4 +1,4 @@
-<div class="navbar display-flex flex-direction-column gap-3">
+<div class="display-flex flex-direction-column gap-3">
   <%= render 'account/profile_card', account: @account %>
 
   <% if @account.user? && @account.owner.organizations.any? %>

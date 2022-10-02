@@ -9,13 +9,13 @@
 </div>
 
 <div class="container">
-  <div class="display-flex gap-3 padding-3">
+  <div class="layout-primary padding-3">
     <%= render 'account/navbar' %>
 
-    <div class="flex-grow-1 min-width-0">
+    <div class="">
       <%= render 'account/tab' %>
 
-      <div class="display-flex gap-3">
+      <div class="layout-secondary">
         <div class="flex-grow-1 min-width-0">
           <div class="display-flex flex-direction-column gap-3">
             <%= render partial: 'collection', collection: @collections, cached: true %>
@@ -26,7 +26,7 @@
           </div>
         </div>
 
-        <div class="sidebar display-flex flex-direction-column gap-3">
+        <div class="display-flex flex-direction-column gap-3">
         </div>
       </div>
     </div>

@@ -219,17 +219,24 @@ body[data-color-scheme="dark"] {
   }
 }
 
-.navbar {
-  width: 240px;
-  flex-shrink: 0;
+.layout-primary {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+
+  @media (min-width: map.get($breakpoints, 'tablet')) {
+    grid-template-columns: 240px minmax(0, 1fr);
+  }
 }
 
-.main {
-}
+.layout-secondary {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
 
-.sidebar {
-  width: 280px;
-  flex-shrink: 0;
+  @media (min-width: map.get($breakpoints, 'laptop')) {
+    grid-template-columns: minmax(0, 1fr) 280px;
+  }
 }
 
 .feature-image {
