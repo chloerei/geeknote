@@ -1,11 +1,11 @@
 <div class="container">
-  <div class="layout">
+  <div class="layout-primary padding-3">
     <%= render 'account/dashboard/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface padding-3">
-        <div class="display-flex gap-2 align-items-center margin-bottom-3">
-          <div class="flex-grow-1 headline-medium">
+    <div class="layout-secondary">
+      <div class="card card--elevated background-surface padding-3">
+        <div class="display-flex gap-2 align-items-center">
+          <div class="flex-grow-1 title-large">
             <%= t 'common.collections' %>
           </div>
           <a href="<%= new_account_dashboard_collection_path(@account) %>" class="button button--outlined">

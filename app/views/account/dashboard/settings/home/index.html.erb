@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="layout">
+  <div class="layout-primary padding-3">
     <%= render 'account/dashboard/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface padding-3">
+    <div class="layout-secondary">
+      <div class="card card--elevated background-surface padding-3">
         <a href="<%= account_dashboard_settings_account_path(@account) %>" class="link-block border-radius-3">
           <div class="display-flex gap-3 padding-3">
             <span class="material-icons">perm_identity</span>

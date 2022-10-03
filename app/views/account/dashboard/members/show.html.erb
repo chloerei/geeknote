@@ -1,10 +1,10 @@
 <div class="container">
-  <div class="layout">
+  <div class="layout-primary padding-3">
     <%= render 'account/dashboard/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface padding-3 margin-bottom-3">
-        <div class="breadcrumb">
+    <div class="layout-secondary">
+      <div class="">
+        <div class="breadcrumb title-medium padding-3">
           <div class="breadcrumb__item">
             <a href="<%= account_dashboard_members_path %>">
               <%= t 'common.members' %>
@@ -14,87 +14,87 @@
             <%= @member.user ? @member.user.name : @member.invitation_email %>
           </div>
         </div>
-      </div>
 
-      <div class="card card--surface padding-3">
-        <dl>
-          <% if @member.user %>
-            <dt><%= t 'common.user' %></dt>
-            <dd>
-              <a href="<%= account_root_path(@member.user.account) %>">
-                <%= @member.user.name %>
-              </a>
-            </dd>
-          <% else %>
-            <dt><%= t 'common.email' %></dt>
-            <dd><%= @member.invitation_email %></dd>
-          <% end %>
-          <dt>
-            <%= Member.human_attribute_name 'status' %>
-          </dt>
-          <dd>
-            <%= Member.human_attribute_name "status.#{@member.status}" %>
-          </dd>
-          <dt>
-            <%= Member.human_attribute_name :role %>
-          </dt>
-          <dd>
-            <%= Member.human_attribute_name "role.#{@member.role}" %>
-          </dd>
-          <% if @member.invited_at %>
+        <div class="card card--elevated background-surface padding-3">
+          <dl>
+            <% if @member.user %>
+              <dt><%= t 'common.user' %></dt>
+              <dd>
+                <a href="<%= account_root_path(@member.user.account) %>">
+                  <%= @member.user.name %>
+                </a>
+              </dd>
+            <% else %>
+              <dt><%= t 'common.email' %></dt>
+              <dd><%= @member.invitation_email %></dd>
+            <% end %>
             <dt>
-              <%= Member.human_attribute_name 'invited_at' %>
+              <%= Member.human_attribute_name 'status' %>
             </dt>
             <dd>
-              <%= format_time @member.invited_at %>
+              <%= Member.human_attribute_name "status.#{@member.status}" %>
             </dd>
-          <% end %>
-          <% if @member.actived_at %>
             <dt>
-              <%= Member.human_attribute_name 'accepted_at' %>
+              <%= Member.human_attribute_name :role %>
             </dt>
             <dd>
-              <%= format_time @member.actived_at %>
+              <%= Member.human_attribute_name "role.#{@member.role}" %>
             </dd>
-          <% end %>
-        </dl>
+            <% if @member.invited_at %>
+              <dt>
+                <%= Member.human_attribute_name 'invited_at' %>
+              </dt>
+              <dd>
+                <%= format_time @member.invited_at %>
+              </dd>
+            <% end %>
+            <% if @member.actived_at %>
+              <dt>
+                <%= Member.human_attribute_name 'accepted_at' %>
+              </dt>
+              <dd>
+                <%= format_time @member.actived_at %>
+              </dd>
+            <% end %>
+          </dl>
 
-        <% if can_manage?(@member) %>
-          <div class="display-flex gap-2">
-            <a href="<%= edit_account_dashboard_member_path(@account, @member) %>" class="button button--text">
-              <div class="button__icon">
-                <span class="material-icons">edit</span>
-              </div>
-              <div class="button__text">
-                <%= t 'common.edit' %>
-              </div>
-            </a>
-            <%= form_with url: resend_account_dashboard_member_path(@account, @member) do %>
-              <button type="submit" class="button button--text">
+          <% if can_manage?(@member) %>
+            <div class="display-flex gap-2">
+              <a href="<%= edit_account_dashboard_member_path(@account, @member) %>" class="button button--text">
                 <div class="button__icon">
-                  <span class="material-icons">send</span>
+                  <span class="material-icons">edit</span>
                 </div>
                 <div class="button__text">
-                  <%= t 'common.resend_invitation' %>
+                  <%= t 'common.edit' %>
                 </div>
-              </button>
-            <% end %>
-            <div class="flex-grow-1">
-            </div>
-            <% if !@member.owner? %>
-              <%= form_with url: account_dashboard_member_path(@account, @member), method: 'delete', data: { turbo_confirm: "Are you sure remove this member?"} do %>
+              </a>
+              <%= form_with url: resend_account_dashboard_member_path(@account, @member) do %>
                 <button type="submit" class="button button--text">
                   <div class="button__icon">
-                    <span class="material-icons">person_remove</span>
+                    <span class="material-icons">send</span>
                   </div>
                   <div class="button__text">
-                    <%= t 'common.remove' %>
+                    <%= t 'common.resend_invitation' %>
                   </div>
                 </button>
               <% end %>
-            <% end %>
-          </div>
-        <% end %>
+              <div class="flex-grow-1">
+              </div>
+              <% if !@member.owner? %>
+                <%= form_with url: account_dashboard_member_path(@account, @member), method: 'delete', data: { turbo_confirm: "Are you sure remove this member?"} do %>
+                  <button type="submit" class="button button--text">
+                    <div class="button__icon">
+                      <span class="material-icons">person_remove</span>
+                    </div>
+                    <div class="button__text">
+                      <%= t 'common.remove' %>
+                    </div>
+                  </button>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
