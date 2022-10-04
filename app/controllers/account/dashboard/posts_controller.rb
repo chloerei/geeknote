@@ -9,6 +9,8 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
 
   def new
     @post = @account.posts.new
+
+    render :editor, layout: 'base'
   end
 
   def create
@@ -23,6 +25,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   end
 
   def edit
+    render :editor, layout: 'base'
   end
 
   def update

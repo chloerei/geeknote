@@ -1,0 +1,118 @@
+<% @body_class = "background-surface" %>
+
+<%= form_with model: @post, url: [@account, :dashboard, @post], builder: CustomFormBuilder, html: { id: 'post-form', class: 'post-form display-flex', autocomplete: "off" }, data: { controller: "form", form_unsave_confirm_value: I18n.t('common.form_unsave_confirm') } do |form| %>
+  <div class="flex-grow-1 min-width-0">
+    <div class="top-app-bar">
+      <div class="top-app-bar__action">
+        <a href="<%= account_dashboard_posts_path %>" class="button button--text button--muted">
+          <div class="button__icon">
+            <span class="material-icons">chevron_left</span>
+          </div>
+          <div class="button__label">
+            <%= t 'common.posts' %>
+          </div>
+        </a>
+      </div>
+      <div class="flex-grow-1">
+      </div>
+      <div class="top-app-bar__action">
+        <button type="submit" name="submit" value="save" class="button button--text button--muted">
+          <%= t 'common.save' %>
+        </button>
+      </div>
+      <div class="top-app-bar__action">
+        <button type="submit" name="submit" value="publish" class="button button--text button--muted">
+          <%= t 'common.publish' %>
+        </button>
+      </div>
+      <div class="top-app-bar__action">
+        <label for="sheet-toggle" class="button button--icon">
+          <span class="material-icons">settings</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="container container--post padding-3">
+      <div class="margin-bottom-3 margin-top-4">
+        <%= form.orignal_text_area :title, class: 'post-form__title display-small', data: { controller: 'auto-grow' }, placeholder: 'Post title...' %>
+      </div>
+
+      <div class="margin-bottom-3">
+        <%= form.hidden_field :content, id: 'post-content', placeholder: 'Content...' %>
+        <div class="markdown-editor" data-controller="markdown-editor" data-markdown-editor-input-value="post-content" data-markdown-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>" data-markdown-editor-i18n-value="<%= { write: I18n.t('markdown_editor.write'), preview: I18n.t('markdown_editor.preview') }.to_json %>">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <input type="checkbox" id="sheet-toggle" class="sheet-toggle" checked>
+  <div class="sheet">
+    <div class="sheet__container border-left@laptop">
+      <div class="top-app-bar align-items-center">
+        <div class="title-medium padding-2">
+          <%= t 'common.settings' %>
+        </div>
+        <div class="flex-grow-1">
+        </div>
+        <div class="top-app-bar__action">
+          <label for="sheet-toggle" class="button button--icon">
+            <span class="material-icons">close</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="padding-x-3 padding-bottom-3">
+        <div class="margin-bottom-3">
+          <div class="image-uploader <%= 'image-uploader--active' if @post.featured_image.attached? %>" data-controller="image-uploader">
+            <div class="image-uploader__preview" data-image-uploader-target="preview">
+              <% if @post.featured_image.attached? %>
+                <%= featured_image_tag @post.featured_image %>
+              <% end %>
+            </div>
+            <div class="image-uploader__toolbar">
+              <label for="post_featured_image" class="button button--text image-uploader__hide-on-active">
+                <div class="button__icon">
+                  <span class="material-icons">add_photo_alternate</span>
+                </div>
+                <div class="button__label">
+                  <%= t Post.human_attribute_name :featured_image %>
+                </div>
+              </label>
+              <label class="button button--icon image-uploader__show-on-active">
+                <span class="material-icons">add_photo_alternate</span>
+                <%= form.file_field :featured_image, direct_upload: true, data: { 'image-uploader-target': 'input', action: 'image-uploader#update' } %>
+              </label>
+              <label class="button button--icon image-uploader__show-on-active">
+                <span class="material-icons">close</span>
+                <input type="checkbox" name="post[remove_featured_image]" data-image-uploader-target="removeCheckbox" data-action="image-uploader#remove">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="margin-bottom-3">
+          <div class="text-field text-field--outlined">
+            <div class="text-field__container">
+              <div class="selector text-field__input" data-controller="selector tag-selector" data-selector-placeholder-value="" data-selector-creatable-value="true" data-selector-max-items-value="5" data-action="selector:input->tag-selector#update">
+                <select name="post[tag_list][]" class="selector__select" data-selector-target="select" multiple>
+                  <% @post.tags.each do |tag| %>
+                    <option value="<%= tag.name %>" selected><%= tag.name %></option>
+                  <% end %>
+                </select>
+              </div>
+              <label class="text-field__label">
+                <%= t 'common.tags' %>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="margin-bottom-3">
+          <%= form.text_field :canonical_url, helper_text: I18n.t('common.canonical_url_helper') %>
+        </div>
+      </div>
+    </div>
+    <label class="sheet__scrim" for="sheet-toggle">
+    </label>
+  </div>
+<% end %>

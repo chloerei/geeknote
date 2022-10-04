@@ -4,24 +4,13 @@
   min-height: 240px;
   display: flex;
   flex-direction: column;
-
-  // outline
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border: 1px solid var(--color-outline);
-    border-radius: var(--space-1);
-    z-index: 1;
-    pointer-events: none;
-  }
 }
 
 .markdown-editor__toolbar {
   display: flex;
-  border-radius: var(--space-1) var(--space-1) 0 0;
-  background: var(--color-surface-variant);
+  border-radius: var(--space-2);
   padding: var(--space-1);
+  background: var(--color-surface-variant);
   gap: var(--space-1);
   position: sticky;
   top: 0;
@@ -32,7 +21,7 @@
   .button--text {
     padding: 8px;
     color: var(--color-on-surface-variant);
-    border-radius: var(--space-1);
+    border-radius: var(--space-2);
     flex-shrink: 0;
   }
 
@@ -46,7 +35,7 @@
   }
 
   .button--icon {
-    border-radius: var(--space-1);
+    border-radius: var(--space-2);
     color: var(--color-on-surface-variant);
     flex-shrink: 0;
   }
@@ -106,7 +95,4 @@
 }
 
 .markdown-editor--focus {
-  &::after {
-    border: 2px solid var(--color-primary);
-  }
 }

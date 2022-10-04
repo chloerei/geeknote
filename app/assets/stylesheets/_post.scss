@@ -1,7 +1,19 @@
 .post-form {
+  height: 100vh;
+
   .markdown-editor {
-    min-height: 320px;
+    min-height: 100vh;
   }
+}
+
+.post-form__title {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  resize: none;
+  overflow: hidden;
+  font-family: sans-serif;
 }
 
 .post-status {

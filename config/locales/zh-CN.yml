@@ -254,6 +254,7 @@ zh-CN:
     reset_password: 重置密码
     restricted: 限制发布
     role: 角色
+    save: 保存
     save_and_fetch: 保存并抓取
     save_changes: 保存修改
     save_draft: 保存草稿

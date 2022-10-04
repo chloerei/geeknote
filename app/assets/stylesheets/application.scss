@@ -586,3 +586,23 @@ summary {
 .text-break-all {
   word-break: break-all;
 }
+
+.sheet__container {
+  padding: 0;
+  width: 360px;
+}
+
+@media (min-width: map.get($breakpoints, "laptop")) {
+  .sheet:not(.sheet--modal) {
+    width: auto;
+
+    .sheet__container {
+      transform: translateX(100%);
+      transition: none;
+    }
+  }
+
+  .sheet-toggle:checked + .sheet {
+    width: 360px;
+  }
+}

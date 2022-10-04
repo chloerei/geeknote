@@ -75,6 +75,9 @@ application.register('text-field', TextFieldController)
 import RecaptchaController from './controllers/recaptcha_controller'
 application.register('recaptcha', RecaptchaController)
 
+import AutoGrowController from './controllers/auto_grow_controller'
+application.register('auto-grow', AutoGrowController)
+
 import './lib/turbo_preserve_scroll'
 
 // clean snackbar content
