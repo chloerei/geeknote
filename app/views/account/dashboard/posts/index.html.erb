@@ -4,8 +4,8 @@
 
     <div class="layout-secondary">
       <div class="">
-        <div class="card card--elevated background-surface padding-3">
-          <div class="display-flex gap-2 align-items-center">
+        <div class="card card--elevated background-surface">
+          <div class="display-flex gap-2 padding-3 align-items-center border-bottom">
             <div class="flex-grow-1 title-large">
               <%= t 'common.posts' %>
             </div>
@@ -20,11 +20,13 @@
             </a>
           </div>
 
-          <div class="margin-bottom-3">
+          <div class="">
             <%= render partial: 'post', collection: @posts %>
           </div>
 
-          <%= paginate @posts %>
+          <div class="padding-3">
+            <%= paginate @posts %>
+          </div>
         </div>
       </div>
     </div>

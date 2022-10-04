@@ -3,8 +3,8 @@
     <%= render 'account/dashboard/navbar' %>
 
     <div class="layout-secondary">
-      <div class="card card--elevated background-surface padding-3">
-        <div class="display-flex gap-2 align-items-center">
+      <div class="card card--elevated background-surface">
+        <div class="display-flex gap-2 padding-3 align-items-center border-bottom">
           <div class="flex-grow-1 title-large">
             <%= t 'common.collections' %>
           </div>
@@ -20,7 +20,7 @@
 
         <% if @collections.any? %>
           <% @collections.each do |collection| %>
-            <div class="display-flex align-items-center padding-y-3 padding-right-3 border-bottom position-relative">
+            <div class="display-flex align-items-center padding-3 border-bottom position-relative">
               <div class="flex-grow-1">
                 <div class="title-medium">
                   <a href="<%= account_dashboard_collection_path(@account, collection) %>" class="link-title link-expended">
@@ -42,6 +42,10 @@
               </div>
             </div>
           <% end %>
+
+          <div class="padding-3">
+            <%= paginate @collections %>
+          </div>
         <% else %>
           <div class="content-placeholder">
             <div class="content-placeholder__icon">
