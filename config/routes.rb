@@ -167,8 +167,6 @@ Rails.application.routes.draw do
       namespace :settings do
         root to: 'home#index'
         resource :profile, only: [:show, :update]
-        resource :avatar, only: [:update]
-        resource :banner_image, only: [:update, :destroy]
         resource :account, only: [:show, :update]
         resource :import, only: [:show, :update]
         resources :exports, only: [:index, :create, :destroy]
