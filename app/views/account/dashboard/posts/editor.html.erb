@@ -41,11 +41,11 @@
 
     <div class="container container--post padding-3">
       <div class="margin-bottom-3 margin-top-4">
-        <%= form.orignal_text_area :title, class: 'post-form__title display-small', data: { controller: 'auto-grow' }, placeholder: 'Post title...' %>
+        <%= form.orignal_text_area :title, class: 'post-form__title display-small', data: { controller: 'auto-grow' }, placeholder: t('.post_title_placeholder') %>
       </div>
 
       <div class="margin-bottom-3">
-        <%= form.hidden_field :content, id: 'post-content', placeholder: 'Content...' %>
+        <%= form.hidden_field :content, id: 'post-content', placeholder: t('.post_content_placeholder') %>
         <div class="markdown-editor" data-controller="markdown-editor" data-markdown-editor-input-value="post-content" data-markdown-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>" data-markdown-editor-i18n-value="<%= { write: I18n.t('markdown_editor.write'), preview: I18n.t('markdown_editor.preview') }.to_json %>">
         </div>
       </div>
