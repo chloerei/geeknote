@@ -193,6 +193,7 @@ zh-CN:
     download: 下载
     edit: 编辑
     email: 邮件地址
+    explore: 发现
     exports: 导出数据
     feed: 订阅
     filter: Filter
@@ -258,7 +259,8 @@ zh-CN:
     save_and_fetch: 保存并抓取
     save_changes: 保存修改
     save_draft: 保存草稿
-    search: Search
+    search: 搜索
+    select: 选择
     send_email: 发送邮件
     send_invitation: 发送邀请
     send_password_reset_email: 发送密码重置邮件
@@ -290,6 +292,12 @@ zh-CN:
   errors:
     messages:
       email_or_password_error: Email 或密码错误
+  explore:
+    posts:
+      index:
+        email_settings: 邮件地址设置
+        verify_email_description: 为了开启完整功能，需要验证邮件地址。
+        verify_email_title: 验证邮件地址
   flash:
     account_updated: 账号已更新。
     added_to_collection: 已添加至“%{name}”。
@@ -311,6 +319,8 @@ zh-CN:
     password_reset_token_invliad: 密码重置链接无效或已过期，请重新获取重置链接。
     password_update_successful: 密码更新成功。
     please_wait_one_minute_to_resend_invitation: 请等待一分钟再重发邀请函。
+    post_is_published: 文章已发布。
+    post_is_saved: 文章已保存。
     profile_updated: 资料已更新。
     removed_from_collection: 已从“%{name}”中移除。
     require_sign_in: 需要登录。

@@ -62,7 +62,7 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
       post account_dashboard_posts_path(user.account), params: { post: { title: '' }}, as: :turbo_stream
     end
     last_post = user.account.posts.last
-    assert_redirected_to account_post_url(user.account, last_post)
+    assert_redirected_to edit_account_dashboard_post_url(user.account, last_post)
     assert_equal user, last_post.user
   end
 
@@ -75,7 +75,7 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
       post account_dashboard_posts_path(organization.account), params: { post: { title: '' }}, as: :turbo_stream
     end
     last_post = organization.account.posts.last
-    assert_redirected_to account_post_url(organization.account, last_post)
+    assert_redirected_to edit_account_dashboard_post_url(organization.account, last_post)
     assert_equal user, last_post.user
   end
 
@@ -135,16 +135,16 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in member
     patch account_dashboard_post_path(organization.account, member_post), params: { post: { title: 'change by member' }}, as: :turbo_stream
-    assert_redirected_to account_post_url(organization.account, member_post)
+    assert_response :success
     assert_raise ActiveRecord::RecordNotFound do
       patch account_dashboard_post_path(organization.account, other_post), params: { post: { title: 'change by member' }}, as: :turbo_stream
     end
 
     sign_in admin
     patch account_dashboard_post_path(organization.account, member_post), params: { post: { title: 'change by admin' }}, as: :turbo_stream
-    assert_redirected_to account_post_url(organization.account, member_post)
+    assert_response :success
     patch account_dashboard_post_path(organization.account, other_post), params: { post: { title: 'change by admin' }}, as: :turbo_stream
-    assert_redirected_to account_post_url(organization.account, other_post)
+    assert_response :success
   end
 
   test "should not publish restricted post" do
@@ -153,7 +153,7 @@ class Account::Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in account.owner
 
-    patch account_dashboard_post_path(account, post), params: { post: { title: 'title' }, submit: 'publish'}
+    patch account_dashboard_post_path(account, post), params: { post: { title: 'title' }, submit: 'publish'}, as: :turbo_stream
     post.reload
     assert_not post.published?
   end
