@@ -15,9 +15,6 @@ const application = Application.start()
 import SelectorController from './controllers/selector_controller'
 application.register('selector', SelectorController)
 
-import ClipboardController from './controllers/clipboard_controller'
-application.register('clipboard', ClipboardController)
-
 import CollectionItemController from './controllers/collection_item_controller'
 application.register('collection-item', CollectionItemController)
 
@@ -26,9 +23,6 @@ application.register('draggable', DraggableController)
 
 import FieldsetManagerController from './controllers/fieldset_manager_controller'
 application.register('fieldset-manager', FieldsetManagerController)
-
-import FocusableController from './controllers/focusable_controller'
-application.register('focusable', FocusableController)
 
 import FormController from './controllers/form_controller'
 application.register('form', FormController)
@@ -39,9 +33,6 @@ application.register('page-nav', PageNavController)
 import PaginationController from './controllers/pagination_controller'
 application.register('pagination', PaginationController)
 
-// import PostEditorController from './controllers/post_editor_controller'
-// application.register('post-editor', PostEditorController)
-//
 import PostListController from './controllers/post_list_controller'
 application.register('post-list', PostListController)
 
@@ -80,8 +71,6 @@ application.register('recaptcha', RecaptchaController)
 
 import AutoGrowController from './controllers/auto_grow_controller'
 application.register('auto-grow', AutoGrowController)
-
-import './lib/turbo_preserve_scroll'
 
 // clean snackbar content
 document.addEventListener('turbo:before-cache', () => {
