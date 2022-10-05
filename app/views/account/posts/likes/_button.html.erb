@@ -1,5 +1,5 @@
 <% liked = post.liked_by? current_user %>
-<%= form_with url: account_post_like_path(post.account, post), method: (liked ? 'delete' : 'post'), data: { controller: 'form' }, id: "post-#{post.id}-like-button" do |form| %>
+<%= form_with url: account_post_like_path(post.account, post), method: (liked ? 'delete' : 'post'), id: "post-#{post.id}-like-button" do |form| %>
   <button type="submit" class="button button--text button--like <%= 'button--active' if liked %> width-100">
     <div class="button__icon">
       <div class="button__show-on-active">

@@ -45,6 +45,9 @@ application.register('pagination', PaginationController)
 import PostListController from './controllers/post_list_controller'
 application.register('post-list', PostListController)
 
+import PostFormController from './controllers/post_form_controller'
+application.register('post-form', PostFormController)
+
 import RevisionController from './controllers/revision_controller'
 application.register('revision', RevisionController)
 

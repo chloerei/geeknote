@@ -1,6 +1,6 @@
 <% @body_class = "background-surface" %>
 
-<%= form_with model: @post, url: [@account, :dashboard, @post], builder: CustomFormBuilder, html: { id: 'post-form', class: 'post-form display-flex', autocomplete: "off" }, data: { controller: "form", form_unsave_confirm_value: I18n.t('common.form_unsave_confirm') } do |form| %>
+<%= form_with model: @post, url: [@account, :dashboard, @post], builder: CustomFormBuilder, html: { id: 'post-form', class: 'post-form display-flex', autocomplete: "off" }, data: { controller: "post-form", post_form_unsave_confirm_value: I18n.t('common.form_unsave_confirm') } do |form| %>
   <div class="flex-grow-1 min-width-0">
     <div class="top-app-bar align-items-center">
       <div class="top-app-bar__action">
