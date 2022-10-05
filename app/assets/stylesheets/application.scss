@@ -255,10 +255,6 @@ body[data-color-scheme="dark"] {
   color: var(--color-on-surface);
 }
 
-.material-icons--inline {
-
-}
-
 .tab {
   overflow: auto;
 }
@@ -547,6 +543,7 @@ body[data-color-scheme="dark"] {
 
 .material-icons--inline {
   font-size: inherit;
+  vertical-align: middle;
 }
 
 summary {
@@ -605,4 +602,8 @@ summary {
   .sheet-toggle:checked + .sheet {
     width: 360px;
   }
+}
+
+.text-field--outlined .text-field__label {
+  z-index: auto;
 }

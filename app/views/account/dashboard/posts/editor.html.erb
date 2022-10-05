@@ -2,7 +2,7 @@
 
 <%= form_with model: @post, url: [@account, :dashboard, @post], builder: CustomFormBuilder, html: { id: 'post-form', class: 'post-form display-flex', autocomplete: "off" }, data: { controller: "form", form_unsave_confirm_value: I18n.t('common.form_unsave_confirm') } do |form| %>
   <div class="flex-grow-1 min-width-0">
-    <div class="top-app-bar">
+    <div class="top-app-bar align-items-center">
       <div class="top-app-bar__action">
         <a href="<%= account_dashboard_posts_path %>" class="button button--text button--muted">
           <div class="button__icon">
@@ -13,6 +13,11 @@
           </div>
         </a>
       </div>
+      <div class="top-app-bar__action">
+        <div class="body-medium text-muted padding-1">
+          <%= Post.human_attribute_name "status.#{@post.status}" %>
+        </div>
+      </div>
       <div class="flex-grow-1">
       </div>
       <div class="top-app-bar__action">
@@ -20,11 +25,13 @@
           <%= t 'common.save' %>
         </button>
       </div>
-      <div class="top-app-bar__action">
-        <button type="submit" name="submit" value="publish" class="button button--text button--muted">
-          <%= t 'common.publish' %>
-        </button>
-      </div>
+      <% if @post.draft? %>
+        <div class="top-app-bar__action">
+          <button type="submit" name="submit" value="publish" class="button button--text button--muted">
+            <%= t 'common.publish' %>
+          </button>
+        </div>
+      <% end %>
       <div class="top-app-bar__action">
         <label for="sheet-toggle" class="button button--icon">
           <span class="material-icons">settings</span>
@@ -45,7 +52,7 @@
     </div>
   </div>
 
-  <input type="checkbox" id="sheet-toggle" class="sheet-toggle" checked>
+  <input type="checkbox" id="sheet-toggle" class="sheet-toggle">
   <div class="sheet">
     <div class="sheet__container border-left@laptop">
       <div class="top-app-bar align-items-center">
@@ -62,7 +69,24 @@
       </div>
 
       <div class="padding-x-3 padding-bottom-3">
+        <% if @post.persisted? %>
+          <div class="margin-bottom-3">
+            <label class="label-medium display-block margin-bottom-2">
+              URL
+            </label>
+            <div class="text-break-all">
+              <a href="<%= account_post_url(@account, @post) %>" target="_blank" class="">
+                <%= account_post_url(@account, @post) %>
+                <span class="material-icons material-icons--inline padding-bottom-1">launch</span>
+              </a>
+            </div>
+          </div>
+        <% end %>
+
         <div class="margin-bottom-3">
+          <label class="label-medium display-block margin-bottom-2">
+            <%= Post.human_attribute_name :featured_image %>
+          </label>
           <div class="image-uploader <%= 'image-uploader--active' if @post.featured_image.attached? %>" data-controller="image-uploader">
             <div class="image-uploader__preview" data-image-uploader-target="preview">
               <% if @post.featured_image.attached? %>
@@ -75,7 +99,7 @@
                   <span class="material-icons">add_photo_alternate</span>
                 </div>
                 <div class="button__label">
-                  <%= t Post.human_attribute_name :featured_image %>
+                  <%= t 'common.select' %>
                 </div>
               </label>
               <label class="button button--icon image-uploader__show-on-active">
