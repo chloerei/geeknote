@@ -12,50 +12,22 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container container--medium">
   <div class="layout-primary padding-3">
     <%= render 'account/navbar' %>
 
     <div class="">
       <%= render 'account/tab' %>
 
-      <div class="layout-secondary">
-        <div class="flex-grow-1 min-width-0">
-          <div class="display-flex flex-direction-column gap-3">
-            <%= render partial: 'post', collection: @posts, cached: true %>
-          </div>
-
-          <div class="padding-3">
-            <%= paginate @posts %>
-          </div>
+      <div class="flex-grow-1 min-width-0">
+        <div class="display-flex flex-direction-column gap-3">
+          <%= render partial: 'post', collection: @posts, cached: true %>
         </div>
 
-        <div class="display-flex flex-direction-column gap-3">
-          <div class="">
-            <div class="title-medium padding-x-3 margin-bottom-2">
-              <%= t 'common.tags' %>
-            </div>
-            <div class="">
-              <% @account.used_tags.first(5).each do |name, count| %>
-                <a href="<%= account_tag_path(id: name) %>" class="link-block padding-x-3 padding-y-2 border-radius-2">
-                  <div class="title-small">
-                    #<%= name %>
-                  </div>
-                  <div class="body-medium text-muted">
-                    <%= t 'common.posts_count', count: count %>
-                  </div>
-                </a>
-              <% end %>
-              <% if @account.used_tags.count > 5 %>
-                <a href="<%= account_tags_path(@account) %>" class="link-block padding-x-3 padding-y-2 border-radius-2">
-                  <%= t 'common.view_more' %>
-                </a>
-              <% end %>
-            </div>
-          </div>
+        <div class="padding-3">
+          <%= paginate @posts %>
         </div>
       </div>
     </div>
-
   </div>
 </div>

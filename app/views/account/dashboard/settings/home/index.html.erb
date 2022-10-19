@@ -2,7 +2,11 @@
   <div class="layout-primary padding-3">
     <%= render 'account/dashboard/navbar' %>
 
-    <div class="layout-secondary">
+    <div class="">
+      <div class="headline-small padding-y-1 margin-bottom-3">
+        <%= t 'common.settings' %>
+      </div>
+
       <div class="card card--elevated background-surface padding-3">
         <a href="<%= account_dashboard_settings_account_path(@account) %>" class="link-block border-radius-3">
           <div class="display-flex gap-3 padding-3">

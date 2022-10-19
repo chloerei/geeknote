@@ -2,22 +2,22 @@
   <div class="layout-primary padding-3">
     <%= render 'account/dashboard/navbar' %>
 
-    <div class="layout-secondary">
-      <div class="card card--elevated background-surface">
-        <div class="display-flex gap-2 padding-3 align-items-center border-bottom">
-          <div class="flex-grow-1 title-large">
-            <%= t 'common.collections' %>
-          </div>
-          <a href="<%= new_account_dashboard_collection_path(@account) %>" class="button button--outlined">
-            <div class="button__icon">
-              <span class="material-icons">add</span>
-            </div>
-            <div class="button__label">
-              <%= t 'common.new_collection' %>
-            </div>
-          </a>
+    <div class="">
+      <div class="display-flex gap-2 margin-bottom-3 align-items-center">
+        <div class="flex-grow-1 headline-small">
+          <%= t 'common.collections' %>
         </div>
+        <a href="<%= new_account_dashboard_collection_path(@account) %>" class="button button--filled">
+          <div class="button__icon">
+            <span class="material-icons">add</span>
+          </div>
+          <div class="button__label">
+            <%= t 'common.new_collection' %>
+          </div>
+        </a>
+      </div>
 
+      <div class="card card--elevated background-surface">
         <% if @collections.any? %>
           <% @collections.each do |collection| %>
             <div class="display-flex align-items-center padding-3 border-bottom position-relative">

@@ -111,7 +111,7 @@ body[data-color-scheme="dark"] {
 }
 
 .container {
-  max-width: 1280px;
+  max-width: 1140px;
   margin: 0 auto;
 }
 
@@ -222,7 +222,7 @@ body[data-color-scheme="dark"] {
 .layout-primary {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-3);
+  gap: var(--space-4);
 
   @media (min-width: map.get($breakpoints, 'tablet')) {
     grid-template-columns: 240px minmax(0, 1fr);
@@ -606,4 +606,23 @@ summary {
 
 .text-field--outlined .text-field__label {
   z-index: auto;
+}
+
+@media (min-width: map.get($breakpoints, "laptop")) {
+  .navigation-drawer:not(.navigation-drawer--modal) {
+    width: auto;
+
+    .navigation-drawer__container {
+      position: static;
+      width: auto;
+      background-color: transparent;
+      padding: 0;
+      overflow: visible;
+    }
+  }
+}
+
+.navigation-drawer__item {
+  background: transparent;
+  padding: 10px 24px;
 }
