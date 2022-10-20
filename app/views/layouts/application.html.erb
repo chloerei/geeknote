@@ -26,13 +26,6 @@
             </a>
           <% end %>
         </div>
-        <div class="top-app-bar__action">
-          <a href="<%= explore_root_path %>" class="button button--text button--muted">
-            <%= t 'common.explore' %>
-          </a>
-        </div>
-        <div class="flex-grow-1">
-        </div>
         <% if current_user %>
           <div class="top-app-bar__action">
             <a href="<%= new_account_dashboard_post_path(current_user.account) %>" class="button button--icon">
@@ -134,7 +127,7 @@
     </div>
   </div>
 
-  <%= content_for?(:main) ? yield(:main) : yield %>
+  <%= content_for?(:content) ? yield(:content) : yield %>
 
   <%= sanitize @site.footer_html %>
 

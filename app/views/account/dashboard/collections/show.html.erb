@@ -1,63 +1,67 @@
-<div class="container">
-  <div class="layout-primary padding-3">
+<div class="container padding-3">
+  <%= render 'account/dashboard/header' %>
+
+  <div class="layout-primary">
     <%= render 'account/dashboard/navbar' %>
 
     <div class="">
-      <div class="breadcrumb headline-small padding-y-1 margin-bottom-3">
-        <div class="breadcrumb__item">
-          <a href="<%= account_dashboard_collections_path(@account) %>">
-            <%= t 'common.collections' %>
-          </a>
-        </div>
-        <div class="breadcrumb__item breadcrumb__item--active">
-          <%= @collection.name %>
-        </div>
-      </div>
-
-      <div class="card card--elevated background-surface padding-3 margin-bottom-3">
-        <div class="display-flex align-items-center gap-2 margin-bottom-3">
-          <div class="flex-grow-1 title-medium">
+      <div class="card card--elevated background-surface margin-bottom-3">
+        <div class="top-app-bar">
+          <div class="top-app-bar__action">
+            <a href="<%= account_dashboard_collections_path(@account) %>" class="button button--icon">
+              <span class="material-icons">arrow_back</span>
+            </a>
+          </div>
+          <div class="top-app-bar__title">
             <%= @collection.name %>
           </div>
-          <a href="<%= edit_account_dashboard_collection_path(@account, @collection) %>" class="button button--icon">
-            <span class="material-icons">edit</span>
-          </a>
-          <div class="dropdown dropdown--right">
-            <label tabindex="0" class="button button--icon">
-              <span class="material-icons">more_vert</span>
-            </label>
-            <div tabindex="0" class="dropdown__container">
-              <a href="<%= account_collection_path(@account, @collection) %>" class="dropdown__item">
-                <div class="dropdown__item__icon">
-                  <span class="material-icons">preview</span>
-                </div>
-                <div class="dropdown__item__text">
-                  <%= t 'common.view' %>
-                </div>
-              </a>
-              <hr class="divider">
-              <%= button_to account_dashboard_collection_path(@account, @collection), method: 'delete', class: 'dropdown__item', data: { confirm: I18n.t('common.delete_collection_confirm') } do %>
-                <div class="dropdown__item__icon">
-                  <span class="material-icons">delete</span>
-                </div>
-                <div class="dropdown__item__text">
-                  <%= t 'common.delete_collection' %>
-                </div>
-              <% end %>
+          <div class="top-app-bar__action">
+            <a href="<%= edit_account_dashboard_collection_path(@account, @collection) %>" class="button button--icon">
+              <span class="material-icons">edit</span>
+            </a>
+          </div>
+          <div class="top-app-bar__action">
+            <div class="dropdown dropdown--right">
+              <label tabindex="0" class="button button--icon">
+                <span class="material-icons">more_vert</span>
+              </label>
+              <div tabindex="0" class="dropdown__container">
+                <a href="<%= account_collection_path(@account, @collection) %>" class="dropdown__item">
+                  <div class="dropdown__item__icon">
+                    <span class="material-icons">preview</span>
+                  </div>
+                  <div class="dropdown__item__text">
+                    <%= t 'common.view' %>
+                  </div>
+                </a>
+                <hr class="divider">
+                <%= button_to account_dashboard_collection_path(@account, @collection), method: 'delete', class: 'dropdown__item', data: { confirm: I18n.t('common.delete_collection_confirm') } do %>
+                  <div class="dropdown__item__icon">
+                    <span class="material-icons">delete</span>
+                  </div>
+                  <div class="dropdown__item__text">
+                    <%= t 'common.delete_collection' %>
+                  </div>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
-        <div class="margin-bottom-3">
-          <%= @collection.description.presence || t('common.no_description') %>
-        </div>
-        <div class="text-muted display-flex align-items-center gap-1">
-          <% if @collection.visibility_private? %>
-            <span class="material-icons material-icons--inline">lock</span>
-            <%= t 'common.private' %>
-          <% else %>
-            <span class="material-icons material-icons--inline">public</span>
-            <%= t 'common.public' %>
-          <% end %>
+
+        <div class="padding-3">
+          <div class="margin-bottom-3">
+            <%= @collection.description.presence || t('common.no_description') %>
+          </div>
+
+          <div class="text-muted display-flex align-items-center gap-1">
+            <% if @collection.visibility_private? %>
+              <span class="material-icons material-icons--inline">lock</span>
+              <%= t 'common.private' %>
+            <% else %>
+              <span class="material-icons material-icons--inline">public</span>
+              <%= t 'common.public' %>
+            <% end %>
+          </div>
         </div>
       </div>
 

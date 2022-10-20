@@ -1,24 +1,28 @@
-<div class="container">
-  <div class="layout-primary padding-3">
+<div class="container padding-3">
+  <%= render 'account/dashboard/header' %>
+
+  <div class="layout-primary">
     <%= render 'account/dashboard/navbar' %>
 
     <div class="">
-      <div class="display-flex gap-2 align-items-center margin-bottom-3">
-        <div class="flex-grow-1 headline-small">
-          <%= t 'common.members' %>
+      <div class="card card--elevated background-surface">
+        <div class="top-app-bar border-bottom">
+          <div class="top-app-bar__title">
+            <%= t 'common.members' %>
+          </div>
+          <div class="top-app-bar__action">
+            <a href="<%= new_account_dashboard_member_path(@account) %>" class="button button--text button--muted">
+              <div class="button__icon">
+                <span class="material-icons">person_add</span>
+              </div>
+              <div class="button__text">
+                <%= t 'common.invite_member' %>
+              </div>
+            </a>
+          </div>
         </div>
 
-        <a href="<%= new_account_dashboard_member_path(@account) %>" class="button button--outlined">
-          <div class="button__icon">
-            <span class="material-icons">person_add</span>
-          </div>
-          <div class="button__text">
-            <%= t 'common.invite_member' %>
-          </div>
-        </a>
-      </div>
 
-      <div class="card card--elevated background-surface">
         <% @members.each do |member| %>
           <div class="display-flex padding-3 position-relative border-bottom">
             <div class="flex-grow-1">

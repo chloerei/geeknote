@@ -1,21 +1,25 @@
-<div class="container">
-  <div class="layout-primary padding-3">
+<div class="container padding-3">
+  <%= render 'account/dashboard/header' %>
+
+  <div class="layout-primary">
     <%= render 'account/dashboard/navbar' %>
 
     <div class="">
-      <div class="breadcrumb headline-small padding-y-1 margin-bottom-3">
-        <div class="breadcrumb__item">
-          <a href="<%= account_dashboard_settings_root_path %>">
-            <%= t 'common.settings' %>
-          </a>
+      <div class="card card--elevated background-surface">
+        <div class="top-app-bar">
+          <div class="top-app-bar__action">
+            <a href="<%= account_dashboard_settings_root_path %>" class="button button--icon">
+              <span class="material-icons">arrow_back</span>
+            </a>
+          </div>
+          <div class="top-app-bar__title">
+            <%= t 'common.account_name' %>
+          </div>
         </div>
-        <div class="breadcrumb__item breadcrumb__item--active">
-          <%= t 'common.account_name' %>
-        </div>
-      </div>
 
-      <div class="card card--elevated background-surface padding-3">
-        <%= render 'form' %>
+        <div class="padding-3">
+          <%= render 'form' %>
+        </div>
       </div>
     </div>
   </div>

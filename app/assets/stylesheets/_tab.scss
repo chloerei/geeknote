@@ -1,0 +1,23 @@
+.tab {
+  overflow: auto;
+}
+
+.tab__item {
+  padding: 0 16px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+  background: transparent;
+}
+
+.tab__item--active {
+  background: var(--color-primary-container);
+}
+
+.tab__item__icon {
+  width: 24px;
+  height: 24px;
+}

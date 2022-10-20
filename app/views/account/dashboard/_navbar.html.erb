@@ -1,112 +1,41 @@
-<div class="navigation-drawer">
-  <div class="navigation-drawer__container display-flex flex-direction-column gap-2">
-    <div class="dropdown">
-      <label tabindex="0" class="button button--text width-100 button--muted">
-        <div class="avatar avatar--small padding-x-1 margin-right-1">
-          <%= avatar_image_tag @account.owner.avatar %>
-        </div>
-        <div class="button__label title-medium flex-grow-1 text-align-left">
-          <%= @account.owner.name %>
-        </div>
-        <div class="button__icon">
-          <span class="material-icons">arrow_drop_down</span>
-        </div>
-      </label>
-      <div tabindex="0" class="dropdown__container">
-        <a class="dropdown__item" href="<%= account_dashboard_posts_path(current_user.account) %>">
-          <div class="dropdown__item__icon">
-            <div class="avatar avatar--small">
-              <%= avatar_image_tag current_user.avatar %>
-            </div>
-          </div>
-          <div class="dropdown__item__text">
-            <%= current_user.name %>
-          </div>
-        </a>
-
-        <% current_user.member_accounts.includes(:owner).each do |account| %>
-          <a class="dropdown__item" href="<%= account_dashboard_posts_path(account) %>">
-            <div class="dropdown__item__icon">
-              <div class="avatar avatar--small">
-                <%= avatar_image_tag account.owner.avatar %>
-              </div>
-            </div>
-            <div class="dropdown__item__text">
-              <%= account.owner.name %>
-            </div>
-          </a>
-        <% end %>
-
-        <a class="dropdown__item" href="#">
-          <div class="dropdown__item__icon">
-            <span class="material-icons">add</span>
-          </div>
-          <div class="dropdown__item__text">
-            <%= t 'common.add_organization' %>
-          </div>
-        </a>
-      </div>
+<div class="nav">
+  <a href="<%= account_dashboard_posts_path(@account) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'posts' %>">
+    <div class="nav__item__icon">
+      <span class="material-icons">article</span>
     </div>
+    <div class="nav__item__label">
+      <%= t 'common.posts' %>
+    </div>
+  </a>
 
-    <a href="" class="navigation-drawer__item">
-      <div class="navigation-drawer__item__icon">
-        <span class="material-icons">dashboard</span>
+  <% if current_member.role.in?(%w(owner admin)) %>
+    <a href="<%= account_dashboard_collections_path(@account) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'collections' %>">
+      <div class="nav__item__icon">
+        <span class="material-icons">library_books</span>
       </div>
-      <div class="navigation-drawer__item__label">
-        <%= t 'common.dashboard' %>
+      <div class="nav__item__label">
+        <%= t 'common.collections' %>
       </div>
     </a>
 
-    <a href="<%= account_root_path(@account) %>" class="navigation-drawer__item">
-      <div class="navigation-drawer__item__icon">
-        <span class="material-icons">web</span>
-      </div>
-      <div class="navigation-drawer__item__label">
-        <%= t 'common.view_page' %>
-      </div>
-      <div class="navigation-drawer__item__icon">
-        <span class="material-icons">arrow_right_alt</span>
-      </div>
-    </a>
-
-    <a href="<%= account_dashboard_posts_path(@account) %>" class="navigation-drawer__item <%= 'navigation-drawer__item--active' if controller_name == 'posts' %>">
-      <div class="navigation-drawer__item__icon">
-        <span class="material-icons">article</span>
-      </div>
-      <div class="navigation-drawer__item__label">
-        <%= t 'common.posts' %>
-      </div>
-    </a>
-
-    <% if current_member.role.in?(%w(owner admin)) %>
-      <a href="<%= account_dashboard_collections_path(@account) %>" class="navigation-drawer__item <%= 'navigation-drawer__item--active' if controller_name == 'collections' %>">
-        <div class="navigation-drawer__item__icon">
-          <span class="material-icons">library_books</span>
+    <% if @account.organization? %>
+      <a href="<%= account_dashboard_members_path(@account) %>" class="nav__item <%= 'nav__item--active' if controller_name == 'members' %>">
+        <div class="nav__item__icon">
+          <span class="material-icons">people</span>
         </div>
-        <div class="navigation-drawer__item__label">
-          <%= t 'common.collections' %>
-        </div>
-      </a>
-
-      <% if @account.organization? %>
-        <a href="<%= account_dashboard_members_path(@account) %>" class="navigation-drawer__item <%= 'navigation-drawer__item--active' if controller_name == 'members' %>">
-          <div class="navigation-drawer__item__icon">
-            <span class="material-icons">people</span>
-          </div>
-          <div class="navigation-drawer__item__label">
-            <%= t 'common.members' %>
-          </div>
-        </a>
-      <% end %>
-
-      <a href="<%= account_dashboard_settings_root_path(@account) %>" class="navigation-drawer__item <%= 'navigation-drawer__item--active' if request.path.include?('dashboard/settings') %>">
-        <div class="navigation-drawer__item__icon">
-          <span class="material-icons">settings</span>
-        </div>
-        <div class="navigation-drawer__item__label">
-          <%= t 'common.settings' %>
+        <div class="nav__item__label">
+          <%= t 'common.members' %>
         </div>
       </a>
     <% end %>
-  </div>
+
+    <a href="<%= account_dashboard_settings_root_path(@account) %>" class="nav__item <%= 'nav__item--active' if request.path.include?('dashboard/settings') %>">
+      <div class="nav__item__icon">
+        <span class="material-icons">settings</span>
+      </div>
+      <div class="nav__item__label">
+        <%= t 'common.settings' %>
+      </div>
+    </a>
+  <% end %>
 </div>

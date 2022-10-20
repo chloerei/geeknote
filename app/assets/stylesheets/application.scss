@@ -18,6 +18,9 @@ $material-icons-font-path: '';
 @import 'typography';
 @import 'selector';
 
+@import 'tab';
+@import 'nav';
+
 @import 'post';
 @import 'image_uploader';
 @import 'markdown_editor';
@@ -133,11 +136,7 @@ body[data-color-scheme="dark"] {
 
 .top-app-bar {
   background-color: transparent;
-  padding: 8px;
-}
-
-.top-app-bar__title {
-  flex-grow: 0;
+  padding: 4px;
 }
 
 .hero-form {
@@ -222,7 +221,7 @@ body[data-color-scheme="dark"] {
 .layout-primary {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-4);
+  gap: var(--space-3);
 
   @media (min-width: map.get($breakpoints, 'tablet')) {
     grid-template-columns: 240px minmax(0, 1fr);
@@ -253,30 +252,6 @@ body[data-color-scheme="dark"] {
 .card--surface {
   background-color: var(--color-surface);
   color: var(--color-on-surface);
-}
-
-.tab {
-  overflow: auto;
-}
-
-.tab__item {
-  padding: 0 16px;
-  height: 40px;
-  border-radius: 20px;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  flex-shrink: 0;
-  background: transparent;
-}
-
-.tab__item--active {
-  background: var(--color-primary-container);
-}
-
-.tab__item__icon {
-  width: 24px;
-  height: 24px;
 }
 
 .text-muted {
