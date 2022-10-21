@@ -32,12 +32,8 @@
     </div>
   <% end %>
 
-  <div class="padding-3">
-    <h1 class="display-small flex-grow-1">
-      <%= @post.title.presence || t('common.untitled') %>
-    </h1>
-
-    <div class="display-flex align-items-center flex-wrap gap-2 margin-y-3">
+  <div class="">
+    <div class="display-flex align-items-center flex-wrap gap-1 margin-y-3">
       <a href="<%= account_root_path(@post.user.account) %>" class="link-title">
         <div class="display-flex gap-2 align-items-center">
           <div class="avatar">
@@ -49,15 +45,26 @@
         </div>
       </a>
 
+      <% if @post.account.organization? %>
+        <span class="text-muted"><%= t 'common.in' %></span>
+        <a href="<%= account_root_path(@post.account) %>" class="link-title">
+          <b><%= @post.account.owner.name %></b>
+        </a>
+      <% end %>
+
       <% if @post.published_at %>
-        &centerdot;
+        <div class="text-muted">
+          &centerdot;
+        </div>
         <div class="text-muted">
           <%= format_time @post.published_at %>
         </div>
       <% end %>
 
       <% if @post.canonical_url %>
-        &centerdot;
+        <div class="text-muted">
+          &centerdot;
+        </div>
         <div class="text-muted">
           <%= t 'common.originally_published_at' %> <%= link_to_canonical_url @post.canonical_url %>
         </div>
@@ -77,6 +84,10 @@
         </div>
       </div>
     </div>
+
+    <h1 class="display-small margin-y-4">
+      <%= @post.title.presence || t('common.untitled') %>
+    </h1>
 
     <% if @post.featured_image.attached? %>
       <div class="feature-image">
@@ -105,7 +116,7 @@
     </div>
   </div>
 
-  <div class="title-large padding-3">
+  <div class="title-large margin-y-3">
     <%= t 'common.comments' %>
   </div>
 

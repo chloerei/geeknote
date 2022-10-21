@@ -9,17 +9,17 @@
 </div>
 
 <div class="container">
-  <div class="display-flex gap-3 padding-3">
+  <div class="layout-primary padding-3">
     <%= render 'account/navbar' %>
 
     <div class="flex-grow-1 min-width-0">
-      <div class="breadcrumb title-medium padding-3">
-        <div class="breadcrumb__item">
-          <a href="<%= account_root_path(@account) %>">
-            <%= @account.owner.name %>
+      <div class="top-app-bar">
+        <div class="top-app-bar__action">
+          <a href="<%= account_root_path(@account) %>" class="button button--icon">
+            <span class="material-icons">arrow_back</span>
           </a>
         </div>
-        <div class="breadcrumb__item breadcrumb__item--active">
+        <div class="top-app-bar__title">
           <%= t 'common.followers' %>
         </div>
       </div>

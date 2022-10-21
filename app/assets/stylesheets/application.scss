@@ -220,7 +220,7 @@ body[data-color-scheme="dark"] {
 
 .layout-primary {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-3);
 
   @media (min-width: map.get($breakpoints, 'tablet')) {
@@ -239,13 +239,20 @@ body[data-color-scheme="dark"] {
 }
 
 .feature-image {
-  margin: 16px -16px;
+  margin: 32px -16px;
 
   img {
     display: block;
     width: 100%;
     height: auto;
-    border-radius: var(--space-3);
+  }
+
+  @media (min-width: 800px) {
+    margin: 32px -32px;
+
+    img {
+      border-radius: 16px;
+    }
   }
 }
 

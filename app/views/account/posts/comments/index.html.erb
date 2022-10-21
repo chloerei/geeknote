@@ -1,14 +1,14 @@
 <% @body_class = "background-surface" %>
 
 <div class="container container--post padding-3">
-  <div class="breadcrumb title-medium padding-3">
-    <div class="breadcrumb__item">
-      <a href="<%= account_post_path(@account, @post) %>">
-        <%= @post.title %>
+  <div class="top-app-bar">
+    <div class="top-app-bar__action">
+      <a href="<%= account_post_path(@account, @post) %>" class="button button--icon">
+        <span class="material-icons">arrow_back</span>
       </a>
     </div>
-    <div class="breadcrumb__item breadcrumb__item--active">
-      <%= t 'common.comments' %>
+    <div class="top-app-bar__title">
+      <%= @post.title %>
     </div>
   </div>
 

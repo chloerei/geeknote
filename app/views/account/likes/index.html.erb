@@ -15,18 +15,13 @@
     <div class="">
       <%= render 'account/tab' %>
 
-      <div class="layout-secondary">
-        <div class="">
-          <div class="display-flex flex-direction-column gap-3">
-            <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
-          </div>
-
-          <div class="padding-3">
-            <%= paginate @posts %>
-          </div>
+      <div class="">
+        <div class="display-flex flex-direction-column gap-3">
+          <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
         </div>
 
-        <div class="display-flex flex-direction-column gap-3">
+        <div class="padding-3">
+          <%= paginate @posts %>
         </div>
       </div>
     </div>

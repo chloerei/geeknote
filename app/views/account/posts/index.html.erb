@@ -12,21 +12,19 @@
   </div>
 </div>
 
-<div class="container container--medium">
+<div class="container">
   <div class="layout-primary padding-3">
     <%= render 'account/navbar' %>
 
     <div class="">
       <%= render 'account/tab' %>
 
-      <div class="flex-grow-1 min-width-0">
-        <div class="display-flex flex-direction-column gap-3">
-          <%= render partial: 'post', collection: @posts, cached: true %>
-        </div>
+      <div class="display-flex flex-direction-column gap-3">
+        <%= render partial: 'post', collection: @posts, cached: true %>
+      </div>
 
-        <div class="padding-3">
-          <%= paginate @posts %>
-        </div>
+      <div class="padding-3">
+        <%= paginate @posts %>
       </div>
     </div>
   </div>

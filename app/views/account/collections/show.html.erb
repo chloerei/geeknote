@@ -13,53 +13,46 @@
     <%= render 'account/navbar' %>
 
     <div class="">
-      <div class="breadcrumb title-medium padding-3">
-        <div class="breadcrumb__item">
-          <a href="<%= account_root_path(@account) %>">
-            <%= @account.display_name %>
+      <div class="top-app-bar">
+        <div class="top-app-bar__action">
+          <a href="<%= account_collections_path(@account) %>" class="button button--icon">
+            <span class="material-icons">arrow_back</span>
           </a>
         </div>
-        <div class="breadcrumb__item">
-          <a href="<%= account_collections_path(@account) %>">
-            <%= t 'common.collections' %>
-          </a>
-        </div>
-        <div class="breadcrumb__item breadcrumb__item--active">
-          <%= @collection.name %>
+        <div class="top-app-bar__title">
+          <%= t 'common.collections' %>
         </div>
       </div>
 
-      <div class="layout-secondary">
-        <div class="">
-          <div class="card card--outlined padding-3 margin-bottom-3">
-            <div class="title-large margin-bottom-3">
-              <%= @collection.name %>
-            </div>
+      <div class="">
+        <div class="card card--outlined padding-3 margin-bottom-3">
+          <div class="title-large margin-bottom-3">
+            <%= @collection.name %>
+          </div>
 
-            <div class="text-muted margin-bottom-3">
-              <%= @collection.description %>
-            </div>
+          <div class="text-muted margin-bottom-3">
+            <%= @collection.description %>
+          </div>
 
-            <div class="text-muted display-flex gap-3 align-items-center">
-              <div class="">
-                <%= @collection.collection_items_count %> <%= t 'common.posts' %>
+          <div class="text-muted display-flex gap-3 align-items-center">
+            <div class="">
+              <%= @collection.collection_items_count %> <%= t 'common.posts' %>
+            </div>
+            <% if @collection.visibility_private? %>
+              <div class="display-flex align-items-center">
+                <span class="material-icons material-icons--inline">lock</span>
+                <%= t 'common.private' %>
               </div>
-              <% if @collection.visibility_private? %>
-                <div class="display-flex align-items-center">
-                  <span class="material-icons material-icons--inline">lock</span>
-                  <%= t 'common.private' %>
-                </div>
-              <% end %>
-            </div>
+            <% end %>
           </div>
+        </div>
 
-          <div class="display-flex flex-direction-column gap-3" data-controller="post-list" data-post-list-collection-id-value="<%= @collection.id %>">
-            <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
-          </div>
+        <div class="display-flex flex-direction-column gap-3" data-controller="post-list" data-post-list-collection-id-value="<%= @collection.id %>">
+          <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
+        </div>
 
-          <div class="padding-3">
-            <%= paginate @posts %>
-          </div>
+        <div class="padding-3">
+          <%= paginate @posts %>
         </div>
       </div>
     </div>
