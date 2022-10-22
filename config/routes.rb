@@ -10,7 +10,9 @@ class AdminConstraint
 end
 
 Rails.application.routes.draw do
-  root to: 'explore/posts#index'
+  root to: 'home#index'
+  get 'feed', to: 'home#feed'
+  get 'newest', to: 'home#newest'
 
   get 'sign_up', to: 'users#new', as: 'sign_up'
   resources :users, only: [:create] do
@@ -26,12 +28,6 @@ Rails.application.routes.draw do
   get 'attachments/:key/*filename', to: 'attachments#show', as: :attachment
 
   post '/rails/active_storage/direct_uploads', to: 'direct_uploads#create'
-
-  namespace :explore do
-    root to: 'posts#index'
-    get 'feed', to: 'posts#feed'
-    get 'newest', to: 'posts#newest'
-  end
 
   resource :preview, only: [:create]
 

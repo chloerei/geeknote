@@ -224,7 +224,7 @@ body[data-color-scheme="dark"] {
   gap: var(--space-3);
 
   @media (min-width: map.get($breakpoints, 'tablet')) {
-    grid-template-columns: 240px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
   }
 }
 

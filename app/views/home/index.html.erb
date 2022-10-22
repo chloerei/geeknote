@@ -1,28 +1,67 @@
-<div class="container container--medium">
-  <div class="display-flex flex-direction-column align-items-center padding-y-6 padding-x-4">
-    <h1 class="display-medium margin-top-0 margin-bottom-3 text-align-center">
-      <%= t '.hero_title' %>
-    </h1>
-    <h3 class="headline-small margin-top-0 margin-bottom-3 text-align-center">
-      <%= t '.hero_subtitle' %>
-    </h3>
-    <div class="margin-bottom-3 max-width-100">
-      <%= form_with url: sign_up_path, method: :get do |form| %>
-        <div class="hero-form">
-          <label class="hero-form__text-field">
-            <div class="hero-form__prefix">
-              <%= ENV['HOST'] %>/
-            </div>
-            <input type="text" name="account_name" value="" placeholder="yourname" autocomplete="off" class="hero-form__input">
-          </label>
-          <button type="submit" class="button button--filled hero-form__button">
-            <%= t '.start_my_page' %>
-          </button>
+<div class="container">
+  <div class="layout-primary padding-3">
+    <div class="">
+      <div class="position-sticky top-3">
+        <div class="">
+          <div class="nav">
+            <a href="<%= root_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'home' && action_name == 'index' %>">
+              <div class="nav__item__icon">
+                <span class="material-icons">whatshot</span>
+              </div>
+              <div class="nav__item__label">
+                <%= t 'common.hot' %>
+              </div>
+            </a>
+            <a href="<%= feed_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'home' && action_name == 'feed' %>">
+              <div class="nav__item__icon">
+                <span class="material-icons">feed</span>
+              </div>
+              <div class="nav__item__label">
+                <%= t 'common.feed' %>
+              </div>
+            </a>
+            <a href="<%= newest_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'home' && action_name == 'newest' %>">
+              <div class="nav__item__icon">
+                <span class="material-icons">auto_awesome</span>
+              </div>
+              <div class="nav__item__label">
+                <%= t 'common.newest' %>
+              </div>
+            </a>
+          </div>
         </div>
-      <% end %>
+
+        <div class="display-none display-block@tablet">
+          <div class="padding-3 title-small text-muted">
+            <%= t 'common.trending_tags' %>
+          </div>
+          <div class="nav">
+            <% Tag.trending.limit(10).each do |tag| %>
+              <a href="<%= tag_path(id: tag.name) %>" class="nav__item <%= 'nav__item--active' if tag == @tag %>">
+                <div class="nav__item__icon">
+                  <span class="material-icons">tag</span>
+                </div>
+                <div class="nav__item__label">
+                  <%= tag.name %>
+                </div>
+                <div class="">
+                  <%= tag.count %>
+                </div>
+              </a>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="body-medium text-align-center">
-      <%= t '.hero_description' %>
+
+    <div class="">
+      <div class="display-flex flex-direction-column gap-3">
+        <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
+      </div>
+
+      <div class="padding-3">
+        <%= paginate @posts %>
+      </div>
     </div>
   </div>
 </div>
