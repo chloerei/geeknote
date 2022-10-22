@@ -46,6 +46,10 @@ zh-CN:
           form:
             feed_mark_canonical_description: 设置 Feed 的文章 URL 为 Canonical Link。希望原博客作为正式地址时勾选此项。
             feed_mark_canonical_label: 设置 Canonical Link
+    posts:
+      comments:
+        form:
+          content_placeholder: 评论…
   activerecord:
     attributes:
       account:
@@ -161,6 +165,7 @@ zh-CN:
     account_profile: 账号资料
     account_settings: 账号设置
     accounts: 账号
+    add_organization: 添加组织
     add_to_collection: 添加收藏
     admin: 管理
     appearance: 外观
@@ -196,6 +201,8 @@ zh-CN:
     done: 完成
     download: 下载
     edit: 编辑
+    edit_comment: 编辑评论
+    edit_member: 编辑成员
     email: 邮件地址
     explore: 发现
     exports: 导出数据
@@ -210,6 +217,7 @@ zh-CN:
     hot: 热门
     icon: 图标
     import: 导入
+    in: 在
     invite_member: 邀请成员
     joined: 加入
     last_fetched_at: 最后抓取于
@@ -285,6 +293,7 @@ zh-CN:
     users: 用户
     view: 查看
     view_more: 查看更多
+    view_page: View page
     visibility: 公开范围
     visit_site: 查看网站
     weekly_digest: 每周摘要

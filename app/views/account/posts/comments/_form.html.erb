@@ -10,7 +10,7 @@
         <%= form_with model: comment, url: [@account, @post, comment], builder: CustomFormBuilder, class: 'form' do |form| %>
           <%= form.hidden_field :parent_id %>
           <div class="margin-bottom-3">
-            <%= form.hidden_field :content, id: 'comment-content' %>
+            <%= form.hidden_field :content, id: 'comment-content', placeholder: t('.content_placeholder') %>
             <div class="markdown-editor" data-controller="markdown-editor" data-markdown-editor-input-value="comment-content" data-markdown-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>" data-markdown-editor-i18n-value="<%= { write: I18n.t('markdown_editor.write'), preview: I18n.t('markdown_editor.preview') }.to_json %>">
             </div>
           </div>
