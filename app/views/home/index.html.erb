@@ -1,60 +1,21 @@
 <div class="container">
   <div class="layout-primary padding-3">
-    <div class="">
-      <div class="position-sticky top-3">
-        <div class="">
-          <div class="nav">
-            <a href="<%= root_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'home' && action_name == 'index' %>">
-              <div class="nav__item__icon">
-                <span class="material-icons">whatshot</span>
-              </div>
-              <div class="nav__item__label">
-                <%= t 'common.hot' %>
-              </div>
-            </a>
-            <a href="<%= feed_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'home' && action_name == 'feed' %>">
-              <div class="nav__item__icon">
-                <span class="material-icons">feed</span>
-              </div>
-              <div class="nav__item__label">
-                <%= t 'common.feed' %>
-              </div>
-            </a>
-            <a href="<%= newest_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'home' && action_name == 'newest' %>">
-              <div class="nav__item__icon">
-                <span class="material-icons">auto_awesome</span>
-              </div>
-              <div class="nav__item__label">
-                <%= t 'common.newest' %>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <div class="display-none display-block@tablet">
-          <div class="padding-3 title-small text-muted">
-            <%= t 'common.trending_tags' %>
-          </div>
-          <div class="nav">
-            <% Tag.trending.limit(10).each do |tag| %>
-              <a href="<%= tag_path(id: tag.name) %>" class="nav__item <%= 'nav__item--active' if tag == @tag %>">
-                <div class="nav__item__icon">
-                  <span class="material-icons">tag</span>
-                </div>
-                <div class="nav__item__label">
-                  <%= tag.name %>
-                </div>
-                <div class="">
-                  <%= tag.count %>
-                </div>
-              </a>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render 'navbar' %>
 
     <div class="">
+      <% if @tag %>
+        <div class="top-app-bar">
+          <div class="top-app-bar__action">
+            <a href="<%= tags_path %>" class="button button--icon">
+              <span class="material-icons">arrow_back</span>
+            </a>
+          </div>
+          <div class="top-app-bar__title">
+            #<%= @tag.name %>
+          </div>
+        </div>
+      <% end %>
+
       <div class="display-flex flex-direction-column gap-3">
         <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
       </div>

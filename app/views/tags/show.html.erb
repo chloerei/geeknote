@@ -1,11 +1,16 @@
 <div class="container">
-  <div class="layout">
-    <%= render 'posts/navbar' %>
+  <div class="layout-primary padding-3">
+    <%= render 'home/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface padding-3 margin-bottom-3">
-        <div class="headline-medium">
-          #<%= params[:id] %>
+    <div class="">
+      <div class="top-app-bar">
+        <div class="top-app-bar__action">
+          <a href="<%= tags_path %>" class="button button--icon">
+            <span class="material-icons">arrow_back</span>
+          </a>
+        </div>
+        <div class="top-app-bar__title">
+          #<%= @tag.name %>
         </div>
       </div>
 
@@ -15,33 +20,6 @@
 
       <div class="padding-3">
         <%= paginate @posts %>
-      </div>
-    </div>
-
-    <div class="sidebar">
-      <div class="card card--surface">
-        <div class="title-medium padding-x-3 padding-top-3 padding-bottom-2">
-          <%= t 'common.related_users' %>
-        </div>
-        <div class="padding-bottom-2">
-          <% @posts.map(&:account).tally.sort_by{ |account, count| -count }.first(3).each do |account, count| %>
-            <a href="<%= account_root_path(account) %>" class="link-block padding-x-3 padding-y-2">
-              <div class="display-flex gap-2">
-                <div class="avatar flex-shrink-0">
-                  <%= avatar_image_tag account.owner.avatar %>
-                </div>
-                <div class="felx-grow-1">
-                  <div class="title-small">
-                    <%= account.display_name %>
-                  </div>
-                  <div class="body-medium">
-                    <%= account.description %>
-                  </div>
-                </div>
-              </div>
-            </a>
-          <% end %>
-        </div>
       </div>
     </div>
   </div>
