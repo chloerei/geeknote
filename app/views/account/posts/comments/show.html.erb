@@ -1,54 +1,45 @@
-<div class="container">
-  <div class="layout">
-    <div class="main">
-      <div class="card card--surface padding-3 margin-bottom-3">
-        <div class="breadcrumb">
-          <div class="breadcrumb__item">
-            <a href="<%= account_post_path(@account, @post) %>">
-              <%= @post.title %>
-            </a>
-          </div>
-          <div class="breadcrumb__item">
-            <a href="<%= account_post_comments_path(@account, @post) %>">
-              <%= t 'common.comments' %>
-            </a>
-          </div>
-          <div class="breadcrumb__item breadcrumb__item--active">
-            <%= @comment.id %>
-          </div>
-        </div>
-      </div>
+<% @body_class = "background-surface" %>
 
-      <%= render 'comment', comment: @comment, liked: @comment.liked_by?(current_user) %>
+<div class="container container--post padding-3">
 
-      <div class="title-medium padding-3">
-        <%= t 'common.replies' %>
-      </div>
-
-      <div id="reply" class="margin-bottom-3">
-        <% if @post.allow_comments? %>
-          <% if current_user %>
-            <%= render 'form', comment: @comment.replies.new %>
-          <% else %>
-            <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">
-              <%= t 'common.sign_in_to_comment' %>
-            </a>
-          <% end %>
-        <% else %>
-          <div class="padding-3 text-muted text-align-center">
-            <%= t 'common.comment_is_disabled' %>
-          </div>
-        <% end %>
-      </div>
-
-      <div id="comments" class="display-flex flex-direction-column gap-3 comment-replies margin-bottom-3" data-liked-ids="<%= "[#{@replies.filter(&:liked).map(&:id).join(',')}]" %>">
-        <%= render partial: 'comment', collection: @replies, cached: true %>
-      </div>
-
-      <div class="margin-3">
-        <%= paginate @replies %>
-      </div>
+  <div class="top-app-bar">
+    <div class="top-app-bar__action">
+      <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--icon">
+        <span class="material-icons">arrow_back</span>
+      </a>
+    </div>
+    <div class="top-app-bar__title">
+      <%= t 'common.comments' %>
     </div>
   </div>
 
+  <%= render 'comment', comment: @comment, liked: @comment.liked_by?(current_user) %>
+
+  <div class="title-large padding-3">
+    <%= t 'common.replies' %>
+  </div>
+
+  <div id="reply" class="margin-bottom-3">
+    <% if @post.allow_comments? %>
+      <% if current_user %>
+        <%= render 'form', comment: @comment.replies.new %>
+      <% else %>
+        <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">
+          <%= t 'common.sign_in_to_comment' %>
+        </a>
+      <% end %>
+    <% else %>
+      <div class="padding-3 text-muted text-align-center">
+        <%= t 'common.comment_is_disabled' %>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="comments" class="display-flex flex-direction-column gap-3 comment-replies margin-bottom-3" data-liked-ids="<%= "[#{@replies.filter(&:liked).map(&:id).join(',')}]" %>">
+    <%= render partial: 'comment', collection: @replies, cached: true %>
+  </div>
+
+  <div class="margin-3">
+    <%= paginate @replies %>
+  </div>
 </div>

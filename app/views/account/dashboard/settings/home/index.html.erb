@@ -1,10 +1,18 @@
-<div class="container">
-  <div class="layout">
+<div class="container padding-3">
+  <%= render 'account/dashboard/header' %>
+
+  <div class="layout-primary">
     <%= render 'account/dashboard/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface padding-3">
-        <a href="<%= account_dashboard_settings_account_path(@account) %>" class="link-block border-radius-3">
+    <div class="">
+      <div class="card card--elevated background-surface padding-bottom-2">
+        <div class="top-app-bar">
+          <div class="top-app-bar__title">
+            <%= t 'common.settings' %>
+          </div>
+        </div>
+
+        <a href="<%= account_dashboard_settings_account_path(@account) %>" class="link-block">
           <div class="display-flex gap-3 padding-3">
             <span class="material-icons">perm_identity</span>
             <div class="flex-grow-1">
@@ -17,7 +25,7 @@
             </div>
           </div>
         </a>
-        <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="link-block border-radius-3">
+        <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="link-block">
           <div class="display-flex gap-3 padding-3">
             <span class="material-icons">account_circle</span>
             <div class="flex-grow-1">
@@ -30,7 +38,7 @@
             </div>
           </div>
         </a>
-        <a href="<%= account_dashboard_settings_import_path(@account) %>" class="link-block border-radius-3">
+        <a href="<%= account_dashboard_settings_import_path(@account) %>" class="link-block">
           <div class="display-flex gap-3 padding-3">
             <span class="material-icons">upload</span>
             <div class="flex-grow-1">
@@ -43,7 +51,7 @@
             </div>
           </div>
         </a>
-        <a href="<%= account_dashboard_settings_exports_path(@account) %>" class="link-block border-radius-3">
+        <a href="<%= account_dashboard_settings_exports_path(@account) %>" class="link-block">
           <div class="display-flex gap-3 padding-3">
             <span class="material-icons">download</span>
             <div class="flex-grow-1">

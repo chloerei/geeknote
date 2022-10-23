@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="layout-primary padding-3">
+    <%= render 'home/navbar' %>
+
+    <div class="">
+      <div class="top-app-bar">
+        <div class="top-app-bar__title">
+          <%= t 'common.popular_tags' %>
+        </div>
+      </div>
+
+      <div class="card card--elevated background-surface padding-y-2">
+        <% @tags.each do |tag| %>
+          <a href="<%= tag_path(id: tag.name) %>" class="link-block">
+            <div class="display-flex align-items-center gap-2 padding-3">
+              <span class="material-icons">tag</span>
+              <div class="flex-grow-1">
+                <%= tag.name %>
+              </div>
+              <div class="">
+                <%= tag.count %>
+              </div>
+            </div>
+          </a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

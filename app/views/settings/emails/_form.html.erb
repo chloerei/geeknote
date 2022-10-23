@@ -1,4 +1,4 @@
-<%= form_with model: @user, url: settings_email_path, builder: CustomFormBuilder, class: 'form', id: 'account-form', data: { controller: 'form' } do |form| %>
+<%= form_with model: @user, url: settings_email_path, builder: CustomFormBuilder, class: 'form', id: 'account-form' do |form| %>
   <div class="margin-bottom-3">
     <%= form.text_field :email %>
   </div>

@@ -1,86 +1,84 @@
-<div class="tabbar">
-  <div class="card card--surface padding-2">
-    <div class="tab flex-direction-column@tablet">
-      <a href="<%= admin_root_path %>" class="tab__item <%= 'tab__item--active' if request.path == '/admin' %>">
-        <div class="tab__item__icon">
-          <span class="material-icons">dashboard</span>
-        </div>
-        <div class="tab__item__label">
-          <%= t 'common.overview' %>
-        </div>
-      </a>
+<div class="">
+  <div class="nav">
+    <a href="<%= admin_root_path %>" class="nav__item <%= 'nav__item--active' if request.path == '/admin' %>">
+      <div class="nav__item__icon">
+        <span class="material-icons">dashboard</span>
+      </div>
+      <div class="nav__item__label">
+        <%= t 'common.overview' %>
+      </div>
+    </a>
 
-      <a href="<%= admin_posts_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/posts') %>">
-        <div class="tab__item__icon">
-          <span class="material-icons">article</span>
-        </div>
-        <div class="tab__item__label">
-          <%= t 'common.posts' %>
-        </div>
-      </a>
+    <a href="<%= admin_posts_path %>" class="nav__item <%= 'nav__item--active' if request.path.start_with?('/admin/posts') %>">
+      <div class="nav__item__icon">
+        <span class="material-icons">article</span>
+      </div>
+      <div class="nav__item__label">
+        <%= t 'common.posts' %>
+      </div>
+    </a>
 
-      <a href="<%= admin_collections_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/collections') %>">
-        <div class="tab__item__icon">
-          <span class="material-icons">library_books</span>
-        </div>
-        <div class="tab__item__label">
-          <%= t 'common.collections' %>
-        </div>
-      </a>
+    <a href="<%= admin_collections_path %>" class="nav__item <%= 'nav__item--active' if request.path.start_with?('/admin/collections') %>">
+      <div class="nav__item__icon">
+        <span class="material-icons">library_books</span>
+      </div>
+      <div class="nav__item__label">
+        <%= t 'common.collections' %>
+      </div>
+    </a>
 
-      <a href="<%= admin_tags_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/tags') %>">
-        <div class="tab__item__icon">
-          <span class="material-icons">tag</span>
-        </div>
-        <div class="tab__item__label">
-          <%= t 'common.tags' %>
-        </div>
-      </a>
+    <a href="<%= admin_tags_path %>" class="nav__item <%= 'nav__item--active' if request.path.start_with?('/admin/tags') %>">
+      <div class="nav__item__icon">
+        <span class="material-icons">tag</span>
+      </div>
+      <div class="nav__item__label">
+        <%= t 'common.tags' %>
+      </div>
+    </a>
 
-      <a href="<%= admin_comments_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/comments') %>">
-        <div class="tab__item__icon">
-          <span class="material-icons">comment</span>
-        </div>
-        <div class="tab__item__label">
-          <%= t 'common.comments' %>
-        </div>
-      </a>
+    <a href="<%= admin_comments_path %>" class="nav__item <%= 'nav__item--active' if request.path.start_with?('/admin/comments') %>">
+      <div class="nav__item__icon">
+        <span class="material-icons">comment</span>
+      </div>
+      <div class="nav__item__label">
+        <%= t 'common.comments' %>
+      </div>
+    </a>
 
-      <a href="<%= admin_accounts_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/accounts') %>">
-        <div class="tab__item__icon">
-          <span class="material-icons">account_circle</span>
-        </div>
-        <div class="tab__item__label">
-          <%= t 'common.accounts' %>
-        </div>
-      </a>
+    <a href="<%= admin_accounts_path %>" class="nav__item <%= 'nav__item--active' if request.path.start_with?('/admin/accounts') %>">
+      <div class="nav__item__icon">
+        <span class="material-icons">account_circle</span>
+      </div>
+      <div class="nav__item__label">
+        <%= t 'common.accounts' %>
+      </div>
+    </a>
 
-      <a href="<%= admin_users_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/users') %>">
-        <div class="tab__item__icon">
-          <span class="material-icons">person</span>
-        </div>
-        <div class="tab__item__label">
-          <%= t 'common.users' %>
-        </div>
-      </a>
+    <a href="<%= admin_users_path %>" class="nav__item <%= 'nav__item--active' if request.path.start_with?('/admin/users') %>">
+      <div class="nav__item__icon">
+        <span class="material-icons">person</span>
+      </div>
+      <div class="nav__item__label">
+        <%= t 'common.users' %>
+      </div>
+    </a>
 
-      <a href="<%= admin_organizations_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/organizations') %>">
-        <div class="tab__item__icon">
-          <span class="material-icons">people</span>
-        </div>
-        <div class="tab__item__label">
-          <%= t 'common.organizations' %>
-        </div>
-      </a>
+    <a href="<%= admin_organizations_path %>" class="nav__item <%= 'nav__item--active' if request.path.start_with?('/admin/organizations') %>">
+      <div class="nav__item__icon">
+        <span class="material-icons">people</span>
+      </div>
+      <div class="nav__item__label">
+        <%= t 'common.organizations' %>
+      </div>
+    </a>
 
-      <a href="<%= admin_settings_root_path %>" class="tab__item <%= 'tab__item--active' if request.path.start_with?('/admin/settings') %>">
-        <div class="tab__item__icon">
-          <span class="material-icons">settings</span>
-        </div>
-        <div class="tab__item__label">
-          <%= t 'common.settings' %>
-        </div>
-      </a>
-    </div>
+    <a href="<%= admin_settings_root_path %>" class="nav__item <%= 'nav__item--active' if request.path.start_with?('/admin/settings') %>">
+      <div class="nav__item__icon">
+        <span class="material-icons">settings</span>
+      </div>
+      <div class="nav__item__label">
+        <%= t 'common.settings' %>
+      </div>
+    </a>
   </div>
 </div>

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="layout-primary padding-3">
+    <%= render 'navbar' %>
+
+    <div class="">
+      <% if @tag %>
+        <div class="top-app-bar">
+          <div class="top-app-bar__action">
+            <a href="<%= tags_path %>" class="button button--icon">
+              <span class="material-icons">arrow_back</span>
+            </a>
+          </div>
+          <div class="top-app-bar__title">
+            #<%= @tag.name %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="display-flex flex-direction-column gap-3">
+        <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
+      </div>
+
+      <div class="padding-3">
+        <%= paginate @posts %>
+      </div>
+    </div>
+  </div>
+</div>

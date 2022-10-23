@@ -1,38 +1,35 @@
-<div class="container">
-  <div class="layout">
+<div class="container padding-3">
+  <div class="layout-primary">
     <%= render 'admin/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface padding-3 margin-bottom-3">
-        <div class="breadcrumb">
-          <div class="breadcrumb__item">
-            <a href="<%= admin_comments_path %>">
-              <%= t 'common.comments' %>
+    <div class="">
+      <div class="card card--elevated background-surface">
+        <div class="top-app-bar">
+          <div class="top-app-bar__action">
+            <a href="<%= admin_comment_path(@comment) %>" class="button button--icon">
+              <span class="material-icons">arrow_back</span>
             </a>
           </div>
-          <div class="breadcrumb__item">
-            <a href="<%= admin_comment_path(@comment) %>">
-              <%= @comment.id %>
-            </a>
-          </div>
-          <div class="breadcrumb__item breadcrumb__item--active">
-            <%= t 'common.edit' %>
+          <div class="top-app-bar__title">
+            <%= t 'common.edit_comment' %> #<%= @comment.id %>
           </div>
         </div>
-      </div>
 
-      <div class="card card--surface padding-3">
-        <%= form_with model: @comment, url: admin_comment_path(@comment), builder: CustomFormBuilder do |form| %>
-          <div class="margin-bottom-3">
-            <%= form.hidden_field :content, id: 'comment-content' %>
-            <div class="markdown-editor" data-controller="markdown-editor" data-markdown-editor-input-value="comment-content" data-markdown-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>" data-markdown-editor-i18n-value="<%= { write: I18n.t('markdown_editor.write'), preview: I18n.t('markdown_editor.preview') }.to_json %>">
+        <div class="padding-3">
+          <%= form_with model: @comment, url: admin_comment_path(@comment), builder: CustomFormBuilder do |form| %>
+            <div class="margin-bottom-3">
+              <div class="border border-radius-2 padding-2">
+                <%= form.hidden_field :content, id: 'comment-content' %>
+                <div class="markdown-editor" data-controller="markdown-editor" data-markdown-editor-input-value="comment-content" data-markdown-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>" data-markdown-editor-i18n-value="<%= { write: I18n.t('markdown_editor.write'), preview: I18n.t('markdown_editor.preview') }.to_json %>">
+                </div>
+              </div>
             </div>
-          </div>
 
-          <button type="submit" class="button button--filled">
-            <%= t 'common.save_changes' %>
-          </button>
-        <% end %>
+            <button type="submit" class="button button--filled">
+              <%= t 'common.save_changes' %>
+            </button>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

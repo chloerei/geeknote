@@ -8,7 +8,7 @@
 .cm-scroller {
   display: flex;
   align-items: flex-start;
-  font-family: monospace;
+  font-family: var(--font-family-monospace);
   line-height: 1.5;
   height: 100%;
   overflow-x: auto;
@@ -23,7 +23,6 @@
   outline: none;
   white-space: pre-wrap;
   word-break: break-word;
-  font-family: var(--font-family-monospace);
   font-size: 17px;
   outline: none;
 }

@@ -1,11 +1,16 @@
-<div class="container">
-  <div class="layout">
+<div class="container padding-3">
+  <div class="layout-primary">
     <%= render 'admin/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface">
-        <div class="headline-small padding-3">
-          <%= t 'common.tags' %>
+    <div class="">
+      <div class="card card--elevated background-surface">
+        <div class="top-app-bar">
+          <div class="top-app-bar__title">
+            <%= t 'common.tags' %>
+          </div>
+            <%= form_with url: admin_tags_path, method: :get, builder: CustomFormBuilder do |form| %>
+              <%= form.text_field :name, value: params[:name] %>
+            <% end %>
         </div>
 
         <table class="table border-top border-bottom">
@@ -33,17 +38,5 @@
       </div>
     </div>
 
-    <div class="sidebar">
-      <div class="card card--surface padding-3">
-        <%= form_with url: admin_tags_path, method: :get, builder: CustomFormBuilder do |form| %>
-          <div class="margin-bottom-3">
-            <%= form.text_field :name, value: params[:name] %>
-          </div>
-          <button type="submit" class="button button--filled">
-            <%= t 'common.search' %>
-          </button>
-        <% end %>
-      </div>
-    </div>
   </div>
 </div>

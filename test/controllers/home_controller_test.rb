@@ -1,6 +1,6 @@
 require "test_helper"
 
-class PostsControllerTest < ActionDispatch::IntegrationTest
+class HomeControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     create(:post)
 
@@ -8,13 +8,20 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get following" do
+  test "should get feed" do
     user = create(:user)
     post = create(:post)
     user.follows.create(account: post.account)
 
     sign_in user
-    get following_posts_path
+    get feed_path
+    assert_response :success
+  end
+
+  test "should get newest" do
+    create(:post)
+
+    get newest_path
     assert_response :success
   end
 end

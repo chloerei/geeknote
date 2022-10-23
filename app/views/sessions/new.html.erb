@@ -1,27 +1,32 @@
-<div class="container container--small padding-3">
-  <div class="card card--surface padding-3 margin-bottom-3">
-    <h2 class="headline-medium margin-top-0 margin-bottom-3">
-      <%= t 'common.sign_in' %>
-    </h2>
-    <%= form_with model: @user, url: sessions_path, method: :post, builder: CustomFormBuilder do |form| %>
-      <div class="margin-bottom-3">
-        <%= form.text_field :email, label: t('common.email') %>
+<div class="container container--micro padding-3">
+  <div class="card card--elevated background-surface margin-bottom-3">
+    <div class="top-app-bar">
+      <div class="top-app-bar__title">
+        <%= t 'common.sign_in' %>
       </div>
-      <div class="margin-bottom-3">
-        <%= form.password_field :password, label: t('common.password') %>
-      </div>
-      <div class="margin-bottom-3">
-        <%= recaptcha_tag %>
-      </div>
-      <% if @user.errors[:base].any? %>
-        <div class="padding-3 background-error-container margin-bottom-3">
-          <%= @user.errors[:base].first %>
+    </div>
+
+    <div class="padding-3">
+      <%= form_with model: @user, url: sessions_path, method: :post, builder: CustomFormBuilder do |form| %>
+        <div class="margin-bottom-3">
+          <%= form.text_field :email, label: t('common.email') %>
         </div>
+        <div class="margin-bottom-3">
+          <%= form.password_field :password, label: t('common.password') %>
+        </div>
+        <div class="margin-bottom-3">
+          <%= recaptcha_tag %>
+        </div>
+        <% if @user.errors[:base].any? %>
+          <div class="padding-3 background-error-container margin-bottom-3">
+            <%= @user.errors[:base].first %>
+          </div>
+        <% end %>
+        <button type="submit" class="button button--filled width-100 justify-content-center">
+          <%= t('common.sign_in') %>
+        </button>
       <% end %>
-      <button type="submit" class="button button--filled width-100 justify-content-center">
-        <%= t('common.sign_in') %>
-      </button>
-    <% end %>
+    </div>
   </div>
 
   <div class="padding-x-3">

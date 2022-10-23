@@ -1,10 +1,18 @@
 <% @page_title = @account.display_name %>
 
+<div class="banner-image">
+  <div class="banner-image__inner">
+    <% if @account.owner.banner_image.attached? %>
+      <%= image_tag @account.owner.banner_image.variant(resize_to_limit: [1920, 1920]) %>
+    <% end %>
+  </div>
+</div>
+
 <div class="container">
-  <div class="layout">
+  <div class="layout-primary padding-3">
     <%= render 'account/navbar' %>
 
-    <div class="main">
+    <div class="">
       <%= render 'account/tab' %>
 
       <div class="display-flex flex-direction-column gap-3">
@@ -15,7 +23,5 @@
         <%= paginate @collections %>
       </div>
     </div>
-
-    <%= render 'account/sidebar' %>
   </div>
 </div>

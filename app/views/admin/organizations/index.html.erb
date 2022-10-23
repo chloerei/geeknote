@@ -1,11 +1,13 @@
-<div class="container">
-  <div class="layout">
+<div class="container padding-3">
+  <div class="layout-primary">
     <%= render 'admin/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface">
-        <div class="headline-small padding-3">
-          <%= t 'common.organizations' %>
+    <div class="">
+      <div class="card card--elevated background-surface">
+        <div class="top-app-bar">
+          <div class="top-app-bar__title">
+            <%= t 'common.organizations' %>
+          </div>
         </div>
 
         <table class="table border-top border-bottom">
@@ -23,7 +25,6 @@
               </tr>
             <% end %>
         </table>
-
 
         <div class="padding-3">
           <%= paginate @organizations %>

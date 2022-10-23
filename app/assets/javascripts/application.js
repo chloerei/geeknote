@@ -15,9 +15,6 @@ const application = Application.start()
 import SelectorController from './controllers/selector_controller'
 application.register('selector', SelectorController)
 
-import ClipboardController from './controllers/clipboard_controller'
-application.register('clipboard', ClipboardController)
-
 import CollectionItemController from './controllers/collection_item_controller'
 application.register('collection-item', CollectionItemController)
 
@@ -26,9 +23,6 @@ application.register('draggable', DraggableController)
 
 import FieldsetManagerController from './controllers/fieldset_manager_controller'
 application.register('fieldset-manager', FieldsetManagerController)
-
-import FocusableController from './controllers/focusable_controller'
-application.register('focusable', FocusableController)
 
 import FormController from './controllers/form_controller'
 application.register('form', FormController)
@@ -39,11 +33,11 @@ application.register('page-nav', PageNavController)
 import PaginationController from './controllers/pagination_controller'
 application.register('pagination', PaginationController)
 
-// import PostEditorController from './controllers/post_editor_controller'
-// application.register('post-editor', PostEditorController)
-//
 import PostListController from './controllers/post_list_controller'
 application.register('post-list', PostListController)
+
+import PostFormController from './controllers/post_form_controller'
+application.register('post-form', PostFormController)
 
 import RevisionController from './controllers/revision_controller'
 application.register('revision', RevisionController)
@@ -75,7 +69,8 @@ application.register('text-field', TextFieldController)
 import RecaptchaController from './controllers/recaptcha_controller'
 application.register('recaptcha', RecaptchaController)
 
-import './lib/turbo_preserve_scroll'
+import AutoGrowController from './controllers/auto_grow_controller'
+application.register('auto-grow', AutoGrowController)
 
 // clean snackbar content
 document.addEventListener('turbo:before-cache', () => {

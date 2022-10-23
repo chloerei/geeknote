@@ -4,6 +4,10 @@ class Tag < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true, length: { maximum: 255 }
 
+  scope :trending, -> {
+    left_outer_joins(:taggings).where("taggings.created_at > ?", 1.month.ago).distinct.select('tags.*, count(taggings.*) as count').group('tags.id').order('count desc')
+  }
+
   def self.search(query)
     where("name like ?", "#{sanitize_sql_like(query)}%")
   end

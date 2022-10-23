@@ -21,6 +21,10 @@ zh-CN:
         form:
           role_admin_description: 可以管理所有内容和成员，可以修改组织账号设置。
           role_member_description: 可以编辑和发布自己的文章。
+      posts:
+        editor:
+          post_content_placeholder: 内容…
+          post_title_placeholder: 标题…
       settings:
         accounts:
           form:
@@ -42,6 +46,10 @@ zh-CN:
           form:
             feed_mark_canonical_description: 设置 Feed 的文章 URL 为 Canonical Link。希望原博客作为正式地址时勾选此项。
             feed_mark_canonical_label: 设置 Canonical Link
+    posts:
+      comments:
+        form:
+          content_placeholder: 评论…
   activerecord:
     attributes:
       account:
@@ -157,10 +165,10 @@ zh-CN:
     account_profile: 账号资料
     account_settings: 账号设置
     accounts: 账号
+    add_organization: 添加组织
     add_to_collection: 添加收藏
     admin: 管理
     appearance: 外观
-    attributes: 属性
     avatar: 头像
     back_to_home: 返回首页
     banner_image: 横幅图片
@@ -180,7 +188,7 @@ zh-CN:
     create_export: 创建导出任务
     create_organization: 创建组织
     dark_theme: 深色主题
-    dashboard: 管理面版
+    dashboard: 仪表盘
     delete: 删除
     delete_collection: 删除合集
     delete_collection_confirm: 确认删除合集？
@@ -192,10 +200,16 @@ zh-CN:
     done: 完成
     download: 下载
     edit: 编辑
+    edit_account: 编辑账号
+    edit_collection: 编辑合集
+    edit_comment: 编辑评论
+    edit_member: 编辑成员
+    edit_organization: 编辑组织
+    edit_tags: 编辑标签
+    edit_users: 编辑用户
     email: 邮件地址
     exports: 导出数据
     feed: 订阅
-    filter: Filter
     follow: 关注
     followers: 关注者
     following: 关注中
@@ -205,6 +219,7 @@ zh-CN:
     hot: 热门
     icon: 图标
     import: 导入
+    in: 在
     invite_member: 邀请成员
     joined: 加入
     last_fetched_at: 最后抓取于
@@ -215,10 +230,9 @@ zh-CN:
     logo_dark: Logo 暗色调
     members: 成员
     merge: 合并
-    more_from: "%{name} 的文章"
+    merge_tags: 合并标签
     move_to_bottom: 移到底部
     move_to_top: 移到顶部
-    new: 新建
     new_collection: 新合集
     new_organization: 新组织
     new_post: 新文章
@@ -236,6 +250,7 @@ zh-CN:
     owner: Owner
     password: 密码
     pending: 待确认
+    popular_tags: 热门标签
     post_delete_confirm: 确认删除文章？
     posts: 文章
     posts_count: "%{count} 篇文章"
@@ -244,8 +259,6 @@ zh-CN:
     public: 公开
     public_link: 公开链接
     publish: 发布
-    related_tags: 相关标签
-    related_users: 相关用户
     remove: 移除
     replies: 回复
     reply: 回复
@@ -254,9 +267,10 @@ zh-CN:
     reset_password: 重置密码
     restricted: 限制发布
     role: 角色
+    save: 保存
     save_and_fetch: 保存并抓取
     save_changes: 保存修改
-    save_draft: 保存草稿
+    select: 选择
     send_email: 发送邮件
     send_invitation: 发送邀请
     send_password_reset_email: 发送密码重置邮件
@@ -277,8 +291,8 @@ zh-CN:
     users: 用户
     view: 查看
     view_more: 查看更多
+    view_page: 查看页面
     visibility: 公开范围
-    visit_site: 查看网站
     weekly_digest: 每周摘要
     weekly_digest_subject: '"%{title}" - %{count} 篇热门文章'
   email:
@@ -309,29 +323,31 @@ zh-CN:
     password_reset_token_invliad: 密码重置链接无效或已过期，请重新获取重置链接。
     password_update_successful: 密码更新成功。
     please_wait_one_minute_to_resend_invitation: 请等待一分钟再重发邀请函。
+    post_is_published: 文章已发布。
+    post_is_saved: 文章已保存。
     profile_updated: 资料已更新。
     removed_from_collection: 已从“%{name}”中移除。
     require_sign_in: 需要登录。
     settings_updated_successful: 设置更新成功。
     weekly_digest_preview_sent_successful: 每周摘要邮件预览发送成功。
+  home:
+    navbar:
+      email_settings: 邮件地址设置
+      hero_description: 分享、发现和讨论技术话题。
+      hero_title: GeekNote 是属于 Geek 的写作社区
+      verify_email_description: 为了开启完整功能，需要验证邮件地址。
+      verify_email_title: 验证邮件地址
   mailer:
     account_mailer:
       export_complted_subject: 数据导出已完成
   markdown_editor:
     preview: 预览
     write: 编辑
-  posts:
-    index:
-      email_settings: 邮件地址设置
-      join_geeknote_description: 马上注册以获得专属写作空间。
-      join_geeknote_title: GeekNote 是专为 Geek 设计的写作平台
-      verify_email_description: 为了开启完整功能，收取通知邮件，确保账号安全，需要验证邮件地址。
-      verify_email_title: 验证邮件地址
   settings:
     emails:
       show:
         resend_verification_email: 重发验证邮件
-        verify_email_description: 为了开启完整功能，收取通知邮件，确保账号安全，需要验证邮件地址。
+        verify_email_description: 为了开启完整功能，需要验证邮件地址。
         verify_email_title: 验证邮件地址
     home:
       index:

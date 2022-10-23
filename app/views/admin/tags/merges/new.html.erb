@@ -1,48 +1,43 @@
-<div class="container">
-  <div class="layout">
+<div class="container padding-3">
+  <div class="layout-primary">
     <%= render 'admin/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface padding-3 margin-bottom-3">
-        <div class="breadcrumb">
-          <div class="breadcrumb__item">
-            <a href="<%= admin_tags_path %>">
-              <%= t 'common.tags' %>
+    <div class="">
+      <div class="card card--elevated background-surface">
+        <div class="top-app-bar">
+          <div class="top-app-bar__action">
+            <a href="<%= admin_tag_path(@tag) %>" class="button button--icon">
+              <span class="material-icons">arrow_back</span>
             </a>
           </div>
-          <div class="breadcrumb__item">
-            <a href="<%= admin_tag_path(@tag) %>">
-              <%= @tag.id %>
-            </a>
-          </div>
-          <div class="breadcrumb__item breadcrumb__item--active">
-            <%= t 'common.merge' %>
+          <div class="top-app-bar__title">
+            <%= t 'common.merge_tags' %>
           </div>
         </div>
-      </div>
 
-      <div class="card card--surface padding-3">
-        <%= form_with url: admin_tag_merge_path, builder: CustomFormBuilder do |form| %>
-          <div class="margin-bottom-3">
-            <%= t '.merge_to', name: @tag.name %>
-          </div>
-          <div class="margin-bottom-3">
-            <div class="text-field text-field--outlined">
-              <div class="text-field__container">
-                <div class="selector text-field__input" data-controller="selector tag-selector" data-selector-placeholder-value="" data-selector-max-items-value="5" data-action="selector:input->tag-selector#update">
-                  <select name="tag_list[]" class="selector__select" data-selector-target="select" multiple>
-                  </select>
+        <div class="padding-3">
+          <%= form_with url: admin_tag_merge_path, builder: CustomFormBuilder do |form| %>
+            <div class="margin-bottom-3">
+              <%= t '.merge_to', name: @tag.name %>
+            </div>
+            <div class="margin-bottom-3">
+              <div class="text-field text-field--outlined">
+                <div class="text-field__container">
+                  <div class="selector text-field__input" data-controller="selector tag-selector" data-selector-placeholder-value="" data-selector-max-items-value="5" data-action="selector:input->tag-selector#update">
+                    <select name="tag_list[]" class="selector__select" data-selector-target="select" multiple>
+                    </select>
+                  </div>
+                  <label class="text-field__label">
+                    <%= t 'common.tags' %>
+                  </label>
                 </div>
-                <label class="text-field__label">
-                  <%= t 'common.tags' %>
-                </label>
               </div>
             </div>
-          </div>
-          <button type="submit" class="button button--filled">
-            <%= t '.merge' %>
-          </button>
-        <% end %>
+            <button type="submit" class="button button--filled">
+              <%= t '.merge' %>
+            </button>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

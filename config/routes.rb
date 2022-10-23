@@ -10,7 +10,9 @@ class AdminConstraint
 end
 
 Rails.application.routes.draw do
-  root to: 'posts#index'
+  root to: 'home#index'
+  get 'feed', to: 'home#feed'
+  get 'newest', to: 'home#newest'
 
   get 'sign_up', to: 'users#new', as: 'sign_up'
   resources :users, only: [:create] do
@@ -27,16 +29,9 @@ Rails.application.routes.draw do
 
   post '/rails/active_storage/direct_uploads', to: 'direct_uploads#create'
 
-  resources :posts, only: [] do
-    collection do
-      get :following
-      get :newest
-    end
-  end
-
   resource :preview, only: [:create]
 
-  resources :tags, only: [:show], id: /.+/, format: false, defaults: { format: :html }
+  resources :tags, only: [:index, :show], id: /.+/, format: false, defaults: { format: :html }
 
   namespace :suggest do
     resources :tags, only: [:index]
@@ -168,8 +163,6 @@ Rails.application.routes.draw do
       namespace :settings do
         root to: 'home#index'
         resource :profile, only: [:show, :update]
-        resource :avatar, only: [:update]
-        resource :banner_image, only: [:update, :destroy]
         resource :account, only: [:show, :update]
         resource :import, only: [:show, :update]
         resources :exports, only: [:index, :create, :destroy]

@@ -29,7 +29,7 @@
     </script>
   </head>
 
-  <body>
+  <body class="<%= @body_class %>">
     <% if current_user %>
       <style>
         [data-visible-to-user]:not([data-visible-to-user="<%= current_user.id %>"]) {

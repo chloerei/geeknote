@@ -1,29 +1,34 @@
-<div class="container">
-  <div class="layout">
+<div class="container padding-3">
+  <%= render 'account/dashboard/header' %>
+
+  <div class="layout-primary">
     <%= render 'account/dashboard/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface padding-3">
-        <div class="display-flex gap-2 align-items-center margin-bottom-3">
-          <div class="flex-grow-1 headline-medium">
+    <div class="">
+      <div class="card card--elevated background-surface">
+        <div class="top-app-bar border-bottom">
+          <div class="top-app-bar__title">
             <%= t 'common.posts' %>
           </div>
-
-          <a href="<%= new_account_dashboard_post_path(@account) %>" class="button button--outlined">
-            <div class="button__icon">
-              <span class="material-icons">post_add</span>
-            </div>
-            <div class="button__text">
-              <%= t 'common.new_post' %>
-            </div>
-          </a>
+          <div class="top-app-bar__action">
+            <a href="<%= new_account_dashboard_post_path(@account) %>" class="button button--text button--muted">
+              <div class="button__icon">
+                <span class="material-icons">post_add</span>
+              </div>
+              <div class="button__label">
+                <%= t 'common.new_post' %>
+              </div>
+            </a>
+          </div>
         </div>
 
-        <div class="margin-bottom-3">
+        <div class="">
           <%= render partial: 'post', collection: @posts %>
         </div>
 
-        <%= paginate @posts %>
+        <div class="padding-3">
+          <%= paginate @posts %>
+        </div>
       </div>
     </div>
   </div>

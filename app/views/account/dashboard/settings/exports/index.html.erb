@@ -1,31 +1,27 @@
-<div class="container">
-  <div class="layout">
+<div class="container padding-3">
+  <%= render 'account/dashboard/header' %>
+
+  <div class="layout-primary">
     <%= render 'account/dashboard/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface padding-3 margin-bottom-3">
-        <div class="breadcrumb">
-          <div class="breadcrumb__item">
-            <a href="<%= account_dashboard_settings_root_path %>">
-              <%= t 'common.settings' %>
+    <div class="">
+      <div class="card card--elevated background-surface">
+        <div class="top-app-bar border-bottom">
+          <div class="top-app-bar__action">
+            <a href="<%= account_dashboard_settings_root_path %>" class="button button--icon">
+              <span class="material-icons">arrow_back</span>
             </a>
           </div>
-          <div class="breadcrumb__item breadcrumb__item--active">
+          <div class="top-app-bar__title">
             <%= t 'common.exports' %>
           </div>
-        </div>
-      </div>
-
-      <div class="card card--surface padding-3">
-        <div class="display-flex gap-2 align-items-center margin-bottom-3">
-          <div class="flex-grow-1 headline-medium">
-            <%= t 'common.exports' %>
+          <div class="top-app-bar__action">
+            <%= form_with url: account_dashboard_settings_exports_path do %>
+              <button type="submit" class="button button--text button--muted">
+                <%= t 'common.create_export' %>
+              </button>
+            <% end %>
           </div>
-          <%= form_with url: account_dashboard_settings_exports_path do %>
-            <button type="submit" class="button button--outlined">
-              <%= t 'common.create_export' %>
-            </button>
-          <% end %>
         </div>
 
         <% if @exports.any? %>

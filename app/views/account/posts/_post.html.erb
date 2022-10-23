@@ -1,27 +1,26 @@
-<div class="card card--surface post-card position-relative padding-3">
-  <h3 class="title-medium margin-top-0 margin-bottom-3">
-    <a href="<%= account_post_path(post.account, post) %>" class="link-expended link-title" data-post-list-target="postLink">
-      <%= post.title.presence || t('common.untitled') %>
-    </a>
-  </h3>
-
-  <div class="display-flex gap-3 margin-bottom-3">
-    <div class="flex-grow-1 text-break-word overflow-hidden">
-
-      <div class="display-flex flex-wrap gap-2 align-items-center margin-bottom-2">
-        <div class="avatar avatar--small">
-          <%= avatar_image_tag post.account.owner.avatar %>
-        </div>
-        <div class="title-small">
-          <%= post.account.display_name %>
-          <% if post.account.organization? %>
-            / <%= post.user.name %>
-          <% end %>
-        </div>
-        <div class="body-medium text-muted">
-          <%= format_time post.published_at %>
-        </div>
+<div class="card card--elevated background-surface post-card position-relative display-flex flex-direction-column gap-3 padding-3">
+  <div class="display-flex flex-wrap gap-1 align-items-center">
+    <div class="display-flex align-items-center gap-2">
+      <div class="avatar avatar--small">
+        <%= avatar_image_tag post.user.avatar %>
       </div>
+      <b><%= post.user.name %></b>
+    </div>
+    <% if post.account.organization? %>
+      <span class="text-muted"><%= t 'common.in' %></span>
+      <%= post.account.owner.name %>
+    <% end %>
+    <span class="text-muted">&centerdot;</span>
+    <span class="text-muted"><%= format_time post.published_at %></span>
+  </div>
+
+  <div class="display-flex gap-3">
+    <div class="flex-grow-1 text-break-word min-width-0">
+      <h3 class="title-large margin-top-0 margin-bottom-3">
+        <a href="<%= account_post_path(post.account, post) %>" class="link-expended link-title" data-post-list-target="postLink">
+          <%= post.title.presence || t('common.untitled') %>
+        </a>
+      </h3>
 
       <div class="body-medium text-muted">
         <%= post_summary post %>

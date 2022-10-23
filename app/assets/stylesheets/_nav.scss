@@ -1,0 +1,45 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-2);
+
+  @media (min-width: map.get($breakpoints, 'tablet')) {
+    flex-direction: column;
+  }
+}
+
+.nav__item {
+  height: 40px;
+  padding: 0 16px;
+  display: flex;
+  grid-gap: 12px;
+  text-decoration: none;
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  align-items: center;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  color: var(--color-on-surface);
+  outline: none;
+  cursor: pointer;
+
+  @include state-layer;
+}
+
+.nav__item--active {
+  color: var(--color-on-primary-container);
+  background-color: var(--color-primary-container);
+}
+
+.nav__item__icon {
+  height: 24px;
+  width: 24px;
+}
+
+.nav__item__label {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

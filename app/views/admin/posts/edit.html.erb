@@ -1,67 +1,64 @@
-<div class="container">
-  <div class="layout">
+<div class="container padding-3">
+  <div class="layout-primary">
     <%= render 'admin/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface padding-3 margin-bottom-3">
-        <div class="breadcrumb">
-          <div class="breadcrumb__item">
-            <a href="<%= admin_posts_path %>">
-              <%= t 'common.posts' %>
+    <div class="">
+      <div class="card card--elevated background-surface">
+        <div class="top-app-bar">
+          <div class="top-app-bar__action">
+            <a href="<%= admin_post_path(@post) %>" class="button button--icon">
+              <span class="material-icons">arrow_back</span>
             </a>
           </div>
-          <div class="breadcrumb__item">
-            <a href="<%= admin_post_path(@post) %>">
-              <%= @post.id %>
-            </a>
-          </div>
-          <div class="breadcrumb__item breadcrumb__item--active">
-            <%= t 'common.edit' %>
+          <div class="top-app-bar__title">
+            <%= t 'common.edit' %> #<%= @post.id %>
           </div>
         </div>
-      </div>
 
-      <div class="card card--surface padding-3">
-        <%= form_with model: @post, url: admin_post_path(@post), builder: CustomFormBuilder do |form| %>
-          <div class="margin-bottom-3">
-            <%= form.text_field :title %>
-          </div>
-          <div class="margin-bottom-3">
-            <%= form.hidden_field :content, id: 'post-content' %>
-            <div class="markdown-editor" data-controller="markdown-editor" data-markdown-editor-input-value="post-content" data-markdown-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>" data-markdown-editor-i18n-value="<%= { write: I18n.t('markdown_editor.write'), preview: I18n.t('markdown_editor.preview') }.to_json %>">
+        <div class="padding-3">
+          <%= form_with model: @post, url: admin_post_path(@post), builder: CustomFormBuilder do |form| %>
+            <div class="margin-bottom-3">
+              <%= form.text_field :title %>
             </div>
-          </div>
-          <div class="margin-bottom-3">
-            <div class="text-field text-field--outlined">
-              <div class="text-field__container">
-                <div class="selector text-field__input" data-controller="selector tag-selector" data-selector-placeholder-value="" data-selector-creatable-value="true" data-selector-max-items-value="5" data-action="selector:input->tag-selector#update">
-                  <select name="post[tag_list][]" class="selector__select" data-selector-target="select" multiple>
-                    <% @post.tags.each do |tag| %>
-                      <option value="<%= tag.name %>" selected><%= tag.name %></option>
-                    <% end %>
-                  </select>
+            <div class="margin-bottom-3">
+              <div class="border border-radius-1 padding-2">
+                <%= form.hidden_field :content, id: 'post-content' %>
+                <div class="markdown-editor" data-controller="markdown-editor" data-markdown-editor-input-value="post-content" data-markdown-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>" data-markdown-editor-i18n-value="<%= { write: I18n.t('markdown_editor.write'), preview: I18n.t('markdown_editor.preview') }.to_json %>">
                 </div>
-                <label class="text-field__label">
-                  <%= t 'common.tags' %>
-                </label>
               </div>
             </div>
-          </div>
-
-          <details>
-            <summary class="padding-1 margin-bottom-3">
-              <%= t 'common.settings' %>
-            </summary>
-
             <div class="margin-bottom-3">
-              <%= form.text_field :canonical_url, helper_text: I18n.t('common.canonical_url_helper') %>
+              <div class="text-field text-field--outlined">
+                <div class="text-field__container">
+                  <div class="selector text-field__input" data-controller="selector tag-selector" data-selector-placeholder-value="" data-selector-creatable-value="true" data-selector-max-items-value="5" data-action="selector:input->tag-selector#update">
+                    <select name="post[tag_list][]" class="selector__select" data-selector-target="select" multiple>
+                      <% @post.tags.each do |tag| %>
+                        <option value="<%= tag.name %>" selected><%= tag.name %></option>
+                      <% end %>
+                    </select>
+                  </div>
+                  <label class="text-field__label">
+                    <%= t 'common.tags' %>
+                  </label>
+                </div>
+              </div>
             </div>
-          </details>
 
-          <button type="submit" class="button button--filled">
-            <%= t 'common.save_changes' %>
-          </button>
-        <% end %>
+            <details>
+              <summary class="padding-1 margin-bottom-3">
+                <%= t 'common.settings' %>
+              </summary>
+
+              <div class="margin-bottom-3">
+                <%= form.text_field :canonical_url, helper_text: I18n.t('common.canonical_url_helper') %>
+              </div>
+            </details>
+
+            <button type="submit" class="button button--filled">
+              <%= t 'common.save_changes' %>
+            </button>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
