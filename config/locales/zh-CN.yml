@@ -342,6 +342,8 @@ zh-CN:
       start_my_page: 创建空间
     navbar:
       email_settings: 邮件地址设置
+      hero_title: GeekNote 是属于 Geek 的写作社区
+      hero_description: 分享、发现和讨论技术话题。
       verify_email_description: 为了开启完整功能，需要验证邮件地址。
       verify_email_title: 验证邮件地址
   mailer:
