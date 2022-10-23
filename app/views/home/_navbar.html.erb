@@ -2,6 +2,20 @@
   <div class="position-sticky top-3">
     <%= sanitize @site.sidebar_header_html %>
 
+    <% if current_user && !current_user.email_verified? %>
+      <div class="card card--filled padding-3 margin-bottom-3">
+        <h3 class="title-medium margin-top-0">
+          <%= t '.verify_email_title' %>
+        </h3>
+        <p>
+          <%= t '.verify_email_description' %>
+        </p>
+        <a href="<%= settings_email_path %>" class="button button--text">
+          <%= t '.email_settings' %>
+        </a>
+      </div>
+    <% end %>
+
     <div class="">
       <div class="nav">
         <a href="<%= root_path %>" class="nav__item <%= 'nav__item--active' if controller_name == 'home' && action_name == 'index' %>">

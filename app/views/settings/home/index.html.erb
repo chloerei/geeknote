@@ -1,52 +1,50 @@
-<div class="container">
-  <div class="layout">
-    <div class="main">
-      <div class="card card--surface padding-3">
-        <div class="headline-medium margin-bottom-4">
-          <%= t 'common.settings' %>
-        </div>
-        <div class="">
-          <a href="<%= settings_email_path %>" class="link-block border-radius-3">
-            <div class="display-flex gap-3 padding-3">
-              <span class="material-icons">email</span>
-              <div class="flex-grow-1">
-                <div class="title-medium">
-                  <%= t '.email' %>
-                </div>
-                <div class="">
-                  <%= t '.email_desription' %>
-                </div>
-              </div>
-            </div>
-          </a>
-          <a href="<%= settings_password_path %>" class="link-block border-radius-3">
-            <div class="display-flex gap-3 padding-3">
-              <span class="material-icons">password</span>
-              <div class="flex-grow-1">
-                <div class="title-medium">
-                  <%= t '.password' %>
-                </div>
-                <div class="">
-                  <%= t '.password_desription' %>
-                </div>
-              </div>
-            </div>
-          </a>
-          <a href="<%= settings_notification_path %>" class="link-block border-radius-3">
-            <div class="display-flex gap-3 padding-3">
-              <span class="material-icons">notifications</span>
-              <div class="flex-grow-1">
-                <div class="title-medium">
-                  <%= t '.notifications' %>
-                </div>
-                <div class="">
-                  <%= t '.notifications_desription' %>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
+<div class="container container--small padding-3">
+  <div class="card card--elevated background-surface">
+    <div class="top-app-bar">
+      <div class="top-app-bar__title">
+        <%= t 'common.settings' %>
       </div>
+    </div>
+    <div class="padding-bottom-2">
+      <a href="<%= settings_email_path %>" class="link-block">
+        <div class="display-flex gap-3 padding-3">
+          <span class="material-icons">email</span>
+          <div class="flex-grow-1">
+            <div class="title-medium">
+              <%= t '.email' %>
+            </div>
+            <div class="">
+              <%= t '.email_desription' %>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="<%= settings_password_path %>" class="link-block">
+        <div class="display-flex gap-3 padding-3">
+          <span class="material-icons">password</span>
+          <div class="flex-grow-1">
+            <div class="title-medium">
+              <%= t '.password' %>
+            </div>
+            <div class="">
+              <%= t '.password_desription' %>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="<%= settings_notification_path %>" class="link-block">
+        <div class="display-flex gap-3 padding-3">
+          <span class="material-icons">notifications</span>
+          <div class="flex-grow-1">
+            <div class="title-medium">
+              <%= t '.notifications' %>
+            </div>
+            <div class="">
+              <%= t '.notifications_desription' %>
+            </div>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 </div>
