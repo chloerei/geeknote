@@ -139,85 +139,6 @@ body[data-color-scheme="dark"] {
   padding: 4px;
 }
 
-.hero-form {
-  display: flex;
-  gap: var(--space-3);
-  flex-direction: column;
-  max-width: 100%;
-}
-
-.hero-form__text-field {
-  display: flex;
-  font-size: 20px;
-  align-items: center;
-  overflow: hidden;
-  padding: var(--space-2) var(--space-3);
-  border: 2px solid var(--color-outline);
-  border-radius: var(--space-5);
-  max-width: 100%;
-}
-
-.hero-form__prefix {
-  font-weight: bold;
-}
-
-.hero-form__input {
-  background: transparent;
-  border: none;
-  padding: 0;
-  outline: 0;
-  font-size: 20px;
-  line-height: 1.5;
-  font-family: sans-serif;
-  flex-grow: 1;
-  min-width: 0;
-}
-
-.hero-form__button {
-  justify-content: center;
-}
-
-@media (min-width: map.get($breakpoints, 'tablet')) {
-  .hero-form {
-    flex-direction: row;
-    border: 2px solid var(--color-outline);
-    background: var(--color-surface);
-    color: var(--color-on-surface);
-    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-3);
-    border-radius: var(--space-5);
-  }
-
-  .hero-form__text-field {
-    border: none;
-    padding: 0 var(--space-2);
-    max-width: 280px;
-    border-radius: 0;
-  }
-}
-
-.layout {
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-  gap: 16px;
-
-  @media (min-width: map.get($breakpoints, 'tablet')) {
-    display: grid;
-    grid-template-columns: 240px minmax(0, 1fr);
-    grid-template-areas:
-      "navbar main"
-      "sidebar main"
-      ". main";
-  }
-
-  @media (min-width: map.get($breakpoints, 'laptop')) {
-    display: grid;
-    grid-template-columns: 240px minmax(0, 1fr) 280px;
-    grid-template-areas:
-      "navbar main sidebar";
-  }
-}
-
 .layout-primary {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -254,11 +175,6 @@ body[data-color-scheme="dark"] {
       border-radius: 16px;
     }
   }
-}
-
-.card--surface {
-  background-color: var(--color-surface);
-  color: var(--color-on-surface);
 }
 
 .text-muted {
