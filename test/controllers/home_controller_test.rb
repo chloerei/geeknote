@@ -4,7 +4,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     create(:post)
 
-    get explore_root_path
+    get root_path
     assert_response :success
   end
 
@@ -14,14 +14,14 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     user.follows.create(account: post.account)
 
     sign_in user
-    get explore_feed_path
+    get feed_path
     assert_response :success
   end
 
   test "should get newest" do
     create(:post)
 
-    get explore_newest_path
+    get newest_path
     assert_response :success
   end
 end

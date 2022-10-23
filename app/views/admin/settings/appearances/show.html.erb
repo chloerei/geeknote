@@ -1,120 +1,120 @@
-<div class="container">
-  <div class="layout">
+<div class="container padding-3">
+  <div class="layout-primary">
     <%= render 'admin/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface padding-3 margin-bottom-3">
-        <div class="breadcrumb">
-          <div class="breadcrumb__item">
-            <a href="<%= admin_settings_root_path %>">
-              <%= t 'common.settings' %>
+    <div class="">
+      <div class="card card--elevated background-surface">
+        <div class="top-app-bar">
+          <div class="top-app-bar__action">
+            <a href="<%= admin_settings_root_path %>" class="button button--icon">
+              <span class="material-icons">arrow_back</span>
             </a>
           </div>
-          <div class="breadcrumb__item breadcrumb__item--active">
+          <div class="top-app-bar__title">
             <%= t 'common.appearance' %>
           </div>
         </div>
-      </div>
 
-      <div class="card card--surface padding-3">
-        <%= form_with url: admin_settings_appearance_path, model: @site, builder: CustomFormBuilder do |form| %>
-          <div class="margin-bottom-3">
-            <%= form.text_field :name %>
-          </div>
-
-          <div class="margin-bottom-3">
-            <%= form.text_area :description %>
-          </div>
-
-          <div class="margin-bottom-3">
-            <div class="label-large margin-bottom-2">
-              <%= t 'common.icon' %>
+        <div class="padding-3">
+          <%= form_with url: admin_settings_appearance_path, model: @site, builder: CustomFormBuilder do |form| %>
+            <div class="margin-bottom-3">
+              <%= form.text_field :name %>
             </div>
-            <div class="image-uploader image-uploader--icon <%= 'image-uploader--active' if @site.icon.attached? %>" data-controller="image-uploader">
-              <div class="image-uploader__preview" data-image-uploader-target="preview">
-                <% if @site.icon.attached? %>
-                  <%= image_tag @site.icon.variant(:normal) %>
-                <% end %>
-              </div>
-              <div class="image-uploader__toolbar">
-                <label class="button button--icon">
-                  <span class="material-icons">add_photo_alternate</span>
-                  <%= form.file_field :icon, direct_upload: true, data: { 'image-uploader-target': 'input', action: 'image-uploader#update' } %>
-                </label>
-                <label class="button button--icon image-uploader__show-on-active">
-                  <span class="material-icons">close</span>
-                  <input type="checkbox" name="[site]remove_icon" data-image-uploader-target="removeCheckbox" data-action="image-uploader#remove">
-                </label>
-              </div>
-            </div>
-          </div>
 
-          <div class="margin-bottom-3">
-            <div class="label-large margin-bottom-2">
-              <%= t 'common.logo' %>
+            <div class="margin-bottom-3">
+              <%= form.text_area :description %>
             </div>
-            <div class="image-uploader image-uploader--logo <%= 'image-uploader--active' if @site.logo.attached? %>" data-controller="image-uploader">
-              <div class="image-uploader__preview" data-image-uploader-target="preview">
-                <% if @site.logo.attached? %>
-                  <%= image_tag @site.logo %>
-                <% end %>
+
+            <div class="margin-bottom-3">
+              <div class="label-large margin-bottom-2">
+                <%= t 'common.icon' %>
               </div>
-              <div class="image-uploader__toolbar">
-                <label class="button button--icon">
-                  <span class="material-icons">add_photo_alternate</span>
-                  <%= form.file_field :logo, direct_upload: true, data: { 'image-uploader-target': 'input', action: 'image-uploader#update' } %>
-                </label>
-                <label class="button button--icon image-uploader__show-on-active">
-                  <span class="material-icons">close</span>
-                  <input type="checkbox" name="[site]remove_logo" data-image-uploader-target="removeCheckbox" data-action="image-uploader#remove">
-                </label>
+              <div class="image-uploader image-uploader--icon <%= 'image-uploader--active' if @site.icon.attached? %>" data-controller="image-uploader">
+                <div class="image-uploader__preview" data-image-uploader-target="preview">
+                  <% if @site.icon.attached? %>
+                    <%= image_tag @site.icon.variant(:normal) %>
+                  <% end %>
+                </div>
+                <div class="image-uploader__toolbar">
+                  <label class="button button--icon">
+                    <span class="material-icons">add_photo_alternate</span>
+                    <%= form.file_field :icon, direct_upload: true, data: { 'image-uploader-target': 'input', action: 'image-uploader#update' } %>
+                  </label>
+                  <label class="button button--icon image-uploader__show-on-active">
+                    <span class="material-icons">close</span>
+                    <input type="checkbox" name="[site]remove_icon" data-image-uploader-target="removeCheckbox" data-action="image-uploader#remove">
+                  </label>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="margin-bottom-3">
-            <div class="label-large margin-bottom-2">
-              <%= t 'common.logo_dark' %>
-            </div>
-            <div class="image-uploader image-uploader--logo <%= 'image-uploader--active' if @site.logo_dark.attached? %>" data-controller="image-uploader">
-              <div class="image-uploader__preview" data-image-uploader-target="preview">
-                <% if @site.logo_dark.attached? %>
-                  <%= image_tag @site.logo_dark %>
-                <% end %>
+            <div class="margin-bottom-3">
+              <div class="label-large margin-bottom-2">
+                <%= t 'common.logo' %>
               </div>
-              <div class="image-uploader__toolbar">
-                <label class="button button--icon">
-                  <span class="material-icons">add_photo_alternate</span>
-                  <%= form.file_field :logo_dark, direct_upload: true, data: { 'image-uploader-target': 'input', action: 'image-uploader#update' } %>
-                </label>
-                <label class="button button--icon image-uploader__show-on-active">
-                  <span class="material-icons">close</span>
-                  <input type="checkbox" name="[site]remove_logo_dark" data-image-uploader-target="removeCheckbox" data-action="image-uploader#remove">
-                </label>
+              <div class="image-uploader image-uploader--logo <%= 'image-uploader--active' if @site.logo.attached? %>" data-controller="image-uploader">
+                <div class="image-uploader__preview" data-image-uploader-target="preview">
+                  <% if @site.logo.attached? %>
+                    <%= image_tag @site.logo %>
+                  <% end %>
+                </div>
+                <div class="image-uploader__toolbar">
+                  <label class="button button--icon">
+                    <span class="material-icons">add_photo_alternate</span>
+                    <%= form.file_field :logo, direct_upload: true, data: { 'image-uploader-target': 'input', action: 'image-uploader#update' } %>
+                  </label>
+                  <label class="button button--icon image-uploader__show-on-active">
+                    <span class="material-icons">close</span>
+                    <input type="checkbox" name="[site]remove_logo" data-image-uploader-target="removeCheckbox" data-action="image-uploader#remove">
+                  </label>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="margin-bottom-3">
-            <%= form.text_area :header_html, rows: 3 %>
-          </div>
+            <div class="margin-bottom-3">
+              <div class="label-large margin-bottom-2">
+                <%= t 'common.logo_dark' %>
+              </div>
+              <div class="image-uploader image-uploader--logo <%= 'image-uploader--active' if @site.logo_dark.attached? %>" data-controller="image-uploader">
+                <div class="image-uploader__preview" data-image-uploader-target="preview">
+                  <% if @site.logo_dark.attached? %>
+                    <%= image_tag @site.logo_dark %>
+                  <% end %>
+                </div>
+                <div class="image-uploader__toolbar">
+                  <label class="button button--icon">
+                    <span class="material-icons">add_photo_alternate</span>
+                    <%= form.file_field :logo_dark, direct_upload: true, data: { 'image-uploader-target': 'input', action: 'image-uploader#update' } %>
+                  </label>
+                  <label class="button button--icon image-uploader__show-on-active">
+                    <span class="material-icons">close</span>
+                    <input type="checkbox" name="[site]remove_logo_dark" data-image-uploader-target="removeCheckbox" data-action="image-uploader#remove">
+                  </label>
+                </div>
+              </div>
+            </div>
 
-          <div class="margin-bottom-3">
-            <%= form.text_area :footer_html, rows: 3 %>
-          </div>
+            <div class="margin-bottom-3">
+              <%= form.text_area :header_html, rows: 3 %>
+            </div>
 
-          <div class="margin-bottom-3">
-            <%= form.text_area :sidebar_header_html, rows: 3 %>
-          </div>
+            <div class="margin-bottom-3">
+              <%= form.text_area :footer_html, rows: 3 %>
+            </div>
 
-          <div class="margin-bottom-3">
-            <%= form.text_area :sidebar_footer_html, rows: 3 %>
-          </div>
+            <div class="margin-bottom-3">
+              <%= form.text_area :sidebar_header_html, rows: 3 %>
+            </div>
 
-          <button type="submit" class="button button--filled">
-            <%= t 'common.save_changes' %>
-          </button>
-        <% end %>
+            <div class="margin-bottom-3">
+              <%= form.text_area :sidebar_footer_html, rows: 3 %>
+            </div>
+
+            <button type="submit" class="button button--filled">
+              <%= t 'common.save_changes' %>
+            </button>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

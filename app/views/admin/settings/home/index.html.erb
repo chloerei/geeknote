@@ -1,12 +1,15 @@
-<div class="container">
-  <div class="layout">
+<div class="container padding-3">
+  <div class="layout-primary">
     <%= render 'admin/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface">
-        <div class="title-large padding-3">
-          <%= t 'common.settings' %>
+    <div class="">
+      <div class="card card--elevated background-surface">
+        <div class="top-app-bar">
+          <div class="top-app-bar__title">
+            <%= t 'common.settings' %>
+          </div>
         </div>
+
         <div class="padding-bottom-2">
           <a href="<%= admin_settings_appearance_path %>" class="link-block">
             <div class="display-flex gap-3 padding-3">

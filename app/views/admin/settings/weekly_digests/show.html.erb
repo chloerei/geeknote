@@ -1,43 +1,48 @@
-<div class="container">
-  <div class="layout">
+<div class="container padding-3">
+  <div class="layout-primary">
     <%= render 'admin/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface padding-3 margin-bottom-3">
-        <div class="breadcrumb">
-          <div class="breadcrumb__item">
-            <a href="<%= admin_settings_root_path %>">
-              <%= t 'common.settings' %>
+    <div class="">
+      <div class="card card--elevated background-surface">
+        <div class="top-app-bar">
+          <div class="top-app-bar__action">
+            <a href="<%= admin_settings_root_path %>" class="button button--icon">
+              <span class="material-icons">arrow_back</span>
             </a>
           </div>
-          <div class="breadcrumb__item breadcrumb__item--active">
+          <div class="top-app-bar__title">
             <%= t 'common.weekly_digest' %>
           </div>
+          <div class="top-app-bar__action">
+            <a href="<%= admin_settings_weekly_digest_preview_path %>" class="button button--text">
+              <%= t 'common.send_preview' %>
+            </a>
+          </div>
         </div>
-      </div>
 
-      <div class="card card--surface padding-3 margin-bottom-3">
-        <%= form_with url: admin_settings_weekly_digest_path, model: @site, builder: CustomFormBuilder do |form| %>
-          <div class="margin-bottom-3">
-            <label class="display-flex gap-3 align-items-center">
-              <div class="flex-grow-1">
-                <%= Site.human_attribute_name(:weekly_digest_email_enabled) %>
-              </div>
-              <%= form.check_box :weekly_digest_email_enabled %>
-            </label>
-          </div>
-          <div class="margin-bottom-3">
-            <%= form.text_area :weekly_digest_header_html, rows: 5 %>
-          </div>
+        <div class="padding-3">
+          <%= form_with url: admin_settings_weekly_digest_path, model: @site, builder: CustomFormBuilder do |form| %>
+            <div class="margin-bottom-3">
+              <label class="display-flex gap-3 align-items-center">
+                <div class="flex-grow-1">
+                  <%= Site.human_attribute_name(:weekly_digest_email_enabled) %>
+                </div>
+                <%= form.check_box :weekly_digest_email_enabled %>
+              </label>
+            </div>
+            <div class="margin-bottom-3">
+              <%= form.text_area :weekly_digest_header_html, rows: 5 %>
+            </div>
 
-          <div class="margin-bottom-3">
-            <%= form.text_area :weekly_digest_footer_html, rows: 5 %>
-          </div>
+            <div class="margin-bottom-3">
+              <%= form.text_area :weekly_digest_footer_html, rows: 5 %>
+            </div>
 
-          <button type="submit" class="button button--filled">
-            <%= t 'common.save_changes' %>
-          </button>
-        <% end %>
+            <button type="submit" class="button button--filled">
+              <%= t 'common.save_changes' %>
+            </button>
+          <% end %>
+        </div>
       </div>
     </div>
 

@@ -1,24 +1,40 @@
-<div class="container">
-  <div class="layout">
+<div class="container padding-3">
+  <div class="layout-primary">
     <%= render 'admin/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface padding-3 margin-bottom-3">
-        <div class="breadcrumb">
-          <div class="breadcrumb__item">
-            <a href="<%= admin_posts_path %>">
-              <%= t 'common.posts' %>
+    <div class="">
+      <div class="card card--elevated background-surface">
+        <div class="top-app-bar">
+          <div class="top-app-bar__action">
+            <a href="<%= admin_posts_path %>" class="button button--icon">
+              <span class="material-icons">arrow_back</span>
             </a>
           </div>
-          <div class="breadcrumb__item breadcrumb__item--active">
-            <%= @post.id %>
+          <div class="top-app-bar__title">
+            <%= t 'common.posts' %> #<%= @post.id %>
           </div>
-        </div>
-      </div>
 
-      <div class="card card--surface">
-        <div class="title-medium padding-3">
-          <%= t 'common.attributes' %>
+          <div class="top-app-bar__action">
+            <a href="<%= edit_admin_post_path(@post) %>" class="button button--text">
+              <%= t 'common.edit' %>
+            </a>
+          </div>
+
+          <div class="top-app-bar__action">
+            <% if @post.restricted? %>
+              <%= form_with model: @post, url: unrestrict_admin_post_path(@post) do %>
+                <button type="submit" class="button button--text">
+                  <%= t '.unrestrict' %>
+                </button>
+              <% end %>
+            <% else  %>
+              <%= form_with model: @post, url: restrict_admin_post_path(@post), data: { turbo_confirm: t('.restrict_post_confirm') } do %>
+                <button type="submit" class="button button--text button--danger">
+                  <%= t '.restrict_post' %>
+                </button>
+              <% end %>
+            <% end %>
+          </div>
         </div>
 
         <table class="table border-top">
@@ -67,29 +83,10 @@
           <% end %>
         </table>
       </div>
-    </div>
 
-    <div class="sidebar">
-      <div class="card card--surface padding-3">
-        <div class="margin-bottom-3">
-          <a href="<%= edit_admin_post_path(@post) %>" class="button button--outlined">
-            <%= t 'common.edit' %>
-          </a>
+      <div class="sidebar">
+        <div class="card card--surface padding-3">
         </div>
-
-        <% if @post.restricted? %>
-          <%= form_with model: @post, url: unrestrict_admin_post_path(@post) do %>
-            <button type="submit" class="button button--outlined">
-              <%= t '.unrestrict' %>
-            </button>
-          <% end %>
-        <% else  %>
-          <%= form_with model: @post, url: restrict_admin_post_path(@post), data: { turbo_confirm: t('.restrict_post_confirm') } do %>
-            <button type="submit" class="button button--outlined button--danger">
-              <%= t '.restrict_post' %>
-            </button>
-          <% end %>
-        <% end %>
       </div>
     </div>
   </div>

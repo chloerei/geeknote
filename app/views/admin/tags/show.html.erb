@@ -1,24 +1,28 @@
-<div class="container">
-  <div class="layout">
+<div class="container padding-3">
+  <div class="layout-primary">
     <%= render 'admin/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface padding-3 margin-bottom-3">
-        <div class="breadcrumb">
-          <div class="breadcrumb__item">
-            <a href="<%= admin_tags_path %>">
-              <%= t 'common.tags' %>
+    <div class="">
+      <div class="card card--elevated background-surface">
+        <div class="top-app-bar">
+          <div class="top-app-bar__action">
+            <a href="<%= admin_tags_path %>" class="button button--icon">
+              <span class="material-icons">arrow_back</span>
             </a>
           </div>
-          <div class="breadcrumb__item breadcrumb__item--active">
-            <%= @tag.id %>
+          <div class="top-app-bar__title">
+            <%= t 'common.tags' %> #<%= @tag.id %>
           </div>
-        </div>
-      </div>
-
-      <div class="card card--surface margin-bottom-3">
-        <div class="title-medium padding-3">
-          <%= t 'common.attributes' %>
+          <div class="top-app-bar__action">
+            <a href="<%= edit_admin_tag_path(@tag) %>" class="button button--text">
+              <%= t 'common.edit' %>
+            </a>
+          </div>
+          <div class="top-app-bar__action">
+            <a href="<%= new_admin_tag_merge_path(@tag) %>" class="button button--text">
+              <%= t 'common.merge' %>
+            </a>
+          </div>
         </div>
 
         <table class="table border-top">
@@ -33,21 +37,6 @@
             </tr>
           <% end %>
         </table>
-      </div>
-    </div>
-
-    <div class="sidebar">
-      <div class="card card--surface padding-3">
-        <div class="margin-bottom-3">
-          <a href="<%= edit_admin_tag_path(@tag) %>" class="button button--outlined">
-            <%= t 'common.edit' %>
-          </a>
-        </div>
-        <div class="">
-          <a href="<%= new_admin_tag_merge_path(@tag) %>" class="button button--outlined">
-            <%= t 'common.merge' %>
-          </a>
-        </div>
       </div>
     </div>
   </div>

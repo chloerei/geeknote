@@ -1,40 +1,35 @@
-<div class="container">
-  <div class="layout">
+<div class="container padding-3">
+  <div class="layout-primary">
     <%= render 'admin/navbar' %>
 
-    <div class="main">
-      <div class="card card--surface padding-3 margin-bottom-3">
-        <div class="breadcrumb">
-          <div class="breadcrumb__item">
-            <a href="<%= admin_collections_path %>">
-              <%= t 'common.collections' %>
+    <div class="">
+      <div class="card card--elevated background-surface margin-bottom-3">
+        <div class="top-app-bar">
+          <div class="top-app-bar__action">
+            <a href="<%= admin_collection_path(@collection) %>" class="button button--icon">
+              <span class="material-icons">arrow_back</span>
             </a>
           </div>
-          <div class="breadcrumb__item breadcrumb__item--active">
-            <a href="<%= admin_collection_path(@collection) %>">
-              <%= @collection.id %>
-            </a>
-          </div>
-          <div class="breadcrumb__item breadcrumb__item--active">
-            <%= t 'common.edit' %>
+          <div class="top-app-bar__title">
+            <%= t 'common.edit_collection' %>
           </div>
         </div>
-      </div>
 
-      <div class="card card--surface padding-3">
-        <%= form_with model: @collection, url: admin_collection_path(@collection), builder: CustomFormBuilder do |form| %>
-          <div class="margin-bottom-3">
-            <%= form.text_field :name %>
-          </div>
+        <div class="padding-3">
+          <%= form_with model: @collection, url: admin_collection_path(@collection), builder: CustomFormBuilder do |form| %>
+            <div class="margin-bottom-3">
+              <%= form.text_field :name %>
+            </div>
 
-          <div class="margin-bottom-3">
-            <%= form.text_area :description %>
-          </div>
+            <div class="margin-bottom-3">
+              <%= form.text_area :description %>
+            </div>
 
-          <button type="submit" class="button button--filled">
-            <%= t 'common.save_changes' %>
-          </button>
-        <% end %>
+            <button type="submit" class="button button--filled">
+              <%= t 'common.save_changes' %>
+            </button>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
