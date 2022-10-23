@@ -291,7 +291,7 @@ zh-CN:
     users: 用户
     view: 查看
     view_more: 查看更多
-    view_page: View page
+    view_page: 查看页面
     visibility: 公开范围
     weekly_digest: 每周摘要
     weekly_digest_subject: '"%{title}" - %{count} 篇热门文章'

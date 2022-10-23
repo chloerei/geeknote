@@ -4,21 +4,22 @@
   <div class="flex-grow-1 min-width-0">
     <div class="top-app-bar align-items-center">
       <div class="top-app-bar__action">
-        <a href="<%= account_dashboard_posts_path %>" class="button button--text button--muted">
-          <div class="button__icon">
-            <span class="material-icons">chevron_left</span>
-          </div>
-          <div class="button__label">
-            <%= t 'common.posts' %>
-          </div>
+        <a href="<%= account_dashboard_posts_path %>" class="button button--icon">
+          <span class="material-icons">arrow_back</span>
         </a>
       </div>
-      <div class="top-app-bar__action">
-        <div class="body-medium text-muted padding-1">
-          <%= Post.human_attribute_name "status.#{@post.status}" %>
+      <div class="top-app-bar__title">
+        <div class="display-flex align-items-center gap-2">
+          <div class="title-medium">
+            <%= t 'common.posts' %>
+          </div>
+          <div class="body-medium text-muted">
+            -
+          </div>
+          <div class="body-medium text-muted">
+            <%= Post.human_attribute_name "status.#{@post.status}" %>
+          </div>
         </div>
-      </div>
-      <div class="flex-grow-1">
       </div>
       <div class="top-app-bar__action">
         <button type="submit" name="submit" value="save" class="button button--text button--muted">
