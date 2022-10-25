@@ -96,3 +96,24 @@
 
 .markdown-editor--focus {
 }
+
+.cmt-meta {
+  color: #777;
+}
+
+.cmt-labelName {
+  color: #777;
+}
+
+.cmt-heading.cmt-meta {
+  color: var(--color-on-surface);
+}
+
+.cmt-strong.cmt-meta {
+  color: var(--color-on-surface);
+}
+
+.cmt-url {
+  color: #777;
+  text-decoration: underline;
+}
