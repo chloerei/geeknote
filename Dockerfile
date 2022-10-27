@@ -1,6 +1,8 @@
 ### base stage ###
 
-FROM rubylang/ruby:3.1.2-focal AS base
+FROM ruby:3.1.2 AS base
+
+ENV LANG C.UTF-8
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   curl \
