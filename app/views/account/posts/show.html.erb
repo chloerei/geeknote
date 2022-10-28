@@ -8,6 +8,8 @@
   <meta property="og:description" content="<%= post_summary @post %>">
   <% if @post.featured_image.attached? %>
     <meta property="og:image" content="<%= featured_image_url @post.featured_image %>">
+  <% elsif @post.social_image.attached? %>
+    <meta property="og:image" content="<%= url_for @post.social_image %>">
   <% end %>
 
   <meta name="twitter:card" content="summary_large_image">
@@ -15,6 +17,8 @@
   <meta name="twitter:description" content="<%= post_summary @post %>">
   <% if @post.featured_image.attached? %>
     <meta name="twitter:image" content="<%= featured_image_url @post.featured_image %>">
+  <% elsif @post.social_image.attached? %>
+    <meta property="og:image" content="<%= url_for @post.social_image %>">
   <% end %>
 
   <link rel="canonical" href="<%= @post.canonical_url || account_post_url(@account, @post) %>">

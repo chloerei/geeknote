@@ -1,6 +1,8 @@
 require "test_helper"
 
 class PostTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   test "should set published at" do
     post = create(:post, status: :draft)
     assert_nil post.published_at
@@ -66,5 +68,24 @@ class PostTest < ActiveSupport::TestCase
     post.update(canonical_url: "javascript:alert('https://example.com')")
     assert_not post.valid?
     assert post.errors.added?(:canonical_url, :invalid_url)
+  end
+
+  test "should enqueued generate social image job" do
+    post = create(:post)
+
+    assert_enqueued_with(job: PostGenerateSocialImageJob, args: [post]) do
+      post.title = 'changed'
+      post.save
+    end
+
+    assert_no_enqueued_jobs do
+      post.content = 'changed'
+      post.save
+    end
+
+    assert_enqueued_with(job: PostGenerateSocialImageJob, args: [post]) do
+      post.title = 'changed 2'
+      post.save
+    end
   end
 end

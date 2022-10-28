@@ -40,6 +40,8 @@ services:
     depends_on:
       - postgres
       - redis
+    cap_add:
+      - SYS_ADMIN
   postgres:
     image: postgres:12
     environment:
