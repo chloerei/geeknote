@@ -29,14 +29,14 @@ WORKDIR /app
 
 FROM base AS production
 
-COPY Gemfile Gemfile.lock /app/
+COPY --chown=deploy:deploy Gemfile Gemfile.lock /app/
 
 RUN bundle install
 
-COPY package.json package-lock.json /app/
+COPY --chown=deploy:deploy package.json package-lock.json /app/
 
 RUN npm install
 
-COPY . /app/
+COPY --chown=deploy:deploy . /app/
 
 RUN bin/rails assets:precompile
