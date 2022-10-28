@@ -50,19 +50,7 @@ module ApplicationHelper
         image_tag avatar.variant(resize_to_fill: [160, 160])
       end
     else
-      image_tag asset_path('avatar.png')
-    end
-  end
-
-  def large_avatar_image_tag(avatar)
-    if avatar.attached?
-      if use_aliyun_oss?
-        image_tag avatar.url(params: { 'x-oss-process' => 'image/resize,m_fill,w_320,h_320'})
-      else
-        image_tag avatar.variant(resize_to_fill: [320, 320])
-      end
-    else
-      image_tag asset_path('avatar.png')
+      image_tag asset_url('avatar.png')
     end
   end
 
