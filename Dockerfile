@@ -2,18 +2,26 @@
 
 FROM ruby:3.1.2 AS base
 
-ENV LANG C.UTF-8
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
   curl \
+  chromium \
+  fonts-noto-cjk \
   libpq-dev \
   libvips42 \
   nodejs \
   npm \
   postgresql-client
 
+ENV LANG=zh_CN.UTF-8
+
 RUN gem install bundler -v 2.3.6 && \
-  bundle config set --global path vendor/bundle
+  bundle config set --local path vendor/bundle
+
+RUN useradd deploy && \
+  mkdir /app && \
+  chown deploy:deploy /app
+
+USER deploy
 
 WORKDIR /app
 
