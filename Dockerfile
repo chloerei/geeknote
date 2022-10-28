@@ -17,7 +17,7 @@ ENV LANG=zh_CN.UTF-8
 RUN gem install bundler -v 2.3.6 && \
   bundle config set --local path vendor/bundle
 
-RUN useradd deploy && \
+RUN useradd -m deploy && \
   mkdir /app && \
   chown deploy:deploy /app
 
