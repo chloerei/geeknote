@@ -532,3 +532,11 @@ summary {
   background: transparent;
   padding: 10px 24px;
 }
+
+.dialog {
+  display: none;
+}
+
+.dialog-toggle:checked + .dialog {
+  display: flex;
+}
