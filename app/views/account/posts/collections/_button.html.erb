@@ -1,16 +1,27 @@
-<label for="post-<%= post.id %>-collections-dialog-toggle" class="button button--text button--muted">
-  <div class="button__icon">
-    <span class="material-icons">bookmark_add</span>
+<% if current_user %>
+  <label for="post-<%= post.id %>-collections-dialog-toggle" class="button button--text button--muted">
+    <div class="button__icon">
+      <span class="material-icons">bookmark_add</span>
+    </div>
+    <div class="button__label">
+      <%= t 'common.add_to_collection' %>
+    </div>
+  </label>
+  <input type="checkbox" id="post-<%= post.id %>-collections-dialog-toggle" class="dialog-toggle">
+  <div id="post-<%= post.id %>-collections-dialog" class="dialog dialog--medium">
+    <div class="dialog__container">
+      <%= turbo_frame_tag "post-#{post.id}-collections", src: account_post_collections_path(post.account, post), loading: 'lazy' do %>
+      <% end %>
+    </div>
+    <label for="post-<%= post.id %>-collections-dialog-toggle" class="dialog__scrim"></label>
   </div>
-  <div class="button__label">
-    <%= t 'common.add_to_collection' %>
-  </div>
-</label>
-<input type="checkbox" id="post-<%= post.id %>-collections-dialog-toggle" class="dialog-toggle">
-<div id="post-<%= post.id %>-collections-dialog" class="dialog dialog--medium">
-  <div class="dialog__container">
-    <%= turbo_frame_tag "post-#{post.id}-collections", src: account_post_collections_path(post.account, post), loading: 'lazy', class: 'flex flex-direction-column overflow-auto' do %>
-    <% end %>
-  </div>
-  <label for="post-<%= post.id %>-collections-dialog-toggle" class="dialog__scrim"></label>
-</div>
+<% else %>
+  <a href="<%= sign_in_path(return_to: url_for) %>" class="button button--text button--muted">
+    <div class="button__icon">
+      <span class="material-icons">bookmark_add</span>
+    </div>
+    <div class="button__label">
+      <%= t 'common.add_to_collection' %>
+    </div>
+  </a>
+<% end %>

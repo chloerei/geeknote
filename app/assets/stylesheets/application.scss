@@ -534,9 +534,15 @@ summary {
 }
 
 .dialog {
-  display: none;
+  turbo-frame[loading="lazy"] {
+    display: none;
+  }
 }
 
 .dialog-toggle:checked + .dialog {
-  display: flex;
+  turbo-frame[loading="lazy"] {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+  }
 }

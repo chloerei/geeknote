@@ -1,5 +1,33 @@
 <div class="container container--small">
   <%= turbo_frame_tag "post-#{@post.id}-collections" do %>
-    <%= render 'form' %>
+    <div class="padding-2 border-bottom">
+      <div class="top-app-bar align-items-center">
+        <div class="top-app-bar__action">
+          <a href="<%= account_post_collections_path(@account, @post) %>" class="button button--icon">
+            <span class="material-icons">arrow_back</span>
+          </a>
+        </div>
+        <div class="top-app-bar__title">
+          <div class="title-medium">
+            <%= t 'common.new_collection' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="padding-x-2 overflow-auto">
+      <%= render 'form' %>
+    </div>
+
+    <div class="padding-2 border-top">
+      <div class="display-flex justify-content-flex-end padding-1">
+        <a href="<%= account_post_collections_path(@account, @post) %>" class="button button--text button--primary">
+          <%= t 'common.cancel' %>
+        </a>
+        <button type="submit" class="button button--text button--primary" form="<%= "post-#{@post.id}-collection-form" %>">
+          <%= t 'common.create_collection' %>
+        </button>
+      </div>
+    </div>
   <% end %>
 </div>
