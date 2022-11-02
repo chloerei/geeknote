@@ -30,5 +30,6 @@ when 'smtp'
 end
 
 ActionMailer::Base.default_url_options = {
-  host: ENV['HOST']
+  host: ENV['HOST'],
+  protocol: ENV['FORCE_SSL'] ? 'https' : 'http'
 }
