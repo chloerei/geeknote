@@ -40,7 +40,7 @@ jobs:
           load: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      - uses: superfly/flyctl-actions/setup-flyctl
+      - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --image geeknote:latest --detach
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
