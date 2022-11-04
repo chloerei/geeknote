@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title><%= "#{@page_title} - " if @page_title %><%= @site.name %></title>
-    <meta name="description" content="<%= t 'common.site_description' %>">
+    <meta name="description" content="<%= @site.description %>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <% if @site.icon.attached? %>
