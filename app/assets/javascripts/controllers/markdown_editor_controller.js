@@ -46,6 +46,26 @@ const classHighlightStyle = HighlightStyle.define([
   {tag: tags.punctuation, class: "cmt-punctuation"}
 ])
 
+function scrollMargin() {
+  return ViewPlugin.fromClass(class {
+    margin = {
+      top: 60,
+      bottom: 120
+    }
+
+    constructor(view) {
+    }
+  }, {
+    provide: plugin => {
+      return EditorView.scrollMargins.of(view => {
+        let value = view.plugin(plugin)
+
+        return value.margin
+      })
+    }
+  })
+}
+
 export default class extends Controller {
   static values = {
     input: String,
@@ -138,6 +158,7 @@ export default class extends Controller {
             ...historyKeymap,
           ]),
           markdown(),
+          scrollMargin(),
           // sync doc value to inputElement
           ViewPlugin.define((view) => {
             return {
