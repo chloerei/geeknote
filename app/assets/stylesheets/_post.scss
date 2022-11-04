@@ -3,7 +3,11 @@
 
   .markdown-editor {
     min-height: 100vh;
-    padding-bottom: 120px;
+    padding-bottom: 76px;
+  }
+
+  .markdown-editor__toolbar {
+    margin: 0 -8px;
   }
 }
 
