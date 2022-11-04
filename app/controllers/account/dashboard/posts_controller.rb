@@ -36,7 +36,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
       @post.published!
       redirect_to account_post_url(@account, @post), notice: I18n.t('flash.post_is_published')
     else
-      flash[:notice] = I18n.t('flash.post_is_saved')
+      flash.now[:notice] = I18n.t('flash.post_is_saved')
       render :update, layout: 'application'
     end
   end
