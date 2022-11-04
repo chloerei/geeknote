@@ -3,18 +3,17 @@
 
   <% if !current_user %>
     <div class="card card--filled padding-3 margin-bottom-3">
-      <h3 class="title-medium margin-top-0">
-        <%= t '.hero_title' %>
-      </h3>
-      <p>
-        <%= t '.hero_description' %>
+      <p class="margin-top-0">
+        <%= @site.description %>
       </p>
-      <a href="<%= sign_up_path %>" class="button button--filled">
-        <%= t 'common.sign_up' %>
-      </a>
-      <a href="<%= sign_in_path %>" class="button button--text">
-        <%= t 'common.sign_in' %>
-      </a>
+      <div class="display-flex gap-2">
+        <a href="<%= sign_up_path %>" class="button button--filled">
+          <%= t 'common.sign_up' %>
+        </a>
+        <a href="<%= sign_in_path %>" class="button button--text">
+          <%= t 'common.sign_in' %>
+        </a>
+      </div>
     </div>
   <% end %>
 
