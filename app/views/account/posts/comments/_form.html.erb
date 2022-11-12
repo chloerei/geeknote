@@ -5,7 +5,7 @@
         <%= avatar_image_tag current_user.avatar %>
       </div>
     </div>
-    <div class="flex-grow-1">
+    <div class="flex-grow-1 min-width-0">
       <div class="padding-y padding-right">
         <%= form_with model: comment, url: [@account, @post, comment], builder: CustomFormBuilder, class: 'form' do |form| %>
           <%= form.hidden_field :parent_id %>
