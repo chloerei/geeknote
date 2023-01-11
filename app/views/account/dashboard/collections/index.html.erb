@@ -53,13 +53,8 @@
             <%= paginate @collections %>
           </div>
         <% else %>
-          <div class="content-placeholder">
-            <div class="content-placeholder__icon">
-              <span class="material-icons">library_books</span>
-            </div>
-            <div class="contents-placeholder__label">
-              <%= t '.no_collections' %>
-            </div>
+          <div class="padding-3 text-align-center text-muted">
+            <%= t '.no_collections' %>
           </div>
         <% end %>
       </div>
