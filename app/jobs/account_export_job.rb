@@ -40,10 +40,14 @@ class AccountExportJob < ApplicationJob
         end
 
         Dir.mkdir('attachments')
-        export.account.attachments.find_each do |attachment|
-          Dir.mkdir(File.join('attachments', attachment.key))
-          attachment.file.open do |file|
-            system 'cp', file.path, File.join(dir, 'attachments', attachment.key, attachment.file.filename.to_s)
+        export.account.posts.find_each do |post|
+          post.content.scan(/!\[.*\]\(\/attachments\/(?<key>\w+)\/.*\)/) do |match|
+            if attachment = Attachment.find_by(key: match[0])
+              Dir.mkdir(File.join('attachments', attachment.key))
+              attachment.file.open do |file|
+                system 'cp', file.path, File.join(dir, 'attachments', attachment.key, attachment.file.filename.to_s)
+              end
+            end
           end
         end
 
