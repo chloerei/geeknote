@@ -29,14 +29,16 @@ WORKDIR /rails
 
 FROM base
 
+ENV BUNDLE_FROZEN=true
+
 COPY --chown=rails:rails Gemfile Gemfile.lock /rails/
 
 RUN bundle install
 
-COPY --chown=rails:rails package.json package-lock.json /app/
+COPY --chown=rails:rails package.json package-lock.json /rails/
 
 RUN npm install
 
-COPY --chown=rails:rails . /app/
+COPY --chown=rails:rails . /rails/
 
 RUN bin/rails assets:precompile
