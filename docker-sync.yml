@@ -1,8 +1,0 @@
-version: '2'
-
-syncs:
-  geeknote-sync:
-    src: './'
-    sync_excludes: ['.git', 'node_modules', 'vendor/bundle', 'tmp', 'log', 'public/uploads', 'public/packs', 'public/packs-test']
-    sync_userid: 1000
-    sync_groupid: 1000

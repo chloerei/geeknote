@@ -7,7 +7,7 @@ services:
       target: base
     command: bin/rails server -b 0.0.0.0
     volumes:
-      - geeknote-sync:/app:nocopy
+      - .:/rails
     ports:
       - 3000:3000
     depends_on:
@@ -22,33 +22,29 @@ services:
     command: npm run build:js -- --watch
     tty: true
     volumes:
-      - geeknote-sync:/app:nocopy
+      - .:/rails
   build-css:
     build:
       context: .
       target: base
     command: npm run build:css -- --watch
     volumes:
-      - geeknote-sync:/app:nocopy
+      - .:/rails
   worker:
     build:
       context: .
       target: base
     command: bundle exec sidekiq
     volumes:
-      - geeknote-sync:/app:nocopy
+      - .:/rails
     depends_on:
       - postgres
       - redis
     cap_add:
       - SYS_ADMIN
   postgres:
-    image: postgres:12
+    image: postgres:14
     environment:
       POSTGRES_PASSWORD: postgres
   redis:
-    image: redis:5
-
-volumes:
-  geeknote-sync:
-    external: true
+    image: redis:6

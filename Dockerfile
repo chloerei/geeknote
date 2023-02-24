@@ -1,6 +1,8 @@
 ### base stage ###
 
-FROM ruby:3.1.2 AS base
+FROM ruby:3.2.1 AS base
+
+ENV LANG=C.UTF-8
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   curl \
@@ -12,31 +14,29 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   npm \
   postgresql-client
 
-ENV LANG=zh_CN.UTF-8
-
-RUN gem install bundler -v 2.3.6 && \
+RUN gem install bundler && \
   bundle config set --local path vendor/bundle
 
-RUN useradd -m deploy && \
-  mkdir /app && \
-  chown deploy:deploy /app
+RUN useradd -m rails && \
+  mkdir /rails && \
+  chown rails:rails /rails
 
-USER deploy
+USER rails:rails
 
-WORKDIR /app
+WORKDIR /rails
 
-### CI stage ###
+### production stage ###
 
-FROM base AS production
+FROM base
 
-COPY --chown=deploy:deploy Gemfile Gemfile.lock /app/
+COPY --chown=rails:rails Gemfile Gemfile.lock /rails/
 
 RUN bundle install
 
-COPY --chown=deploy:deploy package.json package-lock.json /app/
+COPY --chown=rails:rails package.json package-lock.json /app/
 
 RUN npm install
 
-COPY --chown=deploy:deploy . /app/
+COPY --chown=rails:rails . /app/
 
 RUN bin/rails assets:precompile

@@ -27,7 +27,6 @@
 
 /swarm/.env.*
 
-/.docker-sync
 /.git
 
 /public/uploads
