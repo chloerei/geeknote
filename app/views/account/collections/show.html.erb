@@ -48,7 +48,7 @@
         </div>
 
         <div class="display-flex flex-direction-column gap-3" data-controller="post-list" data-post-list-collection-id-value="<%= @collection.id %>">
-          <%= render partial: 'account/posts/post', collection: @posts, cached: true %>
+          <%= render partial: 'account/posts/post', collection: @posts.preload(:account, :user).to_a, cached: -> post { [post.account, post.user, post] } %>
         </div>
 
         <div class="padding-3">
