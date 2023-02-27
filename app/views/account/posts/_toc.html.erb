@@ -1,0 +1,9 @@
+<ul class="toc" data-controller="toc">
+  <% post_toc(post).each do |item| %>
+    <li class="toc__item" data-toc-target="item" data-id="<%= item[:id] %>">
+      <a href="<%= item[:href] %>" data-turbo="false">
+        <%= item[:title] %>
+      </a>
+    </li>
+  <% end %>
+</ul>

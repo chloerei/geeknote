@@ -1,5 +1,4 @@
 <% @page_title = @post.title %>
-<% @body_class = "background-surface" %>
 
 <% content_for :head do %>
   <meta property="og:type" content="article">
@@ -24,129 +23,182 @@
   <link rel="canonical" href="<%= @post.canonical_url || account_post_url(@account, @post) %>">
 <% end %>
 
-<div class="container container--post padding-3">
-  <% if @post.draft? %>
-    <div class="card card--filled padding-3 margin-bottom-3">
-      <div class="title-medium">
-        <%= t 'common.unpublished_post' %>
-        <a href="<%= edit_account_dashboard_post_path(@post.account, @post) %>">
-          <%= t 'common.continute_editing' %>
-        </a>
+<div class="container padding-3">
+  <div class="post-layout">
+    <div>
+      <div class="position-sticky top-3 display-flex flex-direction-column gap-1">
+        <button class="button button--icon">
+          <span class="material-icons">favorite_border</span>
+        </button>
+        <button class="button button--icon">
+          <span class="material-icons">bookmark_border</span>
+        </button>
+        <button class="button button--icon">
+          <span class="material-icons">more_horiz</span>
+        </button>
       </div>
     </div>
-  <% end %>
 
-  <div class="">
-    <div class="display-flex align-items-center flex-wrap gap-1 margin-y-3">
-      <a href="<%= account_root_path(@post.user.account) %>" class="link-title">
-        <div class="display-flex gap-2 align-items-center">
-          <div class="avatar">
-            <%= avatar_image_tag @post.user.avatar %>
+    <div class="display-flex flex-direction-column gap-3">
+      <div class="card card--elevated">
+        <% if @post.featured_image.attached? %>
+          <div class="post__feature-image">
+            <%= featured_image_tag @post.featured_image %>
           </div>
-          <div class="">
-            <b><%= @post.user.name %></b>
-          </div>
-        </div>
-      </a>
+        <% end %>
 
-      <% if @post.account.organization? %>
-        <span class="text-muted"><%= t 'common.in' %></span>
-        <a href="<%= account_root_path(@post.account) %>" class="link-title">
-          <b><%= @post.account.owner.name %></b>
-        </a>
-      <% end %>
+        <div class="padding-3">
+          <h1 class="headline-medium margin-top-0">
+            <%= @post.title %>
+          </h1>
 
-      <% if @post.published_at %>
-        <div class="text-muted">
-          &centerdot;
-        </div>
-        <div class="text-muted">
-          <%= format_time @post.published_at %>
-        </div>
-      <% end %>
-
-      <% if @post.canonical_url %>
-        <div class="text-muted">
-          &centerdot;
-        </div>
-        <div class="text-muted">
-          <%= t 'common.originally_published_at' %> <%= link_to_canonical_url @post.canonical_url %>
-        </div>
-      <% end %>
-
-      <div data-visible-to-user="<%= @post.user.id %>">
-        <div class="dropdown dropdown--right">
-          <label tabindex="0" class="button button--icon">
-            <span class="material-icons">more_horiz</span>
-          </label>
-
-          <div tabindex="0" class="dropdown__container">
-            <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="dropdown__item">
-              <%= t 'common.edit' %>
+          <div class="display-flex align-items-center flex-wrap gap-1 margin-y-3">
+            <a href="<%= account_root_path(@post.user.account) %>" class="link-title">
+              <div class="display-flex gap-2 align-items-center">
+                <div class="avatar avatar--small">
+                  <%= avatar_image_tag @post.user.avatar %>
+                </div>
+                <div class="">
+                  <b><%= @post.user.name %></b>
+                </div>
+              </div>
             </a>
+
+            <% if @post.account.organization? %>
+              <span class="text-muted"><%= t 'common.in' %></span>
+              <a href="<%= account_root_path(@post.account) %>" class="link-title">
+                <b><%= @post.account.owner.name %></b>
+              </a>
+            <% end %>
+
+            <% if @post.published_at %>
+              <div class="text-muted">
+                &centerdot;
+              </div>
+              <div class="text-muted">
+                <%= format_time @post.published_at %>
+              </div>
+            <% end %>
+
+            <% if @post.canonical_url %>
+              <div class="text-muted">
+                &centerdot;
+              </div>
+              <div class="text-muted">
+                <%= t 'common.originally_published_at' %> <%= link_to_canonical_url @post.canonical_url %>
+              </div>
+            <% end %>
+
+            <div data-visible-to-user="<%= @post.user.id %>">
+              <div class="dropdown dropdown--right">
+                <label tabindex="0" class="button button--icon">
+                  <span class="material-icons">more_horiz</span>
+                </label>
+
+                <div tabindex="0" class="dropdown__container">
+                  <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="dropdown__item">
+                    <%= t 'common.edit' %>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <% if @post.tags.any? %>
+            <div class="display-flex flex-wrap gap-2 margin-bottom-3">
+              <% @post.tags.each do |tag| %>
+                <a href="<%= tag_path(id: tag.name) %>" class="chip chip--assist">
+                  <%= tag.name %>
+                </a>
+              <% end %>
+            </div>
+          <% end %>
+
+          <div class="typography">
+            <%= markdown_render @post.content %>
+          </div>
+
+          <div class="display-flex gap-1">
+            <%= render 'account/posts/likes/button', post: @post %>
+
+            <%= render 'account/posts/collections/button', post: @post %>
           </div>
         </div>
       </div>
-    </div>
 
-    <h1 class="display-small margin-y-4">
-      <%= @post.title.presence || t('common.untitled') %>
-    </h1>
+      <div class="card card--elevated padding-3">
+        <div class="title-large margin-y-3">
+          <%= t 'common.comments' %>
+        </div>
 
-    <% if @post.featured_image.attached? %>
-      <div class="feature-image">
-        <%= featured_image_tag @post.featured_image %>
-      </div>
-    <% end %>
+        <div id="reply" class="margin-bottom-3">
+          <% if @post.allow_comments? %>
+            <% if current_user %>
+              <%= render 'account/posts/comments/form', comment: Comment.new %>
+            <% else %>
+              <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">
+                <%= t 'common.sign_in_to_comment' %>
+              </a>
+            <% end %>
+          <% else %>
+            <div class="padding-3 text-muted text-align-center">
+              <%= t 'common.comment_is_disabled' %>
+            </div>
+          <% end %>
+        </div>
 
-    <div class="typography margin-bottom-3">
-      <%= markdown_render @post.content %>
-    </div>
+        <div id="comments" class="display-flex flex-direction-column gap-3 margin-bottom-3" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
+          <%= render partial: 'account/posts/comments/comment', collection: @comments, cached: true %>
+        </div>
 
-    <% if @post.tags.any? %>
-      <div class="display-flex flex-wrap gap-2 margin-bottom-3">
-        <% @post.tags.each do |tag| %>
-          <a href="<%= tag_path(id: tag.name) %>" class="chip chip--assist">
-            <%= tag.name %>
+        <% if @post.comments_count > 3 %>
+          <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100 justify-content-center">
+            <%= t 'common.show_all_comments' %> (<%= @post.comments_count %>)
           </a>
         <% end %>
       </div>
-    <% end %>
+    </div>
 
-    <div class="display-flex gap-1">
-      <%= render 'account/posts/likes/button', post: @post %>
+    <div class="">
+      <div class="position-sticky top-3 display-flex flex-direction-column gap-3">
+        <div class="card card--elevated padding-3">
+          <% if @post.account.organization? %>
+            <div class="display-flex gap-3">
+              <div class="avatar">
+                <%= avatar_image_tag post.account.owner.avatar %>
+              </div>
+            </div>
+          <% end %>
 
-      <%= render 'account/posts/collections/button', post: @post %>
+          <div class="display-flex gap-3 position-relative">
+            <div class="avatar">
+              <%= avatar_image_tag @post.user.avatar %>
+            </div>
+            <div class="flex-grow-1">
+              <div class="title-medium">
+                <a href="<%= account_root_path(@post.user.account) %>" class="link-text link-expended">
+                  <%= @post.user.name %>
+                </a>
+              </div>
+              <div class="body-medium">
+                <%= @post.user.bio %>
+              </div>
+            </div>
+            <div>
+              <% if @post.user != current_user %>
+                <%= render 'account/follows/button', account: @post.user.account %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card--elevated padding-3">
+          <div class="title-medium margin-bottom-2">
+            Table of Contents
+          </div>
+          <%= render "toc", post: @post %>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="title-large margin-y-3">
-    <%= t 'common.comments' %>
-  </div>
-
-  <div id="reply" class="margin-bottom-3">
-    <% if @post.allow_comments? %>
-      <% if current_user %>
-        <%= render 'account/posts/comments/form', comment: Comment.new %>
-      <% else %>
-        <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">
-          <%= t 'common.sign_in_to_comment' %>
-        </a>
-      <% end %>
-    <% else %>
-      <div class="padding-3 text-muted text-align-center">
-        <%= t 'common.comment_is_disabled' %>
-      </div>
-    <% end %>
-  </div>
-
-  <div id="comments" class="display-flex flex-direction-column gap-3 margin-bottom-3" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
-    <%= render partial: 'account/posts/comments/comment', collection: @comments, cached: true %>
-  </div>
-
-  <% if @post.comments_count > 3 %>
-    <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100 justify-content-center">
-      <%= t 'common.show_all_comments' %> (<%= @post.comments_count %>)
-    </a>
-  <% end %>
 </div>

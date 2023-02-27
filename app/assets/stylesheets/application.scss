@@ -20,6 +20,7 @@ $material-icons-font-path: '';
 
 @import 'tab';
 @import 'nav';
+@import 'toc';
 
 @import 'post';
 @import 'image_uploader';
@@ -545,4 +546,8 @@ summary {
     flex-direction: column;
     overflow: auto;
   }
+}
+
+.card--elevated {
+  background: var(--color-surface);
 }

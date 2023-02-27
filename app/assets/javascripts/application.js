@@ -72,6 +72,9 @@ application.register('recaptcha', RecaptchaController)
 import AutoGrowController from './controllers/auto_grow_controller'
 application.register('auto-grow', AutoGrowController)
 
+import TocController from './controllers/toc_controller'
+application.register('toc', TocController)
+
 // clean snackbar content
 document.addEventListener('turbo:before-cache', () => {
   document.getElementById('snackbar-container').innerHTML = ''

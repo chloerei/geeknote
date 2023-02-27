@@ -1,29 +1,27 @@
 module ApplicationHelper
 
   MARKDOWN_ALLOW_TAGS = Set.new(%w(strong em b i p code pre tt samp kbd var sub sup dfn cite big small address hr br div span h1 h2 h3 h4 h5 h6 ul ol li dl dt dd abbr acronym a img blockquote del ins input table thead tbody tr th td))
-  MARKDOWN_ALLOW_ATTRIBUTES = Set.new(%w(href src width height alt cite datetime title class name xml:lang abbr type disabled checked))
+  MARKDOWN_ALLOW_ATTRIBUTES = Set.new(%w(id href src width height alt cite datetime title class name xml:lang abbr type disabled checked))
 
   def markdown_render(text)
-    doc = CommonMarker.render_doc(text, :DEFAULT, [:table, :tasklist, :strikethrough, :autolink, :tagfilter])
+    html = Commonmarker.to_html(text)
+    doc = Nokogiri::HTML.fragment(html)
 
-    # highlight commonmarker code block with rouge
-    doc.walk do |node|
-      if node.type == :code_block
-        next if node.fence_info == ''
-
-        lang = node.fence_info
-        lexer = Rouge::Lexer.find_fancy(lang) || Rouge::Lexer.find_fancy('text')
-        formatter = Rouge::Formatters::HTML.new
-        code = formatter.format(lexer.lex(node.string_content))
-        new_node = CommonMarker::Node.new(:html)
-        new_node.string_content = %Q(<pre class="language-#{lang} highlight"><code>#{code}</code></pre>)
-
-        node.insert_before(new_node)
-        node.delete
-      end
+    # code highlight
+    doc.css("pre code").each do |node|
+      lang = node.parent.attr("lang")
+      lexer = Rouge::Lexer.find_fancy(lang) || Rouge::Lexer.find_fancy('text')
+      formatter = Rouge::Formatters::HTML.new
+      node.inner_html = formatter.format(lexer.lex(node.content))
+      node.parent.add_class("highlight")
     end
 
-    sanitize doc.to_html([:HARDBREAKS, :UNSAFE]), tags: MARKDOWN_ALLOW_TAGS, attributes: MARKDOWN_ALLOW_ATTRIBUTES
+    # fix turbo anchor navigator
+    doc.css(".anchor").each do |node|
+      node["id"] = CGI.escape node["id"]
+    end
+
+    sanitize doc.to_html, tags: MARKDOWN_ALLOW_TAGS, attributes: MARKDOWN_ALLOW_ATTRIBUTES
   end
 
   def use_aliyun_oss?
@@ -118,6 +116,19 @@ module ApplicationHelper
     else
       truncate strip_tags(markdown_render(post.content)), length: length, escape: false
     end
+  end
+
+  def post_toc(post)
+    doc = Nokogiri::HTML.fragment(markdown_render(post.content || ""))
+    toc = doc.css("h2").map do |heading|
+      anchor = heading.css(".anchor")
+      {
+        title: heading.text.strip,
+        href: anchor.attr("href"),
+        id: anchor.attr("id")
+      }
+    end
+    toc
   end
 
   def comment_summary(comment)
