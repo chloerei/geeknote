@@ -47,7 +47,7 @@
           </div>
         <% end %>
 
-        <div class="padding-3">
+        <div class="padding-4">
           <h1 class="headline-medium margin-top-0">
             <%= @post.title %>
           </h1>
@@ -126,12 +126,12 @@
         </div>
       </div>
 
-      <div class="card card--elevated padding-3">
-        <div class="title-large margin-y-3">
+      <div class="card card--elevated">
+        <div class="title-large padding-x-4 padding-y-3">
           <%= t 'common.comments' %>
         </div>
 
-        <div id="reply" class="margin-bottom-3">
+        <div id="reply" class="">
           <% if @post.allow_comments? %>
             <% if current_user %>
               <%= render 'account/posts/comments/form', comment: Comment.new %>
@@ -147,14 +147,16 @@
           <% end %>
         </div>
 
-        <div id="comments" class="display-flex flex-direction-column gap-3 margin-bottom-3" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
+        <div id="comments" class="border-top divide-y" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
           <%= render partial: 'account/posts/comments/comment', collection: @comments, cached: true %>
         </div>
 
         <% if @post.comments_count > 3 %>
-          <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100 justify-content-center">
-            <%= t 'common.show_all_comments' %> (<%= @post.comments_count %>)
-          </a>
+          <div class="padding-x-4 padding-y-3">
+            <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100 justify-content-center">
+              <%= t 'common.show_all_comments' %> (<%= @post.comments_count %>)
+            </a>
+          </div>
         <% end %>
       </div>
     </div>

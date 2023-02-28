@@ -1,20 +1,19 @@
 <% liked ||= false %>
 
 <%= form_with url: account_post_comment_like_path(@post.account, @post, comment), method: (liked ? 'delete' : 'post'), id: "comment-#{comment.id}-like-button", data: { 'comment-target': 'likeButtonForm' } do |form| %>
-  <button type="submit" class="button button--text button--like <%= 'button--active' if liked %>">
-    <div class="button__icon">
+  <div class="display-flex gap-1 align-items-center">
+    <button type="submit" class="button button--icon button--like <%= 'button--active' if liked %>">
       <div class="button__show-on-active">
         <span class="material-icons">favorite</span>
       </div>
       <div class="button__hide-on-active">
         <span class="material-icons">favorite_border</span>
       </div>
-    </div>
-    <div class="button__text">
+    </button>
+    <div class="">
       <% if comment.likes_count > 0 %>
         <%= comment.likes_count %>
       <% end %>
-      <%= t 'common.likes' %>
     </div>
-  </button>
+  </div>
 <% end %>

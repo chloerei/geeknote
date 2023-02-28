@@ -1,38 +1,41 @@
-<% @body_class = "background-surface" %>
+<div class="container padding-3">
+  <div class="post-layout">
+    <div></div>
+    <div>
+      <div class="card card--elevated">
+        <div class="display-flex gap-2 align-items-center padding-2 margin-1">
+          <a href="<%= account_post_path(@account, @post) %>" class="button button--icon">
+            <span class="material-icons">arrow_back</span>
+          </a>
+          <div class="title-medium">
+            <%= @post.title %>
+          </div>
+        </div>
 
-<div class="container container--post padding-3">
-  <div class="top-app-bar">
-    <div class="top-app-bar__action">
-      <a href="<%= account_post_path(@account, @post) %>" class="button button--icon">
-        <span class="material-icons">arrow_back</span>
-      </a>
-    </div>
-    <div class="top-app-bar__title">
-      <%= @post.title %>
-    </div>
-  </div>
+        <div id="reply" class="">
+          <% if @post.allow_comments? %>
+            <% if current_user %>
+              <%= render 'account/posts/comments/form', comment: Comment.new %>
+            <% else %>
+              <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">
+                <%= t 'common.sign_in_to_comment' %>
+              </a>
+            <% end %>
+          <% else %>
+            <div class="padding-3 text-muted text-align-center">
+              <%= t 'common.comment_is_disabled' %>
+            </div>
+          <% end %>
+        </div>
 
-  <div id="reply" class="margin-bottom-3">
-    <% if @post.allow_comments? %>
-      <% if current_user %>
-        <%= render 'account/posts/comments/form', comment: Comment.new %>
-      <% else %>
-        <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">
-          <%= t 'common.sign_in_to_comment' %>
-        </a>
-      <% end %>
-    <% else %>
-      <div class="padding-3 text-muted text-align-center">
-        <%= t 'common.comment_is_disabled' %>
+        <div id="comments" class="border-top divide-y" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
+          <%= render partial: 'account/posts/comments/comment', collection: @comments, cached: true %>
+        </div>
+
+        <div class="margin-3">
+          <%= paginate @comments %>
+        </div>
       </div>
-    <% end %>
-  </div>
-
-  <div id="comments" class="display-flex flex-direction-column gap-3" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
-    <%= render partial: 'account/posts/comments/comment', collection: @comments, cached: true %>
-  </div>
-
-  <div class="margin-3">
-    <%= paginate @comments %>
+    </div>
   </div>
 </div>

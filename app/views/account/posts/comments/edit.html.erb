@@ -1,16 +1,19 @@
-<% @body_class = "background-surface" %>
+<div class="container padding-3">
+  <div class="post-layout">
+    <div></div>
+    <div>
+      <div class="card card--elevated">
+        <div class="display-flex gap-2 align-items-center padding-2 margin-1">
+          <a href="<%= account_post_comment_path(@account, @post, @comment) %>" class="button button--icon">
+            <span class="material-icons">arrow_back</span>
+          </a>
+          <div class="title-medium">
+            <%= t 'common.edit_comment' %>
+          </div>
+        </div>
 
-<div class="container container--post padding-3">
-  <div class="top-app-bar">
-    <div class="top-app-bar__action">
-      <a href="<%= account_post_comment_path(@account, @post, @comment) %>" class="button button--icon">
-        <span class="material-icons">arrow_back</span>
-      </a>
-    </div>
-    <div class="top-app-bar__title">
-      <%= t 'common.edit_comment' %>
+        <%= render 'form', comment: @comment %>
+      </div>
     </div>
   </div>
-
-  <%= render 'form', comment: @comment %>
 </div>

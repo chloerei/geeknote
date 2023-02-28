@@ -27,9 +27,8 @@ $material-icons-font-path: '';
 @import 'markdown_editor';
 
 :root {
-  --space-4: 32px;
-  --space-5: 64px;
-  --space-6: 128px;
+  --space-4: 24px;
+  --space-5: 48px;
 
   --font-family-monospace: Menlo, Consolas, "Liberation Mono", Courier, "Microsoft YaHei", monospace;
 }
@@ -246,6 +245,7 @@ body[data-color-scheme="dark"] {
 
 .button--icon {
   color: var(--color-on-surface-variant);
+  line-height: 0;
 }
 
 .button--muted {
@@ -550,4 +550,10 @@ summary {
 
 .card--elevated {
   background: var(--color-surface);
+}
+
+.divide-y {
+  > *:not(:last-child) {
+    border-bottom: 1px solid var(--color-outline);
+  }
 }
