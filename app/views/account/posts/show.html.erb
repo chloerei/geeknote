@@ -162,42 +162,52 @@
     <div class="">
       <div class="position-sticky top-3 display-flex flex-direction-column gap-3">
         <div class="card card--elevated padding-3">
-          <% if @post.account.organization? %>
-            <div class="display-flex gap-3">
+          <div class="display-flex flex-direction-column gap-3">
+            <% if @post.account.organization? %>
+              <div class="display-flex gap-3 position-relative">
+                <div class="avatar">
+                  <%= avatar_image_tag @post.account.owner.avatar %>
+                </div>
+                <div class="flex-grow-1">
+                  <div class="title-medium">
+                    <a href="<%= account_root_path(@post.account) %>" class="link-text link-expended">
+                      <%= @post.account.owner.name %>
+                    </a>
+                  </div>
+                  <div class="body-medium">
+                    <%= @post.account.owner.description %>
+                  </div>
+                </div>
+                <div>
+                  <%= render 'account/follows/button', account: @post.user.account %>
+                </div>
+              </div>
+            <% end %>
+
+            <div class="display-flex gap-3 position-relative">
               <div class="avatar">
-                <%= avatar_image_tag post.account.owner.avatar %>
+                <%= avatar_image_tag @post.user.avatar %>
               </div>
-            </div>
-          <% end %>
-
-          <div class="display-flex gap-3 position-relative">
-            <div class="avatar">
-              <%= avatar_image_tag @post.user.avatar %>
-            </div>
-            <div class="flex-grow-1">
-              <div class="title-medium">
-                <a href="<%= account_root_path(@post.user.account) %>" class="link-text link-expended">
-                  <%= @post.user.name %>
-                </a>
+              <div class="flex-grow-1">
+                <div class="title-medium">
+                  <a href="<%= account_root_path(@post.user.account) %>" class="link-text link-expended">
+                    <%= @post.user.name %>
+                  </a>
+                </div>
+                <div class="body-medium">
+                  <%= @post.user.bio %>
+                </div>
               </div>
-              <div class="body-medium">
-                <%= @post.user.bio %>
+              <div>
+                <% if @post.user != current_user %>
+                  <%= render 'account/follows/button', account: @post.user.account %>
+                <% end %>
               </div>
-            </div>
-            <div>
-              <% if @post.user != current_user %>
-                <%= render 'account/follows/button', account: @post.user.account %>
-              <% end %>
             </div>
           </div>
         </div>
 
-        <div class="card card--elevated padding-3">
-          <div class="title-medium margin-bottom-2">
-            Table of Contents
-          </div>
-          <%= render "toc", post: @post %>
-        </div>
+        <%= render "toc", post: @post %>
       </div>
     </div>
   </div>
