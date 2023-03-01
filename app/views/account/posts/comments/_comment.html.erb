@@ -32,29 +32,40 @@
     </div>
   </div>
 
-  <div class="typography">
+  <% if comment.parent %>
+    <a href="<%= account_post_comment_path(@account, @post, comment.parent) %>" class="card card--filled padding-3 margin-bottom-3 comment__reply-to">
+        <span><%= t 'common.reply_to' %></span>
+        <b><%= comment.parent.user.name %></b>
+        <span> - </span>
+        <span><%= comment_summary comment.parent %></span>
+    </a>
+  <% end %>
+
+  <div class="typography margin-bottom-3">
     <%= markdown_render comment.content %>
   </div>
 
   <div class="display-flex gap-3">
     <%= render 'account/posts/comments/likes/button', comment: comment %>
 
-    <% if comment.replies_count > 0 %>
-      <div class="display-flex gap-1 align-items-center">
-        <a href="<%= account_post_comment_path(@account, @post, comment, anchor: "replies") %>" class="button button--icon">
-          <span class="material-icons">comment</span>
-        </a>
-        <div class="">
-          <%= comment.replies_count %>
-        </div>
-      </div>
-    <% end %>
+    <a href="<%= account_post_comment_path(@account, @post, comment, anchor: "reply") %>" class="button button--icon">
+      <span class="material-icons">reply</span>
+    </a>
 
     <div class="flex-grow-1">
     </div>
 
-    <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="button button--text button--muted">
-      <%= t 'common.reply' %>
-    </a>
+    <% if comment.replies_count > 0 %>
+      <div class="display-flex gap-1 align-items-center">
+        <a href="<%= account_post_comment_path(@account, @post, comment, anchor: "replies") %>" class="button button--text button--muted">
+          <div class="button__label">
+            <%= comment.replies_count %> <%= t 'common.replies' %>
+          </div>
+          <div class="button__icon">
+            <span class="material-icons">arrow_right_alt</span>
+          </div>
+        </a>
+      </div>
+    <% end %>
   </div>
 </div>

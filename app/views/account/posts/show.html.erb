@@ -149,15 +149,15 @@
 
         <div id="comments" class="border-top divide-y" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
           <%= render partial: 'account/posts/comments/comment', collection: @comments, cached: true %>
-        </div>
 
-        <% if @post.comments_count > 3 %>
-          <div class="padding-x-4 padding-y-3">
-            <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100 justify-content-center">
-              <%= t 'common.show_all_comments' %> (<%= @post.comments_count %>)
-            </a>
-          </div>
-        <% end %>
+          <% if @post.comments_count > 3 %>
+            <div class="padding-x-4 padding-y-3">
+              <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100 justify-content-center">
+                <%= t 'common.show_all_comments' %> (<%= @post.comments_count %>)
+              </a>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
 

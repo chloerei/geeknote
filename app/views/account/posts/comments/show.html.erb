@@ -12,62 +12,7 @@
         </div>
       </div>
 
-      <div class="padding-x-4 padding-y-3" id="comment-<%= @comment.id %>" data-controller="comment" data-comment-id-value="<%= @comment.id %>">
-        <div class="display-flex gap-1 align-items-center margin-bottom-3">
-          <div class="display-flex gap-2">
-            <div class="avatar avatar--small">
-              <%= avatar_image_tag @comment.user.avatar %>
-            </div>
-            <div>
-              <b><%= @comment.user.name %></b>
-            </div>
-          </div>
-          <span class="text-muted">&centerdot;</span>
-          <a href="<%= account_post_comment_path(@account, @post, @comment) %>" class="link-text">
-            <span class="text-muted"><%= format_time @comment.created_at %></span>
-          </a>
-
-          <div class="flex-grow-1"></div>
-
-          <div class="dropdown dropdown--right">
-            <label tabindex="0" class="button button--icon">
-              <span class="material-icons">more_horiz</span>
-            </label>
-            <div tabindex="0" class="dropdown__container">
-              <a href="<%= edit_account_post_comment_path(@account, @post, @comment) %>" class="dropdown__item" data-visible-to-user="<%= @comment.user_id %>">
-                <%= t 'common.edit' %>
-              </a>
-              <%= form_with url: account_post_comment_path(@account, @post, @comment), method: 'delete', data: { 'visible-to-user': @comment.user_id, 'turbo-confirm': "Are you sure delete this comment?" } do |form| %>
-                <button type="submit" class="dropdown__item">
-                  <%= t 'common.delete' %>
-                </button>
-              <% end %>
-            </div>
-          </div>
-        </div>
-
-        <% if @comment.parent %>
-          <a href="<%= account_post_comment_path(@account, @post, @comment.parent) %>" class="card card--outlined padding-3 margin-bottom-3">
-            <div class="display-flex align-items-center gap-1">
-              <span><%= t 'common.reply_to' %></span>
-              <b><%= @comment.parent.user.name %></b>
-              <span>&centerdot;</span>
-              <span><%= format_time @comment.parent.created_at %></span>
-            </div>
-            <div>
-              <%= comment_summary @comment.parent %>
-            </div>
-          </a>
-        <% end %>
-
-        <div class="typography margin-bottom-3">
-          <%= markdown_render @comment.content %>
-        </div>
-
-        <div class="display-flex gap-3">
-          <%= render 'account/posts/comments/likes/button', comment: @comment %>
-        </div>
-      </div>
+      <%= render @comment %>
 
       <div class="padding-x-4">
         <div class="divider"></div>
@@ -89,7 +34,7 @@
         <% end %>
       </div>
 
-      <div id="comments" class="border-top divide-y" data-liked-ids="<%= "[#{@replies.filter(&:liked).map(&:id).join(',')}]" %>">
+      <div id="comments" class="comment-replies border-top divide-y" data-liked-ids="<%= "[#{@replies.filter(&:liked).map(&:id).join(',')}]" %>">
         <%= render partial: 'comment', collection: @replies, cached: true %>
       </div>
 

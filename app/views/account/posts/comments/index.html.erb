@@ -30,11 +30,12 @@
 
         <div id="comments" class="border-top divide-y" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
           <%= render partial: 'account/posts/comments/comment', collection: @comments, cached: true %>
+
+          <div class="padding-x-4 padding-y-3">
+            <%= paginate @comments %>
+          </div>
         </div>
 
-        <div class="margin-3">
-          <%= paginate @comments %>
-        </div>
       </div>
     </div>
   </div>
