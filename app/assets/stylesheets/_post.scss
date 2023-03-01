@@ -58,6 +58,12 @@
   grid-template-columns: 40px 1fr 280px;
 }
 
+.post-sidebar {
+  position: sticky;
+  top: var(--space-3);
+  max-height: calc(100vh - var(--space-3) * 2);
+}
+
 .post__feature-image {
   img {
     max-width: 100%;

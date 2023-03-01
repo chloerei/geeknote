@@ -1,14 +1,14 @@
 <% toc = post_toc(post) %>
 
 <% if toc.any? %>
-  <div class="card card--elevated padding-3">
+  <div class="card card--elevated padding-3 overflow-auto">
     <div class="title-medium margin-bottom-2">
       Table of Contents
     </div>
 
     <ul class="toc" data-controller="toc">
       <% toc.each do |item| %>
-        <li class="toc__item" data-toc-target="item" data-id="<%= item[:id] %>">
+        <li class="toc__item toc__item--level-<%= item[:level] %>" data-toc-target="item" data-id="<%= item[:id] %>">
           <a href="<%= item[:href] %>">
             <%= item[:title] %>
           </a>

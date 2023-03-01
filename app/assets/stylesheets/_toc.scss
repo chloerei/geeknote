@@ -31,18 +31,24 @@
     height: 10px;
     border-radius: 5px;
     background: var(--color-primary-container);
-    border: 2px solid var(--color-surface);
+    border: 1px solid var(--color-surface);
   }
 
   a {
     color: var(--color-on-surface);
     text-decoration: none;
-    opacity: 0.8;
+    opacity: 0.7;
     flex-grow: 1;
 
     &:hover {
       opacity: 1;
     }
+  }
+}
+
+.toc__item--level-3 {
+  &::before {
+    border-width: 3px;
   }
 }
 

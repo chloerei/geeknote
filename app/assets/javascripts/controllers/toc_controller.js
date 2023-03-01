@@ -5,7 +5,6 @@ export default class extends Controller {
 
   connect() {
     this.observer = new IntersectionObserver((entries) => {
-      console.log(entries)
       entries.forEach(entry => {
         let item = this.itemTargets.find((item) => item.dataset.id == entry.target.id)
         if (entry.isIntersecting && entry.intersectionRatio == 1) {
@@ -24,6 +23,7 @@ export default class extends Controller {
       this.itemTargets.forEach((item) => {
         if (item == this.currentItem) {
           item.classList.add("toc__item--active")
+          item.scrollIntoView({ block: "nearest" })
         } else {
           item.classList.remove("toc__item--active")
         }

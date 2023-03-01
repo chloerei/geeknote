@@ -120,12 +120,13 @@ module ApplicationHelper
 
   def post_toc(post)
     doc = Nokogiri::HTML.fragment(markdown_render(post.content || ""))
-    toc = doc.css("h2").map do |heading|
+    toc = doc.css("h2, h3").map do |heading|
       anchor = heading.css(".anchor")
       {
         title: heading.text.strip,
         href: anchor.attr("href"),
-        id: anchor.attr("id")
+        id: anchor.attr("id"),
+        level: heading.name[1].to_i
       }
     end
     toc
