@@ -3,12 +3,21 @@
     <div></div>
 
     <div class="card card--elevated">
-      <div class="display-flex gap-2 align-items-center padding-2 margin-1">
-        <a href="<%= account_post_path(@account, @post) %>" class="button button--icon">
-          <span class="material-icons">arrow_back</span>
-        </a>
-        <div class="title-medium">
-          <%= @post.title %>
+      <div class="breadcrumb padding-x-4 padding-y-3">
+        <div class="breadcrumb__item">
+          <a href="<%= account_post_path(@account, @post) %>">
+            <%= @post.title %>
+          </a>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="<%= account_post_comments_path(@account, @post) %>">
+            <%= t 'common.comments' %>
+          </a>
+        </div>
+        <div class="breadcrumb__item breadcrumb__item--active">
+          <a href="<%= account_post_comment_path(@account, @post, @comment) %>">
+            <%= @comment.id %>
+          </a>
         </div>
       </div>
 

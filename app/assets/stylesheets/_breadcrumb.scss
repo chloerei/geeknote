@@ -7,9 +7,15 @@
 .breadcrumb__item {
   display: inline-flex;
   align-items: center;
+  color: var(--color-on-surface-variant);
 
   a {
     text-decoration: none;
+    color: currentColor;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &:not(:last-child)::after {
@@ -19,5 +25,5 @@
 }
 
 .breadcrumb__item--active {
-  color: var(--color-on-surface-variant);
+  color: var(--color-on-surface);
 }
