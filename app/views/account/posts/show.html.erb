@@ -25,20 +25,6 @@
 
 <div class="container padding-3">
   <div class="post-layout">
-    <div>
-      <div class="position-sticky top-3 display-flex flex-direction-column gap-1">
-        <button class="button button--icon">
-          <span class="material-icons">favorite_border</span>
-        </button>
-        <button class="button button--icon">
-          <span class="material-icons">bookmark_border</span>
-        </button>
-        <button class="button button--icon">
-          <span class="material-icons">more_horiz</span>
-        </button>
-      </div>
-    </div>
-
     <div class="display-flex flex-direction-column gap-3">
       <div class="card card--elevated">
         <% if @post.featured_image.attached? %>
@@ -118,11 +104,20 @@
             <%= markdown_render @post.content %>
           </div>
 
-          <div class="display-flex gap-1">
-            <%= render 'account/posts/likes/button', post: @post %>
-
-            <%= render 'account/posts/collections/button', post: @post %>
+          <div class="post-toolbar">
+            <div class="post-toolbar__content">
+              <button class="button button--icon">
+                <span class="material-icons">favorite_border</span>
+              </button>
+              <button class="button button--icon">
+                <span class="material-icons">bookmark_border</span>
+              </button>
+              <button class="button button--icon">
+                <span class="material-icons">more_horiz</span>
+              </button>
+            </div>
           </div>
+
         </div>
       </div>
 

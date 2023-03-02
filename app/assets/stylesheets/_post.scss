@@ -55,7 +55,23 @@
 .post-layout {
   display: grid;
   gap: 16px;
-  grid-template-columns: 40px 1fr 280px;
+  grid-template-columns: 1fr 280px;
+  position: relative;
+}
+
+.post-toolbar {
+  position: absolute;
+  top: 0;
+  left: -56px;
+  height: 100%;
+}
+
+.post-toolbar__content {
+  position: sticky;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .post-sidebar {
