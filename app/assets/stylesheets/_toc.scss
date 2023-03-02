@@ -35,15 +35,17 @@
   }
 
   a {
-    color: var(--color-on-surface);
+    color: #777;
     text-decoration: none;
-    opacity: 0.7;
     flex-grow: 1;
 
     &:hover {
-      opacity: 1;
+      color: var(--color-on-surface);
     }
   }
+}
+
+.toc__item--level-2 {
 }
 
 .toc__item--level-3 {
@@ -58,6 +60,6 @@
   }
 
   a {
-    opacity: 1;
+    color: var(--color-on-surface);
   }
 }
