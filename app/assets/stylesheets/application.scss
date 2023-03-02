@@ -22,6 +22,7 @@ $material-icons-font-path: '';
 @import 'nav';
 @import 'toc';
 @import 'sheet';
+@import 'button';
 
 @import 'post';
 @import 'image_uploader';
@@ -242,45 +243,6 @@ body[data-color-scheme="dark"] {
 
 .body-medium {
   font-weight: normal;
-}
-
-.button--icon {
-  color: var(--color-on-surface-variant);
-  line-height: 0;
-}
-
-.button--muted {
-  color: var(--color-on-surface-variant);
-}
-
-.button--like {
-  color: var(--color-on-surface-variant);
-}
-
-.button--danger {
-  color: var(--color-error);
-}
-
-.button--like.button--active {
-  color: #f44336;
-}
-
-.button__show-on-active {
-  display: none;
-}
-
-.button__hdie-on-active {
-  display: inherit;
-}
-
-.button--active {
-  .button__show-on-active {
-    display: inherit;
-  }
-
-  .button__hide-on-active {
-    display: none;
-  }
 }
 
 .banner-image {

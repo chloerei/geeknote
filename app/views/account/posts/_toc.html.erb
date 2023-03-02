@@ -1,6 +1,5 @@
 <% toc = post_toc(post) %>
 
-<% if toc.any? %>
   <input type="checkbox" id="toc-sheet-toggle" class="sheet-toggle">
   <div class="sheet sheet--toc">
     <div class="sheet__container">
@@ -8,16 +7,21 @@
         Table of Contents
       </div>
 
-      <ul class="toc" data-controller="toc">
-        <% toc.each do |item| %>
-          <li class="toc__item toc__item--level-<%= item[:level] %>" data-toc-target="item" data-id="<%= item[:id] %>">
-            <a href="<%= item[:href] %>">
-              <%= item[:title] %>
-            </a>
-          </li>
-        <% end %>
-      </ul>
+      <% if toc.any? %>
+        <ul class="toc" data-controller="toc">
+          <% toc.each do |item| %>
+            <li class="toc__item toc__item--level-<%= item[:level] %>" data-toc-target="item" data-id="<%= item[:id] %>">
+              <a href="<%= item[:href] %>">
+                <%= item[:title] %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="body-medium">
+          No contents
+        </div>
+      <% end %>
     </div>
     <label for="toc-sheet-toggle" class="sheet__scrim">
   </div>
-<% end %>

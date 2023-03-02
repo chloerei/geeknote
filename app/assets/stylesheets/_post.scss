@@ -70,6 +70,7 @@
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 10;
 }
 
 .post-toolbar__content {
@@ -100,6 +101,10 @@
     justify-content: flex-start;
     height: auto;
     background: transparent;
+
+    .button-group {
+      flex-direction: column;
+    }
   }
 }
 
@@ -107,6 +112,7 @@
   position: sticky;
   top: var(--space-3);
   max-height: calc(100vh - var(--space-3) * 2);
+  z-index: 10;
 }
 
 .post__feature-image {

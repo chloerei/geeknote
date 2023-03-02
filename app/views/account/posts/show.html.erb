@@ -104,44 +104,37 @@
             <%= markdown_render @post.content %>
           </div>
 
-          <div class="post-toolbar">
-            <div class="post-toolbar__content">
-              <div class="display-flex align-items-center flex-direction-column@laptop">
-                <button class="button button--icon">
-                  <span class="material-icons">favorite_border</span>
-                </button>
-                <% if @post.likes_count > 0 %>
-                  <div class="body-medium">
-                    <%= @post.likes_count %>
-                  </div>
-                <% end %>
-              </div>
-              <div class="display-flex align-items-center flex-direction-column@laptop">
-                <button class="button button--icon">
-                  <span class="material-icons">comment</span>
-                </button>
-                <% if @post.comments_count > 0 %>
-                  <div class="body-medium">
-                    <%= @post.comments_count %>
-                  </div>
-                <% end %>
-              </div>
-              <button class="button button--icon">
-                <span class="material-icons">bookmark_border</span>
-              </button>
-              <label for="toc-sheet-toggle" class="button button--icon display-none@laptop">
-                <span class="material-icons">toc</span>
-              </label>
-              <button class="button button--icon">
-                <span class="material-icons">more_horiz</span>
-              </button>
-            </div>
-          </div>
-
         </div>
       </div>
 
-      <div class="card card--elevated">
+      <div class="post-toolbar">
+        <div class="post-toolbar__content">
+          <%= render "account/posts/likes/button", post: @post %>
+
+          <div class="button-group">
+            <a href="#comments" class="button button--icon">
+              <span class="material-icons">comment</span>
+            </a>
+            <% if @post.comments_count > 0 %>
+              <div class="body-medium">
+                <%= @post.comments_count %>
+              </div>
+            <% end %>
+          </div>
+
+          <%= render "account/posts/collections/button", post: @post %>
+
+          <label for="toc-sheet-toggle" class="button button--icon display-none@laptop">
+            <span class="material-icons">toc</span>
+          </label>
+
+          <button class="button button--icon">
+            <span class="material-icons">more_horiz</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="comments" class="card card--elevated">
         <div class="title-large padding-x-4 padding-y-3">
           <%= t 'common.comments' %>
         </div>
