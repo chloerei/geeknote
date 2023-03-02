@@ -55,23 +55,41 @@
 .post-layout {
   display: grid;
   gap: 16px;
-  grid-template-columns: 1fr 280px;
+  grid-template-columns: 1fr;
   position: relative;
 }
 
+@media (min-width: map.get($breakpoints, "laptop")) {
+  .post-layout {
+    grid-template-columns: 1fr 280px;
+  }
+}
+
 .post-toolbar {
-  position: absolute;
-  top: 0;
-  left: -56px;
-  height: 100%;
+  margin-top: 16px;
 }
 
 .post-toolbar__content {
-  position: sticky;
-  top: 16px;
   display: flex;
-  flex-direction: column;
   gap: 8px;
+  justify-content: center;
+}
+
+@media (min-width: map.get($breakpoints, "laptop")) {
+  .post-toolbar {
+    margin-top: 0;
+    position: absolute;
+    top: 0;
+    left: -56px;
+    height: 100%;
+  }
+
+  .post-toolbar__content {
+    position: sticky;
+    top: 16px;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 }
 
 .post-sidebar {

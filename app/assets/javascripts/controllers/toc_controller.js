@@ -4,6 +4,8 @@ export default class extends Controller {
   static targets = ["item"]
 
   connect() {
+    this.scrollParent = this.getScrollParent(this.element)
+
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         let item = this.itemTargets.find((item) => item.dataset.id == entry.target.id)
@@ -23,7 +25,20 @@ export default class extends Controller {
       this.itemTargets.forEach((item) => {
         if (item == this.currentItem) {
           item.classList.add("toc__item--active")
-          item.scrollIntoView({ block: "nearest" })
+
+          if (this.scrollParent) {
+            let parentRect = this.scrollParent.getBoundingClientRect()
+            let itemRect = item.getBoundingClientRect()
+            let scrollOffsetTop = itemRect.top - parentRect.top + this.scrollParent.scrollTop
+            if (this.scrollParent.scrollTop + parentRect.height < scrollOffsetTop + itemRect.height) {
+              // scroll item to bottom
+              this.scrollParent.scrollTo(0, scrollOffsetTop + itemRect.height - parentRect.height)
+            } else if (this.scrollParent.scrollTop > scrollOffsetTop) {
+              // scroll item to top
+              this.scrollParent.scrollTo(0, scrollOffsetTop)
+            }
+
+          }
         } else {
           item.classList.remove("toc__item--active")
         }
@@ -42,26 +57,16 @@ export default class extends Controller {
   }
 
   disconnect() {
-    this.observer = null
+    this.observer.disconnect()
   }
 
-  // update() {
-  //   if (this.updateTimer) {
-  //     return
-  //   }
-
-  //   this.updateTimer = setTimeout(() => {
-  //     this.itemTargets.forEach(item => {
-  //       item.classList.remove("toc__item--active");
-  //     })
-
-  //     this.itemTargets.forEach(item => {
-  //       console.log(item.dataset)
-  //       let target = document.getElementById(item.dataset.id)
-  //       console.log(target.getBoundingClientRect())
-  //     })
-
-  //     this.updateTimer = null
-  //   }, 1000);
-  // }
+  getScrollParent(element) {
+    if (element == null) {
+      return null
+    } else if (element.scrollHeight > element.clientHeight) {
+      return element
+    } else {
+      return this.getScrollParent(element.parentNode)
+    }
+  }
 }
