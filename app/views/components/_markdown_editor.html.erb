@@ -1,0 +1,41 @@
+<% input ||= nil %>
+<div class="markdown-editor" data-controller="markdown-editor" data-markdown-editor-input-value="<%= input %>" data-markdown-editor-direct-upload-url-value="<%= rails_direct_uploads_path %>">
+  <div class="markdown-editor__toolbar">
+    <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatBold">
+      <span class="material-icons">format_bold</span>
+    </button>
+    <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatItalic">
+      <span class="material-icons">format_italic</span>
+    </button>
+    <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatTitle">
+      <span class="material-icons">title</span>
+    </button>
+    <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatImage">
+      <span class="material-icons">add_photo_alternate</span>
+      <input type="file" class="display-none" data-action="markdown-editor#formatImage">
+    </button>
+    <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatLink">
+      <span class="material-icons">insert_link</span>
+    </button>
+    <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatCode">
+      <span class="material-icons">code</span>
+    </button>
+    <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatQuote">
+      <span class="material-icons">format_quote</span>
+    </button>
+    <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatListBulleted">
+      <span class="material-icons">format_list_bulleted</span>
+    </button>
+    <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatListNumbered">
+      <span class="material-icons">format_list_numbered</span>
+    </button>
+    <div class="flex-grow-1"></div>
+    <button type="button" class="button button--icon markdown-editor__preview-button" data-action="markdown-editor#togglePreview" tabindex="-1">
+      <span class="material-icons">preview</span>
+    </button>
+  </div>
+  <div class="markdown-editor__content" data-markdown-editor-target="content">
+  </div>
+  <div class="markdown-editor__preview typography" data-markdown-editor-target="preview">
+  </div>
+</div>

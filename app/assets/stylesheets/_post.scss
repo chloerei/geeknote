@@ -7,7 +7,9 @@
   }
 
   .markdown-editor__toolbar {
-    margin: 0 -8px;
+    margin: 0 -24px;
+    padding: 4px 16px;
+    border-radius: 0;
   }
 }
 
@@ -15,12 +17,17 @@
   width: 100%;
   border: none;
   outline: none;
-  padding: 12px 0;
+  padding: 0;
+  line-height: 1.5;
   resize: none;
   overflow: hidden;
   font-family: sans-serif;
   background: transparent;
   color: var(--color-on-surface)
+}
+
+.post-form__tag-selector {
+  padding: 0;
 }
 
 .post-status {

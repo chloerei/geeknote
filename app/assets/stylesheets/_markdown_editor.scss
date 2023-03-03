@@ -88,7 +88,7 @@
     color: var(--color-primary);
   }
 
-  .markdown-editor__toolbar .button--icon {
+  .markdown-editor__toolbar .button--icon:not(.markdown-editor__preview-button) {
     color: var(--color-on-disabled);
     pointer-events: none;
   }

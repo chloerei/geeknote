@@ -119,3 +119,18 @@
     }
   }
 }
+
+.image-uploader--featured-image {
+  min-height: 0;
+  overflow: initial;
+
+  &::before {
+    border: none;
+  }
+
+  .image-uploader__preview {
+    img {
+      border-radius: 12px;
+    }
+  }
+}

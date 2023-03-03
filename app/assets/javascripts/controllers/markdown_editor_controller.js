@@ -82,65 +82,9 @@ export default class extends Controller {
   static targets = ["content", "preview"]
 
   connect() {
-    this.element.innerHTML = `
-      <div class="markdown-editor__toolbar">
-        <button type="button" class="button button--text markdown-editor__write-button"  data-action="markdown-editor#write" tabindex="-1">
-          <div class="button__icon">
-            <span class="material-icons">edit</span>
-          </div>
-          <div class="button__label">
-            ${this.i18nValue.write}
-          </div>
-        </button>
-        <button type="button" class="button button--text markdown-editor__preview-button" data-action="markdown-editor#preview" tabindex="-1">
-          <div class="button__icon">
-            <span class="material-icons">preview</span>
-          </div>
-          <div class="button__label">
-            ${this.i18nValue.preview}
-          </div>
-        </button>
-        <div class="flex-grow-1">
-        </div>
-        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatBold">
-          <span class="material-icons">format_bold</span>
-        </button>
-        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatItalic">
-          <span class="material-icons">format_italic</span>
-        </button>
-        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatTitle">
-          <span class="material-icons">title</span>
-        </button>
-        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatCode">
-          <span class="material-icons">code</span>
-        </button>
-        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatQuote">
-          <span class="material-icons">format_quote</span>
-        </button>
-        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatListBulleted">
-          <span class="material-icons">format_list_bulleted</span>
-        </button>
-        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatListNumbered">
-          <span class="material-icons">format_list_numbered</span>
-        </button>
-        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatLink">
-          <span class="material-icons">insert_link</span>
-        </button>
-        <button type="button" class="button button--icon" tabindex="-1" data-action="markdown-editor#formatImage">
-          <span class="material-icons">add_photo_alternate</span>
-          <input type="file" class="display-none" data-action="markdown-editor#formatImage">
-        </button>
-      </div>
-      <div class="markdown-editor__content" data-markdown-editor-target="content">
-      </div>
-      <div class="markdown-editor__preview typography" data-markdown-editor-target="preview">
-      </div>
-    `
-
     if (this.inputValue) {
       this.inputElement = document.getElementById(this.inputValue)
     }
-
 
     this.editorView = new EditorView({
       state: EditorState.create({
@@ -188,6 +132,25 @@ export default class extends Controller {
       }),
       parent: this.contentTarget
     })
+  }
+
+  async togglePreview() {
+    if (this.previewing) {
+      this.element.classList.remove('markdown-editor--previewing')
+      this.previewing = false
+    } else {
+      const response = await post('/preview', {
+        body: {
+          content: this.editorView.state.doc.toString()
+        }
+      })
+
+      if (response.ok) {
+        this.previewTarget.innerHTML = await response.text
+        this.element.classList.add('markdown-editor--previewing')
+        this.previewing = true
+      }
+    }
   }
 
   async preview() {
