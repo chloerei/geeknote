@@ -1,0 +1,11 @@
+  <%= turbo_stream.update 'snackbar-container' do %>
+    <div class="snackbar" data-controller="snackbar" data-snackbar-period="5000">
+      Post saved.
+
+      <% if @post.published? %>
+        <a href="<%= account_post_path(@account, @post) %>" class="button button--text">
+          View
+        </a>
+      <% end %>
+    </div>
+  <% end %>

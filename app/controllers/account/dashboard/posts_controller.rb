@@ -16,13 +16,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   def create
     @post = @account.posts.new post_params.merge(user: current_user)
     @post.save
-
-    if params[:submit] == 'publish'
-      @post.published!
-      redirect_to account_post_url(@account, @post), notice: I18n.t('flash.post_is_published')
-    else
-      redirect_to edit_account_dashboard_post_path(@account, @post), notice: I18n.t('flash.post_is_saved')
-    end
+    redirect_to edit_account_dashboard_post_path(@account, @post), notice: I18n.t("flash.post_is_saved")
   end
 
   def edit
@@ -31,14 +25,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
 
   def update
     @post.update post_params
-
-    if params[:submit] == 'publish' && !@post.restricted?
-      @post.published!
-      redirect_to account_post_url(@account, @post), notice: I18n.t('flash.post_is_published')
-    else
-      flash.now[:notice] = I18n.t('flash.post_is_saved')
-      render :update, layout: 'application'
-    end
+    render :update
   end
 
   def destroy
