@@ -8,12 +8,18 @@ export default class extends Controller {
   }
 
   connect() {
-    this.element.addEventListener("input", () => {
-      this.changed = true
-    })
+    let changeCallback = (event) => {
+      if (event.target.hasAttribute('name')) {
+        this.changed = true
+        this.element.removeEventListener("change", changeCallback)
+      }
+    }
+
+    this.element.addEventListener("change", changeCallback)
 
     this.element.addEventListener("turbo:submit-end", () => {
       this.changed = false
+      this.element.addEventListener("change", changeCallback)
     })
 
     this.beforeUnloadListener = (event) => {

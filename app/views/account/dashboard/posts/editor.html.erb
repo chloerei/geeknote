@@ -23,7 +23,7 @@
           </label>
         </div>
         <div class="top-app-bar__action">
-          <label for="sheet-toggle" class="button button--icon">
+          <label for="post-settings-dialog-toggle" class="button button--icon">
             <span class="material-icons">tune</span>
           </label>
         </div>
@@ -88,43 +88,39 @@
     </div>
   </div>
 
-  <input type="checkbox" id="sheet-toggle" class="sheet-toggle">
-  <div class="sheet sheet--modal">
-    <div class="sheet__container">
-      <div class="top-app-bar align-items-center">
-        <div class="title-medium padding-2">
+  <input type="checkbox" id="post-settings-dialog-toggle" class="dialog-toggle">
+  <div class="dialog">
+    <div class="dialog__container">
+      <div class="display-flex padding-3 align-items-center">
+        <div class="title-medium padding-2 flex-grow-1">
           <%= t 'common.settings' %>
         </div>
-        <div class="flex-grow-1">
+        <label for="post-settings-dialog-toggle" class="button button--icon">
+          <span class="material-icons">close</span>
+        </label>
+      </div>
+
+      <div class="padding-x-4">
+        <div class="margin-bottom-3">
+          <%= form.text_field :canonical_url, helper_text: I18n.t('common.canonical_url_helper') %>
         </div>
-        <div class="top-app-bar__action">
-          <label for="sheet-toggle" class="button button--icon">
-            <span class="material-icons">close</span>
+        <div class="">
+          <label class="display-flex gap-2">
+            <%= form.check_box :allow_comments %>
+            <div class="padding-y-2">
+              Allow comments.
+            </div>
           </label>
         </div>
       </div>
 
-      <div class="padding-x-3 padding-bottom-3">
-        <% if @post.persisted? %>
-          <div class="margin-bottom-3">
-            <label class="label-medium display-block margin-bottom-2">
-              URL
-            </label>
-            <div class="text-break-all">
-              <a href="<%= account_post_url(@account, @post) %>" target="_blank" class="">
-                <%= account_post_url(@account, @post) %>
-                <span class="material-icons material-icons--inline padding-bottom-1">launch</span>
-              </a>
-            </div>
-          </div>
-        <% end %>
-
-        <div class="margin-bottom-3">
-          <%= form.text_field :canonical_url, helper_text: I18n.t('common.canonical_url_helper') %>
-        </div>
+      <div class="display-flex padding-4 align-items-center">
+        <div class="flex-grow-1"></div>
+        <label for="post-settings-dialog-toggle" class="button button--text">
+          Done
+        </label>
       </div>
     </div>
-    <label class="sheet__scrim" for="sheet-toggle">
-    </label>
+    <label for="post-settings-dialog-toggle" class="dialog__scrim"></label>
   </div>
 <% end %>
