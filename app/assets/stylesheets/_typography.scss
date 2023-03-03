@@ -20,12 +20,19 @@
       float: left;
       width: 1em;
       margin-left: -1em;
+      outline: 0;
+      scroll-margin-top: 1em;
+      text-align: right;
+      padding-right: 4px;
+      color: var(--color-on-surface-variant);
+      text-decoration: none;
 
       &::before {
         content: "#";
         visibility: hidden;
       }
 
+      &:focus::before,
       &:hover::before {
         visibility: visible;
       }

@@ -11,12 +11,7 @@
     <label for="post-<%= post.id %>-collections-dialog-toggle" class="dialog__scrim"></label>
   </div>
 <% else %>
-  <a href="<%= sign_in_path(return_to: url_for) %>" class="button button--text button--muted">
-    <div class="button__icon">
-      <span class="material-icons">bookmark_add</span>
-    </div>
-    <div class="button__label">
-      <%= t 'common.add_to_collection' %>
-    </div>
+  <a href="<%= sign_in_path(return_to: url_for) %>" class="button button--icon">
+    <span class="material-icons">bookmark_add</span>
   </a>
 <% end %>
