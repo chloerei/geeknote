@@ -135,6 +135,11 @@ export default class extends Controller {
     })
   }
 
+  disconnect() {
+    this.editorView.dom.remove()
+    this.editorView = null
+  }
+
   async togglePreview() {
     if (this.previewing) {
       this.element.classList.remove('markdown-editor--previewing')

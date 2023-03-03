@@ -1,15 +1,22 @@
 .post-form {
-  height: 100vh;
+  padding-bottom: 120px;
 
   .markdown-editor {
-    min-height: 100vh;
-    padding-bottom: 76px;
+    min-height: 640px;
+
+    .cm-editor {
+      padding: 12px 0;
+    }
   }
 
   .markdown-editor__toolbar {
     margin: 0 -24px;
     padding: 4px 16px;
     border-radius: 0;
+  }
+
+  .markdown-editor__preview {
+    padding: 12px 0;
   }
 }
 

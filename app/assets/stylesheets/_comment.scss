@@ -1,0 +1,18 @@
+.comment-form {
+  .markdown-editor {
+    box-shadow: 0 0 0 1px var(--color-outline);
+    border-radius: 4px;
+  }
+
+  .markdown-editor--focus {
+    box-shadow: 0 0 0 2px var(--color-primary);
+  }
+
+  .markdown-editor__toolbar {
+    border-radius: 4px 4px 0 0;
+  }
+
+  .markdown-editor__content,
+  .markdown-editor__preview {
+  }
+}

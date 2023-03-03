@@ -112,7 +112,7 @@
           <%= render "account/posts/likes/button", post: @post %>
 
           <div class="button-group">
-            <a href="#comments" class="button button--icon">
+            <a href="#reply" class="button button--icon">
               <span class="material-icons">comment</span>
             </a>
             <% if @post.comments_count > 0 %>
@@ -134,7 +134,7 @@
         </div>
       </div>
 
-      <div id="comments" class="card card--elevated">
+      <div id="" class="card card--elevated">
         <div class="title-large padding-x-4 padding-y-3">
           <%= t 'common.comments' %>
         </div>
