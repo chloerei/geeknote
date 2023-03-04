@@ -80,8 +80,9 @@
           </div>
 
           <div class="margin-bottom-3">
-            <%= form.hidden_field :content, id: 'post-content', placeholder: t('.post_content_placeholder') %>
-            <%= render "components/markdown_editor", input: "post-content" %>
+            <%= render "components/markdown_editor" do %>
+              <%= form.hidden_field :content, placeholder: t('.post_content_placeholder'), data: { markdown_editor_target: "input" } %>
+            <% end %>
           </div>
         </div>
       </div>

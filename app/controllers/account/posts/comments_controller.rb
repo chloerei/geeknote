@@ -10,6 +10,16 @@ class Account::Posts::CommentsController < Account::Posts::BaseController
     @replies = @comment.replies.with_liked(current_user).order(created_at: :desc).page(params[:page])
   end
 
+  def new
+    @comment = @post.comments.new parent: (params[:parent_id] && @post.comments.find_by(id: params[:parent_id]))
+
+    if @comment.parent
+      render turbo_stream: turbo_stream.update("comment-#{@comment.parent.id}-reply-form", partial: "form", locals: { comment: @comment })
+    else
+      render turbo_stream: turbo_stream.update("comment-reply-form", partial: "form", locals: { comment: @comment })
+    end
+  end
+
   def create
     @comment = Comment.new comment_params.merge(account: @account, commentable: @post, user: current_user)
 

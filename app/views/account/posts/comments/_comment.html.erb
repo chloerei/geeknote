@@ -1,19 +1,18 @@
-<div class="padding-x-4 padding-y-3" id="comment-<%= comment.id %>" data-controller="comment" data-comment-id-value="<%= comment.id %>">
-  <div class="display-flex gap-1 align-items-center margin-bottom-3">
-    <div class="display-flex gap-2">
-      <div class="avatar avatar--small">
-        <%= avatar_image_tag comment.user.avatar %>
-      </div>
-      <div>
+<div class="padding-y-3" id="comment-<%= comment.id %>" data-controller="comment" data-comment-id-value="<%= comment.id %>">
+  <div class="display-flex gap-2 margin-bottom-3">
+    <div class="avatar flex-shrink-0">
+      <%= avatar_image_tag comment.user.avatar %>
+    </div>
+    <div class="flex-grow-1">
+      <div class="">
         <b><%= comment.user.name %></b>
       </div>
+      <div class="body-medium text-muted">
+        <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="link-text">
+          <%= format_time comment.created_at %>
+        </a>
+      </div>
     </div>
-    <span class="text-muted">&centerdot;</span>
-    <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="link-text">
-      <span class="text-muted"><%= format_time comment.created_at %></span>
-    </a>
-
-    <div class="flex-grow-1"></div>
 
     <div class="dropdown dropdown--right">
       <label tabindex="0" class="button button--icon">
@@ -32,24 +31,20 @@
     </div>
   </div>
 
-  <% if comment.parent %>
-    <a href="<%= account_post_comment_path(@account, @post, comment.parent) %>" class="card card--filled padding-3 margin-bottom-3 comment__reply-to">
-        <span><%= t 'common.reply_to' %></span>
-        <b><%= comment.parent.user.name %></b>
-        <span> - </span>
-        <span><%= comment_summary comment.parent %></span>
-    </a>
-  <% end %>
-
-  <div class="typography margin-bottom-3">
+  <div class="typography margin-bottom-2">
     <%= markdown_render comment.content %>
   </div>
 
-  <div class="display-flex gap-3">
+  <div class="display-flex gap-1">
     <%= render 'account/posts/comments/likes/button', comment: comment %>
 
-    <a href="<%= account_post_comment_path(@account, @post, comment, anchor: "reply") %>" class="button button--icon">
-      <span class="material-icons">reply</span>
+    <a href="<%= new_account_post_comment_path(@account, @post, parent_id: comment.id) %>" class="button button--text button--muted" data-turbo-stream="true">
+      <div class="button__icon">
+        <span class="material-icons">reply</span>
+      </div>
+      <div class="button__label">
+        Reply
+      </div>
     </a>
 
     <div class="flex-grow-1">
@@ -62,10 +57,21 @@
             <%= comment.replies_count %> <%= t 'common.replies' %>
           </div>
           <div class="button__icon">
-            <span class="material-icons">arrow_right_alt</span>
+            <span class="material-icons">expand_more</span>
           </div>
         </a>
       </div>
     <% end %>
   </div>
+
+  <div class="comment__replies">
+    <a href="#comment-<%= comment.id %>" class="comment__border-link"></a>
+
+    <div id="comment-<%= comment.id%>-reply-form">
+    </div>
+
+    <div id="comment-<%= comment.id%>-reply-list" class="divide-y">
+    </div>
+  </div>
+
 </div>

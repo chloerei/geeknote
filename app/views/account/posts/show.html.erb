@@ -112,7 +112,7 @@
           <%= render "account/posts/likes/button", post: @post %>
 
           <div class="button-group">
-            <a href="#reply" class="button button--icon">
+            <a href="#comments" class="button button--icon">
               <span class="material-icons">comment</span>
             </a>
             <% if @post.comments_count > 0 %>
@@ -134,12 +134,12 @@
         </div>
       </div>
 
-      <div id="" class="card card--elevated">
-        <div class="title-large padding-x-4 padding-y-3">
+      <div id="comments" class="card card--elevated padding-4">
+        <div class="title-large">
           <%= t 'common.comments' %>
         </div>
 
-        <div id="reply" class="">
+        <div>
           <% if @post.allow_comments? %>
             <% if current_user %>
               <%= render 'account/posts/comments/form', comment: Comment.new %>
@@ -155,8 +155,8 @@
           <% end %>
         </div>
 
-        <div id="comments" class="border-top divide-y" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
-          <%= render partial: 'account/posts/comments/comment', collection: @comments, cached: true %>
+        <div id="comment-list" class="border-top divide-y" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
+          <%= render partial: 'account/posts/comments/comment', collection: @comments.where(parent: nil), cached: true %>
 
           <% if @post.comments_count > 3 %>
             <div class="padding-x-4 padding-y-3">

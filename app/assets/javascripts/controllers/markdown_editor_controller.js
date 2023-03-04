@@ -68,7 +68,6 @@ function scrollMargin() {
 
 export default class extends Controller {
   static values = {
-    input: String,
     directUploadUrl: String,
     i18n: {
       type: Object,
@@ -79,23 +78,19 @@ export default class extends Controller {
     }
   }
 
-  static targets = ["content", "preview"]
+  static targets = ["input", "content", "preview"]
 
   connect() {
-    if (this.inputValue) {
-      this.inputElement = document.getElementById(this.inputValue)
-    }
-
     this.editorView = new EditorView({
       state: EditorState.create({
-        doc: this.inputElement ? this.inputElement.value : '',
+        doc: this.hasInputTarget ? this.inputTarget.value : '',
         extensions: [
           history(),
           indentOnInput(),
           syntaxHighlighting(classHighlightStyle, { fallback: true }),
           bracketMatching(),
           closeBrackets(),
-          placeholder(this.inputElement ? this.inputElement.placeholder : ''),
+          placeholder(this.hasInputTarget ? this.inputTarget.placeholder : ''),
           keymap.of([
             ...closeBracketsKeymap,
             ...defaultKeymap,
@@ -107,9 +102,9 @@ export default class extends Controller {
           ViewPlugin.define((view) => {
             return {
               update: (viewUpdate) => {
-                if (this.inputElement && viewUpdate.docChanged) {
-                  this.inputElement.value = view.state.doc.toString()
-                  this.inputElement.dispatchEvent(new Event("change", { bubbles: true }))
+                if (this.hasInputTarget && viewUpdate.docChanged) {
+                  this.inputTarget.value = view.state.doc.toString()
+                  this.inputTarget.dispatchEvent(new Event("change", { bubbles: true }))
                 }
               }
             }

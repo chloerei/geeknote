@@ -1,31 +1,29 @@
-<div class="padding-x-4 padding-y-3" id="comment-form">
-  <div class="display-flex gap-3">
-    <div class="avatar flex-shrink-0">
-      <%= avatar_image_tag current_user.avatar %>
-    </div>
-    <div class="flex-grow-1">
-      <%= form_with model: comment, url: [@account, @post, comment], builder: CustomFormBuilder, class: 'form comment-form' do |form| %>
-        <%= form.hidden_field :parent_id %>
-        <div class="margin-bottom-3">
-          <%= form.hidden_field :content, id: dom_id(comment, :content) %>
-          <%= render "components/markdown_editor", input: dom_id(comment, :content), placeholder: t('.content_placeholder') %>
-        </div>
-        <div class="display-flex gap-1">
-          <div class="flex-grow-1"></div>
-          <% if comment.new_record? %>
-            <button type="submit" class="button button--filled">
-              <%= t 'common.submit' %>
-            </button>
-          <% else %>
-            <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="button button--text">
-              <%= t 'common.cancel' %>
-            </a>
-            <button type="submit" class="button button--filled">
-              <%= t 'common.save_changes' %>
-            </button>
-          <% end %>
-        </div>
+<div class="padding-y-3" id="<%= comment_form_id(comment) %>" data-controller="removable">
+  <%= form_with model: comment, url: [@account, @post, comment], builder: CustomFormBuilder, class: 'form comment-form' do |form| %>
+    <%= form.hidden_field :parent_id %>
+    <div class="margin-bottom-3">
+      <%= render "components/markdown_editor" do %>
+        <%= form.hidden_field :content, data: { markdown_editor_target: "input" }, placeholder: "" %>
       <% end %>
     </div>
-  </div>
+    <div class="display-flex gap-2">
+      <% if comment.new_record? %>
+        <button type="submit" class="button button--filled">
+          <%= t 'common.submit' %>
+        </button>
+        <% if comment.parent %>
+          <button type="button" class="button button--text" data-action="removable#remove">
+            <%= t 'common.cancel' %>
+          </button>
+        <% end %>
+      <% else %>
+        <button type="submit" class="button button--filled">
+          <%= t 'common.save_changes' %>
+        </button>
+        <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="button button--text">
+          <%= t 'common.cancel' %>
+        </a>
+      <% end %>
+    </div>
+  <% end %>
 </div>

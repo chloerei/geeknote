@@ -16,3 +16,26 @@
   .markdown-editor__preview {
   }
 }
+
+.comment__replies {
+  padding-left: 48px;
+  position: relative;
+}
+
+.comment__border-link {
+  display: block;
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  background-color: var(--color-outline);
+  background-clip: padding-box;
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 1;
+  }
+}
