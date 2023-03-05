@@ -1,54 +1,123 @@
 <div class="container padding-3">
   <div class="post-layout">
-    <div class="card card--elevated">
-      <div class="breadcrumb padding-x-4 padding-y-3">
-        <div class="breadcrumb__item">
-          <a href="<%= account_post_path(@account, @post) %>">
+    <div>
+      <div class="card card--elevated margin-bottom-3">
+        <div class="display-flex padding-3 gap-2 align-items-center">
+          <a href="<%= account_post_path(@account, @post, anchor: "comments") %>" class="button button--icon">
+            <span class="material-icons">arrow_back</span>
+          </a>
+
+          <div class="title-large">
             <%= @post.title %>
-          </a>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="<%= account_post_comments_path(@account, @post) %>">
-            <%= t 'common.comments' %>
-          </a>
-        </div>
-        <div class="breadcrumb__item breadcrumb__item--active">
-          <a href="<%= account_post_comment_path(@account, @post, @comment) %>">
-            <%= @comment.id %>
-          </a>
-        </div>
-      </div>
-
-      <%= render "comment", comment: @comment %>
-
-      <div class="padding-x-4">
-        <div class="divider"></div>
-      </div>
-
-      <div id="reply">
-        <% if @post.allow_comments? %>
-          <% if current_user %>
-            <%= render 'form', comment: @comment.replies.new %>
-          <% else %>
-            <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">
-              <%= t 'common.sign_in_to_comment' %>
-            </a>
-          <% end %>
-        <% else %>
-          <div class="padding-3 text-muted text-align-center">
-            <%= t 'common.comment_is_disabled' %>
           </div>
-        <% end %>
+        </div>
+
+        <div class="padding-x-4">
+          <div class="comment padding-y-3" id="comment-<%= @comment.id %>" data-controller="comment" data-comment-id-value="<%= @comment.id %>">
+
+            <div id="comment-<%= @comment.id %>-content" class="comment__content">
+              <div class="display-flex gap-2 margin-bottom-3">
+                <div class="avatar flex-shrink-0">
+                  <%= avatar_image_tag @comment.user.avatar %>
+                </div>
+                <div class="flex-grow-1">
+                  <div class="">
+                    <b><%= @comment.user.name %></b>
+                  </div>
+                  <div class="body-medium text-muted">
+                    <a href="<%= account_post_comment_path(@account, @post, @comment) %>" class="link-text">
+                      <%= format_time @comment.created_at %>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="dropdown dropdown--right">
+                  <label tabindex="0" class="button button--icon">
+                    <span class="material-icons">more_horiz</span>
+                  </label>
+                  <div tabindex="0" class="dropdown__container">
+                    <a href="<%= edit_account_post_comment_path(@account, @post, @comment) %>" class="dropdown__item" data-visible-to-user="<%= @comment.user_id %>">
+                      <%= t 'common.edit' %>
+                    </a>
+                    <%= form_with url: account_post_comment_path(@account, @post, @comment), method: 'delete', data: { 'visible-to-user': @comment.user_id, 'turbo-confirm': "Are you sure delete this comment?" } do |form| %>
+                      <button type="submit" class="dropdown__item">
+                        <%= t 'common.delete' %>
+                      </button>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+
+              <% if @comment.parent %>
+                <a href="<%= account_post_comment_path(@account, @post, @comment.parent) %>" class="card card--outlined padding-3 margin-bottom-3 background-surface-variant">
+                  <div>
+                    Reply to <b><%= @comment.parent.user.name %></b> &centerdot; <%= format_time @comment.parent.created_at %>
+                  </div>
+                  <div>
+                    <%= comment_summary @comment.parent %>
+                  </div>
+                </a>
+              <% end %>
+
+              <div class="typography margin-bottom-2">
+                <%= markdown_render @comment.content %>
+              </div>
+
+              <div class="display-flex gap-1">
+                <%= render 'account/posts/comments/likes/button', comment: @comment %>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
 
-      <div id="comments" class="comment-replies border-top divide-y" data-liked-ids="<%= "[#{@replies.filter(&:liked).map(&:id).join(',')}]" %>">
-        <%= render partial: 'comment', collection: @replies, cached: true %>
-      </div>
+      <div id="comments" class="card card--elevated">
+        <div class="title-large padding-x-4 padding-top-4">
+          <%= t 'common.replies' %>
+        </div>
 
-      <div class="margin-3">
-        <%= paginate @replies %>
+        <div class="padding-x-4">
+
+          <% if @post.allow_comments? %>
+            <% if current_user %>
+              <div id="comment-<%= @comment.id %>-reply">
+                <a href="<%= new_account_post_comment_path(@account, @post, parent_id: @comment.id) %>" data-turbo-stream="true" class="comment-form-toggle">
+                  <div class="text-field text-field--outlined ">
+                    <div class="text-field__container padding-y-2 padding-x-3 text-muted">
+                      Comment...
+                    </div>
+                  </div>
+                </a>
+              </div>
+            <% else %>
+              <a href="<%= sign_in_path(return_to: url_for(anchor: "comments")) %>" class="button button--filled">
+                <%= t 'common.sign_in_to_comment' %>
+              </a>
+            <% end %>
+          <% else %>
+            <div class="padding-3 text-muted text-align-center">
+              <%= t 'common.comment_is_disabled' %>
+            </div>
+          <% end %>
+
+          <div id="comment-<%= @comment.id %>-reply-list" class="border-top divide-y">
+
+            <%= render partial: "account/posts/comments/comment", collection: @pagination[:page].pluck(:data), cache: true %>
+
+            <% if @pagination[:page_info][:has_next_page] %>
+              <div id="comment-<%= @comment.id %>-load-more" class="padding-y-3">
+                <a href="<%= account_post_comments_path(@account, @post, parent_id: @comment.id, after: @pagination[:page_info][:end_cursor]) %>" class="button button--text" data-turbo-stream="true">
+                  Load more
+                </a>
+              </div>
+            <% end %>
+          </div>
+
+        </div>
       </div>
     </div>
+
 
     <div>
       <div class="card card--elevated padding-3">

@@ -8,7 +8,7 @@ class Account::Posts::CommentsController < Account::Posts::BaseController
 
   def show
     @comment = @post.comments.find params[:id]
-    @replies = @comment.replies.with_liked(current_user).order(created_at: :desc).page(params[:page])
+    @pagination = RailsCursorPagination::Paginator.new(@comment.replies, after: params[:after], order_by: :likes_count, order: :desc).fetch
   end
 
   def new

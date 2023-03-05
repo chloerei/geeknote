@@ -134,12 +134,12 @@
         </div>
       </div>
 
-      <div id="comments" class="card card--elevated padding-4">
-        <div class="title-large">
+      <div id="comments" class="card card--elevated">
+        <div class="title-large padding-x-4 padding-top-4">
           <%= t 'common.comments' %>
         </div>
 
-        <div>
+        <div class="padding-x-4">
           <% if @post.allow_comments? %>
             <% if current_user %>
               <div id="comment--reply">
@@ -152,7 +152,7 @@
                 </a>
               </div>
             <% else %>
-              <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">
+              <a href="<%= sign_in_path(return_to: url_for(anchor: "comments")) %>" class="button button--filled">
                 <%= t 'common.sign_in_to_comment' %>
               </a>
             <% end %>
@@ -161,19 +161,19 @@
               <%= t 'common.comment_is_disabled' %>
             </div>
           <% end %>
-        </div>
 
-        <div id="comment--reply-list" class="border-top divide-y">
+          <div id="comment--reply-list" class="border-top divide-y">
 
-          <%= render partial: "account/posts/comments/comment", collection: @pagination[:page].pluck(:data), cache: true %>
+            <%= render partial: "account/posts/comments/comment", collection: @pagination[:page].pluck(:data), cache: true %>
 
-          <% if @pagination[:page_info][:has_next_page] %>
-            <div id="comment--load-more" class="padding-y-3">
-              <a href="<%= account_post_comments_path(@account, @post, after: @pagination[:page_info][:end_cursor]) %>" class="button button--text" data-turbo-stream="true">
-                Load more
-              </a>
-            </div>
-          <% end %>
+            <% if @pagination[:page_info][:has_next_page] %>
+              <div id="comment--load-more" class="padding-y-3">
+                <a href="<%= account_post_comments_path(@account, @post, after: @pagination[:page_info][:end_cursor]) %>" class="button button--text" data-turbo-stream="true">
+                  Load more
+                </a>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
