@@ -2,21 +2,17 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static values = {
-    id: Number,
-    likedUserIds: Array
+    id: Number
   }
 
   static targets = ["likeButton", "replyList"]
 
-  connect() {
-    this.modifyLikeButton()
-  }
-
-  modifyLikeButton() {
+  likeButtonTargetConnected(element) {
     const currentUserId = parseInt(document.querySelector("meta[name='current-user-id']")?.getAttribute('content'))
-    if (currentUserId && this.likedUserIdsValue.includes(currentUserId)) {
-      this.likeButtonTarget.setAttribute('data-turbo-method', 'delete')
-      this.likeButtonTarget.classList.add('button--active')
+    const likedUserIds = JSON.parse(element.dataset.likedUserIds || '[]')
+    if (currentUserId && likedUserIds.includes(currentUserId)) {
+      element.setAttribute('data-turbo-method', 'delete')
+      element.classList.add('button--active')
     }
   }
 

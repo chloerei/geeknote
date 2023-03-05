@@ -1,6 +1,4 @@
-<% liked ||= false %>
-
-<a href="<%= account_post_comment_like_path(@post.account, @post, comment) %>" id="comment-<%= comment.id %>-like-button" class="button button--text button--like <%= 'button--active' if liked %>" data-comment-target="likeButton" data-turbo-method="<%= liked ? 'delete' : 'post' %>">
+<a href="<%= account_post_comment_like_path(@post.account, @post, comment) %>" id="comment-<%= comment.id %>-like-button" class="button button--text button--like" data-comment-target="likeButton" data-turbo-method="post" data-liked-user-ids="<%= j comment.likes.pluck(:user_id) %>">
   <div class="button__icon">
     <div class="button__show-on-active">
       <span class="material-icons">favorite</span>
