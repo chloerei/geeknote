@@ -84,7 +84,6 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 10;
 }
 
 .post-toolbar__content {
@@ -94,7 +93,7 @@
   padding: 12px;
   background: var(--color-surface);
   align-items: center;
-
+  z-index: 10;
 }
 
 @media (min-width: map.get($breakpoints, "laptop")) {
@@ -126,7 +125,6 @@
   position: sticky;
   top: var(--space-3);
   max-height: calc(100vh - var(--space-3) * 2);
-  z-index: 10;
 }
 
 .post__feature-image {
