@@ -10,7 +10,7 @@ class Account::Posts::CommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get comments" do
-    get account_post_comments_path(@account, @post)
+    get account_post_comments_path(@account, @post), as: :turbo_stream
     assert_response :success
   end
 
@@ -39,23 +39,23 @@ class Account::Posts::CommentsControllerTest < ActionDispatch::IntegrationTest
   test "should edit comment" do
     sign_in create(:user)
     assert_raise ActiveRecord::RecordNotFound do
-      get edit_account_post_comment_path(@account, @post, @comment)
+      get edit_account_post_comment_path(@account, @post, @comment), as: :turbo_stream
     end
 
     sign_in @comment.user
-    get edit_account_post_comment_path(@account, @post, @comment)
+    get edit_account_post_comment_path(@account, @post, @comment), as: :turbo_stream
     assert_response :success
   end
 
   test "should update comment" do
     sign_in create(:user)
     assert_raise ActiveRecord::RecordNotFound do
-      patch account_post_comment_path(@account, @post, @comment), params: { comment: { content: 'change' } }
+      patch account_post_comment_path(@account, @post, @comment), params: { comment: { content: 'change' } }, as: :turbo_stream
     end
 
     sign_in @comment.user
-    patch account_post_comment_path(@account, @post, @comment), params: { comment: { content: 'change' } }
-    assert_redirected_to account_post_comment_path(@account, @post, @comment)
+    patch account_post_comment_path(@account, @post, @comment), params: { comment: { content: 'change' } }, as: :turbo_stream
+    assert_response :success
   end
 
   test "should destroy comment" do
