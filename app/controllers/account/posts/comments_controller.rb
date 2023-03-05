@@ -21,23 +21,22 @@ class Account::Posts::CommentsController < Account::Posts::BaseController
 
     if @comment.save
       CommentNotificationJob.perform_later(@comment)
-      render :create
     else
-      render turbo_stream: turbo_stream.replace('comment-form', partial: 'form', locals: { comment: @comment })
+      render turbo_stream: turbo_stream.replace("comment-#{@comment.parent_id}-reply-form", partial: 'form', locals: { comment: @comment })
     end
   end
 
   def edit
     @comment = @post.comments.where(user: current_user).find params[:id]
+    render turbo_stream: turbo_stream.before("comment-#{@comment.id}-content", partial: "form", locals: { comment: @comment })
   end
 
   def update
     @comment = @post.comments.where(user: current_user).find params[:id]
 
     if @comment.update comment_params.except(:parent_id)
-      redirect_to account_post_comment_path(@account, @post, @comment)
     else
-      render turbo_stream: turbo_stream.replace('comment-form', partial: 'form', locals: { comment: @comment })
+      render turbo_stream: turbo_stream.replace("comment-#{@comment.id}-form", partial: 'form', locals: { comment: @comment })
     end
   end
 

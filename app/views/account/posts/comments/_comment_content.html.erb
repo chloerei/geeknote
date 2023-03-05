@@ -1,0 +1,66 @@
+<div id="comment-<%= comment.id %>-content" class="comment__content">
+  <div class="display-flex gap-2 margin-bottom-3">
+    <div class="avatar flex-shrink-0">
+      <%= avatar_image_tag comment.user.avatar %>
+    </div>
+    <div class="flex-grow-1">
+      <div class="">
+        <b><%= comment.user.name %></b>
+      </div>
+      <div class="body-medium text-muted">
+        <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="link-text">
+          <%= format_time comment.created_at %>
+        </a>
+      </div>
+    </div>
+
+    <div class="dropdown dropdown--right">
+      <label tabindex="0" class="button button--icon">
+        <span class="material-icons">more_horiz</span>
+      </label>
+      <div tabindex="0" class="dropdown__container">
+        <a href="<%= edit_account_post_comment_path(@account, @post, comment) %>" class="dropdown__item" data-visible-to-user="<%= comment.user_id %>">
+          <%= t 'common.edit' %>
+        </a>
+        <%= form_with url: account_post_comment_path(@account, @post, comment), method: 'delete', data: { 'visible-to-user': comment.user_id, 'turbo-confirm': "Are you sure delete this comment?" } do |form| %>
+          <button type="submit" class="dropdown__item">
+            <%= t 'common.delete' %>
+          </button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="typography margin-bottom-2">
+    <%= markdown_render comment.content %>
+  </div>
+
+  <div class="display-flex gap-1">
+    <%= render 'account/posts/comments/likes/button', comment: comment %>
+
+    <a href="<%= new_account_post_comment_path(@account, @post, parent_id: comment.id) %>" class="button button--text button--muted" data-turbo-stream="true">
+      <div class="button__icon">
+        <span class="material-icons">reply</span>
+      </div>
+      <div class="button__label">
+        Reply
+      </div>
+    </a>
+
+    <div class="flex-grow-1">
+    </div>
+
+    <% if comment.replies_count > 0 %>
+      <div class="display-flex gap-1 align-items-center">
+        <a href="<%= account_post_comment_path(@account, @post, comment, anchor: "replies") %>" class="button button--text button--muted">
+          <div class="button__label">
+            <%= comment.replies_count %> <%= t 'common.replies' %>
+          </div>
+          <div class="button__icon">
+            <span class="material-icons">expand_more</span>
+          </div>
+        </a>
+      </div>
+    <% end %>
+  </div>
+</div>

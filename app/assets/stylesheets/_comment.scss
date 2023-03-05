@@ -11,10 +11,10 @@
   .markdown-editor__toolbar {
     border-radius: 4px 4px 0 0;
   }
+}
 
-  .markdown-editor__content,
-  .markdown-editor__preview {
-  }
+.comment-form + .comment__content {
+  display: none;
 }
 
 .comment__replies {

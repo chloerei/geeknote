@@ -1,7 +1,7 @@
 <%
   form_id =if comment.new_record?
     "comment-#{comment.parent_id}-new-form"
-  elsif
+  else
     "comment-#{comment.id}-form"
   end
 %>
@@ -26,9 +26,9 @@
         <button type="submit" class="button button--filled">
           <%= t 'common.save_changes' %>
         </button>
-        <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="button button--text">
+        <button type="button" class="button button--text" data-action="removable#remove">
           <%= t 'common.cancel' %>
-        </a>
+        </button>
       <% end %>
     </div>
   <% end %>
