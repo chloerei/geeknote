@@ -5,7 +5,7 @@ export default class extends Controller {
     id: Number
   }
 
-  static targets = ["likeButtonForm", "replyList", "showRepliesButton", "hideRepliesButton"]
+  static targets = ["likeButtonForm", "replyList"]
 
   connect() {
     this.modifyLikeButton()
@@ -20,13 +20,11 @@ export default class extends Controller {
   }
 
   showReplies() {
-    this.showRepliesButtonTarget.classList.add("display-none")
-    this.hideRepliesButtonTarget.classList.remove("display-none")
+    this.element.classList.add("comment--show-replies")
   }
 
   hideReplies() {
-    this.hideRepliesButtonTarget.classList.add("display-none")
-    this.showRepliesButtonTarget.classList.remove("display-none")
+    this.element.classList.remove("comment--show-replies")
     this.replyListTarget.innerHTML = ""
   }
 }

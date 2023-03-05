@@ -3,3 +3,7 @@
 <% end %>
 
 <%= turbo_stream.remove "comment-#{@comment.parent_id}-new-form" %>
+
+<% if @comment.parent %>
+  <%= turbo_stream.replace "comment-#{@comment.parent.id}-content", partial: "comment_content", locals: { comment: @comment.parent } %>
+<% end %>

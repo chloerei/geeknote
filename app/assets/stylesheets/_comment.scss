@@ -17,6 +17,20 @@
   display: none;
 }
 
+.comment__hide-replies-button {
+  display: none;
+}
+
+.comment--show-replies > .comment__content {
+  .comment__hide-replies-button {
+    display: inline-flex;
+  }
+
+  .comment__show-replies-button {
+    display: none;;
+  }
+}
+
 .comment__replies {
   padding-left: 48px;
   position: relative;
