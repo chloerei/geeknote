@@ -13,11 +13,7 @@ class Account::Posts::CommentsController < Account::Posts::BaseController
   def new
     @comment = @post.comments.new parent: (params[:parent_id] && @post.comments.find_by(id: params[:parent_id]))
 
-    if @comment.parent
-      render turbo_stream: turbo_stream.update("comment-#{@comment.parent.id}-reply-form", partial: "form", locals: { comment: @comment })
-    else
-      render turbo_stream: turbo_stream.update("comment-reply-form", partial: "form", locals: { comment: @comment })
-    end
+    render turbo_stream: turbo_stream.append("comment-#{@comment.parent_id}-reply", partial: "form", locals: { comment: @comment })
   end
 
   def create

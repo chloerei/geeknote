@@ -39,3 +39,14 @@
     opacity: 1;
   }
 }
+
+.comment-form-toggle {
+  display: block;
+  padding: 16px 0;
+  cursor: text;
+  text-decoration: none;
+
+  &:not(:last-child) {
+    display: none;
+  }
+}

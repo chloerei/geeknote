@@ -69,13 +69,7 @@ function scrollMargin() {
 export default class extends Controller {
   static values = {
     directUploadUrl: String,
-    i18n: {
-      type: Object,
-      default: {
-        write: 'Write',
-        preview: 'Preview'
-      }
-    }
+    autofocus: Boolean
   }
 
   static targets = ["input", "content", "preview"]
@@ -128,6 +122,10 @@ export default class extends Controller {
       }),
       parent: this.contentTarget
     })
+
+    if (this.autofocusValue) {
+      this.editorView.focus()
+    }
   }
 
   disconnect() {

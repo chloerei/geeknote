@@ -1,13 +1,5 @@
-<% if @comment.parent %>
-  <%= turbo_stream.prepend "comment-#{@comment.parent.id}-reply-list" do %>
-    <%= render 'comment', comment: @comment %>
-  <% end %>
-
-  <%= turbo_stream.remove comment_form_id(@comment) %>
-<% else %>
-  <%= turbo_stream.prepend "comment-list" do %>
-    <%= render 'comment', comment: @comment %>
-  <% end %>
-
-  <%= turbo_stream.replace comment_form_id(@comment), partial: "form", locals: { comment: Comment.new } %>
+<%= turbo_stream.prepend "comment-#{@comment.parent_id}-reply-list" do %>
+  <%= render 'comment', comment: @comment %>
 <% end %>
+
+<%= turbo_stream.remove "comment-#{@comment.parent_id}-new-form" %>

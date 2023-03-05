@@ -142,7 +142,15 @@
         <div>
           <% if @post.allow_comments? %>
             <% if current_user %>
-              <%= render 'account/posts/comments/form', comment: Comment.new %>
+              <div id="comment--reply">
+                <a href="<%= new_account_post_comment_path(@account, @post) %>" data-turbo-stream="true" class="comment-form-toggle">
+                  <div class="text-field text-field--outlined ">
+                    <div class="text-field__container padding-y-2 padding-x-3 text-muted">
+                      Comment...
+                    </div>
+                  </div>
+                </a>
+              </div>
             <% else %>
               <a href="<%= sign_in_path(return_to: url_for()) %>" class="button button--filled">
                 <%= t 'common.sign_in_to_comment' %>
@@ -155,7 +163,7 @@
           <% end %>
         </div>
 
-        <div id="comment-list" class="border-top divide-y" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
+        <div id="comment--reply-list" class="border-top divide-y" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
           <%= render partial: 'account/posts/comments/comment', collection: @comments.where(parent: nil), cached: true %>
 
           <% if @post.comments_count > 3 %>
