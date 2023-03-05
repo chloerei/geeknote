@@ -31,6 +31,22 @@
   }
 }
 
+.comment__continute-button {
+  display: none;
+}
+
+.comment .comment .comment {
+  .comment__reply-button,
+  .comment__show-replies-button,
+  .comment__hide-replies-button {
+    display: none;
+  }
+
+  .comment__continute-button {
+    display: inline-flex;
+  }
+}
+
 .comment__replies {
   padding-left: 48px;
   position: relative;

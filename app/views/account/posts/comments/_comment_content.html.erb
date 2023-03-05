@@ -38,7 +38,7 @@
   <div class="display-flex gap-1">
     <%= render 'account/posts/comments/likes/button', comment: comment %>
 
-    <a href="<%= new_account_post_comment_path(@account, @post, parent_id: comment.id) %>" class="button button--text button--muted" data-turbo-stream="true">
+    <a href="<%= new_account_post_comment_path(@account, @post, parent_id: comment.id) %>" class="button button--text button--muted comment__reply-button" data-turbo-stream="true">
       <div class="button__icon">
         <span class="material-icons">reply</span>
       </div>
@@ -68,5 +68,14 @@
         </div>
       </button>
     <% end %>
+
+    <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="button button--text button--muted comment__continute-button">
+      <div class="button__label">
+        continute thread
+      </div>
+      <div class="button__icon">
+        <span class="material-icons">arrow_right_alt</span>
+      </div>
+    </a>
   </div>
 </div>
