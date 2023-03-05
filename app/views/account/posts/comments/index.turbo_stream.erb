@@ -1,0 +1,13 @@
+<%= turbo_stream.remove("comment-#{params[:parent_id]}-load-more") %>
+
+<%= turbo_stream.append("comment-#{params[:parent_id]}-reply-list") do %>
+  <%= render partial: "comment", collection: @pagination[:page].pluck(:data), cache: true %>
+
+  <% if @pagination[:page_info][:has_next_page] %>
+    <div id="comment-<%= params[:parent_id] %>-load-more" class="padding-y-3">
+      <a href="<%= account_post_comments_path(parent_id: params[:parent_id], after: @pagination[:page_info][:end_cursor]) %>" class="button button--text" data-turbo-stream="true">
+        Load more
+      </a>
+    </div>
+  <% end %>
+<% end %>

@@ -268,6 +268,8 @@ GEM
     rails-i18n (7.0.3)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 8)
+    rails_cursor_pagination (0.3.0)
+      activerecord (>= 5.0)
     railties (7.0.3.1)
       actionpack (= 7.0.3.1)
       activesupport (= 7.0.3.1)
@@ -386,6 +388,7 @@ DEPENDENCIES
   puppeteer-ruby
   rails (~> 7.0.3)
   rails-i18n (~> 7.0.1)
+  rails_cursor_pagination
   recaptcha
   redis (~> 4.0)
   rest-client

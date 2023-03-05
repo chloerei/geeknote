@@ -5,7 +5,7 @@ export default class extends Controller {
     id: Number
   }
 
-  static targets = ["likeButtonForm"]
+  static targets = ["likeButtonForm", "replyList", "showRepliesButton", "hideRepliesButton"]
 
   connect() {
     this.modifyLikeButton()
@@ -17,5 +17,16 @@ export default class extends Controller {
       this.likeButtonFormTarget.setAttribute('method', 'delete')
       this.likeButtonFormTarget.querySelector('button').classList.add('button--active')
     }
+  }
+
+  showReplies() {
+    this.showRepliesButtonTarget.classList.add("display-none")
+    this.hideRepliesButtonTarget.classList.remove("display-none")
+  }
+
+  hideReplies() {
+    this.hideRepliesButtonTarget.classList.add("display-none")
+    this.showRepliesButtonTarget.classList.remove("display-none")
+    this.replyListTarget.innerHTML = ""
   }
 }

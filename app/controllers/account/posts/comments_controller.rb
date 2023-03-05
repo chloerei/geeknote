@@ -2,7 +2,8 @@ class Account::Posts::CommentsController < Account::Posts::BaseController
   before_action :require_sign_in, except: [:index, :show]
 
   def index
-    @comments = @post.comments.with_liked(current_user).order(created_at: :desc).page(params[:page])
+    @comments = @post.comments.with_liked(current_user).where(parent_id: params[:parent_id])
+    @pagination = RailsCursorPagination::Paginator.new(@comments, after: params[:after], order_by: :likes_count, order: :desc).fetch
   end
 
   def show

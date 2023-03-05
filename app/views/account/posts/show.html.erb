@@ -163,13 +163,14 @@
           <% end %>
         </div>
 
-        <div id="comment--reply-list" class="border-top divide-y" data-liked-ids="<%= "[#{@comments.filter(&:liked).map(&:id).join(',')}]" %>">
-          <%= render partial: 'account/posts/comments/comment', collection: @comments.where(parent: nil), cached: true %>
+        <div id="comment--reply-list" class="border-top divide-y">
 
-          <% if @post.comments_count > 3 %>
-            <div class="padding-x-4 padding-y-3">
-              <a href="<%= account_post_comments_path(@account, @post) %>" class="button button--text width-100 justify-content-center">
-                <%= t 'common.show_all_comments' %> (<%= @post.comments_count %>)
+          <%= render partial: "account/posts/comments/comment", collection: @pagination[:page].pluck(:data), cache: true %>
+
+          <% if @pagination[:page_info][:has_next_page] %>
+            <div id="comment--load-more" class="padding-y-3">
+              <a href="<%= account_post_comments_path(@account, @post, after: @pagination[:page_info][:end_cursor]) %>" class="button button--text" data-turbo-stream="true">
+                Load more
               </a>
             </div>
           <% end %>
