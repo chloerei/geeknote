@@ -17,7 +17,7 @@ class Account::PostsController < Account::BaseController
       end
     end
 
-    @pagination = RailsCursorPagination::Paginator.new(@post.comments.where(parent_id: nil), order_by: :likes_count, order: :desc).fetch
+    @pagination = RailsCursorPagination::Paginator.new(@post.comments.where(parent_id: nil).includes(:user), order_by: :likes_count, order: :desc).fetch
   end
 
   private

@@ -1,7 +1,7 @@
 <%= turbo_stream.remove("comment-#{params[:parent_id]}-load-more") %>
 
 <%= turbo_stream.append("comment-#{params[:parent_id]}-reply-list") do %>
-  <%= render partial: "comment", collection: @pagination[:page].pluck(:data), cache: true %>
+  <%= render partial: "comment", collection: @pagination[:page].pluck(:data), cached: -> (comment) { [comment.user, comment] } %>
 
   <% if @pagination[:page_info][:has_next_page] %>
     <div id="comment-<%= params[:parent_id] %>-load-more" class="padding-y-3">

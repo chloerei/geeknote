@@ -103,7 +103,7 @@
 
           <div id="comment-<%= @comment.id %>-reply-list" class="border-top divide-y">
 
-            <%= render partial: "account/posts/comments/comment", collection: @pagination[:page].pluck(:data), cache: true %>
+            <%= render partial: "account/posts/comments/comment", collection: @pagination[:page].pluck(:data), cached: -> (comment) { [comment.user, comment] } %>
 
             <% if @pagination[:page_info][:has_next_page] %>
               <div id="comment-<%= @comment.id %>-load-more" class="padding-y-3">
