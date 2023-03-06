@@ -2,7 +2,7 @@
 
 <% if flash[:notice] %>
   <%= turbo_stream.update 'snackbar-container' do %>
-    <div class="snackbar" data-controller="snackbar" data-snackbar-period="5000">
+    <div class="snackbar" data-controller="snackbar" data-snackbar-period="5000" data-turbo-temporary="true">
       <%= flash[:notice] %>
     </div>
   <% end %>

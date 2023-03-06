@@ -9,11 +9,11 @@ class Settings::PasswordsController < Settings::BaseController
       if @user.update user_params
         redirect_to settings_password_path, notice: t('flash.password_update_successful')
       else
-        render turbo_stream: turbo_stream.replace('password-form', partial: 'form')
+        render :show, status: :unprocessable_entity
       end
     else
       @user.errors.add :current_password, :not_match
-      render turbo_stream: turbo_stream.replace('password-form', partial: 'form')
+      render :show, status: :unprocessable_entity
     end
   end
 

@@ -10,11 +10,6 @@ import './channels'
 
 import "./controllers"
 
-// clean snackbar content
-document.addEventListener('turbo:before-cache', () => {
-  document.getElementById('snackbar-container').innerHTML = ''
-})
-
 // color scheme
 document.addEventListener('DOMContentLoaded', () => {
   document.body.dataset.colorScheme = localStorage.getItem('color-scheme') || 'default'

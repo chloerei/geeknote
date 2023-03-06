@@ -9,7 +9,7 @@ class Settings::EmailsController < Settings::BaseController
     if @user.update user_params
       redirect_to settings_email_path, notice: t('flash.email_update_successful')
     else
-      render turbo_stream: turbo_stream.replace('account-form', partial: 'form')
+      render :show, status: :unprocessable_entity
     end
   end
 
