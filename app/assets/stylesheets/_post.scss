@@ -80,20 +80,22 @@
 }
 
 .post-toolbar {
-  position: fixed;
+  position: sticky;
   bottom: 0;
-  left: 0;
-  right: 0;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
 }
 
 .post-toolbar__content {
   display: flex;
-  gap: 8px;
-  height: 80px;
-  padding: 12px;
+  gap: 16px;
+  padding: 8px;
   background: var(--color-surface);
+  border-radius: 40px;
+  box-shadow: var(--shadow-1);
   align-items: center;
-  z-index: 10;
+  justify-content: center;
 }
 
 @media (min-width: map.get($breakpoints, "laptop")) {
@@ -101,10 +103,12 @@
     margin-top: 0;
     position: absolute;
     top: 0;
-    left: -64px;
+    left: -56px;
     bottom: auto;
     right: auto;
     height: 100%;
+    align-items: flex-start;
+    padding: 0;
   }
 
   .post-toolbar__content {
@@ -114,6 +118,7 @@
     justify-content: flex-start;
     height: auto;
     background: transparent;
+    box-shadow: none;
 
     .button-group {
       flex-direction: column;

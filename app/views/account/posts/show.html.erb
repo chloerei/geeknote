@@ -105,30 +105,31 @@
           </div>
 
         </div>
-      </div>
 
-      <div class="post-toolbar">
-        <div class="post-toolbar__content">
-          <%= render "account/posts/likes/button", post: @post %>
+        <div class="post-toolbar">
+          <div class="post-toolbar__content">
+            <%= render "account/posts/likes/button", post: @post %>
 
-          <div class="button-group">
-            <a href="#comments" class="button button--icon">
-              <span class="material-icons">comment</span>
-            </a>
-            <% if @post.comments_count > 0 %>
-              <div class="body-medium">
-                <%= @post.comments_count %>
-              </div>
-            <% end %>
+            <div class="button-group">
+              <a href="#comments" class="button button--icon">
+                <span class="material-icons">comment</span>
+              </a>
+              <% if @post.comments_count > 0 %>
+                <div class="body-medium">
+                  <%= @post.comments_count %>
+                </div>
+              <% end %>
+            </div>
+
+            <%= render "account/posts/collections/button", post: @post %>
+
+            <label for="toc-sheet-toggle" class="button button--icon display-none@laptop">
+              <span class="material-icons">toc</span>
+            </label>
+
           </div>
-
-          <%= render "account/posts/collections/button", post: @post %>
-
-          <label for="toc-sheet-toggle" class="button button--icon display-none@laptop">
-            <span class="material-icons">toc</span>
-          </label>
-
         </div>
+
       </div>
 
       <div id="comments" class="card card--elevated">
