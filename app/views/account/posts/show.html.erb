@@ -179,10 +179,10 @@
     <div class="">
       <div class="post-sidebar display-flex flex-direction-column gap-3">
         <div class="card card--elevated padding-y-2">
-          <%= render "account/item", account: @post.account %>
+          <%= render "account/account", account: @post.account %>
 
           <% if @post.account.organization? %>
-            <%= render "account/item", account: @post.user.account %>
+            <%= render "account/account", account: @post.user.account %>
           <% end %>
         </div>
 
