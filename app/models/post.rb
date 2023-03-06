@@ -25,8 +25,8 @@ class Post < ApplicationRecord
     where(account: user.followings).or(where(user: user.following_users)).distinct
   }
 
-  scope :hot, -> {
-    select("*, (log(10, greatest(3 * likes_count + comments_count, 1)) + (extract(epoch from published_at) / 43200)) as score").where("length(content) > 100").where("likes_count > 0").order(score: :desc)
+  scope :with_score, -> {
+    select("*", "(log(10, greatest(3 * likes_count + comments_count, 1)) + (extract(epoch from published_at) / 43200)) as score").where("length(content) > 100").where("likes_count > 0")
   }
 
   scope :featured, -> { where(featured: true) }

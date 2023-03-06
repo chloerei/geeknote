@@ -1,0 +1,23 @@
+<div class="display-flex gap-3 position-relative padding-y-2 padding-x-3 state-layer">
+  <div class="avatar flex-shrink-0">
+    <%= avatar_image_tag account.owner.avatar %>
+  </div>
+  <div class="flex-grow-1">
+    <div class="display-flex margin-bottom-1">
+      <div class="flex-grow-1">
+        <div class="title-medium">
+          <a href="<%= account_root_path(account) %>" class="link-text link-expended">
+            <%= account.display_name %>
+          </a>
+        </div>
+        <div class="text-muted">
+          @<%= account.name %>
+        </div>
+      </div>
+      <%= render 'account/follows/button', account: account %>
+    </div>
+    <div class="body-medium">
+      <%= truncate account.description %>
+    </div>
+  </div>
+</div>
