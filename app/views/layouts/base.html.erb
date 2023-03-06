@@ -30,21 +30,6 @@
   </head>
 
   <body class="<%= @body_class %>">
-    <% if current_user %>
-      <style>
-        [data-visible-to-user]:not([data-visible-to-user="<%= current_user.id %>"]) {
-          display: none;
-        }
-      </style>
-    <% else %>
-      <style>
-        .visible-to-user,
-        [data-visible-to-user] {
-          display: none;
-        }
-      </style>
-    <% end %>
-
     <%= content_for?(:body) ? yield(:body) : yield %>
 
     <div id="snackbar-container" class="snackbar-container">
@@ -54,5 +39,18 @@
         </div>
       <% end %>
     </div>
+
+    <style>
+      <% if current_user %>
+        [data-visible-to-user]:not([data-visible-to-user="<%= current_user.id %>"]) {
+          display: none;
+        }
+      <% else %>
+        [data-visible-to-user] {
+          display: none;
+        }
+      <% end %>
+    </style>
+
   </body>
 </html>
