@@ -1,15 +1,10 @@
 class Account::PostsController < Account::BaseController
   def index
-    @posts = scoped_posts.order(published_at: :desc).page(params[:page])
+    @pagination = RailsCursorPagination::Paginator.new(scoped_posts.preload(:account, :user), order_by: :published_at, order: :desc, after: params[:after]).fetch
   end
 
   def show
-    # member can read draft post
-    @post = if current_member
-      @account.posts.find params[:id]
-    else
-      @account.posts.published.find params[:id]
-    end
+    @post = scoped_posts.find params[:id]
 
     if params[:collection_id] && (collection = Collection.find_by id: params[:collection_id])
       if collection.can_read_by_user?(current_user)
