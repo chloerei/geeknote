@@ -4,21 +4,12 @@
   <%= auto_discovery_link_tag :atom, account_feed_url(@account, format: :atom) %>
 <% end %>
 
-<div class="banner-image">
-  <div class="banner-image__inner">
-    <% if @account.owner.banner_image.attached? %>
-      <%= image_tag @account.owner.banner_image.variant(resize_to_limit: [1920, 1920]) %>
-    <% end %>
-  </div>
-</div>
+<%= render "account/header", account: @account %>
 
-<div class="container">
-  <div class="layout-primary padding-3">
-    <%= render 'account/navbar' %>
+<div class="container padding-3">
 
+  <div class="layout-primary">
     <div class="">
-      <%= render 'account/tab' %>
-
       <div class="display-flex flex-direction-column gap-3">
         <%= render partial: 'account/posts/post', collection: @posts.preload(:account, :user).to_a, cached: -> post { [post.account, post.user, post] } %>
       </div>
