@@ -36,7 +36,7 @@
       <% if current_user && !current_user.email_verified? %>
         <div class="card card--filled padding-3">
           <h3 class="title-medium margin-top-0">
-            <%= t '.email_in_no_verified' %>
+            <%= t '.email_is_not_verified' %>
           </h3>
           <div class="text-align-right">
             <a href="<%= settings_email_path %>" class="button button--text">

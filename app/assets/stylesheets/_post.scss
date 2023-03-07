@@ -66,13 +66,6 @@
   }
 }
 
-.post-layout {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: 1fr;
-  position: relative;
-}
-
 @media (min-width: map.get($breakpoints, "laptop")) {
   .post-layout {
     grid-template-columns: 1fr 280px;
