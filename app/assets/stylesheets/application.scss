@@ -510,3 +510,31 @@ summary {
     border-bottom: 1px solid var(--color-outline);
   }
 }
+
+.display-contents {
+  display: contents;
+}
+
+.order-last {
+  order: 9999;
+}
+
+details {
+  .show-on-open {
+    display: none;
+  }
+
+  .hide-on-open {
+    display: block;
+  }
+
+  &[open] {
+    .show-on-open {
+      display: block;
+    }
+
+    .hide-on-open {
+      display: none;
+    }
+  }
+}

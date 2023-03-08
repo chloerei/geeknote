@@ -99,6 +99,6 @@ class Account < ApplicationRecord
   end
 
   def used_tags
-    Tag.joins(:posts).where(posts: { account_id: id }).group("tags.name").order("count_all desc").count()
+    Tag.joins(:posts).where(posts: { account_id: id, status: Post.statuses[:published] }).group("tags.name").order("count_all desc").count()
   end
 end

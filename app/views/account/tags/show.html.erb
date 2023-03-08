@@ -1,44 +1,51 @@
 <% @page_title = "#{params[:id]} - #{@account.display_name}" %>
 
-<div class="banner-image">
-  <div class="banner-image__inner">
-    <% if @account.owner.banner_image.attached? %>
-      <%= image_tag @account.owner.banner_image.variant(resize_to_limit: [1920, 1920]) %>
-    <% end %>
-  </div>
-</div>
-
-<div class="container">
-  <div class="layout-primary padding-3">
-    <%= render 'account/navbar' %>
-
-    <div class="">
-      <div class="breadcrumb title-medium padding-3">
-        <div class="breadcrumb__item">
-          <a href="<%= account_root_path(@account) %>">
-            <%= @account.display_name %>
-          </a>
+<div class="container padding-3">
+  <div class="padding-3">
+    <div class="display-flex margin-bottom-3">
+      <a href="<%= account_root_path(@account) %>" class="link-text">
+        <div class="display-flex gap-2 align-items-center">
+          <div class="avatar flex-shrink-0">
+            <%= avatar_image_tag @account.owner.avatar %>
+          </div>
+          <div class="flex-grow-1">
+            <div class="title-medium">
+              <%= @account.owner.name %>
+            </div>
+          </div>
         </div>
-        <div class="breadcrumb__item">
-          <a href="<%= account_tags_path(@account) %>">
-            <%= t 'common.tags' %>
-          </a>
-        </div>
-        <div class="breadcrumb__item breadcrumb__item--active">
-          <%= params[:id] %>
+      </a>
+    </div>
+
+    <div class="display-flex gap-3 align-items-center">
+      <div class="flex-grow-1">
+        <div class="display-flex align-items-center gap-1">
+          <span class="material-icons">tag</span>
+          <div class="title-large">
+            <%= @tag.name %>
+          </div>
         </div>
       </div>
-
-      <div class="layout-secondary">
-        <div class="">
-          <div class="display-flex flex-direction-column gap-3">
-            <%= render partial: 'account/posts/post', collection: @posts.preload(:account, :user).to_a, cached: -> post { [post.account, post.user, post] } %>
-          </div>
-
-          <div class="padding-3">
-            <%= paginate @posts %>
-          </div>
+      <a href="<%= tag_path(id: @tag.name) %>" class="button button--text">
+        <div class="button__label">
+          All site
         </div>
+        <div class="button__icon">
+          <span class="material-icons">arrow_right_alt</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="layout-primary">
+    <div class="">
+
+      <div class="display-flex flex-direction-column gap-3">
+        <%= render partial: 'account/posts/post', collection: @posts.preload(:account, :user).to_a, cached: -> post { [post.account, post.user, post] } %>
+      </div>
+
+      <div class="padding-3">
+        <%= paginate @posts %>
       </div>
     </div>
   </div>

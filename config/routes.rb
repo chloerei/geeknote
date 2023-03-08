@@ -122,7 +122,7 @@ Rails.application.routes.draw do
     resources :collections, only: [:index, :show]
     resources :likes
     resources :members, only: [:index]
-    resources :tags, only: [:index, :show]
+    resources :tags, only: [:show]
 
     resource :invitation, only: [:show, :update]
 

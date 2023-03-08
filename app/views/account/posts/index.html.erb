@@ -30,11 +30,31 @@
         <div class="title-medium margin-bottom-3">
           Tags
         </div>
-        <div class="display-flex flex-wrap gap-2">
-          <% @account.used_tags.first(10).each do |name, count| %>
+        <div class="display-flex flex-wrap gap-2 align-items-center">
+          <% used_tags = @account.used_tags.to_a %>
+          <% used_tags.first(10).each do |name, count| %>
             <a href="<%= account_tag_path(id: name) %>" class="chip chip--assist">
               <%= name %>
             </a>
+          <% end %>
+
+          <% if used_tags.count > 10 %>
+            <details class="display-contents">
+              <summary class="button button--text order-last padding-y-1">
+                <div class="hide-on-open">
+                  Show more
+                </div>
+                <div class="show-on-open">
+                  Show less
+                </div>
+              </summary>
+
+              <% used_tags[10..-1].each do |name, count| %>
+                <a href="<%= account_tag_path(id: name) %>" class="chip chip--assist">
+                  <%= name %>
+                </a>
+              <% end %>
+            </details>
           <% end %>
         </div>
       </div>
