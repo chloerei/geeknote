@@ -1,10 +1,16 @@
 class Account::PostsController < Account::BaseController
   def index
-    @pagination = RailsCursorPagination::Paginator.new(scoped_posts.preload(:account, :user), order_by: :published_at, order: :desc, after: params[:after]).fetch
+    @posts = if @account.user?
+      @account.owner.posts.published
+    else
+      @account.posts.published
+    end
+
+    @pagination = RailsCursorPagination::Paginator.new(@posts.preload(:account, :user), order_by: :published_at, order: :desc, after: params[:after]).fetch
   end
 
   def show
-    @post = scoped_posts.find params[:id]
+    @post = @account.posts.published.find params[:id]
 
     if params[:collection_id] && (collection = Collection.find_by id: params[:collection_id])
       if collection.can_read_by_user?(current_user)
@@ -13,15 +19,5 @@ class Account::PostsController < Account::BaseController
     end
 
     @pagination = RailsCursorPagination::Paginator.new(@post.comments.where(parent_id: nil).includes(:user), order_by: :likes_count, order: :desc).fetch
-  end
-
-  private
-
-  def scoped_posts
-    if @account.user?
-      @account.owner.posts.published
-    else
-      @account.posts.published
-    end
   end
 end
