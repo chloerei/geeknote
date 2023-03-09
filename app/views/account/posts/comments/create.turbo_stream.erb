@@ -1,4 +1,4 @@
-<%= turbo_stream.prepend "comment-#{@comment.parent_id}-reply-list" do %>
+<%= turbo_stream.prepend "comment-#{@comment.parent_id}-replies" do %>
   <%= render 'comment', comment: @comment %>
 <% end %>
 

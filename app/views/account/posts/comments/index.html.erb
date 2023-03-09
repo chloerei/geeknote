@@ -1,0 +1,21 @@
+<div class="container padding-3">
+  <div class="layout-primary">
+    <div>
+      <div class="card card--elevated">
+        <div class="display-flex padding-3 gap-2 align-items-center">
+          <a href="<%= account_post_path(@account, @post, anchor: "comments") %>" class="button button--icon">
+            <span class="material-icons">arrow_back</span>
+          </a>
+
+          <div class="title-large">
+            <%= @post.title %>
+          </div>
+        </div>
+
+        <div class="padding-x-4">
+          <%= render "replies" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

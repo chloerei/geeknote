@@ -5,6 +5,7 @@ export default class extends Controller {
   static targets = ["nextPageLink"]
 
   static values = {
+    manualLoad: Boolean,
     rootMargin: String
   }
 
@@ -13,6 +14,10 @@ export default class extends Controller {
   }
 
   observeNextPageLink() {
+    if (this.manualLoadValue) {
+      return
+    }
+
     if (this.hasNextPageLinkTarget) {
       let observer = new IntersectionObserver((entries, observer) => {
         if (entries[0].isIntersecting) {
@@ -25,6 +30,11 @@ export default class extends Controller {
       })
       observer.observe(this.nextPageLinkTarget)
     }
+  }
+
+  loadNext(event) {
+    event.preventDefault()
+    this.loadNextPage()
   }
 
   async loadNextPage() {

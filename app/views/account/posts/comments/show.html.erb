@@ -101,47 +101,13 @@
             </div>
           <% end %>
 
-          <div id="comment-<%= @comment.id %>-reply-list" class="border-top divide-y">
-
-            <%= render partial: "account/posts/comments/comment", collection: @paginator[:page].pluck(:data), cached: -> (comment) { [comment.user, comment] } %>
-
-            <% if @paginator[:page_info][:has_next_page] %>
-              <div id="comment-<%= @comment.id %>-load-more" class="padding-y-3">
-                <a href="<%= account_post_comments_path(@account, @post, parent_id: @comment.id, after: @paginator[:page_info][:end_cursor]) %>" class="button button--text" data-turbo-stream="true">
-                  Load more
-                </a>
-              </div>
-            <% end %>
-          </div>
+          <%= render "account/posts/comments/replies" %>
 
         </div>
       </div>
     </div>
 
-
     <div>
-      <div class="card card--elevated padding-3">
-        <div class="display-flex gap-3 position-relative">
-          <div class="avatar">
-            <%= avatar_image_tag @comment.user.avatar %>
-          </div>
-          <div class="flex-grow-1">
-            <div class="title-medium">
-              <a href="<%= account_root_path(@comment.user.account) %>" class="link-text link-expended">
-                <%= @comment.user.name %>
-              </a>
-            </div>
-            <div class="body-medium">
-              <%= @comment.user.bio %>
-            </div>
-          </div>
-          <div>
-            <% if @comment.user != current_user %>
-              <%= render 'account/follows/button', account: @comment.user.account %>
-            <% end %>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>

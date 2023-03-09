@@ -13,11 +13,11 @@
   <div class="layout-primary">
     <div class="">
 
-      <div id="posts" class="display-flex flex-direction-column gap-3">
+      <div id="posts" class="display-flex flex-direction-column gap-3" data-controller="pagination">
         <%= render partial: 'account/posts/post', collection: @paginator[:page].pluck(:data), cached: -> post { [post.account, post.user, post] } %>
 
         <% if @paginator[:page_info][:has_next_page] %>
-          <a href="<%= url_for(after: @paginator[:page_info][:end_cursor]) %>" class="button button--text width-100 justify-content-center" id="posts__load-more" data-turbo-stream="true">
+          <a href="<%= url_for(after: @paginator[:page_info][:end_cursor]) %>" class="button button--text width-100 justify-content-center" data-pagination-target="nextPageLink">
             Load more
           </a>
         <% else %>

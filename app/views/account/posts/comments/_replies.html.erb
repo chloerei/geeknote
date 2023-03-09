@@ -1,0 +1,9 @@
+<div id="comment-<%= @comment&.id %>-replies" data-controller="pagination" data-pagination-manual-load-value="true" data-comment-target="replies" class="divide-y">
+  <%= render partial: "account/posts/comments/comment", collection: @paginator[:page].pluck(:data), cached: -> (comment) { [comment.user, comment] } %>
+
+  <% if @paginator[:page_info][:has_next_page] %>
+    <a href="<%= account_post_comments_path(@account, @post, parent_id: @comment&.id, after: @paginator[:page_info][:end_cursor]) %>" class="button button--text margin-y-3" data-pagination-target="nextPageLink" data-action="pagination#loadNext">
+      Load more
+    </a>
+  <% end %>
+</div>

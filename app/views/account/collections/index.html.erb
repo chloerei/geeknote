@@ -5,11 +5,11 @@
 <div class="container padding-3">
   <div class="layout-primary">
     <div class="">
-      <div id="collections" class="display-flex flex-direction-column gap-3">
+      <div id="collections" class="display-flex flex-direction-column gap-3" data-controller="pagination">
         <%= render partial: 'collection', collection: @paginator[:page].pluck(:data), cached: true %>
 
         <% if @paginator[:page_info][:has_next_page] %>
-          <a href="<%= url_for(after: @paginator[:page_info][:end_cursor]) %>" class="button button--text width-100 justify-content-center" id="collections__load-more" data-turbo-stream="true">
+          <a href="<%= url_for(after: @paginator[:page_info][:end_cursor]) %>" class="button button--text width-100 justify-content-center" data-pagination-target="nextPageLink">
             Load more
           </a>
         <% else %>

@@ -5,7 +5,7 @@ export default class extends Controller {
     id: Number
   }
 
-  static targets = ["likeButton", "replyList"]
+  static targets = ["likeButton", "replies"]
 
   likeButtonTargetConnected(element) {
     const currentUserId = parseInt(document.querySelector("meta[name='current-user-id']")?.getAttribute('content'))
@@ -22,6 +22,6 @@ export default class extends Controller {
 
   hideReplies() {
     this.element.classList.remove("comment--show-replies")
-    this.replyListTarget.innerHTML = ""
+    this.repliesTarget.innerHTML = ""
   }
 }

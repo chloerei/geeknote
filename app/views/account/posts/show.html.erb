@@ -160,18 +160,7 @@
             </div>
           <% end %>
 
-          <div id="comment--reply-list" class="border-top divide-y">
-
-            <%= render partial: "account/posts/comments/comment", collection: @paginator[:page].pluck(:data), cached: -> (comment) { [comment.user, comment] } %>
-
-            <% if @paginator[:page_info][:has_next_page] %>
-              <div id="comment--load-more" class="padding-y-3">
-                <a href="<%= account_post_comments_path(@account, @post, after: @paginator[:page_info][:end_cursor]) %>" class="button button--text" data-turbo-stream="true">
-                  Load more
-                </a>
-              </div>
-            <% end %>
-          </div>
+          <%= render "account/posts/comments/replies" %>
         </div>
       </div>
     </div>
