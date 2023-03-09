@@ -6,7 +6,7 @@ class Account::PostsController < Account::BaseController
       @account.posts.published
     end
 
-    @pagination = RailsCursorPagination::Paginator.new(@posts.preload(:account, :user), order_by: :published_at, order: :desc, after: params[:after]).fetch
+    @paginator = RailsCursorPagination::Paginator.new(@posts.preload(:account, :user), order_by: :published_at, order: :desc, after: params[:after]).fetch
   end
 
   def show
@@ -18,6 +18,6 @@ class Account::PostsController < Account::BaseController
       end
     end
 
-    @pagination = RailsCursorPagination::Paginator.new(@post.comments.where(parent_id: nil).includes(:user), order_by: :likes_count, order: :desc).fetch
+    @paginator = RailsCursorPagination::Paginator.new(@post.comments.where(parent_id: nil).includes(:user), order_by: :likes_count, order: :desc).fetch
   end
 end

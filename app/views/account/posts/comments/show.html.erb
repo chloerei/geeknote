@@ -103,11 +103,11 @@
 
           <div id="comment-<%= @comment.id %>-reply-list" class="border-top divide-y">
 
-            <%= render partial: "account/posts/comments/comment", collection: @pagination[:page].pluck(:data), cached: -> (comment) { [comment.user, comment] } %>
+            <%= render partial: "account/posts/comments/comment", collection: @paginator[:page].pluck(:data), cached: -> (comment) { [comment.user, comment] } %>
 
-            <% if @pagination[:page_info][:has_next_page] %>
+            <% if @paginator[:page_info][:has_next_page] %>
               <div id="comment-<%= @comment.id %>-load-more" class="padding-y-3">
-                <a href="<%= account_post_comments_path(@account, @post, parent_id: @comment.id, after: @pagination[:page_info][:end_cursor]) %>" class="button button--text" data-turbo-stream="true">
+                <a href="<%= account_post_comments_path(@account, @post, parent_id: @comment.id, after: @paginator[:page_info][:end_cursor]) %>" class="button button--text" data-turbo-stream="true">
                   Load more
                 </a>
               </div>
