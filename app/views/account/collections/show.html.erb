@@ -1,60 +1,66 @@
 <% @page_title = "#{@collection.name} - #{@account.display_name}" %>
 
-<div class="banner-image">
-  <div class="banner-image__inner">
-    <% if @account.owner.banner_image.attached? %>
-      <%= image_tag @account.owner.banner_image.variant(resize_to_limit: [1920, 1920]) %>
-    <% end %>
+<div class="container padding-3">
+  <div class="breadcrumb margin-bottom-3">
+    <div class="breadcrumb__item">
+      <a href="<%= account_root_path(@account) %>">
+        <div class="display-flex gap-2 align-items-center">
+          <div class="avatar">
+            <%= avatar_image_tag @account.owner.avatar %>
+          </div>
+          <div class="">
+            <b><%= @account.owner.name %></b>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="breadcrumb__item">
+      <a href="<%= account_collections_path(@account) %>">
+        collection
+      </a>
+    </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="layout-primary padding-3">
-    <%= render 'account/navbar' %>
+  <div class="margin-bottom-3">
+    <div class="title-large margin-bottom-3">
+      <%= @collection.name %>
+    </div>
 
-    <div class="">
-      <div class="top-app-bar">
-        <div class="top-app-bar__action">
-          <a href="<%= account_collections_path(@account) %>" class="button button--icon">
-            <span class="material-icons">arrow_back</span>
-          </a>
-        </div>
-        <div class="top-app-bar__title">
-          <%= t 'common.collections' %>
-        </div>
-      </div>
+    <div class="text-muted margin-bottom-3">
+      <%= @collection.description %>
+    </div>
 
+    <div class="text-muted display-flex gap-3 align-items-center">
       <div class="">
-        <div class="card card--outlined padding-3 margin-bottom-3">
-          <div class="title-large margin-bottom-3">
-            <%= @collection.name %>
-          </div>
-
-          <div class="text-muted margin-bottom-3">
-            <%= @collection.description %>
-          </div>
-
-          <div class="text-muted display-flex gap-3 align-items-center">
-            <div class="">
-              <%= @collection.collection_items_count %> <%= t 'common.posts' %>
-            </div>
-            <% if @collection.visibility_private? %>
-              <div class="display-flex align-items-center">
-                <span class="material-icons material-icons--inline">lock</span>
-                <%= t 'common.private' %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-
-        <div class="display-flex flex-direction-column gap-3" data-controller="post-list" data-post-list-collection-id-value="<%= @collection.id %>">
-          <%= render partial: 'account/posts/post', collection: @posts.preload(:account, :user).to_a, cached: -> post { [post.account, post.user, post] } %>
-        </div>
-
-        <div class="padding-3">
-          <%= paginate @posts %>
-        </div>
+        <%= @collection.collection_items_count %> <%= t 'common.posts' %>
       </div>
+      <% if @collection.visibility_private? %>
+        <div class="display-flex align-items-center">
+          <span class="material-icons material-icons--inline">lock</span>
+          <%= t 'common.private' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="layout-primary">
+    <div class="">
+
+      <div id="posts" class="display-flex flex-direction-column gap-3">
+        <%= render partial: 'account/posts/post', collection: @pagination[:page].pluck(:data).map(&:post), cached: -> post { [post.account, post.user, post] } %>
+
+        <% if @pagination[:page_info][:has_next_page] %>
+          <a href="<%= url_for(after: @pagination[:page_info][:end_cursor]) %>" class="button button--text width-100 justify-content-center" id="posts__load-more" data-turbo-stream="true">
+            Load more
+          </a>
+        <% else %>
+          <div class="body-medium text-muted text-align-center padding-x-3 padding-y-2">
+            No more content.
+          </div>
+        <% end %>
+      </div>
+
     </div>
   </div>
 </div>

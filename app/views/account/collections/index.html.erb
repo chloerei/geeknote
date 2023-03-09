@@ -1,26 +1,22 @@
 <% @page_title = @account.display_name %>
 
-<div class="banner-image">
-  <div class="banner-image__inner">
-    <% if @account.owner.banner_image.attached? %>
-      <%= image_tag @account.owner.banner_image.variant(resize_to_limit: [1920, 1920]) %>
-    <% end %>
-  </div>
-</div>
+<%= render "account/header", account: @account %>
 
-<div class="container">
-  <div class="layout-primary padding-3">
-    <%= render 'account/navbar' %>
-
+<div class="container padding-3">
+  <div class="layout-primary">
     <div class="">
-      <%= render 'account/tab' %>
+      <div id="collections" class="display-flex flex-direction-column gap-3">
+        <%= render partial: 'collection', collection: @pagination[:page].pluck(:data), cached: true %>
 
-      <div class="display-flex flex-direction-column gap-3">
-        <%= render partial: 'collection', collection: @collections, cached: true %>
-      </div>
-
-      <div class="padding-3">
-        <%= paginate @collections %>
+        <% if @pagination[:page_info][:has_next_page] %>
+          <a href="<%= url_for(after: @pagination[:page_info][:end_cursor]) %>" class="button button--text width-100 justify-content-center" id="collections__load-more" data-turbo-stream="true">
+            Load more
+          </a>
+        <% else %>
+          <div class="body-medium text-muted text-align-center padding-x-3 padding-y-2">
+            No more content.
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

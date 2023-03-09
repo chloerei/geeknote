@@ -1,22 +1,40 @@
 <div class="card card--elevated background-surface position-relative">
-  <div class="display-flex">
-    <div class="flex-grow-1 padding-3">
-      <h3 class="title-medium margin-top-0 margin-bottom-2 flex flex-align-items-center">
-        <a href="<%= account_collection_path(@account, collection) %>" class="link-title link-expended">
-          <%= collection.name %>
-        </a>
-      </h3>
-      <div class="text-muted margin-bottom-2">
-        <%= collection.description %>
-      </div>
-      <div class="text-muted display-flex gap-3 align-items-center">
-        <div class="">
-          <%= collection.collection_items_count %> <%= t 'common.posts' %>
+  <div class="display-flex gap-3">
+    <div class="flex-grow-1 min-width-0 padding-3">
+      <div class="display-flex flex-direction-column gap-3 height-100 justify-content-space-between">
+        <div class="display-flex gap-2 align-items-center">
+          <div class="avatar avatar--small">
+            <%= avatar_image_tag collection.account.owner.avatar %>
+          </div>
+          <div class="">
+            <b><%= collection.account.owner.name %></b>
+          </div>
         </div>
-        <% if collection.visibility_private? %>
-          <div class="display-flex align-items-center">
-            <span class="material-icons material-icons--inline">lock</span>
-            <%= t 'common.private' %>
+        <h3 class="title-large margin-0 text-overflow-ellipsis">
+          <a href="<%= account_collection_path(collection.account, collection) %>" class="link-title link-expended">
+          </a>
+            <%= collection.name %>
+        </h3>
+        <div class="text-muted display-flex gap-3 align-items-center">
+          <div class="">
+            <%= collection.collection_items_count %> <%= t 'common.posts' %>
+          </div>
+          <% if collection.visibility_private? %>
+            <div class="display-flex align-items-center">
+              <span class="material-icons material-icons--inline">lock</span>
+              <%= t 'common.private' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="display-none display-block@tablet">
+      <div class="collection-images">
+        <% feature_images = collection.posts.joins(:featured_image_attachment).order("collection_items.position asc").limit(3).map(&:featured_image) %>
+        <% 3.times do |n| %>
+          <div class="collection-images__item">
+            <%= featured_image_square_tag feature_images[n] %>
           </div>
         <% end %>
       </div>

@@ -26,6 +26,7 @@ $material-icons-font-path: '';
 
 @import 'post';
 @import 'comment';
+@import 'collection';
 @import 'image_uploader';
 @import 'markdown_editor';
 
@@ -152,8 +153,8 @@ body[data-color-scheme="dark"] {
   grid-template-columns: minmax(0, 1fr);
   gap: var(--space-3);
 
-  @media (min-width: map.get($breakpoints, 'tablet')) {
-    grid-template-columns: 1fr 280px;
+  @media (min-width: map.get($breakpoints, 'laptop')) {
+    grid-template-columns: minmax(0, 1fr) 280px;
   }
 }
 
@@ -325,34 +326,6 @@ body[data-color-scheme="dark"] {
     bottom: 0;
     border: 2px dashed var(--color-outline);
     background: rgba(255, 255, 255, 0.3)
-  }
-}
-
-.collection-images {
-  display: flex;
-  z-index: 0;
-}
-
-.collection-images__item {
-  height: 160px;
-  width: 160px;
-  background: white;
-  box-sizing: content-box;
-
-  &:nth-child(1) {
-    z-index: 3;
-    border-right: 4px solid white;
-  }
-
-  &:nth-child(2) {
-    margin-left: -80px;
-    z-index: 2;
-    border-right: 4px solid white;
-  }
-
-  &:nth-child(3) {
-    margin-left: -120px;
-    z-index: 1;
   }
 }
 

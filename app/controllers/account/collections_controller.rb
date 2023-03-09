@@ -1,11 +1,12 @@
 class Account::CollectionsController < Account::BaseController
   def index
-    @collections = collection_scope.page(params[:page])
+    @pagination = RailsCursorPagination::Paginator.new(collection_scope, order_by: :updated_at, order: :desc, after: params[:after]).fetch
   end
 
   def show
     @collection = collection_scope.find params[:id]
-    @posts = @collection.posts.order("collection_items.position asc").page(params[:page])
+
+    @pagination = RailsCursorPagination::Paginator.new(@collection.collection_items.preload(post: [ :account, :user ]), order_by: :position, order: :asc, after: params[:after]).fetch
   end
 
   private
