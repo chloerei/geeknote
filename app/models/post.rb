@@ -33,10 +33,10 @@ class Post < ApplicationRecord
 
   attribute :saved, :boolean, default: false
 
-  before_update :set_published_at
+  before_save :set_published_at
 
   def set_published_at
-    if published_at.nil? && status_changed? && status == 'published'
+    if published_at.nil? && status == 'published'
       self.published_at = Time.now
     end
   end
