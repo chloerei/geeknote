@@ -15,11 +15,11 @@
 
         <% if @paginator[:page_info][:has_next_page] %>
           <a href="<%= url_for(after: @paginator[:page_info][:end_cursor]) %>" class="button button--text width-100 justify-content-center" data-pagination-target="nextPageLink">
-            Load more
+            <%= t "common.load_more" %>
           </a>
         <% else %>
           <div class="body-medium text-muted text-align-center padding-x-3 padding-y-2">
-            No more content.
+            <%= t "common.no_more_content" %>
           </div>
         <% end %>
       </div>
@@ -42,10 +42,10 @@
             <details class="display-contents">
               <summary class="button button--text order-last padding-y-1">
                 <div class="hide-on-open">
-                  Show more
+                  <%= t "common.show_more" %>
                 </div>
                 <div class="show-on-open">
-                  Show less
+                  <%= t "common.show_less" %>
                 </div>
               </summary>
 

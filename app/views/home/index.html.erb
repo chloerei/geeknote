@@ -1,13 +1,13 @@
 <div class="container padding-3">
   <div class="tab tab--secondary margin-bottom-3">
     <a href="/" class="tab__item <%= 'tab__item--active' if action_name == 'index' %>">
-      Popular
+      <%= t "common.popular" %>
     </a>
     <a href="/feed" class="tab__item <%= 'tab__item--active' if action_name == 'feed' %>">
-      Feed
+      <%= t "common.feed" %>
     </a>
     <a href="/newest" class="tab__item <%= 'tab__item--active' if action_name == 'newest' %>">
-      Newest
+      <%= t "common.newest" %>
     </a>
   </div>
   <div class="layout-primary">
@@ -18,11 +18,11 @@
 
         <% if @paginator[:page_info][:has_next_page] %>
           <a href="<%= url_for(after: @paginator[:page_info][:end_cursor]) %>" class="button button--text width-100 justify-content-center" data-pagination-target="nextPageLink">
-            Load more
+            <%= t "common.load_more" %>
           </a>
         <% else %>
           <div class="body-medium text-muted text-align-center padding-x-3 padding-y-2">
-            No more content.
+            <%= t "common.no_more_content" %>
           </div>
         <% end %>
       </div>
@@ -53,7 +53,7 @@
 
       <div class="card card--elevated padding-3">
         <div class="title-medium margin-bottom-3">
-          Popular Tags
+          <%= t "common.popular_tags" %>
         </div>
         <div class="display-flex flex-wrap gap-2">
           <% Tag.trending.limit(10).each do |tag| %>

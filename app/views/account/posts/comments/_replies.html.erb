@@ -3,7 +3,7 @@
 
   <% if @paginator[:page_info][:has_next_page] %>
     <a href="<%= account_post_comments_path(@account, @post, parent_id: @comment&.id, after: @paginator[:page_info][:end_cursor]) %>" class="button button--text margin-y-3" data-pagination-target="nextPageLink" data-action="pagination#loadNext">
-      Load more
+      <%= t "common.load_more" %>
     </a>
   <% end %>
 </div>

@@ -17,7 +17,7 @@
         <div class="top-app-bar__action line-height-0">
           <label class="button-group">
             <div class="body-medium">
-              Publish
+              <%= t "common.publish" %>
             </div>
             <%= form.switch :status, {}, 'published', 'draft' %>
           </label>
@@ -46,7 +46,7 @@
             </div>
             <div class="image-uploader__hide-on-active padding-top-3 padding-x-4">
               <label for="post_featured_image" class="button button--outlined button--muted">
-                Add featured images
+                <%= t "common.add_featured_image" %>
               </label>
             </div>
             <div class="image-uploader__show-on-active">
@@ -70,7 +70,7 @@
           </div>
 
           <div class="margin-bottom-3">
-            <div class="selector post-form__tag-selector" data-controller="selector tag-selector" data-selector-placeholder-value="Add tags..." data-selector-creatable-value="true" data-selector-max-items-value="5" data-action="selector:input->tag-selector#update">
+            <div class="selector post-form__tag-selector" data-controller="selector tag-selector" data-selector-placeholder-value="<%= t('.post_tags_placeholder') %>" data-selector-creatable-value="true" data-selector-max-items-value="5" data-action="selector:input->tag-selector#update">
               <select name="post[tag_list][]" class="selector__select" data-selector-target="select" multiple>
                 <% @post.tags.each do |tag| %>
                   <option value="<%= tag.name %>" selected><%= tag.name %></option>
@@ -81,7 +81,7 @@
 
           <div class="margin-bottom-3">
             <%= render "components/markdown_editor" do %>
-              <%= form.hidden_field :content, placeholder: t('.post_content_placeholder'), data: { markdown_editor_target: "input" } %>
+              <%= form.hidden_field :content, placeholder: t('account.dashboard.posts.editor.post_content_placeholder'), data: { markdown_editor_target: "input" } %>
             <% end %>
           </div>
         </div>
@@ -109,7 +109,7 @@
           <label class="display-flex gap-2">
             <%= form.check_box :allow_comments %>
             <div class="padding-y-2">
-              Allow comments.
+              <%= Post.human_attribute_name :allow_comments %>
             </div>
           </label>
         </div>

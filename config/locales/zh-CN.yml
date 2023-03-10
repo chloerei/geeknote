@@ -24,6 +24,7 @@ zh-CN:
       posts:
         editor:
           post_content_placeholder: 内容…
+          post_tags_placeholder: 标签…
           post_title_placeholder: 标题…
       settings:
         accounts:
@@ -46,10 +47,6 @@ zh-CN:
           form:
             feed_mark_canonical_description: 设置 Feed 的文章 URL 为 Canonical Link。希望原博客作为正式地址时勾选此项。
             feed_mark_canonical_label: 设置 Canonical Link
-    posts:
-      comments:
-        form:
-          content_placeholder: 评论…
   activerecord:
     attributes:
       account:
@@ -165,7 +162,7 @@ zh-CN:
     account_profile: 账号资料
     account_settings: 账号设置
     accounts: 账号
-    add_organization: 添加组织
+    add_featured_image: 添加封面图片
     add_to_collection: 添加收藏
     admin: 管理
     appearance: 外观
@@ -183,7 +180,6 @@ zh-CN:
     commentable: 评论对象
     comments: 评论
     content_has_expired: 内容已失效
-    continute_editing: 继续编辑
     create_collection: 创建合集
     create_export: 创建导出任务
     create_organization: 创建组织
@@ -225,7 +221,7 @@ zh-CN:
     last_fetched_at: 最后抓取于
     light_theme: 浅色主题
     liked_posts: 赞过
-    likes: 赞
+    load_more: 查看更多
     logo: Logo
     logo_dark: Logo 暗色调
     members: 成员
@@ -239,8 +235,7 @@ zh-CN:
     newest: 最新
     no_collections_info: 合集用于保存或分享您喜欢的文章。
     no_description: 没有描述
-    no_followers: 还没有关注者
-    no_followings: 还没有关注
+    no_more_content: 没有更多内容。
     no_posts: 没有文章
     notification_settings: 通知设置
     notifications: 通知
@@ -250,10 +245,10 @@ zh-CN:
     owner: Owner
     password: 密码
     pending: 待确认
+    popular: 热门
     popular_tags: 热门标签
     post_delete_confirm: 确认删除文章？
     posts: 文章
-    posts_count: "%{count} 篇文章"
     private: 私有
     profile: 个人资料
     public: 公开
@@ -261,8 +256,6 @@ zh-CN:
     publish: 发布
     remove: 移除
     replies: 回复
-    reply: 回复
-    reply_to: 回复
     resend_invitation: 重新发送邀请
     reset_password: 重置密码
     restricted: 限制发布
@@ -270,13 +263,13 @@ zh-CN:
     save: 保存
     save_and_fetch: 保存并抓取
     save_changes: 保存修改
-    select: 选择
     send_email: 发送邮件
     send_invitation: 发送邀请
     send_password_reset_email: 发送密码重置邮件
     send_preview: 发送预览
     settings: 设置
-    show_all_comments: 查看所有评论
+    show_less: 查看更少
+    show_more: 查看更多
     sign_in: 登录
     sign_in_to_comment: 登录后评论
     sign_out: 登出
@@ -284,13 +277,11 @@ zh-CN:
     submit: 提交
     tags: 标签
     theme: 主题
-    unpublished_post: 未发布的文章
     untitled: 无标题
     user: 用户
     users: 用户
     view: 查看
     view_more: 查看更多
-    view_page: 查看页面
     visibility: 公开范围
     weekly_digest: 每周摘要
     weekly_digest_subject: '"%{title}" - %{count} 篇热门文章'
@@ -322,7 +313,6 @@ zh-CN:
     password_reset_token_invliad: 密码重置链接无效或已过期，请重新获取重置链接。
     password_update_successful: 密码更新成功。
     please_wait_one_minute_to_resend_invitation: 请等待一分钟再重发邀请函。
-    post_is_published: 文章已发布。
     post_is_saved: 文章已保存。
     profile_updated: 资料已更新。
     removed_from_collection: 已从“%{name}”中移除。
@@ -330,6 +320,9 @@ zh-CN:
     settings_updated_successful: 设置更新成功。
     weekly_digest_preview_sent_successful: 每周摘要邮件预览发送成功。
   home:
+    index:
+      email_is_not_verified: Email 未验证
+      verify_email: 验证 Email
     navbar:
       email_settings: 邮件地址设置
       verify_email_description: 为了开启完整功能，需要验证邮件地址。
