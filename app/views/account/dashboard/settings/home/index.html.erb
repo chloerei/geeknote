@@ -1,70 +1,60 @@
-<div class="container padding-3">
-  <%= render 'account/dashboard/header' %>
-
-  <div class="layout-primary">
-    <%= render 'account/dashboard/navbar' %>
-
-    <div class="">
-      <div class="card card--elevated background-surface padding-bottom-2">
-        <div class="top-app-bar">
-          <div class="top-app-bar__title">
-            <%= t 'common.settings' %>
-          </div>
-        </div>
-
-        <a href="<%= account_dashboard_settings_account_path(@account) %>" class="link-block">
-          <div class="display-flex gap-3 padding-3">
-            <span class="material-icons">perm_identity</span>
-            <div class="flex-grow-1">
-              <div class="title-medium">
-                <%= t '.account_name' %>
-              </div>
-              <div class="">
-                <%= t '.account_name_desription' %>
-              </div>
-            </div>
-          </div>
-        </a>
-        <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="link-block">
-          <div class="display-flex gap-3 padding-3">
-            <span class="material-icons">account_circle</span>
-            <div class="flex-grow-1">
-              <div class="title-medium">
-                <%= t '.profile' %>
-              </div>
-              <div class="">
-                <%= t '.profile_desription' %>
-              </div>
-            </div>
-          </div>
-        </a>
-        <a href="<%= account_dashboard_settings_import_path(@account) %>" class="link-block">
-          <div class="display-flex gap-3 padding-3">
-            <span class="material-icons">upload</span>
-            <div class="flex-grow-1">
-              <div class="title-medium">
-                <%= t '.import' %>
-              </div>
-              <div class="">
-                <%= t '.import_desription' %>
-              </div>
-            </div>
-          </div>
-        </a>
-        <a href="<%= account_dashboard_settings_exports_path(@account) %>" class="link-block">
-          <div class="display-flex gap-3 padding-3">
-            <span class="material-icons">download</span>
-            <div class="flex-grow-1">
-              <div class="title-medium">
-                <%= t '.exports' %>
-              </div>
-              <div class="">
-                <%= t '.exports_desription' %>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
+<div class="card card--elevated background-surface padding-bottom-2">
+  <div class="top-app-bar">
+    <div class="top-app-bar__title">
+      <%= t 'common.settings' %>
     </div>
   </div>
+
+  <a href="<%= account_dashboard_settings_account_path(@account) %>" class="link-block">
+    <div class="display-flex gap-3 padding-3">
+      <span class="material-icons">perm_identity</span>
+      <div class="flex-grow-1">
+        <div class="title-medium">
+          <%= t '.account_name' %>
+        </div>
+        <div class="">
+          <%= t '.account_name_desription' %>
+        </div>
+      </div>
+    </div>
+  </a>
+  <a href="<%= account_dashboard_settings_profile_path(@account) %>" class="link-block">
+    <div class="display-flex gap-3 padding-3">
+      <span class="material-icons">account_circle</span>
+      <div class="flex-grow-1">
+        <div class="title-medium">
+          <%= t '.profile' %>
+        </div>
+        <div class="">
+          <%= t '.profile_desription' %>
+        </div>
+      </div>
+    </div>
+  </a>
+  <a href="<%= account_dashboard_settings_import_path(@account) %>" class="link-block">
+    <div class="display-flex gap-3 padding-3">
+      <span class="material-icons">upload</span>
+      <div class="flex-grow-1">
+        <div class="title-medium">
+          <%= t '.import' %>
+        </div>
+        <div class="">
+          <%= t '.import_desription' %>
+        </div>
+      </div>
+    </div>
+  </a>
+  <a href="<%= account_dashboard_settings_exports_path(@account) %>" class="link-block">
+    <div class="display-flex gap-3 padding-3">
+      <span class="material-icons">download</span>
+      <div class="flex-grow-1">
+        <div class="title-medium">
+          <%= t '.exports' %>
+        </div>
+        <div class="">
+          <%= t '.exports_desription' %>
+        </div>
+      </div>
+    </div>
+  </a>
 </div>

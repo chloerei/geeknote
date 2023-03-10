@@ -1,26 +1,16 @@
-<div class="container padding-3">
-  <%= render 'account/dashboard/header' %>
-
-  <div class="layout-primary">
-    <%= render 'account/dashboard/navbar' %>
-
-    <div class="">
-      <div class="card card--elevated background-surface">
-        <div class="top-app-bar">
-          <div class="top-app-bar__action">
-            <a href="<%= account_dashboard_collection_path(@account, @collection) %>" class="button button--icon">
-              <span class="material-icons">arrow_back</span>
-            </a>
-          </div>
-          <div class="top-app-bar__title">
-            <%= t 'common.edit' %>
-          </div>
-        </div>
-
-        <div class="padding-3">
-          <%= render 'form' %>
-        </div>
-      </div>
+<div class="card card--elevated">
+  <div class="top-app-bar">
+    <div class="top-app-bar__action">
+      <a href="<%= account_dashboard_collection_path(@account, @collection) %>" class="button button--icon">
+        <span class="material-icons">arrow_back</span>
+      </a>
     </div>
+    <div class="top-app-bar__title">
+      <%= t 'common.edit' %>
+    </div>
+  </div>
+
+  <div class="padding-3">
+    <%= render 'form' %>
   </div>
 </div>

@@ -158,13 +158,13 @@ body[data-color-scheme="dark"] {
   }
 }
 
-.layout-secondary {
+.layout-dashboard {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-3);
 
   @media (min-width: map.get($breakpoints, 'laptop')) {
-    grid-template-columns: minmax(0, 1fr) 280px;
+    grid-template-columns: 280px minmax(0, 1fr)
   }
 }
 

@@ -1,30 +1,20 @@
-<div class="container padding-3">
-  <%= render 'account/dashboard/header' %>
-
-  <div class="layout-primary">
-    <%= render 'account/dashboard/navbar' %>
-
-    <div class="">
-      <div class="card card--elevated background-surface">
-        <div class="top-app-bar">
-          <div class="top-app-bar__action">
-            <a href="<%= account_dashboard_settings_root_path %>" class="button button--icon">
-              <span class="material-icons">arrow_back</span>
-            </a>
-          </div>
-          <div class="top-app-bar__title">
-            <%= t 'common.import' %>
-          </div>
-        </div>
-
-        <div class="padding-3">
-          <div class="padding-bottom-3 border-bottom margin-bottom-3">
-            <%= render 'form' %>
-          </div>
-
-          <%= render 'rules' %>
-        </div>
-      </div>
+<div class="card card--elevated background-surface">
+  <div class="top-app-bar">
+    <div class="top-app-bar__action">
+      <a href="<%= account_dashboard_settings_root_path %>" class="button button--icon">
+        <span class="material-icons">arrow_back</span>
+      </a>
     </div>
+    <div class="top-app-bar__title">
+      <%= t 'common.import' %>
+    </div>
+  </div>
+
+  <div class="padding-3">
+    <div class="padding-bottom-3 border-bottom margin-bottom-3">
+      <%= render 'form' %>
+    </div>
+
+    <%= render 'rules' %>
   </div>
 </div>

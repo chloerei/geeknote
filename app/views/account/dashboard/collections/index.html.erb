@@ -1,63 +1,52 @@
+<div class="card card--elevated">
+  <div class="top-app-bar border-bottom">
+    <div class="top-app-bar__title">
+      <%= t 'common.collections' %>
+    </div>
 
-<div class="container padding-3">
-  <%= render 'account/dashboard/header' %>
-
-  <div class="layout-primary">
-    <%= render 'account/dashboard/navbar' %>
-
-    <div class="">
-      <div class="card card--elevated background-surface">
-        <div class="top-app-bar border-bottom">
-          <div class="top-app-bar__title">
-            <%= t 'common.collections' %>
-          </div>
-
-          <div class="top-app-bar__action">
-            <a href="<%= new_account_dashboard_collection_path(@account) %>" class="button button--text button--muted">
-              <div class="button__icon">
-                <span class="material-icons">add</span>
-              </div>
-              <div class="button__label">
-                <%= t 'common.new_collection' %>
-              </div>
-            </a>
-          </div>
+    <div class="top-app-bar__action">
+      <a href="<%= new_account_dashboard_collection_path(@account) %>" class="button button--text button--muted">
+        <div class="button__icon">
+          <span class="material-icons">add</span>
         </div>
-
-        <% if @collections.any? %>
-          <% @collections.each do |collection| %>
-            <div class="display-flex align-items-center padding-3 border-bottom position-relative">
-              <div class="flex-grow-1">
-                <div class="title-medium">
-                  <a href="<%= account_dashboard_collection_path(@account, collection) %>" class="link-title link-expended">
-                    <%= collection.name %>
-                  </a>
-                </div>
-                <div class="text-muted">
-                  <%= collection.collection_items_count %> <%= t 'common.posts' %>
-                </div>
-              </div>
-              <div class="">
-                <% if collection.visibility_private? %>
-                  <span class="material-icons material-icons--inline">lock</span>
-                  <%= t 'common.private' %>
-                <% else %>
-                  <span class="material-icons material-icons--inline">public</span>
-                  <%= t 'common.public' %>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-
-          <div class="padding-3">
-            <%= paginate @collections %>
-          </div>
-        <% else %>
-          <div class="padding-3 text-align-center text-muted">
-            <%= t '.no_collections' %>
-          </div>
-        <% end %>
-      </div>
+        <div class="button__label">
+          <%= t 'common.new_collection' %>
+        </div>
+      </a>
     </div>
   </div>
+
+  <% if @collections.any? %>
+    <% @collections.each do |collection| %>
+      <div class="display-flex align-items-center padding-3 border-bottom position-relative">
+        <div class="flex-grow-1">
+          <div class="title-medium">
+            <a href="<%= account_dashboard_collection_path(@account, collection) %>" class="link-title link-expended">
+              <%= collection.name %>
+            </a>
+          </div>
+          <div class="text-muted">
+            <%= collection.collection_items_count %> <%= t 'common.posts' %>
+          </div>
+        </div>
+        <div class="">
+          <% if collection.visibility_private? %>
+            <span class="material-icons material-icons--inline">lock</span>
+            <%= t 'common.private' %>
+          <% else %>
+            <span class="material-icons material-icons--inline">public</span>
+            <%= t 'common.public' %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="padding-3">
+      <%= paginate @collections %>
+    </div>
+  <% else %>
+    <div class="padding-3 text-align-center text-muted">
+      <%= t '.no_collections' %>
+    </div>
+  <% end %>
 </div>
