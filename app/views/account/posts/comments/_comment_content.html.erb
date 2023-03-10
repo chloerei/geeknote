@@ -43,7 +43,7 @@
         <span class="material-icons">reply</span>
       </div>
       <div class="button__label">
-        Reply
+        <%= t "common.reply" %>
       </div>
     </a>
 
@@ -54,7 +54,7 @@
 
     <a href="<%= account_post_comment_path(@account, @post, comment) %>" class="button button--text button--muted comment__continute-button">
       <div class="button__label">
-        continute thread
+        <%= t "common.continute_thread" %>
       </div>
       <div class="button__icon">
         <span class="material-icons">arrow_right_alt</span>

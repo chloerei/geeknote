@@ -9,9 +9,9 @@
   </div>
   <div class="button__text">
     <% if comment.likes_count > 0 %>
-      <%= comment.likes_count %> likes
+      <%= comment.likes_count %> <%= t "common.likes" %>
     <% else %>
-      Like
+      <%= t "common.like" %>
     <% end %>
   </div>
 </a>

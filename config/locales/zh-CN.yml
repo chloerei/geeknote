@@ -177,9 +177,11 @@ zh-CN:
     collections: 合集
     comment_is_disabled: 评论已关闭
     comment_on: 评论了
+    comment_placeholder: 评论…
     commentable: 评论对象
     comments: 评论
     content_has_expired: 内容已失效
+    continute_thread: 继续讨论
     create_collection: 创建合集
     create_export: 创建导出任务
     create_organization: 创建组织
@@ -212,6 +214,7 @@ zh-CN:
     followings: 关注中
     forgot_password?: 忘记密码？
     form_unsave_confirm: 改动未保存，确认离开当前页面？
+    hide_replies: Hide replies
     hot: 热门
     icon: 图标
     import: 导入
@@ -220,7 +223,9 @@ zh-CN:
     joined: 加入
     last_fetched_at: 最后抓取于
     light_theme: 浅色主题
+    like: 赞
     liked_posts: 赞过
+    likes: 赞
     load_more: 查看更多
     logo: Logo
     logo_dark: Logo 暗色调
@@ -256,6 +261,7 @@ zh-CN:
     publish: 发布
     remove: 移除
     replies: 回复
+    reply: 回复
     resend_invitation: 重新发送邀请
     reset_password: 重置密码
     restricted: 限制发布
@@ -275,6 +281,7 @@ zh-CN:
     sign_out: 登出
     sign_up: 注册
     submit: 提交
+    table_of_contents: 目录
     tags: 标签
     theme: 主题
     untitled: 无标题
