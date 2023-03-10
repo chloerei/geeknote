@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   resource :preview, only: [:create]
 
-  resources :tags, only: [:index, :show], id: /.+/, format: false, defaults: { format: :html }
+  resources :tags, only: [:show], id: /.+/, format: false, defaults: { format: :html }
 
   namespace :suggest do
     resources :tags, only: [:index]

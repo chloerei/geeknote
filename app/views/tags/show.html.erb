@@ -1,7 +1,5 @@
-<div class="container">
-  <div class="layout-primary padding-3">
-    <%= render 'home/navbar' %>
-
+<div class="container padding-3">
+  <div class="layout-primary">
     <div class="">
       <div class="top-app-bar">
         <div class="top-app-bar__title">
@@ -9,13 +7,20 @@
         </div>
       </div>
 
-      <div class="display-flex flex-direction-column gap-3">
-        <%= render partial: 'account/posts/post', collection: @posts.preload(:account, :user).to_a, cached: -> post { [post.account, post.user, post] } %>
+      <div id="posts" class="display-flex flex-direction-column gap-3" data-controller="pagination">
+        <%= render partial: 'account/posts/post', collection: @paginator[:page].pluck(:data), cached: -> post { [post.account, post.user, post] } %>
+
+        <% if @paginator[:page_info][:has_next_page] %>
+          <a href="<%= url_for(after: @paginator[:page_info][:end_cursor]) %>" class="button button--text width-100 justify-content-center" data-pagination-target="nextPageLink">
+            Load more
+          </a>
+        <% else %>
+          <div class="body-medium text-muted text-align-center padding-x-3 padding-y-2">
+            No more content.
+          </div>
+        <% end %>
       </div>
 
-      <div class="padding-3">
-        <%= paginate @posts %>
-      </div>
     </div>
   </div>
 </div>
