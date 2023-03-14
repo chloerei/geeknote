@@ -20,10 +20,10 @@ jobs:
           cache-to: type=gha,mode=max
       - name: Run test
         run: |
-          docker-compose -f docker-compose.ci.yml run test
+          docker compose -f docker-compose.ci.yml run test
       - name: Run Security check
         run: |
-          docker-compose -f docker-compose.ci.yml run test bundle exec brakeman
+          docker compose -f docker-compose.ci.yml run test bundle exec brakeman
   deploy:
     needs: test
     if: ${{ github.ref == 'refs/heads/master' }}
