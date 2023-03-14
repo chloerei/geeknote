@@ -140,7 +140,7 @@ body[data-color-scheme="dark"] {
 }
 
 .container--post {
-  max-width: 768px;
+  max-width: 824px;
 }
 
 .top-app-bar {
@@ -154,7 +154,7 @@ body[data-color-scheme="dark"] {
   gap: var(--space-3);
 
   @media (min-width: map.get($breakpoints, 'laptop')) {
-    grid-template-columns: minmax(0, 1fr) 280px;
+    grid-template-columns: minmax(0, 1fr) 300px;
   }
 }
 
