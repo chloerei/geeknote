@@ -2,8 +2,7 @@ version: '3.4'
 
 services:
   test:
-    image: geeknote:ci
-    command: bash -c "bin/rails db:prepare && bin/rails test"
+    build: .
     ports:
       - 3000:3000
     depends_on:
@@ -12,8 +11,8 @@ services:
     cap_add:
       - SYS_ADMIN
   postgres:
-    image: postgres:12
+    image: postgres:14
     environment:
       POSTGRES_PASSWORD: postgres
   redis:
-    image: redis:5
+    image: redis:6

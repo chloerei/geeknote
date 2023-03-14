@@ -13,9 +13,7 @@ jobs:
       - name: Build container image
         uses: docker/build-push-action@v3
         with:
-          context: .
           load: true
-          tags: geeknote:ci
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Run test
