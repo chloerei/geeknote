@@ -38,6 +38,8 @@ $material-icons-font-path: '';
 }
 
 @mixin custom-light-scheme {
+  color-scheme: light;
+
   @include light-scheme (
     $primary: #2196f3,
     $secondary: #4F485E,
@@ -63,6 +65,8 @@ $material-icons-font-path: '';
 }
 
 @mixin custom-dark-scheme {
+  color-scheme: dark;
+
   @include dark-scheme (
     $primary: #2196f3,
     $secondary: #4F485E,
@@ -98,27 +102,11 @@ $material-icons-font-path: '';
   }
 }
 
-.padding-6 {
-  padding: var(--space-6);
-}
-
-.padding-x-6 {
-  padding-left: var(--space-6);
-  padding-right: var(--space-6);
-}
-
-.padding-y-6 {
-  padding-top: var(--space-6);
-  padding-bottom: var(--space-6);
-}
-
 body[data-color-scheme="light"] {
-  color-scheme: light;
   @include custom-light-scheme;
 }
 
 body[data-color-scheme="dark"] {
-  color-scheme: dark;
   @include custom-dark-scheme;
 }
 
