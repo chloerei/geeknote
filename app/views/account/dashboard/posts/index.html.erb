@@ -1,8 +1,18 @@
 <div class="card card--elevated background-surface">
   <div class="top-app-bar border-bottom">
-    <div class="top-app-bar__title">
-      <%= t 'common.posts' %>
+    <div class="top-app-bar__action">
+      <%= form_with url: account_dashboard_posts_path, method: :get do |form| %>
+        <div class="text-field text-field--filled text-field--with-leading-icon text-field--search">
+          <div class="text-field__container">
+            <div class="text-field__leading-icon">
+              <span class="material-icons">search</span>
+            </div>
+            <%= form.text_field :query, autocomplete: "off", value: params[:query], autofocus: params[:query].present?, class: "text-field__input" %>
+          </div>
+        </div>
+      <% end %>
     </div>
+    <div class="flex-grow-1"></div>
     <div class="top-app-bar__action">
       <a href="<%= new_account_dashboard_post_path(@account) %>" class="button button--text button--muted">
         <div class="button__icon">

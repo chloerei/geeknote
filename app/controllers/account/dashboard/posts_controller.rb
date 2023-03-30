@@ -4,7 +4,12 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   before_action :set_post, only: [:edit, :update, :publish, :unpublish, :trash, :restore, :destroy]
 
   def index
-    @posts = scoped_posts.where(status: [:draft, :published]).order(updated_at: :desc).page(params[:page])
+    if params[:query].present?
+      # TODO: user_id fitler?
+      @posts = scoped_posts.search(params[:query], filter: "account_id = #{@account.id}").page(params[:page])
+    else
+      @posts = scoped_posts.where(status: [:draft, :published]).order(updated_at: :desc).page(params[:page])
+    end
   end
 
   def new
