@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   include Taggable
   include Likable
   include Commentable
+  include MeiliSearch::Rails
 
   belongs_to :account
   belongs_to :user
@@ -27,6 +28,11 @@ class Post < ApplicationRecord
   }
 
   scope :featured, -> { where(featured: true) }
+
+  meilisearch do
+    searchable_attributes [:title, :content]
+    filterable_attributes [:account_id, :status]
+  end
 
   attribute :saved, :boolean, default: false
 
