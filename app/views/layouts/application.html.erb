@@ -26,6 +26,11 @@
             </a>
           <% end %>
         </div>
+        <div class="top-app-bar__action">
+          <a href="<%= search_path %>" class="button button--icon">
+            <span class="material-icons">search</span>
+          </a>
+        </div>
         <% if current_user %>
           <div class="top-app-bar__action">
             <a href="<%= new_account_dashboard_post_path(current_user.account) %>" class="button button--icon">

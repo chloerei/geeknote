@@ -1,0 +1,31 @@
+<div class="container container--medium padding-3">
+  <div class="margin-y-3">
+    <%= form_with url: search_path, method: :get, builder: CustomFormBuilder do |form| %>
+      <%= form.text_field :query, label: t("common.search"), autocomplete: "off", autofocus: true, value: params[:query] %>
+    <% end %>
+  </div>
+
+  <% if @posts %>
+    <div class="margin-3">
+      <div class="body-medium text-muted">
+        <%= t ".search_results", count: @posts.total_count %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @posts %>
+    <div id="posts" class="display-flex flex-direction-column gap-3" data-controller="pagination">
+      <%= render partial: 'account/posts/post', collection: @posts, cached: -> post { [post.account, post.user, post] } %>
+
+      <% if @posts.next_page %>
+        <a href="<%= url_for(after: search_path(query: params[:query], page: @posts.next_page)) %>" class="button button--text width-100 justify-content-center" data-pagination-target="nextPageLink">
+          <%= t "common.load_more" %>
+        </a>
+      <% else %>
+        <div class="body-medium text-muted text-align-center padding-x-3 padding-y-2">
+          <%= t "common.no_more_content" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

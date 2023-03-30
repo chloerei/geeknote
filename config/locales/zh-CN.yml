@@ -269,6 +269,7 @@ zh-CN:
     save: 保存
     save_and_fetch: 保存并抓取
     save_changes: 保存修改
+    search: 搜索
     send_email: 发送邮件
     send_invitation: 发送邀请
     send_password_reset_email: 发送密码重置邮件
@@ -340,6 +341,9 @@ zh-CN:
   markdown_editor:
     preview: 预览
     write: 编辑
+  search:
+    index:
+      search_results: 找到 %{count} 条结果
   settings:
     emails:
       show:

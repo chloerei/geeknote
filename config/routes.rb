@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get 'feed', to: 'home#feed'
   get 'newest', to: 'home#newest'
 
+  get "/search", to: "search#index", as: :search
+
   get 'sign_up', to: 'users#new', as: 'sign_up'
   resources :users, only: [:create] do
     collection do
