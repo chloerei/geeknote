@@ -5,7 +5,7 @@
     <% end %>
   </div>
 
-  <% if @posts %>
+  <% if params[:query].present? %>
     <div class="margin-3">
       <div class="body-medium text-muted">
         <%= t ".search_results", count: @posts.total_count %>

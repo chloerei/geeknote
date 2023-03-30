@@ -3,19 +3,17 @@
 <%= render "account/header", account: @account %>
 
 <div class="container padding-3">
-  <% if @posts %>
-    <div id="posts" class="display-flex flex-direction-column gap-3" data-controller="pagination">
-      <%= render partial: 'account/posts/post', collection: @posts, cached: -> post { [post.account, post.user, post] } %>
+  <div id="posts" class="display-flex flex-direction-column gap-3" data-controller="pagination">
+    <%= render partial: 'account/posts/post', collection: @posts, cached: -> post { [post.account, post.user, post] } %>
 
-      <% if @posts.next_page %>
-        <a href="<%= url_for(after: search_path(query: params[:query], page: @posts.next_page)) %>" class="button button--text width-100 justify-content-center" data-pagination-target="nextPageLink">
-          <%= t "common.load_more" %>
-        </a>
-      <% else %>
-        <div class="body-medium text-muted text-align-center padding-x-3 padding-y-2">
-          <%= t "common.no_more_content" %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+    <% if @posts.next_page %>
+      <a href="<%= url_for(after: search_path(query: params[:query], page: @posts.next_page)) %>" class="button button--text width-100 justify-content-center" data-pagination-target="nextPageLink">
+        <%= t "common.load_more" %>
+      </a>
+    <% else %>
+      <div class="body-medium text-muted text-align-center padding-x-3 padding-y-2">
+        <%= t "common.no_more_content" %>
+      </div>
+    <% end %>
+  </div>
 </div>
