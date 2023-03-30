@@ -429,6 +429,34 @@ summary {
   z-index: auto;
 }
 
+.text-field--filled.text-field--search {
+  .text-field__container {
+    background-color: transparent;
+
+    &::before {
+      border-bottom: 1px solid transparent;
+    }
+
+    &:focus-within {
+      &::before {
+        border-bottom: 2px solid var(--color-primary);
+      }
+    }
+  }
+
+  .text-field__leading-icon {
+    top: 8px;
+    left: 8px;
+  }
+
+  .text-field__input {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 40px;
+    width: 160px;
+  }
+}
+
 @media (min-width: map.get($breakpoints, "laptop")) {
   .navigation-drawer:not(.navigation-drawer--modal) {
     width: auto;

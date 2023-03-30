@@ -70,6 +70,19 @@
       <a href="<%= account_collections_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'collections' %>">
         <%= t 'common.collections' %>
       </a>
+
+      <div class="padding-x-3">
+        <%= form_with url: account_search_path, method: :get do |form| %>
+          <div class="text-field text-field--filled text-field--with-leading-icon text-field--search">
+            <div class="text-field__container">
+              <div class="text-field__leading-icon">
+                <span class="material-icons">search</span>
+              </div>
+              <%= form.text_field :query, autocomplete: "off", value: params[:query], autofocus: params[:query].present?, class: "text-field__input" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
