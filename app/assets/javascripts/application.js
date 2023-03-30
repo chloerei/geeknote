@@ -12,9 +12,5 @@ import "./controllers"
 
 // color scheme
 document.addEventListener('DOMContentLoaded', () => {
-  document.body.dataset.colorScheme = localStorage.getItem('color-scheme') || 'default'
-})
-
-document.addEventListener('turbo:before-render', (event) => {
-  event.detail.newBody.dataset.colorScheme = localStorage.getItem('color-scheme') || 'default'
+  document.documentElement.dataset.colorScheme = localStorage.getItem('color-scheme') || 'default'
 })

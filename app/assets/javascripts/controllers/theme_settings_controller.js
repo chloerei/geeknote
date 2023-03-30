@@ -11,6 +11,6 @@ export default class extends Controller {
 
   selectColorScheme(event) {
     localStorage.setItem('color-scheme', event.target.value)
-    document.body.dataset.colorScheme = event.target.value
+    document.documentElement.dataset.colorScheme = localStorage.getItem('color-scheme') || 'default'
   }
 }

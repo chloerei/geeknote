@@ -91,22 +91,22 @@ $material-icons-font-path: '';
 }
 
 @media (prefers-color-scheme: light) {
-  body {
+  :root {
     @include custom-light-scheme;
   }
 }
 
 @media (prefers-color-scheme: dark) {
-  body {
+  :root {
     @include custom-dark-scheme;
   }
 }
 
-body[data-color-scheme="light"] {
+html[data-color-scheme="light"] {
   @include custom-light-scheme;
 }
 
-body[data-color-scheme="dark"] {
+html[data-color-scheme="dark"] {
   @include custom-dark-scheme;
 }
 
