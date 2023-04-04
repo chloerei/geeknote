@@ -1,29 +1,4 @@
 module ApplicationHelper
-
-  MARKDOWN_ALLOW_TAGS = Set.new(%w(strong em b i p code pre tt samp kbd var sub sup dfn cite big small address hr br div span h1 h2 h3 h4 h5 h6 ul ol li dl dt dd abbr acronym a img blockquote del ins input table thead tbody tr th td))
-  MARKDOWN_ALLOW_ATTRIBUTES = Set.new(%w(id href src width height alt cite datetime title class name xml:lang abbr type disabled checked))
-
-  def markdown_render(text)
-    html = Commonmarker.to_html(text)
-    doc = Nokogiri::HTML.fragment(html)
-
-    # code highlight
-    doc.css("pre code").each do |node|
-      lang = node.parent.attr("lang")
-      lexer = Rouge::Lexer.find_fancy(lang) || Rouge::Lexer.find_fancy('text')
-      formatter = Rouge::Formatters::HTML.new
-      node.inner_html = formatter.format(lexer.lex(node.content))
-      node.parent.add_class("highlight")
-    end
-
-    # fix turbo anchor navigator
-    doc.css(".anchor").each do |node|
-      node["id"] = CGI.escape node["id"]
-    end
-
-    sanitize doc.to_html, tags: MARKDOWN_ALLOW_TAGS, attributes: MARKDOWN_ALLOW_ATTRIBUTES
-  end
-
   def use_aliyun_oss?
     ENV['STORAGE_SERVICE'] == 'aliyun'
   end

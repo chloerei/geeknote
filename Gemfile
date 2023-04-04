@@ -36,7 +36,7 @@ gem 'dotenv-rails'
 gem 'turbo-rails'
 
 # markdown
-gem 'commonmarker', '~> 1.0.0.pre7'
+gem 'commonmarker', '~> 0.23.8'
 
 # Html to Markdown
 gem 'reverse_markdown'
