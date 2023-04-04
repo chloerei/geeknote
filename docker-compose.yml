@@ -13,6 +13,7 @@ services:
     depends_on:
       - postgres
       - redis
+      - meilisearch
     cap_add:
       - SYS_ADMIN
   build-js:
