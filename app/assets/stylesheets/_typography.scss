@@ -83,7 +83,8 @@
     line-height: 1.2;
     margin: var(--space-3) 0;
     padding: var(--space-3);
-    white-space: pre-wrap;
+    white-space: pre;
+    overflow-x: auto;
   }
 
   pre code {

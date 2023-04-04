@@ -457,10 +457,10 @@
   @include dark-highlight;
 }
 
-body[data-color-scheme="light"] {
+html[data-color-scheme="light"] {
   @include light-highlight;
 }
 
-body[data-color-scheme="dark"] {
+html[data-color-scheme="dark"] {
   @include dark-highlight;
 }
