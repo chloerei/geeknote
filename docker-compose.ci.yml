@@ -1,13 +1,14 @@
 version: '3.4'
 
 services:
-  test:
+  ci:
     build: .
     ports:
       - 3000:3000
     depends_on:
       - postgres
       - redis
+      - meilisearch
     cap_add:
       - SYS_ADMIN
   postgres:
@@ -16,3 +17,7 @@ services:
       POSTGRES_PASSWORD: postgres
   redis:
     image: redis:6
+  meilisearch:
+    image: getmeili/meilisearch:v1.0
+    environment:
+      MEILI_NO_ANALYTICS: true

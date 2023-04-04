@@ -17,11 +17,9 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Run test
-        run: |
-          docker compose -f docker-compose.ci.yml run test
+        run: docker compose -f docker-compose.ci.yml run ci bash -c "bin/rails db:prepare && bin/rails test"
       - name: Run Security check
-        run: |
-          docker compose -f docker-compose.ci.yml run test bundle exec brakeman
+        run: docker compose -f docker-compose.ci.yml run ci bundle exec brakeman
   deploy:
     needs: test
     if: ${{ github.ref == 'refs/heads/master' }}
