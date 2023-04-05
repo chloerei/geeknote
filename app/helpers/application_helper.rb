@@ -95,8 +95,8 @@ module ApplicationHelper
       anchor = heading.css(".anchor")
       {
         title: heading.text.strip,
-        href: anchor.attr("href"),
-        id: anchor.attr("id"),
+        href: anchor.attr("href").to_s,
+        id: anchor.attr("id").to_s,
         level: heading.name[1].to_i
       }
     end

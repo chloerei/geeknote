@@ -15,9 +15,13 @@ module MarkdownHelper
       node.parent.add_class("highlight")
     end
 
-    # fix turbo anchor navigator
-    doc.css(".anchor").each do |node|
-      node["id"] = CGI.escape node["id"]
+    # Add header anchor
+    doc.css("h1, h2, h3, h4, h5, h6").each do |node|
+      anchor = Nokogiri::XML::Node.new "a", doc
+      anchor["id"] = CGI.escape(node.text)
+      anchor["href"] = "##{anchor['id']}"
+      anchor["class"] = "anchor"
+      node.prepend_child anchor
     end
 
     sanitize doc.to_html, tags: MARKDOWN_ALLOW_TAGS, attributes: MARKDOWN_ALLOW_ATTRIBUTES
