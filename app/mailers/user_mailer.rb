@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  helper :markdown
+  helper :application, :markdown
 
   def password_reset_email
     @user = params[:user]
