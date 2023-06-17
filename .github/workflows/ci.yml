@@ -22,11 +22,6 @@ jobs:
           MEILI_NO_ANALYTICS: true
         ports:
           - 7700:7700
-    env:
-      RAILS_ENV: test
-      DATABASE_URL: postgres://postgres:postgres@localhost/geeknote_test
-      REDIS_URL: redis://localhost:6379/0
-      MEILISEARCH_URL: http://localhost:7700
     steps:
       - name: Checkout
         uses: actions/checkout@v3

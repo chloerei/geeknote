@@ -1,5 +1,10 @@
 version: '3.4'
 
+x-default-environment: &default_environment
+  DATABASE_URL: postgres://postgres:postgres@postgres:5432
+  REDIS_URL: redis://redis:6379/0
+  MEILISEARCH_URL: http://meilisearch:7700
+
 services:
   web:
     build:
@@ -16,6 +21,8 @@ services:
       - meilisearch
     cap_add:
       - SYS_ADMIN
+    environment:
+      <<: *default_environment
   build-js:
     build:
       context: .
@@ -43,6 +50,8 @@ services:
       - redis
     cap_add:
       - SYS_ADMIN
+    environment:
+      <<: *default_environment
   postgres:
     image: postgres:14
     environment:
