@@ -4,26 +4,43 @@ on: push
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_PASSWORD: postgres
+      redis:
+        image: redis:6
+      meilisearch:
+        image: getmeili/meilisearch:v1.0
+        env:
+          MEILI_NO_ANALYTICS: true
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Build container image
-        uses: docker/build-push-action@v3
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          load: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          ruby-version: 3.2.1
+          bundler-cache: true
+      - name: Setup NPM
+        uses: actions/setup-node@v3
+        with:
+          node-version: 12
+          cache: "npm"
+      - name: Precompile assets
+        run: bin/rails assets:precompile
+      - name: Setup db
+        run: bin/rails db:prepare
       - name: Run test
-        run: docker compose -f docker-compose.ci.yml run ci bash -c "bin/rails db:prepare && bin/rails test"
-      - name: Run Security check
-        run: docker compose -f docker-compose.ci.yml run ci bundle exec brakeman
+        run: bin/rails test
+      - name: Run brakeman
+        run: bundle exec brakeman
   deploy:
     needs: test
     if: ${{ github.ref == 'refs/heads/master' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
