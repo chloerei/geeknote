@@ -38,7 +38,7 @@ jobs:
       - name: Setup NPM
         uses: actions/setup-node@v3
         with:
-          node-version: 12
+          node-version: 18
           cache: "npm"
       - name: Precompile assets
         run: bin/rails assets:precompile
