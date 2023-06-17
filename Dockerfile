@@ -1,6 +1,6 @@
 ### base stage ###
 
-FROM ruby:3.2.1 AS base
+FROM ruby:3.2.2 AS base
 
 ENV LANG=C.UTF-8
 
@@ -10,11 +10,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   fonts-noto-cjk \
   libpq-dev \
   libvips42 \
-  nodejs \
-  npm \
   postgresql-client
 
-RUN gem install bundler && \
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+  apt-get install -y nodejs
+
+RUN gem install bundler -v 2.4.14 && \
   bundle config set --local path vendor/bundle
 
 RUN useradd -m rails && \
