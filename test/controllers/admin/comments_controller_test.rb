@@ -2,7 +2,7 @@ require "test_helper"
 
 class Admin::CommentsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @admin = create(:user, email: ENV['ADMIN_EMAILS'])
+    @admin = create(:user, email: User::ADMIN_EMAILS.last)
     @comment = create(:comment)
     sign_in @admin
   end

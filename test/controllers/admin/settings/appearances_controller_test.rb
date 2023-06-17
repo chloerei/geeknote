@@ -3,7 +3,7 @@ require "test_helper"
 class Admin::Settings::AppearancesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @site = Site.create
-    @admin = create(:user, email: ENV['ADMIN_EMAILS'])
+    @admin = create(:user, email: User::ADMIN_EMAILS.last)
   end
 
   test "should get show page" do

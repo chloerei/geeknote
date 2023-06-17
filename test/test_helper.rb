@@ -7,6 +7,8 @@ WebMock.disable_net_connect!(allow: [
   ENV.fetch("MEILISEARCH_URL", "http://localhost:7700")
 ])
 
+User::ADMIN_EMAILS.push "admin@example.com"
+
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)

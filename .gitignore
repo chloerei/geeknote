@@ -30,9 +30,9 @@
 yarn-debug.log*
 .yarn-integrity
 
-/.env.production
-/.env.local
-/.env.*.local
+/.env
+/.env.*
+!/.env.example
 
 /swarm/.env.*
 

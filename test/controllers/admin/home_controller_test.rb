@@ -2,7 +2,7 @@ require "test_helper"
 
 class Admin::HomeControllerTest < ActionDispatch::IntegrationTest
   test "should get index as admin" do
-    user = create(:user, email: ENV['ADMIN_EMAILS'])
+    user = create(:user, email: User::ADMIN_EMAILS.last)
     sign_in user
     get admin_root_path
     assert_response :success

@@ -1,7 +1,7 @@
 <%= form_with model: @organization, builder: CustomFormBuilder, html: { class: 'form', id: 'organization-form' } do |form| %>
   <%= form.fields_for :account do |account_form| %>
     <div class="margin-bottom-3">
-      <%= account_form.text_field :name, prefix_text: ENV['HOST'] + '/', autofocus: true %>
+      <%= account_form.text_field :name, prefix_text: ENV.fetch("HOST", "localhost") + '/', autofocus: true %>
     </div>
   <% end %>
   <div class="margin-bottom-3">
