@@ -4,7 +4,7 @@ require 'rails/test_help'
 require 'webmock/minitest'
 
 WebMock.disable_net_connect!(allow: [
-  "meilisearch:7700"
+  ENV.fetch("MEILISEARCH_URL", "http://meilisearch:7700")
 ])
 
 class ActiveSupport::TestCase
