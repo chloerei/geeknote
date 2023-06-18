@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
   resources :organizations, only: [:index, :new, :create]
   resources :notifications, only: [:index]
+  resources :bookmarks, only: [:index]
 
   namespace :settings do
     root to: 'home#index'

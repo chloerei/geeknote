@@ -62,20 +62,20 @@
                     <%= t 'common.profile' %>
                   </div>
                 </a>
-                <a href="<%= account_collections_path(current_user.account) %>" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">library_books</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.collections' %>
-                  </div>
-                </a>
                 <a href="<%= account_dashboard_posts_path(current_user.account) %>" class="dropdown__item">
                   <div class="dropdown__item__icon">
                     <span class="material-icons">dashboard</span>
                   </div>
                   <div class="dropdown__item__text">
                     <%= t 'common.dashboard' %>
+                  </div>
+                </a>
+                <a href="<%= bookmarks_path %>" class="dropdown__item">
+                  <div class="dropdown__item__icon">
+                    <span class="material-icons">bookmark_border</span>
+                  </div>
+                  <div class="dropdown__item__text">
+                    <%= t 'common.bookmarks' %>
                   </div>
                 </a>
                 <a href="<%= organizations_path %>" class="dropdown__item">

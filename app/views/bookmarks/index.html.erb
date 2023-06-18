@@ -1,0 +1,13 @@
+<div class="container padding-3">
+  <h3 class="title-meidum">
+    <%= t "common.bookmarks" %>
+  </h3>
+
+  <div class="display-flex flex-direction-column gap-3">
+    <%= render partial: 'account/posts/post', collection: @posts, cached: -> post { [post.account, post.user, post] } %>
+  </div>
+
+  <div class="padding-3">
+    <%= paginate @posts %>
+  </div>
+</div>
