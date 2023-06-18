@@ -19,6 +19,10 @@
   color: #f44336;
 }
 
+.button--bookmark.button--active {
+  color: var(--color-primary);
+}
+
 .button__show-on-active {
   display: none;
 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_25_084251) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_18_070051) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -76,6 +76,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_25_084251) do
     t.index ["post_id", "user_id"], name: "index_authors_on_post_id_and_user_id", unique: true
     t.index ["post_id"], name: "index_authors_on_post_id"
     t.index ["user_id"], name: "index_authors_on_user_id"
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id", "user_id"], name: "index_bookmarks_on_post_id_and_user_id", unique: true
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "collection_items", force: :cascade do |t|
@@ -216,6 +225,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_25_084251) do
     t.string "feed_source_id"
     t.bigint "user_id"
     t.integer "score", default: 0
+    t.integer "bookmarks_count", default: 0
     t.index ["account_id"], name: "index_posts_on_account_id"
     t.index ["feed_source_id", "account_id"], name: "index_posts_on_feed_source_id_and_account_id", unique: true, where: "(feed_source_id IS NOT NULL)"
     t.index ["published_at"], name: "index_posts_on_published_at"

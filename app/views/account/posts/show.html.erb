@@ -110,6 +110,8 @@
           <div class="post-toolbar__content">
             <%= render "account/posts/likes/button", post: @post %>
 
+            <%= render "account/posts/bookmarks/button", post: @post %>
+
             <div class="button-group">
               <a href="#comments" class="button button--icon">
                 <span class="material-icons">comment</span>
@@ -120,8 +122,6 @@
                 </div>
               <% end %>
             </div>
-
-            <%= render "account/posts/collections/button", post: @post %>
 
             <label for="toc-sheet-toggle" class="button button--icon display-none@laptop">
               <span class="material-icons">toc</span>

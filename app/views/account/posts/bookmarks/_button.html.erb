@@ -1,0 +1,19 @@
+<% active = post.bookmarks.where(user: current_user).exists?  %>
+
+<%= form_with url: account_post_bookmark_path(post.account, post), method: (active ? 'delete' : 'post'), id: "post-#{post.id}-bookmark-button" do |form| %>
+  <div class="button-group">
+    <button type="submit" class="button button--icon button--bookmark <%= 'button--active' if active %>">
+      <div class="button__show-on-active">
+        <span class="material-icons">bookmark</span>
+      </div>
+      <div class="button__hide-on-active">
+        <span class="material-icons">bookmark_border</span>
+      </div>
+    </button>
+    <% if post.bookmarks_count > 0 %>
+      <div class="body-medium">
+        <%= post.bookmarks_count %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
