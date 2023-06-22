@@ -67,9 +67,6 @@
       <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>">
         <%= t 'common.posts' %>
       </a>
-      <a href="<%= account_collections_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'collections' %>">
-        <%= t 'common.collections' %>
-      </a>
 
       <div class="padding-x-3">
         <%= form_with url: account_search_path, method: :get do |form| %>
