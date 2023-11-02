@@ -96,6 +96,10 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => "/sidekiq", constraints: AdminConstraint.new
   end
 
+  namespace :sso do
+    resource :feedbacktrace, controller: "feedbacktrace"
+  end
+
   scope '/:account_name', module: 'account', as: :account do
     root to: 'posts#index'
 

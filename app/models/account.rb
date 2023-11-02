@@ -26,6 +26,7 @@ class Account < ApplicationRecord
     sessions
     settings
     suggest
+    sso
     tags
     users
   ) + ENV.fetch('ACCOUNT_NAME_EXCLUSION_LIST', '').split(',')
