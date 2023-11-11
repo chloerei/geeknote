@@ -1,0 +1,10 @@
+<div class="container container--micro padding-3">
+  <div class="card card--elevated background-surface padding-3">
+    <%= form_with url: sso_feedbacktrace_path, method: :post, id: :sso_form, data: {turbo: false} do %>
+      验证中...
+    <% end %>
+    <script>
+      document.getElementById('sso_form').submit();
+    </script>
+  </div>
+</div>

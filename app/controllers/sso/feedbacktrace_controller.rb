@@ -1,9 +1,13 @@
 class Sso::FeedbacktraceController < ApplicationController
   before_action :require_sign_in
+  layout "base"
 
   def show
+  end
+
+  def create
     token = JWT.encode({
-      iat: Time.now.to_i,
+      exp: 1.minute.from_now.to_i,
       external_id: current_user.id,
       email: current_user.email,
       name: current_user.name,
