@@ -119,6 +119,7 @@ GEM
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
     ffi (1.15.5)
+    foreman (0.88.1)
     fugit (1.5.3)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
@@ -372,6 +373,7 @@ DEPENDENCIES
   diffy
   dotenv-rails
   factory_bot_rails
+  foreman
   hiredis
   i18n-tasks (~> 0.9.34)
   image_processing (~> 1.2)

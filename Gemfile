@@ -93,6 +93,8 @@ group :development do
   gem 'i18n-tasks', '~> 0.9.34'
 
   gem 'brakeman', '~> 5.4.0'
+
+  gem 'foreman'
 end
 
 group :test do
