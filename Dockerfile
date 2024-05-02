@@ -1,45 +1,81 @@
-### base stage ###
+# syntax = docker/dockerfile:1
 
-FROM ruby:3.2.2 AS base
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
+ARG RUBY_VERSION=3.2.2
+FROM ruby:$RUBY_VERSION-slim as base
 
-ENV LANG=C.UTF-8
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  curl \
-  chromium \
-  fonts-noto-cjk \
-  libpq-dev \
-  libvips42 \
-  postgresql-client
-
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-  apt-get install -y nodejs
-
-RUN gem install bundler -v 2.4.14 && \
-  bundle config set --local path vendor/bundle
-
-RUN useradd -m rails && \
-  mkdir /rails && \
-  chown rails:rails /rails
-
-USER rails:rails
-
+# Rails app lives here
 WORKDIR /rails
 
-### production stage ###
+# Set production environment
+ENV BUNDLE_DEPLOYMENT="1" \
+    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_WITHOUT="development:test" \
+    RAILS_ENV="production"
 
-FROM base
+# Update gems and bundler
+RUN gem update --system --no-document && \
+    gem install -N bundler
 
-ENV BUNDLE_FROZEN=true
 
-COPY --chown=rails:rails Gemfile Gemfile.lock /rails/
+# Throw-away build stage to reduce size of final image
+FROM base as build
 
-RUN bundle install
+# Install packages needed to build gems and node modules
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential curl libpq-dev libvips node-gyp pkg-config python-is-python3
 
-COPY --chown=rails:rails package.json package-lock.json /rails/
+# Install Node.js
+ARG NODE_VERSION=18.20.2
+ENV PATH=/usr/local/node/bin:$PATH
+RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
+    /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
+    rm -rf /tmp/node-build-master
 
+# Install application gems
+COPY --link Gemfile Gemfile.lock ./
+RUN bundle install && \
+    bundle exec bootsnap precompile --gemfile && \
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
+
+# Install node modules
+COPY --link package.json package-lock.json ./
 RUN npm install
 
-COPY --chown=rails:rails . /rails/
+# Copy application code
+COPY --link . .
 
-RUN bin/rails assets:precompile
+# Precompile bootsnap code for faster boot times
+RUN bundle exec bootsnap precompile app/ lib/
+
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE=DUMMY ./bin/rails assets:precompile
+
+
+# Final stage for app image
+FROM base
+
+# Install packages needed for deployment
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl libvips postgresql-client && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Copy built artifacts: gems, application
+COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --from=build /rails /rails
+
+# Run and own only the runtime files as a non-root user for security
+RUN groupadd --system --gid 1000 rails && \
+    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
+    chown -R 1000:1000 db log storage tmp
+USER 1000:1000
+
+# Deployment options
+ENV RAILS_LOG_TO_STDOUT="1" \
+    RAILS_SERVE_STATIC_FILES="true"
+
+# Entrypoint prepares the database.
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+# Start the server by default, this can be overwritten at runtime
+EXPOSE 3000

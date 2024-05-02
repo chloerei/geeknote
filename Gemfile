@@ -93,6 +93,8 @@ group :development do
   gem 'brakeman', '~> 5.4.0'
 
   gem 'foreman'
+
+  gem 'dockerfile-rails'
 end
 
 group :test do
