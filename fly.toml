@@ -1,44 +1,25 @@
 app = "geeknote"
 
-kill_signal = "SIGINT"
-kill_timeout = 5
-
-[env]
+[build]
+  dockerfile = "Dockerfile"
 
 [processes]
   web = "bin/rails server"
   worker = "bundle exec sidekiq"
 
-[deploy]
-  release_command = "bin/rails db:migrate"
-
-[experimental]
-  allowed_public_ports = []
-  auto_rollback = true
-
-[[services]]
-  processes = ["web"]
-  http_checks = []
+[http_service]
   internal_port = 3000
-  protocol = "tcp"
-  script_checks = []
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["web"]
 
-  [services.concurrency]
-    hard_limit = 25
-    soft_limit = 20
-    type = "connections"
+[http_service.concurrency]
+  type = "connections"
+  hard_limit = 25
+  soft_limit = 20
 
-  [[services.ports]]
-    # force_https = true
-    handlers = ["http"]
-    port = 80
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
-
-  [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
-    restart_limit = 0
-    timeout = "2s"
+[[statics]]
+  guest_path = "/rails/public"
+  url_prefix = "/"
