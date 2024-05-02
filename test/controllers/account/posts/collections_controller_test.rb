@@ -11,11 +11,11 @@ class Account::Posts::CollectionsControllerTest < ActionDispatch::IntegrationTes
     assert_response :success
 
     assert_difference "collection.collection_items.count", 1 do
-      patch account_post_collection_path(post.account, post, collection), params: { collection: { added: '1' }}, as: :turbo_stream
+      patch account_post_collection_path(post.account, post, collection), params: { collection: { added: "1" } }, as: :turbo_stream
     end
 
     assert_difference "collection.collection_items.count", -1 do
-      patch account_post_collection_path(post.account, post, collection), params: { collection: { added: '0' }}, as: :turbo_stream
+      patch account_post_collection_path(post.account, post, collection), params: { collection: { added: "0" } }, as: :turbo_stream
     end
   end
 
@@ -24,7 +24,7 @@ class Account::Posts::CollectionsControllerTest < ActionDispatch::IntegrationTes
     post = create(:post)
 
     sign_in user
-    post account_post_collections_path(post.account, post), params: { collection: { name: 'test' }}
+    post account_post_collections_path(post.account, post), params: { collection: { name: "test" } }
     assert_redirected_to account_post_collections_path(post.account, post)
 
     collection = user.account.collections.last
@@ -42,12 +42,12 @@ class Account::Posts::CollectionsControllerTest < ActionDispatch::IntegrationTes
       put switch_account_post_collections_path(post.account, post, account: organization.account.name)
     end
 
-    organization.members.create(user: user, role: 'admin')
+    organization.members.create(user: user, role: "admin")
     put switch_account_post_collections_path(post.account, post, account: organization.account.name)
     assert_redirected_to account_post_collections_path(post.account, post)
 
     assert_difference "collection.collection_items.count", 1 do
-      patch account_post_collection_path(post.account, post, collection), params: { collection: { added: '1' }}, as: :turbo_stream
+      patch account_post_collection_path(post.account, post, collection), params: { collection: { added: "1" } }, as: :turbo_stream
     end
   end
 end

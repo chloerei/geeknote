@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :require_sign_in, only: [:feed]
+  before_action :require_sign_in, only: [ :feed ]
 
   def index
     @paginator = RailsCursorPagination::Paginator.new(Post.published.where("score > 0").includes(:account, :user), order_by: :score, order: :desc, after: params[:after]).fetch

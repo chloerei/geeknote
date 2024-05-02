@@ -1,5 +1,5 @@
 class Admin::CollectionsController < Admin::BaseController
-  before_action :set_collection, only: [:show, :edit, :update]
+  before_action :set_collection, only: [ :show, :edit, :update ]
 
   def index
     @collections = Collection.order(id: :desc).page(params[:page])
@@ -13,7 +13,7 @@ class Admin::CollectionsController < Admin::BaseController
 
   def update
     if @collection.update collection_params
-      redirect_to admin_collection_path(@collection), notice: 'User updated.'
+      redirect_to admin_collection_path(@collection), notice: "User updated."
     else
       render :edit, status: :unprocessable_entity
     end

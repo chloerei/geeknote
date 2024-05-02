@@ -23,9 +23,9 @@ class Admin::AccountsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update post" do
-    patch admin_account_path(@account.id), params: { account: { name: 'changed' } }
+    patch admin_account_path(@account.id), params: { account: { name: "changed" } }
     assert_redirected_to admin_account_path(@account.id)
     @account.reload
-    assert_equal 'changed', @account.name
+    assert_equal "changed", @account.name
   end
 end

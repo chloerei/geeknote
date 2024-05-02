@@ -16,21 +16,21 @@ class Account::Posts::CollectionsController < Account::Posts::BaseController
       @collection.collection_items.create(post: @post)
       redirect_to account_post_collections_path(@account, @post)
     else
-      render turbo_stream: turbo_stream.replace("post-#{@post.id}-collection-form", partial: 'form')
+      render turbo_stream: turbo_stream.replace("post-#{@post.id}-collection-form", partial: "form")
     end
   end
 
   def update
     @collection = @collection_account.collections.find params[:id]
 
-    if params[:collection][:added] == '1'
+    if params[:collection][:added] == "1"
       @collection.collection_items.find_or_create_by(post: @post)
       flash.now[:notice] = I18n.t("flash.added_to_collection", name: @collection.name)
     else
       @collection.collection_items.find_by(post: @post)&.destroy
       flash.now[:notice] = I18n.t("flash.removed_from_collection", name: @collection.name)
     end
-    render layout: 'application'
+    render layout: "application"
   end
 
   def switch

@@ -8,14 +8,14 @@ class User::Email::UnsubscribesControllerTest < ActionDispatch::IntegrationTest
 
   test "should get show page with token" do
     user = create(:user)
-    get user_email_unsubscribe_path(token: user.email_auth_token, type: 'comment')
+    get user_email_unsubscribe_path(token: user.email_auth_token, type: "comment")
     assert_response :success
   end
 
   test "should unsubscribe comment email" do
     user = create(:user)
     assert user.comment_email_notification_enabled?
-    patch user_email_unsubscribe_path(token: user.email_auth_token, type: 'comment')
+    patch user_email_unsubscribe_path(token: user.email_auth_token, type: "comment")
     assert_response :success
     user.reload
     assert_not user.comment_email_notification_enabled?
@@ -24,7 +24,7 @@ class User::Email::UnsubscribesControllerTest < ActionDispatch::IntegrationTest
   test "should unsubscribe weekly summary email" do
     user = create(:user)
     assert user.weekly_digest_email_enabled?
-    patch user_email_unsubscribe_path(token: user.email_auth_token, type: 'weekly_digest')
+    patch user_email_unsubscribe_path(token: user.email_auth_token, type: "weekly_digest")
     assert_response :success
     user.reload
     assert_not user.weekly_digest_email_enabled?

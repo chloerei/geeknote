@@ -5,11 +5,11 @@ class Account::Dashboard::Settings::ExportsController < Account::Dashboard::Sett
 
   def create
     if @account.exports.pending.any?
-      redirect_to account_dashboard_settings_exports_path(@account), notice: t('flash.export_task_already_exists')
+      redirect_to account_dashboard_settings_exports_path(@account), notice: t("flash.export_task_already_exists")
     else
       @export = @account.exports.create
       AccountExportJob.perform_later(@export)
-      redirect_to account_dashboard_settings_exports_path(@account), notice: t('flash.export_task_processing')
+      redirect_to account_dashboard_settings_exports_path(@account), notice: t("flash.export_task_processing")
     end
   end
 

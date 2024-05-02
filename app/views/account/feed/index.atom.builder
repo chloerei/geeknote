@@ -14,7 +14,7 @@ atom_feed(root_url: account_root_url(@account), id: account_root_url(@account)) 
     cache post do
       feed.entry(post, url: account_post_url(post.account, post), id: account_post_url(post.account, post), published: post.published_at) do |entry|
         entry.title post.title
-        entry.content(markdown_render(post.content), type: 'html')
+        entry.content(markdown_render(post.content), type: "html")
         entry.summary(post_summary(post))
 
         entry.author do |author|

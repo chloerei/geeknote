@@ -7,7 +7,7 @@ class DropBookmarks < ActiveRecord::Migration[6.1]
 
       t.timestamps
 
-      t.index [:post_id, :user_id], unique: true
+      t.index [ :post_id, :user_id ], unique: true
     end
 
     remove_column :posts, :bookmarks_count, :integer, default: 0

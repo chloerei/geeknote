@@ -1,7 +1,7 @@
 class Account::InvitationsController < Account::BaseController
-  layout 'base'
+  layout "base"
   before_action :require_organization_account, :set_member
-  before_action :require_sign_in, :check_user_match, only: [:update]
+  before_action :require_sign_in, :check_user_match, only: [ :update ]
 
   def show
   end
@@ -20,13 +20,13 @@ class Account::InvitationsController < Account::BaseController
     @member = @account.owner.members.pending.find_by user: nil, invitation_token: params[:invitation_token]
 
     unless @member && @member.invited_at > 7.days.ago
-      render 'expired', status: :not_found
+      render "expired", status: :not_found
     end
   end
 
   def check_user_match
     if @member.user && @member.user != current_user
-      redirect_to account_invitation_path, notice: 'User not match'
+      redirect_to account_invitation_path, notice: "User not match"
     end
   end
 end

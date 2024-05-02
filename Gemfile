@@ -1,73 +1,73 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.3.1'
+ruby "3.3.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.1'
+gem "rails", "~> 7.1"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
+gem "puma", "~> 5.0"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
+gem "jbuilder", "~> 2.7"
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 4.0'
+gem "redis", "~> 4.0"
 
 # Use Active Model has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem "bcrypt", "~> 3.1.7"
 
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 
 # Use Active Storage variant
-gem 'image_processing', '~> 1.2'
+gem "image_processing", "~> 1.2"
 
 # Job Queue
-gem 'sidekiq', '~> 6.0'
-gem 'hiredis'
-gem 'sidekiq-cron', '~> 1.2'
+gem "sidekiq", "~> 6.0"
+gem "hiredis"
+gem "sidekiq-cron", "~> 1.2"
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', require: false
+gem "bootsnap", require: false
 
-gem 'turbo-rails'
+gem "turbo-rails"
 
 # markdown
-gem 'commonmarker', '~> 0.23.8'
+gem "commonmarker", "~> 0.23.8"
 
 # Html to Markdown
-gem 'reverse_markdown'
+gem "reverse_markdown"
 
 # code highlight
-gem 'rouge'
+gem "rouge"
 
 # pagination
-gem 'kaminari'
-gem 'rails_cursor_pagination'
+gem "kaminari"
+gem "rails_cursor_pagination"
 
 # inline email css
-gem 'premailer-rails'
+gem "premailer-rails"
 
-gem 'rails-i18n', '~> 7.0.1'
+gem "rails-i18n", "~> 7.0.1"
 
-gem 'local_time'
+gem "local_time"
 
 gem "activestorage-aliyun", "~> 1.1"
 
 gem "sentry-ruby", require: false
 gem "sentry-rails", require: false
 
-gem 'newrelic_rpm', require: false
+gem "newrelic_rpm", require: false
 
 # Mailer deliver method
-gem 'mailgun-ruby', '~>1.2.5', require: false
-gem 'postal-rails', '~> 1.0', require: false
+gem "mailgun-ruby", "~>1.2.5", require: false
+gem "postal-rails", "~> 1.0", require: false
 
-gem 'with_advisory_lock'
+gem "with_advisory_lock"
 
 gem "recaptcha", require: false
 
-gem 'rest-client'
+gem "rest-client"
 
 gem "meilisearch-rails"
 
@@ -77,29 +77,31 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 
-  gem 'factory_bot_rails'
+  gem "factory_bot_rails"
 
-  gem 'dotenv-rails'
+  gem "dotenv-rails"
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console'
+  gem "web-console"
 
-  gem 'i18n-tasks', '~> 0.9.34'
+  gem "i18n-tasks", "~> 0.9.34"
 
-  gem 'brakeman', '~> 5.4.0'
+  gem "brakeman", "~> 5.4.0"
 
-  gem 'foreman'
+  gem "foreman"
 
-  gem 'dockerfile-rails'
+  gem "dockerfile-rails"
+
+  gem "rubocop-rails-omakase", require: false
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
+  gem "capybara", ">= 2.15"
+  gem "selenium-webdriver"
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
-  gem 'webmock'
+  gem "webdrivers"
+  gem "webmock"
 end

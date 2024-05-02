@@ -23,6 +23,6 @@ class Account::Posts::Comments::LikesControllerTest < ActionDispatch::Integratio
     assert_difference "comment.likes.count", -1 do
       delete account_post_comment_like_path(post.account, post, comment)
     end
-    assert !post.liked_by?(user)
+    assert_not post.liked_by?(user)
   end
 end

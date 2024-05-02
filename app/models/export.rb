@@ -5,5 +5,5 @@ class Export < ApplicationRecord
   }
 
   belongs_to :account
-  has_one_attached :file, service: (ENV['PRIVATE_STORAGE_SERVICE'] || :local)
+  has_one_attached :file, service: (ENV["PRIVATE_STORAGE_SERVICE"] || :local)
 end

@@ -1,5 +1,5 @@
 class Admin::TagsController < Admin::BaseController
-  before_action :set_tag, only: [:show, :edit, :update]
+  before_action :set_tag, only: [ :show, :edit, :update ]
 
   def index
     @tags = Tag.order(taggings_count: :desc).page(params[:page])
@@ -17,7 +17,7 @@ class Admin::TagsController < Admin::BaseController
 
   def update
     if @tag.update tag_params
-      redirect_to admin_tag_path(@tag), notice: 'User updated.'
+      redirect_to admin_tag_path(@tag), notice: "User updated."
     else
       render :edit, status: :unprocessable_entity
     end

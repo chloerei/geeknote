@@ -25,10 +25,10 @@ class Admin::PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update post" do
-    patch admin_post_path(@post), params: { post: { title: 'changed' } }
+    patch admin_post_path(@post), params: { post: { title: "changed" } }
     assert_redirected_to edit_admin_post_path(@post)
     @post.reload
-    assert_equal 'changed', @post.title
+    assert_equal "changed", @post.title
   end
 
   test "should restrict post" do

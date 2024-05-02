@@ -1,6 +1,6 @@
 class Account::Dashboard::MembersController < Account::Dashboard::BaseController
   before_action :require_organization_account, :require_manage_permission
-  before_action :set_member, only: [:show, :edit, :update, :destroy, :resend]
+  before_action :set_member, only: [ :show, :edit, :update, :destroy, :resend ]
 
   helper_method :can_manage?
 
@@ -9,7 +9,7 @@ class Account::Dashboard::MembersController < Account::Dashboard::BaseController
   end
 
   def new
-    @member = Member.new role: 'member'
+    @member = Member.new role: "member"
   end
 
   def create
@@ -37,7 +37,7 @@ class Account::Dashboard::MembersController < Account::Dashboard::BaseController
     if can_manage?(@member) && @member.save
       redirect_to account_dashboard_member_path(@account, @member), notice: "Member updated"
     else
-      render turbo_stream: turbo_stream.replace('member-form', partial: 'form')
+      render turbo_stream: turbo_stream.replace("member-form", partial: "form")
     end
   end
 
@@ -50,12 +50,12 @@ class Account::Dashboard::MembersController < Account::Dashboard::BaseController
 
   def resend
     if @member.invited_at > 1.minute.ago
-      flash[:notice] = I18n.t('flash.please_wait_one_minute_to_resend_invitation')
+      flash[:notice] = I18n.t("flash.please_wait_one_minute_to_resend_invitation")
     else
       @member.regenerate_invitation_token
       @member.touch(:invited_at)
       OrganizationMailer.with(member: @member).invitation_email.deliver_later
-      flash[:notice] = I18n.t('flash.invitation_has_been_sent')
+      flash[:notice] = I18n.t("flash.invitation_has_been_sent")
     end
 
     redirect_to account_dashboard_member_path(@account, @member)
@@ -65,7 +65,7 @@ class Account::Dashboard::MembersController < Account::Dashboard::BaseController
 
   def member_params
     case current_member.role
-    when 'owner'
+    when "owner"
       params.require(:member).permit(:invitation_email, :role)
     else
       params.require(:member).permit(:invitation_email)
@@ -73,17 +73,17 @@ class Account::Dashboard::MembersController < Account::Dashboard::BaseController
   end
 
   def require_manage_permission
-    unless current_member.role.in?(%w(owner admin))
+    unless current_member.role.in?(%w[owner admin])
       render_not_found
     end
   end
 
   def can_manage?(member)
     case current_member.role
-    when 'owner'
+    when "owner"
       true
-    when 'admin'
-      member.role.in? %w(member)
+    when "admin"
+      member.role.in? %w[member]
     else
       false
     end

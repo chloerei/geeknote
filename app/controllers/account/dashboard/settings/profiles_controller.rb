@@ -12,9 +12,9 @@ class Account::Dashboard::Settings::ProfilesController < Account::Dashboard::Set
 
     if @owner.update profile_params
 
-      redirect_to account_dashboard_settings_profile_path(@account), notice: I18n.t('flash.profile_updated')
+      redirect_to account_dashboard_settings_profile_path(@account), notice: I18n.t("flash.profile_updated")
     else
-      render turbo_stream: turbo_stream.replace('profile-form', partial: 'form')
+      render turbo_stream: turbo_stream.replace("profile-form", partial: "form")
     end
   end
 

@@ -21,6 +21,6 @@ class Account::Posts::LikesControllerTest < ActionDispatch::IntegrationTest
     assert_difference "post.likes.count", -1 do
       delete account_post_like_path(post.account, post)
     end
-    assert !post.liked_by?(user)
+    assert_not post.liked_by?(user)
   end
 end

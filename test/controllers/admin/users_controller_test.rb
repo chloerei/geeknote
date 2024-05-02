@@ -23,9 +23,9 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update post" do
-    patch admin_user_path(@user), params: { user: { name: 'changed' } }
+    patch admin_user_path(@user), params: { user: { name: "changed" } }
     assert_redirected_to admin_user_path(@user)
     @user.reload
-    assert_equal 'changed', @user.name
+    assert_equal "changed", @user.name
   end
 end

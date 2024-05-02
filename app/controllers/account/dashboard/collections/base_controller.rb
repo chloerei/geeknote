@@ -4,7 +4,7 @@ class Account::Dashboard::Collections::BaseController < Account::Dashboard::Base
   private
 
   def check_manage_permission
-    unless current_member.role.in?(%w(owner admin))
+    unless current_member.role.in?(%w[owner admin])
       render_not_found
     end
   end

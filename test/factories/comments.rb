@@ -3,6 +3,6 @@ FactoryBot.define do
     account factory: :user_account
     commentable factory: :post
     user
-    content { 'Comtent' }
+    content { "Comtent" }
   end
 end

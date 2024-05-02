@@ -2,10 +2,10 @@ class Comment < ApplicationRecord
   include Likable
 
   belongs_to :commentable, polymorphic: true, counter_cache: true, touch: true
-  belongs_to :parent, class_name: 'Comment', optional: true, counter_cache: :replies_count, touch: true
+  belongs_to :parent, class_name: "Comment", optional: true, counter_cache: :replies_count, touch: true
   belongs_to :account
   belongs_to :user
-  has_many :replies, class_name: 'Comment', foreign_key: :parent_id
+  has_many :replies, class_name: "Comment", foreign_key: :parent_id
   has_many :notifications, as: :record, dependent: :destroy
 
   validates :content, presence: true
@@ -31,6 +31,6 @@ class Comment < ApplicationRecord
         select comments.* from comments join ancestors on ancestors.parent_id = comments.id
       ) select * from ancestors
     EOF
-    Comment.find_by_sql([sql, { parent_id: parent_id }])
+    Comment.find_by_sql([ sql, { parent_id: parent_id } ])
   end
 end

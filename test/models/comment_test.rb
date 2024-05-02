@@ -9,6 +9,6 @@ class CommentTest < ActiveSupport::TestCase
     comment_three = create(:comment, commentable: post, account: account, parent: comment_two)
     comment_four = create(:comment, commentable: post, account: account, parent: comment_one)
 
-    assert_equal [comment_two, comment_one], comment_three.ancestors
+    assert_equal [ comment_two, comment_one ], comment_three.ancestors
   end
 end

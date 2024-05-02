@@ -1,7 +1,7 @@
 class Member < ApplicationRecord
   belongs_to :organization
   belongs_to :user, optional: true
-  belongs_to :inviter, class_name: 'User', optional: true
+  belongs_to :inviter, class_name: "User", optional: true
   has_secure_token :invitation_token
 
   enum role: {

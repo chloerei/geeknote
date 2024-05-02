@@ -1,4 +1,4 @@
-require_relative 'boot'
+require_relative "boot"
 
 require "rails/all"
 
@@ -6,17 +6,17 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-if ENV['SENTRY_DSN'].present?
-  require 'sentry-ruby'
-  require 'sentry-rails'
+if ENV["SENTRY_DSN"].present?
+  require "sentry-ruby"
+  require "sentry-rails"
 end
 
-if ENV['NEW_RELIC_LICENSE_KEY'].present?
-  require 'newrelic_rpm'
+if ENV["NEW_RELIC_LICENSE_KEY"].present?
+  require "newrelic_rpm"
 end
 
-if ENV['RECAPTCHA_SITE_KEY'].present?
-  require 'recaptcha'
+if ENV["RECAPTCHA_SITE_KEY"].present?
+  require "recaptcha"
 end
 
 module GeekNote
@@ -24,7 +24,7 @@ module GeekNote
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
-    config.autoload_paths << Rails.root.join('lib')
+    config.autoload_paths << Rails.root.join("lib")
 
     # Stop Propshaft compile all assets
     config.after_initialize do
@@ -39,12 +39,12 @@ module GeekNote
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    config.i18n.available_locales = ["zh-CN"]
+    config.i18n.available_locales = [ "zh-CN" ]
     config.i18n.default_locale = "zh-CN"
 
     config.cache_store = :redis_cache_store, {
-      url: ENV.fetch('REDIS_URL', 'redis://localhost:6379/0'),
-      namespace: 'cache',
+      url: ENV.fetch("REDIS_URL", "redis://localhost:6379/0"),
+      namespace: "cache",
       expires_in: 1.day
     }
 
@@ -60,9 +60,9 @@ module GeekNote
       html_tag.html_safe
     end
 
-    config.active_storage.service = ENV['STORAGE_SERVICE'] || :local
+    config.active_storage.service = ENV["STORAGE_SERVICE"] || :local
 
-    config.x.feedbacktrace_jwt_sso_callback_url = ENV['FEEDBACKTRACE_JWT_SSO_CALLBACK_URL']
-    config.x.feedbacktrace_jwt_sso_secret_key = ENV['FEEDBACKTRACE_JWT_SSO_SECRET_KEY']
+    config.x.feedbacktrace_jwt_sso_callback_url = ENV["FEEDBACKTRACE_JWT_SSO_CALLBACK_URL"]
+    config.x.feedbacktrace_jwt_sso_secret_key = ENV["FEEDBACKTRACE_JWT_SSO_SECRET_KEY"]
   end
 end

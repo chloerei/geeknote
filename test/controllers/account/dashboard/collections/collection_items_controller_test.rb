@@ -3,7 +3,7 @@ require "test_helper"
 class Account::Dashboard::Collections::CollectionItemsControllerTest < ActionDispatch::IntegrationTest
   test "should update position" do
     user = create(:user)
-    collection = create(:collection, account: user.account, add_to: 'bottom')
+    collection = create(:collection, account: user.account, add_to: "bottom")
     collection_item_1 = create(:collection_item, collection: collection)
     collection_item_2 = create(:collection_item, collection: collection)
 

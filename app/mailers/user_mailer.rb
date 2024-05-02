@@ -6,7 +6,7 @@ class UserMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      subject: I18n.t('email.reset_your_geeknote_password')
+      subject: I18n.t("email.reset_your_geeknote_password")
     )
   end
 
@@ -17,7 +17,7 @@ class UserMailer < ApplicationMailer
     mail(
       from: "#{@site.name} <#{ENV['MAILER_FROM_SUPPORT']}>",
       to: @user.email,
-      subject: I18n.t('email.your_post_is_been_restricted_for_publish')
+      subject: I18n.t("email.your_post_is_been_restricted_for_publish")
     )
   end
 
@@ -26,7 +26,7 @@ class UserMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      subject: I18n.t('email.email_verification')
+      subject: I18n.t("email.email_verification")
     )
   end
 
@@ -55,7 +55,7 @@ class UserMailer < ApplicationMailer
     @posts = Post
       .from(Post.select("*, rank() over (partition by account_id order by likes_count desc, published_at desc)")
       .published
-      .where(published_at: [Date.today - 7 .. Date.today])
+      .where(published_at: [ Date.today - 7 .. Date.today ])
       .where("likes_count > 0"), :posts)
       .where(rank: 1)
       .order(likes_count: :desc, published_at: :desc)
@@ -65,7 +65,7 @@ class UserMailer < ApplicationMailer
     mail(
       from: "#{@site.name} Weekly <#{ENV['MAILER_FROM_DIGEST']}>",
       to: @user.email,
-      subject: I18n.t('common.weekly_digest_subject', title: @posts.first&.title, count: @posts.length)
+      subject: I18n.t("common.weekly_digest_subject", title: @posts.first&.title, count: @posts.length)
     )
   end
 end

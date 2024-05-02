@@ -13,7 +13,7 @@ class Account < ApplicationRecord
   validates :name, uniqueness: true, format: { with: NAME_REGEXP }, presence: true
   validates :feed_url, url: true, allow_blank: true
 
-  NAME_EXCLUSION_LIST = %w(
+  NAME_EXCLUSION_LIST = %w[
     admin
     api
     attachments
@@ -29,7 +29,7 @@ class Account < ApplicationRecord
     sso
     tags
     users
-  ) + ENV.fetch('ACCOUNT_NAME_EXCLUSION_LIST', '').split(',')
+  ] + ENV.fetch("ACCOUNT_NAME_EXCLUSION_LIST", "").split(",")
 
   validate :validate_name_exclusion
 
@@ -39,7 +39,7 @@ class Account < ApplicationRecord
     end
   end
 
-  scope :recommend_for, -> (user) {
+  scope :recommend_for, ->(user) {
     where(
       id: Account.distinct.joins(:posts).where("posts.published_at > ?", 3.month.ago).where("followers_count > 0").where.not(id: user&.account&.id)
     ).order("random()")
@@ -60,7 +60,7 @@ class Account < ApplicationRecord
     when User
       owner == user
     when Organization
-      owner.members.find_by(user: user)&.role&.in? %w(owner admin)
+      owner.members.find_by(user: user)&.role&.in? %w[owner admin]
     else
       false
     end
@@ -80,11 +80,11 @@ class Account < ApplicationRecord
   end
 
   def user?
-    owner_type == 'User'
+    owner_type == "User"
   end
 
   def organization?
-    owner_type == 'Organization'
+    owner_type == "Organization"
   end
 
   def display_name

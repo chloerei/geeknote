@@ -1,12 +1,12 @@
 FactoryBot.define do
   factory :post do
-    title { 'Title' }
-    content { 'Content' }
+    title { "Title" }
+    content { "Content" }
     account factory: :user_account
     user
 
     factory :published_post do
-      status { 'published' }
+      status { "published" }
       published_at { Time.now }
     end
   end

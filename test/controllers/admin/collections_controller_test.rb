@@ -23,9 +23,9 @@ class Admin::CollectionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update post" do
-    patch admin_collection_path(@collection), params: { collection: { name: 'changed' } }
+    patch admin_collection_path(@collection), params: { collection: { name: "changed" } }
     assert_redirected_to admin_collection_path(@collection)
     @collection.reload
-    assert_equal 'changed', @collection.name
+    assert_equal "changed", @collection.name
   end
 end

@@ -13,7 +13,7 @@ class Account::InvitationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not get invitation by invalid token" do
     invitation = create(:invitation, organization: @organization)
-    get account_invitation_path(@organization.account, invitation_token: 'notexists')
+    get account_invitation_path(@organization.account, invitation_token: "notexists")
     assert_response :not_found
   end
 

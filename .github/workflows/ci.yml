@@ -41,8 +41,10 @@ jobs:
         run: bin/rails db:prepare
       - name: Run test
         run: bin/rails test
+      - name: Run rubocop
+        run: bin/rubocop
       - name: Run brakeman
-        run: bundle exec brakeman
+        run: bin/brakeman
   deploy:
     needs: test
     if: ${{ github.ref == 'refs/heads/master' }}

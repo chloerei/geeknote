@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   def new
     if params[:return_to]
       uri = URI(params[:return_to])
-      session[:return_to] = [uri.path, uri.query].compact.join('?')
+      session[:return_to] = [ uri.path, uri.query ].compact.join("?")
     end
 
     @user = User.new

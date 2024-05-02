@@ -23,9 +23,9 @@ class Admin::TagsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update post" do
-    patch admin_tag_path(@tag), params: { tag: { name: 'changed' } }
+    patch admin_tag_path(@tag), params: { tag: { name: "changed" } }
     assert_redirected_to admin_tag_path(@tag)
     @tag.reload
-    assert_equal 'changed', @tag.name
+    assert_equal "changed", @tag.name
   end
 end

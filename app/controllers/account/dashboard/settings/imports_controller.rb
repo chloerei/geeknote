@@ -8,9 +8,9 @@ class Account::Dashboard::Settings::ImportsController < Account::Dashboard::Sett
         FeedImportJob.perform_later(@account)
       end
 
-      redirect_to account_dashboard_settings_import_path(@account), notice: I18n.t('flash.import_settings_updated')
+      redirect_to account_dashboard_settings_import_path(@account), notice: I18n.t("flash.import_settings_updated")
     else
-      render turbo_stream: turbo_stream.replace('settings-form', partial: 'form')
+      render turbo_stream: turbo_stream.replace("settings-form", partial: "form")
     end
   end
 

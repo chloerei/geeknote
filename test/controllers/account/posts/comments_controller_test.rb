@@ -23,7 +23,7 @@ class Account::Posts::CommentsControllerTest < ActionDispatch::IntegrationTest
     sign_in create(:user)
     assert_enqueued_with(job: CommentNotificationJob) do
       assert_difference "@post.comments.count" do
-        post account_post_comments_path(@account, @post), params: { comment: { content: 'text' } }, as: :turbo_stream
+        post account_post_comments_path(@account, @post), params: { comment: { content: "text" } }, as: :turbo_stream
       end
     end
   end
@@ -31,8 +31,8 @@ class Account::Posts::CommentsControllerTest < ActionDispatch::IntegrationTest
   test "should reply comment" do
     sign_in create(:user)
 
-    assert_difference ["@post.comments.count", "@comment.replies.count"] do
-      post account_post_comments_path(@account, @post), params: { comment: { content: 'text', parent_id: @comment.id } }, as: :turbo_stream
+    assert_difference [ "@post.comments.count", "@comment.replies.count" ] do
+      post account_post_comments_path(@account, @post), params: { comment: { content: "text", parent_id: @comment.id } }, as: :turbo_stream
     end
   end
 
@@ -50,11 +50,11 @@ class Account::Posts::CommentsControllerTest < ActionDispatch::IntegrationTest
   test "should update comment" do
     sign_in create(:user)
     assert_raise ActiveRecord::RecordNotFound do
-      patch account_post_comment_path(@account, @post, @comment), params: { comment: { content: 'change' } }, as: :turbo_stream
+      patch account_post_comment_path(@account, @post, @comment), params: { comment: { content: "change" } }, as: :turbo_stream
     end
 
     sign_in @comment.user
-    patch account_post_comment_path(@account, @post, @comment), params: { comment: { content: 'change' } }, as: :turbo_stream
+    patch account_post_comment_path(@account, @post, @comment), params: { comment: { content: "change" } }, as: :turbo_stream
     assert_response :success
   end
 

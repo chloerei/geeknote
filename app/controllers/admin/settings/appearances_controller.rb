@@ -4,7 +4,7 @@ class Admin::Settings::AppearancesController < Admin::Settings::BaseController
 
   def update
     if @site.update site_params
-      redirect_to admin_settings_appearance_path, notice: I18n.t('flash.appearance_update_successful')
+      redirect_to admin_settings_appearance_path, notice: I18n.t("flash.appearance_update_successful")
     else
       render :new, status: :unprocessable_entity
     end

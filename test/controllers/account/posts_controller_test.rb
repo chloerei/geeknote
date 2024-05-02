@@ -14,7 +14,7 @@ class Account::PostsControllerTest < ActionDispatch::IntegrationTest
     account = create(:user_account)
     post = create(:post, account: account, user: account.owner)
     post.published!
-    post.save_revision(status: 'published', user: account.owner)
+    post.save_revision(status: "published", user: account.owner)
 
     get account_post_path(account, post)
     assert_response :success
@@ -25,7 +25,7 @@ class Account::PostsControllerTest < ActionDispatch::IntegrationTest
     user = create(:user_account).owner
     post = create(:post, account: account, user: user)
     post.published!
-    post.save_revision(status: 'published', user: user)
+    post.save_revision(status: "published", user: user)
 
     get account_post_path(account, post)
     assert_response :success

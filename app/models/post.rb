@@ -6,7 +6,7 @@ class Post < ApplicationRecord
 
   belongs_to :account
   belongs_to :user
-  has_many :revisions, class_name: 'PostRevision', dependent: :delete_all
+  has_many :revisions, class_name: "PostRevision", dependent: :delete_all
   has_many :collection_items, dependent: :delete_all
   has_many :bookmarks
 
@@ -23,15 +23,15 @@ class Post < ApplicationRecord
   validates :canonical_url, url: true, allow_blank: true
   validates :feed_source_id, uniqueness: { scope: :account_id }, allow_blank: true
 
-  scope :following_by, -> (user) {
+  scope :following_by, ->(user) {
     where(account: user.followings).or(where(user: user.following_users)).distinct
   }
 
   scope :featured, -> { where(featured: true) }
 
   meilisearch do
-    searchable_attributes [:title, :content]
-    filterable_attributes [:account_id, :status]
+    searchable_attributes [ :title, :content ]
+    filterable_attributes [ :account_id, :status ]
   end
 
   attribute :saved, :boolean, default: false
@@ -39,7 +39,7 @@ class Post < ApplicationRecord
   before_save :set_published_at
 
   def set_published_at
-    if published_at.nil? && status == 'published'
+    if published_at.nil? && status == "published"
       self.published_at = Time.now
     end
   end
@@ -47,7 +47,7 @@ class Post < ApplicationRecord
   def restricted!
     update(
       restricted: true,
-      status: 'draft'
+      status: "draft"
     )
 
     PostRestrictedNotificationJob.perform_later(self)
@@ -59,7 +59,7 @@ class Post < ApplicationRecord
     )
   end
 
-  def save_revision(status: 'draft', user:)
+  def save_revision(status: "draft", user:)
     last_revision = revisions.last
 
     if last_revision && last_revision.status == status && last_revision.user == user && last_revision.created_at > 10.minutes.ago
@@ -90,7 +90,7 @@ class Post < ApplicationRecord
   after_touch :update_score
   def update_score
     if published? && likes_count > 0 && content.length > 100
-      update_column :score, (Math.log([likes_count + comments_count, 1].max, 10) + published_at.to_i / 43200) * 100
+      update_column :score, (Math.log([ likes_count + comments_count, 1 ].max, 10) + published_at.to_i / 43200) * 100
     end
   end
 end

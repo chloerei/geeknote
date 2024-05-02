@@ -1,7 +1,7 @@
 class AttachmentsController < ApplicationController
   include ActiveStorage::SetCurrent
 
-  before_action :require_sign_in, except: [:show]
+  before_action :require_sign_in, except: [ :show ]
 
   def create
     @attachment = Attachment.create attachment_params.merge(user: current_user)

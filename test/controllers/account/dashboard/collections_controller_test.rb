@@ -13,8 +13,8 @@ class Account::Dashboard::CollectionsControllerTest < ActionDispatch::Integratio
     organization = create(:organization)
     member = create(:user)
     admin = create(:user)
-    organization.members.create(user: member, role: 'member')
-    organization.members.create(user: admin, role: 'admin')
+    organization.members.create(user: member, role: "member")
+    organization.members.create(user: admin, role: "admin")
 
     sign_in member
     get account_dashboard_collections_path(organization.account)
@@ -49,10 +49,10 @@ class Account::Dashboard::CollectionsControllerTest < ActionDispatch::Integratio
     collection = create(:collection, account: user.account)
 
     sign_in user
-    patch account_dashboard_collection_path(user.account, collection), params: { collection: { name: 'changed' } }
+    patch account_dashboard_collection_path(user.account, collection), params: { collection: { name: "changed" } }
     assert_redirected_to account_dashboard_collection_path(user.account, collection)
     collection.reload
-    assert 'changed', collection.name
+    assert "changed", collection.name
   end
 
   test "should delete collection" do

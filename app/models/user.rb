@@ -3,15 +3,15 @@ class User < ApplicationRecord
   has_many :posts
   has_many :members
   has_many :organizations, through: :members
-  has_many :manage_accounts, -> { where(members: { role: Member.roles.values_at(:owner, :admin) })}, through: :organizations, source: :account
+  has_many :manage_accounts, -> { where(members: { role: Member.roles.values_at(:owner, :admin) }) }, through: :organizations, source: :account
   has_many :member_accounts, through: :organizations, source: :account
   has_many :attachments
   has_many :likes
-  has_many :liked_posts, through: :likes, source: :likable, source_type: 'Post'
+  has_many :liked_posts, through: :likes, source: :likable, source_type: "Post"
   has_many :notifications
   has_many :follows
   has_many :followings, through: :follows, source: :account
-  has_many :following_users, through: :followings, source: :owner, source_type: 'User'
+  has_many :following_users, through: :followings, source: :owner, source_type: "User"
   has_many :bookmarks
   has_many :bookmarked_posts, through: :bookmarks, source: :post
   has_many :bookmarked_post_tags, through: :bookmarked_posts, source: :tags
@@ -35,7 +35,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :account, update_only: true
 
   def self.encryptor
-    key = Rails.application.key_generator.generate_key 'user-encryptor', ActiveSupport::MessageEncryptor.key_len
+    key = Rails.application.key_generator.generate_key "user-encryptor", ActiveSupport::MessageEncryptor.key_len
     ActiveSupport::MessageEncryptor.new(key)
   end
 
@@ -50,7 +50,7 @@ class User < ApplicationRecord
   end
 
   def email_auth_token
-    User.encryptor.encrypt_and_sign([id, email], purpose: :email_verification, expires_in: 1.week)
+    User.encryptor.encrypt_and_sign([ id, email ], purpose: :email_verification, expires_in: 1.week)
   end
 
   def self.find_by_email_auth_token(token)
@@ -74,7 +74,7 @@ class User < ApplicationRecord
     self.email_verified_at = nil
   end
 
-  ADMIN_EMAILS = ENV.fetch('ADMIN_EMAILS', '').split(',')
+  ADMIN_EMAILS = ENV.fetch("ADMIN_EMAILS", "").split(",")
   def admin?
     ADMIN_EMAILS.include?(email)
   end

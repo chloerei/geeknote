@@ -23,9 +23,9 @@ class Admin::CommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update post" do
-    patch admin_comment_path(@comment), params: { comment: { content: 'changed' } }
+    patch admin_comment_path(@comment), params: { comment: { content: "changed" } }
     assert_redirected_to admin_comment_path(@comment)
     @comment.reload
-    assert_equal 'changed', @comment.content
+    assert_equal "changed", @comment.content
   end
 end

@@ -2,11 +2,11 @@ FactoryBot.define do
   factory :member do
     organization
     user
-    status { 'active' }
+    status { "active" }
 
     factory :invitation do
       user { nil }
-      status { 'pending' }
+      status { "pending" }
       inviter factory: :user
       sequence(:invitation_email) { |n| "username#{n}@example.com" }
       invited_at { Time.now }

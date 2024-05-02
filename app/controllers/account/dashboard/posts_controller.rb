@@ -1,21 +1,21 @@
 class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   helper_method :post_filter_params
 
-  before_action :set_post, only: [:edit, :update, :publish, :unpublish, :trash, :restore, :destroy]
+  before_action :set_post, only: [ :edit, :update, :publish, :unpublish, :trash, :restore, :destroy ]
 
   def index
     if params[:query].present?
       # TODO: user_id fitler?
       @posts = scoped_posts.search(params[:query], filter: "account_id = #{@account.id}").page(params[:page])
     else
-      @posts = scoped_posts.where(status: [:draft, :published]).order(updated_at: :desc).page(params[:page])
+      @posts = scoped_posts.where(status: [ :draft, :published ]).order(updated_at: :desc).page(params[:page])
     end
   end
 
   def new
     @post = @account.posts.new
 
-    render :editor, layout: 'base'
+    render :editor, layout: "base"
   end
 
   def create
@@ -25,7 +25,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   end
 
   def edit
-    render :editor, layout: 'base'
+    render :editor, layout: "base"
   end
 
   def update
@@ -45,7 +45,7 @@ class Account::Dashboard::PostsController < Account::Dashboard::BaseController
   end
 
   def scoped_posts
-    if current_member.role.in?(%w(owner admin))
+    if current_member.role.in?(%w[owner admin])
       @account.posts
     else
       @account.posts.where(user: current_user)

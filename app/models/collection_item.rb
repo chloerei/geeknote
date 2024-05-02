@@ -7,27 +7,27 @@ class CollectionItem < ApplicationRecord
   after_create do
     collection.with_order_lock do
       case collection.order_type
-      when 'custom'
+      when "custom"
         case collection.add_to
-        when 'top'
+        when "top"
           collection.collection_items.update_all "position = position + 1"
           update_attribute :position, 0
-        when 'bottom'
+        when "bottom"
           last = collection.collection_items.maximum("position")
           update_attribute :position, last ? last + 1 : 0
         end
-      when 'added_asc'
+      when "added_asc"
         last = collection.collection_items.maximum("position")
         update_attribute :position, last ? last + 1 : 0
-      when 'added_desc'
+      when "added_desc"
         collection.collection_items.update_all "position = position + 1"
         update_attribute :position, 0
-      when 'published_asc'
+      when "published_asc"
         before = collection.collection_items.joins(:post).where("posts.published_at < ?", post.published_at).maximum("position")
         position = before ? before + 1 : 0
         collection.collection_items.where("position >= ?", position).update_all("position = position + 1")
         update_attribute :position, position
-      when 'published_desc'
+      when "published_desc"
         before = collection.collection_items.joins(:post).where("posts.published_at > ?", post.published_at).maximum("position")
         position = before ? before + 1 : 0
         collection.collection_items.where("position >= ?", position).update_all("position = position + 1")

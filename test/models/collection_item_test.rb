@@ -13,7 +13,7 @@ class CollectionItemTest < ActiveSupport::TestCase
   end
 
   test "should set position when create witn add to buttom" do
-    collection = create(:collection, add_to: 'bottom')
+    collection = create(:collection, add_to: "bottom")
 
     # default add to top
     first_item = create(:collection_item, collection: collection)
@@ -24,7 +24,7 @@ class CollectionItemTest < ActiveSupport::TestCase
   end
 
   test "should reorder after items when destroy" do
-    collection = create(:collection, add_to: 'bottom')
+    collection = create(:collection, add_to: "bottom")
 
     first_item = create(:collection_item, collection: collection)
     second_item = create(:collection_item, collection: collection)
@@ -36,7 +36,7 @@ class CollectionItemTest < ActiveSupport::TestCase
   end
 
   test "should set position when order_type added_asc" do
-    collection = create(:collection, order_type: 'added_asc')
+    collection = create(:collection, order_type: "added_asc")
 
     first_item = create(:collection_item, collection: collection)
     second_item = create(:collection_item, collection: collection)
@@ -48,7 +48,7 @@ class CollectionItemTest < ActiveSupport::TestCase
   end
 
   test "should set position when order_type added_desc" do
-    collection = create(:collection, order_type: 'added_desc')
+    collection = create(:collection, order_type: "added_desc")
 
     first_item = create(:collection_item, collection: collection)
     second_item = create(:collection_item, collection: collection)
@@ -60,7 +60,7 @@ class CollectionItemTest < ActiveSupport::TestCase
   end
 
   test "should set position when order_type published_asc" do
-    collection = create(:collection, order_type: 'published_asc')
+    collection = create(:collection, order_type: "published_asc")
 
     first_post = create(:post, published_at: 3.day.ago)
     second_post = create(:post, published_at: 1.day.ago)
@@ -76,7 +76,7 @@ class CollectionItemTest < ActiveSupport::TestCase
   end
 
   test "should set position when order_type published_desc" do
-    collection = create(:collection, order_type: 'published_desc')
+    collection = create(:collection, order_type: "published_desc")
 
     first_post = create(:post, published_at: 3.day.ago)
     second_post = create(:post, published_at: 1.day.ago)
@@ -92,7 +92,7 @@ class CollectionItemTest < ActiveSupport::TestCase
   end
 
   test "should move item" do
-    collection = create(:collection, add_to: 'bottom')
+    collection = create(:collection, add_to: "bottom")
 
     first_item = create(:collection_item, collection: collection)
     second_item = create(:collection_item, collection: collection)

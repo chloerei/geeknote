@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :collection do
     account factory: :user_account
-    name { 'Name' }
+    name { "Name" }
   end
 end

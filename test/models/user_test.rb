@@ -2,21 +2,21 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   test "account name should be unique" do
-    user_one = create(:user, account_attributes: { name: 'user' })
+    user_one = create(:user, account_attributes: { name: "user" })
     assert user_one.valid?
-    user_two = build(:user, account_attributes: { name: 'user' })
+    user_two = build(:user, account_attributes: { name: "user" })
     assert_not user_two.valid?
     assert user_two.account.errors.where(:name, :taken).any?
   end
 
   test "account name should be valid format" do
-    assert build(:user, account_attributes: { name: 'abc' }).valid?
-    assert build(:user, account_attributes: { name: 'a-c' }).valid?
+    assert build(:user, account_attributes: { name: "abc" }).valid?
+    assert build(:user, account_attributes: { name: "a-c" }).valid?
 
-    assert_not build(:user, account_attributes: { name: '' }).valid?
-    assert_not build(:user, account_attributes: { name: '-abc' }).valid?
-    assert_not build(:user, account_attributes: { name: 'abc-' }).valid?
-    assert_not build(:user, account_attributes: { name: 'a.bc' }).valid?
+    assert_not build(:user, account_attributes: { name: "" }).valid?
+    assert_not build(:user, account_attributes: { name: "-abc" }).valid?
+    assert_not build(:user, account_attributes: { name: "abc-" }).valid?
+    assert_not build(:user, account_attributes: { name: "a.bc" }).valid?
   end
 
   test "should generate and find by password reset token" do
@@ -35,7 +35,7 @@ class UserTest < ActiveSupport::TestCase
     end
 
     # invalid token
-    assert_nil User.find_by_password_reset_token('notexist')
+    assert_nil User.find_by_password_reset_token("notexist")
   end
 
   test "should generate and find by email verification token" do
@@ -50,7 +50,7 @@ class UserTest < ActiveSupport::TestCase
     end
 
     # email changed
-    user.update(email: 'change@example.com')
+    user.update(email: "change@example.com")
     assert_nil User.find_by_email_auth_token(token)
   end
 
@@ -61,7 +61,7 @@ class UserTest < ActiveSupport::TestCase
     user.email_verified!
     assert user.email_verified?
 
-    user.update(email: 'change@example.com')
+    user.update(email: "change@example.com")
     assert_not user.email_verified?
   end
 end

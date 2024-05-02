@@ -18,9 +18,9 @@ class Account::Dashboard::CollectionsController < Account::Dashboard::BaseContro
     @collection = @account.collections.new collection_params
 
     if @collection.save
-      redirect_to account_dashboard_collection_path(@account, @collection), notice: I18n.t('flash.collection_created', name: @collection.name)
+      redirect_to account_dashboard_collection_path(@account, @collection), notice: I18n.t("flash.collection_created", name: @collection.name)
     else
-      render turbo_stream: turbo_stream.replace('collection-form', partial: 'form')
+      render turbo_stream: turbo_stream.replace("collection-form", partial: "form")
     end
   end
 
@@ -32,22 +32,22 @@ class Account::Dashboard::CollectionsController < Account::Dashboard::BaseContro
     @collection = @account.collections.find params[:id]
 
     if @collection.update collection_params
-      redirect_to account_dashboard_collection_path(@account, @collection), notice: I18n.t('flash.collection_updated', name: @collection.name)
+      redirect_to account_dashboard_collection_path(@account, @collection), notice: I18n.t("flash.collection_updated", name: @collection.name)
     else
-      render turbo_stream: turbo_stream.replace('collection-form', partial: 'form')
+      render turbo_stream: turbo_stream.replace("collection-form", partial: "form")
     end
   end
 
   def destroy
     @collection = @account.collections.find params[:id]
     @collection.destroy
-      redirect_to account_dashboard_collections_path(@account), notice: I18n.t('flash.collection_deleted', name: @collection.name)
+      redirect_to account_dashboard_collections_path(@account), notice: I18n.t("flash.collection_deleted", name: @collection.name)
   end
 
   private
 
   def check_manage_permission
-    unless current_member.role.in?(%w(owner admin))
+    unless current_member.role.in?(%w[owner admin])
       render_not_found
     end
   end

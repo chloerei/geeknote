@@ -1,5 +1,5 @@
 class Admin::UsersController < Admin::BaseController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [ :show, :edit, :update ]
 
   def index
     @users = User.order(id: :desc).page(params[:page])
@@ -17,7 +17,7 @@ class Admin::UsersController < Admin::BaseController
 
   def update
     if @user.update user_params
-      redirect_to admin_user_path(@user), notice: 'User updated.'
+      redirect_to admin_user_path(@user), notice: "User updated."
     else
       render :edit, status: :unprocessable_entity
     end

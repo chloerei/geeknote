@@ -6,6 +6,6 @@ class AddFeedSourceColumns < ActiveRecord::Migration[7.0]
 
     add_column :posts, :canonical_url, :string
     add_column :posts, :feed_source_id, :string
-    add_index :posts, [:feed_source_id, :account_id], where: "feed_source_id IS NOT NULL", unique: true
+    add_index :posts, [ :feed_source_id, :account_id ], where: "feed_source_id IS NOT NULL", unique: true
   end
 end

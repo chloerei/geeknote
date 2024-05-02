@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  layout 'mailer'
+  layout "mailer"
 
   before_action :set_site
 

@@ -23,9 +23,9 @@ class Admin::OrganizationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update post" do
-    patch admin_organization_path(@organization), params: { organization: { name: 'changed' } }
+    patch admin_organization_path(@organization), params: { organization: { name: "changed" } }
     assert_redirected_to admin_organization_path(@organization)
     @organization.reload
-    assert_equal 'changed', @organization.name
+    assert_equal "changed", @organization.name
   end
 end

@@ -21,7 +21,7 @@ class FeedImportJob < ApplicationJob
           content: convert_content(entry[:content], entry[:url], account),
           feed_source_id: entry[:id],
           canonical_url: account.feed_mark_canonical? ? entry[:url]: nil,
-          user: account.user? ? account.owner : account.owner.members.find_by(role: 'owner').user
+          user: account.user? ? account.owner : account.owner.members.find_by(role: "owner").user
         )
       end
     end
@@ -36,13 +36,13 @@ class FeedImportJob < ApplicationJob
   def parse_as_atom(account, body)
     xml = Nokogiri::XML(body)
 
-    xml.css('entry').take(100).map do |entry|
+    xml.css("entry").take(100).map do |entry|
       {
-        id: entry.at_css('id')&.content,
-        title: entry.at_css('title')&.content,
-        content: entry.at_css('content')&.content,
-        url: entry.at_css('link')&.attribute('href'),
-        published_at: (DateTime.parse(entry.at_css('published')&.content) rescue nil)
+        id: entry.at_css("id")&.content,
+        title: entry.at_css("title")&.content,
+        content: entry.at_css("content")&.content,
+        url: entry.at_css("link")&.attribute("href"),
+        published_at: (DateTime.parse(entry.at_css("published")&.content) rescue nil)
       }
     end
   end
@@ -50,13 +50,13 @@ class FeedImportJob < ApplicationJob
   def parse_as_rss(account, body)
     xml = Nokogiri::XML(body)
 
-    xml.css('item').take(100).map do |item|
+    xml.css("item").take(100).map do |item|
       {
-        id: item.at_css('guid')&.content,
-        title: item.at_css('title')&.content,
-        content: item.at_css('description')&.content,
-        url: item.at_css('link')&.content,
-        published_at: (DateTime.parse(item.at_css('pubDate')&.content) rescue nil)
+        id: item.at_css("guid")&.content,
+        title: item.at_css("title")&.content,
+        content: item.at_css("description")&.content,
+        url: item.at_css("link")&.content,
+        published_at: (DateTime.parse(item.at_css("pubDate")&.content) rescue nil)
       }
     end
   end
@@ -65,18 +65,18 @@ class FeedImportJob < ApplicationJob
     doc = Nokogiri::HTML.fragment(html)
 
     doc.css("a").each do |node|
-      if node['href'] && node['href'] !~ /\A#/
-        node['href'] = URI.join(url_base, node['href'])
+      if node["href"] && node["href"] !~ /\A#/
+        node["href"] = URI.join(url_base, node["href"])
       end
     rescue URI::InvalidURIError
       next
     end
 
     doc.css("img").each do |node|
-      uri = URI.join(url_base, node['src'])
+      uri = URI.join(url_base, node["src"])
 
-      if uri.scheme.in? %w(http https)
-        node['src'] = uri
+      if uri.scheme.in? %w[http https]
+        node["src"] = uri
 
         begin
           response = RestClient.head uri.to_s
@@ -86,7 +86,7 @@ class FeedImportJob < ApplicationJob
             attachment = account.attachments.new
             attachment.file.attach(io: raw.file, filename: File.basename(uri.path))
             attachment.save!
-            node['src'] = "/attachments/#{attachment.key}/#{attachment.file.filename.to_s}"
+            node["src"] = "/attachments/#{attachment.key}/#{attachment.file.filename}"
           end
         rescue RestClient::Exception,
                SystemCallError,

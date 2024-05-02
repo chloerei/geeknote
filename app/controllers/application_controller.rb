@@ -16,8 +16,8 @@ class ApplicationController < ActionController::Base
 
   def render_not_found
     respond_to do |format|
-      format.html { render 'errors/404', layout: 'base', status: 404 }
-      format.json { render json: { status: 404, error: 'Not Found' }, status: 404 }
+      format.html { render "errors/404", layout: "base", status: 404 }
+      format.json { render json: { status: 404, error: "Not Found" }, status: 404 }
     end
   end
 
@@ -31,15 +31,15 @@ class ApplicationController < ActionController::Base
     end
 
     respond_to do |format|
-      format.html { render 'errors/500', layout: 'base', status: 500 }
-      format.json { render json: { status: 500, error: 'Internal Server Error' }, status: 500 }
+      format.html { render "errors/500", layout: "base", status: 500 }
+      format.json { render json: { status: 500, error: "Internal Server Error" }, status: 500 }
     end
   end
 
   def require_sign_in
     unless current_user
-      return_path = request.get? ? request.path : URI(request.referer.presence || '/').path
-      redirect_to sign_in_path(return_to: return_path), alert: t('flash.require_sign_in')
+      return_path = request.get? ? request.path : URI(request.referer.presence || "/").path
+      redirect_to sign_in_path(return_to: return_path), alert: t("flash.require_sign_in")
     end
   end
 

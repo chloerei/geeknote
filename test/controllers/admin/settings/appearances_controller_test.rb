@@ -14,9 +14,9 @@ class Admin::Settings::AppearancesControllerTest < ActionDispatch::IntegrationTe
 
   test "should update site" do
     sign_in @admin
-    patch admin_settings_appearance_path, params: { site: { name: 'changed'} }
+    patch admin_settings_appearance_path, params: { site: { name: "changed" } }
     assert_redirected_to admin_settings_appearance_path
     @site.reload
-    assert_equal 'changed', @site.name
+    assert_equal "changed", @site.name
   end
 end

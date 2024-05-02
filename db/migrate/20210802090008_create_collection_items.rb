@@ -7,7 +7,7 @@ class CreateCollectionItems < ActiveRecord::Migration[6.1]
 
       t.timestamps
 
-      t.index [:post_id, :collection_id], unique: true
+      t.index [ :post_id, :collection_id ], unique: true
     end
   end
 end

@@ -1,11 +1,11 @@
 class Tag < ApplicationRecord
   has_many :taggings, dependent: :delete_all
-  has_many :posts, through: :taggings, source: :taggable, source_type: 'Post'
+  has_many :posts, through: :taggings, source: :taggable, source_type: "Post"
 
   validates :name, presence: true, uniqueness: true, length: { maximum: 255 }
 
   scope :trending, -> {
-    left_outer_joins(:taggings).where("taggings.created_at > ?", 1.month.ago).distinct.select('tags.*, count(taggings.*) as count').group('tags.id').order('count desc')
+    left_outer_joins(:taggings).where("taggings.created_at > ?", 1.month.ago).distinct.select("tags.*, count(taggings.*) as count").group("tags.id").order("count desc")
   }
 
   def self.search(query)
@@ -19,7 +19,7 @@ class Tag < ApplicationRecord
       if tag && tag != self
         tag.taggings.each do |tagging|
           taggable = tagging.taggable
-          taggable.tag_list = taggable.tag_list - [tag_name] + [name]
+          taggable.tag_list = taggable.tag_list - [ tag_name ] + [ name ]
           taggable.save
         end
         tag.destroy

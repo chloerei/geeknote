@@ -1,5 +1,5 @@
 class User::PasswordsController < ApplicationController
-  before_action :set_user, only: [:edit, :update]
+  before_action :set_user, only: [ :edit, :update ]
 
   def new
     @user = User.new
@@ -11,12 +11,12 @@ class User::PasswordsController < ApplicationController
     if optional_verify_recaptcha(model: @user) && @user.persisted?
       cache_key = "password_reset:#{@user.email}"
       if Rails.cache.exist?(cache_key)
-        @user.errors.add :base, t('flash.password_reset_email_time_limit')
+        @user.errors.add :base, t("flash.password_reset_email_time_limit")
         render :new, status: :unprocessable_entity
       else
         UserMailer.with(user: @user).password_reset_email.deliver_later
         Rails.cache.write(cache_key, true, expires_in: 1.minute)
-        redirect_to sign_in_path, notice: t('flash.password_reset_email_has_been_sent')
+        redirect_to sign_in_path, notice: t("flash.password_reset_email_has_been_sent")
       end
     else
       if @user.new_record?
@@ -32,9 +32,9 @@ class User::PasswordsController < ApplicationController
 
   def update
     if @user.update user_params
-      redirect_to sign_in_path, notice: t('flash.password_reset_successful')
+      redirect_to sign_in_path, notice: t("flash.password_reset_successful")
     else
-      render turbo_stream: turbo_stream.replace('password-reset-form', partial: 'form')
+      render turbo_stream: turbo_stream.replace("password-reset-form", partial: "form")
     end
   end
 
@@ -44,7 +44,7 @@ class User::PasswordsController < ApplicationController
     @user = User.find_by_password_reset_token(params[:token])
 
     if @user.nil?
-      redirect_to new_user_password_path, notice: t('flash.password_reset_token_invliad')
+      redirect_to new_user_password_path, notice: t("flash.password_reset_token_invliad")
     end
   end
 

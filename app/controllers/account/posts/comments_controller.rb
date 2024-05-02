@@ -1,5 +1,5 @@
 class Account::Posts::CommentsController < Account::Posts::BaseController
-  before_action :require_sign_in, except: [:index, :show]
+  before_action :require_sign_in, except: [ :index, :show ]
 
   def index
     @comment = @post.comments.find_by id: params[:parent_id]
@@ -23,7 +23,7 @@ class Account::Posts::CommentsController < Account::Posts::BaseController
     if @comment.save
       CommentNotificationJob.perform_later(@comment)
     else
-      render turbo_stream: turbo_stream.replace("comment-#{@comment.parent_id}-reply-form", partial: 'form', locals: { comment: @comment })
+      render turbo_stream: turbo_stream.replace("comment-#{@comment.parent_id}-reply-form", partial: "form", locals: { comment: @comment })
     end
   end
 
@@ -37,7 +37,7 @@ class Account::Posts::CommentsController < Account::Posts::BaseController
 
     if @comment.update comment_params.except(:parent_id)
     else
-      render turbo_stream: turbo_stream.replace("comment-#{@comment.id}-form", partial: 'form', locals: { comment: @comment })
+      render turbo_stream: turbo_stream.replace("comment-#{@comment.id}-form", partial: "form", locals: { comment: @comment })
     end
   end
 

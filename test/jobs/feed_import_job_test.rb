@@ -2,9 +2,9 @@ require "test_helper"
 
 class FeedImportJobTest < ActiveJob::TestCase
   test "should import atom feed" do
-    account = create(:user_account, feed_url: 'https://example.com/feed.xml', feed_mark_canonical: true)
+    account = create(:user_account, feed_url: "https://example.com/feed.xml", feed_mark_canonical: true)
 
-    stub_request(:get, 'https://example.com/feed.xml').to_return(body: <<~EOF)
+    stub_request(:get, "https://example.com/feed.xml").to_return(body: <<~EOF)
       <?xml version="1.0" encoding="utf-8"?>
       <feed xmlns="http://www.w3.org/2005/Atom">
         <title>Site Title</title>
@@ -34,10 +34,10 @@ class FeedImportJobTest < ActiveJob::TestCase
       FeedImportJob.perform_now(account)
     end
     post = account.posts.last
-    assert_equal 'Post Title', post.title
+    assert_equal "Post Title", post.title
     assert_equal "Post content.\n\n", post.content
-    assert_equal 'urn:uuid:5d563d8d-65f4-44c4-b7d9-f2af8fc012b5', post.feed_source_id
-    assert_equal 'https://example.com/2022/01/01/post-title', post.canonical_url
+    assert_equal "urn:uuid:5d563d8d-65f4-44c4-b7d9-f2af8fc012b5", post.feed_source_id
+    assert_equal "https://example.com/2022/01/01/post-title", post.canonical_url
     assert_nil post.published_at
     assert_equal account.owner, post.user
     assert_not_nil account.feed_fetched_at
@@ -49,11 +49,11 @@ class FeedImportJobTest < ActiveJob::TestCase
   end
 
   test "should import atom feed by organization account" do
-    account = create(:organization_account, feed_url: 'https://example.com/feed.xml', feed_mark_canonical: true)
+    account = create(:organization_account, feed_url: "https://example.com/feed.xml", feed_mark_canonical: true)
     user = create(:user)
     account.owner.members.create(user: user, role: :owner)
 
-    stub_request(:get, 'https://example.com/feed.xml').to_return(body: <<~EOF)
+    stub_request(:get, "https://example.com/feed.xml").to_return(body: <<~EOF)
       <?xml version="1.0" encoding="utf-8"?>
       <feed xmlns="http://www.w3.org/2005/Atom">
         <title>Site Title</title>
@@ -87,9 +87,9 @@ class FeedImportJobTest < ActiveJob::TestCase
   end
 
   test "should import rss feed" do
-    account = create(:user_account, feed_url: 'https://example.com/feed.xml', feed_mark_canonical: true)
+    account = create(:user_account, feed_url: "https://example.com/feed.xml", feed_mark_canonical: true)
 
-    stub_request(:get, 'https://example.com/feed.xml').to_return(body: <<~EOF)
+    stub_request(:get, "https://example.com/feed.xml").to_return(body: <<~EOF)
       <?xml version="1.0" encoding="UTF-8" ?>
       <rss version="2.0">
         <channel>
@@ -114,10 +114,10 @@ class FeedImportJobTest < ActiveJob::TestCase
       FeedImportJob.perform_now(account)
     end
     post = account.posts.last
-    assert_equal 'Post Title', post.title
+    assert_equal "Post Title", post.title
     assert_equal "Post content.\n\n", post.content
-    assert_equal '5d563d8d-65f4-44c4-b7d9-f2af8fc012b5', post.feed_source_id
-    assert_equal 'https://example.com/2022/01/01/post-title', post.canonical_url
+    assert_equal "5d563d8d-65f4-44c4-b7d9-f2af8fc012b5", post.feed_source_id
+    assert_equal "https://example.com/2022/01/01/post-title", post.canonical_url
     assert_nil post.published_at
     assert post.user == account.owner
     assert_not_nil account.feed_fetched_at
@@ -129,9 +129,9 @@ class FeedImportJobTest < ActiveJob::TestCase
   end
 
   test "ignore network error when fetch feed" do
-    account = create(:user_account, feed_url: 'https://example.com/feed.xml', feed_mark_canonical: true)
+    account = create(:user_account, feed_url: "https://example.com/feed.xml", feed_mark_canonical: true)
 
-    stub_request(:get, 'https://example.com/feed.xml').to_return(status: 404, body: '')
+    stub_request(:get, "https://example.com/feed.xml").to_return(status: 404, body: "")
 
     assert_nothing_raised do
       FeedImportJob.perform_now(account)
@@ -184,7 +184,7 @@ class FeedImportJobTest < ActiveJob::TestCase
     account = create(:user_account)
 
     stub_request(:head, "https://example.com/path/to/image.png").
-      to_return(headers: { 'Content-Length': '0' })
+      to_return(headers: { 'Content-Length': "0" })
     stub_request(:get, "https://example.com/path/to/image.png").
       to_return(body: "")
 

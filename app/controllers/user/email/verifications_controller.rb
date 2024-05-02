@@ -6,7 +6,7 @@ class User::Email::VerificationsController < ApplicationController
 
   def update
     @user.email_verified!
-    render turbo_stream: turbo_stream.replace(:main, partial: 'success')
+    render turbo_stream: turbo_stream.replace(:main, partial: "success")
   end
 
   private

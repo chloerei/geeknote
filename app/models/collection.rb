@@ -13,7 +13,7 @@ class Collection < ApplicationRecord
     added_asc: 1,
     added_desc: 2,
     published_asc: 3,
-    published_desc: 4,
+    published_desc: 4
   }, _prefix: true
 
   enum add_to: {
@@ -25,9 +25,9 @@ class Collection < ApplicationRecord
 
   attribute :added, :boolean, default: false
 
-  scope :with_post_status, -> (post) {
+  scope :with_post_status, ->(post) {
     select(
-      sanitize_sql_array(["*, exists(select 1 from collection_items where collection_items.collection_id = collections.id and collection_items.post_id = :post_id ) as added", post_id: post.id])
+      sanitize_sql_array([ "*, exists(select 1 from collection_items where collection_items.collection_id = collections.id and collection_items.post_id = :post_id ) as added", post_id: post.id ])
     )
   }
 
@@ -41,13 +41,13 @@ class Collection < ApplicationRecord
 
   def reorder
     items = case order_type
-    when 'added_asc'
+    when "added_asc"
       self.collection_items.order(created_at: :asc)
-    when 'added_desc'
+    when "added_desc"
       self.collection_items.order(created_at: :desc)
-    when 'published_asc'
+    when "published_asc"
       self.collection_items.joins(:post).order("posts.published_at asc")
-    when 'published_desc'
+    when "published_desc"
       self.collection_items.joins(:post).order("posts.published_at desc")
     else
       self.collection_items.order(position: :asc)
