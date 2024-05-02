@@ -44,7 +44,7 @@ jobs:
       - name: Run rubocop
         run: bin/rubocop
       - name: Run brakeman
-        run: bin/brakeman
+        run: bin/brakeman --quiet
   deploy:
     needs: test
     if: ${{ github.ref == 'refs/heads/master' }}

@@ -18,12 +18,15 @@
       },
       "user_input": ":role",
       "confidence": "Medium",
+      "cwe_id": [
+        915
+      ],
       "note": ""
     },
     {
       "warning_type": "Redirect",
       "warning_code": 18,
-      "fingerprint": "5afbf862a58f78a7f2b84a29391c5fb1222cb2757ffcea069b3b14490645de6b",
+      "fingerprint": "8e88558c24ece96d204384f27a9607f4f576940df698e802f1ecaf16dbe8082f",
       "check_name": "Redirect",
       "message": "Possible unprotected redirect",
       "file": "app/controllers/attachments_controller.rb",
@@ -37,10 +40,13 @@
         "method": "show"
       },
       "user_input": "Attachment.find_by!(:key => params[:key]).file.blob.url(:disposition => params[:disposition])",
-      "confidence": "High",
+      "confidence": "Weak",
+      "cwe_id": [
+        601
+      ],
       "note": ""
     }
   ],
-  "updated": "2022-07-11 13:20:11 +0000",
-  "brakeman_version": "5.2.3"
+  "updated": "2024-05-02 07:56:51 +0000",
+  "brakeman_version": "5.4.1"
 }
