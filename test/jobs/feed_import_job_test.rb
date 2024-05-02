@@ -209,7 +209,7 @@ class FeedImportJobTest < ActiveJob::TestCase
     EOF
 
     assert_equal <<~EOF, result
-     ![](%7C%20ls)
+     ![](|%20ls)
 
      ![](/etc/passwd)
 
