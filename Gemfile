@@ -65,8 +65,6 @@ gem 'postal-rails', '~> 1.0', require: false
 
 gem 'with_advisory_lock'
 
-gem 'diffy'
-
 gem "recaptcha", require: false
 
 gem 'rest-client'

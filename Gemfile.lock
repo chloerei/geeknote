@@ -114,7 +114,6 @@ GEM
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
-    diffy (3.4.2)
     dockerfile-rails (1.6.10)
       rails (>= 3.0.0)
     domain_name (0.6.20240107)
@@ -393,7 +392,6 @@ DEPENDENCIES
   capybara (>= 2.15)
   commonmarker (~> 0.23.8)
   debug
-  diffy
   dockerfile-rails
   dotenv-rails
   factory_bot_rails
