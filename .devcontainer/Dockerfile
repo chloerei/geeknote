@@ -10,10 +10,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
       libpq-dev \
       libvips42 \
       postgresql-client \
-      git
-
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-  apt-get install -y nodejs
+      git \
+      nodejs \
+      npm
 
 RUN gem install bundler -v 2.4.14 && \
   bundle config set --local path vendor/bundle

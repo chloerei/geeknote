@@ -23,14 +23,16 @@ FROM base as build
 
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential curl libpq-dev libvips node-gyp pkg-config python-is-python3
-
-# Install Node.js
-ARG NODE_VERSION=18.20.2
-ENV PATH=/usr/local/node/bin:$PATH
-RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
-    /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
-    rm -rf /tmp/node-build-master
+    apt-get install --no-install-recommends -y \
+        build-essential \
+        curl \
+        libpq-dev \
+        libvips \
+        node-gyp \
+        pkg-config \
+        python-is-python3 \
+        nodejs \
+        npm
 
 # Install application gems
 COPY --link Gemfile Gemfile.lock ./
