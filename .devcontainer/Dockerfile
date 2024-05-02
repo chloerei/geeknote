@@ -17,10 +17,4 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN gem install bundler -v 2.4.14 && \
   bundle config set --local path vendor/bundle
 
-RUN useradd -m rails && \
-  mkdir /rails && \
-  chown rails:rails /rails
-
-USER rails:rails
-
 WORKDIR /rails
