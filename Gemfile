@@ -71,8 +71,6 @@ gem "recaptcha", require: false
 
 gem 'rest-client'
 
-gem 'puppeteer-ruby'
-
 gem "meilisearch-rails"
 
 gem "jwt"

@@ -12,7 +12,6 @@ class Post < ApplicationRecord
 
   has_secure_token :preview_token
   has_one_attached :featured_image
-  has_one_attached :social_image
 
   # TODO: remove and clean trashed post
   enum status: {
@@ -86,12 +85,6 @@ class Post < ApplicationRecord
     if value && featured_image.attached?
       self.featured_image = nil
     end
-  end
-
-  after_save :generate_social_image, if: :saved_change_to_title?
-
-  def generate_social_image
-    PostGenerateSocialImageJob.perform_later(self)
   end
 
   after_touch :update_score

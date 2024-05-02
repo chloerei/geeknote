@@ -105,7 +105,6 @@ Rails.application.routes.draw do
 
     resources :posts do
       scope module: 'posts' do
-        resource :social_image, only: [:show]
         resource :preview, only: [:show]
         resource :like, only: [:create, :destroy]
         resource :bookmark, only: [:create, :destroy]
