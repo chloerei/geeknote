@@ -8,7 +8,7 @@ class Admin::Settings::WeeklyDigests::PreviewsControllerTest < ActionDispatch::I
 
   test "should send preiview to email" do
     sign_in @admin
-    assert_enqueued_email_with UserMailer, :weekly_digest, args: { user: @admin } do
+    assert_enqueued_email_with UserMailer, :weekly_digest, params: { user: @admin } do
       post admin_settings_weekly_digest_preview_path, params: { user: { email: @admin.email } }
     end
     assert_redirected_to admin_settings_weekly_digest_preview_path

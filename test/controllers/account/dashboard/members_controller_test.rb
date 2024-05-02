@@ -42,7 +42,7 @@ class Account::Dashboard::MembersControllerTest < ActionDispatch::IntegrationTes
   end
 
   test "view member detail" do
-    member = create(:member, organization: @organization)
+    member = create(:member, organization: @organization, role: 'member')
 
     sign_in create(:user)
     get account_dashboard_member_path(@account, member)
