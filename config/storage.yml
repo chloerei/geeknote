@@ -21,6 +21,15 @@ aliyun_private:
   bucket: <%= ENV['PRIVATE_ALIYUN_OSS_BUCKET'] %>
   endpoint: <%= ENV['ALIYUN_OSS_ENDPOINT'] %>
 
+s3:
+  service: S3
+  access_key_id: <%= ENV.fetch("STORAGE_S3_ACCESS_KEY_ID", nil) %>
+  secret_access_key: <%= ENV.fetch("STORAGE_S3_SECRET_ACCESS_KEY", nil) %>
+  endpoint: <%= ENV.fetch("STORAGE_S3_ENDPOINT", nil) %>
+  bucket: <%= ENV.fetch("STORAGE_S3_BUCKET", nil) %>
+  public: true
+  region: auto
+
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
 #   service: S3
