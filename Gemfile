@@ -52,8 +52,6 @@ gem "rails-i18n", "~> 7.0.1"
 
 gem "local_time"
 
-gem "activestorage-aliyun", "~> 1.1"
-
 gem "aws-sdk-s3", require: false
 
 gem "sentry-ruby", require: false

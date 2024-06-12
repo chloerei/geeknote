@@ -8,21 +8,6 @@ local:
   root: <%= Rails.root.join("storage") %>
   public: true
 
-aliyun:
-  service: Aliyun
-  access_key_id: <%= ENV['ALIYUN_OSS_ACCESS_KEY_ID'] %>
-  access_key_secret: <%= ENV['ALIYUN_OSS_ACCESS_KEY_SECRET'] %>
-  bucket: <%= ENV['ALIYUN_OSS_BUCKET'] %>
-  endpoint: <%= ENV['ALIYUN_OSS_ENDPOINT'] %>
-  public: true
-
-aliyun_private:
-  service: Aliyun
-  access_key_id: <%= ENV['ALIYUN_OSS_ACCESS_KEY_ID'] %>
-  access_key_secret: <%= ENV['ALIYUN_OSS_ACCESS_KEY_SECRET'] %>
-  bucket: <%= ENV['PRIVATE_ALIYUN_OSS_BUCKET'] %>
-  endpoint: <%= ENV['ALIYUN_OSS_ENDPOINT'] %>
-
 s3:
   service: S3
   access_key_id: <%= ENV.fetch("STORAGE_S3_ACCESS_KEY_ID", nil) %>
