@@ -34,7 +34,6 @@
         <% feature_images = collection.posts.joins(:featured_image_attachment).order("collection_items.position asc").limit(3).map(&:featured_image) %>
         <% 3.times do |n| %>
           <div class="collection-images__item">
-            <%= featured_image_square_tag feature_images[n] %>
           </div>
         <% end %>
       </div>

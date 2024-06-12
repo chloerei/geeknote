@@ -2,6 +2,8 @@ module MarkdownHelper
   MARKDOWN_ALLOW_TAGS = Set.new(%w[strong em b i p code pre tt samp kbd var sub sup dfn cite big small address hr br div span h1 h2 h3 h4 h5 h6 ul ol li dl dt dd abbr acronym a img blockquote del ins input table thead tbody tr th td])
   MARKDOWN_ALLOW_ATTRIBUTES = Set.new(%w[id href src width height alt cite datetime title class name xml:lang abbr type disabled checked])
 
+  ATTACHMENT_PATTERN = /^\/attachments\/(?<key>[\w]+)/
+
   def markdown_render(text)
     html = CommonMarker.render_html(text, :DEFAULT, [ :table, :tasklist, :strikethrough, :autolink, :tagfilter ])
     doc = Nokogiri::HTML.fragment(html)
@@ -22,6 +24,32 @@ module MarkdownHelper
       anchor["href"] = "##{anchor['id']}"
       anchor["class"] = "anchor"
       node.prepend_child anchor
+    end
+
+    # replace image src and add metadata
+    doc.css("img").each do |node|
+      match = ATTACHMENT_PATTERN.match(node["src"])
+      if match
+        attachment = Attachment.find_by(key: match[:key])
+        if attachment
+          node["src"] = storage_url(attachment.file)
+          if attachment.file.metadata["height"] && attachment.file.metadata["width"]
+            node["height"] = attachment.file.metadata["height"]
+            node["width"] = attachment.file.metadata["width"]
+          end
+        end
+      end
+    end
+
+    # replace link href
+    doc.css("a").each do |node|
+      match = ATTACHMENT_PATTERN.match(node["href"])
+      if match
+        attachment = Attachment.find_by(key: match[:key])
+        if attachment
+          node["href"] = storage_url(attachment.file)
+        end
+      end
     end
 
     sanitize doc.to_html, tags: MARKDOWN_ALLOW_TAGS, attributes: MARKDOWN_ALLOW_ATTRIBUTES

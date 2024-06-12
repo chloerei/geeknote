@@ -1,15 +1,17 @@
 module ApplicationHelper
-  def use_aliyun_oss?
-    ENV["STORAGE_SERVICE"] == "aliyun"
+  def storage_url(model)
+    if ENV["STORAGE_HOST"]
+      url = URI(model.url)
+      url.host = ENV["STORAGE_HOST"]
+      url.to_s
+    else
+      model.url
+    end
   end
 
   def avatar_url(avatar)
     if avatar.attached?
-      if use_aliyun_oss?
-        avatar.url(params: { "x-oss-process" => "image/resize,m_fill,w_160,h_160" })
-      else
-        url_for avatar.variant(resize_to_fill: [ 160, 160 ])
-      end
+      storage_url avatar.variant(:thumb)
     else
       asset_path("avatar.png")
     end
@@ -17,11 +19,7 @@ module ApplicationHelper
 
   def avatar_image_tag(avatar)
     if avatar.attached?
-      if use_aliyun_oss?
-        image_tag avatar.url(params: { "x-oss-process" => "image/resize,m_fill,w_160,h_160" })
-      else
-        image_tag avatar.variant(resize_to_fill: [ 160, 160 ])
-      end
+      image_tag avatar_url(avatar)
     else
       image_tag asset_url("avatar.png")
     end
@@ -29,55 +27,22 @@ module ApplicationHelper
 
   def banner_image_tag(banner_image)
     if banner_image.attached?
-      if use_aliyun_oss?
-        image_tag banner_image.url(params: { "x-oss-process" => "image/resize,m_lfit,w_1920,h_1920" })
-      else
-        image_tag banner_image.variant(resize_to_limit: [ 1920, 1920 ])
-      end
+      image_tag storage_url(banner_image.variant(:large))
     else
       content_tag "div", "", class: "banner-image-placeholder"
-    end
-  end
-
-  def featured_image_thumb_tag(featured_image)
-    if featured_image.attached?
-      if use_aliyun_oss?
-        image_tag featured_image.url(params: { "x-oss-process" => "image/resize,m_fill,w_256,h_256" })
-      else
-        image_tag featured_image.variant(resize_to_fill: [ 256, 256 ])
-      end
-    end
-  end
-
-  def featured_image_square_tag(featured_image)
-    if featured_image && featured_image.attached?
-      if use_aliyun_oss?
-        image_tag featured_image.url(params: { "x-oss-process" => "image/resize,m_fill,w_400,h_400" })
-      else
-        image_tag featured_image.variant(resize_to_fill: [ 400, 400 ])
-      end
     end
   end
 
   def featured_image_tag(featured_image)
     if featured_image.attached?
       options = featured_image.metadata.slice(:width, :height)
-
-      if use_aliyun_oss?
-        image_tag featured_image.url(params: { "x-oss-process" => "image/resize,m_lfit,w_1920,h_1920" }), options
-      else
-        image_tag featured_image.variant(resize_to_limit: [ 1920, 1920 ]), options
-      end
+      image_tag storage_url(featured_image.variant(:large)), options
     end
   end
 
   def featured_image_url(featured_image)
     if featured_image.attached?
-      if use_aliyun_oss?
-        featured_image.url(params: { "x-oss-process" => "image/resize,m_lfit,w_1920,h_1920" })
-      else
-        url_for featured_image.variant(resize_to_limit: [ 1920, 1920 ])
-      end
+      url_for storage_url(featured_image.variant(:large))
     end
   end
 

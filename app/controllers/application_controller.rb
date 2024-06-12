@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include ActiveStorage::SetCurrent
+
   before_action :set_site
 
   helper_method :current_user
