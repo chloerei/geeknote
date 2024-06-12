@@ -43,7 +43,7 @@ class AccountExportJob < ApplicationJob
         export.account.posts.find_each do |post|
           post.content.scan(/!\[.*\]\(\/attachments\/(?<key>\w+)\/.*\)/) do |match|
             if attachment = Attachment.find_by(key: match[0])
-              Dir.mkdir(File.join("attachments", attachment.key))
+              Dir.mkdir(File.join("attachments", attachment.key)) unless Dir.exist?(File.join("attachments", attachment.key))
               attachment.file.open do |file|
                 system "cp", file.path, File.join(dir, "attachments", attachment.key, attachment.file.filename.to_s)
               end
@@ -62,8 +62,8 @@ class AccountExportJob < ApplicationJob
     if export.account.user?
       AccountMailer.with(account: export.account, user: export.account.owner).export_completed.deliver_later
     else
-      export.account.members.where(role: [ "owner", "admin" ]).each do |user|
-        AccountMailer.with(account: export.account, user: user).export_completed.deliver_later
+      export.account.owner.members.where(role: [ "owner", "admin" ]).each do |member|
+        AccountMailer.with(account: export.account, user: member.user).export_completed.deliver_later
       end
     end
   end
