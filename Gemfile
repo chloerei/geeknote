@@ -54,6 +54,8 @@ gem "local_time"
 
 gem "activestorage-aliyun", "~> 1.1"
 
+gem "aws-sdk-s3", require: false
+
 gem "sentry-ruby", require: false
 gem "sentry-rails", require: false
 
