@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <% if @site.icon.attached? %>
-      <link rel="icon" href="<%= url_for @site.icon.variant(:normal) %>">
+      <link rel="icon" href="<%= storage_url @site.icon.variant(:normal) %>">
     <% end %>
 
     <%= csrf_meta_tags %>

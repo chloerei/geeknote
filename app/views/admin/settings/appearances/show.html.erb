@@ -32,7 +32,7 @@
               <div class="image-uploader image-uploader--icon <%= 'image-uploader--active' if @site.icon.attached? %>" data-controller="image-uploader">
                 <div class="image-uploader__preview" data-image-uploader-target="preview">
                   <% if @site.icon.attached? %>
-                    <%= image_tag @site.icon.variant(:normal) %>
+                    <%= image_tag storage_url(@site.icon.variant(:normal)) %>
                   <% end %>
                 </div>
                 <div class="image-uploader__toolbar">
@@ -55,7 +55,7 @@
               <div class="image-uploader image-uploader--logo <%= 'image-uploader--active' if @site.logo.attached? %>" data-controller="image-uploader">
                 <div class="image-uploader__preview" data-image-uploader-target="preview">
                   <% if @site.logo.attached? %>
-                    <%= image_tag @site.logo %>
+                    <%= image_tag storage_url(@site.logo) %>
                   <% end %>
                 </div>
                 <div class="image-uploader__toolbar">
@@ -78,7 +78,7 @@
               <div class="image-uploader image-uploader--logo <%= 'image-uploader--active' if @site.logo_dark.attached? %>" data-controller="image-uploader">
                 <div class="image-uploader__preview" data-image-uploader-target="preview">
                   <% if @site.logo_dark.attached? %>
-                    <%= image_tag @site.logo_dark %>
+                    <%= image_tag storage_url(@site.logo_dark) %>
                   <% end %>
                 </div>
                 <div class="image-uploader__toolbar">

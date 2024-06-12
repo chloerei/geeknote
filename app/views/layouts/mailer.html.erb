@@ -429,7 +429,7 @@
               <td class="email-masthead">
                 <a href="<%= root_url %>" class="email-masthead_name">
                   <% if @site.logo.attached? %>
-                    <%= image_tag @site.logo, class: 'email-masthead_logo' %>
+                    <%= image_tag storage_url(@site.logo), class: 'email-masthead_logo' %>
                   <% else %>
                     <%= @site.name %>
                   <% end %>
