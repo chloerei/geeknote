@@ -9,18 +9,12 @@
     "@codemirror/language": "^6.0.0",
     "@codemirror/state": "^6.0.0",
     "@codemirror/view": "^6.0.0",
-    "@hotwired/stimulus": "^3.0.1",
-    "@hotwired/turbo-rails": "^7.3.0",
-    "@rails/actioncable": "^7.0.1",
-    "@rails/activestorage": "^7.0.1",
-    "@rails/request.js": "0.0.6",
     "esbuild": "^0.12.27",
-    "local-time": "^2.1.0",
     "material-icons": "^1.10.6",
     "sass": "^1.39.2"
   },
   "scripts": {
-    "build:js": "esbuild app/assets/javascripts/*.* --bundle --outdir=app/assets/builds --sourcemap",
+    "build:js": "esbuild app/assets/javascripts/*.* --bundle --format=esm --outdir=app/assets/builds",
     "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --load-path=node_modules --source-map --embed-sources",
     "build:icon": "cp node_modules/material-icons/iconfont/material-icons*.woff* app/assets/builds"
   },

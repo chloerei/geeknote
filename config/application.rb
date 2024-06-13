@@ -26,13 +26,11 @@ module GeekNote
 
     config.autoload_paths << Rails.root.join("lib")
 
-    # Stop Propshaft compile all assets
-    config.after_initialize do
-      config.assets.paths = [
-        Rails.root.join("app/assets/builds"),
-        Rails.root.join("app/assets/images")
-      ]
-    end
+    config.assets.excluded_paths << Rails.root.join("app/assets/stylesheets")
+    config.assets.excluded_paths << Rails.root.join("app/assets/javascripts")
+
+    config.importmap.cache_sweepers << Rails.root.join("app/assets/builds")
+
     config.asset_host = ENV["ASSET_HOST"]
 
     if ENV["IMGPROXY_ENDPOINT"].present?
