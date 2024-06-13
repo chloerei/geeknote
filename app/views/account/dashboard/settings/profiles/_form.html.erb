@@ -6,7 +6,7 @@
     <div class="image-uploader image-uploader--banner-image <%= 'image-uploader--active' if @owner.banner_image.attached? %>" data-controller="image-uploader">
       <div class="image-uploader__preview" data-image-uploader-target="preview">
         <% if @owner.banner_image.attached? %>
-          <%= image_tag storage_url(@owner.banner_image.variant(:large)) %>
+          <%= image_tag @owner.banner_image.variant(:large) %>
         <% end %>
       </div>
       <div class="image-uploader__toolbar">

@@ -31,7 +31,7 @@
     <% if post.featured_image.attached? %>
       <div class="flex-shrink-0 display-none display-block@tablet">
         <div class="post-card__feature-image">
-          <%= image_tag storage_url(post.featured_image.variant(:large)) %>
+          <%= image_tag post.featured_image.variant(:large) %>
         </div>
       </div>
     <% end %>

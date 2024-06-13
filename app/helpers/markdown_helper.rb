@@ -32,7 +32,7 @@ module MarkdownHelper
       if match
         attachment = Attachment.find_by(key: match[:key])
         if attachment
-          node["src"] = storage_url(attachment.file)
+          node["src"] = polymorphic_url(attachment.file)
           if attachment.file.metadata["height"] && attachment.file.metadata["width"]
             node["height"] = attachment.file.metadata["height"]
             node["width"] = attachment.file.metadata["width"]
@@ -47,7 +47,7 @@ module MarkdownHelper
       if match
         attachment = Attachment.find_by(key: match[:key])
         if attachment
-          node["href"] = storage_url(attachment.file)
+          node["href"] = polymorphic_url(attachment.file)
         end
       end
     end

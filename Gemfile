@@ -54,6 +54,8 @@ gem "local_time"
 
 gem "aws-sdk-s3", require: false
 
+gem "imgproxy-rails"
+
 gem "sentry-ruby", require: false
 gem "sentry-rails", require: false
 

@@ -1,7 +1,7 @@
 <div class="banner-image">
   <div class="banner-image__inner">
     <% if @account.owner.banner_image.attached? %>
-      <%= image_tag storage_url(@account.owner.banner_image.variant(:large)) %>
+      <%= image_tag @account.owner.banner_image.variant(:large) %>
     <% end %>
   </div>
 </div>

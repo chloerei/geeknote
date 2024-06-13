@@ -12,7 +12,7 @@ class Post < ApplicationRecord
 
   has_secure_token :preview_token
   has_one_attached :featured_image do |attachable|
-    attachable.variant :large, resize_to_limit: [ 1920, 1920 ], preprocessed: true
+    attachable.variant :large, resize_to_limit: [ 1920, 1920 ]
   end
 
   # TODO: remove and clean trashed post

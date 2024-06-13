@@ -1,33 +1,19 @@
 module ApplicationHelper
-  def storage_url(model)
-    if ENV["STORAGE_HOST"]
-      url = URI(model.url)
-      url.host = ENV["STORAGE_HOST"]
-      url.to_s
-    else
-      model.url
-    end
-  end
-
   def avatar_url(avatar)
     if avatar.attached?
-      storage_url avatar.variant(:thumb)
+      polymorphic_url avatar.variant(:thumb)
     else
-      asset_path("avatar.png")
+      asset_url("avatar.png")
     end
   end
 
   def avatar_image_tag(avatar)
-    if avatar.attached?
-      image_tag avatar_url(avatar)
-    else
-      image_tag asset_url("avatar.png")
-    end
+    image_tag avatar_url(avatar)
   end
 
   def banner_image_tag(banner_image)
     if banner_image.attached?
-      image_tag storage_url(banner_image.variant(:large))
+      image_tag banner_image.variant(:large)
     else
       content_tag "div", "", class: "banner-image-placeholder"
     end
@@ -36,13 +22,13 @@ module ApplicationHelper
   def featured_image_tag(featured_image)
     if featured_image.attached?
       options = featured_image.metadata.slice(:width, :height)
-      image_tag storage_url(featured_image.variant(:large)), options
+      image_tag featured_image.variant(:large), options
     end
   end
 
   def featured_image_url(featured_image)
     if featured_image.attached?
-      url_for storage_url(featured_image.variant(:large))
+      polymorphic_url featured_image.variant(:large)
     end
   end
 
