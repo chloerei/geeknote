@@ -36,7 +36,7 @@ module GeekNote
     config.asset_host = ENV["ASSET_HOST"]
 
     if ENV["IMGPROXY_ENDPOINT"].present?
-      config.active_storage.resolve_model_to_route = :imgproxy_active_storage
+      config.active_storage.resolve_model_to_route = :custom_imgproxy_active_storage
     end
 
     # Settings in config/environments/* take precedence over those specified here.

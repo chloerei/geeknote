@@ -179,4 +179,14 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  direct :custom_imgproxy_active_storage do |model, options|
+    if ImgproxyRails::Helpers.applicable_variation?(model)
+      transformations = model.variation.transformations
+      Imgproxy.url_for(model.blob, ImgproxyRails::Transformer.call(transformations))
+    else
+      # Use redirect instead of proxy
+      route_for(:rails_storage_redirect, model, options)
+    end
+  end
 end
