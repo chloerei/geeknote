@@ -1,4 +1,4 @@
-FROM ruby:3.3.1
+FROM ruby:3.3.3
 
 # Default value to allow debug server to serve content over GitHub Codespace's port forwarding service
 # The value is a comma-separated list of allowed domains
