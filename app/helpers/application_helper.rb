@@ -1,4 +1,9 @@
 module ApplicationHelper
+  MATERIAL_ICONS = {}
+  def material_icon(name)
+    MATERIAL_ICONS[name] ||= File.read(Rails.root.join("vendor/icons/@material-symbols/svg-400/rounded/#{name}.svg")).html_safe
+  end
+
   def avatar_url(avatar)
     if avatar.attached?
       polymorphic_url avatar.variant(:thumb)
