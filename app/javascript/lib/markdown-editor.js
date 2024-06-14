@@ -6,7 +6,28 @@ class MarkdownEditor {
   static acceptFileTypes = [
     'image/png',
     'image/gif',
+    'image/jpg',
     'image/jpeg',
+    'image/svg+xml',
+    'text/plain',
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/vnd.ms-powerpoint',
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    'application/vnd.ms-excel',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'text/markdown',
+    'text/x-markdown',
+    'text/x-log',
+    'text/x-patch',
+    'application/zip',
+    'application/gzip',
+    'application/x-gzip',
+    'application/x-tar',
+    'video/mp4',
+    'video/quicktime',
+    'video/webm'
   ]
 
   static acceptFileSize = 10 * 1024 * 1024
@@ -43,7 +64,6 @@ class MarkdownEditor {
       input: input,
       scrollMargin: scrollMargin,
     })
-    this.editorView = this.markdownMirror.editorView
 
     this.mirrorAttachFile = (event) => {
       Array.from(event.detail.files).forEach(file => {
@@ -104,38 +124,6 @@ class MarkdownEditor {
     }
 
     this.markdownMirror.findAndReplace(placeholder, markup)
-  }
-
-  formatBold() {
-    this.markdownMirror.wrapSelection('*', '*')
-  }
-
-  formatItalic() {
-    this.markdownMirror.wrapSelection('_', '_')
-  }
-
-  formatTitle() {
-    this.markdownMirror.linePrepend('## ')
-  }
-
-  formatCode() {
-    this.markdownMirror.wrapSelection('`', '`')
-  }
-
-  formatQuote() {
-    this.markdownMirror.linePrepend('> ')
-  }
-
-  formatListBulleted() {
-    this.markdownMirror.linePrepend('- ')
-  }
-
-  formatListNumbered() {
-    this.markdownMirror.linePrepend('1. ')
-  }
-
-  formatLink() {
-    this.markdownMirror.wrapSelection('[', ']()')
   }
 }
 
