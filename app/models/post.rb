@@ -7,7 +7,6 @@ class Post < ApplicationRecord
   belongs_to :account
   belongs_to :user
   has_many :revisions, class_name: "PostRevision", dependent: :delete_all
-  has_many :collection_items, dependent: :delete_all
   has_many :bookmarks
 
   has_secure_token :preview_token

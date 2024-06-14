@@ -17,7 +17,7 @@
   <div class="display-flex gap-3">
     <div class="flex-grow-1 text-break-word min-width-0">
       <h3 class="title-large margin-top-0 margin-bottom-3">
-        <a href="<%= account_post_path(post.account, post) %>" class="link-expended link-title" data-post-list-target="postLink">
+        <a href="<%= account_post_path(post.account, post) %>" class="link-expended link-title">
           <%= post.title.presence || t('common.untitled') %>
         </a>
       </h3>

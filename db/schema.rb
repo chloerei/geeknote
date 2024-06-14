@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_06_18_070051) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_14_063727) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -85,29 +85,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_06_18_070051) do
     t.datetime "updated_at", null: false
     t.index ["post_id", "user_id"], name: "index_bookmarks_on_post_id_and_user_id", unique: true
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
-  end
-
-  create_table "collection_items", force: :cascade do |t|
-    t.bigint "collection_id"
-    t.bigint "post_id"
-    t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["collection_id"], name: "index_collection_items_on_collection_id"
-    t.index ["post_id", "collection_id"], name: "index_collection_items_on_post_id_and_collection_id", unique: true
-  end
-
-  create_table "collections", force: :cascade do |t|
-    t.bigint "account_id"
-    t.string "name"
-    t.text "description"
-    t.integer "visibility", default: 0
-    t.integer "order_type", default: 0
-    t.integer "add_to", default: 0
-    t.integer "collection_items_count", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_collections_on_account_id"
   end
 
   create_table "comments", force: :cascade do |t|

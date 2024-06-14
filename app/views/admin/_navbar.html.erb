@@ -18,15 +18,6 @@
       </div>
     </a>
 
-    <a href="<%= admin_collections_path %>" class="nav__item <%= 'nav__item--active' if request.path.start_with?('/admin/collections') %>">
-      <div class="nav__item__icon">
-        <span class="material-icons">library_books</span>
-      </div>
-      <div class="nav__item__label">
-        <%= t 'common.collections' %>
-      </div>
-    </a>
-
     <a href="<%= admin_tags_path %>" class="nav__item <%= 'nav__item--active' if request.path.start_with?('/admin/tags') %>">
       <div class="nav__item__icon">
         <span class="material-icons">tag</span>

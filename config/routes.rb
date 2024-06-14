@@ -70,8 +70,6 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :collections
-
     resources :tags do
       scope module: :tags do
         resource :merge, only: [ :new, :create ]
@@ -108,11 +106,6 @@ Rails.application.routes.draw do
         resource :preview, only: [ :show ]
         resource :like, only: [ :create, :destroy ]
         resource :bookmark, only: [ :create, :destroy ]
-        resources :collections, only: [ :index, :new, :create, :update ] do
-          collection do
-            put :switch
-          end
-        end
         resources :comments do
           scope module: "comments" do
             resource :like, only: [ :create, :destroy ]
@@ -128,7 +121,6 @@ Rails.application.routes.draw do
     resource :follow, only: [ :create, :destroy ]
     resources :followings, only: [ :index ]
     resources :followers, only: [ :index ]
-    resources :collections, only: [ :index, :show ]
     resources :likes
     resources :members, only: [ :index ]
     resources :tags, only: [ :show ]
@@ -159,12 +151,6 @@ Rails.application.routes.draw do
       resources :members do
         member do
           post :resend
-        end
-      end
-
-      resources :collections do
-        scope module: "collections" do
-          resources :collection_items, only: [ :update, :destroy ]
         end
       end
 

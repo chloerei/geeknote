@@ -2,15 +2,8 @@
 zh-CN:
   account:
     dashboard:
-      collections:
-        form:
-          new_post_add_to: 使用自定义排序时，新条目添加至
-        index:
-          no_collections: 还没有合集
       home:
         index:
-          collections: 合集
-          collections_desription: 文章合集。
           members: 成员
           members_desription: 邀请其他人加入写作。
           posts: 文章
@@ -52,15 +45,6 @@ zh-CN:
       account:
         feed_url: RSS/Atom Feed URL
         name: 账号名
-      collection:
-        description: 描述
-        name: 名称
-      collection/order_type:
-        added_asc: 添加时间（从早到晚）
-        added_desc: 添加时间（从晚到早）
-        custom: 自定义
-        published_asc: 发布时间（从早到晚）
-        published_desc: 发布时间（从晚到早）
       comment:
         content: 评论
       export/status:
@@ -151,11 +135,6 @@ zh-CN:
         new:
           merge: 合并
           merge_to: 将以下标签合并到“%{name}”
-  collection:
-    visibility_private_description: 只有账号成员可以查看。
-    visibility_private_label: 私有
-    visibility_public_description: 任何人都可以查看。
-    visibility_public_label: 公开
   common:
     account: 账号
     account_name: 账号名
@@ -163,7 +142,6 @@ zh-CN:
     account_settings: 账号设置
     accounts: 账号
     add_featured_image: 添加封面图片
-    add_to_collection: 添加收藏
     admin: 管理
     all_bookmarks: 全部书签
     appearance: 外观
@@ -174,9 +152,6 @@ zh-CN:
     cancel: 取消
     canonical_url_helper: 文章的原始链接。
     change_password: 修改密码
-    collection_bottom: 合集底部
-    collection_top: 合集顶部
-    collections: 合集
     comment_is_disabled: 评论已关闭
     comment_on: 评论了
     comment_placeholder: 评论…
@@ -184,16 +159,11 @@ zh-CN:
     comments: 评论
     content_has_expired: 内容已失效
     continute_thread: 继续讨论
-    create_collection: 创建合集
     create_export: 创建导出任务
     create_organization: 创建组织
     dark_theme: 深色主题
     dashboard: 内容管理
     delete: 删除
-    delete_collection: 删除合集
-    delete_collection_confirm: 确认删除合集？
-    delete_collection_item: 从合集移除
-    delete_collection_item_confirm: 确认从合集移除该文章？
     delete_export_confirm: 确认删除导出内容？
     deleted_content: 已删除内容
     devise_theme: 设备主题（默认)
@@ -201,7 +171,6 @@ zh-CN:
     download: 下载
     edit: 编辑
     edit_account: 编辑账号
-    edit_collection: 编辑合集
     edit_comment: 编辑评论
     edit_member: 编辑成员
     edit_organization: 编辑组织
@@ -236,11 +205,9 @@ zh-CN:
     merge_tags: 合并标签
     move_to_bottom: 移到底部
     move_to_top: 移到顶部
-    new_collection: 新合集
     new_organization: 新组织
     new_post: 新文章
     newest: 最新
-    no_collections_info: 合集用于保存或分享您喜欢的文章。
     no_description: 没有描述
     no_more_content: 没有更多内容。
     no_posts: 没有文章
@@ -304,11 +271,7 @@ zh-CN:
       email_or_password_error: Email 或密码错误
   flash:
     account_updated: 账号已更新。
-    added_to_collection: 已添加至“%{name}”。
     appearance_update_successful: 外观设置更新成功。
-    collection_created: 已创建合集“%{name}”。
-    collection_deleted: 已删除合集“%{name}”
-    collection_updated: 已更新合集“%{name}”
     email_update_successful: 邮件地址已更新。
     email_verification_sent: 验证邮件已发送，请检查收件箱。
     email_verification_time_limit: 请等待一分钟后重发邮件。
@@ -325,7 +288,6 @@ zh-CN:
     please_wait_one_minute_to_resend_invitation: 请等待一分钟再重发邀请函。
     post_is_saved: 文章已保存。
     profile_updated: 资料已更新。
-    removed_from_collection: 已从“%{name}”中移除。
     require_sign_in: 需要登录。
     settings_updated_successful: 设置更新成功。
     weekly_digest_preview_sent_successful: 每周摘要邮件预览发送成功。

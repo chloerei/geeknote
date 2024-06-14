@@ -12,12 +12,6 @@ class Account::PostsController < Account::BaseController
   def show
     @post = @account.posts.published.find params[:id]
 
-    if params[:collection_id] && (collection = Collection.find_by id: params[:collection_id])
-      if collection.can_read_by_user?(current_user)
-        @collection = collection
-      end
-    end
-
     @paginator = RailsCursorPagination::Paginator.new(@post.comments.where(parent_id: nil).includes(:user), order_by: :likes_count, order: :desc).fetch
   end
 end
