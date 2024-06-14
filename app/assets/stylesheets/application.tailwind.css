@@ -1,0 +1,9 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer utilities {
+  .icon svg {
+    @apply w-full h-full fill-current;
+  }
+}

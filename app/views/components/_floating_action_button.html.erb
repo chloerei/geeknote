@@ -1,0 +1,7 @@
+<%# locals: (icon: :add, tag: :button, options: {}) %>
+
+<%= content_tag tag, options.with_defaults(type: :button, class: "w-14 h-14 flex items-center justify-center rounded-2xl select-none interactive-bg-primary-container shadow-md hover:shadow-lg") do %>
+  <div class="icon w-6 h-6">
+    <%= material_icon icon %>
+  </div>
+<% end %>

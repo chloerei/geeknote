@@ -1,0 +1,17 @@
+<%# locals: (tag: :button, label: "Button", icon: nil, trailing_icon: nil, active: false, options: {}) %>
+
+<%= content_tag tag, options.with_defaults({type: "button", class: "inline-flex items-center align-middle h-10 px-3 gap-2 rounded-full text-primary whitespace-nowrap cursor-pointer select-none hover:bg-primary/10 active:bg-primary/20 disabled:opacity-50 disabled:pointer-events-none"}) do %>
+  <% if icon %>
+    <div class="icon w-4 h-4">
+      <%= material_icon icon %>
+    </div>
+  <% end %>
+  <div class="text-sm font-medium">
+    <%= label %>
+  </div>
+  <% if trailing_icon %>
+    <div class="icon w-4 h-4">
+      <%= material_icon trailing_icon %>
+    </div>
+  <% end %>
+<% end %>

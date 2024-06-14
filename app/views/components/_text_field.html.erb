@@ -1,0 +1,38 @@
+<%# locals: (form:, name:, type: :text_field, prefix: nil, suffix: nil, error: nil, label: nil, description: nil, options: {}) %>
+
+<%
+  error ||= form.object && form.object.errors[name].first
+%>
+
+<div>
+  <% if label %>
+    <%= form.label name, label, class: "block mb-2 text-sm font-medium text-on-surface-variant" %>
+  <% end %>
+  <div class="flex items-center w-full border-0 ring-1 focus-within:ring-2 rounded <%= error.nil? ? "ring-outline focus-within:ring-primary" : "ring-error focus-within:ring-error" %>">
+    <% if prefix %>
+      <div class="h-10 px-4 flex items-center text-on-surface-variant bg-surface-variant rounded-l">
+        <%= prefix %>
+      </div>
+    <% end %>
+    <% if type == :text_area %>
+      <%= form.text_area name, options.merge(class: "flex-grow min-w-0 border-none rounded focus:ring-0 bg-surface disabled:bg-surface-variant") %>
+    <% else %>
+      <%= form.public_send type, name, options.merge(class: "flex-grow min-w-0 h-10 border-none rounded focus:ring-0 bg-surface disabled:bg-surface-variant") %>
+    <% end %>
+    <% if suffix %>
+      <div class="h-10 px-4 flex items-center text-on-surface-variant bg-surface-variant rounded-r">
+        <%= suffix %>
+      </div>
+    <% end %>
+  </div>
+  <% if error %>
+    <div class="mt-2 text-sm text-error">
+      <%= error %>
+    </div>
+  <% end %>
+  <% if description %>
+    <div class="mt-2 text-sm text-on-surface-variant">
+      <%= description %>
+    </div>
+  <% end %>
+</div>

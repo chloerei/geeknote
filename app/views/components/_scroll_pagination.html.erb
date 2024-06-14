@@ -1,0 +1,21 @@
+<%# locals: (pagy:, content_id: "scroll-pagination-content") %>
+
+<div id="scroll-pagination" data-controller="scroll-pagination">
+  <div id="<%= content_id %>" class="" data-scroll-pagination-target="content">
+    <%= yield %>
+  </div>
+
+  <div id="scroll-pagination-info" class="p-4" data-scroll-pagination-target="next">
+    <% if pagy.next %>
+      <div class="text-center">
+        <a href="<%= pagy_url_for(pagy, pagy.next) %>" class="text-button" data-scroll-pagination-target="nextLink">
+          Load more
+        </a>
+      </div>
+    <% else %>
+      <div class="text-center text-sm text-on-surface-variant">
+        No more content
+      </div>
+    <% end %>
+  </div>
+</div>
