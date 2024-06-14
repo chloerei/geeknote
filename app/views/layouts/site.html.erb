@@ -1,0 +1,15 @@
+<% content_for :body do %>
+  <div class="flex">
+    <div class="flex-shrink-0 w-20 h-screen sticky top-0 z-10">
+      <%= render "layouts/site/navigation_rail" %>
+    </div>
+
+    <div class="flex-grow min-w-0 bg-surface p-6">
+      <div class="max-w-screen-xl mx-auto">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= render template: "layouts/application" %>

@@ -1,142 +1,45 @@
-<% content_for :body do %>
-  <%= sanitize @site.header_html %>
+<!DOCTYPE html>
+<html class="bg-surface-container">
+  <head>
+    <title>Geeknote</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  <div class="background-surface shadow-1">
-    <div class="container">
-      <div class="top-app-bar">
-        <div class="top-app-bar__title">
-          <% if @site.logo.attached? %>
-            <div class="logo">
-              <a href="/" class="display-inline-block">
-                <div class="display-block@light">
-                  <%= image_tag @site.logo.variant(:normal) %>
-                </div>
-                <div class="display-block@dark">
-                  <% if @site.logo_dark.attached? %>
-                    <%= image_tag @site.logo_dark.variant(:normal) %>
-                  <% else %>
-                    <%= image_tag @site.logo.variant(:normal) %>
-                  <% end %>
-                </div>
-              </a>
-            </div>
-          <% else %>
-            <a href="/">
-              <%= @site.name || 'GeekNote' %>
-            </a>
-          <% end %>
-        </div>
-        <div class="top-app-bar__action">
-          <a href="<%= search_path %>" class="button button--icon">
-            <span class="material-icons">search</span>
-          </a>
-        </div>
-        <% if current_user %>
-          <div class="top-app-bar__action">
-            <a href="<%= new_account_dashboard_post_path(current_user.account) %>" class="button button--icon">
-              <span class="material-icons">post_add</span>
-            </a>
-          </div>
-          <div class="top-app-bar__action">
-            <a href="<%= notifications_path %>" class="button button--icon">
-              <span class="material-icons">notifications</span>
-              <% if current_user.notifications.unread.any? %>
-                <div class="badge badge--small margin-1">
-                </div>
-              <% end %>
-            </a>
-          </div>
-          <div class="top-app-bar__action">
-            <div class="dropdown dropdown--right">
-              <label tabindex="0" class="button button--icon button--avatar">
-                <div class="avatar">
-                  <%= avatar_image_tag current_user.avatar %>
-                </div>
-              </label>
-              <div tabindex="0" class="dropdown__container">
-                <a href="<%= account_root_path(current_user.account) %>" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">account_box</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.profile' %>
-                  </div>
-                </a>
-                <a href="<%= account_dashboard_posts_path(current_user.account) %>" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">dashboard</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.dashboard' %>
-                  </div>
-                </a>
-                <a href="<%= bookmarks_path %>" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">bookmark_border</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.bookmarks' %>
-                  </div>
-                </a>
-                <a href="<%= organizations_path %>" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">switch_account</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.organizations' %>
-                  </div>
-                </a>
-                <label for="theme-dialog-toggle" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">dark_mode</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.theme' %>
-                  </div>
-                </label>
-                <a href="<%= settings_root_path %>" class="dropdown__item">
-                  <div class="dropdown__item__icon">
-                    <span class="material-icons">settings</span>
-                  </div>
-                  <div class="dropdown__item__text">
-                    <%= t 'common.settings' %>
-                  </div>
-                </a>
-                <hr class="divider">
-                <%= form_with url: sign_out_path, method: 'delete' do %>
-                  <button type="submit" class="dropdown__item">
-                    <div class="dropdown__item__icon">
-                      <span class="material-icons">logout</span>
-                    </div>
-                    <div class="dropdown__item__text">
-                      <%= t 'common.sign_out' %>
-                    </div>
-                  </button>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        <% else %>
-          <div class="top-app-bar__action">
-            <a href="<%= sign_up_path %>" class="button button--text button--muted">
-              <%= t 'common.sign_up' %>
-            </a>
-          </div>
-          <div class="top-app-bar__action">
-            <a href="<%= sign_in_path %>" class="button button--text button--muted">
-              <%= t 'common.sign_in' %>
-            </a>
-          </div>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <meta name="turbo-refresh-method" content="morph">
+    <meta name="turbo-refresh-scroll" content="preserve">
+
+    <% if Current.user %>
+      <meta name="current-user-id" content="<%= Current.user.id %>">
+    <% end %>
+
+    <%= yield :head %>
+  </head>
+
+  <body>
+    <style>
+      <% if Current.user %>
+        .visible-to-user--<%= Current.user.id %> {
+          display: block;
+        }
+
+        <% if Current.user.admin? %>
+          .visible-to-admin {
+            display: block;
+          }
         <% end %>
+      <% end %>
+    </style>
+
+    <%= content_for?(:body) ? yield(:body) : yield %>
+
+    <% if notice || alert %>
+      <div class="snackbar" data-controller="snackbar" data-turbo-temporary>
+        <%= notice || alert %>
       </div>
-    </div>
-  </div>
-
-  <%= content_for?(:content) ? yield(:content) : yield %>
-
-  <%= sanitize @site.footer_html %>
-
-  <%= render 'layouts/theme_dialog' %>
-<% end %>
-
-<%= render template: 'layouts/base' %>
+    <% end %>
+  </body>
+</html>

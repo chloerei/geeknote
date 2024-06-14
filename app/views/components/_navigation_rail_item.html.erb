@@ -1,12 +1,10 @@
-<%# locals: (icon: :square, label: "Item", tag: :a, options: {}, active: false) %>
+<%# locals: (url:, icon:, label:, active: false) %>
 
-<%= content_tag tag, options.with_defaults(class: "h-14 flex flex-col gap-1 items-center relative cursor-pointer select-none") do %>
-  <div class="h-8 px-4 py-1 rounded-full <%= active ? 'interactive-bg-secondary-container' : 'interactive-bg-surface-container' %> after:absolute after:inset-0">
-    <div class="icon w-6 h-6">
-      <%= material_icon icon %>
-    </div>
+<a href="<%= url %>" class="navigation-rail__item <%= "navigation-rail__item--active" if active %>">
+  <div class="navigation-rail__item__icon">
+    <%= material_icon(active ? "#{icon}-fill" : icon) %>
   </div>
-  <div class="text-xs font-medium">
+  <div class="navigation-rail__item__label">
     <%= label %>
   </div>
-<% end %>
+</a>

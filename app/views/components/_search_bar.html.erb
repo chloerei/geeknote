@@ -2,85 +2,25 @@
 
 <div>
   <div class="h-14 flex items-center gap-2 p-2 relative">
-    <label for="" class="absolute inset-0 interactive-bg-surface-container-high rounded-full cursor-pointer"></label>
+    <button type="button" class="absolute inset-0 interactive-bg-surface-container-high rounded-full cursor-pointer" data-controller="toggle" data-toggle-dialog-outlet="#search-dialog" data-action="toggle#dialog"></button>
     <div class="flex-shrink-0 p-2 pointer-events-none relative text-on-surface">
       <div class="icon w-6 h-6">
         <%= material_icon :search %>
       </div>
     </div>
-    <div class="flex-grow min-w-0 line-clamp-1 pointer-events-none relative text-on-surface">
+    <div type="button" class="flex-grow min-w-0 line-clamp-1 pointer-events-none relative text-on-surface">
       <%= placeholder %>
     </div>
     <div class="flex-shrink-0 relative">
-      <button class="block p-2 rounded-full cursor-pointer hover:interactive-bg-surface-container-high" data-controller="toggle" data-toggle-dialog-outlet="#user_dialog" data-action="toggle#dialog">
-        <% if Current.user %>
-          <img src="<%= avatar_url(Current.user) %>" class="h-8 w-8 rounded-full">
-        <% else %>
-          <img src="<%= asset_path("avatar.svg") %>" class="h-8 w-8 rounded-full">
-        <% end %>
-      </button>
     </div>
   </div>
 
-  <%= render "components/dialog", id: "user_dialog" do %>
-    <div class="flex flex-col max-h-[70vh] overflow-hidden">
-      <div class="flex-grow min-h-0 overflow-auto my-6 px-6">
-        <% if Current.user %>
-          <div class="flex flex-col gap-2 py-4 items-center">
-            <img src="<%= avatar_url(Current.user) %>" alt="avatar" class="w-20 h-20 rounded-full">
-            <div class="flex flex-col items-center">
-              <div class="text-lg font-medium">
-                <%= Current.user.name %>
-              </div>
-              <div class="text-sm text-on-surface-variant">
-                @<%= Current.user.username %>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-col">
-            <%
-              [
-                { icon: :account_circle, label: "Profile", url: '#' },
-                { icon: :settings, label: "Settings", url: settings_root_path },
-                { icon: :logout, label: "Sign out", url: session_path(Current.session), method: :delete }
-              ].each do |item|
-            %>
-              <%= link_to item[:url], class: "flex items-center gap-4 px-4 h-10 interactive-bg-surface-container-high rounded-full text-sm font-medium", data: { turbo_method: item[:method] } do %>
-                <div class="icon w-6 h-6">
-                  <%= material_icon item[:icon] %>
-                </div>
-                <%= item[:label] %>
-              <% end %>
-            <% end %>
-          </div>
-        <% else %>
-          <div class="flex flex-col gap-2 py-4 items-center">
-            <img src="<%= asset_path("avatar.svg") %>" alt="avatar" class="w-20 h-20 rounded-full">
-            <div class="flex flex-col items-center">
-              <div class="text-lg font-medium">
-                Guest
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-col">
-            <%
-              [
-                { icon: :login, label: "Sign in", url: sign_in_path },
-                { icon: :person_add, label: "Sign up", url: sign_up_path },
-              ].each do |item|
-            %>
-              <%= link_to item[:url], class: "flex items-center gap-4 px-4 h-10 interactive-bg-surface-container-high rounded-full text-sm font-medium", data: { turbo_method: item[:method] } do %>
-                <div class="icon w-6 h-6">
-                  <%= material_icon item[:icon] %>
-                </div>
-                <%= item[:label] %>
-              <% end %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+  <dialog class="dialog w-[560px] mt-16" id="search-dialog" data-controller="dialog" data-action="click->dialog#backdropClose">
+    <div class="p-6">
+      <input type="text" class="w-full" placeholder="Search" autofocus>
     </div>
-  <% end %>
+    <div class="p-6">
+      Search result
+    </div>
+  </dialog>
 </div>

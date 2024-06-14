@@ -4,34 +4,26 @@
   error ||= form.object && form.object.errors[name].first
 %>
 
-<div>
-  <% if label %>
-    <%= form.label name, label, class: "block mb-2 text-sm font-medium text-on-surface-variant" %>
-  <% end %>
-  <div class="flex items-center w-full border-0 ring-1 focus-within:ring-2 rounded <%= error.nil? ? "ring-outline focus-within:ring-primary" : "ring-error focus-within:ring-error" %>">
+<div class="text-field <%= "text-field--error" if error %>">
+  <div class="text-field__container">
     <% if prefix %>
-      <div class="h-10 px-4 flex items-center text-on-surface-variant bg-surface-variant rounded-l">
+      <div class="text-field__prefix">
         <%= prefix %>
       </div>
     <% end %>
-    <% if type == :text_area %>
-      <%= form.text_area name, options.merge(class: "flex-grow min-w-0 border-none rounded focus:ring-0 bg-surface disabled:bg-surface-variant") %>
-    <% else %>
-      <%= form.public_send type, name, options.merge(class: "flex-grow min-w-0 h-10 border-none rounded focus:ring-0 bg-surface disabled:bg-surface-variant") %>
-    <% end %>
+    <%= form.public_send type, name, options.merge(class: "text-field__input") %>
     <% if suffix %>
-      <div class="h-10 px-4 flex items-center text-on-surface-variant bg-surface-variant rounded-r">
+      <div class="text-field__suffix">
         <%= suffix %>
       </div>
     <% end %>
   </div>
   <% if error %>
-    <div class="mt-2 text-sm text-error">
+    <div class="text-field__supporting-text">
       <%= error %>
     </div>
-  <% end %>
-  <% if description %>
-    <div class="mt-2 text-sm text-on-surface-variant">
+  <% elsif description %>
+    <div class="text-field__supporting-text">
       <%= description %>
     </div>
   <% end %>

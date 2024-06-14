@@ -1,21 +1,18 @@
-<%# locals: (form:, name:, label: nil, description: nil, options: {}) %>
+<%# locals: (form:, name:, label: nil, options: {}) %>
 
 <%
   error ||= form.object && form.object.errors[name].first
 %>
 
 <div>
-  <% if label %>
-    <%= form.label name, label, class: "block mb-2 text-sm font-medium text-on-surface-variant" %>
-  <% end %>
   <div class="group/image-field <%= 'attached' if form.object.send(name).attached? %>" data-controller="image-field">
     <%= form.file_field name, class: "hidden", direct_upload: true, data: { image_field_target: "input", action: "image-field#preview" } %>
     <%= form.check_box "remove_#{name}", class: "hidden", data: { image_field_target: "removeInput", action: "image-field#remove" } %>
     <%= yield %>
   </div>
-  <% if description %>
-    <div class="mt-2 text-sm text-on-surface-variant">
-      <%= description %>
+  <% if error %>
+    <div class="mt-2 text-sm text-error">
+      <%= error %>
     </div>
   <% end %>
 </div>

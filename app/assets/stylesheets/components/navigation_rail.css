@@ -1,0 +1,31 @@
+@layer components {
+  .navigation-rail {
+    @apply w-20 h-full py-4 flex flex-col items-center bg-surface-container;
+  }
+
+  .navigation-rail__item {
+    @apply h-14 flex flex-col gap-1 items-center relative cursor-pointer select-none;
+  }
+
+  .navigation-rail__item__icon {
+    @apply h-8 px-4 py-1 rounded-full interactive-bg-surface-container after:absolute after:inset-0;
+  }
+
+  .navigation-rail__item__icon svg {
+    @apply w-6 h-6 fill-current;
+  }
+
+  .navigation-rail__item__label {
+    @apply text-xs font-medium text-on-surface-variant;
+  }
+
+  .navigation-rail__item--active {
+    .navigation-rail__item__label {
+      @apply font-bold text-on-surface;
+    }
+
+    .navigation-rail__item__icon {
+      @apply interactive-bg-secondary-container;
+    }
+  }
+}

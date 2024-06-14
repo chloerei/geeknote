@@ -1,0 +1,26 @@
+@layer components {
+  .tab {
+    @apply inline-flex h-10 px-4 gap-2 items-center text-sm font-medium rounded-full relative z-0;
+
+    &::after {
+      @apply absolute inset-0 -z-10 bg-current rounded-full opacity-0;
+      content: "";
+    }
+
+    &:hover::after {
+      @apply opacity-10;
+    }
+
+    &:active::after {
+      @apply opacity-20;
+    }
+
+    &.tab--active {
+      @apply text-primary bg-primary/10;
+    }
+
+    svg {
+      @apply w-4 h-4 fill-current;
+    }
+  }
+}

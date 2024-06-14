@@ -2,8 +2,25 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import "codemirror.css";
+@import "highlight.css";
+@import "combobox.css";
+@import "components/all.css";
+
+@layer base {
+}
+
+@layer components {
+}
+
 @layer utilities {
   .icon svg {
     @apply w-full h-full fill-current;
+  }
+
+  .search-result {
+    em {
+      @apply font-bold text-primary-container;
+    }
   }
 }

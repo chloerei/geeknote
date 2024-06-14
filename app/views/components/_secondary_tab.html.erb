@@ -1,3 +1,7 @@
-<div class="flex">
-  <%= yield %>
-</div>
+<%# locals: (url: nil, label: "Item", active: false) %>
+
+<a href="<%= url %>" class="secondary-tab <%= 'secondary-tab--active' if active %>">
+  <div class="secondary-tab__content">
+    <%= label %>
+  </div>
+</a>

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-  include ActiveStorage::SetCurrent
+  before_action :set_site, :set_current_user
 
-  before_action :set_site
+  layout "site"
 
   helper_method :current_user
 
@@ -45,8 +45,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_current_user
+    Current.user = authenticate_by_auth_token
+  end
+
   def current_user
-    @current_user ||= authenticate_by_auth_token
+    Current.user
   end
 
   def authenticate_by_auth_token
@@ -56,7 +60,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_in(user)
-    @current_user = user
+    Current.user = user
     cookies[:auth_token] = {
       value: user.auth_token,
       expires: 12.month,
@@ -65,7 +69,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_out
-    @current_user = nil
+    Current.user = nil
     cookies[:auth_token] = nil
   end
 

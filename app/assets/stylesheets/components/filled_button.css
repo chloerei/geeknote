@@ -1,0 +1,17 @@
+@layer components {
+  .filled-button {
+    @apply inline-flex items-center align-middle h-10 px-6 gap-2 rounded-full text-sm font-medium whitespace-nowrap select-none interactive-bg-primary;
+
+    svg {
+      @apply w-4 h-4 fill-current;
+
+      &:first-child {
+        @apply -ml-2;
+      }
+
+      &:last-child {
+        @apply -mr-2;
+      }
+    }
+  }
+}

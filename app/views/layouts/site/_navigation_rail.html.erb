@@ -1,0 +1,73 @@
+<div class="navigation-rail">
+  <div class="">
+    <a href="<%= '#' %>" class="floating-action-button">
+      <%= material_icon :edit %>
+    </a>
+  </div>
+
+  <div class="mt-8 flex flex-col flex-grow gap-3">
+    <%= render "components/navigation_rail_item", url: root_path, icon: :home, label: "Home", active: request.path.in?([root_path]) %>
+
+    <%= render "components/navigation_rail_item", url: search_path, icon: :search, label: "Search", active: current_page?(search_path) %>
+
+    <% if Current.user %>
+      <%= render "components/navigation_rail_item", url: notifications_path, icon: :notifications, label: "Notifications", active: current_page?(notifications_path) %>
+
+      <%= render "components/navigation_rail_item", url: bookmarks_path, icon: :bookmarks, label: "Bookmarks", active: current_page?(bookmarks_path) %>
+
+      <%= render "components/navigation_rail_item", url: "#", icon: :library_books, label: "Posts", active: "#" %>
+    <% end %>
+  </div>
+
+  <div class="flex-shrink-0">
+    <div class="menu">
+      <label tabindex="0" class="block p-1 rounded-full cursor-pointer hover:interactive-bg-surface-container-high">
+        <% if Current.user %>
+          <img src="<%= avatar_url(Current.user) %>" class="h-10 w-10 rounded-full">
+        <% else %>
+          <img src="<%= asset_path("avatar.svg") %>" class="h-10 w-10 rounded-full">
+        <% end %>
+      </label>
+      <div tabindex="0" class="menu__content left-full bottom-0 origin-bottom-left">
+        <% if Current.user %>
+          <a href="<%= account_root_path(Current.user.account.name) %>" class="menu__item">
+            <%= material_icon :account_circle %>
+            <span>
+              Profile
+            </span>
+          </a>
+
+          <a href="<%= settings_root_path %>" class="menu__item">
+            <%= material_icon :settings %>
+            <span>
+              Settings
+            </span>
+          </a>
+
+          <%= form_with url: sign_out_path, method: :delete do |form| %>
+            <button type="submit" class="menu__item">
+              <%= material_icon :logout %>
+              <span>
+                Sign out
+              </span>
+            </button>
+        <% end %>
+      <% else %>
+        <a href="<%= sign_in_path %>" class="menu__item">
+          <%= material_icon :login %>
+          <span>
+            Sign in
+          </span>
+        </a>
+
+        <a href="<%= sign_up_path %>" class="menu__item">
+          <%= material_icon :person_add %>
+          <span>
+            Sign up
+          </span>
+        </a>
+      <% end %>
+    </div>
+  </div>
+  </div>
+</div>

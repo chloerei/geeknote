@@ -1,0 +1,9 @@
+@layer components {
+  .checkbox {
+    @apply h-10 w-10 flex items-center justify-center cursor-pointer interactive-bg-surface rounded-full;
+
+    input[type="checkbox"] {
+      @apply w-4 h-4 border border-outline bg-transparent focus:ring-0 focus:ring-offset-0 checked:bg-primary-container checked:border-primary-container cursor-pointer;
+    }
+  }
+}
