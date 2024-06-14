@@ -3,9 +3,13 @@ class Site < ApplicationRecord
     attachable.variant :normal, resize_to_fit: [ 512, 512 ]
   end
 
-  has_one_attached :logo
+  has_one_attached :logo do |attachable|
+    attachable.variant :normal, resize_to_limit: [ 320, 320 ]
+  end
 
-  has_one_attached :logo_dark
+  has_one_attached :logo_dark do |attachable|
+    attachable.variant :normal, resize_to_limit: [ 320, 320 ]
+  end
 
   def remove_icon=(value)
     if value

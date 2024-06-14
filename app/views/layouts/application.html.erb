@@ -9,13 +9,13 @@
             <div class="logo">
               <a href="/" class="display-inline-block">
                 <div class="display-block@light">
-                  <%= image_tag @site.logo %>
+                  <%= image_tag @site.logo.variant(:normal) %>
                 </div>
                 <div class="display-block@dark">
                   <% if @site.logo_dark.attached? %>
-                    <%= image_tag @site.logo_dark %>
+                    <%= image_tag @site.logo_dark.variant(:normal) %>
                   <% else %>
-                    <%= image_tag @site.logo %>
+                    <%= image_tag @site.logo.variant(:normal) %>
                   <% end %>
                 </div>
               </a>
