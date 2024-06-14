@@ -11,8 +11,8 @@ end
 
 Rails.application.routes.draw do
   root to: "home#index"
-  get "feed", to: "home#feed"
-  get "newest", to: "home#newest"
+  get "following", to: "home#following", as: :following
+  get "newest", to: "home#newest", as: :newest
 
   get "/search", to: "search#index", as: :search
 

@@ -1,17 +1,17 @@
 class HomeController < ApplicationController
-  before_action :require_sign_in, only: [ :feed ]
+  before_action :require_sign_in, only: [ :following ]
 
   def index
-    @paginator = RailsCursorPagination::Paginator.new(Post.published.where("score > 0").includes(:account, :user), order_by: :score, order: :desc, after: params[:after]).fetch
+    @pagy, @posts = pagy(Post.published.order(score: :desc), page: params[:page])
   end
 
-  def feed
-    @paginator = RailsCursorPagination::Paginator.new(Post.published.following_by(current_user).includes(:account, :user), order_by: :published_at, order: :desc, after: params[:after]).fetch
+  def following
+    @pagy, @posts = pagy(Post.published.where(user_id: Current.user.followees).order(published_at: :desc), page: params[:page])
     render :index
   end
 
   def newest
-    @paginator = RailsCursorPagination::Paginator.new(Post.published.includes(:account, :user), order_by: :published_at, order: :desc, after: params[:after]).fetch
+    @pagy, @posts = pagy(Post.published.order(published_at: :desc), page: params[:page])
     render :index
   end
 end

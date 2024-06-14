@@ -52,6 +52,7 @@ gem "rouge"
 # pagination
 gem "kaminari"
 gem "rails_cursor_pagination"
+gem "pagy"
 
 # inline email css
 gem "premailer-rails"

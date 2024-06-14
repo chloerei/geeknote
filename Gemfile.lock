@@ -256,6 +256,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.6-x86_64-linux)
       racc (~> 1.4)
+    pagy (8.4.4)
     parallel (1.24.0)
     parser (3.3.1.0)
       ast (~> 2.4.1)
@@ -461,6 +462,7 @@ DEPENDENCIES
   mailgun-ruby (~> 1.2.5)
   meilisearch-rails
   newrelic_rpm
+  pagy
   pg (~> 1.1)
   postal-rails (~> 1.0)
   premailer-rails

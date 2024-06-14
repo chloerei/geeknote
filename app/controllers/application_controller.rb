@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
+
   before_action :set_site, :set_current_user
 
   layout "site"
