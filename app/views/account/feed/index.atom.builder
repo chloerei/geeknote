@@ -1,7 +1,7 @@
 atom_feed(root_url: account_root_url(@account), id: account_root_url(@account)) do |feed|
   feed.title @account.display_name
   feed.subtitle @account.description
-  feed.icon avatar_url(@account.owner.avatar)
+  feed.icon avatar_url(@account.owner)
   if @posts.any?
     feed.updated(@posts.maximum(:updated_at))
   end

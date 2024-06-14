@@ -6,7 +6,8 @@ class HomeController < ApplicationController
   end
 
   def following
-    @pagy, @posts = pagy(Post.published.where(user_id: Current.user.followees).order(published_at: :desc), page: params[:page])
+    # Todo
+    @pagy, @posts = pagy(Post.published.order(published_at: :desc), page: params[:page])
     render :index
   end
 

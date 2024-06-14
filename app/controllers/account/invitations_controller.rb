@@ -1,5 +1,5 @@
 class Account::InvitationsController < Account::BaseController
-  layout "base"
+  layout "application"
   before_action :require_organization_account, :set_member
   before_action :require_sign_in, :check_user_match, only: [ :update ]
 
