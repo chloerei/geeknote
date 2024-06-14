@@ -6,17 +6,8 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-if ENV["SENTRY_DSN"].present?
-  require "sentry-ruby"
-  require "sentry-rails"
-end
-
 if ENV["NEW_RELIC_LICENSE_KEY"].present?
   require "newrelic_rpm"
-end
-
-if ENV["RECAPTCHA_SITE_KEY"].present?
-  require "recaptcha"
 end
 
 module GeekNote

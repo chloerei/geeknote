@@ -64,9 +64,6 @@ gem "aws-sdk-s3", require: false
 
 gem "imgproxy-rails"
 
-gem "sentry-ruby", require: false
-gem "sentry-rails", require: false
-
 gem "newrelic_rpm", require: false
 
 # Mailer deliver method
