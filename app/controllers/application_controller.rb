@@ -24,10 +24,6 @@ class ApplicationController < ActionController::Base
   end
 
   def render_server_error(exception)
-    if defined?(Sentry)
-      Sentry.capture_exception(exception)
-    end
-
     if defined?(NewRelic)
       NewRelic::Agent.notice_error(exception)
     end
