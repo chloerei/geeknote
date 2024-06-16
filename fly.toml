@@ -19,3 +19,7 @@ app = "geeknote"
   type = "connections"
   hard_limit = 25
   soft_limit = 20
+
+[[statics]]
+  guest_path = "/rails/public"
+  url_prefix = "/"
