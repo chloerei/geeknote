@@ -18,7 +18,7 @@ services:
       MEILISEARCH_URL: http://meilisearch:7700
 
   postgres:
-    image: postgres:latest
+    image: postgres:15
     restart: unless-stopped
     volumes:
       - postgres-data:/var/lib/postgresql/data
@@ -28,10 +28,10 @@ services:
       POSTGRES_PASSWORD: postgres
 
   redis:
-    image: redis:6
+    image: redis:7
 
   meilisearch:
-    image: getmeili/meilisearch:v1.0
+    image: getmeili/meilisearch:v1.8
     environment:
       MEILI_NO_ANALYTICS: true
     volumes:
