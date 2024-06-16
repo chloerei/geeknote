@@ -16,15 +16,11 @@ Rails.application.routes.draw do
 
   get "/search", to: "search#index", as: :search
 
-  get "sign_up", to: "users#new", as: "sign_up"
-  resources :users, only: [ :create ] do
-    collection do
-      post "validate"
-    end
-  end
-  get "sign_in", to: "sessions#new", as: "sign_in"
-  delete "sign_out", to: "sessions#destroy", as: "sign_out"
-  resources :sessions, only: [ :create ]
+  get  "sign_in", to: "sessions#new"
+  post "sign_in", to: "sessions#create"
+  get  "sign_up", to: "registrations#new"
+  post "sign_up", to: "registrations#create"
+  delete "sign_out", to: "sessions#destroy"
 
   resources :attachments, only: [ :create ]
   get "attachments/:key/*filename", to: "attachments#show", as: :attachment
