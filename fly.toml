@@ -3,6 +3,9 @@ app = "geeknote"
 [build]
   dockerfile = "Dockerfile"
 
+[deploy]
+  strategy = "bluegreen"
+
 [processes]
   web = "bin/rails server"
   worker = "bundle exec sidekiq"
