@@ -28,6 +28,8 @@ module GeekNote
       config.active_storage.resolve_model_to_route = :custom_imgproxy_active_storage
     end
 
+    config.action_dispatch.trusted_proxies = ENV.fetch("TRUSTED_PROXIES", "").split(",").map { |proxy| IPAddr.new(proxy) }
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
