@@ -98,6 +98,8 @@ Rails.application.routes.draw do
     resource :feedbacktrace, controller: "feedbacktrace"
   end
 
+  get "up", to: "rails/health#show", as: :rails_health_check
+
   scope "/:account_name", module: "account", as: :account do
     root to: "posts#index"
 
