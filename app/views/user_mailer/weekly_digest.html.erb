@@ -18,6 +18,6 @@
 
 <div class="body-sub">
   <p class="sub">
-    不想收到同类邮件？<a href="<%= user_email_unsubscribe_url(token: @user.email_auth_token, type: 'weekly_digest') %>">退订邮件</a>或<a href="<%= settings_notification_url %>">修改通知设置</a>。
+    不想收到同类邮件？<a href="<%= identity_email_unsubscribe_url(token: @user.email_auth_token, type: 'weekly_digest') %>">退订邮件</a>或<a href="<%= settings_notification_url %>">修改通知设置</a>。
   </p>
 </div>

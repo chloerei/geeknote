@@ -1,0 +1,15 @@
+<div class="max-w-screen-sm mx-auto">
+  <div class="card p-4">
+    <h2 class="headline-medium margin-top-0 margin-bottom-3">
+      <%= t '.email_verification' %>
+    </h2>
+    <div class="mt-4">
+      <%= form_with url: identity_email_verification_path(token: params[:token]), method: :patch, id: "verification-form" do |form| %>
+        <%= t '.verifying' %>
+      <% end %>
+      <script>
+        //document.getElementById("verification-form").submit()
+      </script>
+    </div>
+  </div>
+</div>

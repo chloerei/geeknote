@@ -1,4 +1,4 @@
-class User::Email::VerificationsController < ApplicationController
+class Identity::Email::VerificationsController < ApplicationController
   before_action :set_user
 
   def show
@@ -6,7 +6,7 @@ class User::Email::VerificationsController < ApplicationController
 
   def update
     @user.email_verified!
-    render turbo_stream: turbo_stream.replace(:main, partial: "success")
+    redirect_to root_path, notice: "Email verified!"
   end
 
   private

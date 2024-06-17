@@ -1,0 +1,27 @@
+<div class="max-w-screen-sm mx-auto">
+  <div class="card">
+    <div class="flex items-center p-2">
+      <a href="<%= sign_in_path %>" class="icon-button">
+        <%= material_icon :arrow_back %>
+      </a>
+      <div class="flex-grow px-2 text-lg font-medium">
+        Password reset
+      </div>
+    </div>
+
+    <div class="p-4">
+      <%= form_with model: @user, url: identity_password_path do |form| %>
+        <div class="form-field">
+          <%= form.label :email, class: "form-label" %>
+          <%= render "components/text_field", form: form, name: :email, options: { required: true, autofocus: true } %>
+        </div>
+
+        <div class="form-field">
+          <button type="submit" class="filled-button">
+            Send reset email
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

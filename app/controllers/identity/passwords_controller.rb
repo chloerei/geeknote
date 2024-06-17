@@ -1,4 +1,4 @@
-class User::PasswordsController < ApplicationController
+class Identity::PasswordsController < ApplicationController
   before_action :set_user, only: [ :edit, :update ]
 
   def new
@@ -44,7 +44,7 @@ class User::PasswordsController < ApplicationController
     @user = User.find_by_password_reset_token(params[:token])
 
     if @user.nil?
-      redirect_to new_user_password_path, notice: t("flash.password_reset_token_invliad")
+      redirect_to new_identity_password_path, notice: t("flash.password_reset_token_invliad")
     end
   end
 

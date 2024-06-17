@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     resource :notification
   end
 
-  namespace :user do
+  namespace :identity do
     resource :password, only: [ :new, :create, :edit, :update ]
     namespace :email do
       resource :verification, only: [ :show, :update ]

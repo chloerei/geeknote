@@ -1,4 +1,4 @@
-class User::Email::UnsubscribesController < ApplicationController
+class Identity::Email::UnsubscribesController < ApplicationController
   before_action :set_user
 
   def show
