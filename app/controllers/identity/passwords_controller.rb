@@ -32,20 +32,18 @@ class Identity::PasswordsController < ApplicationController
 
   def update
     if @user.update user_params
-      redirect_to sign_in_path, notice: t("flash.password_reset_successful")
+      redirect_to sign_in_path, notice: "Password has been reset."
     else
-      render turbo_stream: turbo_stream.replace("password-reset-form", partial: "form")
+      render :edit, status: :unprocessable_entity
     end
   end
 
   private
 
   def set_user
-    @user = User.find_by_password_reset_token(params[:token])
-
-    if @user.nil?
-      redirect_to new_identity_password_path, notice: t("flash.password_reset_token_invliad")
-    end
+    @user = User.find_by_token_for!(:password_reset, params[:token])
+  rescue StandardError
+    redirect_to new_identity_password_path, notice: "Invalid token. Please try again."
   end
 
   def user_params

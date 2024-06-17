@@ -18,10 +18,8 @@ class Identity::Email::UnsubscribesController < ApplicationController
 
   def set_user
     # reuse verification token
-    @user = User.find_by_email_auth_token(params[:token])
-
-    unless @user
-      render :expired, status: :not_found
-    end
+    @user = User.find_by_token_for!(:email_unsubscription, params[:token])
+  rescue StandardError
+    render :expired, status: :not_found
   end
 end

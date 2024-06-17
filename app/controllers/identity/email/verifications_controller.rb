@@ -12,10 +12,8 @@ class Identity::Email::VerificationsController < ApplicationController
   private
 
   def set_user
-    @user = User.find_by_email_auth_token(params[:token])
-
-    unless @user
-      render :expired, status: :not_found
-    end
+    @user = User.find_by_token_for!(:email_verification, params[:token])
+  rescue StandardError
+    render :invalid, status: :not_found
   end
 end

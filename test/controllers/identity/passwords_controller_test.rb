@@ -30,7 +30,7 @@ class Identity::PasswordsControllerTest < ActionDispatch::IntegrationTest
   test "should access reset form if token valid" do
     user = create(:user)
 
-    get edit_identity_password_path(token: user.password_reset_token)
+    get edit_identity_password_path(token: user.generate_token_for(:password_reset))
     assert_response :success
   end
 
@@ -41,7 +41,7 @@ class Identity::PasswordsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update if token valid" do
     user = create(:user)
-    patch identity_password_path(token: user.password_reset_token), params: { user: { password: "12345678", password_confirmation: "12345678" } }
+    patch identity_password_path(token: user.generate_token_for(:password_reset)), params: { user: { password: "12345678", password_confirmation: "12345678" } }
     assert_redirected_to sign_in_path
     assert user.reload.authenticate("12345678")
   end
