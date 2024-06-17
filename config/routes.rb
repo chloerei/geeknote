@@ -95,6 +95,10 @@ Rails.application.routes.draw do
     resource :feedbacktrace, controller: "feedbacktrace"
   end
 
+  scope "/dashboard/:account_name", module: "dashboard", as: :dashboard do
+    resources :posts
+  end
+
   scope "/:account_name", module: "account", as: :account do
     root to: "posts#index"
 

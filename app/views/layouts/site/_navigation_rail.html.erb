@@ -15,7 +15,7 @@
 
       <%= render "components/navigation_rail_item", url: bookmarks_path, icon: :bookmarks, label: "Bookmarks", active: current_page?(bookmarks_path) %>
 
-      <%= render "components/navigation_rail_item", url: "#", icon: :library_books, label: "Posts", active: "#" %>
+      <%= render "components/navigation_rail_item", url: dashboard_posts_path(Current.user.account.name), icon: :dashboard, label: "Dashboard", active: request.path.start_with?("/dashboard") %>
     <% end %>
   </div>
 

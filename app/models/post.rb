@@ -4,6 +4,8 @@ class Post < ApplicationRecord
   include Commentable
   include MeiliSearch::Rails
 
+  extend Pagy::Meilisearch
+
   belongs_to :account
   belongs_to :user
   has_many :revisions, class_name: "PostRevision", dependent: :delete_all
@@ -30,9 +32,20 @@ class Post < ApplicationRecord
 
   scope :featured, -> { where(featured: true) }
 
-  meilisearch do
+  meilisearch sanitize: true do
+    attribute :title, :status, :account_id, :user_id, :score, :published_at, :created_at, :updated_at
+    attribute :content do
+      CommonMarker.render_html(content.to_s, :DEFAULT, [ :table, :tasklist, :strikethrough, :autolink, :tagfilter ])
+    end
+
     searchable_attributes [ :title, :content ]
-    filterable_attributes [ :account_id, :status ]
+    filterable_attributes [ :status, :account_id, :user_id ]
+    sortable_attributes [ :score, :published_at, :created_at, :updated_at ]
+
+    attributes_to_highlight [ :title, :content ]
+    attributes_to_crop [ :content ]
+    crop_length 100
+    pagination max_total_hits: 1000
   end
 
   attribute :saved, :boolean, default: false

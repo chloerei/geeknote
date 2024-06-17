@@ -1,0 +1,110 @@
+<div class="flex items-center gap-2">
+  <div class="text-xl font-medium flex-grow">
+    Dashboard
+  </div>
+  <div class="menu">
+    <label tabindex="0" class="text-button">
+      <img src="<%= avatar_url(@account.owner) %>" alt="avatar" class="w-6 h-6 rounded-full">
+      <div>
+        <%= @account.name %>
+      </div>
+      <%= material_icon :arrow_drop_down %>
+    </label>
+    <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
+      <a href="<%= dashboard_posts_path(Current.user.account.name) %>" class="menu__item">
+        <img src="<%= avatar_url(Current.user) %>" alt="avatar" class="w-10 h-10 rounded-full">
+        <div class="">
+          <div class="font-medium">
+            <%= Current.user.name %>
+          </div>
+          <div class="text-sm text-on-surface-variant">
+            @<%= Current.user.account.name %>
+          </div>
+        </div>
+      </a>
+
+      <% Current.user.organizations.includes(:account).each do |organization| %>
+        <a href="<%= dashboard_posts_path(Current.user.account.name) %>" class="menu__item">
+          <img src="<%= avatar_url(organization) %>" alt="avatar" class="w-10 h-10 rounded-full">
+          <div class="">
+            <div class="font-medium">
+              <%= organization.name %>
+            </div>
+            <div class="text-sm text-on-surface-variant">
+              @<%= organization.account.name %>
+            </div>
+          </div>
+        </a>
+      <% end %>
+
+      <hr class="border-outline-variant">
+      <a href="#" class="menu__item">
+        <%= material_icon :add %>
+        <div>
+          New organization
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="bg-surface-container-lowest shadow rounded-xl mt-6">
+  <div class="flex p-4 gap-2 border-b border-outline-variant">
+    <div class="relative">
+      <div class="icon w-6 h-6 absolute top-2 left-2">
+        <%= material_icon :search %>
+      </div>
+      <%= form_with url: url_for, method: :get do |f| %>
+        <%= f.search_field :q, value: params[:q], placeholder: "Search", class: "h-10 pl-10 border-none focus:ring-0 interactive-bg-surface-container rounded-full" %>
+      <% end %>
+    </div>
+
+    <div class="flex-grow"></div>
+
+    <div class="menu">
+      <label tabindex="0" class="text-button text-on-surface-variant">
+        Status: <%= @status || "all" %>
+        <%= material_icon :arrow_drop_down %>
+      </label>
+      <div class="menu__content">
+        <a href="<%= url_for(request.GET.merge(status: nil)) %>" class="menu__item">
+          All
+        </a>
+        <a href="<%= url_for(request.GET.merge(status: "draft")) %>" class="menu__item">
+          Draft
+        </a>
+        <a href="<%= url_for(request.GET.merge(status: "published")) %>" class="menu__item">
+          Published
+        </a>
+        <a href="<%= url_for(request.GET.merge(status: "trashed")) %>" class="menu__item">
+          Trashed
+        </a>
+      </div>
+    </div>
+
+    <div class="menu">
+      <label tabindex="0" class="text-button text-on-surface-variant">
+        Sort by: <%= @sort %>
+        <%= material_icon :arrow_drop_down %>
+      </label>
+      <div class="menu__content">
+        <a href="<%= url_for(request.GET.merge(sort: "created")) %>" class="menu__item">
+          Created
+        </a>
+        <a href="<%= url_for(request.GET.merge(sort: nil)) %>" class="menu__item">
+          Updated
+        </a>
+      </div>
+    </div>
+
+    <a href="<%= new_dashboard_post_path(@account.name) %>" class="filled-button">
+      New post
+    </a>
+  </div>
+
+  <div class="pb-3">
+    <%= render "components/scroll_pagination", pagy: @pagy do %>
+      <%= render partial: "post", collection: @posts %>
+    <% end %>
+  </div>
+</div>

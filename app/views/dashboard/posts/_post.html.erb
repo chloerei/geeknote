@@ -1,0 +1,33 @@
+<div class="flex items-center px-4 py-3 border-b border-outline-variant gap-4 relative">
+  <div class="flex-grow min-w-0">
+    <a href="<%= edit_dashboard_post_path(post.account, post) %>" class="font-medium break-words line-clamp-1 hover:text-primary after:absolute after:inset-0">
+      <%= post.title.presence || "Unititled" %>
+    </a>
+  </div>
+  <div class="w-40">
+    <div class="text-sm text-on-surface-variant">
+      <%= time_ago_in_words post.updated_at %>
+    </div>
+  </div>
+  <div class="flex-shrink-0">
+    <div class="menu">
+      <label tabindex="0" class="icon-button">
+        <%= material_icon "more_vert" %>
+      </label>
+      <div class="menu__content top-full right-0 origin-top-right">
+        <a href="<%= edit_post_path(post) %>" class="menu__item">
+          <%= material_icon :edit %>
+          <span>
+            Edit
+          </span>
+        </a>
+        <a href="#" class="menu__item">
+          <%= material_icon :delete %>
+          <span>
+            Move to trash
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
