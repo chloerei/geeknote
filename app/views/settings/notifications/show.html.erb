@@ -1,17 +1,30 @@
-<div class="container container--small padding-3">
-  <div class="card card--elevated background-surface">
-    <div class="top-app-bar">
-      <div class="top-app-bar__action">
-        <a href="<%= settings_root_path %>" class="button button--icon">
-          <span class="material-icons">arrow_back</span>
-        </a>
-      </div>
-      <div class="top-app-bar__title">
-        <%= t 'common.notifications' %>
+<div class="max-w-screen-sm mx-auto">
+  <div class="bg-surface-container-lowest rounded-xl">
+    <div class="flex items-center p-2">
+      <a href="<%= settings_root_path %>" class="icon-button">
+        <%= material_icon :arrow_back %>
+      </a>
+      <div class="text-lg font-medium flex-grow px-2">
+        Notification
       </div>
     </div>
-    <div class="padding-3">
-      <%= render 'form' %>
+
+    <div class="p-4">
+      <%= form_with model: @user, url: settings_notification_path do |form| %>
+        <div class="space-y-4">
+          <%= render "components/checkbox_field", form: form, name: :email_notification_enabled, description: "Receive email notifications." %>
+
+          <%= render "components/checkbox_field", form: form, name: :comment_email_notification_enabled, description: "Receive comment email notifications." %>
+
+          <%= render "components/checkbox_field", form: form, name: :weekly_digest_email_enabled, description: "Receive weekly digest email." %>
+
+          <div>
+            <button type="submit" class="filled-button">
+              Save changes
+            </button>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

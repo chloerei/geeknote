@@ -1,50 +1,31 @@
-<div class="container container--small padding-3">
-  <div class="card card--elevated background-surface">
-    <div class="top-app-bar">
-      <div class="top-app-bar__title">
-        <%= t 'common.settings' %>
+<div class="max-w-screen-sm mx-auto">
+  <div class="card">
+    <div class="flex items-center h-14 p-2">
+      <div class="text-lg font-medium flex-grow px-2">
+        Settings
       </div>
     </div>
-    <div class="padding-bottom-2">
-      <a href="<%= settings_email_path %>" class="link-block">
-        <div class="display-flex gap-3 padding-3">
-          <span class="material-icons">email</span>
-          <div class="flex-grow-1">
-            <div class="title-medium">
-              <%= t '.email' %>
+    <div class="pb-4">
+      <% [
+        { icon: :account_circle, label: "Profile", href: settings_profile_path, description: "Update avatar, name, and bio" },
+        { icon: :contact_mail, label: "Email", href: settings_email_path, description: "Update your login email" },
+        { icon: :lock, label: "Password", href: settings_password_path, description: "Change your login password" },
+        { icon: :notifications, label: "Notification", href: settings_notification_path, description: "Manage your notification settings" },
+      ].each do |item| %>
+        <a href="<%= item[:href] %>" class="flex items-center h-16 gap-4 px-4 interactive-bg-surface-container-lowest">
+          <div class="icon w-6 h-6">
+            <%= material_icon item[:icon] %>
+          </div>
+          <div class="flex-grow">
+            <div class="font-medium line-clamp-1">
+              <%= item[:label] %>
             </div>
-            <div class="">
-              <%= t '.email_desription' %>
+            <div class="text-sm font-medium text-on-surface-variant line-clamp-1">
+              <%= item[:description] %>
             </div>
           </div>
-        </div>
-      </a>
-      <a href="<%= settings_password_path %>" class="link-block">
-        <div class="display-flex gap-3 padding-3">
-          <span class="material-icons">password</span>
-          <div class="flex-grow-1">
-            <div class="title-medium">
-              <%= t '.password' %>
-            </div>
-            <div class="">
-              <%= t '.password_desription' %>
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="<%= settings_notification_path %>" class="link-block">
-        <div class="display-flex gap-3 padding-3">
-          <span class="material-icons">notifications</span>
-          <div class="flex-grow-1">
-            <div class="title-medium">
-              <%= t '.notifications' %>
-            </div>
-            <div class="">
-              <%= t '.notifications_desription' %>
-            </div>
-          </div>
-        </div>
-      </a>
+        </a>
+      <% end %>
     </div>
   </div>
 </div>

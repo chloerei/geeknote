@@ -1,39 +1,55 @@
-<div class="container container--small padding-3">
-  <div class="card card--elevated background-surface">
-    <div class="top-app-bar">
-      <div class="top-app-bar__action">
-        <a href="<%= settings_root_path %>" class="button button--icon">
-          <span class="material-icons">arrow_back</span>
-        </a>
-      </div>
-      <div class="top-app-bar__title">
-        <%= t 'common.email' %>
+<div class="max-w-screen-sm mx-auto">
+  <div class="bg-surface-container-lowest rounded-xl">
+    <div class="flex items-center p-2">
+      <a href="<%= settings_root_path %>" class="icon-button">
+        <%= material_icon :arrow_back %>
+      </a>
+      <div class="text-lg font-medium flex-grow px-2">
+        Email
       </div>
     </div>
-    <div class="padding-3">
-      <%= render 'form' %>
+
+    <div class="p-4">
+      <%= form_with model: @user, url: settings_email_path do |form| %>
+        <div class="form-field">
+          <%= form.label :email, class: "form-label" %>
+          <%= render "components/text_field", form: form, name: :email %>
+        </div>
+
+        <div class="form-field">
+          <%= form.label :password_challenge, class: "form-label" %>
+          <%= render "components/text_field", form: form, name: :password_challenge, type: :password_field, options: { autocomplete: "current-password" } %>
+        </div>
+
+        <div class="form-field">
+          <button type="submit" class="filled-button">
+            Save changes
+          </button>
+        </div>
+      <% end %>
     </div>
   </div>
 
-  <% if !@user.email_verified? %>
-    <div class="card card--filled padding-3 margin-top-3">
-      <h3 class="subtitle-5 margin-top-0">
-        <%= t '.verify_email_title' %>
-      </h3>
-      <p>
-        <%= t '.verify_email_description' %>
-      </p>
-      <%= form_with url: resend_settings_email_path do |form| %>
-      <button type="submit" class="button button--text">
-        <div class="button__icon">
-          <span class="material-icons">send</span>
-
-        </div>
-        <div class="button__label">
-          <%= t '.resend_verification_email' %>
-        </div>
-      </button>
-      <% end %>
+  <% if @user.persisted? && !@user.email_verified? %>
+    <div class="card p-4 bg-secondary-container mt-4">
+      <div class="text-lg font-medium">
+        Verify your email address
+      </div>
+      <div class="mt-2">
+        <p>
+          Please check your inbox for an email from us and click the link to verify your email address.
+        </p>
+      </div>
+      <div class="mt-2">
+        <%= form_with url: resend_settings_email_path do |form| %>
+          <button type="submit" class="outlined-button">
+            <%= material_icon :send %>
+            <span>
+              Resend verification Email
+            </span>
+          </button>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>

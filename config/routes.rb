@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
   namespace :settings do
     root to: "home#index"
+    resource :profile, only: [ :show, :update ]
     resource :email do
       post :resend
     end

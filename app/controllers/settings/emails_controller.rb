@@ -1,13 +1,13 @@
 class Settings::EmailsController < Settings::BaseController
   def show
-    @user = current_user
   end
 
   def update
-    @user = current_user
-    @user.require_password = true
-    if @user.update user_params
-      redirect_to settings_email_path, notice: t("flash.email_update_successful")
+    if @user.update(user_params.with_defaults(password_challenge: ""))
+      if @user.email_previously_changed?
+        UserMailer.with(user: @user).email_verification.deliver_later
+      end
+      redirect_to settings_email_path, notice: "Email was successfully updated."
     else
       render :show, status: :unprocessable_entity
     end
@@ -28,6 +28,6 @@ class Settings::EmailsController < Settings::BaseController
   private
 
   def user_params
-    params.require(:user).permit(:email, :current_password, account_attributes: [ :path ])
+    params.require(:user).permit(:email, :password_challenge)
   end
 end

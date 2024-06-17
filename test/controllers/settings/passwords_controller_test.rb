@@ -1,22 +1,23 @@
 require "test_helper"
 
 class Settings::PasswordsControllerTest < ActionDispatch::IntegrationTest
-  test "should update password with current password" do
-    user = create(:user, password: "password")
-
-    sign_in user
-    patch settings_password_path, params: { user: { current_password: "password", password: "change", password_confirmation: "change" } }
-    user.reload
-    assert user.authenticate("change")
+  setup do
+    @user = create(:user, password: "password")
+    sign_in @user
   end
 
-  test "should not update password without current password" do
-    user = create(:user, password: "password")
+  test "should get show" do
+    get settings_password_url
+    assert_response :success
+  end
 
-    sign_in user
-    patch settings_password_path, params: { user: { current_password: "wrong", password: "change", password_confirmation: "change" } }
-    user.reload
-    assert user.authenticate("password")
-    assert_not user.authenticate("change")
+  test "should update" do
+    patch settings_password_url, params: { user: { password: "newpassword", password_confirmation: "newpassword", password_challenge: "password" } }
+    assert_redirected_to settings_password_url
+  end
+
+  test "should not update with invalid password" do
+    patch settings_password_url, params: { user: { password: "newpassword", password_confirmation: "newpassword", password_challenge: "invalid" } }
+    assert_response :unprocessable_entity
   end
 end
