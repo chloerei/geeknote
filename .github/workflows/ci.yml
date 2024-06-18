@@ -13,11 +13,11 @@ jobs:
         ports:
           - 5432:5432
       redis:
-        image: redis:6
+        image: redis:7
         ports:
           - 6379:6379
       meilisearch:
-        image: getmeili/meilisearch:v1.0
+        image: getmeili/meilisearch:v1.8
         env:
           MEILI_NO_ANALYTICS: true
         ports:
