@@ -1,6 +1,6 @@
 @layer components {
   .tab {
-    @apply inline-flex h-10 px-4 gap-2 items-center text-sm font-medium rounded-full relative z-0;
+    @apply inline-flex h-10 px-4 gap-2 items-center text-sm font-medium rounded-full relative z-0 select-none;
 
     &::after {
       @apply absolute inset-0 -z-10 bg-current rounded-full opacity-0;
