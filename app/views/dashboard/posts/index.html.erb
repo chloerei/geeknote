@@ -91,10 +91,10 @@
         <%= material_icon :arrow_drop_down %>
       </label>
       <div class="menu__content">
-        <a href="<%= url_for(request.GET.merge(sort: "created")) %>" class="menu__item">
+        <a href="<%= url_for(request.GET.merge(sort: nil)) %>" class="menu__item">
           Created
         </a>
-        <a href="<%= url_for(request.GET.merge(sort: nil)) %>" class="menu__item">
+        <a href="<%= url_for(request.GET.merge(sort: "updated")) %>" class="menu__item">
           Updated
         </a>
       </div>

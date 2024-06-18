@@ -1,13 +1,41 @@
 <div class="post-item flex items-center px-4 py-3 border-b border-outline-variant gap-4 relative">
   <div class="flex-grow min-w-0">
-    <a href="<%= edit_dashboard_post_path(post.account, post) %>" class="font-medium break-words line-clamp-1 hover:text-primary after:absolute after:inset-0">
-      <%= post.title.presence || "Unititled" %>
-    </a>
-  </div>
-  <div class="w-40">
-    <div class="text-sm text-on-surface-variant">
-      <%= time_ago_in_words post.updated_at %>
+    <div>
+      <a href="<%= edit_dashboard_post_path(post.account, post) %>" class="font-medium break-words line-clamp-1 hover:text-primary after:absolute after:inset-0">
+        <%= post.title.presence || "Unititled" %>
+      </a>
     </div>
+    <div class="text-sm font-medium text-on-surface-variant mt-1">
+      <% if @account.organization? %>
+        <span>
+          by <%= post.user.name %>
+        </span>
+      <% end %>
+      <% if post.account.organization? %>
+        <span>
+          in <%= post.account.owner.name %>
+        </span>
+      <% end %>
+      <span>
+        <%= time_ago_in_words post.updated_at %>
+      </span>
+    </div>
+  </div>
+  <div class="w-32">
+    <% case post.status %>
+    <% when "draft" %>
+      <div class="inline-block px-2 rounded bg-surface-container">
+        Draft
+      </div>
+    <% when "published" %>
+      <div class="inline-block px-2 rounded bg-primary-container">
+        Published
+      </div>
+    <% when "trashed" %>
+      <div class="inline-block px-2 rounded bg-tertiary-container">
+        Trashed
+      </div>
+    <% end %>
   </div>
   <div class="flex-shrink-0">
     <div class="menu">
