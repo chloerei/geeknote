@@ -1,4 +1,4 @@
-<div class="flex items-center px-4 py-3 border-b border-outline-variant gap-4 relative">
+<div class="post-item flex items-center px-4 py-3 border-b border-outline-variant gap-4 relative">
   <div class="flex-grow min-w-0">
     <a href="<%= edit_dashboard_post_path(post.account, post) %>" class="font-medium break-words line-clamp-1 hover:text-primary after:absolute after:inset-0">
       <%= post.title.presence || "Unititled" %>
@@ -15,7 +15,7 @@
         <%= material_icon "more_vert" %>
       </label>
       <div class="menu__content top-full right-0 origin-top-right">
-        <a href="<%= edit_post_path(post) %>" class="menu__item">
+        <a href="<%= edit_dashboard_post_path(post.account.name, post) %>" class="menu__item">
           <%= material_icon :edit %>
           <span>
             Edit

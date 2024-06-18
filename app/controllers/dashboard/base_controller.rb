@@ -15,7 +15,8 @@ class Dashboard::BaseController < ApplicationController
         redirect_to account_root_path(@account.name), alert: "You are not allowed to access this page."
       end
     else
-      if !@account.owner.members.where(user: Current.user).exists?
+      @member = @account.owner.members.find_by(user: Current.user)
+      if !@member
         redirect_to account_root_path(@account.name), alert: "You are not allowed to access this page."
       end
     end

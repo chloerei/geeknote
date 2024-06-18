@@ -16,6 +16,12 @@ class Post < ApplicationRecord
     attachable.variant :large, resize_to_limit: [ 1920, 1920 ]
   end
 
+  attribute :remove_featured_image, :boolean
+
+  after_save do
+    featured_image.purge_later if remove_featured_image
+  end
+
   # TODO: remove and clean trashed post
   enum status: {
     draft: 0,

@@ -6,6 +6,10 @@ import { MarkdownEditor } from "lib/markdown-editor"
 export default class extends Controller {
   static targets = [ "form", "submitButton", "publishButton", "container", "titleInput", "contentInput", "contentMarkdown", "preview", "toolbarButton" ]
 
+  static values = {
+    previewUrl: String
+  }
+
   connect() {
     this.markdownEditor = new MarkdownEditor({
       parent: this.contentMarkdownTarget,
@@ -50,7 +54,7 @@ export default class extends Controller {
     const formData = new FormData(this.formTarget)
     formData.delete('_method')
 
-    const response = await post('/posts/preview', {
+    const response = await post(this.previewUrlValue, {
         body: formData
       }
     )
