@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     resources :tags, only: [ :index ]
   end
 
-  resources :organizations, only: [ :index, :new, :create ]
+  resources :organizations, only: [ :new, :create ]
   resources :notifications, only: [ :index ]
   resources :bookmarks, only: [ :index ]
 
@@ -96,6 +96,7 @@ Rails.application.routes.draw do
   end
 
   scope "/dashboard/:account_name", module: "dashboard", as: :dashboard do
+    root to: "posts#index"
     resources :posts
   end
 

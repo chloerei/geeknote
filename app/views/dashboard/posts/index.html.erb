@@ -11,34 +11,37 @@
       <%= material_icon :arrow_drop_down %>
     </label>
     <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
-      <a href="<%= dashboard_posts_path(Current.user.account.name) %>" class="menu__item">
-        <img src="<%= avatar_url(Current.user) %>" alt="avatar" class="w-10 h-10 rounded-full">
+      <div class="px-4 py-2 text-sm font-medium text-on-surface-variant">
+        Personal
+      </div>
+
+      <a href="<%= dashboard_root_path(Current.user.account.name) %>" class="menu__item">
+        <img src="<%= avatar_url(Current.user) %>" alt="avatar" class="w-6 h-6 rounded-full">
         <div class="">
           <div class="font-medium">
             <%= Current.user.name %>
           </div>
-          <div class="text-sm text-on-surface-variant">
-            @<%= Current.user.account.name %>
-          </div>
         </div>
       </a>
 
+      <hr class="border-outline-variant my-2">
+
+      <div class="px-4 py-2 text-sm font-medium text-on-surface-variant">
+        Organizations
+      </div>
+
       <% Current.user.organizations.includes(:account).each do |organization| %>
-        <a href="<%= dashboard_posts_path(Current.user.account.name) %>" class="menu__item">
-          <img src="<%= avatar_url(organization) %>" alt="avatar" class="w-10 h-10 rounded-full">
-          <div class="">
+        <a href="<%= dashboard_root_path(organization.account.name) %>" class="menu__item">
+          <img src="<%= avatar_url(organization) %>" alt="avatar" class="w-6 h-6 rounded-full">
+          <div class="flex-grow">
             <div class="font-medium">
               <%= organization.name %>
-            </div>
-            <div class="text-sm text-on-surface-variant">
-              @<%= organization.account.name %>
             </div>
           </div>
         </a>
       <% end %>
 
-      <hr class="border-outline-variant">
-      <a href="#" class="menu__item">
+      <a href="<%= new_organization_path %>" class="menu__item">
         <%= material_icon :add %>
         <div>
           New organization
