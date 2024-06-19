@@ -22,7 +22,6 @@ class Post < ApplicationRecord
     featured_image.purge_later if remove_featured_image
   end
 
-  # TODO: remove and clean trashed post
   enum status: {
     draft: 0,
     published: 1,
@@ -59,7 +58,7 @@ class Post < ApplicationRecord
   before_save :set_published_at
 
   def set_published_at
-    if published_at.nil? && status == "published"
+    if published_at.nil? && published?
       self.published_at = Time.now
     end
   end
