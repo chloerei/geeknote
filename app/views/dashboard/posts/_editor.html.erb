@@ -108,9 +108,9 @@
       <%# Container %>
       <div class="card flex-grow p-8 mb-4 max-w-screen-md group/container" data-post-editor-target="container" data-turbo-permanent>
         <div class="block group-[.previewing]/container:hidden min-h-screen">
-          <%= form.text_area :title, class: "block w-full p-0 border-none focus:ring-0 bg-transparent text-3xl font-bold resize-none", placeholder: "Title", autocomplete: "off", data: { post_editor_target: "titleInput", action: "input->post-editor#resizeTitleInput keydown.enter->post-editor#focus:prevent" } %>
+          <%= form.text_area :title, class: "block w-full px-0 py-2 border-none focus:ring-0 bg-transparent text-3xl font-bold resize-none", placeholder: "Title", autocomplete: "off", data: { post_editor_target: "titleInput", action: "input->post-editor#resizeTitleInput keydown.enter->post-editor#focus:prevent" } %>
           <%= form.hidden_field :content, id: "post_content", placeholder: "Write in Markdown", data: { post_editor_target: "contentInput" } %>
-          <div id="post_content_markdown" class="mt-6" data-post-editor-target="contentMarkdown"></div>
+          <div id="post_content_markdown" class="mt-4" data-post-editor-target="contentMarkdown"></div>
         </div>
 
         <div data-post-editor-target="preview" class="hidden group-[.previewing]/container:block break-words min-h-screen prose dark:prose-invert max-w-none"></div>
@@ -214,7 +214,7 @@
               </div>
 
               <div class="form-field">
-                <%= form.label :email, class: "form-label" %>
+                <%= form.label :canonical_url, class: "form-label" %>
                 <%= render "components/text_field", form: form, name: :canonical_url, description: "If you are cross-posting this article, enter the original URL here." %>
               </div>
             </div>

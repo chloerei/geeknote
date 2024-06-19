@@ -83,12 +83,6 @@ class Post < ApplicationRecord
     write_attribute :canonical_url, value.presence
   end
 
-  def remove_featured_image=(value)
-    if value && featured_image.attached?
-      self.featured_image = nil
-    end
-  end
-
   after_touch :update_score
   def update_score
     if published? && likes_count > 0 && content.length > 100
