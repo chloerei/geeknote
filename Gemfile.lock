@@ -152,6 +152,10 @@ GEM
     hashdiff (1.1.0)
     highline (3.0.1)
     hiredis (0.6.3)
+    hotwire_combobox (0.3.1)
+      rails (>= 7.0.7.2)
+      stimulus-rails (>= 1.2)
+      turbo-rails (>= 1.2)
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.5)
@@ -451,6 +455,7 @@ DEPENDENCIES
   factory_bot_rails
   foreman
   hiredis
+  hotwire_combobox (~> 0.3.1)
   i18n-tasks (~> 0.9.34)
   image_processing (~> 1.2)
   imgproxy-rails
