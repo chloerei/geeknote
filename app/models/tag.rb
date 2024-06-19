@@ -13,14 +13,16 @@ class Tag < ApplicationRecord
   end
 
   def merge(tag_list)
-    tag_list.each do |tag_name|
+    tag_list.split(",").each do |tag_name|
       tag = Tag.find_by name: tag_name
 
       if tag && tag != self
         tag.taggings.each do |tagging|
           taggable = tagging.taggable
-          taggable.tag_list = taggable.tag_list - [ tag_name ] + [ name ]
-          taggable.save
+          taggable.tags.destroy(tag)
+          if !taggable.tags.exists?(self.id)
+            taggable.tags << self
+          end
         end
         tag.destroy
       end

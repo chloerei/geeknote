@@ -12,8 +12,8 @@ module Taggable
     tags.map(&:name).join(",")
   end
 
-  def tag_list=(names)
-    self.tags = names.split(",").map do |name|
+  def tag_list=(value)
+    self.tags = value.split(",").map do |name|
       Tag.find_or_create_by(name: name.strip)
     end
   end
