@@ -46,7 +46,6 @@ Rails.application.routes.draw do
 
   namespace :settings do
     root to: "home#index"
-    resource :profile, only: [ :show, :update ]
     resource :email do
       post :resend
     end
@@ -111,6 +110,10 @@ Rails.application.routes.draw do
         resource :publish, only: [ :update, :destroy ]
         resource :trash, only: [ :update, :destroy ]
       end
+    end
+
+    namespace :settings do
+      resource :profile, only: [ :show, :update ]
     end
   end
 
