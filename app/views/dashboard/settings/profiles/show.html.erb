@@ -2,22 +2,7 @@
 
 <div class="card mt-6 flex flex-col md:flex-row">
   <div class="flex-shrink-0 md:w-64">
-    <div class="flex md:flex-col h-full pt-3 md:py-3 border-b md:border-b-0 md:border-r border-outline-variant overflow-auto">
-      <%
-        [
-          { url: dashboard_settings_profile_path, label: "Profile", active: true },
-          { url: "#", label: "Import", active: false },
-          { url: "#", label: "Export", active: false },
-        ].each do |item|
-      %>
-        <a href="<%= item[:url] %>" class="flex-grow md:flex-grow-0 flex items-center justify-center md:justify-start h-12 px-4 text-sm font-medium relative interactive-bg-surface-container-lowest <%= item[:active] ? "md:interactive-bg-surface-container" : "" %>">
-          <%= item[:label] %>
-          <% if item[:active] %>
-            <div class="absolute left-0 md:left-auto md:top-0 right-0 bottom-0 h-[2px] md:h-full md:w-[2px] bg-primary"></div>
-          <% end %>
-        </a>
-      <% end %>
-    </div>
+    <%= render "dashboard/settings/nav" %>
   </div>
 
   <div class="flex-grow min-w-0 p-4">

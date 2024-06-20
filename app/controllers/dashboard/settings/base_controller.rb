@@ -9,7 +9,7 @@ class Dashboard::Settings::BaseController < Dashboard::BaseController
         redirect_to dashboard_root_path(@account.name), alert: "You are not allowed to access this page"
       end
     else
-      unless @member.role.in?(["owner", "admin"])
+      unless @member.role.in?([ "owner", "admin" ])
         redirect_to dashboard_root_path(@account.name), alert: "You are not allowed to access this page"
       end
     end
