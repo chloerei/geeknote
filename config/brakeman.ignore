@@ -3,18 +3,18 @@
     {
       "warning_type": "Mass Assignment",
       "warning_code": 105,
-      "fingerprint": "2936ada8e533c9cd2da0b7de00582b697ae70e556b9e38ef20603607bb5030b4",
+      "fingerprint": "a8dbb6efbe4ec243fb3181b08a0cc4312b1b7bd5b885f938d13c23302ff6b765",
       "check_name": "PermitAttributes",
       "message": "Potentially dangerous key allowed for mass assignment",
-      "file": "app/controllers/account/dashboard/members_controller.rb",
-      "line": 69,
+      "file": "app/controllers/dashboard/settings/members_controller.rb",
+      "line": 28,
       "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
-      "code": "params.require(:member).permit(:invitation_email, :role)",
+      "code": "params.require(:member).permit(:role)",
       "render_path": null,
       "location": {
         "type": "method",
-        "class": "Account::Dashboard::MembersController",
-        "method": "member_params"
+        "class": "Dashboard::Settings::MembersController",
+        "method": "update"
       },
       "user_input": ":role",
       "confidence": "Medium",
@@ -24,29 +24,29 @@
       "note": ""
     },
     {
-      "warning_type": "Redirect",
-      "warning_code": 18,
-      "fingerprint": "8e88558c24ece96d204384f27a9607f4f576940df698e802f1ecaf16dbe8082f",
-      "check_name": "Redirect",
-      "message": "Possible unprotected redirect",
-      "file": "app/controllers/attachments_controller.rb",
-      "line": 17,
-      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
-      "code": "redirect_to(Attachment.find_by!(:key => params[:key]).file.blob.url(:disposition => params[:disposition]), :allow_other_host => true)",
+      "warning_type": "Mass Assignment",
+      "warning_code": 105,
+      "fingerprint": "ef237dace9a95ae0df5efb8f412e081756df5dcbcea5ae067e260e3ad0fbf780",
+      "check_name": "PermitAttributes",
+      "message": "Potentially dangerous key allowed for mass assignment",
+      "file": "app/controllers/dashboard/settings/members_controller.rb",
+      "line": 12,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.require(:member).permit(:invitation_email, :role)",
       "render_path": null,
       "location": {
         "type": "method",
-        "class": "AttachmentsController",
-        "method": "show"
+        "class": "Dashboard::Settings::MembersController",
+        "method": "create"
       },
-      "user_input": "Attachment.find_by!(:key => params[:key]).file.blob.url(:disposition => params[:disposition])",
-      "confidence": "Weak",
+      "user_input": ":role",
+      "confidence": "Medium",
       "cwe_id": [
-        601
+        915
       ],
       "note": ""
     }
   ],
-  "updated": "2024-05-02 07:56:51 +0000",
+  "updated": "2024-06-21 13:08:14 +0000",
   "brakeman_version": "5.4.1"
 }
