@@ -17,6 +17,6 @@ class OrganizationsControllerTest < ActionDispatch::IntegrationTest
       post organizations_path, params: { organization: { account_attributes: { name: "neworg" }, name: "org" } }
     end
     member = user.members.last
-    assert member.owner?
+    assert member.admin?
   end
 end
