@@ -165,21 +165,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :members do
-        member do
-          post :resend
-        end
-      end
-
       resources :attachments, only: [ :create ]
-
-      namespace :settings do
-        root to: "home#index"
-        resource :profile, only: [ :show, :update ]
-        resource :account, only: [ :show, :update ]
-        resource :import, only: [ :show, :update ]
-        resources :exports, only: [ :index, :create, :destroy ]
-      end
     end
   end
 
