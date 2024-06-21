@@ -1,4 +1,4 @@
-<%# locals: (form:, name:, description: nil) %>
+<%# locals: (form:, name:, label: nil, description: nil) %>
 
 <div class="flex gap-4 relative">
   <div class="flex-shrink-0">
@@ -6,8 +6,8 @@
       <%= form.check_box name %>
     </label>
   </div>
-  <div class="flex-grow">
-    <%= form.label name, class: "block font-medium" %>
+  <div class="flex-grow min-w-0">
+    <%= form.label name, label, class: "block font-medium" %>
     <% if description %>
       <div class="text-sm text-on-surface-variant">
         <%= description %>

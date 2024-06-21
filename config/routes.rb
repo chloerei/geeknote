@@ -114,6 +114,7 @@ Rails.application.routes.draw do
 
     namespace :settings do
       resource :profile, only: [ :show, :update ]
+      resources :members
       resource :import, only: [ :show, :update ]
       resource :export, only: [ :show, :create ]
     end

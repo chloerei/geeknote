@@ -14,4 +14,12 @@ class Dashboard::Settings::BaseController < Dashboard::BaseController
       end
     end
   end
+
+  def require_organization_account
+    if !@account.organization?
+      redirect_to dashboard_settings_profile_path, alert: "You are not allowed to access this page"
+    else
+      @organization = @account.owner
+    end
+  end
 end

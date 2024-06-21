@@ -1,0 +1,65 @@
+<%= render "dashboard/header" %>
+
+<div class="card mt-6 flex flex-col md:flex-row">
+  <div class="flex-shrink-0 md:w-64">
+    <%= render "dashboard/settings/nav" %>
+  </div>
+
+  <div class="flex-grow min-w-0">
+    <div class="flex h-14 items-center px-2 gap-2">
+      <a href="<%= dashboard_settings_members_path %>" class="icon-button">
+        <%= material_icon :arrow_back %>
+      </a>
+      <div class="flex-grow text-lg font-medium px-2">
+        Edit member
+      </div>
+    </div>
+
+    <div class="p-4 max-w-screen-sm">
+      <div class="mb-4">
+        <% if @member.user %>
+          <div class="flex gap-4">
+            <div class="flex-shrink-0">
+              <img src="<%= avatar_url(@member.user) %>" class="w-10 h-10 rounded-full">
+            </div>
+            <div class="flex-grow">
+              <div class="font-medium">
+                <%= @member.user.name %>
+              </div>
+              <div class="text-on-surface-variant">
+                <%= @member.user.email %>
+              </div>
+            </div>
+          </div>
+        <% else %>
+          <div class="flex items-center gap-4">
+            <div class="flex-shrink-0">
+              <img src="<%= asset_path("avatar.png") %>" class="w-10 h-10 rounded-full">
+            </div>
+            <div class="flex-grow">
+              <div class="text-on-surface-variant">
+                <%= @member.invitation_email %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <%= form_with model: @member, url: dashboard_settings_member_path(@account.name, @member) do |form| %>
+        <div class="form-field">
+          <div class="text-sm font-medium">
+            Role
+          </div>
+          <div class="space-y-2">
+            <%= render "components/radio_button_field", form: form, name: :role, value: "admin", label: "Admin", description: "Can manage member's posts and change dashboard settings." %>
+            <%= render "components/radio_button_field", form: form, name: :role, value: "member", label: "Member", description: "Can write and publish their own posts." %>
+          </div>
+        </div>
+        <div class="form-field">
+          <button type="submit" class="filled-button">
+            Save changes
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -2,15 +2,18 @@
   <%
     [
       { url: dashboard_settings_profile_path, label: "Profile", active: (controller_name == "profiles") },
+      { url: dashboard_settings_members_path, label: "Members", active: (controller_name == "members"), hidden: !@account.organization? },
       { url: dashboard_settings_import_path, label: "Import", active: (controller_name == "imports") },
       { url: dashboard_settings_export_path, label: "Export", active: (controller_name == "exports") },
     ].each do |item|
   %>
-    <a href="<%= item[:url] %>" class="flex-grow md:flex-grow-0 flex items-center justify-center md:justify-start h-12 px-4 text-sm font-medium relative interactive-bg-surface-container-lowest <%= item[:active] ? "md:interactive-bg-surface-container" : "" %>">
-      <%= item[:label] %>
-      <% if item[:active] %>
-        <div class="absolute left-0 md:left-auto md:top-0 right-0 bottom-0 h-[2px] md:h-full md:w-[2px] bg-primary"></div>
-      <% end %>
-    </a>
+    <% if !item[:hidden] %>
+      <a href="<%= item[:url] %>" class="flex-grow md:flex-grow-0 flex items-center justify-center md:justify-start h-12 px-4 text-sm font-medium relative interactive-bg-surface-container-lowest <%= item[:active] ? "md:interactive-bg-surface-container" : "" %>">
+        <%= item[:label] %>
+        <% if item[:active] %>
+          <div class="absolute left-0 md:left-auto md:top-0 right-0 bottom-0 h-[2px] md:h-full md:w-[2px] bg-primary"></div>
+        <% end %>
+      </a>
+    <% end %>
   <% end %>
 </div>

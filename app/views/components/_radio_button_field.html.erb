@@ -1,0 +1,17 @@
+<%# locals: (form:, name:, value:, label: nil, description: nil) %>
+
+<div class="flex gap-4 relative">
+  <div class="flex-shrink-0">
+    <label class="w-10 h-10 flex items-center justify-center rounded-full cursor-pointer hover:bg-gray-100 active:bg-gray-200 after:absolute after:inset-0">
+      <%= form.radio_button name, value, class: "focus:ring-0 cursor-pointer" %>
+    </label>
+  </div>
+  <div class="flex-grow min-w-0">
+    <%= form.label name, label || value, value: value, class: "block font-medium" %>
+    <% if description %>
+      <div class="text-sm text-on-surface-variant">
+        <%= description %>
+      </div>
+    <% end %>
+  </div>
+</div>
