@@ -1,0 +1,49 @@
+<%= render "dashboard/header" %>
+
+<div class="card mt-6 flex flex-col md:flex-row">
+  <div class="flex-shrink-0 md:w-64">
+    <%= render "dashboard/settings/nav" %>
+  </div>
+
+  <div class="flex-grow min-w-0 p-4">
+    <div class="max-w-screen-sm">
+      <div class="text-lg font-medium">
+        Export
+      </div>
+
+      <div class="mt-4">
+        <p>
+          Export posts and attachments to a .tar.gz file. You can export once per day.
+        </p>
+
+        <div class="mt-4">
+          <%= form_with url: dashboard_settings_export_path, method: :post do |form| %>
+            <button type="submit" class="filled-button">
+              Export
+            </button>
+          <% end %>
+        </div>
+
+        <% if @account.export %>
+          <div class="mt-4">
+            <div>
+              Last exported at <%= format_time @account.export.created_at %>
+            </div>
+
+            <div class="mt-4">
+              <% if @account.export.completed? %>
+                <a href="<%= url_for(@account.export.file) %>" class="outlined-button">
+                  Download
+                </a>
+              <% else %>
+                <span class="text-on-surface-variant">
+                  Export is in progress
+                </span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

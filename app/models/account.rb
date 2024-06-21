@@ -6,7 +6,7 @@ class Account < ApplicationRecord
   has_many :follows
   has_many :followers, through: :follows, source: :user
   has_many :follower_accounts, through: :followers, source: :account
-  has_many :exports
+  has_one :export, dependent: :destroy
 
   NAME_REGEXP = /\A[a-zA-Z0-9][a-zA-Z0-9\-]{1,61}[a-zA-Z0-9]\z/
   validates :name, uniqueness: true, format: { with: NAME_REGEXP }, presence: true
