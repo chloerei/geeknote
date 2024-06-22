@@ -1,63 +1,23 @@
-<% @page_title = @account.display_name %>
+<% @page_titles.push @account.display_name %>
 
 <% content_for :head do %>
   <%= auto_discovery_link_tag :atom, account_feed_url(@account, format: :atom) %>
 <% end %>
 
-<%= render "account/header", account: @account %>
+<div class="flex gap-6">
+  <div class="flex-grow min-w-0">
+    <%= render "account/header", account: @account %>
 
-<div class="container padding-3">
-
-  <div class="layout-primary">
-    <div class="">
-      <div id="posts" class="display-flex flex-direction-column gap-3" data-controller="pagination">
-        <%= render partial: 'account/posts/post', collection: @paginator[:page].pluck(:data), cached: -> post { [post.account, post.user, post] } %>
-
-        <% if @paginator[:page_info][:has_next_page] %>
-          <a href="<%= url_for(after: @paginator[:page_info][:end_cursor]) %>" class="button button--text width-100 justify-content-center" data-pagination-target="nextPageLink">
-            <%= t "common.load_more" %>
-          </a>
-        <% else %>
-          <div class="body-medium text-muted text-align-center padding-x-3 padding-y-2">
-            <%= t "common.no_more_content" %>
-          </div>
-        <% end %>
-      </div>
+    <div class="flex gap-2 mt-4">
+      <%= render "components/tab", label: "Posts", active: true %>
+      <%= render "components/tab", label: "Comments", active: false %>
     </div>
 
-    <div>
-      <div class="card card--elevated padding-3">
-        <div class="title-medium margin-bottom-3">
-          Tags
-        </div>
-        <div class="display-flex flex-wrap gap-2 align-items-center">
-          <% used_tags = @account.used_tags.to_a %>
-          <% used_tags.first(10).each do |name, count| %>
-            <a href="<%= account_tag_path(id: name) %>" class="chip chip--assist">
-              <%= name %>
-            </a>
-          <% end %>
-
-          <% if used_tags.count > 10 %>
-            <details class="display-contents">
-              <summary class="button button--text order-last padding-y-1">
-                <div class="hide-on-open">
-                  <%= t "common.show_more" %>
-                </div>
-                <div class="show-on-open">
-                  <%= t "common.show_less" %>
-                </div>
-              </summary>
-
-              <% used_tags[10..-1].each do |name, count| %>
-                <a href="<%= account_tag_path(id: name) %>" class="chip chip--assist">
-                  <%= name %>
-                </a>
-              <% end %>
-            </details>
-          <% end %>
-        </div>
-      </div>
+    <div class="mt-4">
+      <%= render partial: "home/post", collection: @posts %>
     </div>
+  </div>
+
+  <div class="flex-shrink-0 w-80">
   </div>
 </div>

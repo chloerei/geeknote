@@ -15,7 +15,8 @@ class ApplicationController < ActionController::Base
   private
 
   def set_site
-    @site = Site.first_or_create
+    @site = Site.first_or_create(name: "Geeknote")
+    @page_titles = [ @site.name ]
   end
 
   def render_not_found

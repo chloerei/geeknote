@@ -1,13 +1,13 @@
-<% followed = current_user && account.follows.where(user: current_user).exists? %>
+<% followed = Current.user && account.follows.where(user: Current.user).exists? %>
 
 <%= form_with url: account_follow_path(account), id: "account-#{account.name}-follow-button", method: (followed ? 'delete' : 'post') do |form| %>
   <% if followed %>
-    <button type="submit" class="button button--filled">
-      <%= t 'common.following' %>
+    <button type="submit" class="outlined-button">
+      Unfollow
     </button>
   <% else %>
-    <button type="submit" class="button button--outlined">
-      <%= t 'common.follow' %>
+    <button type="submit" class="filled-button">
+      Follow
     </button>
   <% end %>
 <% end %>
