@@ -1,50 +1,57 @@
-<div class="card card--elevated background-surface profile-card">
-  <div class="display-flex flex-direction-column align-items-center gap-3 padding-3">
-    <div class="avatar avatar--medium">
-      <a href="<%= account_root_path(account) %>">
-        <%= avatar_image_tag account.owner.avatar %>
-      </a>
-    </div>
-
-    <div class="title-large">
-      <a href="<%= account_root_path(account) %>" class="link-title">
-        <%= account.display_name %>
-      </a>
-    </div>
-
-    <div class="">
-      <%= account.description %>
-    </div>
-
-    <% if account.owner != current_user %>
-      <%= render 'account/follows/button', account: account %>
-    <% end %>
-
-    <% if current_member %>
-      <a href="<%= account_dashboard_posts_path(@account) %>" class="button button--outlined width-100 justify-content-center">
-        <%= t 'common.dashboard' %>
-      </a>
-    <% end %>
-
-    <div class="display-flex gap-3">
-      <% if account.user? %>
-        <a href="<%= account_followings_path(account) %>" class="link-text margin-right-8">
-          <b><%= account.owner.followings_count %></b> <%= t 'common.followings' %>
+<div class="bg-surface-container-lowest rounded-xl">
+  <div class="flex flex-col p-4 gap-4">
+    <div class="flex items-center justify-between gap-4">
+      <div class="flex-shrink-0">
+        <a href="<%= account_root_path(account.name) %>">
+          <img src="<%= avatar_url(account.owner) %>" alt="avatar" class="w-14 h-14 rounded-full">
         </a>
+      </div>
+
+      <% if account != Current.user&.account %>
+        <div class="flex-shrink-0">
+          <%= render "account/follows/button", account: account %>
+        </div>
       <% end %>
-      <a href="<%= account_followers_path(account) %>" class="link-text">
-        <b><%= account.followers_count %></b> <%= t 'common.followers' %>
-      </a>
     </div>
 
     <div class="">
-      <%= local_time account.created_at.to_date, format: I18n.t("date.formats.long") %> <%= t 'common.joined' %>
-    </div>
+      <div class="relative">
+        <div class="text-2xl font-bold">
+          <a href="<%= account_root_path(account.name) %>" class="hover:underline after:absolute after:inset-0">
+            <%= account.display_name %>
+          </a>
+        </div>
 
-    <div class="display-flex gap-2">
-      <a href="<%= account_feed_url(account, format: :atom) %>" class="button button--icon" target="_blank" title="Atom Feed">
-        <span class="material-icons">rss_feed</span>
-      </a>
+        <div class="text-on-surface-variant">
+          @<%= account.name %>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <%= account.description %>
+      </div>
+
+      <div class="mt-4 text-on-surface-variant">
+        <div class="inline-flex items-center gap-2">
+          <div class="icon w-6 h-6">
+            <%= material_icon :calendar_month %>
+          </div>
+          <%= local_date account.created_at.to_date, data: { turbo_permanent: true } %> Joined
+        </div>
+      </div>
+
+      <div class="mt-2 flex gap-4">
+        <% if account.user? %>
+          <a href="<%= account_followings_path(account.name) %>">
+            <span class="tabular-nums font-medium"><%= account.owner.followings_count %></span>
+            <span class="text-on-surface-variant">Following</span>
+          </a>
+        <% end %>
+        <a href="<%= account_followers_path(account.name) %>">
+          <span class="tabular-nums font-medium"><%= account.followers_count %></span>
+          <span class="text-on-surface-variant">Followers</span>
+        </a>
+      </div>
     </div>
   </div>
 </div>

@@ -1,45 +1,33 @@
-<% @page_title = @account.display_name %>
-
-<div class="container padding-3">
-  <div class="layout-primary">
-    <div class="">
-      <div class="breadcrumb margin-bottom-3">
-        <div class="breadcrumb__item">
-          <a href="<%= account_root_path(@account) %>">
-            <div class="display-flex gap-2 align-items-center">
-              <div class="avatar">
-                <%= avatar_image_tag @account.owner.avatar %>
-              </div>
-              <div class="">
-                <b><%= @account.owner.name %></b>
-              </div>
-            </div>
+<div class="flex gap-6">
+  <div class="flex-grow min-w-0">
+    <div class="card">
+      <div class="flex items-center h-14 gap-2 p-2">
+        <div class="flex-shrink-0">
+          <a href="<%= account_root_path(@account.name) %>" class="icon-button">
+            <%= material_icon :arrow_back %>
           </a>
         </div>
-
-        <div class="breadcrumb__item">
-          <a href="<%= account_followers_path(@account) %>">
-            <%= t 'common.followers' %>
-          </a>
+        <div class="flex-grow text-lg">
+          <span class="font-medium">
+            <%= @account.name %>
+          </span>
         </div>
       </div>
 
-      <div class="card card--elevated">
-        <div id="followers" class="divide-y" data-controller="pagination">
-          <%= render partial: "account/account", collection: @paginator[:page].pluck(:data).map(&:user).map(&:account), cached: true %>
-
-          <% if @paginator[:page_info][:has_next_page] %>
-            <a href="<%= url_for(after: @paginator[:page_info][:end_cursor]) %>" class="button button--text width-100 justify-content-center" data-pagination-target="nextPageLink">
-              <%= t "common.load_more" %>
-            </a>
-          <% else %>
-            <div class="body-medium text-muted text-align-center padding-x-3 padding-y-2">
-              <%= t "common.no_more_content" %>
-            </div>
-          <% end %>
-        </div>
+      <div class="flex gap-2 items-center border-b border-outline-variant">
+        <% if @account.user? %>
+          <%= render "components/primary_tab", url: account_followings_path(@account.name), label: "Following", active: current_page?(account_followings_path(@account.name)) %>
+        <% end %>
+        <%= render "components/primary_tab", url: account_followers_path(@account.name), label: "Followers", active: current_page?(account_followers_path(@account.name)) %>
       </div>
 
+      <%= render "components/scroll_pagination", pagy: @pagy do %>
+        <%= render partial: "account/item", collection: @accounts, as: :account %>
+      <% end %>
     </div>
+  </div>
+
+  <div class="flex-shrink-0 w-80">
+    <%= render "account/profile_card", account: @account %>
   </div>
 </div>

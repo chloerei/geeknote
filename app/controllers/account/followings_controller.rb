@@ -2,6 +2,12 @@ class Account::FollowingsController < Account::BaseController
   before_action :require_user_account
 
   def index
-    @paginator = RailsCursorPagination::Paginator.new(@account.owner.follows.includes(:account), order_by: :created_at, order: :desc, after: params[:after]).fetch
+    @pagy, @accounts = pagy(@account.owner.followings.includes(:owner).order("follows.created_at DESC"), page: params[:page])
+  end
+
+  private
+
+  def require_user_account
+    redirect_to account_root_path(@account) unless @account.user?
   end
 end
