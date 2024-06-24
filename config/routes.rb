@@ -27,7 +27,6 @@ Rails.application.routes.draw do
   resources :sessions, only: [ :create ]
 
   resources :attachments, only: [ :create ]
-  get "attachments/:key/*filename", to: "attachments#show", as: :attachment
 
   post "/rails/active_storage/direct_uploads", to: "direct_uploads#create"
 
