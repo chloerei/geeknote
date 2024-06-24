@@ -50,6 +50,7 @@
       <div class="group replies mt-4">
         <%= render "components/scroll_pagination", pagy: @pagy, content_id: "comments_list" do %>
           <%= render partial: "comment", collection: @comments %>
+          <%= render "account/comments/status", comments: @comments %>
         <% end %>
       </div>
 

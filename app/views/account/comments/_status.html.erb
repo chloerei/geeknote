@@ -1,0 +1,10 @@
+<%# lcoals: (comments) %>
+
+<%
+  liked_ids = Current.user ? Like.where(likable_type: "Comment", likable_id: comments, user_id: Current.user.id).pluck(:likable_id) : []
+%>
+
+<div class="hidden"
+  data-controller="comments-status"
+  data-comments-status-liked-ids-value="<%= liked_ids %>">
+</div>
