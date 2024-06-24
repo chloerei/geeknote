@@ -1,0 +1,23 @@
+<%# locals: (comment:, liked: false) %>
+
+<div id="<%= dom_id(comment, :like) %>" class="inline-flex items-center group <%= 'liked' if liked %>">
+  <div class="group-[.liked]:hidden">
+    <%= form_with url: account_comment_like_path(comment.user.account.name, comment), method: :post do %>
+      <button type="submit" class="icon-button hover:text-red-500 hover:bg-red-500/10 active:bg-red-500/20">
+        <%= material_icon "favorite" %>
+      </button>
+    <% end %>
+  </div>
+  <div class="hidden group-[.liked]:block">
+    <%= form_with url: account_comment_like_path(comment.user.account.name, comment), method: :delete do %>
+      <button type="submit" class="icon-button text-red-500 hover:text-red-500 hover:bg-red-500/10 active:bg-red-500/20">
+        <%= material_icon "favorite-fill" %>
+      </button>
+    <% end %>
+  </div>
+  <% if comment.likes_count > 0 %>
+    <span class="text-on-surface-variant tabular-nums px-1">
+      <%= comment.likes_count %>
+    </span>
+  <% end %>
+</div>

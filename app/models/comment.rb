@@ -3,7 +3,6 @@ class Comment < ApplicationRecord
 
   belongs_to :commentable, polymorphic: true, counter_cache: true, touch: true
   belongs_to :parent, class_name: "Comment", optional: true, counter_cache: :replies_count, touch: true
-  belongs_to :account
   belongs_to :user
   has_many :replies, class_name: "Comment", foreign_key: :parent_id
   has_many :notifications, as: :record, dependent: :destroy
@@ -32,5 +31,9 @@ class Comment < ApplicationRecord
       ) select * from ancestors
     EOF
     Comment.find_by_sql([ sql, { parent_id: parent_id } ])
+  end
+
+  def commentable_sgid=(sgid)
+    self.commentable = GlobalID::Locator.locate_signed(sgid, for: :commentable)
   end
 end

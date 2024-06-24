@@ -1,21 +1,57 @@
-<div class="container padding-3">
-  <div class="layout-primary">
-    <div>
-      <div class="card card--elevated">
-        <div class="display-flex padding-3 gap-2 align-items-center">
-          <a href="<%= account_post_path(@account, @post, anchor: "comments") %>" class="button button--icon">
-            <span class="material-icons">arrow_back</span>
+<div class="flex gap-6">
+  <div class="flex-grow min-w-0">
+    <div class="bg-surface-container-lowest rounded-xl">
+      <div class="flex items-center p-2 gap-2">
+        <div class="flex-shrink-0">
+          <a href="<%= account_post_path(@account.name, @post) %>" class="icon-button">
+            <%= material_icon :arrow_back %>
           </a>
-
-          <div class="title-large">
-            <%= @post.title %>
-          </div>
         </div>
-
-        <div class="padding-x-4">
-          <%= render "replies" %>
+        <div class="flex-grow px-2 text-lg font-medium line-clamp-1">
+          <%= @post.title %>
         </div>
       </div>
     </div>
+
+    <div id="comments" class="">
+      <div class="flex items-center p-2 gap-4">
+        <div class="flex-grow font-medium px-2">
+          Comments <%= @pagy.count %>
+        </div>
+        <div class="menu">
+          <label tabindex="0" class="text-button text-on-surface-variant">
+            <%= material_icon :sort %>
+            <span>
+              <%= @sort %>
+            </span>
+          </label>
+          <div class="menu__content top-full right-0 origin-top-right">
+            <a href="<%= url_for(sort: nil) %>" class="menu__item">
+              Newest
+            </a>
+            <a href="<%= url_for(sort: "oldest") %>" class="menu__item">
+              Oldest
+            </a>
+            <a href="<%= url_for(sort: "popular") %>" class="menu__item">
+              Popular
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <% if Current.user %>
+        <div class="card p-4">
+          <%= render "account/comments/form", comment: Current.user.comments.new(commentable: @post), open: params[:comment].present? %>
+        </div>
+      <% end %>
+
+      <div class="mt-4">
+        <%= render "components/scroll_pagination", pagy: @pagy, content_id: "comments_list" do %>
+          <%= render partial: "account/comments/comment", collection: @comments, cached: true %>
+        <% end %>
+      </div>
+    </div>
   </div>
+
+  <div class="flex-shrink-0 w-80"></div>
 </div>

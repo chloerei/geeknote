@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_one :account, as: :owner, autosave: true
   has_many :posts
+  has_many :comments
   has_many :members
   has_many :organizations, through: :members
   has_many :manage_accounts, -> { where(members: { role: Member.roles.values_at(:owner, :admin) }) }, through: :organizations, source: :account

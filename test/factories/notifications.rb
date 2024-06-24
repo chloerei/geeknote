@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :notification do
-    account factory: :user_account
     user
 
     factory :comment_notification do

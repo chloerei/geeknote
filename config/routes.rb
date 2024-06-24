@@ -128,11 +128,13 @@ Rails.application.routes.draw do
         resource :preview, only: [ :show ]
         resource :like, only: [ :create, :destroy ]
         resource :bookmark, only: [ :create, :destroy ]
-        resources :comments do
-          scope module: "comments" do
-            resource :like, only: [ :create, :destroy ]
-          end
-        end
+        resources :comments, only: [ :index ]
+      end
+    end
+
+    resources :comments do
+      scope module: "comments" do
+        resource :like, only: [ :create, :destroy ]
       end
     end
 

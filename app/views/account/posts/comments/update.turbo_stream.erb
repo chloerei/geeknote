@@ -1,3 +1,0 @@
-<%= turbo_stream.replace "comment-#{@comment.id}-content", partial: "comment_content", locals: { comment: @comment } %>
-
-<%= turbo_stream.remove "comment-#{@comment.id}-form" %>

@@ -38,12 +38,12 @@ class UserMailer < ApplicationMailer
       to: @user.email,
       from: "#{@comment.user.name} <#{ENV['MAILER_FROM_DEFAULT']}>",
       subject: "Re: #{@comment.commentable.title}",
-      message_id: "#{@comment.account.name}/posts/#{@comment.commentable_id}/comments/#{@comment.id}@geeknote.net",
-      references: "#{@comment.account.name}/posts/#{@comment.commentable_id}@geeknote.net"
+      message_id: "#{@comment.user.account.name}/comments/#{@comment.id}@geeknote.net",
+      references: "#{@comment.user.account.name}/#{@comment.commentable_type.downcase}/#{@comment.commentable_id}@geeknote.net"
     }
 
     if @comment.parent
-      options[:in_reply_to] = "#{@comment.account.name}/posts/#{@comment.commentable_id}/comments/#{@comment.parent_id}@geeknote.net"
+      options[:in_reply_to] = "#{@comment.user.account.name}/comments/#{@comment.parent_id}@geeknote.net"
     end
 
     mail(options)

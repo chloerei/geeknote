@@ -2,7 +2,7 @@
 
 <%= markdown_render @comment.content %>
 
-<a href="<%= account_post_comment_url(@comment.commentable.account, @comment.commentable, @comment) %>" class="btn-primary">
+<a href="<%= account_comment_url(@comment.user.account.name, @comment) %>" class="btn-primary">
   查看评论
 </a>
 
