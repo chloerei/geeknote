@@ -1,18 +1,25 @@
-<% liked = post.liked_by? current_user %>
-<%= form_with url: account_post_like_path(post.account, post), method: (liked ? 'delete' : 'post'), id: "post-#{post.id}-like-button" do |form| %>
-  <div class="button-group">
-    <button type="submit" class="button button--icon button--like <%= 'button--active' if liked %> width-100">
-      <div class="button__show-on-active">
-        <span class="material-icons">favorite</span>
-      </div>
-      <div class="button__hide-on-active">
-        <span class="material-icons">favorite_border</span>
-      </div>
-    </button>
-    <% if post.likes_count > 0 %>
-      <div class="body-medium">
-        <%= post.likes_count %>
-      </div>
+<%
+  liked = Current.user.present? && post.liked_by?(Current.user)
+%>
+
+<div id="<%= dom_id(post, :like) %>" class="inline-flex items-center group <%= 'liked' if liked %>">
+  <div class="group-[.liked]:hidden">
+    <%= form_with url: account_post_like_path(post.account.name, post), method: :post do %>
+      <button type="submit" class="icon-button hover:text-red-500 hover:bg-red-500/10 active:bg-red-500/20">
+        <%= material_icon "favorite" %>
+      </button>
     <% end %>
   </div>
-<% end %>
+  <div class="hidden group-[.liked]:block">
+    <%= form_with url: account_post_like_path(post.account.name, post), method: :delete do %>
+      <button type="submit" class="icon-button text-red-500 hover:text-red-500 hover:bg-red-500/10 active:bg-red-500/20">
+        <%= material_icon "favorite-fill" %>
+      </button>
+    <% end %>
+  </div>
+  <% if @post.likes_count > 0 %>
+    <span class="text-on-surface-variant tabular-nums px-1">
+      <%= post.likes_count %>
+    </span>
+  <% end %>
+</div>
