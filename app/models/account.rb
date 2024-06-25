@@ -1,4 +1,8 @@
 class Account < ApplicationRecord
+  include MeiliSearch::Rails
+
+  extend Pagy::Meilisearch
+
   belongs_to :owner, polymorphic: true
   has_many :posts
   has_many :comments
@@ -7,6 +11,18 @@ class Account < ApplicationRecord
   has_many :followers, through: :follows, source: :user
   has_many :follower_accounts, through: :followers, source: :account
   has_one :export, dependent: :destroy
+
+  meilisearch do
+    attribute :name, :display_name, :description, :created_at
+
+    searchable_attributes [ :name, :display_name, :description ]
+    sortable_attributes [ :created_at ]
+
+    attributes_to_highlight [ :description ]
+    attributes_to_crop [ :description ]
+    crop_length 100
+    pagination max_total_hits: 1000
+  end
 
   NAME_REGEXP = /\A[a-zA-Z0-9][a-zA-Z0-9\-]{1,61}[a-zA-Z0-9]\z/
   validates :name, uniqueness: true, format: { with: NAME_REGEXP }, presence: true

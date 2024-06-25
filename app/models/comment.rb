@@ -1,5 +1,8 @@
 class Comment < ApplicationRecord
+  include MeiliSearch::Rails
   include Likable
+
+  extend Pagy::Meilisearch
 
   belongs_to :commentable, polymorphic: true, counter_cache: true, touch: true
   belongs_to :parent, class_name: "Comment", optional: true, counter_cache: :replies_count, touch: true
@@ -15,6 +18,22 @@ class Comment < ApplicationRecord
   scope :hot, -> {
     select("*, (log(10, greatest(3 * likes_count + replies_count, 1)) + (extract(epoch from created_at) / 43200)) as score").order(score: :desc)
   }
+
+  meilisearch sanitize: true do
+    attribute :user_id, :created_at
+    attribute :content do
+      CommonMarker.render_html(content.to_s, :DEFAULT, [ :table, :tasklist, :strikethrough, :autolink, :tagfilter ])
+    end
+
+    searchable_attributes [ :content ]
+    filterable_attributes [ :user_id ]
+    sortable_attributes [ :created_at ]
+
+    attributes_to_highlight [ :content ]
+    attributes_to_crop [ :content ]
+    crop_length 100
+    pagination max_total_hits: 1000
+  end
 
   def check_parent_comment
     if parent && parent.commentable != commentable
