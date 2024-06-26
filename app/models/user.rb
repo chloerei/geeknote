@@ -15,7 +15,6 @@ class User < ApplicationRecord
   has_many :following_users, through: :followings, source: :owner, source_type: "User"
   has_many :bookmarks
   has_many :bookmarked_posts, through: :bookmarks, source: :post
-  has_many :bookmarked_post_tags, through: :bookmarked_posts, source: :tags
 
   has_secure_password
   has_secure_token :auth_token
