@@ -1,0 +1,9 @@
+<p>
+  Your post "<%= @post.title.presence || 'Untitile' %>" has been blocked according to the Community Guidelines.
+</p>
+
+<p>
+  <a href="<%= account_post_url(@post.account.name, @post) %>">
+    View on web
+  </a>
+</p>

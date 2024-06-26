@@ -10,17 +10,6 @@ class UserMailer < ApplicationMailer
     )
   end
 
-  def post_restricted_email
-    @user = params[:user]
-    @post = params[:post]
-
-    mail(
-      from: "#{@site.name} <#{ENV['MAILER_FROM_SUPPORT']}>",
-      to: @user.email,
-      subject: I18n.t("email.your_post_is_been_restricted_for_publish")
-    )
-  end
-
   def email_verification
     @user = params[:user]
 
@@ -30,9 +19,10 @@ class UserMailer < ApplicationMailer
     )
   end
 
-  def comment_notification
-    @user = params[:user]
-    @comment = params[:comment]
+  def commented_notification
+    @notification = params[:notification]
+    @user = @notification.user
+    @comment = @notification.comment
 
     options = {
       to: @user.email,
@@ -47,6 +37,18 @@ class UserMailer < ApplicationMailer
     end
 
     mail(options)
+  end
+
+  def post_blocked_notification
+    @notification = params[:notification]
+    @user = @notification.user
+    @post = @notification.post
+
+    mail(
+      from: "#{@site.name} <#{ENV['MAILER_FROM_SUPPORT']}>",
+      to: @user.email,
+      subject: "Post Blocked: #{@notification.post.title}"
+    )
   end
 
   def weekly_digest

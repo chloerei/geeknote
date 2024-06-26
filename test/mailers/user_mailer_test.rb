@@ -11,7 +11,8 @@ class UserMailerTest < ActionMailer::TestCase
     user = create(:user)
     parent = create(:comment)
     comment = create(:comment, commentable: parent.commentable, parent: parent)
-    email = UserMailer.with(user: user, comment: comment).comment_notification
+    notification = Notification::Commented.create(user: user, comment: comment)
+    email = UserMailer.with(notification: notification).commented_notification
 
     assert_equal [ user.email ], email.to
     assert_equal "#{comment.user.account.name}/comments/#{comment.id}@geeknote.net", email.message_id

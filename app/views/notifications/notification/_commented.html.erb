@@ -1,0 +1,26 @@
+<%
+  comment = notification.comment
+%>
+
+<a href="<%= account_comment_path(comment.user.account.name, comment) %>" class="flex p-4 gap-4 interactive-bg-surface-container-lowest">
+  <div class="flex-shrink-0">
+    <div class="icon w-6 h-6">
+      <%= material_icon :comment %>
+    </div>
+  </div>
+  <div class="flex-grow">
+    <div class="font-medium line-clamp-1">
+      <%= comment.user.name %>
+      commented on
+      <%= comment.commentable.title %>
+    </div>
+    <div class="text-sm text-on-surface-variant line-clamp-1">
+      <%= markdown_summary comment.content %>
+    </div>
+  </div>
+  <div class="flex-shrink-0">
+    <div class="text-sm text-on-surface-variant">
+      <%= format_time notification.created_at %>
+    </div>
+  </div>
+</a>

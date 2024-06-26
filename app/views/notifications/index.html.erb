@@ -1,21 +1,11 @@
-<div class="container container--small padding-3">
-  <div class="card card--elevated background-surface">
-    <div class="top-app-bar">
-      <div class="top-app-bar__title">
-        <%= t 'common.notifications' %>
-      </div>
-    </div>
-    <div class="">
-      <% @notifications.each do |notification| %>
-        <% begin %>
-          <%= render "notifications/#{notification.type}", notification: notification %>
-        <% rescue %>
-          <% notification.destroy %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="padding-3">
-      <%= paginate @notifications %>
-    </div>
+<div class="max-w-screen-lg mx-auto">
+  <div class="text-xl font-medium">
+    Notifications
+  </div>
+
+  <div class="card py-3 mt-6">
+    <%= render "components/scroll_pagination", pagy: @pagy do %>
+      <%= render partial: "notification", collection: @notifications %>
+    <% end %>
   </div>
 </div>
