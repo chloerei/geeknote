@@ -1,0 +1,12 @@
+<%# locals: (url:, icon:, label:, active: false) %>
+
+<a href="<%= url %>" class="flex h-14 items-center px-4 gap-3 rounded-full <%= active ? "interactive-bg-secondary-container" : "hover:interactive-bg-surface" %>">
+  <% if icon %>
+    <div class="icon w-6 h-6">
+      <%= material_icon icon %>
+    </div>
+  <% end %>
+  <div class="text-sm font-medium">
+    <%= label %>
+  </div>
+</a>
