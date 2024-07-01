@@ -1,0 +1,13 @@
+@layer components {
+  .data-table {
+    @apply table-auto w-full;
+
+    th {
+      @apply px-4 py-3 border-b border-outline-variant font-medium text-left;
+    }
+
+    td {
+      @apply px-4 py-3 border-b border-outline-variant;
+    }
+  }
+}

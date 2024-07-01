@@ -6,20 +6,49 @@
       </div>
     </div>
 
-    <table class="table border-top border-bottom">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>
+            ID
+          </th>
+          <th>
+            Title
+          </th>
+          <th>
+            Account
+          </th>
+          <th>
+            User
+          </th>
+          <th>
+            Created at
+          </th>
+          <th></th>
+        </tr>
+      </thead>
       <tbody>
         <% @posts.each do |post| %>
           <tr>
             <td>
-              <a href="<%= admin_post_path(post) %>">
-                <%= post.title.presence || 'Untitile' %>
-              </a>
+              <%= post.id %>
+            </td>
+            <td>
+              <%= post.title.presence || 'Untitile' %>
             </td>
             <td>
               <%= post.account.name %>
             </td>
             <td>
+              <%= post.user.name %>
+            </td>
+            <td>
               <%= format_time post.created_at %>
+            </td>
+            <td class="text-right">
+              <a href="<%= admin_post_path(post) %>" class="text-button">
+                View
+              </a>
             </td>
           </tr>
         <% end %>

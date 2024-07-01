@@ -13,7 +13,7 @@ class Admin::PostsController < Admin::BaseController
 
   def update
     if @post.update post_params
-      redirect_to edit_admin_post_path(@post), notice: "Post updated."
+      redirect_to admin_post_path(@post), notice: "Post updated."
     else
       render :edit, status: :unprocessable_entity
     end

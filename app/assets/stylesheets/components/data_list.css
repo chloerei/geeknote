@@ -1,0 +1,15 @@
+@layer components {
+  .data-list {
+    & > div {
+      @apply grid grid-cols-4 gap-4 p-4 border-b border-outline-variant;
+
+    }
+    dt {
+      @apply font-medium;
+    }
+
+    dd {
+      @apply col-span-3;
+    }
+  }
+}
