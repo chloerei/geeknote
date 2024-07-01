@@ -2,7 +2,7 @@ class Admin::PostsController < Admin::BaseController
   before_action :set_post, only: [ :show, :edit, :update, :restrict, :unrestrict ]
 
   def index
-    @posts = Post.order(id: :desc).includes(:account, :user).page(params[:page])
+    @pagy, @posts = pagy(Post.order(id: :desc).includes(:account, :user))
   end
 
   def show

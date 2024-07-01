@@ -1,39 +1,33 @@
-<div class="container padding-3">
-  <div class="layout-primary">
-    <%= render 'admin/navbar' %>
-
-    <div class="">
-      <div class="card card--elevated background-surface">
-        <div class="top-app-bar">
-          <div class="top-app-bar__title">
-            <%= t 'common.posts' %>
-          </div>
-        </div>
-
-        <table class="table border-top border-bottom">
-          <tbody>
-            <% @posts.each do |post| %>
-              <tr>
-                <td>
-                  <a href="<%= admin_post_path(post) %>">
-                    <%= post.title.presence || 'Untitile' %>
-                  </a>
-                </td>
-                <td>
-                  <%= post.account.name %>
-                </td>
-                <td>
-                  <%= format_time post.created_at %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-
-        <div class="padding-3">
-          <%= paginate @posts %>
-        </div>
+<div class="">
+  <div class="card">
+    <div class="flex items-center h-14 px-2">
+      <div class="text-lg font-medium px-2">
+        <%= t 'common.posts' %>
       </div>
+    </div>
+
+    <table class="table border-top border-bottom">
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td>
+              <a href="<%= admin_post_path(post) %>">
+                <%= post.title.presence || 'Untitile' %>
+              </a>
+            </td>
+            <td>
+              <%= post.account.name %>
+            </td>
+            <td>
+              <%= format_time post.created_at %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="p-4">
+      <%= render "components/page_pagination", pagy: @pagy %>
     </div>
   </div>
 </div>
