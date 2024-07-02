@@ -60,10 +60,6 @@ class Account < ApplicationRecord
     ).order("random()")
   }
 
-  def to_param
-    name
-  end
-
   def post_tags
     Tag.joins(:posts).where(posts: { account_id: self.id }).distinct
   end

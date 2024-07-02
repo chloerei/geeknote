@@ -1,43 +1,65 @@
-<div class="container padding-3">
-  <div class="layout-primary">
-    <%= render 'admin/navbar' %>
-
-    <div class="">
-      <div class="card card--elevated background-surface">
-        <div class="top-app-bar">
-          <div class="top-app-bar__title">
-            <%= t 'common.accounts' %>
-          </div>
-
-          <%= form_with method: :get, builder: CustomFormBuilder do |form| %>
-            <%= form.text_field :name, value: params[:name] %>
-          <% end %>
-        </div>
-
-        <table class="table border-top border-bottom">
-          <tbody>
-            <% @accounts.each do |account| %>
-              <tr>
-                <td>
-                  <a href="<%= admin_account_path(account.id) %>">
-                    <%= account.name %>
-                  </a>
-                </td>
-                <td>
-                  <%= account.owner_type %>
-                </td>
-                <td>
-                  <%= format_time account.created_at %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-
-        </table>
-
-        <div class="padding-3">
-          <%= paginate @accounts %>
-        </div>
+<div class="">
+  <div class="card">
+    <div class="flex items-center h-14 gap-2 px-2">
+      <div class="flex-grow text-lg font-medium px-2">
+        <%= t 'common.accounts' %>
       </div>
+
+      <div class="relative">
+        <div class="icon w-6 h-6 absolute top-2 left-2">
+          <%= material_icon :search %>
+        </div>
+        <%= form_with url: url_for, method: :get do |f| %>
+          <%= f.search_field :q, value: params[:q], placeholder: "Search", class: "h-10 pl-10 border-none focus:ring-0 interactive-bg-surface-container rounded-full" %>
+        <% end %>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>
+            ID
+          </th>
+          <th>
+            Name
+          </th>
+          <th>
+            Owner type
+          </th>
+          <th>
+            Created at
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @accounts.each do |account| %>
+          <tr>
+            <td>
+              <%= account.id %>
+            </td>
+            <td>
+              <%= account.name %>
+            </td>
+            <td>
+              <%= account.owner_type %>
+            </td>
+            <td>
+              <%= format_time account.created_at %>
+            </td>
+            <td class="text-right">
+              <a href="<%= admin_account_path(account) %>" class="text-button">
+                View
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+
+    <div class="p-4">
+      <%= render "components/page_pagination", pagy: @pagy %>
     </div>
 </div>

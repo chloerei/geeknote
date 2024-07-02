@@ -1,60 +1,63 @@
-<div class="container padding-3">
-  <div class="layout-primary">
-    <%= render 'admin/navbar' %>
-
-    <div class="">
-      <div class="card card--elevated background-surface">
-        <div class="top-app-bar">
-          <div class="top-app-bar__action">
-            <a href="<%= admin_accounts_path %>" class="button button--icon">
-              <span class="material-icons">arrow_back</span>
-            </a>
-          </div>
-          <div class="top-app-bar__title">
-            <%= t 'common.accounts' %> #<%= @account.id %>
-          </div>
-          <div class="top-app-bar__action">
-            <a href="<%= edit_admin_account_path(@account.id) %>" class="button button--text">
-              <%= t 'common.edit' %>
-            </a>
-          </div>
-        </div>
-
-        <table class="table border-top">
-          <tr>
-            <th>
-              <%= t 'common.owner' %>
-            </th>
-            <td>
-              <a href="<%= url_for([:admin, @account.owner]) %>">
-                <%= url_for([:admin, @account.owner]) %>
-              </a>
-            </td>
-          </tr>
-
-          <tr>
-            <th>
-              <%= t 'common.public_link' %>
-            </th>
-            <td>
-              <a href="<%= account_root_path(@account) %>">
-                <%= account_root_path(@account) %>
-              </a>
-            </td>
-          </tr>
-
-          <% @account.attributes.each do |name, value| %>
-            <tr>
-              <th>
-                <%= name %>
-              </th>
-              <td class="text-break-all">
-                <%= value %>
-              </td>
-            </tr>
+<div class="">
+  <div class="card pb-3">
+    <div class="flex items-center h-14 gap-2 px-2">
+      <a href="<%= admin_accounts_path %>" class="icon-button">
+        <%= material_icon :arrow_back %>
+      </a>
+      <div class="flex-grow text-lg font-medium px-2">
+        Account #<%= @account.id %>
+      </div>
+      <a href="<%= edit_admin_account_path(@account) %>" class="icon-button">
+        <%= material_icon :edit %>
+      </a>
+      <div class="menu">
+        <label tabindex="0" class="icon-button">
+          <%= material_icon :more_vert %>
+        </label>
+        <div class="menu__content top-full right-0 origin-top-right">
+          <%= form_with url: admin_account_path(@account), method: :delete, data: { turbo_confirm: "Delete account?" } do %>
+            <button type="submit" class="menu__item">
+              <%= material_icon :delete %>
+              <span>Delete</span>
+            </button>
           <% end %>
-        </table>
+        </div>
       </div>
     </div>
+
+    <dl class="data-list">
+      <div>
+        <dt>
+          <%= t 'common.owner' %>
+        </dt>
+        <dd>
+          <a href="<%= url_for([:admin, @account.owner]) %>" class="text-primary underline">
+            <%= url_for([:admin, @account.owner]) %>
+          </a>
+        </dd>
+      </div>
+
+      <div>
+        <dt>
+          <%= t 'common.public_link' %>
+        </dt>
+        <dd>
+          <a href="<%= account_root_path(@account.name) %>" class="text-primary underline">
+            <%= account_root_path(@account.name) %>
+          </a>
+        </dd>
+      </div>
+
+      <% @account.attributes.each do |name, value| %>
+        <div>
+          <dt>
+            <%= name %>
+          </dt>
+          <dd class="text-break-all">
+            <%= value %>
+          </dd>
+        </div>
+      <% end %>
+    </dl>
   </div>
 </div>

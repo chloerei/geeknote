@@ -1,12 +1,8 @@
 class Admin::AccountsController < Admin::BaseController
-  before_action :set_account, only: [ :show, :edit, :update ]
+  before_action :set_account, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @accounts = Account.order(id: :desc).page(params[:page])
-
-    if params[:name]
-      @accounts = @accounts.where(name: params[:name])
-    end
+    @pagy, @accounts = pagy_meilisearch(Account.pagy_search(params[:q]), sort: [ "created_at:desc" ])
   end
 
   def show
@@ -21,6 +17,11 @@ class Admin::AccountsController < Admin::BaseController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @account.destroy
+    redirect_to admin_accounts_path, notice: "Account deleted."
   end
 
   private
