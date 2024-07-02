@@ -1,49 +1,52 @@
-<div class="container padding-3">
-  <div class="layout-primary">
-    <%= render 'admin/navbar' %>
-
-    <div class="">
-      <div class="card card--elevated background-surface">
-        <div class="top-app-bar">
-          <div class="top-app-bar__action">
-            <a href="<%= admin_users_path %>" class="button button--icon">
-              <span class="material-icons">arrow_back</span>
-            </a>
-          </div>
-          <div class="top-app-bar__title">
-            <%= t 'common.users' %> #<%= @user.id %>
-          </div>
-          <div class="top-app-bar__action">
-            <a href="<%= edit_admin_user_path(@user) %>" class="button button--text">
-              <%= t 'common.edit' %>
-            </a>
-          </div>
-        </div>
-
-        <table class="table border-top">
-          <tr>
-            <th>
-              <%= t 'common.account' %>
-            </th>
-            <td>
-              <a href="<%= admin_account_path(@user.account.id) %>">
-                <%= admin_account_path(@user.account.id) %>
-              </a>
-            </td>
-          </tr>
-
-          <% @user.attributes.except('password_digest', 'auth_token').each do |name, value| %>
-            <tr>
-              <th>
-                <%= name %>
-              </th>
-              <td class="text-break-all">
-                <%= value %>
-              </td>
-            </tr>
+<div class="">
+  <div class="card">
+    <div class="flex items-center h-14 gap-2 px-2">
+      <a href="<%= admin_users_path %>" class="icon-button">
+        <%= material_icon :arrow_back %>
+      </a>
+      <div class="flex-grow text-lg font-medium px-2">
+        User #<%= @user.id %>
+      </div>
+      <a href="<%= edit_admin_user_path(@user) %>" class="icon-button">
+        <%= material_icon :edit %>
+      </a>
+      <div class="menu">
+        <label tabindex="0" class="icon-button">
+          <%= material_icon :more_vert %>
+        </label>
+        <div class="menu__content top-full right-0 origin-top-right">
+          <%= form_with url: admin_user_path(@user), method: :delete, data: { turbo_confirm: "Delete user?" } do %>
+            <button type="submit" class="menu__item">
+              <%= material_icon :delete %>
+              <span>Delete</span>
+            </button>
           <% end %>
-        </table>
+        </div>
       </div>
     </div>
+
+    <dl class="data-list">
+      <div>
+        <dt>
+          <%= t 'common.account' %>
+        </dt>
+        <dd>
+          <a href="<%= admin_account_path(@user.account) %>" class="text-primary underline">
+            <%= admin_account_path(@user.account) %>
+          </a>
+        </dd>
+      </div>
+
+      <% @user.attributes.except('password_digest', 'auth_token').each do |name, value| %>
+        <div>
+          <dt>
+            <%= name %>
+          </dt>
+          <dd>
+            <%= value %>
+          </dd>
+        </div>
+      <% end %>
+    </dl>
   </div>
 </div>

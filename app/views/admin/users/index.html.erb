@@ -1,43 +1,55 @@
-<div class="container padding-3">
-  <div class="layout-primary">
-    <%= render 'admin/navbar' %>
-
-    <div class="">
-      <div class="card card--elevated background-surface">
-        <div class="top-app-bar">
-          <div class="top-app-bar__title">
-            <%= t 'common.users' %>
-          </div>
-          <div class="top-app-bar__action">
-            <%= form_with method: :get, builder: CustomFormBuilder do |form| %>
-              <%= form.text_field :email, value: params[:email] %>
-            <% end %>
-          </div>
-        </div>
-
-        <table class="table border-top border-bottom">
-          <tbody>
-            <% @users.each do |user| %>
-              <tr>
-                <td>
-                  <a href="<%= admin_user_path(user) %>">
-                    <%= user.name %>
-                  </a>
-                </td>
-                <td>
-                  <%= user.email %>
-                </td>
-                <td>
-                  <%= format_time user.created_at %>
-                </td>
-              </tr>
-            <% end %>
-        </table>
-
-        <div class="padding-3">
-          <%= paginate @users %>
-        </div>
+<div class="">
+  <div class="card">
+    <div class="flex items-center h-14 gap-2 px-2">
+      <div class="flex-grow text-lg font-medium px-2">
+        <%= t 'common.users' %>
       </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>
+            ID
+          </th>
+          <th>
+            Name
+          </th>
+          <th>
+            Email
+          </th>
+          <th>
+            Created at
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <%= user.id %>
+            </td>
+            <td>
+              <%= user.name %>
+            </td>
+            <td>
+              <%= user.email %>
+            </td>
+            <td>
+              <%= format_time user.created_at %>
+            </td>
+            <td class="text-right">
+              <a href="<%= admin_user_path(user) %>" class="text-button">
+                View
+              </a>
+            </td>
+          </tr>
+        <% end %>
+    </table>
+
+    <div class="p-4">
+      <%= render "components/page_pagination", pagy: @pagy %>
     </div>
   </div>
 </div>
