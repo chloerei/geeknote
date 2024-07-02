@@ -19,17 +19,25 @@
         </label>
         <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
           <% if @post.restricted? %>
-            <%= form_with model: @post, url: unrestrict_admin_post_path(@post) do %>
+            <%= form_with url: unrestrict_admin_post_path(@post), method: :patch do %>
               <button type="submit" class="menu__item">
-                <%= t '.unrestrict' %>
+                <%= material_icon :block %>
+                <span>Unblock</span>
               </button>
             <% end %>
           <% else  %>
-            <%= form_with model: @post, url: restrict_admin_post_path(@post), data: { turbo_confirm: t('.restrict_post_confirm') } do %>
+            <%= form_with url: restrict_admin_post_path(@post), method: :patch, data: { turbo_confirm: t('.restrict_post_confirm') } do %>
               <button type="submit" class="menu__item">
-                <%= t '.restrict_post' %>
+                <%= material_icon :block %>
+                <span>Block</span>
               </button>
             <% end %>
+          <% end %>
+          <%= form_with url: admin_post_path(@post), method: :delete, data: { turbo_confirm: "Delete post?" } do %>
+            <button type="submit" class="menu__item">
+              <%= material_icon :delete %>
+              <span>Delete</span>
+            </button>
           <% end %>
         </div>
       </div>

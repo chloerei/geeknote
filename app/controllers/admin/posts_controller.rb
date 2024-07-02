@@ -1,5 +1,5 @@
 class Admin::PostsController < Admin::BaseController
-  before_action :set_post, only: [ :show, :edit, :update, :restrict, :unrestrict ]
+  before_action :set_post, only: [ :show, :edit, :update, :restrict, :unrestrict, :destroy ]
 
   def index
     @pagy, @posts = pagy(Post.order(id: :desc).includes(:account, :user))
@@ -27,6 +27,11 @@ class Admin::PostsController < Admin::BaseController
   def unrestrict
     @post.remove_restricted
     redirect_to admin_post_path(@post), notice: "Post remove restricted."
+  end
+
+  def destroy
+    @post.destroy
+    redirect_to admin_posts_path, notice: "Post deleted."
   end
 
   private
