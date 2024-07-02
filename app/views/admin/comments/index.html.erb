@@ -10,6 +10,9 @@
       <thead>
         <tr>
           <th>
+            ID
+          </th>
+          <th>
             Content
           </th>
           <th>
@@ -24,6 +27,9 @@
       <tbody>
         <% @comments.each do |comment| %>
           <tr>
+            <td>
+              <%= comment.id %>
+            </td>
             <td>
               <div class="line-clamp-1">
                 <%= truncate comment.content, length: 35 %>

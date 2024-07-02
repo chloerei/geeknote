@@ -1,12 +1,8 @@
 class Admin::TagsController < Admin::BaseController
-  before_action :set_tag, only: [ :show, :edit, :update ]
+  before_action :set_tag, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @tags = Tag.order(taggings_count: :desc).page(params[:page])
-
-    if params[:name]
-      @tags = @tags.where("name like ?", "%#{Tag.sanitize_sql_like(params[:name])}%")
-    end
+    @pagy, @tags = pagy_meilisearch(Tag.pagy_search(params[:q]), sort: [ "created_at:desc" ])
   end
 
   def show
@@ -21,6 +17,11 @@ class Admin::TagsController < Admin::BaseController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @tag.destroy
+    redirect_to admin_tags_path, notice: "Tag deleted."
   end
 
   private

@@ -4,10 +4,9 @@ class Admin::Tags::MergesController < Admin::BaseController
   def new
   end
 
-  # TODO: tag_list array to string
   def create
     @tag.merge params[:tag_list]
-    redirect_to admin_tag_path(@tag)
+    redirect_to admin_tag_path(@tag), notice: "Tags merged."
   end
 
   private

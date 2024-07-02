@@ -1,4 +1,8 @@
 class Tag < ApplicationRecord
+  include MeiliSearch::Rails
+
+  extend Pagy::Meilisearch
+
   has_many :taggings, dependent: :delete_all
   has_many :posts, through: :taggings, source: :taggable, source_type: "Post"
 
@@ -8,8 +12,13 @@ class Tag < ApplicationRecord
     left_outer_joins(:taggings).where("taggings.created_at > ?", 1.month.ago).distinct.select("tags.*, count(taggings.*) as count").group("tags.id").order("count desc")
   }
 
-  def self.search(query)
-    where("name like ?", "#{sanitize_sql_like(query)}%")
+  meilisearch do
+    attribute :name, :taggings_count, :created_at
+
+    searchable_attributes [ :name ]
+    sortable_attributes [ :taggings_count, :created_at ]
+
+    pagination max_total_hits: 1000
   end
 
   def merge(tag_list)

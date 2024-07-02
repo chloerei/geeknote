@@ -1,43 +1,49 @@
-<div class="container padding-3">
-  <div class="layout-primary">
-    <%= render 'admin/navbar' %>
+<div class="">
+  <div class="card pb-3">
+    <div class="flex items-center h-14 px-2">
+      <a href="<%= admin_tags_path %>" class="icon-button">
+        <%= material_icon :arrow_back %>
+      </a>
 
-    <div class="">
-      <div class="card card--elevated background-surface">
-        <div class="top-app-bar">
-          <div class="top-app-bar__action">
-            <a href="<%= admin_tags_path %>" class="button button--icon">
-              <span class="material-icons">arrow_back</span>
-            </a>
-          </div>
-          <div class="top-app-bar__title">
-            <%= t 'common.tags' %> #<%= @tag.id %>
-          </div>
-          <div class="top-app-bar__action">
-            <a href="<%= edit_admin_tag_path(@tag) %>" class="button button--text">
-              <%= t 'common.edit' %>
-            </a>
-          </div>
-          <div class="top-app-bar__action">
-            <a href="<%= new_admin_tag_merge_path(@tag) %>" class="button button--text">
-              <%= t 'common.merge' %>
-            </a>
-          </div>
-        </div>
+      <div class="flex-grow text-lg font-medium">
+        Tag #<%= @tag.id %>
+      </div>
 
-        <table class="table border-top">
-          <% @tag.attributes.except('password_digest', 'auth_token').each do |name, value| %>
-            <tr>
-              <th>
-                <%= name %>
-              </th>
-              <td class="text-break-all">
-                <%= value %>
-              </td>
-            </tr>
+      <a href="<%= edit_admin_tag_path(@tag) %>" class="icon-button">
+        <%= material_icon :edit %>
+      </a>
+
+      <div class="menu">
+        <label tabindex="0" class="icon-button">
+          <%= material_icon :more_vert %>
+        </label>
+        <div class="menu__content top-full right-0 origin-top-right">
+          <a href="<%= new_admin_tag_merge_path(@tag) %>" class="menu__item">
+            <%= material_icon :merge %>
+            <span>Merge</span>
+          </a>
+
+          <%= form_with url: admin_tag_path(@tag), method: :delete, data: { turbo_confirm: "Delete tag?" } do %>
+            <button type="submit" class="menu__item">
+              <%= material_icon :delete %>
+              <span>Delete</span>
+            </button>
           <% end %>
-        </table>
+        </div>
       </div>
     </div>
+
+    <table class="data-table">
+      <% @tag.attributes.each do |name, value| %>
+        <tr>
+          <th>
+            <%= name %>
+          </th>
+          <td class="text-break-all">
+            <%= value %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 </div>

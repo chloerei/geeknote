@@ -1,44 +1,31 @@
-<div class="container padding-3">
-  <div class="layout-primary">
-    <%= render 'admin/navbar' %>
-
-    <div class="">
-      <div class="card card--elevated background-surface">
-        <div class="top-app-bar">
-          <div class="top-app-bar__action">
-            <a href="<%= admin_tag_path(@tag) %>" class="button button--icon">
-              <span class="material-icons">arrow_back</span>
-            </a>
-          </div>
-          <div class="top-app-bar__title">
-            <%= t 'common.merge_tags' %>
-          </div>
-        </div>
-
-        <div class="padding-3">
-          <%= form_with url: admin_tag_merge_path, builder: CustomFormBuilder do |form| %>
-            <div class="margin-bottom-3">
-              <%= t '.merge_to', name: @tag.name %>
-            </div>
-            <div class="margin-bottom-3">
-              <div class="text-field text-field--outlined">
-                <div class="text-field__container">
-                  <div class="selector text-field__input" data-controller="selector tag-selector" data-selector-placeholder-value="" data-selector-max-items-value="5" data-action="selector:input->tag-selector#update">
-                    <select name="tag_list[]" class="selector__select" data-selector-target="select" multiple>
-                    </select>
-                  </div>
-                  <label class="text-field__label">
-                    <%= t 'common.tags' %>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <button type="submit" class="button button--filled">
-              <%= t '.merge' %>
-            </button>
-          <% end %>
-        </div>
+<div class="">
+  <div class="card">
+    <div class="flex items-center h-14 px-2 gap-2">
+      <a href="<%= admin_tag_path(@tag) %>" class="icon-button">
+        <%= material_icon :arrow_back %>
+      </a>
+      <div class="flex-grow text-lg font-medium px-2">
+        <%= t 'common.merge_tags' %>
       </div>
+    </div>
+
+    <div class="p-4">
+      <%= form_with url: admin_tag_merge_path do |form| %>
+        <div class="form-field">
+          <%= t '.merge_to', name: @tag.name %>
+        </div>
+        <div class="form-field">
+          <%= form.label :tag_list, class: "form-label" %>
+          <div class="combobox">
+            <%= form.combobox :tag_list, tag_options_path, multiselect_chip_src: tag_chips_path, free_text: true %>
+          </div>
+        </div>
+        <div class="form-field">
+          <button type="submit" class="filled-button">
+            <%= t '.merge' %>
+          </button>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
