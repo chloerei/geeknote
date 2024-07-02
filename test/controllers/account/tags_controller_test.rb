@@ -5,7 +5,7 @@ class Account::TagsControllerTest < ActionDispatch::IntegrationTest
     @account = create(:user_account)
     create(:post, account: @account, tag_list: "Ruby")
 
-    get account_tag_path(@account, id: "Ruby")
+    get account_tag_path(@account.name, id: "Ruby")
     assert_response :success
   end
 end

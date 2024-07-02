@@ -6,7 +6,7 @@ class Account::PostsControllerTest < ActionDispatch::IntegrationTest
     create(:post, account: account, user: account.owner)
     create(:post, account: create(:organization_account), user: account.owner)
 
-    get account_root_path(account)
+    get account_root_path(account.name)
     assert_response :success
   end
 
@@ -15,7 +15,7 @@ class Account::PostsControllerTest < ActionDispatch::IntegrationTest
     post = create(:post, account: account, user: account.owner)
     post.published!
 
-    get account_post_path(account, post)
+    get account_post_path(account.name, post)
     assert_response :success
   end
 
@@ -25,11 +25,11 @@ class Account::PostsControllerTest < ActionDispatch::IntegrationTest
     post = create(:post, account: account, user: user)
     post.published!
 
-    get account_post_path(account, post)
+    get account_post_path(account.name, post)
     assert_response :success
 
     assert_raise ActiveRecord::RecordNotFound do
-      get account_post_path(user.account, post)
+      get account_post_path(user.account.name, post)
     end
   end
 end

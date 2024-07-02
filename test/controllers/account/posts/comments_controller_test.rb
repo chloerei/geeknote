@@ -10,7 +10,7 @@ class Account::Posts::CommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get comments" do
-    get account_post_comments_path(@account, @post)
+    get account_post_comments_path(@account.name, @post)
     assert_response :success
   end
 end
