@@ -1,58 +1,52 @@
 <div class="navigation-rail gap-6">
+  <%= render "components/navigation_rail_item", url: root_path, icon: :home, label: "Home", active: request.path.in?([root_path]) %>
+
+  <%= render "components/navigation_rail_item", url: search_path, icon: :search, label: "Search", active: current_page?(search_path) %>
+
   <% if Current.user %>
-    <div class="">
-      <a href="<%= new_dashboard_post_path(Current.user.account.name) %>" class="floating-action-button">
-        <%= material_icon :edit %>
-      </a>
-    </div>
+    <%= render "components/navigation_rail_item", url: notifications_path, icon: :notifications, label: "Notifications", active: current_page?(notifications_path) %>
+
+    <%= render "components/navigation_rail_item", url: bookmarks_path, icon: :bookmarks, label: "Bookmarks", active: current_page?(bookmarks_path) %>
+
+    <%= render "components/navigation_rail_item", url: dashboard_root_path(Current.user.account.name), icon: :post, label: "Posts", active: request.path.start_with?("/dashboard") %>
   <% end %>
 
-  <div class="flex flex-col flex-grow gap-3">
-    <%= render "components/navigation_rail_item", url: root_path, icon: :home, label: "Home", active: request.path.in?([root_path]) %>
-
-    <%= render "components/navigation_rail_item", url: search_path, icon: :search, label: "Search", active: current_page?(search_path) %>
-
-    <% if Current.user %>
-      <%= render "components/navigation_rail_item", url: notifications_path, icon: :notifications, label: "Notifications", active: current_page?(notifications_path) %>
-
-      <%= render "components/navigation_rail_item", url: bookmarks_path, icon: :bookmarks, label: "Bookmarks", active: current_page?(bookmarks_path) %>
-
-      <%= render "components/navigation_rail_item", url: dashboard_root_path(Current.user.account.name), icon: :dashboard, label: "Dashboard", active: request.path.start_with?("/dashboard") %>
-    <% end %>
-  </div>
-
-  <div class="flex-shrink-0">
-    <div class="menu">
-      <label tabindex="0" class="block p-1 rounded-full cursor-pointer hover:interactive-bg-surface-container-high">
+  <div class="menu flex-shrink-0">
+    <label tabindex="0" class="navigation-rail__item">
+      <div class="navigation-rail__item__icon">
         <% if Current.user %>
-          <img src="<%= avatar_url(Current.user) %>" class="h-10 w-10 rounded-full">
+          <img src="<%= avatar_url(Current.user) %>" class="h-6 w-6 rounded-full">
         <% else %>
-          <img src="<%= asset_path("avatar.png") %>" class="h-10 w-10 rounded-full">
+          <img src="<%= asset_path("avatar.png") %>" class="h-6 w-6 rounded-full">
         <% end %>
-      </label>
-      <div tabindex="0" class="menu__content left-full bottom-0 origin-bottom-left">
-        <% if Current.user %>
-          <a href="<%= account_root_path(Current.user.account.name) %>" class="menu__item">
-            <%= material_icon :account_circle %>
-            <span>
-              Profile
-            </span>
-          </a>
+      </div>
+      <div class="navigation-rail__item__label">
+        Me
+      </div>
+    </label>
+    <div tabindex="0" class="menu__content top-auto left-auto bottom-full right-0 origin-bottom-right md:left-full md:bottom-0 md:origin-bottom-left">
+      <% if Current.user %>
+        <a href="<%= account_root_path(Current.user.account.name) %>" class="menu__item">
+          <%= material_icon :account_circle %>
+          <span>
+            Profile
+          </span>
+        </a>
 
-          <a href="<%= settings_root_path %>" class="menu__item">
-            <%= material_icon :settings %>
-            <span>
-              Settings
-            </span>
-          </a>
+        <a href="<%= settings_root_path %>" class="menu__item">
+          <%= material_icon :settings %>
+          <span>
+            Settings
+          </span>
+        </a>
 
-          <%= form_with url: sign_out_path, method: :delete do |form| %>
-            <button type="submit" class="menu__item">
-              <%= material_icon :logout %>
-              <span>
-                Sign out
-              </span>
-            </button>
+        <%= form_with url: sign_out_path, method: :delete do |form| %>
+          <button type="submit" class="menu__item">
+            <%= material_icon :logout %>
+            <span>
+              Sign out
+            </span>
+          </button>
         <% end %>
       <% else %>
         <a href="<%= sign_in_path %>" class="menu__item">
@@ -70,6 +64,5 @@
         </a>
       <% end %>
     </div>
-  </div>
   </div>
 </div>

@@ -1,13 +1,11 @@
 <% content_for :body do %>
-  <div class="flex">
-    <div class="flex-shrink-0 w-20 h-screen sticky top-0 z-10">
-      <%= render "layouts/site/navigation_rail" %>
-    </div>
+  <div class="fixed h-20 left-0 bottom-0 right-0 md:h-full md:w-20 md:top-0 md:left-0 md:bottom-0 z-10 bg-surface-container">
+    <%= render "layouts/site/navigation_rail" %>
+  </div>
 
-    <div class="flex-grow min-w-0 bg-surface">
-      <div class="max-w-screen-xl mx-auto p-6">
-        <%= yield %>
-      </div>
+  <div class="mb-20 md:mb-0 md:ml-20">
+    <div class="max-w-screen-xl mx-auto p-6">
+      <%= yield %>
     </div>
   </div>
 <% end %>

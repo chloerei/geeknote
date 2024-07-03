@@ -13,7 +13,7 @@
 
     <div class="flex-grow"></div>
 
-    <div class="menu">
+    <div class="menu hidden md:block">
       <label tabindex="0" class="text-button text-on-surface-variant">
         Status: <%= @status || "all" %>
         <%= material_icon :arrow_drop_down %>
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <div class="menu">
+    <div class="menu hidden md:block">
       <label tabindex="0" class="text-button text-on-surface-variant">
         Sort by: <%= @sort %>
         <%= material_icon :arrow_drop_down %>

@@ -20,7 +20,7 @@
 <% end %>
 
 
-<div class="max-w-screen-xl mx-auto flex gap-6">
+<div class="max-w-screen-xl mx-auto flex flex-col md:flex-row gap-6">
   <div class="flex-grow min-w-0">
 
     <div class="card">
@@ -141,7 +141,7 @@
     </div>
   </div>
 
-  <div class="flex-shrink-0 w-80">
+  <div class="flex-shrink-0 md:w-80">
 
     <div class="flex flex-col gap-4">
       <% if @post.account != @post.user.account %>

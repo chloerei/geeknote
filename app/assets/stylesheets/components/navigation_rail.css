@@ -1,10 +1,10 @@
 @layer components {
   .navigation-rail {
-    @apply w-20 h-full py-4 flex flex-col items-center bg-surface-container;
+    @apply flex h-20 px-4 md:w-20 md:h-full md:px-0 md:py-4 md:flex-col items-center bg-surface-container;
   }
 
   .navigation-rail__item {
-    @apply h-14 flex flex-col gap-1 items-center relative cursor-pointer select-none;
+    @apply flex-grow md:flex-grow-0 h-14 flex flex-col gap-1 items-center relative cursor-pointer select-none;
   }
 
   .navigation-rail__item__icon {
