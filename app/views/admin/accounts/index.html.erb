@@ -4,15 +4,6 @@
       <div class="flex-grow text-lg font-medium px-2">
         <%= t 'common.accounts' %>
       </div>
-
-      <div class="relative">
-        <div class="icon w-6 h-6 absolute top-2 left-2">
-          <%= material_icon :search %>
-        </div>
-        <%= form_with url: url_for, method: :get do |f| %>
-          <%= f.search_field :q, value: params[:q], placeholder: "Search", class: "h-10 pl-10 border-none focus:ring-0 interactive-bg-surface-container rounded-full" %>
-        <% end %>
-      </div>
     </div>
 
     <table class="data-table">

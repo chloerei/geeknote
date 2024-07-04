@@ -2,7 +2,7 @@ class Admin::TagsController < Admin::BaseController
   before_action :set_tag, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @pagy, @tags = pagy_meilisearch(Tag.pagy_search(params[:q]), sort: [ "created_at:desc" ])
+    @pagy, @tags = pagy(Tag.order(id: :desc))
   end
 
   def show

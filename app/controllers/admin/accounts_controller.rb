@@ -2,7 +2,7 @@ class Admin::AccountsController < Admin::BaseController
   before_action :set_account, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @pagy, @accounts = pagy_meilisearch(Account.pagy_search(params[:q]), sort: [ "created_at:desc" ])
+    @pagy, @accounts = pagy(Account.order(id: :desc))
   end
 
   def show
