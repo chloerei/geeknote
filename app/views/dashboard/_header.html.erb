@@ -1,9 +1,10 @@
 <div class="flex items-center gap-2">
-  <div class="text-xl font-medium flex-grow">
+  <div class="text-lg font-medium flex-grow">
     Dashboard
   </div>
-  <a href="<%= account_root_path(@account.name) %>" class="icon-button">
+  <a href="<%= account_root_path(@account.name) %>" class="text-button">
     <%= material_icon :north_east %>
+    <span>View</span>
   </a>
   <div class="menu">
     <label tabindex="0" class="text-button">

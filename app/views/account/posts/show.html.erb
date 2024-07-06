@@ -113,7 +113,7 @@
             </div>
           <% end %>
 
-          <div class="sticky flex justify-center px-4 mt-8 bottom-4">
+          <div class="sticky flex justify-center px-4 mt-8 bottom-24 md:bottom-4">
             <div class="flex gap-2 p-1 bg-surface-container rounded-full shadow-md">
               <%= render "account/posts/likes/button", post: @post %>
 
@@ -127,12 +127,6 @@
               </div>
 
               <%= render "account/posts/bookmarks/button", post: @post %>
-
-              <div class="inline-flex items-center">
-                <button type="button" class="icon-button">
-                  <%= material_icon :toc %>
-                </button>
-              </div>
             </div>
           </div>
 

@@ -1,6 +1,6 @@
 @layer components {
   .navigation-rail {
-    @apply flex h-20 px-4 md:w-20 md:h-full md:px-0 md:py-4 md:flex-col items-center bg-surface-container;
+    @apply flex flex-col py-4 gap-3 items-center fixed top-0 left-0 bottom-0 w-20 bg-surface-container z-10;
   }
 
   .navigation-rail__item {
