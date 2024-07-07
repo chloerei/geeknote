@@ -7,7 +7,7 @@
         <%= material_icon :search %>
       </div>
       <%= form_with url: url_for, method: :get do |f| %>
-        <%= f.search_field :q, value: params[:q], placeholder: "Search", class: "h-10 pl-10 border-none focus:ring-0 interactive-bg-surface-container rounded-full" %>
+        <%= f.search_field :q, value: params[:q], placeholder: t("general.search"), class: "h-10 pl-10 border-none focus:ring-0 interactive-bg-surface-container rounded-full" %>
       <% end %>
     </div>
 
@@ -15,42 +15,64 @@
 
     <div class="menu hidden md:block">
       <label tabindex="0" class="text-button text-on-surface-variant">
-        Status: <%= @status || "all" %>
+        <span>
+          <%=
+            case params[:status]
+            when "draft"
+              t "general.draft"
+            when "published"
+              t "general.published"
+            when "trashed"
+              t "general.trashed"
+            else
+              t "general.all_posts"
+            end
+          %>
+        </span>
         <%= material_icon :arrow_drop_down %>
       </label>
       <div class="menu__content">
         <a href="<%= url_for(request.GET.merge(status: nil)) %>" class="menu__item">
-          All
+          <%= t "general.all_posts" %>
         </a>
         <a href="<%= url_for(request.GET.merge(status: "draft")) %>" class="menu__item">
-          Draft
+          <%= t "general.draft" %>
         </a>
         <a href="<%= url_for(request.GET.merge(status: "published")) %>" class="menu__item">
-          Published
+          <%= t "general.published" %>
         </a>
         <a href="<%= url_for(request.GET.merge(status: "trashed")) %>" class="menu__item">
-          Trashed
+          <%= t "general.trashed" %>
         </a>
       </div>
     </div>
 
     <div class="menu hidden md:block">
       <label tabindex="0" class="text-button text-on-surface-variant">
-        Sort by: <%= @sort %>
+        <span>
+          <%=
+            case params[:sort]
+            when "updated"
+              t "general.last_updated"
+            else
+              t "general.newest"
+            end
+          %>
+        </span>
         <%= material_icon :arrow_drop_down %>
       </label>
       <div class="menu__content">
         <a href="<%= url_for(request.GET.merge(sort: nil)) %>" class="menu__item">
-          Created
+          <%= t "general.newest" %>
         </a>
         <a href="<%= url_for(request.GET.merge(sort: "updated")) %>" class="menu__item">
-          Updated
+          <%= t "general.last_updated" %>
         </a>
       </div>
     </div>
 
     <a href="<%= new_dashboard_post_path(@account.name) %>" class="filled-button">
-      New post
+      <%= t "general.new_post" %>
     </a>
   </div>
 

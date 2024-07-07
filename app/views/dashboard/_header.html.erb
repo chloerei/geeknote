@@ -1,10 +1,10 @@
 <div class="flex items-center gap-2">
   <div class="text-lg font-medium flex-grow">
-    Dashboard
+    <%= t "general.dashboard" %>
   </div>
   <a href="<%= account_root_path(@account.name) %>" class="text-button">
     <%= material_icon :north_east %>
-    <span>View</span>
+    <span><%= t "general.view" %></span>
   </a>
   <div class="menu">
     <label tabindex="0" class="text-button">
@@ -16,7 +16,7 @@
     </label>
     <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
       <div class="px-4 py-2 text-sm font-medium text-on-surface-variant">
-        Personal
+        <%= t "general.personal" %>
       </div>
 
       <a href="<%= dashboard_root_path(Current.user.account.name) %>" class="menu__item">
@@ -31,7 +31,7 @@
       <hr class="border-outline-variant my-2">
 
       <div class="px-4 py-2 text-sm font-medium text-on-surface-variant">
-        Organizations
+        <%= t "general.organizations" %>
       </div>
 
       <% Current.user.organizations.includes(:account).each do |organization| %>
@@ -47,15 +47,13 @@
 
       <a href="<%= new_organization_path %>" class="menu__item">
         <%= material_icon :add %>
-        <div>
-          New organization
-        </div>
+        <span><%= t "general.new_organization" %></span>
       </a>
     </div>
   </div>
 </div>
 
 <div class="flex gap-2 mt-6">
-  <%= render "components/tab", icon: "article", label: "Posts", url: dashboard_root_path(@account.name), active: current_page?(dashboard_root_path(@account.name)) %>
-  <%= render "components/tab", icon: "settings", label: "Settings", url: dashboard_settings_profile_path, active: request.path.include?("/settings/") %>
+  <%= render "components/tab", icon: "article", label: t("general.posts"), url: dashboard_root_path(@account.name), active: current_page?(dashboard_root_path(@account.name)) %>
+  <%= render "components/tab", icon: "settings", label: t("general.settings"), url: dashboard_settings_profile_path, active: request.path.include?("/settings/") %>
 </div>

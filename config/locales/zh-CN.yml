@@ -119,12 +119,14 @@ zh-CN:
     account: 账号
     account_settings: 账号设置
     accounts: 账号
+    all_posts: 所有文章
     appearance: 外观
     bookmarks: 书签
     commentable: 评论对象
     comments: 评论
     created_at: 创建于
     dashboard: 仪表盘
+    draft: 草稿
     edit: 编辑
     email: 邮件地址
     following: 关注中
@@ -132,26 +134,33 @@ zh-CN:
     id: Id
     in: 在
     last_fetched_at: 最后抓取于
+    last_updated: 最近更新
     load_more: 查看更多
     me: 我
     members: 成员
     merge_tags: 合并标签
-    name: Name
+    move_to_trash: 移到回收站
+    name: 名称
+    new_organization: 新组织
+    new_post: 新文章
     newest: 最新
     no_more_content: 没有更多内容。
     notification_settings: 通知设置
     notifications: 通知
     organizations: 组织
     overview: 概览
-    owner: Owner
+    owner: 拥有者
     password: 密码
+    personal: 个人
     popular: 热门
     popular_tags: 热门标签
     posts: 文章
     public_link: 公开链接
+    published: 已发布
     recommend_users: 推荐用户
     reset_password: 重置密码
     save_changes: 保存修改
+    search: 搜索
     send_email: 发送邮件
     send_preview: 发送预览
     settings: 设置
@@ -160,9 +169,11 @@ zh-CN:
     submit: 提交
     table_of_contents: 目录
     tags: 标签
+    trashed: 回收站
     untitled: 无标题
     user: 用户
     users: 用户
+    view: 查看
     weekly_digest: 每周摘要
     weekly_digest_subject: '"%{title}" - %{count} 篇热门文章'
   home:

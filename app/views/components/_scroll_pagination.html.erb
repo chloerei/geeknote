@@ -9,12 +9,12 @@
     <% if pagy.next %>
       <div class="text-center">
         <a href="<%= pagy_url_for(pagy, pagy.next) %>" class="text-button" data-scroll-pagination-target="nextLink">
-          Load more
+          <%= t "general.load_more" %>
         </a>
       </div>
     <% else %>
       <div class="text-center text-sm text-on-surface-variant">
-        No more content
+        <%= t "general.no_more_content" %>
       </div>
     <% end %>
   </div>
