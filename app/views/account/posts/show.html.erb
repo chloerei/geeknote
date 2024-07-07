@@ -16,9 +16,8 @@
     <meta name="twitter:image" content="<%= featured_image_url @post.featured_image %>">
   <% end %>
 
-  <link rel="canonical" href="<%= @post.canonical_url || account_post_url(@account, @post) %>">
+  <link rel="canonical" href="<%= @post.canonical_url || account_post_url(@account.name, @post) %>">
 <% end %>
-
 
 <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row gap-6">
   <div class="flex-grow min-w-0">
@@ -50,6 +49,13 @@
             </div>
             <div class="text-sm text-on-surface-variant">
               <%= format_time @post.published_at %>
+              <% if @post.canonical_url.present? %>
+                &centerdot;
+                <%= t "general.originally_published_at" %>
+                <a href="<%= @post.canonical_url %>" target="_blank" class="text-primary">
+                  <%= URI(@post.canonical_url).host %>
+                </a>
+              <% end %>
             </div>
           </div>
 
@@ -61,22 +67,18 @@
               <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
                 <button type="button" class="menu__item" data-controller="copy-link" data-action="copy-link#copy" data-copy-link-url-value="<%= account_post_path(@account.name, @post) %>">
                   <%= material_icon :link %>
-                  Copy link
+                  <span><%= t "general.copy_link" %></span>
                 </button>
 
                 <div class="hidden visible-to-user--<%= @post.user.id %>">
                   <a href="<%= edit_dashboard_post_path(@account.name, @post) %>" class="menu__item">
                     <%= material_icon :edit %>
-                    <span>
-                      Edit
-                    </span>
+                    <span><%= t "general.edit" %></span>
                   </a>
                   <%= form_with url: dashboard_post_path(@account.name, @post), method: :delete do |form| %>
                     <button type="submit" class="menu__item">
                       <%= material_icon :delete %>
-                      <span>
-                        Delete
-                      </span>
+                      <span><%= t "general.delete" %></span>
                     </button>
                   <% end %>
                 </div>
@@ -84,9 +86,7 @@
                 <div class="hidden visible-to-admin">
                   <button type="button" class="menu__item">
                     <%= material_icon :build %>
-                    <span>
-                      Manage
-                    </span>
+                    <span><%= t "general.manage" %></span>
                   </button>
                 </div>
               </div>
@@ -148,12 +148,12 @@
 
       <div class="card">
         <div class="text-lg font-medium p-4">
-          More from <%= @post.user.name %>
+          <%= t "general.more_from", name: @account.display_name %>
         </div>
         <div class="mb-3">
           <% @post.user.posts.published.order(published_at: :desc).where.not(id: @post.id).limit(3).each do |post| %>
             <a href="<%= account_post_path(post.account.name, post) %>" class="flex p-4 interactive-bg-surface-container-lowest">
-              <%= post.title %>
+              <%= post.title.presence || t("general.untitled") %>
             </a>
           <% end %>
         </div>

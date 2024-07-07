@@ -1,4 +1,4 @@
-<div class="bg-surface-container-lowest rounded-xl">
+<div class="card">
   <div class="w-full aspect-[3/1] bg-primary-container rounded-t-xl">
     <% if account.owner.banner_image.attached? %>
       <img src="<%= url_for(account.owner.banner_image.variant(:large)) %>" alt="banner image" class="w-full aspect-[3/1] object-cover rounded-t-xl">
@@ -12,7 +12,7 @@
     <div class="flex-shrink-0 flex items-center gap-2">
       <% if account.user? && account.owner == Current.user %>
         <a href="<%= dashboard_settings_profile_path %>" class="outlined-button">
-          Edit profile
+          <%= t "general.edit_profile" %>
         </a>
       <% else %>
         <%= render "account/follows/button", account: account %>
@@ -25,17 +25,13 @@
         <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
           <button type="button" class="menu__item" data-controller="copy-link" data-action="copy-link#copy" data-copy-link-url-value="<%= account_root_url(account.name) %>">
             <%= material_icon :link %>
-            <div>
-              Copy link
-            </div>
+            <span><%= t "general.copy_link" %></span>
           </button>
           <% if Current.user %>
             <% if (account.user? && account.owner == Current.user) || (account.organization? && account.owner.members.active.where(user: Current.user).exists?) %>
               <a href="<%= dashboard_root_path(account.name) %>" class="menu__item">
                 <%= material_icon :dashboard %>
-                <div>
-                  Dashboard
-                </div>
+                <%= t "general.dashboard" %>
               </a>
             <% end %>
           <% end %>
@@ -76,12 +72,12 @@
       <% if account.user? %>
         <a href="<%= account_followings_path(account.name) %>">
           <span class="tabular-nums font-medium"><%= account.owner.followings_count %></span>
-          <span class="text-on-surface-variant">Following</span>
+          <span class="text-on-surface-variant"><%= t "general.following" %></span>
         </a>
       <% end %>
       <a href="<%= account_followers_path(account.name) %>">
         <span class="tabular-nums font-medium"><%= account.followers_count %></span>
-        <span class="text-on-surface-variant">Followers</span>
+        <span class="text-on-surface-variant"><%= t "general.followers" %></span>
       </a>
     </div>
   </div>

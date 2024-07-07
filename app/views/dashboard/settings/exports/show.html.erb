@@ -8,20 +8,20 @@
   <div class="flex-grow min-w-0">
     <div class="flex h-14 items-center p-2 gap-2">
       <div class="text-lg font-medium px-2">
-        Export
+        <%= t "general.export" %>
       </div>
     </div>
 
     <div class="p-4">
       <div class="max-w-screen-sm">
         <p>
-          Export posts and attachments to a .tar.gz file. You can export once per day.
+          <%= t ".export_description" %>
         </p>
 
         <div class="mt-4">
           <%= form_with url: dashboard_settings_export_path, method: :post do |form| %>
             <button type="submit" class="filled-button">
-              Export
+              <%= t "general.export" %>
             </button>
           <% end %>
         </div>
@@ -29,17 +29,18 @@
         <% if @account.export %>
           <div class="mt-4">
             <div>
-              Last exported at <%= format_time @account.export.created_at %>
+              <%= t ".last_exported_at" %>
+              <%= format_time @account.export.created_at %>
             </div>
 
             <div class="mt-4">
               <% if @account.export.completed? %>
                 <a href="<%= url_for(@account.export.file) %>" class="outlined-button">
-                  Download
+                  <%= t "general.download" %>
                 </a>
               <% else %>
                 <span class="text-on-surface-variant">
-                  Export is in progress
+                  <%= t ".export_in_progress" %>
                 </span>
               <% end %>
             </div>

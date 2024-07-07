@@ -8,11 +8,6 @@
   <div class="flex-grow min-w-0">
     <%= render "account/header", account: @account %>
 
-    <div class="flex gap-2 mt-4">
-      <%= render "components/tab", label: "Posts", active: true %>
-      <%= render "components/tab", label: "Comments", active: false %>
-    </div>
-
     <div class="mt-4">
       <%= render partial: "home/post", collection: @posts %>
     </div>

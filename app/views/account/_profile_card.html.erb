@@ -36,7 +36,8 @@
           <div class="icon w-6 h-6">
             <%= material_icon :calendar_month %>
           </div>
-          <%= local_date account.created_at.to_date, data: { turbo_permanent: true } %> Joined
+          <%= local_date account.created_at.to_date, data: { turbo_permanent: true } %>
+          <%= t "general.joined" %>
         </div>
       </div>
 
@@ -44,12 +45,12 @@
         <% if account.user? %>
           <a href="<%= account_followings_path(account.name) %>">
             <span class="tabular-nums font-medium"><%= account.owner.followings_count %></span>
-            <span class="text-on-surface-variant">Following</span>
+            <span class="text-on-surface-variant"><%= t "general.following" %></span>
           </a>
         <% end %>
         <a href="<%= account_followers_path(account.name) %>">
           <span class="tabular-nums font-medium"><%= account.followers_count %></span>
-          <span class="text-on-surface-variant">Followers</span>
+          <span class="text-on-surface-variant"><%= t "general.followers" %></span>
         </a>
       </div>
     </div>

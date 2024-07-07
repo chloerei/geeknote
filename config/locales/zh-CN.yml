@@ -3,6 +3,7 @@ zh-CN:
   activerecord:
     attributes:
       account:
+        feed_mark_canonical: 标记原文链接
         feed_url: RSS/Atom Feed URL
         name: 账号名
       comment:
@@ -101,10 +102,15 @@ zh-CN:
         featured_image_description: 作为文章封面、社交分享图像。
         tag_description: 便于分类和检索。
     settings:
+      exports:
+        show:
+          export_description: 导出文章和附件并打包为.tar.gz 压缩包。一天可以导出一次。
+          export_in_progress: 导出中
+          last_exported_at: 上次导出于
       imports:
         show:
-          feed_mark_canonical_description: Feed mark canonical description
-          save_and_fetch: Save and fetch
+          feed_mark_canonical_description: 标记导入文章的链接作为原文链接。
+          save_and_fetch: 保存并抓取
   email:
     email_verification: 验证邮箱地址
     reset_your_geeknote_password: 重置密码
@@ -131,22 +137,33 @@ zh-CN:
     click_to_select_image: 点击选择图片
     commentable: 评论对象
     comments: 评论
+    copy_link: 复制链接
     created_at: 创建于
     dashboard: 仪表盘
+    delete: 删除
     delete_permanently: 永久删除
+    download: Download
     draft: 草稿
     edit: 编辑
+    edit_profile: 编辑资料
     email: 邮件地址
+    export: 导出
+    follow: 关注
+    followers: 关注者
     following: 关注中
     home: 首页
     id: Id
+    import: 导入
     in: 在
+    joined: 加入
     last_fetched_at: 最后抓取于
     last_updated: 最近更新
     load_more: 查看更多
+    manage: 管理
     me: 我
     members: 成员
     merge_tags: 合并标签
+    more_from: 更多来自 %{name}
     move_to_trash: 移到回收站
     name: 名称
     new_organization: 新组织
@@ -156,6 +173,7 @@ zh-CN:
     notification_settings: 通知设置
     notifications: 通知
     organizations: 组织
+    originally_published_at: 原发布于
     overview: 概览
     owner: 拥有者
     password: 密码
@@ -165,6 +183,7 @@ zh-CN:
     post: 文章
     posts: 文章
     preview: 预览
+    profile: 资料
     public_link: 公开链接
     publish: 发布
     published: 已发布
@@ -178,11 +197,13 @@ zh-CN:
     send_preview: 发送预览
     settings: 设置
     sign_in: 登录
+    sign_out: 登出
     sign_up: 注册
     submit: 提交
     table_of_contents: 目录
     tags: 标签
     trashed: 回收站
+    unfollow: 取消关注
     unpublish: 取消发布
     untitled: 无标题
     update: 更新

@@ -1,10 +1,10 @@
 <div class="flex md:flex-col h-full pt-3 md:py-3 border-b md:border-b-0 md:border-r border-outline-variant overflow-auto">
   <%
     [
-      { url: dashboard_settings_profile_path, label: "Profile", active: (controller_name == "profiles") },
-      { url: dashboard_settings_members_path, label: "Members", active: (controller_name == "members"), hidden: !@account.organization? },
-      { url: dashboard_settings_import_path, label: "Import", active: (controller_name == "imports") },
-      { url: dashboard_settings_export_path, label: "Export", active: (controller_name == "exports") },
+      { url: dashboard_settings_profile_path, label: t("general.profile"), active: (controller_name == "profiles") },
+      { url: dashboard_settings_members_path, label: t("general.members"), active: (controller_name == "members"), hidden: !@account.organization? },
+      { url: dashboard_settings_import_path, label: t("general.import"), active: (controller_name == "imports") },
+      { url: dashboard_settings_export_path, label: t("general.export"), active: (controller_name == "exports") },
     ].each do |item|
   %>
     <% if !item[:hidden] %>

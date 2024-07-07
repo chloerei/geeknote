@@ -18,55 +18,40 @@
   <div class="flex-grow"></div>
 
   <div class="menu flex-shrink-0">
-    <label tabindex="0" class="navigation-rail__item">
-      <div class="navigation-rail__item__icon">
-        <% if Current.user %>
-          <img src="<%= avatar_url(Current.user) %>" class="h-6 w-6 rounded-full">
-        <% else %>
-          <img src="<%= asset_path("avatar.png") %>" class="h-6 w-6 rounded-full">
-        <% end %>
-      </div>
-      <div class="navigation-rail__item__label">
-        Me
-      </div>
+    <label tabindex="0" class="icon-button">
+      <% if Current.user %>
+        <img src="<%= avatar_url(Current.user) %>" class="h-8 w-8 rounded-full">
+      <% else %>
+        <img src="<%= asset_path("avatar.png") %>" class="h-8 w-8 rounded-full">
+      <% end %>
     </label>
     <div tabindex="0" class="menu__content top-auto left-auto bottom-full right-0 origin-bottom-right md:left-full md:bottom-0 md:origin-bottom-left">
       <% if Current.user %>
         <a href="<%= account_root_path(Current.user.account.name) %>" class="menu__item">
           <%= material_icon :account_circle %>
-          <span>
-            Profile
-          </span>
+          <span><%= t "general.profile" %></span>
         </a>
 
         <a href="<%= settings_root_path %>" class="menu__item">
           <%= material_icon :settings %>
-          <span>
-            Settings
-          </span>
+          <span><%= t "general.settings" %></span>
         </a>
 
         <%= form_with url: sign_out_path, method: :delete do |form| %>
           <button type="submit" class="menu__item">
             <%= material_icon :logout %>
-            <span>
-              Sign out
-            </span>
+            <span><%= t "general.sign_out" %></span>
           </button>
         <% end %>
       <% else %>
         <a href="<%= sign_in_path %>" class="menu__item">
           <%= material_icon :login %>
-          <span>
-            Sign in
-          </span>
+          <span><%= t "general.sign_in" %></span>
         </a>
 
         <a href="<%= sign_up_path %>" class="menu__item">
           <%= material_icon :person_add %>
-          <span>
-            Sign up
-          </span>
+          <span><%= t "general.sign_up" %></span>
         </a>
       <% end %>
     </div>
