@@ -25,15 +25,15 @@
     <% case post.status %>
     <% when "draft" %>
       <div class="inline-block px-2 rounded bg-surface-container">
-        <%= t "general.draft" %>
+        <%= Post.human_attribute_name "status.#{post.status}" %>
       </div>
     <% when "published" %>
       <div class="inline-block px-2 rounded bg-primary-container">
-        <%= t "general.published" %>
+        <%= Post.human_attribute_name "status.#{post.status}" %>
       </div>
     <% when "trashed" %>
       <div class="inline-block px-2 rounded bg-tertiary-container">
-        <%= t "general.trashed" %>
+        <%= Post.human_attribute_name "status.#{post.status}" %>
       </div>
     <% end %>
   </div>

@@ -8,25 +8,25 @@
   >
 
   <%# Top bar %>
-  <div class="flex items-center p-3 gap-2 sticky top-0 z-10 bg-surface-container">
+  <div class="flex items-center p-3 gap-2 sticky top-0 z-10 bg-surface">
     <a href="<%= dashboard_posts_path(@account.name) %>" class="icon-button">
       <%= material_icon :arrow_back %>
     </a>
     <div class="flex-grow px-2">
       <div class="text-lg font-medium">
-        Post
+        <%= t "general.post" %>
         <span class="text-on-surface-variant font-normal px-2">
-          <%= @post.status %>
+          <%= Post.human_attribute_name "status.#{@post.status}" %>
         </span>
       </div>
     </div>
 
     <% if @post.new_record? %>
       <button type="submit" class="text-button" form="post-form" data-post-editor-target="submitButton" disabled>
-        Save
+        <%= t "general.save" %>
       </button>
       <button type="button" class="text-button" disabled>
-        Publish
+        <%= t "general.publish" %>
       </button>
       <label for="settings" class="icon-button">
         <%= material_icon :tune %>
@@ -37,16 +37,16 @@
     <% else %>
       <% if @post.draft? %>
         <button type="submit" class="text-button" form="post-form" data-post-editor-target="submitButton" disabled>
-          Save
+          <%= t "general.save" %>
         </button>
         <%= form_with model: @post, url: dashboard_post_publish_path(@account.name, @post), method: :patch do %>
           <button type="submit" class="text-button" data-post-editor-target="publishButton">
-            Publish
+            <%= t "general.publish" %>
           </button>
         <% end %>
       <% elsif @post.published? %>
         <button type="submit" class="text-button" form="post-form" data-post-editor-target="submitButton" disabled>
-          Update
+          <%= t "general.update" %>
         </button>
         <a href="<%= account_post_path(@post.account.name, @post) %>" class="icon-button">
           <%= material_icon :north_east %>
@@ -54,7 +54,7 @@
       <% elsif @post.trashed? %>
         <%= form_with model: @post, url: dashboard_post_trash_path(@account.name, @post), method: :delete do %>
           <button type="submit" class="text-button">
-            Restore
+            <%= t "general.restore" %>
           </button>
         <% end %>
       <% end %>
@@ -74,7 +74,7 @@
               <button type="submit" class="menu__item">
                 <%= material_icon :unpublished %>
                 <span>
-                  Unpublish
+                  <%= t "general.unpublish" %>
                 </span>
               </button>
             <% end %>
@@ -84,7 +84,7 @@
               <button type="submit" class="menu__item">
                 <%= material_icon :delete_forever %>
                 <span>
-                  Delete permanently
+                  <%= t "general.delete_permanently" %>
                 </span>
               </button>
             <% end %>
@@ -93,7 +93,7 @@
               <button type="submit" class="menu__item">
                 <%= material_icon :delete %>
                 <span>
-                  Move to trash
+                  <%= t "general.move_to_trash" %>
                 </span>
               </button>
             <% end %>
@@ -109,8 +109,8 @@
       <%# Container %>
       <div class="card flex-grow p-8 mb-4 max-w-screen-md group/container" data-post-editor-target="container" data-turbo-permanent>
         <div class="block group-[.previewing]/container:hidden min-h-screen">
-          <%= form.text_area :title, class: "block w-full px-0 py-2 border-none focus:ring-0 bg-transparent text-3xl font-bold resize-none", placeholder: "Title", autocomplete: "off", data: { post_editor_target: "titleInput", action: "input->post-editor#resizeTitleInput keydown.enter->post-editor#focus:prevent" } %>
-          <%= form.hidden_field :content, id: "post_content", placeholder: "Write in Markdown", data: { post_editor_target: "contentInput" } %>
+          <%= form.text_area :title, class: "block w-full px-0 py-2 border-none focus:ring-0 bg-transparent text-3xl font-bold resize-none", placeholder: Post.human_attribute_name("title"), autocomplete: "off", data: { post_editor_target: "titleInput", action: "input->post-editor#resizeTitleInput keydown.enter->post-editor#focus:prevent" } %>
+          <%= form.hidden_field :content, id: "post_content", placeholder: "Markdown...", data: { post_editor_target: "contentInput" } %>
           <div id="post_content_markdown" class="mt-4" data-post-editor-target="contentMarkdown"></div>
         </div>
 
@@ -120,10 +120,10 @@
           <div class="flex gap-1 p-1 bg-surface-container rounded-full shadow-md">
             <div class="flex items-center">
               <button type="button" class="text-button group-[.previewing]/container:text-on-surface-variant" data-action="post-editor#write">
-                Write
+                <%= t "general.write" %>
               </button>
               <button type="button" class="text-button text-on-surface-variant group-[.previewing]/container:text-primary" data-action="post-editor#preview">
-                Preview
+                <%= t "general.preview" %>
               </button>
             </div>
 
@@ -133,11 +133,6 @@
               </button>
             </div>
 
-            <div class="flex items-center gap-1">
-              <button type="button" class="icon-button">
-                <%= material_icon :help %>
-              </button>
-            </div>
           </div>
         </div>
       </div>
@@ -156,7 +151,7 @@
           <div class="flex-grow min-h-0 flex flex-col w-80">
             <div class="flex items-center p-4">
               <div class="text-lg font-medium flex-grow px-2">
-                Settings
+                <%= t "general.settings" %>
               </div>
               <label for="settings" class="icon-button">
                 <%= material_icon :close %>
@@ -180,7 +175,7 @@
                         <%= material_icon :add_photo_alternate %>
                       </div>
                       <div class="text-sm font-medium">
-                        Click to select image
+                        <%= t "general.click_to_select_image" %>
                       </div>
                     </label>
 
@@ -199,24 +194,24 @@
                   </div>
                 <% end %>
                 <div class="form-text">
-                  Use as post cover, card image, and social media preview.
+                  <%= t ".featured_image_description" %>
                 </div>
               </div>
 
               <%# Tags %>
               <div class="form-field" data-turbo-permanent>
-                <label for="post_tag_list" class="block mb-2 text-sm font-medium text-on-surface-variant">Tags</label>
+                <%= form.label :tag_list, class: "form-label" %>
                 <div class="combobox">
                   <%= form.combobox :tag_list, tag_options_path, multiselect_chip_src: tag_chips_path, free_text: true %>
                 </div>
-                <div class="text-sm text-on-surface-variant mt-2">
-                  Let readers find your post with tags.
+                <div class="form-text">
+                  <%= t ".tag_description" %>
                 </div>
               </div>
 
               <div class="form-field">
                 <%= form.label :canonical_url, class: "form-label" %>
-                <%= render "components/text_field", form: form, name: :canonical_url, description: "If you are cross-posting this article, enter the original URL here." %>
+                <%= render "components/text_field", form: form, name: :canonical_url, description: t(".canonical_url_description") %>
               </div>
             </div>
           </div>

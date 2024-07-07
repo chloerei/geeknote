@@ -25,11 +25,12 @@ zh-CN:
         name: 名称
       post:
         allow_comments: 允许评论
-        canonical_url: Canonical URL
+        canonical_url: 原文链接
         content: 内容
         excerpt: 摘要
         featured: 置顶显示
         featured_image: 封面
+        tag_list: 标签
         title: 标题
       post/status:
         draft: 草稿
@@ -94,6 +95,11 @@ zh-CN:
           merge: 合并
           merge_to: 将以下标签合并到“%{name}”
   dashboard:
+    posts:
+      editor:
+        canonical_url_description: 如果文章之前已发布在其他地方，可以填写原文链接。
+        featured_image_description: 作为文章封面、社交分享图像。
+        tag_description: 便于分类和检索。
     settings:
       imports:
         show:
@@ -122,10 +128,12 @@ zh-CN:
     all_posts: 所有文章
     appearance: 外观
     bookmarks: 书签
+    click_to_select_image: 点击选择图片
     commentable: 评论对象
     comments: 评论
     created_at: 创建于
     dashboard: 仪表盘
+    delete_permanently: 永久删除
     draft: 草稿
     edit: 编辑
     email: 邮件地址
@@ -154,11 +162,16 @@ zh-CN:
     personal: 个人
     popular: 热门
     popular_tags: 热门标签
+    post: 文章
     posts: 文章
+    preview: 预览
     public_link: 公开链接
+    publish: 发布
     published: 已发布
     recommend_users: 推荐用户
     reset_password: 重置密码
+    restore: 恢复
+    save: 保存
     save_changes: 保存修改
     search: 搜索
     send_email: 发送邮件
@@ -170,12 +183,15 @@ zh-CN:
     table_of_contents: 目录
     tags: 标签
     trashed: 回收站
+    unpublish: 取消发布
     untitled: 无标题
+    update: 更新
     user: 用户
     users: 用户
     view: 查看
     weekly_digest: 每周摘要
     weekly_digest_subject: '"%{title}" - %{count} 篇热门文章'
+    write: 写作
   home:
     sidebar:
       email_is_not_verified: Email 未验证，部分功能将受限。
