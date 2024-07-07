@@ -1,12 +1,12 @@
 <div class="">
   <div class="text-lg font-medium">
-    Home
+    <%= t "general.home" %>
   </div>
 
   <div class="flex items-center gap-2 mt-6">
-    <%= render "components/tab", icon: :trending_up, label: "Popular", url: root_path, active: current_page?(root_path) %>
-    <%= render "components/tab", icon: :post, label: "Following", url: following_path, active: current_page?(following_path) %>
-    <%= render "components/tab", icon: :newspaper, label: "Newest", url: newest_path, active: current_page?(newest_path) %>
+    <%= render "components/tab", icon: :trending_up, label: t("general.popular"), url: root_path, active: current_page?(root_path) %>
+    <%= render "components/tab", icon: :post, label: t("general.following"), url: following_path, active: current_page?(following_path) %>
+    <%= render "components/tab", icon: :newspaper, label: t("general.newest"), url: newest_path, active: current_page?(newest_path) %>
   </div>
 
   <div class="flex gap-6 mt-6">

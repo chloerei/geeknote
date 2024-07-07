@@ -54,12 +54,6 @@ class Account < ApplicationRecord
     end
   end
 
-  scope :recommend_for, ->(user) {
-    where(
-      id: Account.distinct.joins(:posts).where("posts.published_at > ?", 3.month.ago).where("followers_count > 0").where.not(id: user&.account&.id)
-    ).order("random()")
-  }
-
   def post_tags
     Tag.joins(:posts).where(posts: { account_id: self.id }).distinct
   end

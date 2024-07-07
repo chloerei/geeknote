@@ -28,7 +28,7 @@
             </button>
             <% if @account.feed_url.present? && @account.feed_fetched_at %>
               <div class="text-on-surface-variant">
-                <%= t 'common.last_fetched_at' %>
+                <%= t 'general.last_fetched_at' %>
                 <%= format_time @account.feed_fetched_at %>
               </div>
             <% end %>

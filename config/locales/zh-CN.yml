@@ -1,45 +1,5 @@
 ---
 zh-CN:
-  account:
-    dashboard:
-      home:
-        index:
-          members: 成员
-          members_desription: 邀请其他人加入写作。
-          posts: 文章
-          posts_desription: 草稿和已发布文章。
-          settings: 设置
-          settings_desription: 账号设置。
-      members:
-        form:
-          role_admin_description: 可以管理所有内容和成员，可以修改组织账号设置。
-          role_member_description: 可以编辑和发布自己的文章。
-      posts:
-        editor:
-          post_content_placeholder: 内容…
-          post_tags_placeholder: 标签…
-          post_title_placeholder: 标题…
-      settings:
-        accounts:
-          form:
-            account_name_warning: 修改账号名会使以往的文章链接、RSS 订阅链接失效，请慎重修改！
-        exports:
-          index:
-            no_data_exported_yet: 还没有创建数据导出。
-        home:
-          index:
-            account_name: 账号名
-            account_name_desription: 修改账号名。
-            exports: 导出
-            exports_desription: 导出 Markdown 格式的文章和附件。
-            import: 导入
-            import_desription: 从 RSS/Atom Feed 导入文章。
-            profile: 账号资料
-            profile_desription: 头像、简介和其它一般信息。
-        imports:
-          form:
-            feed_mark_canonical_description: 设置 Feed 的文章 URL 为 Canonical Link。希望原博客作为正式地址时勾选此项。
-            feed_mark_canonical_label: 设置 Canonical Link
   activerecord:
     attributes:
       account:
@@ -120,9 +80,7 @@ zh-CN:
   admin:
     posts:
       show:
-        restrict_post: 限制发布
         restrict_post_confirm: 确认限制发布？（将会发送邮件通知用户）
-        unrestrict: 取消限制发布
     settings:
       home:
         index:
@@ -135,216 +93,105 @@ zh-CN:
         new:
           merge: 合并
           merge_to: 将以下标签合并到“%{name}”
-  common:
-    account: 账号
-    account_name: 账号名
-    account_profile: 账号资料
-    account_settings: 账号设置
-    accounts: 账号
-    add_featured_image: 添加封面图片
-    admin: 管理
-    all_bookmarks: 全部书签
-    appearance: 外观
-    avatar: 头像
-    back_to_home: 返回首页
-    banner_image: 横幅图片
-    bookmarks: 书签
-    cancel: 取消
-    canonical_url_helper: 文章的原始链接。
-    change_password: 修改密码
-    comment_is_disabled: 评论已关闭
-    comment_on: 评论了
-    comment_placeholder: 评论…
-    commentable: 评论对象
-    comments: 评论
-    content_has_expired: 内容已失效
-    continute_thread: 继续讨论
-    create_export: 创建导出任务
-    create_organization: 创建组织
-    dark_theme: 深色主题
-    dashboard: 内容管理
-    delete: 删除
-    delete_export_confirm: 确认删除导出内容？
-    deleted_content: 已删除内容
-    devise_theme: 设备主题（默认)
-    done: 完成
-    download: 下载
-    edit: 编辑
-    edit_account: 编辑账号
-    edit_comment: 编辑评论
-    edit_member: 编辑成员
-    edit_organization: 编辑组织
-    edit_tags: 编辑标签
-    edit_users: 编辑用户
-    email: 邮件地址
-    exports: 导出数据
-    feed: 订阅
-    follow: 关注
-    followers: 关注者
-    following: 关注中
-    followings: 关注中
-    forgot_password?: 忘记密码？
-    form_unsave_confirm: 改动未保存，确认离开当前页面？
-    hide_replies: 隐藏回复
-    hot: 热门
-    icon: 图标
-    import: 导入
-    in: 在
-    invite_member: 邀请成员
-    joined: 加入
-    last_fetched_at: 最后抓取于
-    light_theme: 浅色主题
-    like: 赞
-    liked_posts: 赞过
-    likes: 赞
-    load_more: 查看更多
-    logo: Logo
-    logo_dark: Logo 暗色调
-    members: 成员
-    merge: 合并
-    merge_tags: 合并标签
-    move_to_bottom: 移到底部
-    move_to_top: 移到顶部
-    new_organization: 新组织
-    new_post: 新文章
-    newest: 最新
-    no_description: 没有描述
-    no_more_content: 没有更多内容。
-    no_posts: 没有文章
-    notification_settings: 通知设置
-    notifications: 通知
-    organizations: 组织
-    originally_published_at: 最初发布于
-    overview: 概览
-    owner: Owner
-    password: 密码
-    pending: 待确认
-    popular: 热门
-    popular_tags: 热门标签
-    post_delete_confirm: 确认删除文章？
-    posts: 文章
-    private: 私有
-    profile: 个人资料
-    public: 公开
-    public_link: 公开链接
-    publish: 发布
-    remove: 移除
-    replies: 回复
-    reply: 回复
-    resend_invitation: 重新发送邀请
-    reset_password: 重置密码
-    restricted: 限制发布
-    role: 角色
-    save: 保存
-    save_and_fetch: 保存并抓取
-    save_changes: 保存修改
-    search: 搜索
-    send_email: 发送邮件
-    send_invitation: 发送邀请
-    send_password_reset_email: 发送密码重置邮件
-    send_preview: 发送预览
-    settings: 设置
-    show_less: 查看更少
-    show_more: 查看更多
-    sign_in: 登录
-    sign_in_to_comment: 登录后评论
-    sign_out: 登出
-    sign_up: 注册
-    submit: 提交
-    table_of_contents: 目录
-    tags: 标签
-    theme: 主题
-    untitled: 无标题
-    user: 用户
-    users: 用户
-    view: 查看
-    view_more: 查看更多
-    visibility: 公开范围
-    weekly_digest: 每周摘要
-    weekly_digest_subject: '"%{title}" - %{count} 篇热门文章'
+  dashboard:
+    settings:
+      imports:
+        show:
+          feed_mark_canonical_description: Feed mark canonical description
+          save_and_fetch: Save and fetch
   email:
     email_verification: 验证邮箱地址
     reset_your_geeknote_password: 重置密码
-    your_post_is_been_restricted_for_publish: 您的帖子已被限制发布
   errors:
     messages:
       email_or_password_error: Email 或密码错误
   flash:
-    account_updated: 账号已更新。
     appearance_update_successful: 外观设置更新成功。
-    email_update_successful: 邮件地址已更新。
     email_verification_sent: 验证邮件已发送，请检查收件箱。
     email_verification_time_limit: 请等待一分钟后重发邮件。
-    export_task_already_exists: 已有导出任务正在运行。
-    export_task_processing: 导出任务处理中，完成时您将收到邮件通知。
     import_settings_updated: 导入设置已更新，抓取将在后台进行。
-    invitation_has_been_sent: 邀请函已发送。
-    notification_settings_updated: 通知设置已更新。
     password_reset_email_has_been_sent: 重置邮件已发送，请检查收件箱。
     password_reset_email_time_limit: 请等待一分钟后重发邮件。
-    password_reset_successful: 密码重置成功，请使用您的新密码登录账号。
-    password_reset_token_invliad: 密码重置链接无效或已过期，请重新获取重置链接。
-    password_update_successful: 密码更新成功。
-    please_wait_one_minute_to_resend_invitation: 请等待一分钟再重发邀请函。
-    post_is_saved: 文章已保存。
-    profile_updated: 资料已更新。
     require_sign_in: 需要登录。
     settings_updated_successful: 设置更新成功。
     weekly_digest_preview_sent_successful: 每周摘要邮件预览发送成功。
+  general:
+    account: 账号
+    account_settings: 账号设置
+    accounts: 账号
+    appearance: 外观
+    bookmarks: 书签
+    commentable: 评论对象
+    comments: 评论
+    created_at: 创建于
+    dashboard: 仪表盘
+    edit: 编辑
+    email: 邮件地址
+    following: 关注中
+    home: 首页
+    id: Id
+    in: 在
+    last_fetched_at: 最后抓取于
+    load_more: 查看更多
+    me: 我
+    members: 成员
+    merge_tags: 合并标签
+    name: Name
+    newest: 最新
+    no_more_content: 没有更多内容。
+    notification_settings: 通知设置
+    notifications: 通知
+    organizations: 组织
+    overview: 概览
+    owner: Owner
+    password: 密码
+    popular: 热门
+    popular_tags: 热门标签
+    posts: 文章
+    public_link: 公开链接
+    recommend_users: 推荐用户
+    reset_password: 重置密码
+    save_changes: 保存修改
+    send_email: 发送邮件
+    send_preview: 发送预览
+    settings: 设置
+    sign_in: 登录
+    sign_up: 注册
+    submit: 提交
+    table_of_contents: 目录
+    tags: 标签
+    untitled: 无标题
+    user: 用户
+    users: 用户
+    weekly_digest: 每周摘要
+    weekly_digest_subject: '"%{title}" - %{count} 篇热门文章'
   home:
-    index:
-      email_is_not_verified: Email 未验证
+    sidebar:
+      email_is_not_verified: Email 未验证，部分功能将受限。
       verify_email: 验证 Email
-    navbar:
-      email_settings: 邮件地址设置
-      verify_email_description: 为了开启完整功能，需要验证邮件地址。
-      verify_email_title: 验证邮件地址
-  mailer:
-    account_mailer:
-      export_complted_subject: 数据导出已完成
-  markdown_editor:
-    preview: 预览
-    write: 编辑
-  search:
-    index:
-      search_results: 找到 %{count} 条结果
-  settings:
-    emails:
-      show:
-        resend_verification_email: 重发验证邮件
-        verify_email_description: 为了开启完整功能，需要验证邮件地址。
-        verify_email_title: 验证邮件地址
-    home:
-      index:
-        email: 邮件地址
-        email_desription: 修改登录邮件地址。
-        notifications: 通知
-        notifications_desription: 修改通知方式和类型。
-        password: 修改密码
-        password_desription: 修改登录密码。
-  user:
+  identity:
     email:
       unsubscribes:
         expired:
-          token_expired: 链接已过期
-          you_can_unsubscribe_email_in_notification_settings: 您可以在通知设置中取消邮件通知。
+          token_expired: Token expired
+          you_can_unsubscribe_email_in_notification_settings: You can unsubscribe email in notification settings
         show:
-          unsubscribe_email: 退订邮件
-          unsubscribing: 退订中，请稍等…………
+          unsubscribe_email: Unsubscribe email
+          unsubscribing: Unsubscribing
         success:
-          notification_settings: 通知设置
-          unsubscribe_successfully: 成功退订
-          you_can_resubscribe_email_in_notification_settings: 您可以在通知设置中重新打开邮件通知。
+          notification_settings: Notification settings
+          unsubscribe_successfully: Unsubscribe successfully
+          you_can_resubscribe_email_in_notification_settings: You can resubscribe email in notification settings
       verifications:
-        expired:
-          please_resend_email_veification: 请重新发送验证邮件。
-          token_expired: 链接已过期
+        invalid:
+          please_resend_email_veification: Please resend email veification
+          token_expired: Token expired
         show:
-          email_verification: 邮箱验证
-          verifying: 验证中，请稍等……
-        success:
-          back_to_homepage: 回到首页
-          your_email_has_been_verified: 您的邮箱已验证成功
-  users:
-    new:
-      account_name_helper_text: 可以使用大小写字母、数字和 - 号，全站唯一
+          email_verification: Email verification
+          verifying: Verifying
+    passwords:
+      edit:
+        reset_password_for: Reset password for
+  mailer:
+    account_mailer:
+      export_complted_subject: 数据导出已完成

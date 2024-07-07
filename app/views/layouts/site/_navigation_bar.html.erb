@@ -7,14 +7,14 @@
     <% end %>
   <% end %>
 
-  <%= render "components/navigation_bar_item", url: root_path, icon: :home, label: "Home", active: request.path.in?([root_path]) %>
+  <%= render "components/navigation_bar_item", url: root_path, icon: :home, label: t("general.home"), active: request.path.in?([root_path]) %>
 
   <% if Current.user %>
-    <%= render "components/navigation_bar_item", url: notifications_path, icon: :notifications, label: "Notifications", active: current_page?(notifications_path) %>
+    <%= render "components/navigation_bar_item", url: notifications_path, icon: :notifications, label: t("general.notifications"), active: current_page?(notifications_path) %>
 
-    <%= render "components/navigation_bar_item", url: bookmarks_path, icon: :bookmarks, label: "Bookmarks", active: current_page?(bookmarks_path) %>
+    <%= render "components/navigation_bar_item", url: bookmarks_path, icon: :bookmarks, label: t("general.bookmarks"), active: current_page?(bookmarks_path) %>
 
-    <%= render "components/navigation_bar_item", url: dashboard_root_path(Current.user.account.name), icon: :post, label: "Posts", active: request.path.start_with?("/dashboard") %>
+    <%= render "components/navigation_bar_item", url: dashboard_root_path(Current.user.account.name), icon: :post, label: t("general.posts"), active: request.path.start_with?("/dashboard") %>
   <% end %>
 
   <div class="menu flex-grow basis-0">
@@ -27,7 +27,7 @@
         <% end %>
       </div>
       <div class="navigation-bar__item__label">
-        Me
+        <%= t "general.me" %>
       </div>
     </label>
     <div tabindex="0" class="menu__content top-auto left-auto bottom-full right-0 origin-bottom-right md:left-full md:bottom-0 md:origin-bottom-left">

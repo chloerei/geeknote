@@ -46,7 +46,7 @@
     <dl class="data-list pb-3">
       <div>
         <dt>
-          <%= t 'common.account' %>
+          <%= t 'general.account' %>
         </dt>
         <dd>
           <a href="<%= admin_account_path(@post.account.id) %>" class="text-primary underline">
@@ -57,7 +57,7 @@
 
       <div>
         <dt>
-          <%= t 'common.user' %>
+          <%= t 'general.user' %>
         </dt>
         <dd>
           <a href="<%= admin_user_path(@post.user) %>" class="text-primary underline">
@@ -68,7 +68,7 @@
 
       <div>
         <dt>
-          <%= t 'common.public_link' %>
+          <%= t 'general.public_link' %>
         </dt>
         <dd>
           <a href="<%= account_post_path(@post.account, @post) %>" class="text-primary underline">

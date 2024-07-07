@@ -67,7 +67,7 @@ class UserMailer < ApplicationMailer
     mail(
       from: "#{@site.name} Weekly <#{ENV['MAILER_FROM_DIGEST']}>",
       to: @user.email,
-      subject: I18n.t("common.weekly_digest_subject", title: @posts.first&.title, count: @posts.length)
+      subject: I18n.t("general.weekly_digest_subject", title: @posts.first&.title, count: @posts.length)
     )
   end
 end

@@ -19,7 +19,7 @@
   %>
   <div class="bg-surface-container-lowest rounded-xl">
     <div class="p-4 font-medium">
-      Popular tags
+      <%= t "general.popular_tags" %>
     </div>
 
     <div class="px-4 pb-4">
@@ -31,12 +31,15 @@
     </div>
   </div>
 
+  <%
+    recommend_accounts = Account.where(id: Account.order(followers_count: :desc).excluding(Current.user&.account).limit(100)).order("RANDOM()").limit(3)
+  %>
   <div class="bg-surface-container-lowest rounded-xl">
     <div class="p-4 font-medium">
-      Recommend follow
+      <%= t "general.recommend_users" %>
     </div>
     <div class="p-4">
-      #todo
+      <%= render partial: "account/item", collection: recommend_accounts, as: :account %>
     </div>
   </div>
 

@@ -26,10 +26,10 @@
       <% else %>
         <div class="display-flex gap-3 justify-content-center">
           <a href="<%= sign_up_path(return_to: account_invitation_path(invitation_token: @member.invitation_token)) %>" class="button button--filled">
-            <%= t 'common.sign_up' %>
+            <%= t 'general.sign_up' %>
           </a>
           <a href="<%= sign_in_path(return_to: account_invitation_path(invitation_token: @member.invitation_token)) %>" class="button button--outlined">
-            <%= t 'common.sign_in' %>
+            <%= t 'general.sign_in' %>
           </a>
         </div>
       <% end %>
