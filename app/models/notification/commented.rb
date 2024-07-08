@@ -32,7 +32,7 @@ class Notification::Commented < Notification
   end
 
   def send_email_later
-    if user.email_verified? && user.email_notification_enabled?
+    if user.email_verified? && user.comment_email_notification_enabled?
       UserMailer.with(notification: self).commented_notification.deliver_later
     end
   end

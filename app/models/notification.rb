@@ -3,14 +3,6 @@ class Notification < ApplicationRecord
 
   scope :unread, -> { where(read_at: nil) }
 
-  # after_create :send_email_later
-
-  def send_email_later
-    if user.enable_notification_email?
-      UserMailer.with(notification: self).notification.deliver_later
-    end
-  end
-
   def title
     raise "Not implemented"
   end

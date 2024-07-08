@@ -16,7 +16,7 @@ class Notification::CommentedTest < ActiveSupport::TestCase
   end
 
   test "should not send email if user disable email notification" do
-    user = create(:user, email_verified_at: Time.now, email_notification_enabled: false)
+    user = create(:user, email_verified_at: Time.now, comment_email_notification_enabled: false)
     Notification::Commented.create(user: user, comment: create(:comment))
     assert_no_enqueued_emails
   end
