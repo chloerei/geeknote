@@ -1,0 +1,16 @@
+<%# locals: (form:) %>
+
+<%
+  error ||= form.object.errors[:recaptcha].first
+%>
+
+<% if defined?(Recaptcha) %>
+  <div>
+    <div class="h-20" data-sitekey="<%= Recaptcha.configuration.site_key %>" data-controller="recaptcha" data-action="recaptcha:load@window->recaptcha#render turbo:morph@window->recaptcha#render" data-turbo-permanent></div>
+    <% if error %>
+      <div class="form-text text-error">
+        <%= error %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

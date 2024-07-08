@@ -11,6 +11,14 @@
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
+    <%# <script src="https://www.recaptcha.net/recaptcha/api.js" async defer></script> %>
+    <script>
+      var onRecaptchaLoad = function() {
+        window.dispatchEvent(new Event("recaptcha:load"));
+      }
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
+
     <meta name="turbo-refresh-method" content="morph">
     <meta name="turbo-refresh-scroll" content="preserve">
 

@@ -74,7 +74,7 @@ class ApplicationController < ActionController::Base
 
   def optional_verify_recaptcha(options = {})
     if defined?(Recaptcha)
-      verify_recaptcha(options)
+      verify_recaptcha(options.with_defaults(attribute: :recaptcha))
     else
       true
     end

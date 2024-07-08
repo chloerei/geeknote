@@ -274,6 +274,10 @@ zh-CN:
     notification:
       post_blocked:
         title: 文章 %{title} 已被屏蔽
+  recaptcha:
+    errors:
+      recaptcha_unreachable: 无法连接 reCAPTCHA 服务器，请检查网络连接。
+      verification_failed: reCAPTCHA 验证失败，请重试。
   settings:
     emails:
       resend:

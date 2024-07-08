@@ -3,7 +3,7 @@
     <h1 class="text-lg font-medium">Sign up</h1>
 
     <div class="mt-4">
-      <%= form_with(url: sign_up_path, model: @user) do |form| %>
+      <%= form_with(url: sign_up_path, model: @user, method: :post) do |form| %>
         <div class="form-field">
           <%= form.label :email, class: "form-label" %>
           <%= render "components/text_field", form: form, name: :email, options: { required: true, autofocus: true, autocomplete: "email" } %>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="form-field">
-          <%= recaptcha_tag %>
+          <%= render "components/recaptcha_field", form: form %>
         </div>
 
         <div class="form-field">
