@@ -1,7 +1,7 @@
 <div class="card">
   <div class="w-full aspect-[3/1] bg-primary-container rounded-t-xl">
     <% if account.owner.banner_image.attached? %>
-      <img src="<%= url_for(account.owner.banner_image.variant(:large)) %>" alt="banner image" class="w-full aspect-[3/1] object-cover rounded-t-xl">
+      <img src="<%= polymorphic_url(account.owner.banner_image.variant(:large)) %>" alt="banner image" class="w-full aspect-[3/1] object-cover rounded-t-xl">
     <% end %>
   </div>
 
