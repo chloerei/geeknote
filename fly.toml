@@ -9,7 +9,7 @@ primary_region = "nrt"
   strategy = "bluegreen"
 
 [processes]
-  web = "bin/rails server"
+  web = "./bin/rails server"
   worker = "bundle exec sidekiq"
 
 [http_service]
