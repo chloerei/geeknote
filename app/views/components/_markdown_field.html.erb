@@ -4,17 +4,14 @@
   <%= form.hidden_field name, options.merge(data: { markdown_field_target: "contentInput" }) %>
   <div class="flex items-center p-1 gap-1 bg-surface-container rounded-t">
     <button type="button" class="text-button group-[.previewing]:text-on-surface-variant" data-action="markdown-field#write">
-      Write
+      <%= t "general.write" %>
     </button>
     <button type="button" class="text-button text-on-surface-variant group-[.previewing]:text-primary" data-action="markdown-field#preview">
-      Preview
+      <%= t "general.preview" %>
     </button>
     <div class="flex-grow"></div>
     <button type="button" class="icon-button" data-action="markdown-field#attachFile">
       <%= material_icon :attach_file %>
-    </button>
-    <button type="button" class="icon-button">
-      <%= material_icon :help %>
     </button>
   </div>
   <div class="min-h-[160px]">

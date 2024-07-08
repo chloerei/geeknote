@@ -43,7 +43,7 @@ export default class extends Controller {
 
     const formData = new FormData()
     formData.append("content", this.contentInputTarget.value)
-    const response = await post("/markdown/preview", {
+    const response = await post("/preview", {
       body: formData
     })
 

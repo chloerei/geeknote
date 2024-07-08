@@ -154,6 +154,7 @@ zh-CN:
     appearance: 外观
     bookmarks: 书签
     click_to_select_image: 点击选择图片
+    comment_on: 评论于
     commentable: 评论对象
     comments: 评论
     copy_link: 复制链接
@@ -161,7 +162,7 @@ zh-CN:
     dashboard: 仪表盘
     delete: 删除
     delete_permanently: 永久删除
-    download: Download
+    download: 下载
     draft: 草稿
     edit: 编辑
     edit_profile: 编辑资料
@@ -183,6 +184,7 @@ zh-CN:
     members: 成员
     merge_tags: 合并标签
     more_from: 更多来自 %{name}
+    most_likes: 最多赞
     move_to_trash: 移到回收站
     name: 名称
     new_organization: 新组织
@@ -192,6 +194,7 @@ zh-CN:
     notification: 通知
     notification_settings: 通知设置
     notifications: 通知
+    oldest: 最旧
     organizations: 组织
     originally_published_at: 原发布于
     overview: 概览
@@ -207,6 +210,8 @@ zh-CN:
     publish: 发布
     published: 已发布
     recommend_users: 推荐用户
+    replies: 回复
+    reply: 回复
     reset_password: 重置密码
     restore: 恢复
     save: 保存

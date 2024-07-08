@@ -16,24 +16,33 @@
     <div id="comments" class="">
       <div class="flex items-center p-2 gap-4">
         <div class="flex-grow font-medium px-2">
-          Comments <%= @pagy.count %>
+          <%= t "general.comments" %> <%= @pagy.count %>
         </div>
         <div class="menu">
           <label tabindex="0" class="text-button text-on-surface-variant">
             <%= material_icon :sort %>
             <span>
-              <%= @sort %>
+              <%=
+                case @sort
+                when "oldest"
+                  t("general.oldest")
+                when "likes"
+                  t("general.most_likes")
+                else
+                  t("general.newest")
+                end
+              %>
             </span>
           </label>
           <div class="menu__content top-full right-0 origin-top-right">
             <a href="<%= url_for(sort: nil) %>" class="menu__item">
-              Newest
+              <%= t "general.newest" %>
             </a>
             <a href="<%= url_for(sort: "oldest") %>" class="menu__item">
-              Oldest
+              <%= t "general.oldest" %>
             </a>
-            <a href="<%= url_for(sort: "popular") %>" class="menu__item">
-              Popular
+            <a href="<%= url_for(sort: "likes") %>" class="menu__item">
+              <%= t "general.most_likes" %>
             </a>
           </div>
         </div>
