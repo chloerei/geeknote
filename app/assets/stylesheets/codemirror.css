@@ -1,0 +1,65 @@
+.cm-editor {
+  position: relative;
+}
+
+.cm-content:focus {
+  outline: 0;
+}
+
+.cm-announced {
+  display: none;
+}
+
+.cm-placeholder {
+  opacity: 70%;
+}
+
+.cmt-heading1,
+.cmt-heading2,
+.cmt-heading3,
+.cmt-heading4,
+.cmt-heading5,
+.cmt-heading6 {
+  @apply font-medium;
+}
+
+.cmt-strong {
+  @apply font-medium;
+}
+
+.cmt-emphasis {
+  @apply italic;
+}
+
+.cmt-strikethrough {
+  @apply line-through;
+}
+
+.cmt-link.cmt-processingInstruction,
+.cmt-link.cmt-url {
+  @apply opacity-50;
+}
+
+.cmt-comment {
+  @apply opacity-50;
+}
+
+.cmt-url {
+  @apply underline;
+}
+
+.cmt-monospace {
+  @apply font-mono text-sm;
+}
+
+.post-editor {
+  .cm-content {
+    min-height: 100vh;
+  }
+}
+
+.markdown-field {
+  .cm-content {
+    @apply min-h-[160px] p-4;
+  }
+}

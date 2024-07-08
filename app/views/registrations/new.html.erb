@@ -1,0 +1,52 @@
+<div class="max-w-screen-sm mx-auto">
+  <div class="bg-surface-container-lowest rounded-xl p-4">
+    <h1 class="text-lg font-medium">Sign up</h1>
+
+    <div class="mt-4">
+      <%= form_with(url: sign_up_path, model: @user) do |form| %>
+        <div class="form-field">
+          <%= form.label :email, class: "form-label" %>
+          <%= render "components/text_field", form: form, name: :email, options: { required: true, autofocus: true, autocomplete: "email" } %>
+        </div>
+
+        <%= form.fields_for :account do |account_form| %>
+          <div class="form-field">
+            <%= account_form.label :name, class: "form-label" %>
+            <%= render "components/text_field", form: account_form, name: :name, prefix: "@", options: { required: true, autocomplete: "username" } %>
+          </div>
+        <% end %>
+
+        <div class="form-field">
+          <%= form.label :name, class: "form-label" %>
+          <%= render "components/text_field", form: form, name: :name, options: { required: true, autocomplete: "name" } %>
+        </div>
+
+        <div class="form-field">
+          <%= form.label :password, class: "form-label" %>
+          <%= render "components/text_field", form: form, name: :password, type: :password_field, options: { required: true, autocomplete: "new-password" } %>
+        </div>
+
+        <div class="form-field">
+          <%= form.label :password_confirmation, class: "form-label" %>
+          <%= render "components/text_field", form: form, name: :password_confirmation, type: :password_field, options: { required: true, autocomplete: "new-password" } %>
+        </div>
+
+        <div class="form-field">
+          <%= recaptcha_tag %>
+        </div>
+
+        <div class="form-field">
+          <button type="submit" class="filled-button">
+            Sign up
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="p-4 space-y-2 text-on-surface-variant">
+    <div>
+      <%= link_to "Sign in", sign_in_path %>
+    </div>
+  </div>
+</div>

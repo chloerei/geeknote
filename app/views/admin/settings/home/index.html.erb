@@ -1,44 +1,38 @@
-<div class="container padding-3">
-  <div class="layout-primary">
-    <%= render 'admin/navbar' %>
+<div class="">
+  <div class="card pb-3">
+    <div class="flex items-center h-14 gap-2 px-2">
+      <div class="flex-grow text-lg font-medium px-2">
+        <%= t 'general.settings' %>
+      </div>
+    </div>
 
     <div class="">
-      <div class="card card--elevated background-surface">
-        <div class="top-app-bar">
-          <div class="top-app-bar__title">
-            <%= t 'common.settings' %>
+      <a href="<%= admin_settings_appearance_path %>" class="flex gap-4 p-4 interactive-bg-surface-container-lowest">
+        <div class="icon h-6 w-6">
+          <%= material_icon :web %>
+        </div>
+        <div class="flex-grow">
+          <div class="text-lg font-medium">
+            <%= t '.appearance' %>
+          </div>
+          <div class="">
+            <%= t '.appearance_desription' %>
           </div>
         </div>
-
-        <div class="padding-bottom-2">
-          <a href="<%= admin_settings_appearance_path %>" class="link-block">
-            <div class="display-flex gap-3 padding-3">
-              <span class="material-icons">web</span>
-              <div class="flex-grow-1">
-                <div class="title-medium">
-                  <%= t '.appearance' %>
-                </div>
-                <div class="">
-                  <%= t '.appearance_desription' %>
-                </div>
-              </div>
-            </div>
-          </a>
-          <a href="<%= admin_settings_weekly_digest_path %>" class="link-block">
-            <div class="display-flex gap-3 padding-3">
-              <span class="material-icons">email</span>
-              <div class="flex-grow-1">
-                <div class="title-medium">
-                  <%= t '.weekly_digest' %>
-                </div>
-                <div class="">
-                  <%= t '.weekly_digest_desription' %>
-                </div>
-              </div>
-            </div>
-          </a>
+      </a>
+      <a href="<%= admin_settings_weekly_digest_path %>" class="flex gap-4 p-4 interactive-bg-surface-container-lowest">
+        <div class="icon h-6 w-6">
+          <%= material_icon :mail %>
         </div>
-      </div>
+        <div class="flex-grow">
+          <div class="text-lg font-medium">
+            <%= t '.weekly_digest' %>
+          </div>
+          <div class="">
+            <%= t '.weekly_digest_desription' %>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 </div>

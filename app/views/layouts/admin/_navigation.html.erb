@@ -1,0 +1,25 @@
+<div class="w-80 p-3">
+  <div class="p-4">
+    <div class="text-sm font-medium text-on-surface-variant">
+      Admin
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <%= render "components/navigation_drawer_item", icon: :dashboard, label: "Dashboard", url: admin_root_path, active: (request.path == "/admin") %>
+
+    <%= render "components/navigation_drawer_item", icon: :article, label: "Posts", url: admin_posts_path, active: (request.path.start_with?("/admin/posts")) %>
+
+    <%= render "components/navigation_drawer_item", icon: :comment, label: "Comments", url: admin_comments_path, active: (request.path.start_with?("/admin/comments")) %>
+
+    <%= render "components/navigation_drawer_item", icon: :label, label: "Tags", url: admin_tags_path, active: (request.path.start_with?("/admin/tags")) %>
+
+    <%= render "components/navigation_drawer_item", icon: :account_circle, label: "Accounts", url: admin_accounts_path, active: (request.path.start_with?("/admin/accounts")) %>
+
+    <%= render "components/navigation_drawer_item", icon: :person, label: "Users", url: admin_users_path, active: (request.path.start_with?("/admin/users")) %>
+
+    <%= render "components/navigation_drawer_item", icon: :group, label: "Organizations", url: admin_organizations_path, active: (request.path.start_with?("/admin/organizations")) %>
+
+    <%= render "components/navigation_drawer_item", icon: :settings, label: "Settings", url: admin_settings_root_path, active: (request.path.start_with?("/admin/settings")) %>
+  </div>
+</div>

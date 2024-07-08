@@ -1,31 +1,27 @@
-<div class="container padding-3">
-  <div class="layout-primary">
-    <%= render 'admin/navbar' %>
-
-    <div class="">
-      <div class="card card--elevated background-surface">
-        <div class="top-app-bar">
-          <div class="top-app-bar__action">
-            <a href="<%= admin_settings_weekly_digest_path %>" class="button button--icon">
-              <span class="material-icons">arrow_back</span>
-            </a>
-          </div>
-          <div class="top-app-bar__title">
-            <%= t 'common.send_preview' %>
-          </div>
-        </div>
-
-        <div class="padding-3">
-          <%= form_with model: @user, url: admin_settings_weekly_digest_preview_path, builder: CustomFormBuilder do |form| %>
-            <div class="margin-bottom-3">
-              <%= form.text_field :email %>
-            </div>
-            <button type="submit" class="button button--filled">
-              <%= t 'common.send_email' %>
-            </button>
-          <% end %>
-        </div>
+<div class="">
+  <div class="card">
+    <div class="flex items-center h-14 gap-2 px-2">
+      <a href="<%= admin_settings_weekly_digest_path %>" class="icon-button">
+        <%= material_icon :arrow_back %>
+      </a>
+      <div class="flex-grow text-lg font-medium px-2">
+        <%= t 'general.send_preview' %>
       </div>
+    </div>
+
+    <div class="p-4">
+      <%= form_with model: @user, url: admin_settings_weekly_digest_preview_path do |form| %>
+        <div class="form-field">
+          <%= form.label :email, class: "form-label" %>
+          <%= render "components/text_field", form: form, name: :email %>
+        </div>
+
+        <div class="form-field">
+          <button type="submit" class="filled-button">
+            <%= t 'general.send_email' %>
+          </button>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

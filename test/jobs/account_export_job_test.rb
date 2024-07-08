@@ -18,7 +18,7 @@ class AccountExportDataJobTest < ActiveJob::TestCase
       user: account.owner,
       status: "published",
       published_at: DateTime.new(2022, 1, 1),
-      tag_list: [ "Ruby", "JavaScript" ]
+      tag_list: "Ruby,JavaScript"
     )
 
     attachment = Attachment.create user: account.owner
@@ -32,7 +32,7 @@ class AccountExportDataJobTest < ActiveJob::TestCase
       published_at: DateTime.new(2022, 1, 1)
     )
 
-    export = account.exports.create
+    export = account.create_export
     AccountExportJob.perform_now(export)
     assert export.file.attached?
 

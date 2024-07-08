@@ -1,0 +1,22 @@
+<%# locals: (comment:, open: false) %>
+
+<details id="<%= dom_id(comment, :form) %>" class="group comment-form" <%= 'open' if open %> data-controller="comment-form" data-action="toggle->comment-form#focus" data-comment-form-markdown-field-outlet=".markdown-field">
+  <summary class="block group-open:hidden">
+    <div class="flex items-center h-12 px-4 ring-1 ring-outline rounded select-none cursor-pointer">
+      Add a comment
+    </div>
+  </summary>
+
+  <%= form_with model: comment, url: comment.new_record? ? account_comments_path(comment.user.account.name) : account_comment_path(comment.user.account.name, comment) do |form| %>
+    <%= form.hidden_field :commentable_sgid, value: comment.commentable.to_sgid(for: :commentable) %>
+    <%= form.hidden_field :parent_id %>
+    <div class="form-field">
+      <%= render "components/markdown_field", form: form, name: :content, autofocus: open %>
+    </div>
+    <div class="form-field">
+      <button type="submit" class="filled-button">
+        <%= t "general.reply" %>
+      </button>
+    </div>
+  <% end %>
+</details>

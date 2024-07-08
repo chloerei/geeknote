@@ -16,11 +16,16 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.with(user: @user).email_verification
   end
 
-  def comment_notification
-    user = User.first || FactoryBot.create(:user)
-    comment = Comment.first || FactoryBot.create(:comment)
+  def commented_notification
+    notification = Notification::Commented.first || FactoryBot.create(:commented_notification)
 
-    UserMailer.with(user: user, comment: comment).comment_notification
+    UserMailer.with(notification: notification).commented_notification
+  end
+
+  def post_blocked_notification
+    notification = Notification::PostBlocked.first || FactoryBot.create(:post_blocked_notification)
+
+    UserMailer.with(notification: notification).post_blocked_notification
   end
 
   def weekly_digest

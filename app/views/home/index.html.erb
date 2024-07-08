@@ -1,76 +1,23 @@
-<div class="container padding-3">
-  <div class="tab tab--secondary margin-bottom-3">
-    <a href="/" class="tab__item <%= 'tab__item--active' if action_name == 'index' %>">
-      <%= t "common.popular" %>
-    </a>
-    <a href="/feed" class="tab__item <%= 'tab__item--active' if action_name == 'feed' %>">
-      <%= t "common.feed" %>
-    </a>
-    <a href="/newest" class="tab__item <%= 'tab__item--active' if action_name == 'newest' %>">
-      <%= t "common.newest" %>
-    </a>
+<div class="">
+  <div class="text-lg font-medium">
+    <%= t "general.home" %>
   </div>
-  <div class="layout-primary">
-    <div class="">
 
-      <div id="posts" class="display-flex flex-direction-column gap-3" data-controller="pagination">
-        <%= render partial: 'account/posts/post', collection: @paginator[:page].pluck(:data), cached: -> post { [post.account, post.user, post] } %>
+  <div class="flex items-center gap-2 mt-6">
+    <%= render "components/tab", icon: :trending_up, label: t("general.popular"), url: root_path, active: current_page?(root_path) %>
+    <%= render "components/tab", icon: :post, label: t("general.following"), url: following_path, active: current_page?(following_path) %>
+    <%= render "components/tab", icon: :newspaper, label: t("general.newest"), url: newest_path, active: current_page?(newest_path) %>
+  </div>
 
-        <% if @paginator[:page_info][:has_next_page] %>
-          <a href="<%= url_for(after: @paginator[:page_info][:end_cursor]) %>" class="button button--text width-100 justify-content-center" data-pagination-target="nextPageLink">
-            <%= t "common.load_more" %>
-          </a>
-        <% else %>
-          <div class="body-medium text-muted text-align-center padding-x-3 padding-y-2">
-            <%= t "common.no_more_content" %>
-          </div>
-        <% end %>
-      </div>
-
+  <div class="flex gap-6 mt-6">
+    <div class="flex-grow min-w-0">
+      <%= render "components/scroll_pagination", pagy: @pagy do %>
+        <%= render partial: "post", collection: @posts %>
+      <% end %>
     </div>
 
-    <div class="display-flex flex-direction-column gap-3">
-
-      <%= sanitize @site.sidebar_header_html %>
-
-      <% if current_user && !current_user.email_verified? %>
-        <div class="card card--filled padding-3">
-          <h3 class="title-medium margin-top-0">
-            <%= t '.email_is_not_verified' %>
-          </h3>
-          <div class="text-align-right">
-            <a href="<%= settings_email_path %>" class="button button--text">
-              <div class="button__label">
-                <%= t '.verify_email' %>
-              </div>
-              <div class="button__icon">
-                <span class="material-icons">arrow_right_alt</span>
-              </div>
-            </a>
-          </div>
-        </div>
-      <% end %>
-
-      <div class="card card--elevated padding-3">
-        <div class="title-medium margin-bottom-3">
-          <%= t "common.popular_tags" %>
-        </div>
-        <div class="display-flex flex-wrap gap-2">
-          <% Tag.trending.limit(10).each do |tag| %>
-            <a href="<%= tag_path(id: tag.name) %>" class="chip chip--assist">
-              <%= tag.name %>
-            </a>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="card card--elevated padding-y-2">
-        <% @relate_accounts = @paginator[:page].pluck(:data).map(&:account).tally.sort_by{ |_, count| -count }.map(&:first) %>
-
-        <%= render partial: "account/account", collection: @relate_accounts.first(3) %>
-      </div>
-
-      <%= sanitize @site.sidebar_footer_html %>
+    <div class="hidden md:block flex-shrink-0 w-80">
+      <%= render "sidebar" %>
     </div>
   </div>
 </div>

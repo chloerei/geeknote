@@ -1,5 +1,5 @@
 class Admin::OrganizationsController < Admin::BaseController
-  before_action :set_organization, only: [ :show, :edit, :update ]
+  before_action :set_organization, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @organizations = Organization.order(id: :desc).page(params[:page])
@@ -21,6 +21,11 @@ class Admin::OrganizationsController < Admin::BaseController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @organization.destroy
+    redirect_to admin_organizations_path, notice: "Organization deleted."
   end
 
   private

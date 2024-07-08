@@ -1,0 +1,12 @@
+<% content_for :body do %>
+  <%= render "layouts/site/navigation_rail" %>
+  <%= render "layouts/site/navigation_bar" %>
+
+  <div class="mb-20 md:mb-0 md:ml-20">
+    <div class="max-w-screen-xl mx-auto p-4 md:p-6">
+      <%= yield %>
+    </div>
+  </div>
+<% end %>
+
+<%= render template: "layouts/application" %>

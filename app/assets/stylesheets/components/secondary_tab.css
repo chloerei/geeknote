@@ -1,0 +1,18 @@
+@layer components {
+  .secondary-tab {
+    @apply flex-grow flex items-center justify-center gap-2 h-12 px-4 relative cursor-pointer select-none hover:interactive-bg-surface text-sm font-medium;
+
+    svg {
+      @apply w-6 h-6 fill-current;
+    }
+  }
+
+  .secondary-tab--active {
+    @apply text-primary;
+  }
+
+  .secondary-tab--active::after {
+    @apply absolute left-0 right-0 bottom-0 h-[2px] bg-primary;
+    content: '';
+  }
+}

@@ -7,7 +7,7 @@ class Account::Posts::LikesControllerTest < ActionDispatch::IntegrationTest
 
     sign_in user
     assert_difference "post.likes.count" do
-      post account_post_like_path(post.account, post)
+      post account_post_like_path(post.account.name, post)
     end
     assert post.liked_by?(user)
   end
@@ -19,7 +19,7 @@ class Account::Posts::LikesControllerTest < ActionDispatch::IntegrationTest
 
     sign_in user
     assert_difference "post.likes.count", -1 do
-      delete account_post_like_path(post.account, post)
+      delete account_post_like_path(post.account.name, post)
     end
     assert_not post.liked_by?(user)
   end

@@ -1,12 +1,8 @@
 class Admin::UsersController < Admin::BaseController
-  before_action :set_user, only: [ :show, :edit, :update ]
+  before_action :set_user, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @users = User.order(id: :desc).page(params[:page])
-
-    if params[:email]
-      @users = @users.where(email: params[:email])
-    end
+    @pagy, @users = pagy(User.order(id: :desc))
   end
 
   def show
@@ -21,6 +17,11 @@ class Admin::UsersController < Admin::BaseController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @user.destroy
+    redirect_to admin_users_path, notice: "User deleted."
   end
 
   private

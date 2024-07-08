@@ -8,13 +8,13 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get feed" do
+  test "should get following" do
     user = create(:user)
     post = create(:post)
     user.follows.create(account: post.account)
 
     sign_in user
-    get feed_path
+    get following_path
     assert_response :success
   end
 

@@ -1,0 +1,13 @@
+@layer components {
+  .form-field {
+    @apply mt-4 first-of-type:mt-0;
+  }
+
+  .form-label {
+    @apply block mb-2 text-sm font-medium text-on-surface-variant;
+  }
+
+  .form-text {
+    @apply mt-2 text-sm text-on-surface-variant;
+  }
+}

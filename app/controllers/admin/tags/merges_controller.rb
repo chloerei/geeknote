@@ -6,7 +6,7 @@ class Admin::Tags::MergesController < Admin::BaseController
 
   def create
     @tag.merge params[:tag_list]
-    redirect_to admin_tag_path(@tag)
+    redirect_to admin_tag_path(@tag), notice: "Tags merged."
   end
 
   private

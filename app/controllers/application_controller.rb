@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
-  include ActiveStorage::SetCurrent
+  include Pagy::Backend
 
-  before_action :set_site
+  before_action :set_site, :set_current_user
+
+  layout "site"
 
   helper_method :current_user
 
@@ -13,12 +15,13 @@ class ApplicationController < ActionController::Base
   private
 
   def set_site
-    @site = Site.first_or_create
+    @site = Site.first_or_create(name: "Geeknote")
+    @page_titles = [ @site.name ]
   end
 
   def render_not_found
     respond_to do |format|
-      format.html { render "errors/404", layout: "base", status: 404 }
+      format.html { render "errors/404", layout: "application", status: 404 }
       format.json { render json: { status: 404, error: "Not Found" }, status: 404 }
     end
   end
@@ -29,7 +32,7 @@ class ApplicationController < ActionController::Base
     end
 
     respond_to do |format|
-      format.html { render "errors/500", layout: "base", status: 500 }
+      format.html { render "errors/500", layout: "application", status: 500 }
       format.json { render json: { status: 500, error: "Internal Server Error" }, status: 500 }
     end
   end
@@ -37,12 +40,16 @@ class ApplicationController < ActionController::Base
   def require_sign_in
     unless current_user
       return_path = request.get? ? request.path : URI(request.referer.presence || "/").path
-      redirect_to sign_in_path(return_to: return_path), alert: t("flash.require_sign_in")
+      redirect_to sign_in_path(return_to: return_path), alert: t(".require_sign_in")
     end
   end
 
+  def set_current_user
+    Current.user = authenticate_by_auth_token
+  end
+
   def current_user
-    @current_user ||= authenticate_by_auth_token
+    Current.user
   end
 
   def authenticate_by_auth_token
@@ -52,7 +59,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_in(user)
-    @current_user = user
+    Current.user = user
     cookies[:auth_token] = {
       value: user.auth_token,
       expires: 12.month,
@@ -61,7 +68,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_out
-    @current_user = nil
+    Current.user = nil
     cookies[:auth_token] = nil
   end
 

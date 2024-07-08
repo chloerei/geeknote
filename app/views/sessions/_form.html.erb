@@ -1,9 +1,9 @@
-<%= form_with url: sessions_path, builder: CustomFormBuilder, html: { class: 'form', id: 'sign-in-form' } do |form| %>
+<%= form_with url: sign_in_path, builder: CustomFormBuilder, html: { class: 'form', id: 'sign-in-form' } do |form| %>
   <div class="margin-bottom-3">
-    <%= form.text_field :email, value: params[:email], label: t('common.email') %>
+    <%= form.text_field :email, value: params[:email], label: t('general.email') %>
   </div>
   <div class="margin-bottom-3">
-    <%= form.password_field :password, label: t('common.password') %>
+    <%= form.password_field :password, label: t('general.password') %>
   </div>
   <% if @sign_in_error %>
     <div class="alert">
@@ -11,6 +11,6 @@
     </div>
   <% end %>
   <button type="submit" class="button button--filled width-100 justify-content-center">
-    <%= t('common.sign_in') %>
+    <%= t('general.sign_in') %>
   </button>
 <% end %>

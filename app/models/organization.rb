@@ -10,6 +10,14 @@ class Organization < ApplicationRecord
     attachable.variant :large, resize_to_limit: [ 1920, 1920 ]
   end
 
+  attribute :remove_avatar, :boolean
+  attribute :remove_banner_image, :boolean
+
+  after_save do
+    avatar.purge_later if remove_avatar
+    banner_image.purge_later if remove_banner_image
+  end
+
   validates :name, presence: true
 
   accepts_nested_attributes_for :account, update_only: true

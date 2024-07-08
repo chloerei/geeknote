@@ -1,0 +1,5 @@
+@layer components {
+  .card {
+    @apply bg-surface-container-lowest rounded-xl shadow;
+  }
+}

@@ -1,0 +1,18 @@
+<div class="max-w-screen-sm mx-auto">
+  <div class="card p-4">
+    <h2 class="text-lg font-medium">
+      <%= t '.token_expired' %>
+    </h2>
+    <div class="mt-4">
+      <%= t '.please_resend_email_veification' %>
+    </div>
+    <div class="mt-4">
+      <a href="<%= settings_email_path %>" class="outlined-button">
+        <div>
+          <%= t 'general.account_settings' %>
+        </div>
+        <%= material_icon :arrow_forward %>
+      </a>
+    </div>
+  </div>
+</div>

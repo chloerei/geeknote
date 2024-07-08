@@ -1,0 +1,38 @@
+@layer components {
+  .text-field {
+  }
+
+  .text-field__label {
+    @apply block mb-2 text-sm font-medium text-on-surface-variant;
+  }
+
+  .text-field__container {
+    @apply flex items-center w-full border-0 ring-1 focus-within:ring-2 rounded ring-outline focus-within:ring-primary;
+  }
+
+  .text-field__prefix {
+    @apply h-10 px-4 flex items-center text-on-surface-variant bg-surface-variant rounded-l;
+  }
+
+  .text-field__input {
+    @apply flex-grow min-w-0 border-none rounded focus:ring-0 bg-surface disabled:bg-surface-variant
+  }
+
+  .text-field__suffix {
+    @apply h-10 px-4 flex items-center text-on-surface-variant bg-surface-variant rounded-r;
+  }
+
+  .text-field__supporting-text {
+    @apply mt-2 text-sm text-on-surface-variant;
+  }
+
+  .text-field--error {
+    .text-field__container {
+      @apply ring-error focus-within:ring-error;
+    }
+
+    .text-field__supporting-text {
+      @apply text-error;
+    }
+  }
+}

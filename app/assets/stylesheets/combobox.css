@@ -1,0 +1,48 @@
+.hw-combobox {
+  @apply flex flex-col gap-2 relative;
+}
+
+.hw-combobox__main__wrapper {
+  @apply flex flex-wrap items-center gap-2 ring-1 ring-outline rounded p-2 relative w-full focus-within:ring-2 focus-within:ring-primary;
+
+  &:has(.hw-combobox__input--invalid) {
+    @apply ring-error;
+  }
+}
+
+.hw-combobox__chip {
+  @apply inline-flex items-center gap-1 text-sm font-medium outline outline-1 outline-outline rounded h-8 p-1 pl-2 select-none;
+}
+
+.hw-combobox__chip__remover {
+  @apply w-5 h-5 p-1 rounded-full interactive-bg-surface;
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12' /%3E%3C/svg%3E");
+}
+
+.hw-combobox__input {
+  @apply bg-transparent w-40 h-8 p-0 m-0 border-none outline-none focus:ring-0;
+}
+
+.hw-combobox__listbox {
+  @apply absolute top-full left-0 right-0 mt-1 z-10 bg-surface rounded shadow-md;
+}
+
+.hw-combobox__option {
+  @apply flex items-center gap-2 p-2 cursor-pointer interactive-bg-surface;
+}
+
+.hw-combobox__option[hidden] {
+  @apply hidden;
+}
+
+.hw-combobox__option--selected {
+  @apply bg-surface-variant;
+}
+
+.hw-combobox__dialog__wrapper {
+  display: none;
+
+  &:has([open]) {
+    display: flex;
+  }
+}

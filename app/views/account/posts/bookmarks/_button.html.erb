@@ -1,19 +1,25 @@
-<% active = post.bookmarks.where(user: current_user).exists?  %>
+<%
+  liked = Current.user.present? && post.bookmarks.where(user: Current.user).exists?
+%>
 
-<%= form_with url: account_post_bookmark_path(post.account, post), method: (active ? 'delete' : 'post'), id: "post-#{post.id}-bookmark-button" do |form| %>
-  <div class="button-group">
-    <button type="submit" class="button button--icon button--bookmark <%= 'button--active' if active %>">
-      <div class="button__show-on-active">
-        <span class="material-icons">bookmark</span>
-      </div>
-      <div class="button__hide-on-active">
-        <span class="material-icons">bookmark_border</span>
-      </div>
-    </button>
-    <% if post.bookmarks_count > 0 %>
-      <div class="body-medium">
-        <%= post.bookmarks_count %>
-      </div>
+<div id="<%= dom_id(post, :bookmark) %>" class="inline-flex items-center group <%= 'liked' if liked %>">
+  <div class="group-[.liked]:hidden">
+    <%= form_with url: account_post_bookmark_path(post.account.name, post), method: :post do %>
+      <button type="submit" class="icon-button hover:text-primary hover:bg-primary/10 active:bg-primary/20">
+        <%= material_icon "bookmark" %>
+      </button>
     <% end %>
   </div>
-<% end %>
+  <div class="hidden group-[.liked]:block">
+    <%= form_with url: account_post_bookmark_path(post.account.name, post), method: :delete do %>
+      <button type="submit" class="icon-button text-primary hover:text-primary hover:bg-primary/10 active:bg-primary/20">
+        <%= material_icon "bookmark-fill" %>
+      </button>
+    <% end %>
+  </div>
+  <% if @post.bookmarks_count > 0 %>
+    <span class="text-on-surface-variant tabular-nums px-1">
+      <%= post.bookmarks_count %>
+    </span>
+  <% end %>
+</div>

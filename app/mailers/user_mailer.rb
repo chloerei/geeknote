@@ -10,17 +10,6 @@ class UserMailer < ApplicationMailer
     )
   end
 
-  def post_restricted_email
-    @user = params[:user]
-    @post = params[:post]
-
-    mail(
-      from: "#{@site.name} <#{ENV['MAILER_FROM_SUPPORT']}>",
-      to: @user.email,
-      subject: I18n.t("email.your_post_is_been_restricted_for_publish")
-    )
-  end
-
   def email_verification
     @user = params[:user]
 
@@ -30,23 +19,36 @@ class UserMailer < ApplicationMailer
     )
   end
 
-  def comment_notification
-    @user = params[:user]
-    @comment = params[:comment]
+  def commented_notification
+    @notification = params[:notification]
+    @user = @notification.user
+    @comment = @notification.comment
 
     options = {
       to: @user.email,
       from: "#{@comment.user.name} <#{ENV['MAILER_FROM_DEFAULT']}>",
       subject: "Re: #{@comment.commentable.title}",
-      message_id: "#{@comment.account.name}/posts/#{@comment.commentable_id}/comments/#{@comment.id}@geeknote.net",
-      references: "#{@comment.account.name}/posts/#{@comment.commentable_id}@geeknote.net"
+      message_id: "#{@comment.user.account.name}/comments/#{@comment.id}@geeknote.net",
+      references: "#{@comment.user.account.name}/#{@comment.commentable_type.downcase}/#{@comment.commentable_id}@geeknote.net"
     }
 
     if @comment.parent
-      options[:in_reply_to] = "#{@comment.account.name}/posts/#{@comment.commentable_id}/comments/#{@comment.parent_id}@geeknote.net"
+      options[:in_reply_to] = "#{@comment.user.account.name}/comments/#{@comment.parent_id}@geeknote.net"
     end
 
     mail(options)
+  end
+
+  def post_blocked_notification
+    @notification = params[:notification]
+    @user = @notification.user
+    @post = @notification.post
+
+    mail(
+      from: "#{@site.name} <#{ENV['MAILER_FROM_SUPPORT']}>",
+      to: @user.email,
+      subject: "Post Blocked: #{@notification.post.title}"
+    )
   end
 
   def weekly_digest
@@ -65,7 +67,7 @@ class UserMailer < ApplicationMailer
     mail(
       from: "#{@site.name} Weekly <#{ENV['MAILER_FROM_DIGEST']}>",
       to: @user.email,
-      subject: I18n.t("common.weekly_digest_subject", title: @posts.first&.title, count: @posts.length)
+      subject: I18n.t("general.weekly_digest_subject", title: @posts.first&.title, count: @posts.length)
     )
   end
 end

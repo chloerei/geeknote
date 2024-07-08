@@ -1,11 +1,29 @@
 import { Controller } from "@hotwired/stimulus"
 
+// Connects to data-controller="snackbar"
 export default class extends Controller {
-  connect() {
-    const delay = parseInt(this.data.get('period')) || 5000
+  static show(message) {
+    const html = `
+      <div class="snackbar" data-controller="snackbar" data-turbo-temporary>
+        ${message}
+      </div>
+    `
+    document.body.insertAdjacentHTML('beforeend', html)
+  }
 
-    setTimeout(() => {
-      this.element.remove()
-    }, delay)
+  static values = {
+    period: {
+      type: Number,
+      default: 5000
+    }
+  }
+
+  connect() {
+    setTimeout(() => this.remove(), this.periodValue)
+  }
+
+  remove() {
+    this.element.classList.add('animate-slide-out-down')
+    this.element.addEventListener('animationend', () => this.element.remove())
   }
 }

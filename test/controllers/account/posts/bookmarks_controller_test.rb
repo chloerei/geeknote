@@ -9,7 +9,7 @@ class Account::Posts::BookmarksControllerTest < ActionDispatch::IntegrationTest
   test "should create bookmark" do
     sign_in @user
     assert_difference("@post.bookmarks.count") do
-      post account_post_bookmark_url(@post.account, @post)
+      post account_post_bookmark_url(@post.account.name, @post)
     end
     assert_response :success
   end
@@ -18,7 +18,7 @@ class Account::Posts::BookmarksControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     @post.bookmarks.create(user: @user)
     assert_difference("@post.bookmarks.count", -1) do
-      delete account_post_bookmark_url(@post.account, @post)
+      delete account_post_bookmark_url(@post.account.name, @post)
     end
     assert_response :success
   end

@@ -1,14 +1,20 @@
 module ApplicationHelper
-  def avatar_url(avatar)
-    if avatar.attached?
-      polymorphic_url avatar.variant(:thumb)
+  include Pagy::Frontend
+
+  MATERIAL_ICONS = {}
+  def material_icon(name)
+    MATERIAL_ICONS[name] ||= File.read(Rails.root.join("vendor/icons/@material-symbols/svg-400/rounded/#{name}.svg")).html_safe
+  end
+
+  def avatar_url(user)
+    if user.avatar.attached?
+      polymorphic_url user.avatar.variant(:thumb)
     else
       asset_url("avatar.png")
     end
   end
 
   def avatar_image_tag(avatar)
-    image_tag avatar_url(avatar)
   end
 
   def banner_image_tag(banner_image)
@@ -60,7 +66,7 @@ module ApplicationHelper
 
   def format_time(time)
     if time
-      local_time time, format: :long
+      local_time time, format: :long, data: { turbo_permanent: true }
     end
   end
 

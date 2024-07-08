@@ -1,8 +1,8 @@
 class Admin::PostsController < Admin::BaseController
-  before_action :set_post, only: [ :show, :edit, :update, :restrict, :unrestrict ]
+  before_action :set_post, only: [ :show, :edit, :update, :restrict, :unrestrict, :destroy ]
 
   def index
-    @posts = Post.order(id: :desc).includes(:account, :user).page(params[:page])
+    @pagy, @posts = pagy(Post.order(id: :desc).includes(:account, :user))
   end
 
   def show
@@ -13,7 +13,7 @@ class Admin::PostsController < Admin::BaseController
 
   def update
     if @post.update post_params
-      redirect_to edit_admin_post_path(@post), notice: "Post updated."
+      redirect_to admin_post_path(@post), notice: "Post updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -27,6 +27,11 @@ class Admin::PostsController < Admin::BaseController
   def unrestrict
     @post.remove_restricted
     redirect_to admin_post_path(@post), notice: "Post remove restricted."
+  end
+
+  def destroy
+    @post.destroy
+    redirect_to admin_posts_path, notice: "Post deleted."
   end
 
   private

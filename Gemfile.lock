@@ -1,3 +1,18 @@
+GIT
+  remote: https://github.com/chloerei/i18n-tasks.git
+  revision: d7ed0c1b5c0f06c37de9dbae340b4dd1fe8d9d1a
+  specs:
+    i18n-tasks (1.0.14)
+      activesupport (>= 4.0.2)
+      ast (>= 2.1.0)
+      erubi
+      highline (>= 2.0.0)
+      i18n
+      parser (>= 3.2.2.1)
+      rails-i18n
+      rainbow (>= 2.2.2, < 4.0)
+      terminal-table (>= 1.5.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -152,6 +167,10 @@ GEM
     hashdiff (1.1.0)
     highline (3.0.1)
     hiredis (0.6.3)
+    hotwire_combobox (0.3.1)
+      rails (>= 7.0.7.2)
+      stimulus-rails (>= 1.2)
+      turbo-rails (>= 1.2)
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.5)
@@ -161,16 +180,6 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
-    i18n-tasks (0.9.37)
-      activesupport (>= 4.0.2)
-      ast (>= 2.1.0)
-      erubi
-      highline (>= 2.0.0)
-      i18n
-      parser (>= 2.2.3.0)
-      rails-i18n
-      rainbow (>= 2.2.2, < 4.0)
-      terminal-table (>= 1.5.1)
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
@@ -256,6 +265,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.6-x86_64-linux)
       racc (~> 1.4)
+    pagy (8.6.2)
     parallel (1.24.0)
     parser (3.3.1.0)
       ast (~> 2.4.1)
@@ -450,7 +460,8 @@ DEPENDENCIES
   factory_bot_rails
   foreman
   hiredis
-  i18n-tasks (~> 0.9.34)
+  hotwire_combobox (~> 0.3.1)
+  i18n-tasks!
   image_processing (~> 1.2)
   imgproxy-rails
   importmap-rails
@@ -461,6 +472,7 @@ DEPENDENCIES
   mailgun-ruby (~> 1.2.5)
   meilisearch-rails
   newrelic_rpm
+  pagy
   pg (~> 1.1)
   postal-rails (~> 1.0)
   premailer-rails

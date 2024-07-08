@@ -1,0 +1,25 @@
+class Identity::Email::UnsubscribesController < ApplicationController
+  before_action :set_user
+
+  def show
+  end
+
+  def update
+    case params[:type]
+    when "comment"
+      @user.update(comment_email_notification_enabled: false)
+    when "weekly_digest"
+      @user.update(weekly_digest_email_enabled: false)
+    end
+    render turbo_stream: turbo_stream.replace("main", partial: "success")
+  end
+
+  private
+
+  def set_user
+    # reuse verification token
+    @user = User.find_by_token_for!(:email_unsubscription, params[:token])
+  rescue StandardError
+    render :expired, status: :not_found
+  end
+end

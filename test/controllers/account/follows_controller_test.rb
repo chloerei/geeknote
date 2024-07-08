@@ -7,7 +7,7 @@ class Account::FollowsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in user
     assert_difference "account.followers.count" do
-      post account_follow_path(account)
+      post account_follow_path(account.name)
     end
   end
 
@@ -18,7 +18,7 @@ class Account::FollowsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in user
     assert_difference "account.followers.count", -1 do
-      delete account_follow_path(account)
+      delete account_follow_path(account.name)
     end
   end
 end

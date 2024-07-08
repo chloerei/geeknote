@@ -54,4 +54,14 @@ module MarkdownHelper
 
     sanitize doc.to_html, tags: MARKDOWN_ALLOW_TAGS, attributes: MARKDOWN_ALLOW_ATTRIBUTES
   end
+
+  def markdown_summary(text)
+    html = CommonMarker.render_html(text, :DEFAULT, [ :table, :tasklist, :strikethrough, :autolink, :tagfilter ])
+    doc = Nokogiri::HTML.fragment(html)
+
+    first_paragraph = doc.css("p").first
+
+    text = first_paragraph&.text || ""
+    truncate(text, length: 140)
+  end
 end

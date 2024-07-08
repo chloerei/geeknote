@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_14_063727) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_26_085645) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -88,7 +88,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_14_063727) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.bigint "account_id"
     t.string "commentable_type"
     t.bigint "commentable_id"
     t.bigint "user_id"
@@ -98,7 +97,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_14_063727) do
     t.integer "replies_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_comments_on_account_id"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
@@ -150,16 +148,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_14_063727) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.bigint "account_id"
     t.bigint "user_id"
-    t.string "record_type"
-    t.bigint "record_id"
-    t.integer "type"
     t.datetime "read_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_notifications_on_account_id"
-    t.index ["record_type", "record_id"], name: "index_notifications_on_record"
+    t.string "type"
+    t.jsonb "data", default: {}
+    t.index ["user_id", "read_at"], name: "index_notifications_on_unread", where: "(read_at IS NULL)"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 

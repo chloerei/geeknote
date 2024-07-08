@@ -1,85 +1,84 @@
-<div class="banner-image">
-  <div class="banner-image__inner">
-    <% if @account.owner.banner_image.attached? %>
-      <%= image_tag @account.owner.banner_image.variant(:large) %>
+<div class="card">
+  <div class="w-full aspect-[3/1] bg-primary-container rounded-t-xl">
+    <% if account.owner.banner_image.attached? %>
+      <img src="<%= url_for(account.owner.banner_image.variant(:large)) %>" alt="banner image" class="w-full aspect-[3/1] object-cover rounded-t-xl">
     <% end %>
   </div>
-</div>
 
-<div class="background-surface">
-  <div class="container padding-x-3">
-    <div class="display-flex flex-direction-column flex-direction-row@tablet gap-4 padding-y-4">
-      <div class="avatar avatar--profile flex-shrink-0">
-        <%= avatar_image_tag @account.owner.avatar %>
-      </div>
+  <div class="flex gap-4 justify-between px-4">
+    <div class="flex-shrink-0 -mt-20">
+      <img src="<%= avatar_url(account.owner) %>" alt="avatar" class="w-40 h-40 rounded-full border-4 border-surface bg-surface">
+    </div>
+    <div class="flex-shrink-0 flex items-center gap-2">
+      <% if account.user? && account.owner == Current.user %>
+        <a href="<%= dashboard_settings_profile_path %>" class="outlined-button">
+          <%= t "general.edit_profile" %>
+        </a>
+      <% else %>
+        <%= render "account/follows/button", account: account %>
+      <% end %>
 
-      <div class="flex-grow-1 display-flex flex-direction-column gap-2">
-        <div class="display-flex align-items-flex-start gap-3">
-          <div class="flex-grow-1">
-            <div class="title-large">
-              <%= @account.owner.name %>
-            </div>
-            <div class="text-muted">
-              @<%= @account.name %>
-            </div>
-          </div>
-
-          <% if current_member %>
-            <a href="<%= account_dashboard_posts_path(@account) %>" class="button button--outlined">
-              <%= t 'common.dashboard' %>
-            </a>
+      <div class="menu">
+        <label tabindex="0" class="icon-button">
+          <%= material_icon :more_vert %>
+        </label>
+        <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
+          <button type="button" class="menu__item" data-controller="copy-link" data-action="copy-link#copy" data-copy-link-url-value="<%= account_root_url(account.name) %>">
+            <%= material_icon :link %>
+            <span><%= t "general.copy_link" %></span>
+          </button>
+          <% if Current.user %>
+            <% if (account.user? && account.owner == Current.user) || (account.organization? && account.owner.members.active.where(user: Current.user).exists?) %>
+              <a href="<%= dashboard_root_path(account.name) %>" class="menu__item">
+                <%= material_icon :dashboard %>
+                <%= t "general.dashboard" %>
+              </a>
+            <% end %>
           <% end %>
-
-          <% if account.owner != current_user %>
-            <%= render 'account/follows/button', account: account %>
-          <% end %>
-        </div>
-
-        <div class="">
-          <%= truncate account.description %>
-        </div>
-
-        <div class="display-flex gap-3 align-items-center">
-          <% if account.user? %>
-            <a href="<%= account_followings_path(account) %>" class="link-text">
-              <b><%= account.owner.followings_count %></b> <%= t 'common.followings' %>
-            </a>
-          <% end %>
-
-          <a href="<%= account_followers_path(account) %>" class="link-text">
-            <b><%= account.followers_count %></b> <%= t 'common.followers' %>
-          </a>
-
-          <a href="<%= account_feed_url(account, format: :atom) %>" class="button button--icon" target="_blank" title="Atom Feed">
-            <span class="material-icons">rss_feed</span>
-          </a>
         </div>
       </div>
+    </div>
+  </div>
 
+  <div class="p-4">
+    <div class="text-2xl font-bold">
+      <%= account.owner.name %>
     </div>
 
-  </div>
-</div>
+    <div class="text-on-surface-variant">
+      @<%= account.name %>
+    </div>
 
-<div class="border-bottom background-surface">
-  <div class="container padding-x-3">
-    <div class="tab tab--secondary">
-      <a href="<%= account_root_path(@account) %>" class="tab__item <%= 'tab__item--active' if controller_name == 'posts' %>">
-        <%= t 'common.posts' %>
-      </a>
-
-      <div class="padding-x-3">
-        <%= form_with url: account_search_path, method: :get do |form| %>
-          <div class="text-field text-field--filled text-field--with-leading-icon text-field--search">
-            <div class="text-field__container">
-              <div class="text-field__leading-icon">
-                <span class="material-icons">search</span>
-              </div>
-              <%= form.text_field :query, autocomplete: "off", value: params[:query], autofocus: params[:query].present?, class: "text-field__input" %>
-            </div>
-          </div>
-        <% end %>
+    <% if account.user? %>
+      <div class="mt-4">
+        <%= account.owner.bio %>
       </div>
+    <% else %>
+      <div class="mt-4">
+        <%= account.owner.description %>
+      </div>
+    <% end %>
+
+    <div class="mt-4 text-on-surface-variant">
+      <div class="inline-flex items-center gap-2">
+        <div class="icon w-6 h-6">
+          <%= material_icon :calendar_month %>
+        </div>
+        <%= local_date account.created_at.to_date, data: { turbo_permanent: true } %> Joined
+      </div>
+    </div>
+
+    <div class="mt-2 flex gap-4">
+      <% if account.user? %>
+        <a href="<%= account_followings_path(account.name) %>">
+          <span class="tabular-nums font-medium"><%= account.owner.followings_count %></span>
+          <span class="text-on-surface-variant"><%= t "general.following" %></span>
+        </a>
+      <% end %>
+      <a href="<%= account_followers_path(account.name) %>">
+        <span class="tabular-nums font-medium"><%= account.followers_count %></span>
+        <span class="text-on-surface-variant"><%= t "general.followers" %></span>
+      </a>
     </div>
   </div>
 </div>

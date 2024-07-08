@@ -1,0 +1,107 @@
+<%# locals: (comment:, showpage: false) %>
+
+<div id="<%= dom_id(comment) %>" class="card mt-4 first:mt-0">
+  <div class="flex gap-4 p-4">
+    <div class="flex-shrink-0">
+      <img src="<%= avatar_url(comment.user) %>" alt="avatar" class="w-10 h-10 rounded-full">
+    </div>
+    <div class="flex-grow">
+      <div class="text-sm font-medium">
+        <%= comment.user.name %>
+      </div>
+      <div class="text-sm text-on-surface-variant">
+        <a href="<%= account_comment_path(comment.user.account.name, comment) %>">
+          <%= format_time comment.created_at %>
+        </a>
+      </div>
+    </div>
+    <div class="flex-shrink-0">
+      <div class="menu">
+        <label tabindex="0" type="button" class="icon-button">
+          <%= material_icon :more_vert %>
+        </label>
+        <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
+          <button type="button" class="menu__item" data-controller="copy-link" data-action="copy-link#copy" data-copy-link-url-value="<%= account_comment_path(comment.user.account.name, comment) %>">
+            <%= material_icon :link %>
+            Copy link
+          </button>
+          <div class="hidden visible-to-user--<%= comment.user.id %>">
+            <a href="<%= edit_account_comment_path(comment.user.account.name, comment) %>" class="menu__item">
+              <%= material_icon :edit %>
+              <span>
+                Edit
+              </span>
+            </a>
+            <%= form_with url: account_comment_path(comment.user.account.name, comment), method: :delete, data: { turbo_confirm: "Delete commnet?" } do |form| %>
+              <button type="submit" class="menu__item">
+                <%= material_icon :delete %>
+                <span>
+                  Delete
+                </span>
+              </button>
+            <% end %>
+          </div>
+          <div class="hidden visible-to-admin">
+            <button type="button" class="menu__item">
+              <%= material_icon :build %>
+              <span>
+                Manage
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% if comment.parent %>
+    <div class="px-4 pb-4 group-[.replies]:hidden">
+      <a href="<%= account_comment_path(comment.parent.user.account.name, comment.parent) %>" class="block interactive-bg-surface-container rounded-lg p-4">
+        <div class="flex items-center gap-2">
+          <img src="<%= avatar_url(comment.parent.user) %>" alt="avatar" class="h-6 w-6 rounded-full">
+          <span class="font-medium">
+            <%= comment.parent.user.name %>
+          </span>
+          <span class="text-on-surface-variant">
+            <%= format_time comment.parent.created_at %>
+          </span>
+          <div class="icon w-6 h-6">
+            <%= material_icon :reply %>
+          </div>
+        </div>
+        <div class="text-on-surface-variant mt-2">
+          <%= markdown_summary comment.parent.content %>
+        </div>
+      </a>
+    </div>
+  <% end %>
+
+  <article class="prose dark:prose-invert max-w-none px-4">
+    <%= markdown_render comment.content %>
+  </article>
+
+  <div class="flex items-center gap-2 p-2">
+    <%= render "account/comments/likes/button", comment: comment %>
+
+    <% if !showpage %>
+      <div class="inline-flex items-center">
+        <a href="<%= account_comment_path(comment.user.account.name, comment, comment: true, anchor: "form_comment") %>" class="icon-button">
+          <%= material_icon :reply %>
+        </a>
+      </div>
+    <% end %>
+
+    <div class="flex-grow"></div>
+
+    <% if !showpage %>
+      <% if comment.replies_count > 0 %>
+        <a href="<%= account_comment_path(comment.user.account.name, comment) %>" class="text-button text-on-surface-variant group-[.comment-show]:hidden">
+          <span>
+            View <%= comment.replies_count %> replies
+          </span>
+          <%= material_icon :arrow_right_alt %>
+        </a>
+      <% end %>
+    <% end %>
+  </div>
+</div>

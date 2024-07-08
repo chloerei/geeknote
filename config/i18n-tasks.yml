@@ -107,9 +107,9 @@ ignore_unused:
 ## Exclude these keys from the `i18n-tasks eq-base' report:
 # ignore_eq_base:
 #   all:
-#     - common.ok
+#     - general.ok
 #   fr,es:
-#     - common.brand
+#     - general.brand
 
 ## Exclude these keys from the `i18n-tasks check-consistent-interpolations` report:
 # ignore_inconsistent_interpolations:

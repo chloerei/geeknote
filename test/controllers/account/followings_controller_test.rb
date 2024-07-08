@@ -6,7 +6,7 @@ class Account::FollowingsControllerTest < ActionDispatch::IntegrationTest
     user.follows.create(account: create(:user_account))
     user.follows.create(account: create(:organization_account))
 
-    get account_followings_path(user.account)
+    get account_followings_path(user.account.name)
     assert_response :success
   end
 end

@@ -1,16 +1,6 @@
 require "test_helper"
 
 class OrganizationsControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    user = create(:user)
-    organization = create(:organization)
-    create(:member, user: user, organization: organization, role: "member")
-
-    sign_in user
-    get organizations_path
-    assert_response :success
-  end
-
   test "should get new page" do
     user = create(:user)
 
@@ -27,6 +17,6 @@ class OrganizationsControllerTest < ActionDispatch::IntegrationTest
       post organizations_path, params: { organization: { account_attributes: { name: "neworg" }, name: "org" } }
     end
     member = user.members.last
-    assert member.owner?
+    assert member.admin?
   end
 end

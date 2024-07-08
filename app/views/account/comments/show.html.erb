@@ -1,0 +1,72 @@
+<div class="max-w-screen-xl mx-auto flex gap-6">
+  <div class="flex-grow min-w-0">
+    <div class="card p-4">
+      <div class="text-lg">
+        <%= t "general.commented_on" %>
+        <a href="<%= account_post_path(@comment.commentable.account.name, @comment.commentable) %>" class="text-primary underline">
+          <%= @comment.commentable.title %>
+        </a>
+      </div>
+    </div>
+
+    <div class="card mt-4">
+      <%= render "comment", comment: @comment, showpage: true %>
+    </div>
+
+    <div id="comments" class="">
+      <div class="flex items-center p-2 gap-4">
+        <div class="flex-grow font-medium px-2">
+          <%= t "general.replies" %> <%= @comment.replies_count %>
+        </div>
+        <div class="menu">
+          <label tabindex="0" class="text-button text-on-surface-variant">
+            <%= material_icon :sort %>
+            <span>
+              <%=
+                case @sort
+                when "oldest"
+                  t("general.oldest")
+                when "likes"
+                  t("general.most_likes")
+                else
+                  t("general.newest")
+                end
+              %>
+            </span>
+          </label>
+          <div class="menu__content top-full right-0 origin-top-right">
+            <a href="<%= url_for(sort: nil, anchor: "comments") %>" class="menu__item">
+              <%= t "general.newest" %>
+            </a>
+            <a href="<%= url_for(sort: "oldest", anchor: "comments") %>" class="menu__item">
+              <%= t "general.oldest" %>
+            </a>
+            <a href="<%= url_for(sort: "likes", anchor: "comments") %>" class="menu__item">
+              <%= t "general.most_likes" %>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <% if Current.user %>
+        <div class="card">
+          <div class="p-4">
+            <%= render "form", comment: Current.user.comments.new(commentable: @comment.commentable, parent: @comment), open: params[:comment].present? %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="group replies mt-4">
+        <%= render "components/scroll_pagination", pagy: @pagy, content_id: "comments_list" do %>
+          <%= render partial: "comment", collection: @comments %>
+          <%= render "account/comments/status", comments: @comments %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="flex-shrink-0 w-80">
+    <%= render "account/profile_card", account: @comment.user.account %>
+  </div>
+</div>

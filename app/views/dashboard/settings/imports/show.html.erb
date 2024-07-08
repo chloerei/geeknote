@@ -1,0 +1,40 @@
+<%= render "dashboard/header" %>
+
+<div class="card mt-6 flex flex-col md:flex-row">
+  <div class="flex-shrink-0 md:w-64">
+    <%= render "dashboard/settings/nav" %>
+  </div>
+
+  <div class="flex-grow min-w-0">
+    <div class="flex h-14 items-center p-2 gap-2">
+      <div class="text-lg font-medium px-2">
+        <%= t "general.import" %>
+      </div>
+    </div>
+
+    <div class="p-4">
+      <div class="max-w-screen-sm">
+        <%= form_with model: @account, url: dashboard_settings_import_path(@account.name) do |form| %>
+          <div class="form-field">
+            <%= form.label :feed_url, class: "form-label" %>
+            <%= render "components/text_field", form: form, name: :feed_url %>
+          </div>
+          <div class="form-field">
+            <%= render "components/checkbox_field", form: form, name: :feed_mark_canonical, description: t('.feed_mark_canonical_description') %>
+          </div>
+          <div class="form-field flex gap-2 items-center">
+            <button type="submit" class="filled-button">
+              <%= t '.save_and_fetch' %>
+            </button>
+            <% if @account.feed_url.present? && @account.feed_fetched_at %>
+              <div class="text-on-surface-variant">
+                <%= t 'general.last_fetched_at' %>
+                <%= format_time @account.feed_fetched_at %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

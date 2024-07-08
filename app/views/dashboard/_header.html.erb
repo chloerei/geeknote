@@ -1,0 +1,59 @@
+<div class="flex items-center gap-2">
+  <div class="text-lg font-medium flex-grow">
+    <%= t "general.dashboard" %>
+  </div>
+  <a href="<%= account_root_path(@account.name) %>" class="text-button">
+    <%= material_icon :north_east %>
+    <span><%= t "general.view" %></span>
+  </a>
+  <div class="menu">
+    <label tabindex="0" class="text-button">
+      <img src="<%= avatar_url(@account.owner) %>" alt="avatar" class="w-6 h-6 rounded-full">
+      <div>
+        <%= @account.name %>
+      </div>
+      <%= material_icon :arrow_drop_down %>
+    </label>
+    <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
+      <div class="px-4 py-2 text-sm font-medium text-on-surface-variant">
+        <%= t "general.personal" %>
+      </div>
+
+      <a href="<%= dashboard_root_path(Current.user.account.name) %>" class="menu__item">
+        <img src="<%= avatar_url(Current.user) %>" alt="avatar" class="w-6 h-6 rounded-full">
+        <div class="">
+          <div class="font-medium">
+            <%= Current.user.name %>
+          </div>
+        </div>
+      </a>
+
+      <hr class="border-outline-variant my-2">
+
+      <div class="px-4 py-2 text-sm font-medium text-on-surface-variant">
+        <%= t "general.organizations" %>
+      </div>
+
+      <% Current.user.organizations.includes(:account).each do |organization| %>
+        <a href="<%= dashboard_root_path(organization.account.name) %>" class="menu__item">
+          <img src="<%= avatar_url(organization) %>" alt="avatar" class="w-6 h-6 rounded-full">
+          <div class="flex-grow">
+            <div class="font-medium">
+              <%= organization.name %>
+            </div>
+          </div>
+        </a>
+      <% end %>
+
+      <a href="<%= new_organization_path %>" class="menu__item">
+        <%= material_icon :add %>
+        <span><%= t "general.new_organization" %></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="flex gap-2 mt-6">
+  <%= render "components/tab", icon: "article", label: t("general.posts"), url: dashboard_root_path(@account.name), active: current_page?(dashboard_root_path(@account.name)) %>
+  <%= render "components/tab", icon: "settings", label: t("general.settings"), url: dashboard_settings_profile_path, active: request.path.include?("/settings/") %>
+</div>

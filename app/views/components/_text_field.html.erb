@@ -1,0 +1,30 @@
+<%# locals: (form:, name:, type: :text_field, prefix: nil, suffix: nil, error: nil, label: nil, description: nil, options: {}) %>
+
+<%
+  error ||= form.object && form.object.errors[name].first
+%>
+
+<div class="text-field <%= "text-field--error" if error %>">
+  <div class="text-field__container">
+    <% if prefix %>
+      <div class="text-field__prefix">
+        <%= prefix %>
+      </div>
+    <% end %>
+    <%= form.public_send type, name, options.merge(class: "text-field__input") %>
+    <% if suffix %>
+      <div class="text-field__suffix">
+        <%= suffix %>
+      </div>
+    <% end %>
+  </div>
+  <% if error %>
+    <div class="text-field__supporting-text">
+      <%= error %>
+    </div>
+  <% elsif description %>
+    <div class="text-field__supporting-text">
+      <%= description %>
+    </div>
+  <% end %>
+</div>

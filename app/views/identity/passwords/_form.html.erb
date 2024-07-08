@@ -1,0 +1,11 @@
+<%= form_with model: @user, url: identity_password_path(token: params[:token]), builder: CustomFormBuilder, class: 'form', id: 'password-reset-form' do |form| %>
+  <div class="margin-bottom-3">
+    <%= form.password_field :password %>
+  </div>
+  <div class="margin-bottom-3">
+    <%= form.password_field :password_confirmation %>
+  </div>
+  <button type="submit" class="button button--filled">
+    <%= t('general.submit') %>
+  </button>
+<% end %>

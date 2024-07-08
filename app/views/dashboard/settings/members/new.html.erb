@@ -1,0 +1,41 @@
+<%= render "dashboard/header" %>
+
+<div class="card mt-6 flex flex-col md:flex-row">
+  <div class="flex-shrink-0 md:w-64">
+    <%= render "dashboard/settings/nav" %>
+  </div>
+
+  <div class="flex-grow min-w-0">
+    <div class="flex h-14 items-center px-2 gap-2">
+      <a href="<%= dashboard_settings_members_path %>" class="icon-button">
+        <%= material_icon :arrow_back %>
+      </a>
+      <div class="flex-grow text-lg font-medium px-2">
+        Add member
+      </div>
+    </div>
+
+    <div class="p-4 max-w-screen-sm">
+      <%= form_with model: @member, url: dashboard_settings_members_path(@account.name) do |form| %>
+        <div class="form-field">
+          <%= form.label :invitation_email, class: "form-label" %>
+          <%= render "components/text_field", form: form, name: :invitation_email %>
+        </div>
+        <div class="form-field">
+          <div class="text-sm font-medium">
+            Role
+          </div>
+          <div class="space-y-2">
+            <%= render "components/radio_button_field", form: form, name: :role, value: "admin", label: "Admin", description: "Can manage member's posts and change dashboard settings." %>
+            <%= render "components/radio_button_field", form: form, name: :role, value: "member", label: "Member", description: "Can write and publish their own posts." %>
+          </div>
+        </div>
+        <div class="form-field">
+          <button type="submit" class="filled-button">
+            Send invitation
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

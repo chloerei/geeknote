@@ -1,0 +1,24 @@
+<%= render "dashboard/header" %>
+
+<div class="card mt-6 flex flex-col md:flex-row">
+  <div class="flex-shrink-0 md:w-64">
+    <%= render "dashboard/settings/nav" %>
+  </div>
+
+  <div class="flex-grow min-w-0">
+    <div class="flex h-14 items-center p-2">
+      <div class="text-lg font-medium px-2">
+        Profile
+      </div>
+    </div>
+    <div class="p-4">
+      <div class="max-w-screen-sm">
+        <% if @account.user? %>
+          <%= render "user_form", user: @account.owner %>
+        <% else %>
+          <%= render "organization_form", organization: @account.owner %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

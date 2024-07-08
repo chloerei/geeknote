@@ -1,10 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :require_sign_in
 
-  def index
-    @members = current_user.members.includes(organization: :account)
-  end
-
   def new
     @organization = Organization.new
     @organization.build_account
@@ -14,16 +10,16 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new organization_params
 
     if @organization.save
-      @organization.members.create(role: "owner", user: current_user, status: :active)
-      redirect_to account_root_path(@organization.account)
+      @organization.members.create(role: "admin", user: current_user, status: :active)
+      redirect_to dashboard_root_path(@organization.account.name)
     else
-      render turbo_stream: turbo_stream.replace("organization-form", partial: "form")
+      render :new, status: :unprocessable_entity
     end
   end
 
   private
 
   def organization_params
-    params.require(:organization).permit(:name, :description, account_attributes: [ :name ])
+    params.require(:organization).permit(:name, account_attributes: [ :name ])
   end
 end

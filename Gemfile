@@ -40,6 +40,8 @@ gem "stimulus-rails"
 
 gem "requestjs-rails"
 
+gem "hotwire_combobox", "~> 0.3.1"
+
 # markdown
 gem "commonmarker", "~> 0.23.8"
 
@@ -52,6 +54,7 @@ gem "rouge"
 # pagination
 gem "kaminari"
 gem "rails_cursor_pagination"
+gem "pagy"
 
 # inline email css
 gem "premailer-rails"
@@ -93,7 +96,7 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "web-console"
 
-  gem "i18n-tasks", "~> 0.9.34"
+  gem "i18n-tasks", github: "chloerei/i18n-tasks"
 
   gem "brakeman", "~> 5.4.0"
 

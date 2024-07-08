@@ -1,0 +1,23 @@
+<%# locals: (form:, name:, autofocus: false, options: {}) %>
+
+<div class="markdown-field ring-1 focus-within:ring-2 ring-outline focus-within:ring-primary rounded group" data-controller="markdown-field" data-markdown-field-autofocus-value="<%= !!autofocus %>">
+  <%= form.hidden_field name, options.merge(data: { markdown_field_target: "contentInput" }) %>
+  <div class="flex items-center p-1 gap-1 bg-surface-container rounded-t">
+    <button type="button" class="text-button group-[.previewing]:text-on-surface-variant" data-action="markdown-field#write">
+      <%= t "general.write" %>
+    </button>
+    <button type="button" class="text-button text-on-surface-variant group-[.previewing]:text-primary" data-action="markdown-field#preview">
+      <%= t "general.preview" %>
+    </button>
+    <div class="flex-grow"></div>
+    <button type="button" class="icon-button" data-action="markdown-field#attachFile">
+      <%= material_icon :attach_file %>
+    </button>
+  </div>
+  <div class="min-h-[160px]">
+    <div class="group-[.previewing]:hidden" data-markdown-field-target="contentMarkdown" data-action="turbo:morph@window->markdown-field#reconnect">
+    </div>
+    <div class="prose dark:prose-invert max-w-none hidden group-[.previewing]:block p-4" data-markdown-field-target="preview">
+    </div>
+  </div>
+</div>

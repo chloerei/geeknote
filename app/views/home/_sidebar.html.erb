@@ -1,0 +1,47 @@
+<div class="space-y-4">
+  <%= sanitize @site.sidebar_header_html %>
+
+  <% if current_user && !current_user.email_verified? %>
+    <div class="bg-tertiary-container rounded-xl p-4">
+      <h3 class="font-medium">
+        <%= t '.email_is_not_verified' %>
+      </h3>
+      <div class="mt-4">
+        <a href="<%= settings_email_path %>" class="underline">
+          <%= t '.verify_email' %>
+        </a>
+      </div>
+    </div>
+  <% end %>
+
+  <%
+    popular_tags = Tag.order(taggings_count: :desc).limit(10)
+  %>
+  <div class="card">
+    <div class="p-4 font-medium">
+      <%= t "general.popular_tags" %>
+    </div>
+
+    <div class="px-4 pb-4">
+      <% popular_tags.each do |tag| %>
+        <a href="#" class="inline-flex items-center h-8 px-3 text-sm font-medium interactive-bg-surface-container rounded-full">
+          <%= tag.name %>
+        </a>
+      <% end %>
+    </div>
+  </div>
+
+  <%
+    recommend_accounts = Account.where(id: Account.order(followers_count: :desc).excluding(Current.user&.account).limit(100)).order("RANDOM()").limit(3)
+  %>
+  <div class="card">
+    <div class="p-4 font-medium">
+      <%= t "general.recommend_users" %>
+    </div>
+    <div class="">
+      <%= render partial: "account/item", collection: recommend_accounts, as: :account %>
+    </div>
+  </div>
+
+  <%= sanitize @site.sidebar_footer_html %>
+</div>

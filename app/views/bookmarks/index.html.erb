@@ -1,72 +1,11 @@
-<div class="container padding-3">
-  <h3 class="title-meidum padding-x-3">
-    <%= t "common.bookmarks" %>
-  </h3>
-
-  <div class="layout-dashboard">
-    <div class="overflow-auto">
-      <div class="nav">
-        <a href="<%= bookmarks_path %>" class="nav__item <%= 'nav__item--active' if params[:tag].blank? %>">
-          <div class="nav__item__icon">
-            <span class="material-icons">bookmark</span>
-          </div>
-          <div class="nav__item__label">
-            <%= t 'common.all_bookmarks' %>
-          </div>
-        </a>
-
-        <% tags = current_user.bookmarked_post_tags.distinct.order(taggings_count: :desc).to_a %>
-        <% tags.first(10).each do |tag| %>
-          <a href="<%= bookmarks_path(tag: tag.name) %>" class="nav__item <%= 'nav__item--active' if params[:tag] == tag.name %>">
-            <div class="nav__item__icon">
-              <span class="material-icons">tag</span>
-            </div>
-            <div class="nav__item__label">
-              <%= tag.name %>
-            </div>
-          </a>
-        <% end %>
-        <% if tags.count > 10 %>
-            <details class="display-contents">
-              <summary class="nav__item order-last">
-                <div class="nav__item__icon">
-                  <span class="material-icons hide-on-open">expand_more</span>
-                  <span class="material-icons show-on-open">expand_less</span>
-                </div>
-                <div class="nav__item__label">
-                  <div class="hide-on-open">
-                    <%= t "common.show_more" %>
-                  </div>
-                  <div class="show-on-open">
-                    <%= t "common.show_less" %>
-                  </div>
-                </div>
-              </summary>
-
-              <% tags[3..-1].each do |tag| %>
-                <a href="<%= bookmarks_path(tag: tag.name) %>" class="nav__item <%= 'nav__item--active' if params[:tag] == tag.name %>">
-                  <div class="nav__item__icon">
-                    <span class="material-icons">tag</span>
-                  </div>
-                  <div class="nav__item__label">
-                    <%= tag.name %>
-                  </div>
-                </a>
-              <% end %>
-            </details>
-        <% end %>
-      </div>
-    </div>
-
-    <div>
-      <div class="display-flex flex-direction-column gap-3">
-        <%= render partial: 'account/posts/post', collection: @posts, cached: -> post { [post.account, post.user, post] } %>
-      </div>
-
-      <div class="padding-3">
-        <%= paginate @posts %>
-      </div>
-    </div>
+<div class="max-w-screen-lg mx-auto">
+  <div class="text-lg font-medium">
+    <%= t "general.bookmarks" %>
   </div>
 
+  <div class="mt-6">
+    <%= render "components/scroll_pagination", pagy: @pagy do %>
+      <%= render partial: "home/post", collection: @posts %>
+    <% end %>
+  </div>
 </div>

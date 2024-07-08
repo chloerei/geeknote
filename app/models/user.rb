@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_one :account, as: :owner, autosave: true
   has_many :posts
+  has_many :comments
   has_many :members
   has_many :organizations, through: :members
   has_many :manage_accounts, -> { where(members: { role: Member.roles.values_at(:owner, :admin) }) }, through: :organizations, source: :account
@@ -14,10 +15,21 @@ class User < ApplicationRecord
   has_many :following_users, through: :followings, source: :owner, source_type: "User"
   has_many :bookmarks
   has_many :bookmarked_posts, through: :bookmarks, source: :post
-  has_many :bookmarked_post_tags, through: :bookmarked_posts, source: :tags
 
   has_secure_password
   has_secure_token :auth_token
+
+  generates_token_for :email_verification, expires_in: 2.days do
+    email
+  end
+
+  generates_token_for :email_unsubscription, expires_in: 7.days do
+    email
+  end
+
+  generates_token_for :password_reset, expires_in: 20.minutes do
+    password_salt.last(10)
+  end
 
   has_one_attached :avatar do |attachable|
     attachable.variant :thumb, resize_to_fill: [ 320, 320 ]
@@ -25,6 +37,14 @@ class User < ApplicationRecord
 
   has_one_attached :banner_image do |attachable|
     attachable.variant :large, resize_to_limit: [ 1920, 1920 ]
+  end
+
+  attribute :remove_avatar, :boolean
+  attribute :remove_banner_image, :boolean
+
+  after_save do
+    avatar.purge_later if remove_avatar
+    banner_image.purge_later if remove_banner_image
   end
 
   validates :name, presence: true
@@ -39,32 +59,6 @@ class User < ApplicationRecord
   end
 
   accepts_nested_attributes_for :account, update_only: true
-
-  def self.encryptor
-    key = Rails.application.key_generator.generate_key "user-encryptor", ActiveSupport::MessageEncryptor.key_len
-    ActiveSupport::MessageEncryptor.new(key)
-  end
-
-  def password_reset_token
-    User.encryptor.encrypt_and_sign(id, purpose: :password_reset, expires_in: 30.minutes)
-  end
-
-  def self.find_by_password_reset_token(token)
-    find_by id: User.encryptor.decrypt_and_verify(token.to_s, purpose: :password_reset)
-  rescue ActiveSupport::MessageEncryptor::InvalidMessage
-    nil
-  end
-
-  def email_auth_token
-    User.encryptor.encrypt_and_sign([ id, email ], purpose: :email_verification, expires_in: 1.week)
-  end
-
-  def self.find_by_email_auth_token(token)
-    id, email = User.encryptor.decrypt_and_verify(token.to_s, purpose: :email_verification)
-    find_by id: id, email: email
-  rescue ActiveSupport::MessageEncryptor::InvalidMessage
-    nil
-  end
 
   def email_verified?
     email_verified_at.present?

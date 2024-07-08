@@ -1,0 +1,10 @@
+<%# locals: (url:, icon:, label:, active: false) %>
+
+<a href="<%= url %>" class="navigation-rail__item <%= "navigation-rail__item--active" if active %>">
+  <div class="navigation-rail__item__icon">
+    <%= material_icon(active ? "#{icon}-fill" : icon) %>
+  </div>
+  <div class="navigation-rail__item__label">
+    <%= label %>
+  </div>
+</a>

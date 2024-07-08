@@ -1,42 +1,56 @@
-<div class="container padding-3">
-  <div class="layout-primary">
-    <%= render 'admin/navbar' %>
-
-    <div class="">
-      <div class="card card--elevated background-surface">
-        <div class="top-app-bar">
-          <div class="top-app-bar__title">
-            <%= t 'common.tags' %>
-          </div>
-            <%= form_with url: admin_tags_path, method: :get, builder: CustomFormBuilder do |form| %>
-              <%= form.text_field :name, value: params[:name] %>
-            <% end %>
-        </div>
-
-        <table class="table border-top border-bottom">
-          <tbody>
-            <% @tags.each do |tag| %>
-              <tr>
-                <td>
-                  <a href="<%= admin_tag_path(tag) %>">
-                    <%= tag.name %>
-                  </a>
-                </td>
-                <td>
-                  <%= tag.taggings_count %>
-                </td>
-                <td>
-                  <%= format_time tag.created_at %>
-                </td>
-              </tr>
-            <% end %>
-        </table>
-
-        <div class="padding-3">
-          <%= paginate @tags %>
-        </div>
+<div class="">
+  <div class="card">
+    <div class="flex items-center h-14 px-2">
+      <div class="flex-grow px-2 text-lg font-medium">
+        Tags
       </div>
     </div>
 
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>
+            ID
+          </th>
+          <th>
+            Name
+          </th>
+          <th>
+            Taggings
+          </th>
+          <th>
+            Created at
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tags.each do |tag| %>
+          <tr>
+            <td>
+              <%= tag.id %>
+            </td>
+            <td>
+              <%= tag.name %>
+            </td>
+            <td>
+              <%= tag.taggings_count %>
+            </td>
+            <td>
+              <%= format_time tag.created_at %>
+            </td>
+            <td class="text-right">
+              <a href="<%= admin_tag_path(tag) %>" class="text-button">
+                View
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="p-4">
+      <%= render "components/page_pagination", pagy: @pagy %>
+    </div>
   </div>
 </div>

@@ -16,163 +16,149 @@
     <meta name="twitter:image" content="<%= featured_image_url @post.featured_image %>">
   <% end %>
 
-  <link rel="canonical" href="<%= @post.canonical_url || account_post_url(@account, @post) %>">
+  <link rel="canonical" href="<%= @post.canonical_url || account_post_url(@account.name, @post) %>">
 <% end %>
 
-<div class="container padding-3">
-  <div class="layout-primary">
-    <div class="display-flex flex-direction-column gap-3 position-relative">
-      <div class="card card--elevated">
-        <% if @post.featured_image.attached? %>
-          <div class="post__feature-image">
-            <%= featured_image_tag @post.featured_image %>
-          </div>
-        <% end %>
+<div class="max-w-screen-xl mx-auto flex flex-col md:flex-row gap-6">
+  <div class="flex-grow min-w-0">
 
-        <div class="padding-4">
-          <h1 class="headline-medium margin-top-0">
-            <%= @post.title %>
-          </h1>
+    <div class="card">
+      <% if @post.featured_image.attached? %>
+        <img src="<%= url_for(@post.featured_image.variant(:large)) %>" alt="cover" class="rounded-xl object-cover w-full aspect-video">
+      <% end %>
 
-          <div class="display-flex align-items-center flex-wrap gap-1 margin-y-3">
-            <a href="<%= account_root_path(@post.user.account) %>" class="link-title">
-              <div class="display-flex gap-2 align-items-center">
-                <div class="avatar avatar--small">
-                  <%= avatar_image_tag @post.user.avatar %>
-                </div>
-                <div class="">
-                  <b><%= @post.user.name %></b>
-                </div>
-              </div>
+      <div class="p-6">
+        <div class="flex gap-4">
+          <div class="flex-shrink-0">
+            <a href="<%= account_root_path(@post.user.account.name) %>">
+              <img src="<%= avatar_url(@post.user) %>" alt="avatar" class="w-10 h-10 rounded-full">
             </a>
+          </div>
 
-            <% if @post.account.organization? %>
-              <span class="text-muted"><%= t 'common.in' %></span>
-              <a href="<%= account_root_path(@post.account) %>" class="link-title">
-                <b><%= @post.account.owner.name %></b>
+          <div class="flex-grow">
+            <div class="text-sm">
+              <a href="<%= account_root_path(@post.user.account.name) %>" class="font-medium">
+                <%= @post.user.account.name %>
               </a>
-            <% end %>
-
-            <% if @post.published_at %>
-              <div class="text-muted">
+              <% if @post.account != @post.user.account %>
+                <span>in</span>
+                <a href="<%= account_root_path(@post.account.name) %>" class="font-medium">
+                  <%= @post.account.display_name %>
+                </a>
+              <% end %>
+            </div>
+            <div class="text-sm text-on-surface-variant">
+              <%= format_time @post.published_at %>
+              <% if @post.canonical_url.present? %>
                 &centerdot;
-              </div>
-              <div class="text-muted">
-                <%= format_time @post.published_at %>
-              </div>
-            <% end %>
+                <%= t "general.originally_published_at" %>
+                <a href="<%= @post.canonical_url %>" target="_blank" class="text-primary">
+                  <%= URI(@post.canonical_url).host %>
+                </a>
+              <% end %>
+            </div>
+          </div>
 
-            <% if @post.canonical_url %>
-              <div class="text-muted">
-                &centerdot;
-              </div>
-              <div class="text-muted">
-                <%= t 'common.originally_published_at' %> <%= link_to_canonical_url @post.canonical_url %>
-              </div>
-            <% end %>
+          <div class="flex-shrink-0">
+            <div class="menu">
+              <label tabindex="0" type="button" class="icon-button">
+                <%= material_icon :more_vert %>
+              </label>
+              <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
+                <button type="button" class="menu__item" data-controller="copy-link" data-action="copy-link#copy" data-copy-link-url-value="<%= account_post_path(@account.name, @post) %>">
+                  <%= material_icon :link %>
+                  <span><%= t "general.copy_link" %></span>
+                </button>
 
-            <div data-visible-to-user="<%= @post.user.id %>">
-              <div class="dropdown dropdown--right">
-                <label tabindex="0" class="button button--icon">
-                  <span class="material-icons">more_horiz</span>
-                </label>
-
-                <div tabindex="0" class="dropdown__container">
-                  <a href="<%= edit_account_dashboard_post_path(@account, @post) %>" class="dropdown__item">
-                    <%= t 'common.edit' %>
+                <div class="hidden visible-to-user--<%= @post.user.id %>">
+                  <a href="<%= edit_dashboard_post_path(@account.name, @post) %>" class="menu__item">
+                    <%= material_icon :edit %>
+                    <span><%= t "general.edit" %></span>
                   </a>
+                  <%= form_with url: dashboard_post_path(@account.name, @post), method: :delete do |form| %>
+                    <button type="submit" class="menu__item">
+                      <%= material_icon :delete %>
+                      <span><%= t "general.delete" %></span>
+                    </button>
+                  <% end %>
+                </div>
+
+                <div class="hidden visible-to-admin">
+                  <button type="button" class="menu__item">
+                    <%= material_icon :build %>
+                    <span><%= t "general.manage" %></span>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="mt-6">
+          <article class="prose dark:prose-invert max-w-none mt-6">
+            <h1>
+              <%= @post.title %>
+            </h1>
+
+            <%= markdown_render @post.content %>
+          </article>
 
           <% if @post.tags.any? %>
-            <div class="display-flex flex-wrap gap-2 margin-bottom-3">
+            <div class="flex gap-2 mt-6">
               <% @post.tags.each do |tag| %>
-                <a href="<%= tag_path(id: tag.name) %>" class="chip chip--assist">
+                <a href="#" class="inline-flex items-center h-8 px-3 text-sm font-medium interactive-bg-surface-container rounded-full">
                   <%= tag.name %>
                 </a>
               <% end %>
             </div>
           <% end %>
 
-          <div class="typography">
-            <%= markdown_render @post.content %>
-          </div>
+          <div class="sticky flex justify-center px-4 mt-8 bottom-24 md:bottom-4">
+            <div class="flex gap-2 p-1 bg-surface-container rounded-full shadow-md">
+              <%= render "account/posts/likes/button", post: @post %>
 
-        </div>
-
-        <div class="post-toolbar">
-          <div class="post-toolbar__content">
-            <%= render "account/posts/likes/button", post: @post %>
-
-            <%= render "account/posts/bookmarks/button", post: @post %>
-
-            <div class="button-group">
-              <a href="#comments" class="button button--icon">
-                <span class="material-icons">comment</span>
-              </a>
-              <% if @post.comments_count > 0 %>
-                <div class="body-medium">
-                  <%= @post.comments_count %>
-                </div>
-              <% end %>
-            </div>
-
-            <label for="toc-sheet-toggle" class="button button--icon display-none@laptop">
-              <span class="material-icons">toc</span>
-            </label>
-
-          </div>
-        </div>
-
-      </div>
-
-      <div id="comments" class="card card--elevated">
-        <div class="title-large padding-x-4 padding-top-4">
-          <%= t 'common.comments' %>
-        </div>
-
-        <div class="padding-x-4">
-          <% if @post.allow_comments? %>
-            <% if current_user %>
-              <div id="comment--reply">
-                <a href="<%= new_account_post_comment_path(@account, @post) %>" data-turbo-stream="true" class="comment-form-toggle">
-                  <div class="text-field text-field--outlined ">
-                    <div class="text-field__container padding-y-2 padding-x-3 text-muted">
-                      <%= t 'common.comment_placeholder' %>
-                    </div>
-                  </div>
+              <div class="inline-flex items-center">
+                <a href="<%= account_post_comments_path(@account.name, @post, comment: true) %>" class="icon-button">
+                  <%= material_icon :mode_comment %>
                 </a>
+                <% if @post.comments_count > 0 %>
+                  <span class="text-on-surface-variant tabular-nums px-1"><%= @post.comments_count %></span>
+                <% end %>
               </div>
-            <% else %>
-              <a href="<%= sign_in_path(return_to: url_for(anchor: "comments")) %>" class="button button--filled">
-                <%= t 'common.sign_in_to_comment' %>
-              </a>
-            <% end %>
-          <% else %>
-            <div class="padding-3 text-muted text-align-center">
-              <%= t 'common.comment_is_disabled' %>
+
+              <%= render "account/posts/bookmarks/button", post: @post %>
             </div>
-          <% end %>
+          </div>
 
-          <%= render "account/posts/comments/replies" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex-shrink-0 md:w-80">
+
+    <div class="flex flex-col gap-4">
+      <% if @post.account != @post.user.account %>
+        <div class="card">
+          <%= render "account/item", account: @post.account %>
+        </div>
+      <% end %>
+
+      <%= render "account/profile_card", account: @post.user.account %>
+
+      <div class="card">
+        <div class="text-lg font-medium p-4">
+          <%= t "general.more_from", name: @account.display_name %>
+        </div>
+        <div class="mb-3">
+          <% @post.user.posts.published.order(published_at: :desc).where.not(id: @post.id).limit(3).each do |post| %>
+            <a href="<%= account_post_path(post.account.name, post) %>" class="flex p-4 interactive-bg-surface-container-lowest">
+              <%= post.title.presence || t("general.untitled") %>
+            </a>
+          <% end %>
         </div>
       </div>
     </div>
 
-    <div class="">
-      <div class="post-sidebar display-flex flex-direction-column gap-3">
-        <div class="card card--elevated padding-y-2">
-          <%= render "account/account", account: @post.account %>
-
-          <% if @post.account.organization? %>
-            <%= render "account/account", account: @post.user.account %>
-          <% end %>
-        </div>
-
-        <%= render "toc", post: @post %>
-      </div>
-    </div>
   </div>
 </div>

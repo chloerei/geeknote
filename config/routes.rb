@@ -11,20 +11,16 @@ end
 
 Rails.application.routes.draw do
   root to: "home#index"
-  get "feed", to: "home#feed"
-  get "newest", to: "home#newest"
+  get "following", to: "home#following", as: :following
+  get "newest", to: "home#newest", as: :newest
 
   get "/search", to: "search#index", as: :search
 
-  get "sign_up", to: "users#new", as: "sign_up"
-  resources :users, only: [ :create ] do
-    collection do
-      post "validate"
-    end
-  end
-  get "sign_in", to: "sessions#new", as: "sign_in"
-  delete "sign_out", to: "sessions#destroy", as: "sign_out"
-  resources :sessions, only: [ :create ]
+  get  "sign_in", to: "sessions#new"
+  post "sign_in", to: "sessions#create"
+  get  "sign_up", to: "registrations#new"
+  post "sign_up", to: "registrations#create"
+  delete "sign_out", to: "sessions#destroy"
 
   resources :attachments, only: [ :create ]
 
@@ -34,11 +30,16 @@ Rails.application.routes.draw do
 
   resources :tags, only: [ :show ], id: /.+/, format: false, defaults: { format: :html }
 
+  namespace :tag do
+    resources :options, only: [ :index ]
+    resources :chips, only: [ :create ]
+  end
+
   namespace :suggest do
     resources :tags, only: [ :index ]
   end
 
-  resources :organizations, only: [ :index, :new, :create ]
+  resources :organizations, only: [ :new, :create ]
   resources :notifications, only: [ :index ]
   resources :bookmarks, only: [ :index ]
 
@@ -51,7 +52,7 @@ Rails.application.routes.draw do
     resource :notification
   end
 
-  namespace :user do
+  namespace :identity do
     resource :password, only: [ :new, :create, :edit, :update ]
     namespace :email do
       resource :verification, only: [ :show, :update ]
@@ -99,6 +100,27 @@ Rails.application.routes.draw do
 
   get "up", to: "rails/health#show", as: :rails_health_check
 
+  scope "/dashboard/:account_name", module: "dashboard", as: :dashboard do
+    root to: "posts#index"
+    resources :posts do
+      collection do
+        post "preview"
+      end
+
+      scope module: :posts do
+        resource :publish, only: [ :update, :destroy ]
+        resource :trash, only: [ :update, :destroy ]
+      end
+    end
+
+    namespace :settings do
+      resource :profile, only: [ :show, :update ]
+      resources :members
+      resource :import, only: [ :show, :update ]
+      resource :export, only: [ :show, :create ]
+    end
+  end
+
   scope "/:account_name", module: "account", as: :account do
     root to: "posts#index"
 
@@ -107,11 +129,13 @@ Rails.application.routes.draw do
         resource :preview, only: [ :show ]
         resource :like, only: [ :create, :destroy ]
         resource :bookmark, only: [ :create, :destroy ]
-        resources :comments do
-          scope module: "comments" do
-            resource :like, only: [ :create, :destroy ]
-          end
-        end
+        resources :comments, only: [ :index ]
+      end
+    end
+
+    resources :comments do
+      scope module: "comments" do
+        resource :like, only: [ :create, :destroy ]
       end
     end
 
@@ -144,21 +168,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :members do
-        member do
-          post :resend
-        end
-      end
-
       resources :attachments, only: [ :create ]
-
-      namespace :settings do
-        root to: "home#index"
-        resource :profile, only: [ :show, :update ]
-        resource :account, only: [ :show, :update ]
-        resource :import, only: [ :show, :update ]
-        resources :exports, only: [ :index, :create, :destroy ]
-      end
     end
   end
 

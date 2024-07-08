@@ -4,7 +4,7 @@
   <% if @account.user? && @account.owner.organizations.any? %>
     <div class="card card--elevated background-surface padding-3">
       <div class="title-medium margin-bottom-3">
-        <%= t 'common.organizations' %>
+        <%= t 'general.organizations' %>
       </div>
       <div class="display-flex gap-2">
         <% @account.owner.organizations.order('members.created_at asc').each do |organization| %>
@@ -21,7 +21,7 @@
   <% if @account.organization? && @account.owner.members.active.any? %>
     <div class="card card--elevated background-surface padding-3">
       <div class="title-medium margin-bottom-3">
-        <%= t 'common.members' %>
+        <%= t 'general.members' %>
       </div>
       <div class="display-flex gap-2">
         <% @account.owner.members.active.order('created_at asc').each do |member| %>

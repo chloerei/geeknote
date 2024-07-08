@@ -3,7 +3,7 @@
 </p>
 
 <div class="body-action">
-  <a href="<%= user_email_verification_url(token: @user.email_auth_token) %>" class="button">
+  <a href="<%= identity_email_verification_url(token: @user.generate_token_for(:email_verification)) %>" class="button">
     验证邮箱地址
   </a>
 </div>

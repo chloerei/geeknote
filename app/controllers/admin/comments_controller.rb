@@ -1,8 +1,8 @@
 class Admin::CommentsController < Admin::BaseController
-  before_action :set_comment, only: [ :show, :edit, :update ]
+  before_action :set_comment, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @comments = Comment.order(id: :desc).includes(:user).page(params[:page])
+    @pagy, @comments = pagy(Comment.order(id: :desc).includes(:user))
   end
 
   def show
@@ -17,6 +17,11 @@ class Admin::CommentsController < Admin::BaseController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @comment.destroy
+    redirect_to admin_comments_path, notice: "Comment deleted."
   end
 
   private

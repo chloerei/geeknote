@@ -1,9 +1,28 @@
 class SearchController < ApplicationController
   def index
-    if params[:query].present?
-      @posts = Post.includes(:account, :user).search(params[:query], filter: "status = 'published'").page(params[:page])
-    else
-      @posts = Post.published.includes(:account, :user).order(score: :desc).page(params[:page])
+    @tab = params[:tab].presence_in(%w[posts comments accounts]) || "posts"
+
+    options = {}
+
+    @sort = params[:sort].presence_in(%w[relevance newest oldest]) || "relevance"
+    options[:sort] = case @sort
+    when "newest"
+      [ "created_at:desc" ]
+    when "oldest"
+      [ "created_at:asc" ]
+    end
+
+    case @tab
+    when "posts"
+      options[:filter] = "status = 'published'"
+      posts = Post.published.pagy_search(params[:q], options)
+      @pagy, @posts = pagy_meilisearch(posts)
+    when "comments"
+      comments = Comment.pagy_search(params[:q], options)
+      @pagy, @comments = pagy_meilisearch(comments)
+    when "accounts"
+      accounts = Account.pagy_search(params[:q], options)
+      @pagy, @accounts = pagy_meilisearch(accounts)
     end
   end
 end

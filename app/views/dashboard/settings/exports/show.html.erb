@@ -1,0 +1,52 @@
+<%= render "dashboard/header" %>
+
+<div class="card mt-6 flex flex-col md:flex-row">
+  <div class="flex-shrink-0 md:w-64">
+    <%= render "dashboard/settings/nav" %>
+  </div>
+
+  <div class="flex-grow min-w-0">
+    <div class="flex h-14 items-center p-2 gap-2">
+      <div class="text-lg font-medium px-2">
+        <%= t "general.export" %>
+      </div>
+    </div>
+
+    <div class="p-4">
+      <div class="max-w-screen-sm">
+        <p>
+          <%= t ".export_description" %>
+        </p>
+
+        <div class="mt-4">
+          <%= form_with url: dashboard_settings_export_path, method: :post do |form| %>
+            <button type="submit" class="filled-button">
+              <%= t "general.export" %>
+            </button>
+          <% end %>
+        </div>
+
+        <% if @account.export %>
+          <div class="mt-4">
+            <div>
+              <%= t ".last_exported_at" %>
+              <%= format_time @account.export.created_at %>
+            </div>
+
+            <div class="mt-4">
+              <% if @account.export.completed? %>
+                <a href="<%= url_for(@account.export.file) %>" class="outlined-button">
+                  <%= t "general.download" %>
+                </a>
+              <% else %>
+                <span class="text-on-surface-variant">
+                  <%= t ".export_in_progress" %>
+                </span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

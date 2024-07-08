@@ -1,60 +1,66 @@
-<div class="container padding-3">
-  <div class="layout-primary">
-    <%= render 'admin/navbar' %>
+<div class="">
+  <div class="card">
+    <div class="flex items-center h-14 px-2 gap-2">
+      <a href="<%= admin_comments_path %>" class="icon-button">
+        <%= material_icon :arrow_back %>
+      </a>
 
-    <div class="">
-      <div class="card card--elevated background-surface">
-        <div class="top-app-bar">
-          <div class="top-app-bar__action">
-            <a href="<%= admin_comments_path %>" class="button button--icon">
-              <span class="material-icons">arrow_back</span>
-            </a>
-          </div>
-          <div class="top-app-bar__title">
-            <%= t 'common.comments' %> #<%= @comment.id %>
-          </div>
-          <div class="top-app-bar__action">
-            <a href="<%= edit_admin_comment_path(@comment) %>" class="button button--text">
-              <%= t 'common.edit' %>
-            </a>
-          </div>
-        </div>
+      <div class="flex-grow text-lg font-medium">
+        Commnet #<%= @comment.id %>
+      </div>
 
-        <table class="table border-top">
-          <tr>
-            <th>
-              <%= t 'common.user' %>
-            </th>
-            <td>
-              <a href="<%= edit_admin_user_path(@comment.user) %>">
-                <%= @comment.user.name %>
-              </a>
-            </td>
-          </tr>
+      <a href="<%= edit_admin_comment_path(@comment) %>" class="icon-button">
+        <%= material_icon :edit %>
+      </a>
 
-          <tr>
-            <th>
-              <%= t 'common.commentable' %>
-            </th>
-            <td>
-              <a href="<%= url_for([:admin, @comment.commentable]) %>">
-                <%= url_for([:admin, @comment.commentable]) %>
-              </a>
-            </td>
-          </tr>
-
-          <% @comment.attributes.each do |name, value| %>
-            <tr>
-              <th>
-                <%= name %>
-              </th>
-              <td class="text-break-all">
-                <%= value %>
-              </td>
-            </tr>
+      <div class="menu">
+        <label tabindex="0" class="icon-button">
+          <%= material_icon :more_vert %>
+        </label>
+        <div class="menu__content top-full right-0 origin-top-right">
+          <%= form_with url: admin_comment_path(@comment), method: :delete, data: { turbo_confirm: "Delete comment?" } do %>
+            <button type="submit" class="menu__item">
+              <%= material_icon :delete %>
+              <span>Delete</span>
+            </button>
           <% end %>
-        </table>
+        </div>
       </div>
     </div>
+
+    <dl class="data-list">
+      <div>
+        <dt>
+          <%= t 'general.user' %>
+        </dt>
+        <dd>
+          <a href="<%= edit_admin_user_path(@comment.user) %>">
+            <%= @comment.user.name %>
+          </a>
+        </dd>
+      </div>
+
+      <div>
+        <dt>
+          <%= t 'general.commentable' %>
+        </dt>
+        <dd>
+          <a href="<%= url_for([:admin, @comment.commentable]) %>">
+            <%= url_for([:admin, @comment.commentable]) %>
+          </a>
+        </dd>
+      </div>
+
+      <% @comment.attributes.each do |name, value| %>
+        <div>
+          <dt>
+            <%= name %>
+          </dt>
+          <dd class="text-break-all">
+            <%= value %>
+          </dd>
+        </div>
+      <% end %>
+    </dl>
   </div>
 </div>

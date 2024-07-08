@@ -1,12 +1,10 @@
 class Settings::NotificationsController < Settings::BaseController
   def show
-    @user = current_user
   end
 
   def update
-    @user = current_user
     @user.update settings_params
-    redirect_to settings_notification_path, notice: I18n.t("flash.notification_settings_updated")
+    redirect_to settings_notification_path, notice: t(".success")
   end
 
   private

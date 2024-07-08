@@ -1,0 +1,221 @@
+<div id="post-editor" class="post-editor"
+  data-controller="post-editor"
+  data-action="
+    keydown.ctrl+s@window->post-editor#submit:prevent
+    keydown.meta+s@window->post-editor#submit:prevent
+  "
+  data-post-editor-preview-url-value="<%= preview_dashboard_posts_path(@account.name) %>"
+  >
+
+  <%# Top bar %>
+  <div class="flex items-center p-3 gap-2 sticky top-0 z-10 bg-surface">
+    <a href="<%= dashboard_posts_path(@account.name) %>" class="icon-button">
+      <%= material_icon :arrow_back %>
+    </a>
+    <div class="flex-grow px-2">
+      <div class="text-lg font-medium">
+        <%= Post.human_attribute_name "status.#{@post.status}" %>
+      </div>
+    </div>
+
+    <% if @post.new_record? %>
+      <button type="submit" class="text-button" form="post-form" data-post-editor-target="submitButton" disabled>
+        <%= t "general.save" %>
+      </button>
+      <button type="button" class="text-button" disabled>
+        <%= t "general.publish" %>
+      </button>
+      <label for="settings" class="icon-button">
+        <%= material_icon :tune %>
+      </label>
+      <button type="button" class="icon-button" disabled>
+        <%= material_icon :more_horiz %>
+      </button>
+    <% else %>
+      <% if @post.draft? %>
+        <button type="submit" class="text-button" form="post-form" data-post-editor-target="submitButton" disabled>
+          <%= t "general.save" %>
+        </button>
+        <%= form_with model: @post, url: dashboard_post_publish_path(@account.name, @post), method: :patch do %>
+          <button type="submit" class="text-button" data-post-editor-target="publishButton">
+            <%= t "general.publish" %>
+          </button>
+        <% end %>
+      <% elsif @post.published? %>
+        <button type="submit" class="text-button" form="post-form" data-post-editor-target="submitButton" disabled>
+          <%= t "general.update" %>
+        </button>
+        <a href="<%= account_post_path(@post.account.name, @post) %>" class="icon-button">
+          <%= material_icon :north_east %>
+        </a>
+      <% elsif @post.trashed? %>
+        <%= form_with model: @post, url: dashboard_post_trash_path(@account.name, @post), method: :delete do %>
+          <button type="submit" class="text-button">
+            <%= t "general.restore" %>
+          </button>
+        <% end %>
+      <% end %>
+
+      <label for="settings" class="icon-button">
+        <%= material_icon :tune %>
+      </label>
+
+      <div class="menu">
+        <label tabindex="0" class="icon-button">
+          <%= material_icon :more_horiz %>
+        </label>
+
+        <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
+          <% if @post.published? %>
+            <%= form_with model: @post, url: dashboard_post_publish_path(@account.name, @post), method: :delete do %>
+              <button type="submit" class="menu__item">
+                <%= material_icon :unpublished %>
+                <span>
+                  <%= t "general.unpublish" %>
+                </span>
+              </button>
+            <% end %>
+          <% end %>
+          <% if @post.trashed? %>
+            <%= form_with model: @post, url: dashboard_post_path(@account.name, @post), method: :delete, data: { turbo_confirm: "Are you sure you want to delete this post permanently?" } do %>
+              <button type="submit" class="menu__item">
+                <%= material_icon :delete_forever %>
+                <span>
+                  <%= t "general.delete_permanently" %>
+                </span>
+              </button>
+            <% end %>
+          <% else %>
+            <%= form_with model: @post, url: dashboard_post_trash_path(@account.name, @post), method: :patch do %>
+              <button type="submit" class="menu__item">
+                <%= material_icon :delete %>
+                <span>
+                  <%= t "general.move_to_trash" %>
+                </span>
+              </button>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= form_with model: @post, url: @post.new_record? ? dashboard_posts_path(@account.name) : dashboard_post_path(@account.name, @post), id: "post-form", data: { post_editor_target: "form", controller: "form-unsave-checker", action: "input->post-editor#handleChanges" } do |form| %>
+    <div class="flex px-4 justify-center">
+
+      <%# Container %>
+      <div class="card flex-grow p-8 mb-4 max-w-screen-md group/container" data-post-editor-target="container" data-turbo-permanent>
+        <div class="block group-[.previewing]/container:hidden min-h-screen">
+          <%= form.text_area :title, class: "block w-full px-0 py-2 border-none focus:ring-0 bg-transparent text-3xl font-bold resize-none", placeholder: Post.human_attribute_name("title"), autocomplete: "off", data: { post_editor_target: "titleInput", action: "input->post-editor#resizeTitleInput keydown.enter->post-editor#focus:prevent" } %>
+          <%= form.hidden_field :content, id: "post_content", placeholder: "Markdown...", data: { post_editor_target: "contentInput" } %>
+          <div id="post_content_markdown" class="mt-4" data-post-editor-target="contentMarkdown"></div>
+        </div>
+
+        <div data-post-editor-target="preview" class="hidden group-[.previewing]/container:block break-words min-h-screen prose dark:prose-invert max-w-none"></div>
+
+        <div class="sticky flex justify-center px-4 mt-8 bottom-4">
+          <div class="flex gap-1 p-1 bg-surface-container rounded-full shadow-md">
+            <div class="flex items-center">
+              <button type="button" class="text-button group-[.previewing]/container:text-on-surface-variant" data-action="post-editor#write">
+                <%= t "general.write" %>
+              </button>
+              <button type="button" class="text-button text-on-surface-variant group-[.previewing]/container:text-primary" data-action="post-editor#preview">
+                <%= t "general.preview" %>
+              </button>
+            </div>
+
+            <div class="flex items-center gap-1">
+              <button type="button" class="icon-button" data-action="post-editor#attachFile" data-post-editor-target="toolbarButton">
+                <%= material_icon :attach_file %>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <%# Side sheet %>
+      <div>
+        <%# Side sheet toggle %>
+        <input id="settings" type="checkbox" class="peer hidden" oninput="event.stopPropagation()" data-turbo-permanent>
+        <div class="
+          transition-all origin-right peer-checked:ml-4 w-80 overflow-hidden
+          fixed top-0 right-0 bottom-0 bg-surface-container-lowest rounded-l-2xl shadow-lg
+          max-xl:z-20 max-xl:translate-x-full max-xl:peer-checked:translate-x-0
+          xl:card xl:sticky xl:top-16 xl:max-h-[calc(100vh-64px-16px)] xl:w-0 xl:peer-checked:w-80 xl:shadow-none
+          flex flex-col
+          ">
+          <div class="flex-grow min-h-0 flex flex-col w-80">
+            <div class="flex items-center p-4">
+              <div class="text-lg font-medium flex-grow px-2">
+                <%= t "general.settings" %>
+              </div>
+              <label for="settings" class="icon-button">
+                <%= material_icon :close %>
+              </label>
+            </div>
+            <div class="px-6 mb-6 flex-grow overflow-auto">
+
+              <%# Featured image %>
+              <div class="form-field">
+                <%= form.label :featured_image, class: "form-label" %>
+                <%= render "components/image_field", form: form, name: :featured_image do %>
+                  <div class="relative w-full aspect-video">
+                    <div class="absolute inset-0 [&>img]:object-cover [&>img]:h-full [&>img]:w-full [&>img]:rounded" data-image-field-target="preview">
+                      <% if @post.featured_image.attached? %>
+                        <%= image_tag @post.featured_image.variant(:large) %>
+                      <% end %>
+                    </div>
+
+                    <label for="post_featured_image" class="absolute inset-0 flex flex-col items-center justify-center gap-2 group-[.attached]/image-field:hidden rounded border-2 border-dashed border-outline-variant interactive-bg-surface text-on-surface-variant cursor-pointer">
+                      <div class="icon w-6 h-6">
+                        <%= material_icon :add_photo_alternate %>
+                      </div>
+                      <div class="text-sm font-medium">
+                        <%= t "general.click_to_select_image" %>
+                      </div>
+                    </label>
+
+                    <div class="absolute top-2 right-2 items-center gap-2 hidden group-[.attached]/image-field:flex">
+                      <div class="bg-surface-variant rounded-full">
+                        <label for="post_featured_image" class="icon-button">
+                          <%= material_icon :add_photo_alternate %>
+                        </label>
+                      </div>
+                      <div class="bg-surface-variant rounded-full">
+                        <label for="post_remove_featured_image" class="icon-button">
+                          <%= material_icon :delete %>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+                <div class="form-text">
+                  <%= t ".featured_image_description" %>
+                </div>
+              </div>
+
+              <%# Tags %>
+              <div class="form-field" data-turbo-permanent>
+                <%= form.label :tag_list, class: "form-label" %>
+                <div class="combobox">
+                  <%= form.combobox :tag_list, tag_options_path, multiselect_chip_src: tag_chips_path, free_text: true %>
+                </div>
+                <div class="form-text">
+                  <%= t ".tag_description" %>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <%= form.label :canonical_url, class: "form-label" %>
+                <%= render "components/text_field", form: form, name: :canonical_url, description: t(".canonical_url_description") %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <label class="fixed inset-0 bg-black/40 transition-all z-10 invisible peer-checked:visible opacity-0 peer-checked:opacity-100 xl:peer-checked:hidden" for="settings"></label>
+      </div>
+    </div>
+  <% end %>
+
+</div>

@@ -1,6 +1,6 @@
 class Sso::FeedbacktraceController < ApplicationController
   before_action :require_sign_in
-  layout "base"
+  layout "application"
 
   def show
   end

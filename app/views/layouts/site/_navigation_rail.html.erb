@@ -1,0 +1,59 @@
+<div class="navigation-rail hidden md:flex">
+  <% if Current.user %>
+    <a href="<%= new_dashboard_post_path(Current.user.account.name) %>" class="floating-action-button mb-2">
+      <%= material_icon :edit_square %>
+    </a>
+  <% end %>
+
+  <%= render "components/navigation_rail_item", url: root_path, icon: :home, label: t("general.home"), active: request.path.in?([root_path]) %>
+
+  <% if Current.user %>
+    <%= render "components/navigation_rail_item", url: notifications_path, icon: :notifications, label: t("general.notifications"), active: current_page?(notifications_path) %>
+
+    <%= render "components/navigation_rail_item", url: bookmarks_path, icon: :bookmarks, label: t("general.bookmarks"), active: current_page?(bookmarks_path) %>
+
+    <%= render "components/navigation_rail_item", url: dashboard_root_path(Current.user.account.name), icon: :post, label: t("general.posts"), active: request.path.start_with?("/dashboard") %>
+  <% end %>
+
+  <div class="flex-grow"></div>
+
+  <div class="menu flex-shrink-0">
+    <label tabindex="0" class="icon-button">
+      <% if Current.user %>
+        <img src="<%= avatar_url(Current.user) %>" class="h-8 w-8 rounded-full">
+      <% else %>
+        <img src="<%= asset_path("avatar.png") %>" class="h-8 w-8 rounded-full">
+      <% end %>
+    </label>
+    <div tabindex="0" class="menu__content top-auto left-auto bottom-full right-0 origin-bottom-right md:left-full md:bottom-0 md:origin-bottom-left">
+      <% if Current.user %>
+        <a href="<%= account_root_path(Current.user.account.name) %>" class="menu__item">
+          <%= material_icon :account_circle %>
+          <span><%= t "general.profile" %></span>
+        </a>
+
+        <a href="<%= settings_root_path %>" class="menu__item">
+          <%= material_icon :settings %>
+          <span><%= t "general.settings" %></span>
+        </a>
+
+        <%= form_with url: sign_out_path, method: :delete do |form| %>
+          <button type="submit" class="menu__item">
+            <%= material_icon :logout %>
+            <span><%= t "general.sign_out" %></span>
+          </button>
+        <% end %>
+      <% else %>
+        <a href="<%= sign_in_path %>" class="menu__item">
+          <%= material_icon :login %>
+          <span><%= t "general.sign_in" %></span>
+        </a>
+
+        <a href="<%= sign_up_path %>" class="menu__item">
+          <%= material_icon :person_add %>
+          <span><%= t "general.sign_up" %></span>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</div>
