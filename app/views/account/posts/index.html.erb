@@ -4,15 +4,12 @@
   <%= auto_discovery_link_tag :atom, account_feed_url(@account, format: :atom) %>
 <% end %>
 
-<div class="flex flex-col md:flex-row gap-6">
+<div class="max-w-screen-md mx-auto">
   <div class="flex-grow min-w-0">
     <%= render "account/header", account: @account %>
 
     <div class="mt-4">
       <%= render partial: "home/post", collection: @posts %>
     </div>
-  </div>
-
-  <div class="flex-shrink-0 w-80">
   </div>
 </div>
