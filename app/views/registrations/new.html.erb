@@ -1,6 +1,8 @@
 <div class="max-w-screen-sm mx-auto">
-  <div class="bg-surface-container-lowest rounded-xl p-4">
-    <h1 class="text-lg font-medium">Sign up</h1>
+  <div class="card p-4">
+    <h1 class="text-lg font-medium">
+      <%= t "general.sign_up" %>
+    </h1>
 
     <div class="mt-4">
       <%= form_with(url: sign_up_path, model: @user, method: :post) do |form| %>
@@ -37,7 +39,7 @@
 
         <div class="form-field">
           <button type="submit" class="filled-button">
-            Sign up
+            <%= t "general.sign_up" %>
           </button>
         </div>
       <% end %>
@@ -46,7 +48,7 @@
 
   <div class="p-4 space-y-2 text-on-surface-variant">
     <div>
-      <%= link_to "Sign in", sign_in_path %>
+      <%= link_to t("general.sign_in"), sign_in_path %>
     </div>
   </div>
 </div>

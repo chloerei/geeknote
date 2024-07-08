@@ -1,6 +1,8 @@
 <div class="max-w-screen-sm mx-auto">
-  <div class="bg-surface-container-lowest rounded-xl p-4">
-    <h1 class="text-lg font-medium">Sign in</h1>
+  <div class="card p-4">
+    <h1 class="text-lg font-medium">
+      <%= t "general.sign_in" %>
+    </h1>
 
     <div class="mt-4">
       <%= form_with(url: sign_in_path, model: @user, method: :post) do |form| %>
@@ -20,7 +22,7 @@
 
         <div class="form-field">
           <button type="submit" class="filled-button">
-            Sign in
+            <%= t "general.sign_in" %>
           </button>
         </div>
       <% end %>
@@ -29,10 +31,10 @@
 
   <div class="p-4 space-y-2 text-on-surface-variant">
     <div>
-      <%= link_to "Sign up", sign_up_path %>
+      <%= link_to t("general.sign_up"), sign_up_path %>
     </div>
     <div>
-      <%= link_to "Forgot your password?", new_identity_password_path %>
+      <%= link_to t("general.reset_password"), new_identity_password_path %>
     </div>
   </div>
 </div>
