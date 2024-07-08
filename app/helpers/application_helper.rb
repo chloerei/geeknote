@@ -66,7 +66,7 @@ module ApplicationHelper
 
   def format_time(time)
     if time
-      local_time time, format: :long
+      local_time time, format: :long, data: { turbo_permanent: true }
     end
   end
 

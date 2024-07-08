@@ -2,7 +2,7 @@
   <div class="flex-grow min-w-0">
     <div class="card p-4">
       <div class="text-lg">
-        <%= t "general.comment_on" %>
+        <%= t "general.commented_on" %>
         <a href="<%= account_post_path(@comment.commentable.account.name, @comment.commentable) %>" class="text-primary underline">
           <%= @comment.commentable.title %>
         </a>

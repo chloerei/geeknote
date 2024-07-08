@@ -15,22 +15,6 @@ class Notification::PostBlocked < Notification
     data["post_id"] = post.id
   end
 
-  def title
-    "Post #{post.title} has been blocked"
-  end
-
-  def body
-    "The post has been blocked by the administrator."
-  end
-
-  def url
-    Rails.application.routes.url_helpers.account_post_url(post.account.name, post)
-  end
-
-  def icon
-    "block"
-  end
-
   def send_email_later
     if user.email_verified?
       UserMailer.with(notification: self).post_blocked_notification.deliver_later
