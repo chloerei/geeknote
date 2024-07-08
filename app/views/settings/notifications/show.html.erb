@@ -5,22 +5,22 @@
         <%= material_icon :arrow_back %>
       </a>
       <div class="text-lg font-medium flex-grow px-2">
-        Notification
+        <%= t "general.notification" %>
       </div>
     </div>
 
     <div class="p-4">
       <%= form_with model: @user, url: settings_notification_path do |form| %>
         <div class="space-y-4">
-          <%= render "components/checkbox_field", form: form, name: :email_notification_enabled, description: "Receive email notifications." %>
+          <%= render "components/checkbox_field", form: form, name: :email_notification_enabled, description: t(".email_notification_description") %>
 
-          <%= render "components/checkbox_field", form: form, name: :comment_email_notification_enabled, description: "Receive comment email notifications." %>
+          <%= render "components/checkbox_field", form: form, name: :comment_email_notification_enabled, description: t(".comment_email_notification_description") %>
 
-          <%= render "components/checkbox_field", form: form, name: :weekly_digest_email_enabled, description: "Receive weekly digest email." %>
+          <%= render "components/checkbox_field", form: form, name: :weekly_digest_email_enabled, description: t(".weekly_digest_email_description") %>
 
           <div>
             <button type="submit" class="filled-button">
-              Save changes
+              <%= t "general.save_changes" %>
             </button>
           </div>
         </div>

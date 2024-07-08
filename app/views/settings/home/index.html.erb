@@ -2,14 +2,14 @@
   <div class="card">
     <div class="flex items-center h-14 p-2">
       <div class="text-lg font-medium flex-grow px-2">
-        Settings
+        <%= t "general.settings" %>
       </div>
     </div>
     <div class="pb-4">
       <% [
-        { icon: :contact_mail, label: "Email", href: settings_email_path, description: "Update your login email" },
-        { icon: :lock, label: "Password", href: settings_password_path, description: "Change your login password" },
-        { icon: :notifications, label: "Notification", href: settings_notification_path, description: "Manage your notification settings" },
+        { icon: :contact_mail, label: t("general.email"), href: settings_email_path, description: t(".email_description") },
+        { icon: :lock, label: t("general.password"), href: settings_password_path, description: t(".password_description") },
+        { icon: :notifications, label: t("general.notification"), href: settings_notification_path, description: t(".notification_description") },
       ].each do |item| %>
         <a href="<%= item[:href] %>" class="flex items-center h-16 gap-4 px-4 interactive-bg-surface-container-lowest">
           <div class="icon w-6 h-6">

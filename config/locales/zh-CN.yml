@@ -55,6 +55,7 @@ zh-CN:
         email_notification_enabled: 开启邮件通知
         name: 名称
         password: 密码
+        password_challenge: 当前密码
         password_confirmation: 密码确认
         weekly_digest_email_enabled: 每周摘要邮件
     errors:
@@ -146,7 +147,7 @@ zh-CN:
     draft: 草稿
     edit: 编辑
     edit_profile: 编辑资料
-    email: 邮件地址
+    email: Email
     export: 导出
     follow: 关注
     followers: 关注者
@@ -170,6 +171,7 @@ zh-CN:
     new_post: 新文章
     newest: 最新
     no_more_content: 没有更多内容。
+    notification: 通知
     notification_settings: 通知设置
     notifications: 通知
     organizations: 组织
@@ -221,25 +223,41 @@ zh-CN:
     email:
       unsubscribes:
         expired:
-          token_expired: Token expired
-          you_can_unsubscribe_email_in_notification_settings: You can unsubscribe email in notification settings
+          token_expired: 链接已过期
+          you_can_unsubscribe_email_in_notification_settings: 你可以在通知设置中取消订阅邮件。
         show:
-          unsubscribe_email: Unsubscribe email
-          unsubscribing: Unsubscribing
+          unsubscribe_email: 取消订阅邮件
+          unsubscribing: 取消订阅中
         success:
-          notification_settings: Notification settings
-          unsubscribe_successfully: Unsubscribe successfully
-          you_can_resubscribe_email_in_notification_settings: You can resubscribe email in notification settings
+          notification_settings: 通知设置
+          unsubscribe_successfully: 取消订阅成功
+          you_can_resubscribe_email_in_notification_settings: 你可以在通知设置中重新订阅邮件。
       verifications:
         invalid:
-          please_resend_email_veification: Please resend email veification
-          token_expired: Token expired
+          please_resend_email_veification: 请重新发送验证邮件。
+          token_expired: 链接已过期
         show:
-          email_verification: Email verification
-          verifying: Verifying
+          email_verification: 验证邮箱地址
+          verifying: 验证中
     passwords:
       edit:
-        reset_password_for: Reset password for
+        reset_password_for: 重置密码
   mailer:
     account_mailer:
       export_complted_subject: 数据导出已完成
+  settings:
+    emails:
+      show:
+        resend_verification_email: 重发验证邮件
+        verify_email: 验证 Email
+        verify_email_description: 检查收件箱并点击邮件中的链接以验证邮箱地址。
+    home:
+      index:
+        email_description: 更改邮箱地址
+        notification_description: 更改通知设置
+        password_description: 更改登录密码
+    notifications:
+      show:
+        comment_email_notification_description: 当有人评论我的内容时发送邮件通知。
+        email_notification_description: 当有新的通知时发送邮件通知。
+        weekly_digest_email_description: 每周热门文章摘要邮件。

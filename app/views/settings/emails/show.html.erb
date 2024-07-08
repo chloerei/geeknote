@@ -5,7 +5,7 @@
         <%= material_icon :arrow_back %>
       </a>
       <div class="text-lg font-medium flex-grow px-2">
-        Email
+        <%= t "general.email" %>
       </div>
     </div>
 
@@ -23,7 +23,7 @@
 
         <div class="form-field">
           <button type="submit" class="filled-button">
-            Save changes
+            <%= t "general.save_changes" %>
           </button>
         </div>
       <% end %>
@@ -33,11 +33,11 @@
   <% if @user.persisted? && !@user.email_verified? %>
     <div class="card p-4 bg-secondary-container mt-4">
       <div class="text-lg font-medium">
-        Verify your email address
+        <%= t ".verify_email" %>
       </div>
       <div class="mt-2">
         <p>
-          Please check your inbox for an email from us and click the link to verify your email address.
+          <%= t ".verify_email_description" %>
         </p>
       </div>
       <div class="mt-2">
@@ -45,7 +45,7 @@
           <button type="submit" class="outlined-button">
             <%= material_icon :send %>
             <span>
-              Resend verification Email
+              <%= t ".resend_verification_email" %>
             </span>
           </button>
         <% end %>
