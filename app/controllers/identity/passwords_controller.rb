@@ -11,12 +11,12 @@ class Identity::PasswordsController < ApplicationController
     if optional_verify_recaptcha(model: @user) && @user.persisted?
       cache_key = "password_reset:#{@user.email}"
       if Rails.cache.exist?(cache_key)
-        @user.errors.add :base, t("flash.password_reset_email_time_limit")
+        @user.errors.add :base, t(".please_wait_one_minute")
         render :new, status: :unprocessable_entity
       else
         UserMailer.with(user: @user).password_reset_email.deliver_later
         Rails.cache.write(cache_key, true, expires_in: 1.minute)
-        redirect_to sign_in_path, notice: t("flash.password_reset_email_has_been_sent")
+        redirect_to sign_in_path, notice: t(".success")
       end
     else
       if @user.new_record?

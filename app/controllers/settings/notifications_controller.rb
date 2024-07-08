@@ -4,7 +4,7 @@ class Settings::NotificationsController < Settings::BaseController
 
   def update
     @user.update settings_params
-    redirect_to settings_notification_path, notice: "Settings updated"
+    redirect_to settings_notification_path, notice: t(".success")
   end
 
   private

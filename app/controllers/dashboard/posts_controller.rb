@@ -45,7 +45,7 @@ class Dashboard::PostsController < Dashboard::BaseController
     @post = @account.posts.new(post_params.merge(user: Current.user))
 
     if @post.save
-      redirect_to edit_dashboard_post_path(@account.name, @post), notice: "Post was successfully created."
+      redirect_to edit_dashboard_post_path(@account.name, @post), notice: t(".success")
     else
       render :edit, layout: "application", status: :unprocessable_entity
     end
@@ -60,7 +60,7 @@ class Dashboard::PostsController < Dashboard::BaseController
     @post = post_scope.find(params[:id])
 
     if @post.update(post_params)
-      redirect_to edit_dashboard_post_path(@account.name, @post), notice: "Post was successfully updated."
+      redirect_to edit_dashboard_post_path(@account.name, @post), notice: t(".success")
     else
       render :edit, layout: "application", status: :unprocessable_entity
     end

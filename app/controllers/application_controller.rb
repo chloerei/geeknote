@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   def require_sign_in
     unless current_user
       return_path = request.get? ? request.path : URI(request.referer.presence || "/").path
-      redirect_to sign_in_path(return_to: return_path), alert: t("flash.require_sign_in")
+      redirect_to sign_in_path(return_to: return_path), alert: t(".require_sign_in")
     end
   end
 

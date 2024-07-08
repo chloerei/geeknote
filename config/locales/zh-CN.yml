@@ -85,23 +85,49 @@ zh-CN:
       show:
         restrict_post_confirm: 确认限制发布？（将会发送邮件通知用户）
     settings:
+      appearances:
+        update:
+          success: 外观设置更新成功。
       home:
         index:
           appearance: 外观
           appearance_desription: 网站名称、Logo 和页面 HTML 等。
           weekly_digest: 每周摘要
           weekly_digest_desription: 每周摘要邮件开关和内容 HTML。
+      weekly_digests:
+        previews:
+          create:
+            success: 预览已发送。
+        update:
+          success: 每周摘要邮件设置已更新。
     tags:
       merges:
         new:
           merge: 合并
           merge_to: 将以下标签合并到“%{name}”
+  application:
+    require_sign_in:
+      require_sign_in: Require sign in
   dashboard:
     posts:
+      create:
+        success: 创建成功
       editor:
         canonical_url_description: 如果文章之前已发布在其他地方，可以填写原文链接。
         featured_image_description: 作为文章封面、社交分享图像。
         tag_description: 便于分类和检索。
+      publishes:
+        destroy:
+          success: 文章已取消发布。
+        update:
+          success: 文章已发布。
+      trashes:
+        destroy:
+          success: 文章已恢复。
+        update:
+          success: 文章已移到回收站。
+      update:
+        success: 更新成功
     settings:
       exports:
         show:
@@ -112,22 +138,14 @@ zh-CN:
         show:
           feed_mark_canonical_description: 标记导入文章的链接作为原文链接。
           save_and_fetch: 保存并抓取
+        update:
+          success: 导入设置已更新，抓取将在后台进行。
   email:
     email_verification: 验证邮箱地址
     reset_your_geeknote_password: 重置密码
   errors:
     messages:
       email_or_password_error: Email 或密码错误
-  flash:
-    appearance_update_successful: 外观设置更新成功。
-    email_verification_sent: 验证邮件已发送，请检查收件箱。
-    email_verification_time_limit: 请等待一分钟后重发邮件。
-    import_settings_updated: 导入设置已更新，抓取将在后台进行。
-    password_reset_email_has_been_sent: 重置邮件已发送，请检查收件箱。
-    password_reset_email_time_limit: 请等待一分钟后重发邮件。
-    require_sign_in: 需要登录。
-    settings_updated_successful: 设置更新成功。
-    weekly_digest_preview_sent_successful: 每周摘要邮件预览发送成功。
   general:
     account: 账号
     account_settings: 账号设置
@@ -182,7 +200,6 @@ zh-CN:
     personal: 个人
     popular: 热门
     popular_tags: 热门标签
-    post: 文章
     posts: 文章
     preview: 预览
     profile: 资料
@@ -240,6 +257,9 @@ zh-CN:
           email_verification: 验证邮箱地址
           verifying: 验证中
     passwords:
+      create:
+        please_wait_one_minute: 请等待一分钟后重发邮件。
+        success: 重置邮件已发送，请检查收件箱。
       edit:
         reset_password_for: 重置密码
   mailer:
@@ -247,10 +267,15 @@ zh-CN:
       export_complted_subject: 数据导出已完成
   settings:
     emails:
+      resend:
+        already_sent: 验证邮件已发送，请检查收件箱。
+        success: 验证邮件已发送，请检查收件箱。
       show:
         resend_verification_email: 重发验证邮件
         verify_email: 验证 Email
         verify_email_description: 检查收件箱并点击邮件中的链接以验证邮箱地址。
+      update:
+        success: Email 更新成功。
     home:
       index:
         email_description: 更改邮箱地址
@@ -259,5 +284,9 @@ zh-CN:
     notifications:
       show:
         comment_email_notification_description: 当有人评论我的内容时发送邮件通知。
-        email_notification_description: 当有新的通知时发送邮件通知。
         weekly_digest_email_description: 每周热门文章摘要邮件。
+      update:
+        success: 通知设置更新成功。
+    passwords:
+      update:
+        success: 密码更新成功。

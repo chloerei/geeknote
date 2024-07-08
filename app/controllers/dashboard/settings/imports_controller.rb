@@ -8,7 +8,7 @@ class Dashboard::Settings::ImportsController < Dashboard::Settings::BaseControll
         FeedImportJob.perform_later(@account)
       end
 
-      redirect_to dashboard_settings_import_path(@account.name), notice: I18n.t("flash.import_settings_updated")
+      redirect_to dashboard_settings_import_path(@account.name), notice: t(".success")
     else
       render :show, status: :unprocessable_entity
     end

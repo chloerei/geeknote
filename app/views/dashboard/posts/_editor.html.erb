@@ -14,10 +14,7 @@
     </a>
     <div class="flex-grow px-2">
       <div class="text-lg font-medium">
-        <%= t "general.post" %>
-        <span class="text-on-surface-variant font-normal px-2">
-          <%= Post.human_attribute_name "status.#{@post.status}" %>
-        </span>
+        <%= Post.human_attribute_name "status.#{@post.status}" %>
       </div>
     </div>
 
