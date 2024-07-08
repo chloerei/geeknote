@@ -28,7 +28,7 @@
 
       <% if post.featured_image.attached? %>
         <div class="flex-shrink-0">
-          <img src="<%= url_for(post.featured_image.variant(:large)) %>" alt="Featured image" class="rounded-lg w-40 aspect-video object-cover">
+          <img src="<%= polymorphic_url(post.featured_image.variant(:large)) %>" alt="Featured image" class="rounded-lg w-40 aspect-video object-cover">
         </div>
       <% end %>
     </div>

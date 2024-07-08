@@ -24,7 +24,7 @@
 
     <div class="card">
       <% if @post.featured_image.attached? %>
-        <img src="<%= url_for(@post.featured_image.variant(:large)) %>" alt="cover" class="rounded-xl object-cover w-full aspect-video">
+        <img src="<%= polymorphic_url(@post.featured_image.variant(:large)) %>" alt="cover" class="rounded-xl object-cover w-full aspect-video">
       <% end %>
 
       <div class="p-6">
