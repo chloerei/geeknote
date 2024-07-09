@@ -56,7 +56,7 @@
 
       <div class="mt-4">
         <%= render "components/scroll_pagination", pagy: @pagy, content_id: "comments_list" do %>
-          <%= render partial: "account/comments/comment", collection: @comments, cached: true %>
+          <%= render partial: "account/comments/comment", collection: @comments, cached: -> comment { [ comment.user, comment ]} %>
           <%= render "account/comments/status", comments: @comments %>
         <% end %>
       </div>

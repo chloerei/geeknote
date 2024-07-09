@@ -12,7 +12,7 @@
   <div class="flex gap-6 mt-6">
     <div class="flex-grow min-w-0">
       <%= render "components/scroll_pagination", pagy: @pagy do %>
-        <%= render partial: "post", collection: @posts %>
+        <%= render partial: "post", collection: @posts, cached: -> post { [ post.account, post.user, post ] } %>
       <% end %>
     </div>
 

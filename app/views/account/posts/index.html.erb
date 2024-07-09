@@ -9,7 +9,7 @@
     <%= render "account/header", account: @account %>
 
     <div class="mt-4">
-      <%= render partial: "home/post", collection: @posts %>
+      <%= render partial: "home/post", collection: @posts, cached: -> post { [ post.account, post.user, post ] } %>
     </div>
   </div>
 </div>

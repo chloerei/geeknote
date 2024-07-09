@@ -19,7 +19,7 @@ class Account::CommentsController < Account::BaseController
       comments.order(created_at: :desc)
     end
 
-    @pagy, @comments = pagy(comments, page: params[:page])
+    @pagy, @comments = pagy(comments.includes(:user))
   end
 
   def create

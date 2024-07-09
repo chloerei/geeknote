@@ -1,12 +1,12 @@
 class Account::PostsController < Account::BaseController
   def index
-    @posts = if @account.user?
+    posts = if @account.user?
       @account.owner.posts.published
     else
       @account.posts.published
     end
 
-    @paginator = RailsCursorPagination::Paginator.new(@posts.preload(:account, :user), order_by: :published_at, order: :desc, after: params[:after]).fetch
+    @pagy, @posts = pagy(posts.includes(:account, :user))
   end
 
   def show

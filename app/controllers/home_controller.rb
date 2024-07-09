@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   before_action :require_sign_in, only: [ :following ]
 
   def index
-    @pagy, @posts = pagy(Post.published.order(score: :desc))
+    @pagy, @posts = pagy(Post.published.order(score: :desc).includes(:account, :user))
   end
 
   def following
@@ -11,12 +11,13 @@ class HomeController < ApplicationController
     @pagy, @posts = pagy(
       Post.published.order(published_at: :desc).where(account: follow_accounts)
         .or(Post.published.order(published_at: :desc).where(user: follow_users))
+        .includes(:account, :user)
     )
     render :index
   end
 
   def newest
-    @pagy, @posts = pagy(Post.published.order(published_at: :desc))
+    @pagy, @posts = pagy(Post.published.order(published_at: :desc).includes(:account, :user))
     render :index
   end
 end
