@@ -176,6 +176,7 @@ zh-CN:
     import: 导入
     in: 在
     joined: 加入
+    last_created: 最近创建
     last_fetched_at: 最后抓取于
     last_updated: 最近更新
     load_more: 查看更多

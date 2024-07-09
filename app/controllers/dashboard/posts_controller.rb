@@ -1,39 +1,27 @@
 class Dashboard::PostsController < Dashboard::BaseController
   def index
-    options = {}
-
-    filters = []
-
-    if @account.user?
-      filters << "user_id = #{Current.user.id}"
-    else
-      if @member.owner? || @member.admin?
-        filters << "account_id = #{@account.id}"
-      else
-        filters << "account_id = #{@account.id} AND user_id = #{Current.user.id}"
-      end
-    end
+    posts = post_scope
 
     @status = params[:status].presence_in(Post.statuses)
     if @status
-      filters << "status = '#{@status}'"
+      posts = posts.where(status: @status)
     else
-      filters << "status != 'trashed'"
+      posts = posts.where.not(status: "trashed")
     end
-
-    options[:filter] = filters.join(" AND ")
 
     @sort = params[:sort].presence_in(%w[ updated created ]) || "created"
     case @sort
     when "updated"
-      options[:sort] = [ "updated_at:desc" ]
+      posts = posts.order(updated_at: :desc)
     when "created"
-      options[:sort] = [ "created_at:desc" ]
+      posts = posts.order(created_at: :desc)
     end
 
-    posts = post_scope.pagy_search(params[:q], options)
+    if params[:q].present?
+      posts = posts.where("title ILIKE ?", "%#{params[:q]}%")
+    end
 
-    @pagy, @posts = pagy_meilisearch(posts)
+    @pagy, @posts = pagy(posts)
   end
 
   def new

@@ -55,7 +55,7 @@
             when "updated"
               t "general.last_updated"
             else
-              t "general.newest"
+              t "general.last_created"
             end
           %>
         </span>
@@ -63,7 +63,7 @@
       </label>
       <div class="menu__content">
         <a href="<%= url_for(request.GET.merge(sort: nil)) %>" class="menu__item">
-          <%= t "general.newest" %>
+          <%= t "general.last_created" %>
         </a>
         <a href="<%= url_for(request.GET.merge(sort: "updated")) %>" class="menu__item">
           <%= t "general.last_updated" %>
