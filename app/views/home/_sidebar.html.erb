@@ -22,7 +22,7 @@
       <%= t "general.popular_tags" %>
     </div>
 
-    <div class="px-4 pb-4">
+    <div class="px-4 pb-4 flex gap-4 flex-wrap">
       <% popular_tags.each do |tag| %>
         <a href="#" class="inline-flex items-center h-8 px-3 text-sm font-medium interactive-bg-surface-container rounded-full">
           <%= tag.name %>

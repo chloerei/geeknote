@@ -69,7 +69,7 @@
     </div>
 
     <% if post.tags.any? %>
-      <div class="flex gap-2 relative">
+      <div class="hidden md:flex gap-2 relative">
         <% post.tags.each do |tag| %>
           <a href="#" class="inline-flex items-center h-8 px-3 text-sm font-medium interactive-bg-surface-container rounded-full">
             <%= tag.name %>
