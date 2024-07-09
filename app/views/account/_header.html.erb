@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <div class="mt-2 flex gap-4">
+    <div class="mt-2 flex items-center gap-4">
       <% if account.user? %>
         <a href="<%= account_followings_path(account.name) %>">
           <span class="tabular-nums font-medium"><%= account.owner.followings_count %></span>
@@ -78,6 +78,11 @@
       <a href="<%= account_followers_path(account.name) %>">
         <span class="tabular-nums font-medium"><%= account.followers_count %></span>
         <span class="text-on-surface-variant"><%= t "general.followers" %></span>
+      </a>
+      <a href="<%= account_feed_url(account.name, format: :atom) %>" class="inline-flex items-center" target="_blank">
+        <div class="icon w-4 h-4">
+          <%= material_icon :rss_feed %>
+        </div>
       </a>
     </div>
   </div>

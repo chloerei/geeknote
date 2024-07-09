@@ -1,7 +1,7 @@
 <% @page_titles.push @account.display_name %>
 
 <% content_for :head do %>
-  <%= auto_discovery_link_tag :atom, account_feed_url(@account, format: :atom) %>
+  <%= auto_discovery_link_tag :atom, account_feed_url(@account.name, format: :atom) %>
 <% end %>
 
 <div class="max-w-screen-md mx-auto">
