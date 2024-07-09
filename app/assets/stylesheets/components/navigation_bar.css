@@ -19,6 +19,10 @@
     @apply text-xs font-medium text-on-surface-variant;
   }
 
+  .navigation-rail__item__badge {
+    @apply absolute top-0 left-1/2 px-1 text-xs font-medium bg-error rounded-full;
+  }
+
   .navigation-bar__item--active {
     .navigation-bar__item__label {
       @apply font-bold text-on-surface;
