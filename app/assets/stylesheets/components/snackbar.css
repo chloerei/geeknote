@@ -1,5 +1,5 @@
 @layer components {
   .snackbar {
-    @apply fixed bottom-4 left-4 z-10 bg-inverse-surface text-sm font-medium p-4 shadow rounded animate-slide-in-up;
+    @apply bg-inverse-surface text-sm font-medium p-4 shadow rounded animate-slide-in-up;
   }
 }

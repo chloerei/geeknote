@@ -1,9 +1,11 @@
-<div class="navigation-bar md:hidden">
+<div class="navigation-bar md:hidden pb-safe">
   <% if request.path.in?([ "/", "/following", "/newest", "/notifications", "/bookmarks", "/me" ]) %>
     <% if Current.user %>
-      <a href="<%= new_dashboard_post_path(Current.user.account.name) %>" class="floating-action-button mb-2 absolute right-4 bottom-24">
-        <%= material_icon :edit_square %>
-      </a>
+      <div class="fixed right-4 bottom-24 pb-safe">
+        <a href="<%= new_dashboard_post_path(Current.user.account.name) %>" class="floating-action-button">
+          <%= material_icon :edit_square %>
+        </a>
+      </div>
     <% end %>
   <% end %>
 

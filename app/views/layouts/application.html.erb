@@ -2,7 +2,7 @@
 <html class="bg-background">
   <head>
     <title><%= @page_titles.reverse.join(" - ") %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <link rel="icon" href="<%= asset_path("icon.svg") %>" type="image/svg+xml">
 
     <%= csrf_meta_tags %>
@@ -47,8 +47,10 @@
     <%= content_for?(:body) ? yield(:body) : yield %>
 
     <% if notice || alert %>
-      <div class="snackbar" data-controller="snackbar" data-turbo-temporary>
-        <%= notice || alert %>
+      <div class="fixed bottom-4 left-4 z-10 pb-safe">
+        <div class="snackbar" data-controller="snackbar" data-turbo-temporary>
+          <%= notice || alert %>
+        </div>
       </div>
     <% end %>
   </body>

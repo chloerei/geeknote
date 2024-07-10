@@ -4,8 +4,10 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static show(message) {
     const html = `
-      <div class="snackbar" data-controller="snackbar" data-turbo-temporary>
-        ${message}
+      <div class="fixed bottom-4 left-4 z-10 pb-safe">
+        <div class="snackbar" data-controller="snackbar" data-turbo-temporary>
+          ${message}
+        </div>
       </div>
     `
     document.body.insertAdjacentHTML('beforeend', html)

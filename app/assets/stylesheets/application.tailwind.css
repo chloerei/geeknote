@@ -23,4 +23,9 @@
       @apply font-bold text-primary-container;
     }
   }
+
+  .pb-safe {
+    box-sizing: content-box;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
