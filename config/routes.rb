@@ -102,7 +102,7 @@ Rails.application.routes.draw do
 
   scope "/dashboard/:account_name", module: "dashboard", as: :dashboard do
     root to: "posts#index"
-    resources :posts do
+    resources :posts, only: [ :index, :new, :create, :edit, :update, :destroy ] do
       collection do
         post "preview"
       end

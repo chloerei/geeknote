@@ -77,11 +77,11 @@
             <% end %>
           <% end %>
           <% if @post.trashed? %>
-            <%= form_with model: @post, url: dashboard_post_path(@account.name, @post), method: :delete, data: { turbo_confirm: "Are you sure you want to delete this post permanently?" } do %>
+            <%= form_with model: @post, url: dashboard_post_path(@account.name, @post), method: :delete, data: { turbo_confirm: t(".delete_forever_confirm") } do %>
               <button type="submit" class="menu__item">
                 <%= material_icon :delete_forever %>
                 <span>
-                  <%= t "general.delete_permanently" %>
+                  <%= t "general.delete_forever" %>
                 </span>
               </button>
             <% end %>

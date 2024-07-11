@@ -54,6 +54,12 @@ class Dashboard::PostsController < Dashboard::BaseController
     end
   end
 
+  def destroy
+    @post = post_scope.find(params[:id])
+    @post.destroy
+    redirect_to dashboard_posts_path(@account.name), notice: t(".success")
+  end
+
   def preview
     @post = Post.new(post_params)
     render layout: false

@@ -111,9 +111,12 @@ zh-CN:
   dashboard:
     posts:
       create:
-        success: 创建成功
+        success: 文章已创建。
+      destroy:
+        success: 文章已删除。
       editor:
         canonical_url_description: 如果文章之前已发布在其他地方，可以填写原文链接。
+        delete_forever_confirm: 永久删除文章？
         featured_image_description: 作为文章封面、社交分享图像。
         tag_description: 便于分类和检索。
       publishes:
@@ -161,7 +164,7 @@ zh-CN:
     created_at: 创建于
     dashboard: 仪表盘
     delete: 删除
-    delete_permanently: 永久删除
+    delete_forever: 永久删除
     download: 下载
     draft: 草稿
     edit: 编辑
