@@ -3,7 +3,7 @@
 <% content_for :head do %>
   <meta property="og:type" content="article">
   <meta property="og:title" content="<%= @post.title %>">
-  <meta property="og:url" content="<%= account_post_url(@account, @post) %>">
+  <meta property="og:url" content="<%= account_post_url(@account.name, @post) %>">
   <meta property="og:description" content="<%= post_summary @post %>">
   <% if @post.featured_image.attached? %>
     <meta property="og:image" content="<%= featured_image_url @post.featured_image %>">
