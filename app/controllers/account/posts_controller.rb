@@ -6,7 +6,7 @@ class Account::PostsController < Account::BaseController
       @account.posts.published
     end
 
-    @pagy, @posts = pagy(posts.includes(:account, :user))
+    @pagy, @posts = pagy(posts.order(published_at: :desc).includes(:account, :user))
   end
 
   def show
