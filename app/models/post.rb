@@ -6,6 +6,8 @@ class Post < ApplicationRecord
 
   extend Pagy::Meilisearch
 
+  normalizes :canonical_url, with: ->(url) { url.presence }
+
   belongs_to :account
   belongs_to :user
   has_many :revisions, class_name: "PostRevision", dependent: :delete_all
@@ -16,20 +18,20 @@ class Post < ApplicationRecord
     attachable.variant :large, resize_to_limit: [ 1920, 1920 ]
   end
 
-  attribute :remove_featured_image, :boolean
-
-  after_save do
-    featured_image.purge_later if remove_featured_image
-  end
-
   enum status: {
     draft: 0,
     published: 1,
     trashed: 2
   }
 
+  attribute :remove_featured_image, :boolean
+
   validates :canonical_url, url: true, allow_blank: true
   validates :feed_source_id, uniqueness: { scope: :account_id }, allow_blank: true
+
+  before_save :set_published_at
+  after_save :condition_remove_featured_image
+  after_touch :update_score
 
   scope :following_by, ->(user) {
     where(account: user.followings).or(where(user: user.following_users)).distinct
@@ -53,10 +55,6 @@ class Post < ApplicationRecord
     pagination max_total_hits: 1000
   end
 
-  attribute :saved, :boolean, default: false
-
-  before_save :set_published_at
-
   def set_published_at
     if published_at.nil? && published?
       self.published_at = Time.now
@@ -78,14 +76,13 @@ class Post < ApplicationRecord
     )
   end
 
-  def canonical_url=(value)
-    write_attribute :canonical_url, value.presence
+  def update_score
+    if published_at && likes_count > 0 && content.length > 100
+      update_column :score, (Math.log([ likes_count, 1 ].max, 10) + published_at.to_i / 43200) * 100
+    end
   end
 
-  after_touch :update_score
-  def update_score
-    if published? && likes_count > 0 && content.length > 100
-      update_column :score, (Math.log([ likes_count + comments_count, 1 ].max, 10) + published_at.to_i / 43200) * 100
-    end
+  def condition_remove_featured_image
+    featured_image.purge_later if remove_featured_image
   end
 end
