@@ -3,20 +3,20 @@
     {
       "warning_type": "Redirect",
       "warning_code": 18,
-      "fingerprint": "6f4c45adedd2384957f9902026f5f6c639c02498c45ea0adfdaf99f36005df71",
+      "fingerprint": "3fd4fa0ee723c89d121c55d7fe670ddcc5a6061e6166d30dd375e800de8537b7",
       "check_name": "Redirect",
       "message": "Possible unprotected redirect",
       "file": "app/controllers/attachments_controller.rb",
       "line": 21,
       "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
-      "code": "redirect_to(Attachment.find_by(:key => params[:id]).file.url, :allow_other_host => true)",
+      "code": "redirect_to(Attachment.find_by(:key => params[:key]).file.url, :allow_other_host => true)",
       "render_path": null,
       "location": {
         "type": "method",
         "class": "AttachmentsController",
         "method": "show"
       },
-      "user_input": "Attachment.find_by(:key => params[:id]).file.url",
+      "user_input": "Attachment.find_by(:key => params[:key]).file.url",
       "confidence": "Weak",
       "cwe_id": [
         601
@@ -70,6 +70,6 @@
       "note": ""
     }
   ],
-  "updated": "2024-07-26 12:34:26 +0000",
+  "updated": "2024-07-26 13:15:09 +0000",
   "brakeman_version": "5.4.1"
 }
