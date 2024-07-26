@@ -14,7 +14,7 @@ class AttachmentsController < ApplicationController
   end
 
   def show
-    attachment = Attachment.find_by key: params[:id]
+    attachment = Attachment.find_by key: params[:key]
 
     if attachment
       expires_in ActiveStorage.service_urls_expire_in
