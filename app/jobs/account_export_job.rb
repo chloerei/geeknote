@@ -6,52 +6,26 @@ class AccountExportJob < ApplicationJob
 
     Dir.mktmpdir("export") do |dir|
       Dir.chdir(dir) do
-        Dir.mkdir("drafts")
-        export.account.posts.draft.find_each do |post|
-          File.open(File.join(dir, "drafts", "#{post.id}.md"), "w") do |file|
-            file.write <<~EOF
-              ---
-              layout: post
-              title: #{post.title}
-              author: #{post.user&.name}
-              tags: [#{post.tags.pluck(:name).join(', ')}]
-              ---
-
-              #{post.content}
-            EOF
-          end
-        end
-
         Dir.mkdir("posts")
-        export.account.posts.published.find_each do |post|
+        export.account.posts.where(status: [ :draft, :published ]).find_each do |post|
+          content = process_attachment_url(post.content)
+
           File.open(File.join(dir, "posts", "#{post.id}.md"), "w") do |file|
             file.write <<~EOF
               ---
               layout: post
               title: #{post.title}
-              date: #{post.published_at}
-              author: #{post.user&.name}
-              tags: [#{post.tags.pluck(:name).join(', ')}]
+              author: #{post.user.name}
+              tags: [#{post.tags.pluck(:name).join(", ")}]
+              #{post.published? ? "date: #{post.published_at}" : "published: false"}
               ---
 
-              #{post.content}
+              #{content}
             EOF
           end
         end
 
-        Dir.mkdir("attachments")
-        export.account.posts.find_each do |post|
-          post.content.scan(/!\[.*\]\(\/attachments\/(?<key>\w+)\/.*\)/) do |match|
-            if attachment = Attachment.find_by(key: match[0])
-              Dir.mkdir(File.join("attachments", attachment.key)) unless Dir.exist?(File.join("attachments", attachment.key))
-              attachment.file.open do |file|
-                system "cp", file.path, File.join(dir, "attachments", attachment.key, attachment.file.filename.to_s)
-              end
-            end
-          end
-        end
-
-        system "tar", "-czf", "export.tar.gz", "posts", "drafts", "attachments"
+        system "tar", "-czf", "export.tar.gz", "posts"
 
         export.file.attach io: File.open("export.tar.gz"), filename: "#{export.account.name}_export_#{export.created_at.to_fs :number}.tar.gz"
       end
@@ -64,6 +38,17 @@ class AccountExportJob < ApplicationJob
     else
       export.account.owner.members.where(role: [ "owner", "admin" ]).each do |member|
         AccountMailer.with(account: export.account, user: member.user).export_completed.deliver_later
+      end
+    end
+  end
+
+  def process_attachment_url(content)
+    content.gsub(/\/attachments\/(?<key>[\w]+)/) do
+      match = Regexp.last_match
+      if attachment = Attachment.find_by(key: match[:key])
+        Rails.application.routes.url_helpers.attachment_url(attachment.key)
+      else
+        match[0]
       end
     end
   end

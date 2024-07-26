@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   post "sign_up", to: "registrations#create"
   delete "sign_out", to: "sessions#destroy"
 
-  resources :attachments, only: [ :create ]
+  resources :attachments, only: [ :create, :show ]
 
   post "/rails/active_storage/direct_uploads", to: "direct_uploads#create"
 
@@ -167,8 +167,6 @@ Rails.application.routes.draw do
           resource :featured_image, only: [ :update, :destroy ]
         end
       end
-
-      resources :attachments, only: [ :create ]
     end
   end
 

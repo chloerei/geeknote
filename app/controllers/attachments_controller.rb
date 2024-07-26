@@ -13,6 +13,17 @@ class AttachmentsController < ApplicationController
     }
   end
 
+  def show
+    attachment = Attachment.find_by key: params[:id]
+
+    if attachment
+      expires_in ActiveStorage.service_urls_expire_in
+      redirect_to attachment.file.url, allow_other_host: true
+    else
+      head :not_found
+    end
+  end
+
   private
 
   def attachment_params

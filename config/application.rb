@@ -58,7 +58,7 @@ module GeekNote
 
     config.active_storage.service = ENV["STORAGE_SERVICE"] || :local
 
-    config.x.host = ENV.fetch("HOST", "localhost:3000")
+    config.x.host = ENV.fetch("HOST", "localhost")
 
     config.x.feedbacktrace_jwt_sso_callback_url = ENV["FEEDBACKTRACE_JWT_SSO_CALLBACK_URL"]
     config.x.feedbacktrace_jwt_sso_secret_key = ENV["FEEDBACKTRACE_JWT_SSO_SECRET_KEY"]
