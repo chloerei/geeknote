@@ -32,22 +32,10 @@ module MarkdownHelper
       if match
         attachment = Attachment.find_by(key: match[:key])
         if attachment
-          node["src"] = polymorphic_url(attachment.file)
           if attachment.file.metadata["height"] && attachment.file.metadata["width"]
             node["height"] = attachment.file.metadata["height"]
             node["width"] = attachment.file.metadata["width"]
           end
-        end
-      end
-    end
-
-    # replace link href
-    doc.css("a").each do |node|
-      match = ATTACHMENT_PATTERN.match(node["href"])
-      if match
-        attachment = Attachment.find_by(key: match[:key])
-        if attachment
-          node["href"] = polymorphic_url(attachment.file)
         end
       end
     end
