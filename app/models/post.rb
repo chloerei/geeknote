@@ -28,6 +28,7 @@ class Post < ApplicationRecord
 
   validates :canonical_url, url: true, allow_blank: true
   validates :feed_source_id, uniqueness: { scope: :account_id }, allow_blank: true
+  validates :featured_image, content_type: [ :png, :jpg, :jpeg ], size: { less_than: 5.megabytes }
 
   before_save :set_published_at
   after_save :condition_remove_featured_image

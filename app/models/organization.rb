@@ -19,6 +19,8 @@ class Organization < ApplicationRecord
   end
 
   validates :name, presence: true
+  validates :avatar, content_type: [ :png, :jpg, :jpeg ], size: { less_than: 5.megabytes }
+  validates :banner_image, content_type: [ :png, :jpg, :jpeg ], size: { less_than: 5.megabytes }
 
   accepts_nested_attributes_for :account, update_only: true
 end

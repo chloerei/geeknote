@@ -49,6 +49,8 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true
+  validates :avatar, content_type: [ :png, :jpg, :jpeg ], size: { less_than: 5.megabytes }
+  validates :banner_image, content_type: [ :png, :jpg, :jpeg ], size: { less_than: 5.megabytes }
 
   # only for error display
   attr_accessor :current_password, :require_password
