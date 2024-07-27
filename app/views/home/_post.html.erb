@@ -17,7 +17,7 @@
     <div class="flex gap-4">
       <div class="flex-grow min-w-0">
         <div class="line-clamp-3">
-          <a href="<%= account_post_path(post.user.account.name, post) %>" class="text-lg font-medium hover:opacity-80 after:absolute after:inset-0">
+          <a href="<%= account_post_path(post.account.name, post) %>" class="text-lg font-medium hover:opacity-80 after:absolute after:inset-0">
             <%= post.title %>
           </a>
           <div class="text-on-surface-variant">
