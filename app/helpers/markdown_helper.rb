@@ -1,6 +1,6 @@
 module MarkdownHelper
-  MARKDOWN_ALLOW_TAGS = Set.new(%w[strong em b i p code pre tt samp kbd var sub sup dfn cite big small address hr br div span h1 h2 h3 h4 h5 h6 ul ol li dl dt dd abbr acronym a img blockquote del ins input table thead tbody tr th td])
-  MARKDOWN_ALLOW_ATTRIBUTES = Set.new(%w[id href src width height alt cite datetime title class name xml:lang abbr type disabled checked])
+  MARKDOWN_ALLOW_TAGS = Set.new(%w[strong em b i p code pre tt samp kbd var sub sup dfn cite big small address hr br div span h1 h2 h3 h4 h5 h6 ul ol li dl dt dd abbr acronym a img blockquote del ins input table thead tbody tr th td video])
+  MARKDOWN_ALLOW_ATTRIBUTES = Set.new(%w[id href src width height alt cite datetime title class name xml:lang abbr type disabled checked controls])
 
   def markdown_render(text)
     html = CommonMarker.render_html(text, :DEFAULT, [ :table, :tasklist, :strikethrough, :autolink, :tagfilter ])
@@ -22,6 +22,23 @@ module MarkdownHelper
       anchor["href"] = "##{anchor['id']}"
       anchor["class"] = "anchor"
       node.prepend_child anchor
+    end
+
+    # search p a as only child
+    doc.css("p a:only-child").each do |node|
+      # ensure not other text in parent node
+      if node.parent.text != node.text
+        next
+      end
+
+      # match attachment url
+      if match = node["href"].match(%r{^/attachments/(?<key>\w+)})
+        if attachment = Attachment.find_by(key: match[:key])
+          if attachment.file.video?
+            node.replace %(<video src="#{match[0]}" controls="controls"></video>)
+          end
+        end
+      end
     end
 
     sanitize doc.to_html, tags: MARKDOWN_ALLOW_TAGS, attributes: MARKDOWN_ALLOW_ATTRIBUTES

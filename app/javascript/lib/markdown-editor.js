@@ -4,30 +4,25 @@ import { MarkdownMirror } from "markdown-mirror"
 
 class MarkdownEditor {
   static acceptFileTypes = [
-    'image/png',
-    'image/gif',
-    'image/jpg',
-    'image/jpeg',
-    'image/svg+xml',
-    'text/plain',
-    'application/pdf',
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    'application/vnd.ms-powerpoint',
-    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-    'application/vnd.ms-excel',
-    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    'text/markdown',
-    'text/x-markdown',
-    'text/x-log',
-    'text/x-patch',
-    'application/zip',
-    'application/gzip',
-    'application/x-gzip',
-    'application/x-tar',
-    'video/mp4',
-    'video/quicktime',
-    'video/webm'
+    '.png',
+    '.gif',
+    '.jpg',
+    '.jpeg',
+    '.svg',
+    '.log',
+    '.md',
+    '.docx',
+    '.pptx',
+    '.xlsx',
+    '.txt',
+    '.patch',
+    '.pdf',
+    '.zip',
+    '.gz',
+    '.tgz',
+    '.mp4',
+    '.mov',
+    '.webm'
   ]
 
   static acceptFileSize = 10 * 1024 * 1024
@@ -100,11 +95,6 @@ class MarkdownEditor {
   async uploadAndInsertFile(file) {
     if (file.size > MarkdownEditor.acceptFileSize) {
       alert(`File size is too large. Maximum file size is ${MarkdownEditor.acceptFileSize / 1024 / 1024}MB.`)
-      return
-    }
-
-    if (!MarkdownEditor.acceptFileTypes.includes(file.type)) {
-      alert("File type is not allowed.")
       return
     }
 
