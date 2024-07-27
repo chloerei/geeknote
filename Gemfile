@@ -23,6 +23,8 @@ gem "propshaft"
 # Use Active Storage variant
 gem "image_processing", "~> 1.2"
 
+gem "active_storage_validations"
+
 # Job Queue
 gem "sidekiq", "~> 6.0"
 gem "hiredis"

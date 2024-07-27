@@ -21,8 +21,9 @@ class AccountExportDataJobTest < ActiveJob::TestCase
       tag_list: "Ruby,JavaScript"
     )
 
-    attachment = Attachment.create user: account.owner
+    attachment = Attachment.new user: account.owner
     attachment.file.attach(io: File.open("test/fixtures/files/avatar.png"), filename: "avatar.png")
+    attachment.save
 
     post_3 = account.posts.create(
       title: "Attachment",
