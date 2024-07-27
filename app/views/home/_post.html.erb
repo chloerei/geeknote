@@ -5,8 +5,12 @@
         <img src="<%= avatar_url(post.user) %>" alt="avatar" class="w-10 h-10 rounded-full">
       </div>
       <div class="flex-grow">
-        <div class="text-sm font-medium">
-          <%= post.user.name %>
+        <div class="text-sm">
+          <span class="font-medium"><%= post.user.name %></span>
+          <% if post.account != post.user.account %>
+            <span class="text-on-surface-variant">in</span>
+            <span class="font-medium"><%= post.account.owner.name %></span>
+          <% end %>
         </div>
         <div class="text-sm text-on-surface-variant">
           <%= format_time post.published_at %>
