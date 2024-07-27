@@ -36,4 +36,28 @@ class MarkdownHelperTest < ActionView::TestCase
 
     assert_equal html, markdown_render(text)
   end
+
+  test "should render youtube link" do
+    text = <<~EOF
+      https://www.youtube.com/watch?v=abc
+    EOF
+
+    html = <<~EOF
+      <p><iframe src="https://www.youtube.com/embed/abc" allowfullscreen></iframe></p>
+    EOF
+
+    assert_equal html, markdown_render(text)
+  end
+
+  test "should render bilibili link" do
+    text = <<~EOF
+      https://www.bilibili.com/video/abc
+    EOF
+
+    html = <<~EOF
+      <p><iframe src="https://player.bilibili.com/player.html?bvid=abc" allowfullscreen></iframe></p>
+    EOF
+
+    assert_equal html, markdown_render(text)
+  end
 end

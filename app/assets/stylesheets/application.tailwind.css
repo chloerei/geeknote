@@ -28,4 +28,10 @@
     box-sizing: content-box;
     padding-bottom: env(safe-area-inset-bottom);
   }
+
+  .prose {
+    iframe {
+      @apply w-full aspect-video;
+    }
+  }
 }

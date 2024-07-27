@@ -1,6 +1,42 @@
 module MarkdownHelper
-  MARKDOWN_ALLOW_TAGS = Set.new(%w[strong em b i p code pre tt samp kbd var sub sup dfn cite big small address hr br div span h1 h2 h3 h4 h5 h6 ul ol li dl dt dd abbr acronym a img blockquote del ins input table thead tbody tr th td video])
-  MARKDOWN_ALLOW_ATTRIBUTES = Set.new(%w[id href src width height alt cite datetime title class name xml:lang abbr type disabled checked controls])
+  MARKDOWN_ALLOW_TAGS = %w[strong em b i p code pre tt samp kbd var sub sup dfn cite big small address hr br div span h1 h2 h3 h4 h5 h6 ul ol li dl dt dd abbr acronym a img blockquote del ins input table thead tbody tr th td video]
+  MARKDOWN_ALLOW_ATTRIBUTES = %w[id href src width height alt cite datetime title class name xml:lang abbr type disabled checked controls allowfullscreen]
+
+  class MarkdownScruber < Rails::Html::PermitScrubber
+    def initialize
+      super
+      self.tags = MARKDOWN_ALLOW_TAGS
+      self.attributes = MARKDOWN_ALLOW_ATTRIBUTES
+    end
+
+    protected
+
+    def allowed_node?(node)
+      allowed = super
+      return true if allowed
+
+      case node.name
+      when "iframe"
+        return allow_iframe?(node)
+      end
+
+      false
+    end
+
+    def allow_iframe?(node)
+      src = node["src"]
+      return false unless src
+
+      case src
+      when %r{^https://www.youtube.com/embed/}
+        true
+      when %r{^https://player.bilibili.com/player.html}
+        true
+      else
+        false
+      end
+    end
+  end
 
   def markdown_render(text)
     html = CommonMarker.render_html(text, :DEFAULT, [ :table, :tasklist, :strikethrough, :autolink, :tagfilter ])
@@ -38,10 +74,23 @@ module MarkdownHelper
             node.replace %(<video src="#{match[0]}" controls="controls"></video>)
           end
         end
+        next
+      end
+
+      # match youtube url
+      if match = node["href"].match(%r{^https://www.youtube.com/watch\?v=(?<id>\w+)})
+        node.replace %(<iframe src="https://www.youtube.com/embed/#{match[:id]}" allowfullscreen></iframe>)
+        next
+      end
+
+      # match bilibili url
+      if match = node["href"].match(%r{^https://www.bilibili.com/video/(?<id>\w+)})
+        node.replace %(<iframe src="https://player.bilibili.com/player.html?bvid=#{match[:id]}" allowfullscreen></iframe>)
+        next
       end
     end
 
-    sanitize doc.to_html, tags: MARKDOWN_ALLOW_TAGS, attributes: MARKDOWN_ALLOW_ATTRIBUTES
+    sanitize doc.to_html, scrubber: MarkdownScruber.new
   end
 
   def markdown_summary(text)
