@@ -32,6 +32,3 @@ primary_region = "nrt"
   timeout = "5s"
   path = "/up"
 
-[[statics]]
-  guest_path = "/rails/public"
-  url_prefix = "/"
