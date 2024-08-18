@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.cm-content {
+  white-space: pre-wrap;
+}
+
 .cm-content:focus {
   outline: 0;
 }
