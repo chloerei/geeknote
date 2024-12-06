@@ -4,7 +4,7 @@
 
 <% @posts.each do |post| %>
   <p>
-    <a href="<%= account_post_url(post.account, post) %>"><b><%= post.title %></b></a>
+    <a href="<%= account_post_url(post.account.name, post) %>"><b><%= post.title %></b></a>
     &mdash;
     <%= post_summary post, length: 70 %>
     <br>
