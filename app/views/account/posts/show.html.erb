@@ -67,22 +67,22 @@
           <div class="flex-shrink-0">
             <div class="menu">
               <label tabindex="0" type="button" class="icon-button">
-                <%= material_icon :more_vert %>
+                <x-icon>more_vert</x-icon>
               </label>
               <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
                 <button type="button" class="menu__item" data-controller="copy-link" data-action="copy-link#copy" data-copy-link-url-value="<%= account_post_path(@account.name, @post) %>">
-                  <%= material_icon :link %>
+                  <x-icon>link</x-icon>
                   <span><%= t "general.copy_link" %></span>
                 </button>
 
                 <div class="hidden visible-to-user--<%= @post.user.id %>">
                   <a href="<%= edit_dashboard_post_path(@account.name, @post) %>" class="menu__item">
-                    <%= material_icon :edit %>
+                    <x-icon>edit</x-icon>
                     <span><%= t "general.edit" %></span>
                   </a>
                   <%= form_with url: dashboard_post_path(@account.name, @post), method: :delete do |form| %>
                     <button type="submit" class="menu__item">
-                      <%= material_icon :delete %>
+                      <x-icon>delete</x-icon>
                       <span><%= t "general.delete" %></span>
                     </button>
                   <% end %>
@@ -90,7 +90,7 @@
 
                 <div class="hidden visible-to-admin">
                   <button type="button" class="menu__item">
-                    <%= material_icon :build %>
+                    <x-icon>build</x-icon>
                     <span><%= t "general.manage" %></span>
                   </button>
                 </div>
@@ -124,7 +124,7 @@
 
               <div class="inline-flex items-center">
                 <a href="<%= account_post_comments_path(@account.name, @post, comment: true) %>" class="icon-button">
-                  <%= material_icon :mode_comment %>
+                  <x-icon>mode_comment</x-icon>
                 </a>
                 <% if @post.comments_count > 0 %>
                   <span class="text-on-surface-variant tabular-nums px-1"><%= @post.comments_count %></span>

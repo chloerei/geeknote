@@ -1,7 +1,7 @@
 <div class="max-w-screen-lg mx-auto">
   <div class="relative">
     <div class="icon h-6 w-6 absolute left-3 top-3">
-      <%= material_icon :search %>
+      <x-icon>search</x-icon>
     </div>
     <%= form_with url: search_url, method: :get do |form| %>
       <%= form.hidden_field :tab, value: @tab %>
@@ -19,7 +19,7 @@
         <span>
           Sort by: <%= @sort %>
         </span>
-        <%= material_icon :arrow_drop_down %>
+        <x-icon>arrow_drop_down</x-icon>
       </label>
       <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
         <a href="<%= url_for(request.GET.merge(sort: nil)) %>" class="menu__item">

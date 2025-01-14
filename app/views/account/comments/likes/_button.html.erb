@@ -4,14 +4,14 @@
   <div class="group-[.liked]:hidden">
     <%= form_with url: account_comment_like_path(comment.user.account.name, comment), method: :post do %>
       <button type="submit" class="icon-button hover:text-red-500 hover:bg-red-500/10 active:bg-red-500/20">
-        <%= material_icon "favorite" %>
+        <x-icon>favorite</x-icon>
       </button>
     <% end %>
   </div>
   <div class="hidden group-[.liked]:block">
     <%= form_with url: account_comment_like_path(comment.user.account.name, comment), method: :delete do %>
       <button type="submit" class="icon-button text-red-500 hover:text-red-500 hover:bg-red-500/10 active:bg-red-500/20">
-        <%= material_icon "favorite-fill" %>
+        <x-icon fill>favorite</x-icon>
       </button>
     <% end %>
   </div>

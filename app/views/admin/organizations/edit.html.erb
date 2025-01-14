@@ -2,7 +2,7 @@
   <div class="card">
     <div class="flex items-center h-14 gap-2 px-2">
       <a href="<%= admin_organization_path(@organization) %>" class="icon-button">
-        <%= material_icon :arrow_back %>
+        <x-icon>arrow_back</x-icon>
       </a>
       <div class="flex-grow text-lg font-medium px-2">
         Edit organization #<%= @organization.id %>

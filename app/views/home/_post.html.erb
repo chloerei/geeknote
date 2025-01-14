@@ -41,9 +41,7 @@
   <div class="flex justify-between mt-4">
     <div class="flex items-center h-8 px-3 gap-2 text-sm interactive-bg-surface-container rounded-full">
       <div class="inline-flex items-center gap-1">
-        <div class="icon w-4 h-4">
-          <%= material_icon :favorite %>
-        </div>
+        <x-icon class="text-base">favorite</x-icon>
         <% if post.likes_count > 0 %>
           <div class="tabular-nums">
             <%= post.likes_count %>
@@ -51,9 +49,7 @@
         <% end %>
       </div>
       <div class="inline-flex items-center gap-1">
-        <div class="icon w-4 h-4">
-          <%= material_icon :comment %>
-        </div>
+        <x-icon class="text-base">comment</x-icon>
         <% if post.comments_count > 0 %>
           <div class="tabular-nums">
             <%= post.comments_count %>
@@ -61,9 +57,7 @@
         <% end %>
       </div>
       <div class="inline-flex items-center gap-1">
-        <div class="icon w-4 h-4">
-          <%= material_icon :bookmark %>
-        </div>
+        <x-icon class="text-base">bookmark</x-icon>
         <% if post.bookmarks_count > 0 %>
           <div class="tabular-nums">
             <%= post.bookmarks_count %>

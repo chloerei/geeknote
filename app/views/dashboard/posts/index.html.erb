@@ -4,7 +4,7 @@
   <div class="flex p-4 gap-2 border-b border-outline-variant">
     <div class="relative">
       <div class="icon w-6 h-6 absolute top-2 left-2">
-        <%= material_icon :search %>
+        <x-icon>search</x-icon>
       </div>
       <%= form_with url: url_for, method: :get do |f| %>
         <%= f.search_field :q, value: params[:q], placeholder: t("general.search"), class: "h-10 pl-10 border-none focus:ring-0 interactive-bg-surface-container rounded-full" %>
@@ -29,7 +29,7 @@
             end
           %>
         </span>
-        <%= material_icon :arrow_drop_down %>
+        <x-icon>arrow_drop_down</x-icon>
       </label>
       <div class="menu__content">
         <a href="<%= url_for(request.GET.merge(status: nil)) %>" class="menu__item">
@@ -59,7 +59,7 @@
             end
           %>
         </span>
-        <%= material_icon :arrow_drop_down %>
+        <x-icon>arrow_drop_down</x-icon>
       </label>
       <div class="menu__content">
         <a href="<%= url_for(request.GET.merge(sort: nil)) %>" class="menu__item">

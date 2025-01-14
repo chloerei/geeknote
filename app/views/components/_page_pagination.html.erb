@@ -5,13 +5,13 @@
   <% if pagy.prev %>
     <a href="<%= pagy_url_for(pagy, pagy.prev) %>" class="inline-flex items-center h-8 px-2 interactive-bg-surface-container rounded">
       <div class="icon w-4 h-4">
-        <%= material_icon :chevron_left %>
+        <x-icon>chevron_left</x-icon>
       </div>
     </a>
   <% else %>
     <span class="inline-flex items-center h-8 px-2 bg-surface-container-low rounded">
       <div class="icon w-4 h-4">
-        <%= material_icon :chevron_left %>
+        <x-icon>chevron_left</x-icon>
       </div>
     </span>
   <% end %>
@@ -35,13 +35,13 @@
   <% if pagy.next %>
     <a href="<%= pagy_url_for(pagy, pagy.next) %>" class="inline-flex items-center h-8 px-2 interactive-bg-surface-container rounded">
       <div class="icon w-4 h-4">
-        <%= material_icon :chevron_right %>
+        <x-icon>chevron_right</x-icon>
       </div>
     </a>
   <% else %>
     <span class="inline-flex items-center h-8 px-2 bg-surface-container-low rounded">
       <div class="icon w-4 h-4">
-        <%= material_icon :chevron_right %>
+        <x-icon>chevron_right</x-icon>
       </div>
     </span>
   <% end %>

@@ -4,7 +4,7 @@
       <div class="flex items-center p-2 gap-2">
         <div class="flex-shrink-0">
           <a href="<%= account_post_path(@account.name, @post) %>" class="icon-button">
-            <%= material_icon :arrow_back %>
+            <x-icon>arrow_back</x-icon>
           </a>
         </div>
         <div class="flex-grow px-2 text-lg font-medium line-clamp-1">
@@ -20,7 +20,7 @@
         </div>
         <div class="menu">
           <label tabindex="0" class="text-button text-on-surface-variant">
-            <%= material_icon :sort %>
+            <x-icon>sort</x-icon>
             <span>
               <%=
                 case @sort

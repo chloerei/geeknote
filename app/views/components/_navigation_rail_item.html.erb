@@ -2,7 +2,11 @@
 
 <a href="<%= url %>" class="navigation-rail__item <%= "navigation-rail__item--active" if active %>">
   <div class="navigation-rail__item__icon">
-    <%= material_icon(active ? "#{icon}-fill" : icon) %>
+    <% if active %>
+      <x-icon fill><%= icon %></x-icon>
+    <% else %>
+      <x-icon><%= icon %></x-icon>
+    <% end %>
   </div>
   <div class="navigation-rail__item__label">
     <%= label %>

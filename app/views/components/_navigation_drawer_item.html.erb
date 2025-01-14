@@ -3,7 +3,7 @@
 <a href="<%= url %>" class="flex h-14 items-center px-4 gap-3 rounded-full <%= active ? "interactive-bg-secondary-container" : "hover:interactive-bg-surface" %>">
   <% if icon %>
     <div class="icon w-6 h-6">
-      <%= material_icon icon %>
+      <x-icon><%= icon %></x-icon>
     </div>
   <% end %>
   <div class="text-sm font-medium">

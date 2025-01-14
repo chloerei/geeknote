@@ -13,7 +13,7 @@
       ].each do |item| %>
         <a href="<%= item[:href] %>" class="flex items-center h-16 gap-4 px-4 interactive-bg-surface-container-lowest">
           <div class="icon w-6 h-6">
-            <%= material_icon item[:icon] %>
+            <x-icon><%= item[:icon] %></x-icon>
           </div>
           <div class="flex-grow">
             <div class="font-medium line-clamp-1">

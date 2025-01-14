@@ -18,23 +18,23 @@
     <div class="flex-shrink-0">
       <div class="menu">
         <label tabindex="0" type="button" class="icon-button">
-          <%= material_icon :more_vert %>
+          <x-icon>more_vert</x-icon>
         </label>
         <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
           <button type="button" class="menu__item" data-controller="copy-link" data-action="copy-link#copy" data-copy-link-url-value="<%= account_comment_path(comment.user.account.name, comment) %>">
-            <%= material_icon :link %>
+            <x-icon>link</x-icon>
             Copy link
           </button>
           <div class="hidden visible-to-user--<%= comment.user.id %>">
             <a href="<%= edit_account_comment_path(comment.user.account.name, comment) %>" class="menu__item">
-              <%= material_icon :edit %>
+              <x-icon>edit</x-icon>
               <span>
                 Edit
               </span>
             </a>
             <%= form_with url: account_comment_path(comment.user.account.name, comment), method: :delete, data: { turbo_confirm: "Delete commnet?" } do |form| %>
               <button type="submit" class="menu__item">
-                <%= material_icon :delete %>
+                <x-icon>delete</x-icon>
                 <span>
                   Delete
                 </span>
@@ -43,7 +43,7 @@
           </div>
           <div class="hidden visible-to-admin">
             <button type="button" class="menu__item">
-              <%= material_icon :build %>
+              <x-icon>build</x-icon>
               <span>
                 Manage
               </span>
@@ -66,7 +66,7 @@
             <%= format_time comment.parent.created_at %>
           </span>
           <div class="icon w-6 h-6">
-            <%= material_icon :reply %>
+            <x-icon>reply</x-icon>
           </div>
         </div>
         <div class="text-on-surface-variant mt-2">
@@ -86,7 +86,7 @@
     <% if !showpage %>
       <div class="inline-flex items-center">
         <a href="<%= account_comment_path(comment.user.account.name, comment, comment: true, anchor: "form_comment") %>" class="icon-button">
-          <%= material_icon :reply %>
+          <x-icon>reply</x-icon>
         </a>
       </div>
     <% end %>
@@ -99,7 +99,7 @@
           <span>
             View <%= comment.replies_count %> replies
           </span>
-          <%= material_icon :arrow_right_alt %>
+          <x-icon>arrow_right_alt</x-icon>
         </a>
       <% end %>
     <% end %>

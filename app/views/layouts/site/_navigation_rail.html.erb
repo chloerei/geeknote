@@ -1,7 +1,7 @@
 <div class="navigation-rail hidden md:flex">
   <% if Current.user %>
     <a href="<%= new_dashboard_post_path(Current.user.account.name) %>" class="floating-action-button mb-2">
-      <%= material_icon :edit_square %>
+      <x-icon>edit_square</x-icon>
     </a>
   <% end %>
 
@@ -28,29 +28,29 @@
     <div tabindex="0" class="menu__content top-auto left-auto bottom-full right-0 origin-bottom-right md:left-full md:bottom-0 md:origin-bottom-left">
       <% if Current.user %>
         <a href="<%= account_root_path(Current.user.account.name) %>" class="menu__item">
-          <%= material_icon :account_circle %>
+          <x-icon>account_circle</x-icon>
           <span><%= t "general.profile" %></span>
         </a>
 
         <a href="<%= settings_root_path %>" class="menu__item">
-          <%= material_icon :settings %>
+          <x-icon>settings</x-icon>
           <span><%= t "general.settings" %></span>
         </a>
 
         <%= form_with url: sign_out_path, method: :delete do |form| %>
           <button type="submit" class="menu__item">
-            <%= material_icon :logout %>
+            <x-icon>logout</x-icon>
             <span><%= t "general.sign_out" %></span>
           </button>
         <% end %>
       <% else %>
         <a href="<%= sign_in_path %>" class="menu__item">
-          <%= material_icon :login %>
+          <x-icon>login</x-icon>
           <span><%= t "general.sign_in" %></span>
         </a>
 
         <a href="<%= sign_up_path %>" class="menu__item">
-          <%= material_icon :person_add %>
+          <x-icon>person_add</x-icon>
           <span><%= t "general.sign_up" %></span>
         </a>
       <% end %>

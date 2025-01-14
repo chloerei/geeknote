@@ -2,7 +2,7 @@
   <div class="bg-surface-container-lowest rounded-xl">
     <div class="flex items-center p-2">
       <a href="<%= settings_root_path %>" class="icon-button">
-        <%= material_icon :arrow_back %>
+        <x-icon>arrow_back</x-icon>
       </a>
       <div class="text-lg font-medium flex-grow px-2">
         <%= t "general.email" %>
@@ -43,7 +43,7 @@
       <div class="mt-2">
         <%= form_with url: resend_settings_email_path do |form| %>
           <button type="submit" class="outlined-button">
-            <%= material_icon :send %>
+            <x-icon>send</x-icon>
             <span>
               <%= t ".resend_verification_email" %>
             </span>

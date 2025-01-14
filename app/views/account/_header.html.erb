@@ -20,17 +20,17 @@
 
       <div class="menu">
         <label tabindex="0" class="icon-button">
-          <%= material_icon :more_vert %>
+          <x-icon>more_vert</x-icon>
         </label>
         <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
           <button type="button" class="menu__item" data-controller="copy-link" data-action="copy-link#copy" data-copy-link-url-value="<%= account_root_url(account.name) %>">
-            <%= material_icon :link %>
+            <x-icon>link</x-icon>
             <span><%= t "general.copy_link" %></span>
           </button>
           <% if Current.user %>
             <% if (account.user? && account.owner == Current.user) || (account.organization? && account.owner.members.active.where(user: Current.user).exists?) %>
               <a href="<%= dashboard_root_path(account.name) %>" class="menu__item">
-                <%= material_icon :dashboard %>
+                <x-icon>dashboard</x-icon>
                 <%= t "general.dashboard" %>
               </a>
             <% end %>
@@ -62,7 +62,7 @@
     <div class="mt-4 text-on-surface-variant">
       <div class="inline-flex items-center gap-2">
         <div class="icon w-6 h-6">
-          <%= material_icon :calendar_month %>
+          <x-icon>calendar_month</x-icon>
         </div>
         <%= local_date account.created_at.to_date, data: { turbo_permanent: true } %> Joined
       </div>
@@ -81,7 +81,7 @@
       </a>
       <a href="<%= account_feed_url(account.name, format: :atom) %>" class="inline-flex items-center" target="_blank">
         <div class="icon w-4 h-4">
-          <%= material_icon :rss_feed %>
+          <x-icon>rss_feed</x-icon>
         </div>
       </a>
     </div>

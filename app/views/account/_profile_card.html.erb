@@ -34,7 +34,7 @@
       <div class="mt-4 text-on-surface-variant">
         <div class="inline-flex items-center gap-2">
           <div class="icon w-6 h-6">
-            <%= material_icon :calendar_month %>
+            <x-icon>calendar_month</x-icon>
           </div>
           <%= local_date account.created_at.to_date, data: { turbo_permanent: true } %>
           <%= t "general.joined" %>

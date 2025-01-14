@@ -1,9 +1,9 @@
 {
-  "name": "GeekNote",
+  "name": "geeknote",
   "private": true,
   "dependencies": {
     "@codemirror/lang-markdown": "^6.2.5",
-    "@material-symbols/svg-400": "^0.20.0",
+    "@material-symbols/font-400": "^0.27.2",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.13",
@@ -15,7 +15,7 @@
   "scripts": {
     "build:js": "esbuild app/assets/javascripts/*.* --bundle --format=esm --outdir=app/assets/builds",
     "build:css": "tailwindcss -i app/assets/stylesheets/application.tailwind.css -o app/assets/builds/tailwind.css",
-    "build:icon": "cp -r node_modules/@material-symbols vendor/icons"
+    "build:icon": "cp -r node_modules/@material-symbols/font-400/*.woff2 app/assets/builds"
   },
   "version": "0.1.0"
 }

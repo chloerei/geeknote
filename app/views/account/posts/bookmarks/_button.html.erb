@@ -6,14 +6,14 @@
   <div class="group-[.liked]:hidden">
     <%= form_with url: account_post_bookmark_path(post.account.name, post), method: :post do %>
       <button type="submit" class="icon-button hover:text-primary hover:bg-primary/10 active:bg-primary/20">
-        <%= material_icon "bookmark" %>
+        <x-icon>bookmark</x-icon>
       </button>
     <% end %>
   </div>
   <div class="hidden group-[.liked]:block">
     <%= form_with url: account_post_bookmark_path(post.account.name, post), method: :delete do %>
       <button type="submit" class="icon-button text-primary hover:text-primary hover:bg-primary/10 active:bg-primary/20">
-        <%= material_icon "bookmark-fill" %>
+        <x-icon fill>bookmark</x-icon>
       </button>
     <% end %>
   </div>

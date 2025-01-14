@@ -2,22 +2,22 @@
   <div class="card">
     <div class="flex items-center h-14 gap-2 px-2">
       <a href="<%= admin_users_path %>" class="icon-button">
-        <%= material_icon :arrow_back %>
+        <x-icon>arrow_back</x-icon>
       </a>
       <div class="flex-grow text-lg font-medium px-2">
         User #<%= @user.id %>
       </div>
       <a href="<%= edit_admin_user_path(@user) %>" class="icon-button">
-        <%= material_icon :edit %>
+        <x-icon>edit</x-icon>
       </a>
       <div class="menu">
         <label tabindex="0" class="icon-button">
-          <%= material_icon :more_vert %>
+          <x-icon>more_vert</x-icon>
         </label>
         <div class="menu__content top-full right-0 origin-top-right">
           <%= form_with url: admin_user_path(@user), method: :delete, data: { turbo_confirm: "Delete user?" } do %>
             <button type="submit" class="menu__item">
-              <%= material_icon :delete %>
+              <x-icon>delete</x-icon>
               <span>Delete</span>
             </button>
           <% end %>

@@ -2,7 +2,7 @@
   <div class="card">
     <div class="flex items-center h-14 px-2 gap-2">
       <a href="<%= admin_comment_path(@comment) %>" class="icon-button">
-        <%= material_icon :arrow_back %>
+        <x-icon>arrow_back</x-icon>
       </a>
       <div class="flex-grow text-lg font-medium">
         Edit comment #<%= @comment.id %>

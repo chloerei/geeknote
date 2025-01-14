@@ -2,7 +2,7 @@
 
 <a href="<%= url %>" class="tab <%= 'tab--active' if active %>">
   <% if icon %>
-    <%= material_icon icon %>
+    <x-icon><%= icon %></x-icon>
   <% end %>
   <div>
     <%= label %>

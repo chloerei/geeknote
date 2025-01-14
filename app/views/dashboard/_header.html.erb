@@ -3,7 +3,7 @@
     <%= t "general.dashboard" %>
   </div>
   <a href="<%= account_root_path(@account.name) %>" class="text-button">
-    <%= material_icon :north_east %>
+    <x-icon>north_east</x-icon>
     <span><%= t "general.view" %></span>
   </a>
   <div class="menu">
@@ -12,7 +12,7 @@
       <div>
         <%= @account.name %>
       </div>
-      <%= material_icon :arrow_drop_down %>
+      <x-icon>arrow_drop_down</x-icon>
     </label>
     <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
       <div class="px-4 py-2 text-sm font-medium text-on-surface-variant">
@@ -46,7 +46,7 @@
       <% end %>
 
       <a href="<%= new_organization_path %>" class="menu__item">
-        <%= material_icon :add %>
+        <x-icon>add</x-icon>
         <span><%= t "general.new_organization" %></span>
       </a>
     </div>

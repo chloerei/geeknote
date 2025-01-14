@@ -10,7 +10,7 @@
   <%# Top bar %>
   <div class="flex items-center p-3 gap-2 sticky top-0 z-10 bg-surface">
     <a href="<%= dashboard_posts_path(@account.name) %>" class="icon-button">
-      <%= material_icon :arrow_back %>
+      <x-icon>arrow_back</x-icon>
     </a>
     <div class="flex-grow px-2">
       <div class="text-lg font-medium">
@@ -26,10 +26,10 @@
         <%= t "general.publish" %>
       </button>
       <label for="settings" class="icon-button">
-        <%= material_icon :tune %>
+        <x-icon>tune</x-icon>
       </label>
       <button type="button" class="icon-button" disabled>
-        <%= material_icon :more_horiz %>
+        <x-icon>more_horiz</x-icon>
       </button>
     <% else %>
       <% if @post.draft? %>
@@ -46,7 +46,7 @@
           <%= t "general.update" %>
         </button>
         <a href="<%= account_post_path(@post.account.name, @post) %>" class="icon-button">
-          <%= material_icon :north_east %>
+          <x-icon>north_east</x-icon>
         </a>
       <% elsif @post.trashed? %>
         <%= form_with model: @post, url: dashboard_post_trash_path(@account.name, @post), method: :delete do %>
@@ -57,19 +57,19 @@
       <% end %>
 
       <label for="settings" class="icon-button">
-        <%= material_icon :tune %>
+        <x-icon>tune</x-icon>
       </label>
 
       <div class="menu">
         <label tabindex="0" class="icon-button">
-          <%= material_icon :more_horiz %>
+          <x-icon>more_horiz</x-icon>
         </label>
 
         <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
           <% if @post.published? %>
             <%= form_with model: @post, url: dashboard_post_publish_path(@account.name, @post), method: :delete do %>
               <button type="submit" class="menu__item">
-                <%= material_icon :unpublished %>
+                <x-icon>unpublished</x-icon>
                 <span>
                   <%= t "general.unpublish" %>
                 </span>
@@ -79,7 +79,7 @@
           <% if @post.trashed? %>
             <%= form_with model: @post, url: dashboard_post_path(@account.name, @post), method: :delete, data: { turbo_confirm: t(".delete_forever_confirm") } do %>
               <button type="submit" class="menu__item">
-                <%= material_icon :delete_forever %>
+                <x-icon>delete_forever</x-icon>
                 <span>
                   <%= t "general.delete_forever" %>
                 </span>
@@ -88,7 +88,7 @@
           <% else %>
             <%= form_with model: @post, url: dashboard_post_trash_path(@account.name, @post), method: :patch do %>
               <button type="submit" class="menu__item">
-                <%= material_icon :delete %>
+                <x-icon>delete</x-icon>
                 <span>
                   <%= t "general.move_to_trash" %>
                 </span>
@@ -126,7 +126,7 @@
 
             <div class="flex items-center gap-1">
               <button type="button" class="icon-button" data-action="post-editor#attachFile" data-post-editor-target="toolbarButton">
-                <%= material_icon :attach_file %>
+                <x-icon>attach_file</x-icon>
               </button>
             </div>
 
@@ -151,7 +151,7 @@
                 <%= t "general.settings" %>
               </div>
               <label for="settings" class="icon-button">
-                <%= material_icon :close %>
+                <x-icon>close</x-icon>
               </label>
             </div>
             <div class="px-6 mb-6 flex-grow overflow-auto">
@@ -169,7 +169,7 @@
 
                     <label for="post_featured_image" class="absolute inset-0 flex flex-col items-center justify-center gap-2 group-[.attached]/image-field:hidden rounded border-2 border-dashed border-outline-variant interactive-bg-surface text-on-surface-variant cursor-pointer">
                       <div class="icon w-6 h-6">
-                        <%= material_icon :add_photo_alternate %>
+                        <x-icon>add_photo_alternate</x-icon>
                       </div>
                       <div class="text-sm font-medium">
                         <%= t "general.click_to_select_image" %>
@@ -179,12 +179,12 @@
                     <div class="absolute top-2 right-2 items-center gap-2 hidden group-[.attached]/image-field:flex">
                       <div class="bg-surface-variant rounded-full">
                         <label for="post_featured_image" class="icon-button">
-                          <%= material_icon :add_photo_alternate %>
+                          <x-icon>add_photo_alternate</x-icon>
                         </label>
                       </div>
                       <div class="bg-surface-variant rounded-full">
                         <label for="post_remove_featured_image" class="icon-button">
-                          <%= material_icon :delete %>
+                          <x-icon>delete</x-icon>
                         </label>
                       </div>
                     </div>

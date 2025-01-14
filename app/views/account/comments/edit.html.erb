@@ -3,7 +3,7 @@
     <div class="bg-surface-container-lowest rounded-xl">
       <div class="flex items-center p-2 gap-2">
         <a href="<%= account_comment_path(@account.name, @comment) %>" class="icon-button">
-          <%= material_icon :arrow_back %>
+          <x-icon>arrow_back</x-icon>
         </a>
         <div class="flex-grow px-2 text-lg font-medium">
           Edit comment

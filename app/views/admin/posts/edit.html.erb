@@ -2,7 +2,7 @@
   <div class="card card--elevated background-surface">
     <div class="flex h-14 items-center px-2">
       <a href="<%= admin_post_path(@post) %>" class="icon-button">
-        <%= material_icon :arrow_back %>
+        <x-icon>arrow_back</x-icon>
       </a>
       <div class="flex-grow px-2 text-lg font-medium">
         <%= t 'general.edit' %> #<%= @post.id %>
