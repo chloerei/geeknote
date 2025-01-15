@@ -102,7 +102,7 @@ group :development do
 
   gem "i18n-tasks", github: "chloerei/i18n-tasks"
 
-  gem "brakeman", "~> 5.4.0"
+  gem "brakeman", "~> 7.0"
 
   gem "rubocop-rails-omakase", require: false
 end

@@ -120,7 +120,8 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
-    brakeman (5.4.1)
+    brakeman (7.0.0)
+      racc
     builder (3.3.0)
     capybara (3.40.0)
       addressable
@@ -166,7 +167,8 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashdiff (1.1.2)
-    highline (3.0.1)
+    highline (3.1.2)
+      reline
     hiredis (0.6.3)
     hotwire_combobox (0.3.1)
       rails (>= 7.0.7.2)
@@ -462,7 +464,7 @@ DEPENDENCIES
   aws-sdk-s3
   bcrypt (~> 3.1.7)
   bootsnap
-  brakeman (~> 5.4.0)
+  brakeman (~> 7.0)
   capybara (>= 2.15)
   commonmarker (~> 0.23.8)
   debug
