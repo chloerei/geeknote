@@ -25,3 +25,4 @@ namespace :build do
 end
 
 Rake::Task["assets:precompile"].enhance([ "build:all" ])
+Rake::Task["test:prepare"].enhance(["build:all"])
