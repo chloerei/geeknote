@@ -2,7 +2,7 @@ class PostRevision < ApplicationRecord
   belongs_to :post
   belongs_to :user
 
-  enum status: {
+  enum :status, {
     draft: 0,
     published: 1
   }

@@ -18,7 +18,7 @@ class Post < ApplicationRecord
     attachable.variant :large, resize_to_limit: [ 1920, 1920 ]
   end
 
-  enum status: {
+  enum :status, {
     draft: 0,
     published: 1,
     trashed: 2

@@ -1,5 +1,5 @@
 class Export < ApplicationRecord
-  enum status: {
+  enum :status, {
     pending: 0,
     completed: 1
   }

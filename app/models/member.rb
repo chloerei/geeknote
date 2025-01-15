@@ -4,13 +4,13 @@ class Member < ApplicationRecord
   belongs_to :inviter, class_name: "User", optional: true
   has_secure_token :invitation_token
 
-  enum role: {
+  enum :role, {
     owner: 0,
     admin: 1,
     member: 2
   }
 
-  enum status: {
+  enum :status, {
     pending: 0,
     active: 1
   }

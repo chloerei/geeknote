@@ -40,7 +40,7 @@ module MarkdownHelper
 
   def markdown_render(text)
     html = CommonMarker.render_html(text, :DEFAULT, [ :table, :tasklist, :strikethrough, :autolink, :tagfilter ])
-    doc = Nokogiri::HTML.fragment(html)
+    doc = Nokogiri::HTML5.fragment(html)
 
     # code highlight
     doc.css("pre code").each do |node|
