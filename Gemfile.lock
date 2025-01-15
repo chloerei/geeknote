@@ -296,7 +296,7 @@ GEM
       date
       stringio
     public_suffix (6.0.1)
-    puma (5.6.8)
+    puma (6.5.0)
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.1)
@@ -488,7 +488,7 @@ DEPENDENCIES
   postal-rails (~> 1.0)
   premailer-rails
   propshaft
-  puma (~> 5.0)
+  puma (~> 6.5.0)
   rails (~> 8.0.1)
   rails-i18n (~> 8.0.1)
   rails_cursor_pagination
