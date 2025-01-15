@@ -28,7 +28,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3.3
+          ruby-version: 3.4.1
           bundler-cache: true
       - name: Setup NPM
         uses: actions/setup-node@v3

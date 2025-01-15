@@ -9,6 +9,8 @@ gem "rails", "~> 8.0.1"
 gem "pg", "~> 1.1"
 # Use Puma as the app server
 gem "puma", "~> 5.0"
+# Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
+gem "thruster", require: false
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.7"
 # Use Redis adapter to run Action Cable in production
@@ -101,10 +103,6 @@ group :development do
   gem "i18n-tasks", github: "chloerei/i18n-tasks"
 
   gem "brakeman", "~> 5.4.0"
-
-  gem "foreman"
-
-  gem "dockerfile-rails"
 
   gem "rubocop-rails-omakase", require: false
 end

@@ -8,12 +8,15 @@ primary_region = "nrt"
 [deploy]
   strategy = "bluegreen"
 
+[env]
+  HTTP_PORT = 8080
+
 [processes]
-  web = "./bin/rails server"
+  web = "./bin/thrust ./bin/rails server"
   worker = "bundle exec sidekiq"
 
 [http_service]
-  internal_port = 3000
+  internal_port = 8080
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
@@ -31,4 +34,3 @@ primary_region = "nrt"
   method = "GET"
   timeout = "5s"
   path = "/up"
-
