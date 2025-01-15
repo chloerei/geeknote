@@ -1,4 +1,4 @@
-FROM ruby:3.3.3
+FROM ruby:3.4.1
 
 # Default value to allow debug server to serve content over GitHub Codespace's port forwarding service
 # The value is a comma-separated list of allowed domains
@@ -14,7 +14,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
       nodejs \
       npm
 
-RUN gem install bundler -v 2.4.14 && \
+RUN gem install bundler -v 2.6.2 && \
   bundle config set --local path vendor/bundle
 
 WORKDIR /rails
