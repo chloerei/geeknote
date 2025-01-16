@@ -27,6 +27,8 @@ gem "image_processing", "~> 1.2"
 
 gem "active_storage_validations"
 
+gem "solid_cache", "~> 1.0"
+
 # Job Queue
 gem "sidekiq", "~> 6.0"
 gem "hiredis"
