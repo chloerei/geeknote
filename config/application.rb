@@ -38,12 +38,6 @@ module GeekNote
     config.i18n.available_locales = [ "zh-CN" ]
     config.i18n.default_locale = "zh-CN"
 
-    config.cache_store = :redis_cache_store, {
-      url: ENV.fetch("REDIS_URL", "redis://localhost:6379/0"),
-      namespace: -> { "cache:#{I18n.locale}" },
-      expires_in: 1.day
-    }
-
     config.active_job.queue_adapter = :sidekiq
 
     config.generators do |generate|
