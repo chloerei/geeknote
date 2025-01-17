@@ -370,8 +370,6 @@ GEM
     regexp_parser (2.10.0)
     reline (0.6.0)
       io-console (~> 0.5)
-    requestjs-rails (0.0.12)
-      railties (>= 6.1.0)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
       http-cookie (>= 1.0.2, < 2.0)
@@ -500,7 +498,6 @@ DEPENDENCIES
   i18n-tasks!
   image_processing (~> 1.2)
   imgproxy-rails
-  importmap-rails
   jbuilder (~> 2.7)
   jwt
   kaminari
@@ -519,7 +516,6 @@ DEPENDENCIES
   rails-i18n (~> 8.0.1)
   rails_cursor_pagination
   recaptcha
-  requestjs-rails
   rest-client
   reverse_markdown
   rouge

@@ -33,15 +33,11 @@ gem "mission_control-jobs", github: "rails/mission_control-jobs"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-gem "importmap-rails"
-
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
-
-gem "requestjs-rails"
 
 gem "hotwire_combobox", "~> 0.3.1"
 
