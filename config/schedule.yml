@@ -1,6 +1,0 @@
-feed_import_schedule_job:
-  cron: "0 * * * *"
-  class: "FeedImportScheduleJob"
-weekly_digest_schedule_job:
-  cron: "0 12 * * 5"
-  class: "WeeklySummaryScheduleJob"

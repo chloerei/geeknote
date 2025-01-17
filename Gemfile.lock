@@ -172,7 +172,6 @@ GEM
     hashdiff (1.1.2)
     highline (3.1.2)
       reline
-    hiredis (0.6.3)
     hotwire_combobox (0.3.2)
       rails (>= 7.0.7.2)
       stimulus-rails (>= 1.2)
@@ -361,7 +360,6 @@ GEM
     rdoc (6.10.0)
       psych (>= 4.0.0)
     recaptcha (5.19.0)
-    redis (4.8.1)
     regexp_parser (2.10.0)
     reline (0.6.0)
       io-console (~> 0.5)
@@ -415,14 +413,6 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sidekiq (6.5.12)
-      connection_pool (>= 2.2.5, < 3)
-      rack (~> 2.0)
-      redis (>= 4.5.0, < 5)
-    sidekiq-cron (1.12.0)
-      fugit (~> 1.8)
-      globalid (>= 1.0.1)
-      sidekiq (>= 6)
     solid_cable (3.0.5)
       actioncable (>= 7.2)
       activejob (>= 7.2)
@@ -499,7 +489,6 @@ DEPENDENCIES
   debug
   dotenv-rails
   factory_bot_rails
-  hiredis
   hotwire_combobox (~> 0.3.1)
   i18n-tasks!
   image_processing (~> 1.2)
@@ -523,15 +512,12 @@ DEPENDENCIES
   rails-i18n (~> 8.0.1)
   rails_cursor_pagination
   recaptcha
-  redis (~> 4.0)
   requestjs-rails
   rest-client
   reverse_markdown
   rouge
   rubocop-rails-omakase
   selenium-webdriver
-  sidekiq (~> 6.0)
-  sidekiq-cron (~> 1.2)
   solid_cable (~> 3.0)
   solid_cache (~> 1.0)
   solid_queue (~> 1.1)
