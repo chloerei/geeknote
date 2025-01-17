@@ -1,4 +1,4 @@
 web: env RUBY_DEBUG_OPEN=true bin/rails server
-worker: bundle exec sidekiq
+worker: bin/jobs
 js: npm run build:js -- --watch
 css: npm run build:css -- --watch

@@ -23,6 +23,11 @@ development:
     url: <%= ENV["DATABASE_URL"] %>
     database: geeknote_development_cable
     migrations_paths: db/cable_migrate
+  queue:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+    database: geeknote_development_queue
+    migrations_paths: db/queue_migrate
 
 test:
   <<: *default
@@ -44,3 +49,8 @@ production:
     url: <%= ENV["CABLE_DATABASE_URL"] || ENV["DATABASE_URL"] %>
     database: geeknote_production_cable
     migrations_paths: db/cable_migrate
+  queue:
+    <<: *default
+    url: <%= ENV["QUEUE_DATABASE_URL"] || ENV["DATABASE_URL"] %>
+    database: geeknote_production_queue
+    migrations_paths: db/queue_migrate

@@ -29,6 +29,7 @@ gem "active_storage_validations"
 
 gem "solid_cache", "~> 1.0"
 gem "solid_cable", "~> 3.0"
+gem "solid_queue", "~> 1.1"
 
 # Job Queue
 gem "sidekiq", "~> 6.0"
