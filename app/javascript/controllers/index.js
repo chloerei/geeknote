@@ -37,5 +37,8 @@ application.register("scroll-pagination", ScrollPaginationController)
 import SnackbarController from "./snackbar_controller"
 application.register("snackbar", SnackbarController)
 
+import TagFieldController from "./tag_field_controller"
+application.register("tag-field", TagFieldController)
+
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)

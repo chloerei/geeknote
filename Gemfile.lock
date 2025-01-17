@@ -187,10 +187,6 @@ GEM
     hashdiff (1.1.2)
     highline (3.1.2)
       reline
-    hotwire_combobox (0.3.2)
-      rails (>= 7.0.7.2)
-      stimulus-rails (>= 1.2)
-      turbo-rails (>= 1.2)
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.8)
@@ -494,7 +490,6 @@ DEPENDENCIES
   debug
   dotenv-rails
   factory_bot_rails
-  hotwire_combobox (~> 0.3.1)
   i18n-tasks!
   image_processing (~> 1.2)
   imgproxy-rails

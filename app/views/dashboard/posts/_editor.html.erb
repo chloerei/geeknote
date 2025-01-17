@@ -198,7 +198,9 @@
               <%# Tags %>
               <div class="form-field" data-turbo-permanent>
                 <%= form.label :tag_list, class: "form-label" %>
-                <%= form.hidden_field :tag_list %>
+                <div data-controller="tag-field">
+                  <%= form.hidden_field :tag_list, data: { tag_field_target: "input" } %>
+                </div>
                 <div class="form-text">
                   <%= t ".tag_description" %>
                 </div>

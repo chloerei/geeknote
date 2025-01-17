@@ -20,11 +20,6 @@ Rails.application.routes.draw do
 
   resources :tags, only: [ :show ], id: /.+/, format: false, defaults: { format: :html }
 
-  namespace :tag do
-    resources :options, only: [ :index ]
-    resources :chips, only: [ :create ]
-  end
-
   namespace :suggest do
     resources :tags, only: [ :index ]
   end

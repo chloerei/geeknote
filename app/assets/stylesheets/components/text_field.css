@@ -15,7 +15,7 @@
   }
 
   .text-field__input {
-    @apply flex-grow min-w-0 border-none rounded focus:ring-0 bg-surface disabled:bg-surface-variant
+    @apply flex-grow min-w-0 border-none rounded focus:ring-0 bg-transparent disabled:bg-surface-variant
   }
 
   .text-field__suffix {

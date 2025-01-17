@@ -1,0 +1,92 @@
+.ts-wrapper {
+  display: flex;
+  position: relative;
+}
+
+.ts-control {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  outline: 1px solid rgb(var(--color-outline));
+  padding: 8px;
+  border-radius: 4px;
+
+  &:focus-within {
+    outline-width: 2px;
+    outline-color: rgb(var(--color-primary));
+  }
+
+  input {
+    flex-grow: 1;
+    height: 32px;
+    padding-left: 4px;
+    flex-shrink: 1;
+    border: none;
+    outline: none;
+    min-width: 40px;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .item {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 8px;
+    gap: 8px;
+    border: 1px solid rgb(var(--color-outline));
+    border-radius: 4px;
+  }
+
+  .remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+    margin-left: -4px;
+    margin-right: -4px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 9999px;
+    cursor: pointer;
+  }
+}
+
+.ts-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: rgb(var(--color-surface));
+  z-index: 10;
+
+  .create,
+  .option,
+  .no-results {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 16px;
+    cursor: pointer;
+  }
+
+  .create,
+  .option {
+    &:hover {
+      background-color: rgb(var(--color-surface-container));
+    }
+
+    &.active {
+      background-color: rgb(var(--color-surface-container));
+    }
+  }
+
+  .highlight {
+    background-color: rgb(var(--color-surface-container-high));
+    color: rgb(var(--color-on-surface))
+  }
+}
