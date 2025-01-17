@@ -46,7 +46,7 @@ gem "requestjs-rails"
 gem "hotwire_combobox", "~> 0.3.1"
 
 # markdown
-gem "commonmarker", "~> 0.23.8"
+gem "commonmarker", "~> 1.1.5"
 
 # Html to Markdown
 gem "reverse_markdown"
