@@ -1,6 +1,6 @@
 import { DirectUpload } from "@rails/activestorage"
 import { post } from '@rails/request.js'
-import { MarkdownMirror } from "markdown-mirror"
+import { MarkdownMirror } from "./markdown-mirror"
 
 class MarkdownEditor {
   static acceptFileTypes = [
