@@ -93,6 +93,7 @@ Rails.application.routes.draw do
     end
 
     mount Sidekiq::Web => "/sidekiq", constraints: AdminConstraint.new
+    mount MissionControl::Jobs::Engine, at: "/jobs"
   end
 
   namespace :sso do
