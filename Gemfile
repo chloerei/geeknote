@@ -39,8 +39,6 @@ gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
-gem "hotwire_combobox", "~> 0.3.1"
-
 # markdown
 gem "commonmarker", "~> 0.23.8"
 
