@@ -1,0 +1,7 @@
+production:
+  feed_import_schedule_job:
+    class: FeedImportScheduleJob
+    schedule: "0 * * * *"
+  weekly_digest_schedule_job:
+    class: WeeklySummaryScheduleJob
+    schedule: "0 12 * * 5"

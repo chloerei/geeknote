@@ -13,8 +13,6 @@ gem "puma", "~> 6.5.0"
 gem "thruster", require: false
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.7"
-# Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.0"
 
 # Use Active Model has_secure_password
 gem "bcrypt", "~> 3.1.7"
@@ -29,11 +27,9 @@ gem "active_storage_validations"
 
 gem "solid_cache", "~> 1.0"
 gem "solid_cable", "~> 3.0"
+gem "solid_queue", "~> 1.1"
+gem "mission_control-jobs", "~> 1.0"
 
-# Job Queue
-gem "sidekiq", "~> 6.0"
-gem "hiredis"
-gem "sidekiq-cron", "~> 1.2"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 

@@ -1,14 +1,3 @@
-require "sidekiq/web"
-require "sidekiq/cron/web"
-
-class AdminConstraint
-  def matches?(request)
-    return false unless request.cookies["auth_token"]
-    user = User.find_by auth_token: request.cookies["auth_token"]
-    user && user.admin?
-  end
-end
-
 Rails.application.routes.draw do
   root to: "home#index"
   get "following", to: "home#following", as: :following
@@ -92,7 +81,7 @@ Rails.application.routes.draw do
       end
     end
 
-    mount Sidekiq::Web => "/sidekiq", constraints: AdminConstraint.new
+    mount MissionControl::Jobs::Engine, at: "/jobs"
   end
 
   namespace :sso do
