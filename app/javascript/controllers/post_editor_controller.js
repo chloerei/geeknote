@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import { post } from '@rails/request.js'
-import { MarkdownEditor } from "lib/markdown-editor"
+import { MarkdownEditor } from "../lib/markdown-editor"
 
 // Connects to data-controller="post-editor"
 export default class extends Controller {

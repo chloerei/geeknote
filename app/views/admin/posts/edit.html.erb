@@ -23,8 +23,8 @@
 
         <div class="form-field">
           <%= form.label :tag_list, class: "form-label" %>
-          <div class="combobox">
-            <%= form.combobox :tag_list, tag_options_path, multiselect_chip_src: tag_chips_path, free_text: true %>
+          <div data-controller="tag-field">
+            <%= form.hidden_field :tag_list, data: { tag_field_target: "input" } %>
           </div>
         </div>
 

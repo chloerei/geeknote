@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import SnackbarController from "controllers/snackbar_controller"
+import SnackbarController from "./snackbar_controller"
 
 // Connects to data-controller="copy-link"
 export default class extends Controller {

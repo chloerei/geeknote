@@ -3,17 +3,23 @@
   "private": true,
   "dependencies": {
     "@codemirror/lang-markdown": "^6.2.5",
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.12",
     "@material-symbols/font-400": "^0.27.2",
+    "@rails/activestorage": "^8.0.100",
+    "@rails/request.js": "^0.0.11",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.13",
     "codemirror": "^6.0.1",
     "esbuild": "^0.24.2",
+    "local-time": "^3.0.2",
     "tailwind-material-colors": "^3.0.2",
-    "tailwindcss": "^3.4.4"
+    "tailwindcss": "^3.4.4",
+    "tom-select": "^2.4.1"
   },
   "scripts": {
-    "build:js": "esbuild app/assets/javascripts/*.* --bundle --format=esm --outdir=app/assets/builds",
+    "build:js": "esbuild app/javascript/*.* --bundle --format=esm --outdir=app/assets/builds",
     "build:css": "tailwindcss -i app/assets/stylesheets/application.tailwind.css -o app/assets/builds/tailwind.css",
     "build:icon": "cp -r node_modules/@material-symbols/font-400/*.woff2 app/assets/builds"
   },

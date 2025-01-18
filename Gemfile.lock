@@ -187,10 +187,6 @@ GEM
     hashdiff (1.1.2)
     highline (3.1.2)
       reline
-    hotwire_combobox (0.3.2)
-      rails (>= 7.0.7.2)
-      stimulus-rails (>= 1.2)
-      turbo-rails (>= 1.2)
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.8)
@@ -370,8 +366,6 @@ GEM
     regexp_parser (2.10.0)
     reline (0.6.0)
       io-console (~> 0.5)
-    requestjs-rails (0.0.12)
-      railties (>= 6.1.0)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
       http-cookie (>= 1.0.2, < 2.0)
@@ -496,11 +490,9 @@ DEPENDENCIES
   debug
   dotenv-rails
   factory_bot_rails
-  hotwire_combobox (~> 0.3.1)
   i18n-tasks!
   image_processing (~> 1.2)
   imgproxy-rails
-  importmap-rails
   jbuilder (~> 2.7)
   jwt
   kaminari
@@ -519,7 +511,6 @@ DEPENDENCIES
   rails-i18n (~> 8.0.1)
   rails_cursor_pagination
   recaptcha
-  requestjs-rails
   rest-client
   reverse_markdown
   rouge
