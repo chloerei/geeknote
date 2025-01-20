@@ -1,12 +1,14 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "tailwindcss" source(none);
 
-@import "codemirror.css";
-@import "highlight.css";
-@import "icon.css";
-@import "tom_select.css";
-@import "components/all.css";
+@source "../stylesheets";
+@source "../../javascripts";
+@source "../../views";
+
+@import "./codemirror.css";
+@import "./highlight.css";
+@import "./icon.css";
+@import "./tom_select.css";
+/* @import "./components/all.css"; */
 
 @layer base {
 }
@@ -15,13 +17,10 @@
 }
 
 @layer utilities {
-  .icon svg {
-    @apply w-full h-full fill-current;
-  }
-
   .search-result {
     em {
-      @apply font-bold text-primary-container;
+      font-weight: 500;
+      color: var(--color-primary);
     }
   }
 
