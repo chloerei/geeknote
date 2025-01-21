@@ -1,6 +1,6 @@
 @layer components {
   .primary-tab {
-    @apply flex-grow flex justify-center h-12 px-4 cursor-pointer select-none hover:interactive-bg-surface text-sm font-medium;
+    @apply flex-grow flex justify-center h-12 px-4 cursor-pointer select-none interactive text-sm font-medium;
 
     svg {
       @apply w-6 h-6 fill-current;

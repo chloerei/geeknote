@@ -1,24 +1,24 @@
-@import "filled_button.css";
-@import "outlined_button.css";
-@import "text_button.css";
-@import "floating_action_button";
-@import "icon_button.css";
+@import "./filled_button.css";
+@import "./outlined_button.css";
+@import "./text_button.css";
+@import "./floating_action_button";
+@import "./icon_button.css";
 
-@import "navigation_bar.css";
-@import "navigation_rail.css";
+@import "./navigation_bar.css";
+@import "./navigation_rail.css";
 
-@import "tab.css";
-@import "primary_tab.css";
-@import "secondary_tab.css";
+@import "./tab.css";
+@import "./primary_tab.css";
+@import "./secondary_tab.css";
 
-@import "dialog.css";
-@import "card.css";
-@import "menu.css";
-@import "snackbar.css";
+@import "./dialog.css";
+@import "./card.css";
+@import "./menu.css";
+@import "./snackbar.css";
 
-@import "checkbox.css";
-@import "text_field.css";
+@import "./checkbox.css";
+@import "./text_field.css";
 
-@import "form";
-@import "data_table";
-@import "data_list";
+@import "./form";
+@import "./data_table";
+@import "./data_list";

@@ -1,6 +1,6 @@
 @layer components {
   .icon-button {
-    @apply inline-flex items-center justify-center align-middle h-10 w-10 rounded-full select-none text-on-surface-variant cursor-pointer hover:interactive-bg-surface-variant disabled:opacity-50 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center align-middle h-10 w-10 rounded-full select-none text-on-surface-variant cursor-pointer interactive disabled:opacity-50 disabled:pointer-events-none;
 
     svg {
       @apply w-6 h-6 fill-current;

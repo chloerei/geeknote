@@ -9,7 +9,7 @@
 @import "./highlight.css";
 @import "./icon.css";
 @import "./tom_select.css";
-/* @import "./components/all.css"; */
+@import "./components/all.css";
 
 @theme {
 }
@@ -31,5 +31,28 @@
     iframe {
       @apply w-full aspect-video;
     }
+  }
+}
+
+@utility interactive {
+  position: relative;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: currentColor;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:active::before {
+    opacity: 0.1;
   }
 }

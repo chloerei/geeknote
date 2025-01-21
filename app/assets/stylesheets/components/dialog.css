@@ -18,7 +18,7 @@
   }
 
   .dialog::backdrop {
-    @apply bg-black/40 opacity-0 transition-all;
+    @apply bg-scrim/40 opacity-0 transition-all;
 
     transition-behavior: allow-discrete;
   }
