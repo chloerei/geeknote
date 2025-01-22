@@ -29,7 +29,8 @@
 
   .prose {
     iframe {
-      @apply w-full aspect-video;
+      width: 100%;
+      aspect-ratio: 16 / 9;
     }
   }
 }
@@ -43,6 +44,7 @@
     position: absolute;
     inset: 0;
     background-color: currentColor;
+    border-radius: inherit;
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.2s;
