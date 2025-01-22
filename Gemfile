@@ -87,6 +87,8 @@ group :development, :test do
   gem "factory_bot_rails"
 
   gem "dotenv-rails"
+
+  gem "hotwire-spark"
 end
 
 group :development do
