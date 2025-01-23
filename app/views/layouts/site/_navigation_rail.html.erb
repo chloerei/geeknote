@@ -10,7 +10,7 @@
   <% end %>
 
   <div class="flex-grow flex flex-col gap-3 justify-start">
-    <a href="/" class="navigation-rail__item <%= "navigation-rail__item--active" if request.path.in?(["/", "following", "newest"]) %>">
+    <a href="/" class="navigation-rail__item <%= "navigation-rail__item--active" if request.path.in?(["/", "/following", "/newest"]) %>">
       <div class="navigation-rail__item__icon">
         <x-icon>home</x-icon>
       </div>

@@ -4,9 +4,18 @@
   </div>
 
   <div class="flex items-center gap-2 mt-6">
-    <%= render "components/tab", icon: :trending_up, label: t("general.popular"), url: root_path, active: current_page?(root_path) %>
-    <%= render "components/tab", icon: :post, label: t("general.following"), url: following_path, active: current_page?(following_path) %>
-    <%= render "components/tab", icon: :newspaper, label: t("general.newest"), url: newest_path, active: current_page?(newest_path) %>
+    <a href="<%= root_path %>" class="tab tab--primary <%= "tab--active" if current_page?(root_path) %>">
+      <x-icon>trending_up</x-icon>
+      <%= t "general.popular" %>
+    </a>
+    <a href="<%= following_path %>" class="tab tab--primary <%= "tab--active" if current_page?(following_path) %>">
+      <x-icon>inbox</x-icon>
+      <%= t "general.following" %>
+    </a>
+    <a href="<%= newest_path %>" class="tab tab--primary <%= "tab--active" if current_page?(newest_path) %>">
+      <x-icon>bolt</x-icon>
+      <%= t "general.newest" %>
+    </a>
   </div>
 
   <div class="flex gap-6 mt-6">
