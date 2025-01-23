@@ -8,11 +8,11 @@
     "@material-symbols/font-400": "^0.27.2",
     "@rails/activestorage": "^8.0.100",
     "@rails/request.js": "^0.0.11",
-    "@tailwindcss/cli": "^4.0.0-beta.9",
+    "@tailwindcss/cli": "^4.0.0",
     "codemirror": "^6.0.1",
     "esbuild": "^0.24.2",
     "local-time": "^3.0.2",
-    "tailwindcss": "^4.0.0-beta.9",
+    "tailwindcss": "^4.0.0",
     "tom-select": "^2.4.1"
   },
   "scripts": {
