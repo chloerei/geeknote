@@ -1,79 +1,45 @@
-<article id="<%= dom_id(post) %>" class="p-4 mt-4 first:mt-0 relative card interactive">
-  <div class="flex flex-col gap-2">
-    <div class="flex gap-4">
-      <div class="flex-shrink-0">
-        <img src="<%= avatar_url(post.user) %>" alt="avatar" class="w-10 h-10 rounded-full">
-      </div>
-      <div class="flex-grow">
-        <div class="text-sm">
-          <span class="font-medium"><%= post.user.name %></span>
-          <% if post.account != post.user.account %>
-            <span class="text-on-surface-variant">in</span>
-            <span class="font-medium"><%= post.account.owner.name %></span>
-          <% end %>
-        </div>
-        <div class="text-sm text-on-surface-variant">
-          <%= format_time post.published_at %>
-        </div>
-      </div>
+<section id="<%= dom_id(post) %>" class="p-4 mt-4 first:mt-0 relative card interactive">
+  <div class="flex gap-2">
+    <div class="flex-shrink-0">
+      <img src="<%= avatar_url(post.user) %>" alt="avatar" class="size-6 rounded-full">
     </div>
-
-    <div class="flex gap-4">
-      <div class="flex-grow min-w-0">
-        <div class="line-clamp-3">
-          <a href="<%= account_post_path(post.account.name, post) %>" class="text-lg font-medium hover:opacity-80 after:absolute after:inset-0">
-            <%= post.title %>
-          </a>
-          <div class="text-on-surface-variant">
-            <%= markdown_summary post.content %>
-          </div>
-        </div>
-      </div>
-
-      <% if post.featured_image.attached? %>
-        <div class="flex-shrink-0">
-          <img src="<%= polymorphic_url(post.featured_image.variant(:large)) %>" alt="Featured image" class="rounded-lg w-40 aspect-video object-cover">
-        </div>
+    <div class="flex-grow">
+      <span class="font-medium"><%= post.user.name %></span>
+      <% if post.account != post.user.account %>
+        <span class="text-on-surface-variant">in</span>
+        <span class="font-medium"><%= post.account.owner.name %></span>
       <% end %>
     </div>
   </div>
 
-  <div class="flex justify-between mt-4">
-    <div class="flex items-center h-8 px-3 gap-2 text-sm interactive-bg-surface-container rounded-full">
-      <div class="inline-flex items-center gap-1">
-        <x-icon class="text-base">favorite</x-icon>
-        <% if post.likes_count > 0 %>
-          <div class="tabular-nums">
-            <%= post.likes_count %>
-          </div>
-        <% end %>
+  <div class="flex gap-4 mt-2">
+    <div class="grow">
+      <div class="line-clamp-3">
+        <h3 class="text-xl font-medium">
+          <a href="<%= account_post_path(post.account.name, post) %>" class="after:absolute after:inset-0">
+            <%= post.title %>
+          </a>
+        </h3>
+
+        <div class="mt-2 text-sm text-on-surface-variant">
+          <%= markdown_summary post.content %>
+        </div>
+
       </div>
-      <div class="inline-flex items-center gap-1">
-        <x-icon class="text-base">comment</x-icon>
-        <% if post.comments_count > 0 %>
-          <div class="tabular-nums">
-            <%= post.comments_count %>
-          </div>
-        <% end %>
-      </div>
-      <div class="inline-flex items-center gap-1">
-        <x-icon class="text-base">bookmark</x-icon>
-        <% if post.bookmarks_count > 0 %>
-          <div class="tabular-nums">
-            <%= post.bookmarks_count %>
-          </div>
-        <% end %>
+
+      <div class="text-sm text-on-surface-variant mt-2">
+        <span><%= format_time post.published_at %></span>
+        &centerdot;
+        <span><%= post.likes_count %> likes</span>
+        &centerdot;
+        <span><%= post.comments_count %> comments</span>
       </div>
     </div>
 
-    <% if post.tags.any? %>
-      <div class="hidden md:flex gap-2 relative">
-        <% post.tags.each do |tag| %>
-          <a href="#" class="inline-flex items-center h-8 px-3 text-sm font-medium interactive-bg-surface-container rounded-full">
-            <%= tag.name %>
-          </a>
-        <% end %>
+    <% if post.featured_image.attached? %>
+      <div class="flex-shrink-0">
+        <img src="<%= polymorphic_url(post.featured_image.variant(:large)) %>" alt="Featured image" class="rounded-lg w-40 aspect-video object-cover">
       </div>
     <% end %>
   </div>
-</article>
+</section>
