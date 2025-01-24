@@ -54,6 +54,12 @@
 </div>
 
 <div class="flex gap-2 mt-6">
-  <%= render "components/tab", icon: "article", label: t("general.posts"), url: dashboard_root_path(@account.name), active: current_page?(dashboard_root_path(@account.name)) %>
-  <%= render "components/tab", icon: "settings", label: t("general.settings"), url: dashboard_settings_profile_path, active: request.path.include?("/settings/") %>
+  <a href="<%= dashboard_root_path(@account.name) %>" class="tab tab--primary <%= "tab--active" if current_page?(dashboard_root_path(@account.name)) %>">
+    <x-icon>article</x-icon>
+    <%= t "general.posts" %>
+  </a>
+  <a href="<%= dashboard_settings_profile_path(@account.name) %>" class="tab tab--primary <%= "tab--active" if request.path.include?("/settings/") %>">
+    <x-icon>settings</x-icon>
+    <%= t "general.settings" %>
+  </a>
 </div>

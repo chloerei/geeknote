@@ -5,7 +5,7 @@
 
   <div class="mt-6">
     <%= render "components/scroll_pagination", pagy: @pagy do %>
-      <%= render partial: "home/post", collection: @posts %>
+      <%= render partial: "account/posts/post", collection: @posts %>
     <% end %>
   </div>
 </div>
