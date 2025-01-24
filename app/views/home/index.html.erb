@@ -18,14 +18,14 @@
     </a>
   </div>
 
-  <div class="flex gap-6 mt-6">
-    <div class="flex-grow min-w-0">
+  <div class="layout-main-sidebar mt-6">
+    <div class="">
       <%= render "components/scroll_pagination", pagy: @pagy do %>
-        <%= render partial: "post", collection: @posts, cached: -> post { [ post.account, post.user, post ] } %>
+        <%= render partial: "account/posts/post", collection: @posts, cached: -> post { [ post.account, post.user, post ] } %>
       <% end %>
     </div>
 
-    <div class="hidden md:block flex-shrink-0 w-80">
+    <div class="hidden md:block">
       <%= render "sidebar" %>
     </div>
   </div>

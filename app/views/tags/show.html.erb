@@ -1,26 +1,22 @@
-<div class="container padding-3">
-  <div class="layout-primary">
+<div class="">
+  <div class="flex items-center gap-2">
+    <a href="/" class="icon-button">
+      <x-icon>arrow_back</x-icon>
+    </a>
+    <div class="text-lg font-medium">
+      <%= @tag.name %>
+    </div>
+  </div>
+
+  <div class="layout-main-sidebar mt-6">
     <div class="">
-      <div class="top-app-bar">
-        <div class="top-app-bar__title">
-          #<%= @tag.name %>
-        </div>
-      </div>
+      <%= render "components/scroll_pagination", pagy: @pagy do %>
+        <%= render partial: "account/posts/post", collection: @posts, cached: -> post { [ post.account, post.user, post ] } %>
+      <% end %>
+    </div>
 
-      <div id="posts" class="display-flex flex-direction-column gap-3" data-controller="pagination">
-        <%= render partial: 'account/posts/post', collection: @paginator[:page].pluck(:data), cached: -> post { [post.account, post.user, post] } %>
-
-        <% if @paginator[:page_info][:has_next_page] %>
-          <a href="<%= url_for(after: @paginator[:page_info][:end_cursor]) %>" class="button button--text width-100 justify-content-center" data-pagination-target="nextPageLink">
-            <%= t "general.load_more" %>
-          </a>
-        <% else %>
-          <div class="body-medium text-muted text-align-center padding-x-3 padding-y-2">
-            <%= t "general.no_more_content" %>
-          </div>
-        <% end %>
-      </div>
-
+    <div class="hidden md:block">
+      <%= render "home/sidebar" %>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 <%# locals: (account:) %>
 
-<div class="flex gap-4 p-4">
+<div class="flex gap-4 p-4 relative">
   <div class="flex-shrink-0">
       <img src="<%= avatar_url(account.owner) %>" alt="avatar" class="w-10 h-10 rounded-full">
   </div>
@@ -8,7 +8,7 @@
     <div class="flex justify-between">
       <div class="flex-grow">
         <div class="text-sm font-medium">
-          <a href="<%= account_root_path(account.name) %>">
+          <a href="<%= account_root_path(account.name) %>" class="hover:underline after:absolute after:inset-0">
             <%= account.display_name %>
           </a>
         </div>

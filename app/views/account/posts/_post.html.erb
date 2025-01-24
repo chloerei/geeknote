@@ -1,60 +1,45 @@
-<div class="card card--elevated background-surface post-card position-relative display-flex flex-direction-column gap-3 padding-3">
-  <div class="display-flex flex-wrap gap-1 align-items-center">
-    <div class="display-flex align-items-center gap-2">
-      <div class="avatar avatar--small">
-        <%= avatar_image_tag post.user.avatar %>
-      </div>
-      <b><%= post.user.name %></b>
+<section id="<%= dom_id(post) %>" class="p-4 mt-4 first:mt-0 relative card interactive">
+  <div class="flex gap-2">
+    <div class="flex-shrink-0">
+      <img src="<%= avatar_url(post.user) %>" alt="avatar" class="size-6 rounded-full">
     </div>
-    <% if post.account.organization? %>
-      <span class="text-muted"><%= t 'general.in' %></span>
-      <%= post.account.owner.name %>
-    <% end %>
-    <span class="text-muted">&centerdot;</span>
-    <span class="text-muted"><%= format_time post.published_at %></span>
+    <div class="flex-grow">
+      <span class="font-medium"><%= post.user.name %></span>
+      <% if post.account != post.user.account %>
+        <span class="text-on-surface-variant">in</span>
+        <span class="font-medium"><%= post.account.owner.name %></span>
+      <% end %>
+    </div>
   </div>
 
-  <div class="display-flex gap-3">
-    <div class="flex-grow-1 text-break-word min-width-0">
-      <h3 class="title-large margin-top-0 margin-bottom-3">
-        <a href="<%= account_post_path(post.account, post) %>" class="link-expended link-title">
-          <%= post.title.presence || t('general.untitled') %>
-        </a>
-      </h3>
+  <div class="flex gap-4 mt-2">
+    <div class="grow">
+      <div class="line-clamp-3">
+        <h3 class="text-xl font-medium">
+          <a href="<%= account_post_path(post.account.name, post) %>" class="after:absolute after:inset-0">
+            <%= post.title %>
+          </a>
+        </h3>
 
-      <div class="body-medium text-muted">
-        <%= post_summary post %>
+        <div class="mt-2 text-sm text-on-surface-variant">
+          <%= markdown_summary post.content %>
+        </div>
+
       </div>
 
+      <div class="text-sm text-on-surface-variant mt-2">
+        <span><%= format_time post.published_at %></span>
+        &centerdot;
+        <span><%= post.likes_count %> likes</span>
+        &centerdot;
+        <span><%= post.comments_count %> comments</span>
+      </div>
     </div>
 
     <% if post.featured_image.attached? %>
-      <div class="flex-shrink-0 display-none display-block@tablet">
-        <div class="post-card__feature-image">
-          <%= image_tag post.featured_image.variant(:large) %>
-        </div>
+      <div class="flex-shrink-0">
+        <img src="<%= polymorphic_url(post.featured_image.variant(:large)) %>" alt="Featured image" class="rounded-lg w-40 aspect-video object-cover">
       </div>
     <% end %>
   </div>
-
-  <div class="display-flex flex-wrap gap-3">
-    <% if post.tags.any? %>
-      <div class="display-flex flex-wrap gap-2">
-        <% post.tags.each do |tag| %>
-          <a href="<%= tag_path(id: tag.name) %>" class="chip">
-            <%= tag.name %>
-          </a>
-        <% end %>
-      </div>
-    <% end %>
-
-    <div class="display-flex align-items-center gap-1">
-      <span class="material-icons material-icons--inline">favorite</span>
-      <span><%= post.likes_count %></span>
-    </div>
-    <div class="display-flex align-items-center gap-1">
-      <span class="material-icons material-icons--inline">comment</span>
-      <span><%= post.comments_count %></span>
-    </div>
-  </div>
-</div>
+</section>
