@@ -11,7 +11,7 @@
     </div>
     <div class="flex-shrink-0 flex items-center gap-2">
       <% if account.user? && account.owner == Current.user %>
-        <a href="<%= dashboard_settings_profile_path %>" class="outlined-button">
+        <a href="<%= dashboard_settings_profile_path %>" class="button button--outlined">
           <%= t "general.edit_profile" %>
         </a>
       <% else %>

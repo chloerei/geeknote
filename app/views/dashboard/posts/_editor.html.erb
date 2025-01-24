@@ -19,10 +19,10 @@
     </div>
 
     <% if @post.new_record? %>
-      <button type="submit" class="text-button" form="post-form" data-post-editor-target="submitButton" disabled>
+      <button type="submit" class="button button--text" form="post-form" data-post-editor-target="submitButton" disabled>
         <%= t "general.save" %>
       </button>
-      <button type="button" class="text-button" disabled>
+      <button type="button" class="button button--text" disabled>
         <%= t "general.publish" %>
       </button>
       <label for="settings" class="icon-button">
@@ -33,16 +33,16 @@
       </button>
     <% else %>
       <% if @post.draft? %>
-        <button type="submit" class="text-button" form="post-form" data-post-editor-target="submitButton" disabled>
+        <button type="submit" class="button button--text" form="post-form" data-post-editor-target="submitButton" disabled>
           <%= t "general.save" %>
         </button>
         <%= form_with model: @post, url: dashboard_post_publish_path(@account.name, @post), method: :patch do %>
-          <button type="submit" class="text-button" data-post-editor-target="publishButton">
+          <button type="submit" class="button button--text" data-post-editor-target="publishButton">
             <%= t "general.publish" %>
           </button>
         <% end %>
       <% elsif @post.published? %>
-        <button type="submit" class="text-button" form="post-form" data-post-editor-target="submitButton" disabled>
+        <button type="submit" class="button button--text" form="post-form" data-post-editor-target="submitButton" disabled>
           <%= t "general.update" %>
         </button>
         <a href="<%= account_post_path(@post.account.name, @post) %>" class="icon-button">
@@ -50,7 +50,7 @@
         </a>
       <% elsif @post.trashed? %>
         <%= form_with model: @post, url: dashboard_post_trash_path(@account.name, @post), method: :delete do %>
-          <button type="submit" class="text-button">
+          <button type="submit" class="button button--text">
             <%= t "general.restore" %>
           </button>
         <% end %>
@@ -116,10 +116,10 @@
         <div class="sticky flex justify-center px-4 mt-8 bottom-4 pb-safe">
           <div class="flex gap-1 p-1 bg-surface-container rounded-full shadow-md">
             <div class="flex items-center">
-              <button type="button" class="text-button group-[.previewing]/container:text-on-surface-variant" data-action="post-editor#write">
+              <button type="button" class="button button--text group-[.previewing]/container:text-on-surface-variant" data-action="post-editor#write">
                 <%= t "general.write" %>
               </button>
-              <button type="button" class="text-button text-on-surface-variant group-[.previewing]/container:text-primary" data-action="post-editor#preview">
+              <button type="button" class="button button--text text-on-surface-variant group-[.previewing]/container:text-primary" data-action="post-editor#preview">
                 <%= t "general.preview" %>
               </button>
             </div>

@@ -2,12 +2,12 @@
   <div class="text-lg font-medium flex-grow">
     <%= t "general.dashboard" %>
   </div>
-  <a href="<%= account_root_path(@account.name) %>" class="text-button">
+  <a href="<%= account_root_path(@account.name) %>" class="button button--text">
     <x-icon>north_east</x-icon>
     <span><%= t "general.view" %></span>
   </a>
   <div class="menu">
-    <label tabindex="0" class="text-button">
+    <label tabindex="0" class="button button--text">
       <img src="<%= avatar_url(@account.owner) %>" alt="avatar" class="w-6 h-6 rounded-full">
       <div>
         <%= @account.name %>

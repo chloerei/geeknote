@@ -1,8 +1,6 @@
-@import "./filled_button.css";
-@import "./outlined_button.css";
-@import "./text_button.css";
-@import "./fab";
+@import "./button.css";
 @import "./icon_button.css";
+@import "./fab";
 
 @import "./navigation_bar.css";
 @import "./navigation_rail.css";

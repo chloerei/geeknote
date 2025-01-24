@@ -8,7 +8,7 @@
   <div id="scroll-pagination-info" class="p-4" data-scroll-pagination-target="next">
     <% if pagy.next %>
       <div class="text-center">
-        <a href="<%= pagy_url_for(pagy, pagy.next) %>" class="text-button" data-scroll-pagination-target="nextLink">
+        <a href="<%= pagy_url_for(pagy, pagy.next) %>" class="button button--text" data-scroll-pagination-target="nextLink">
           <%= t "general.load_more" %>
         </a>
       </div>

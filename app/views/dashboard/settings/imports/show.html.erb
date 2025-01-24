@@ -23,7 +23,7 @@
             <%= render "components/checkbox_field", form: form, name: :feed_mark_canonical, description: t('.feed_mark_canonical_description') %>
           </div>
           <div class="form-field flex gap-2 items-center">
-            <button type="submit" class="filled-button">
+            <button type="submit" class="button button--filled">
               <%= t '.save_and_fetch' %>
             </button>
             <% if @account.feed_url.present? && @account.feed_fetched_at %>
