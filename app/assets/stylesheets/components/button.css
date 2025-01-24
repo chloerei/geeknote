@@ -10,8 +10,15 @@
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
+    user-select: none;
 
     @apply interactive;
+
+    x-icon {
+      width: 18px;
+      height: 18px;
+      font-size: 18px;
+    }
   }
 
   .button--filled {

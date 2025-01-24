@@ -103,7 +103,6 @@
 }
 
 @theme {
-  --color-*: initial;
   --color-primary: var(--color-primary);
   --color-surface-tint: var(--color-surface-tint);
   --color-on-primary: var(--color-on-primary);
