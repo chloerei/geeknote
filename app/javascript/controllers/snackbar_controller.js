@@ -25,7 +25,7 @@ export default class extends Controller {
   }
 
   remove() {
-    this.element.classList.add('animate-slide-out-down')
     this.element.addEventListener('animationend', () => this.element.remove())
+    this.element.classList.add('snackbar--removing')
   }
 }
