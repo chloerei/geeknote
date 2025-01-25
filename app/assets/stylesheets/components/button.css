@@ -19,6 +19,11 @@
       height: 18px;
       font-size: 18px;
     }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 
   .button--filled {
@@ -40,11 +45,12 @@
   }
 
   .button--outlined {
-    border: 1px solid var(--color-outline);
-    padding: 0 15px;
+    outline: 1px solid var(--color-outline);
+    outline-offset: -1px;
   }
 
   .button--text {
+    color: var(--color-primary);
     padding: 0 12px;
   }
 }
