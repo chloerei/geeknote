@@ -8,13 +8,15 @@
   flex-wrap: wrap;
   gap: 8px;
   width: 100%;
-  outline: 1px solid rgb(var(--color-outline));
+  outline: 1px solid var(--color-outline);
+  outline-offset: -1px;
   padding: 8px;
   border-radius: 4px;
 
   &:focus-within {
     outline-width: 2px;
-    outline-color: rgb(var(--color-primary));
+    outline-color: var(--color-primary);
+    outline-offset: -2px;
   }
 
   input {
@@ -37,7 +39,7 @@
     height: 32px;
     padding: 0 8px;
     gap: 8px;
-    border: 1px solid rgb(var(--color-outline));
+    border: 1px solid var(--color-outline);
     border-radius: 4px;
   }
 
@@ -61,32 +63,29 @@
   top: 100%;
   left: 0;
   right: 0;
-  background-color: rgb(var(--color-surface));
+  background-color: var(--color-surface);
   z-index: 10;
 
   .create,
   .option,
   .no-results {
-    display: flex;
-    align-items: center;
-    height: 40px;
-    padding: 0 16px;
+    padding: 8px 16px;
     cursor: pointer;
   }
 
   .create,
   .option {
     &:hover {
-      background-color: rgb(var(--color-surface-container));
+      background-color: var(--color-surface-container);
     }
 
     &.active {
-      background-color: rgb(var(--color-surface-container));
+      background-color: var(--color-surface-container);
     }
   }
 
   .highlight {
-    background-color: rgb(var(--color-surface-container-high));
-    color: rgb(var(--color-on-surface))
+    background-color: var(--color-surface-container-high);
+    color: var(--color-on-surface);
   }
 }

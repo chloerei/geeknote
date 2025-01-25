@@ -1,32 +1,69 @@
-<div class="navigation-rail hidden md:flex">
+<div class="navigation-rail hidden md:flex bg-surface-container">
+  <a href="/" class="p-2">
+    <img src="<%= asset_path "icon.svg" %>" alt="logo" class="size-10">
+  </a>
+
   <% if Current.user %>
-    <a href="<%= new_dashboard_post_path(Current.user.account.name) %>" class="floating-action-button mb-2">
+    <a href="<%= new_dashboard_post_path(Current.user.account.name) %>" class="fab mb-2">
       <x-icon>edit_square</x-icon>
     </a>
   <% end %>
 
-  <%= render "components/navigation_rail_item", url: root_path, icon: :home, label: t("general.home"), active: request.path.in?([root_path]) %>
+  <div class="flex-grow flex flex-col gap-3 justify-start">
+    <a href="/" class="navigation-rail__item <%= "navigation-rail__item--active" if request.path.in?(["/", "/following", "/newest"]) %>">
+      <div class="navigation-rail__item__icon">
+        <x-icon>home</x-icon>
+      </div>
+      <div class="navigation-rail__item__label">
+        <%= t "general.home" %>
+      </div>
+    </a>
+
+    <% if Current.user %>
+      <a href="<%= notifications_path %>" class="navigation-rail__item <%= "navigation-rail__item--active" if current_page?(notifications_path) %>">
+        <div class="navigation-rail__item__icon">
+          <x-icon>notifications</x-icon>
+        </div>
+        <div class="navigation-rail__item__label">
+          <%= t "general.notifications" %>
+        </div>
+      </a>
+
+      <a href="<%= bookmarks_path %>" class="navigation-rail__item <%= "navigation-rail__item--active" if current_page?(bookmarks_path) %>">
+        <div class="navigation-rail__item__icon">
+          <x-icon>bookmarks</x-icon>
+        </div>
+        <div class="navigation-rail__item__label">
+          <%= t "general.bookmarks" %>
+        </div>
+      </a>
+
+      <a href="<%= dashboard_root_path(Current.user.account.name) %>" class="navigation-rail__item <%= "navigation-rail__item--active" if request.path.start_with?("/dashboard") %>">
+        <div class="navigation-rail__item__icon">
+          <x-icon>post</x-icon>
+        </div>
+        <div class="navigation-rail__item__label">
+          <%= t "general.posts" %>
+        </div>
+      </a>
+    <% else %>
+      <a href="<%= sign_in_path %>" class="navigation-rail__item  <%= "navigation-rail__item--active" if current_page?(sign_in_path) %>">
+        <div class="navigation-rail__item__icon">
+          <x-icon>login</x-icon>
+        </div>
+        <div class="navigation-rail__item__label">
+          <%= t "general.sign_in" %>
+        </div>
+      </a>
+    <% end %>
+  </div>
 
   <% if Current.user %>
-    <%= render "components/navigation_rail_item", url: notifications_path, icon: :notifications, label: t("general.notifications"), active: current_page?(notifications_path), badge: Current.user.notifications.unread.count %>
-
-    <%= render "components/navigation_rail_item", url: bookmarks_path, icon: :bookmarks, label: t("general.bookmarks"), active: current_page?(bookmarks_path) %>
-
-    <%= render "components/navigation_rail_item", url: dashboard_root_path(Current.user.account.name), icon: :post, label: t("general.posts"), active: request.path.start_with?("/dashboard") %>
-  <% end %>
-
-  <div class="flex-grow"></div>
-
-  <div class="menu flex-shrink-0">
-    <label tabindex="0" class="icon-button">
-      <% if Current.user %>
+    <div class="menu flex-shrink-0">
+      <label tabindex="0" class="icon-button">
         <img src="<%= avatar_url(Current.user) %>" class="h-8 w-8 rounded-full">
-      <% else %>
-        <img src="<%= asset_path("avatar.png") %>" class="h-8 w-8 rounded-full">
-      <% end %>
-    </label>
-    <div tabindex="0" class="menu__content top-auto left-auto bottom-full right-0 origin-bottom-right md:left-full md:bottom-0 md:origin-bottom-left">
-      <% if Current.user %>
+      </label>
+      <div tabindex="0" class="menu__content top-auto left-auto bottom-full right-0 origin-bottom-right md:left-full md:bottom-0 md:origin-bottom-left">
         <a href="<%= account_root_path(Current.user.account.name) %>" class="menu__item">
           <x-icon>account_circle</x-icon>
           <span><%= t "general.profile" %></span>
@@ -43,17 +80,7 @@
             <span><%= t "general.sign_out" %></span>
           </button>
         <% end %>
-      <% else %>
-        <a href="<%= sign_in_path %>" class="menu__item">
-          <x-icon>login</x-icon>
-          <span><%= t "general.sign_in" %></span>
-        </a>
-
-        <a href="<%= sign_up_path %>" class="menu__item">
-          <x-icon>person_add</x-icon>
-          <span><%= t "general.sign_up" %></span>
-        </a>
-      <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>

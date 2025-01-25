@@ -20,7 +20,7 @@
 
         <div class="mt-4">
           <%= form_with url: dashboard_settings_export_path, method: :post do |form| %>
-            <button type="submit" class="filled-button">
+            <button type="submit" class="button button--filled">
               <%= t "general.export" %>
             </button>
           <% end %>
@@ -35,7 +35,7 @@
 
             <div class="mt-4">
               <% if @account.export.completed? %>
-                <a href="<%= url_for(@account.export.file) %>" class="outlined-button">
+                <a href="<%= url_for(@account.export.file) %>" class="button button--outlined">
                   <%= t "general.download" %>
                 </a>
               <% else %>

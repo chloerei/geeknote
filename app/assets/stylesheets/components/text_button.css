@@ -1,9 +1,0 @@
-@layer components {
-  .text-button {
-    @apply inline-flex items-center align-middle h-10 px-3 gap-2 rounded-full text-primary text-sm font-medium whitespace-nowrap select-none cursor-pointer hover:bg-primary/10 active:bg-primary/20 disabled:opacity-50 disabled:pointer-events-none;
-
-    svg {
-      @apply w-4 h-4 fill-current;
-    }
-  }
-}

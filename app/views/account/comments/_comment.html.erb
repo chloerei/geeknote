@@ -95,7 +95,7 @@
 
     <% if !showpage %>
       <% if comment.replies_count > 0 %>
-        <a href="<%= account_comment_path(comment.user.account.name, comment) %>" class="text-button text-on-surface-variant group-[.comment-show]:hidden">
+        <a href="<%= account_comment_path(comment.user.account.name, comment) %>" class="button button--text text-on-surface-variant group-[.comment-show]:hidden">
           <span>
             View <%= comment.replies_count %> replies
           </span>

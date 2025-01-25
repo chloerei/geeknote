@@ -1,38 +1,84 @@
 @layer components {
   .text-field {
+    display: block;
   }
 
   .text-field__label {
-    @apply block mb-2 text-sm font-medium text-on-surface-variant;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-on-surface-variant);
   }
 
   .text-field__container {
-    @apply flex items-center w-full border-0 ring-1 focus-within:ring-2 rounded ring-outline focus-within:ring-primary;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 0;
+    border-radius: 4px;
+    outline: 1px solid var(--color-outline);
+    outline-offset: -1px;
   }
 
-  .text-field__prefix {
-    @apply h-10 px-4 flex items-center text-on-surface-variant bg-surface-variant rounded-l;
+  .text-field__container:focus-within {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
   }
 
   .text-field__input {
-    @apply flex-grow min-w-0 border-none rounded focus:ring-0 bg-transparent disabled:bg-surface-variant
+    flex-grow: 1;
+    padding: 8px 16px;
+    min-width: 0;
+    border: none;
+    background-color: transparent;
+    outline: 0;
+  }
+
+  textarea.text-field__input {
+    height: 88px;
+    resize: vertical;
+  }
+
+  .text-field__input:focus {
+    outline: none;
+  }
+
+  .text-field__input:disabled {
+    background-color: var(--color-surface-variant);
+  }
+
+  .text-field__prefix {
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    color: var(--color-on-surface-variant);
+    background-color: var(--color-surface-container);
+    border-radius: 4px 0 0 4px;
   }
 
   .text-field__suffix {
-    @apply h-10 px-4 flex items-center text-on-surface-variant bg-surface-variant rounded-r;
+    padding: 8px 16px;
+    color: var(--color-on-surface-variant);
+    background-color: var(--color-surface-container);
+    border-radius: 0 4px 4px 0;
   }
 
   .text-field__supporting-text {
-    @apply mt-2 text-sm text-on-surface-variant;
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--color-on-surface-variant);
   }
 
-  .text-field--error {
-    .text-field__container {
-      @apply ring-error focus-within:ring-error;
-    }
+  .text-field--error .text-field__container {
+    outline-color: var(--color-error);
+  }
 
-    .text-field__supporting-text {
-      @apply text-error;
-    }
+  .text-field--error .text-field__container:focus-within {
+    outline-color: var(--color-error);
+  }
+
+  .text-field--error .text-field__supporting-text {
+    color: var(--color-error);
   }
 }

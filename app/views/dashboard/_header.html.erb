@@ -2,12 +2,12 @@
   <div class="text-lg font-medium flex-grow">
     <%= t "general.dashboard" %>
   </div>
-  <a href="<%= account_root_path(@account.name) %>" class="text-button">
+  <a href="<%= account_root_path(@account.name) %>" class="button button--text">
     <x-icon>north_east</x-icon>
     <span><%= t "general.view" %></span>
   </a>
   <div class="menu">
-    <label tabindex="0" class="text-button">
+    <label tabindex="0" class="button button--text">
       <img src="<%= avatar_url(@account.owner) %>" alt="avatar" class="w-6 h-6 rounded-full">
       <div>
         <%= @account.name %>
@@ -54,6 +54,12 @@
 </div>
 
 <div class="flex gap-2 mt-6">
-  <%= render "components/tab", icon: "article", label: t("general.posts"), url: dashboard_root_path(@account.name), active: current_page?(dashboard_root_path(@account.name)) %>
-  <%= render "components/tab", icon: "settings", label: t("general.settings"), url: dashboard_settings_profile_path, active: request.path.include?("/settings/") %>
+  <a href="<%= dashboard_root_path(@account.name) %>" class="tab tab--primary <%= "tab--active" if current_page?(dashboard_root_path(@account.name)) %>">
+    <x-icon>article</x-icon>
+    <%= t "general.posts" %>
+  </a>
+  <a href="<%= dashboard_settings_profile_path(@account.name) %>" class="tab tab--primary <%= "tab--active" if request.path.include?("/settings/") %>">
+    <x-icon>settings</x-icon>
+    <%= t "general.settings" %>
+  </a>
 </div>

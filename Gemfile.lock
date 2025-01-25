@@ -187,6 +187,10 @@ GEM
     hashdiff (1.1.2)
     highline (3.1.2)
       reline
+    hotwire-spark (0.1.12)
+      listen
+      rails (>= 7.0.0)
+      zeitwerk
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.8)
@@ -233,6 +237,9 @@ GEM
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
     language_server-protocol (3.17.0.3)
+    listen (3.9.0)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     local_time (3.0.2)
     logger (1.6.5)
     loofah (2.24.0)
@@ -360,6 +367,9 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.2.1)
+    rb-fsevent (0.11.2)
+    rb-inotify (0.11.1)
+      ffi (~> 1.0)
     rdoc (6.10.0)
       psych (>= 4.0.0)
     recaptcha (5.19.0)
@@ -490,6 +500,7 @@ DEPENDENCIES
   debug
   dotenv-rails
   factory_bot_rails
+  hotwire-spark
   i18n-tasks!
   image_processing (~> 1.2)
   imgproxy-rails

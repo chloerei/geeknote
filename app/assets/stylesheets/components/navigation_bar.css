@@ -8,7 +8,7 @@
   }
 
   .navigation-bar__item__icon {
-    @apply h-8 px-4 py-1 rounded-full interactive-bg-surface-container after:absolute after:inset-0;
+    @apply h-8 px-4 py-1 rounded-full interactive after:absolute after:inset-0;
   }
 
   .navigation-bar__item__icon svg {
@@ -29,7 +29,7 @@
     }
 
     .navigation-bar__item__icon {
-      @apply interactive-bg-secondary-container;
+      @apply interactive;
     }
   }
 }

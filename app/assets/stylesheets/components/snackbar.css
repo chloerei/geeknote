@@ -1,5 +1,22 @@
 @layer components {
   .snackbar {
-    @apply bg-inverse-surface text-sm font-medium p-4 shadow rounded animate-slide-in-up;
+    background-color: var(--color-inverse-surface);
+    color: var(--color-inverse-on-surface);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+
+    @starting-style {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
+
+  .snackbar--removing {
+    transform: translateY(100%);
+    opacity: 0;
   }
 }

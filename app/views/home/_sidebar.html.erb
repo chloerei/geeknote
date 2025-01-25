@@ -24,7 +24,7 @@
 
     <div class="px-4 pb-4 flex gap-4 flex-wrap">
       <% popular_tags.each do |tag| %>
-        <a href="#" class="inline-flex items-center h-8 px-3 text-sm font-medium interactive-bg-surface-container rounded-full">
+        <a href="<%= tag_path(tag.name) %>" class="inline-flex items-center h-8 px-3 text-sm font-medium bg-surface-container interactive rounded-full">
           <%= tag.name %>
         </a>
       <% end %>

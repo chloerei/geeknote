@@ -1,5 +1,6 @@
 @layer components {
   .card {
-    @apply bg-surface-container-lowest rounded-xl shadow;
+    background-color: var(--color-surface);
+    border-radius: 12px;
   }
 }

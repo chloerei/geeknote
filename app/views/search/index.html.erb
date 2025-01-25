@@ -15,7 +15,7 @@
     <%= render "components/tab", url: url_for(request.GET.merge(tab: "accounts")), label: "Accounts", active: (@tab == "accounts") %>
     <div class="flex-grow"></div>
     <div class="menu">
-      <label tabindex="0" type="button" class="text-button text-on-surface-variant">
+      <label tabindex="0" type="button" class="button button--text text-on-surface-variant">
         <span>
           Sort by: <%= @sort %>
         </span>

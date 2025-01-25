@@ -1,9 +1,14 @@
 @layer components {
   .icon-button {
-    @apply inline-flex items-center justify-center align-middle h-10 w-10 rounded-full select-none text-on-surface-variant cursor-pointer hover:interactive-bg-surface-variant disabled:opacity-50 disabled:pointer-events-none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    cursor: pointer;
+    user-select: none;
 
-    svg {
-      @apply w-6 h-6 fill-current;
-    }
+    @apply interactive;
   }
 }

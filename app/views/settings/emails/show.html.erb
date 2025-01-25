@@ -22,7 +22,7 @@
         </div>
 
         <div class="form-field">
-          <button type="submit" class="filled-button">
+          <button type="submit" class="button button--filled">
             <%= t "general.save_changes" %>
           </button>
         </div>
@@ -42,7 +42,7 @@
       </div>
       <div class="mt-2">
         <%= form_with url: resend_settings_email_path do |form| %>
-          <button type="submit" class="outlined-button">
+          <button type="submit" class="button button--outlined">
             <x-icon>send</x-icon>
             <span>
               <%= t ".resend_verification_email" %>

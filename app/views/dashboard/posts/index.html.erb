@@ -14,7 +14,7 @@
     <div class="flex-grow"></div>
 
     <div class="menu hidden md:block">
-      <label tabindex="0" class="text-button text-on-surface-variant">
+      <label tabindex="0" class="button button--text text-on-surface-variant">
         <span>
           <%=
             case params[:status]
@@ -48,7 +48,7 @@
     </div>
 
     <div class="menu hidden md:block">
-      <label tabindex="0" class="text-button text-on-surface-variant">
+      <label tabindex="0" class="button button--text text-on-surface-variant">
         <span>
           <%=
             case params[:sort]
@@ -71,7 +71,7 @@
       </div>
     </div>
 
-    <a href="<%= new_dashboard_post_path(@account.name) %>" class="filled-button">
+    <a href="<%= new_dashboard_post_path(@account.name) %>" class="button button--filled">
       <%= t "general.new_post" %>
     </a>
   </div>

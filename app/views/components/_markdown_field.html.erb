@@ -3,10 +3,10 @@
 <div class="markdown-field ring-1 focus-within:ring-2 ring-outline focus-within:ring-primary rounded group" data-controller="markdown-field" data-markdown-field-autofocus-value="<%= !!autofocus %>">
   <%= form.hidden_field name, options.merge(data: { markdown_field_target: "contentInput" }) %>
   <div class="flex items-center p-1 gap-1 bg-surface-container rounded-t">
-    <button type="button" class="text-button group-[.previewing]:text-on-surface-variant" data-action="markdown-field#write">
+    <button type="button" class="button button--text group-[.previewing]:text-on-surface-variant" data-action="markdown-field#write">
       <%= t "general.write" %>
     </button>
-    <button type="button" class="text-button text-on-surface-variant group-[.previewing]:text-primary" data-action="markdown-field#preview">
+    <button type="button" class="button button--text text-on-surface-variant group-[.previewing]:text-primary" data-action="markdown-field#preview">
       <%= t "general.preview" %>
     </button>
     <div class="flex-grow"></div>

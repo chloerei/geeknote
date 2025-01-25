@@ -1,26 +1,30 @@
 @layer components {
   .tab {
-    @apply inline-flex h-10 px-4 gap-2 items-center text-sm font-medium rounded-full relative z-0 select-none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-on-surface-variant);
 
-    &::after {
-      @apply absolute inset-0 -z-10 bg-current rounded-full opacity-0;
-      content: "";
-    }
+    @apply interactive;
+  }
 
-    &:hover::after {
-      @apply opacity-10;
+  .tab--active {
+    x-icon {
+      font-variation-settings: 'FILL' 1;
     }
+  }
 
-    &:active::after {
-      @apply opacity-20;
-    }
+  .tab--primary {
+    border-radius: 24px;
+  }
 
-    &.tab--active {
-      @apply text-primary bg-primary/10;
-    }
-
-    svg {
-      @apply w-4 h-4 fill-current;
-    }
+  .tab--primary.tab--active {
+    background-color: var(--color-primary-container);
+    color: var(--color-on-primary-container);
   }
 }

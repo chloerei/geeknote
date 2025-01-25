@@ -1,9 +1,0 @@
-@layer components {
-  .floating-action-button {
-    @apply w-14 h-14 flex items-center justify-center rounded-2xl select-none interactive-bg-primary-container shadow-md hover:shadow-lg;
-
-    svg {
-      @apply w-6 h-6 fill-current;
-    }
-  }
-}

@@ -1,0 +1,14 @@
+@layer components {
+  .fab {
+    width: 56px;
+    height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary-container);
+    color: var(--color-on-primary-container);
+    border-radius: 12px;
+
+    @apply interactive;
+  }
+}

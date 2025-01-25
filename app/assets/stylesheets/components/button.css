@@ -1,0 +1,56 @@
+@layer components {
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    height: 40px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+
+    @apply interactive;
+
+    x-icon {
+      width: 18px;
+      height: 18px;
+      font-size: 18px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .button--filled {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+
+    &:hover {
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  .button--filled-tonal {
+    background-color: var(--color-secondary-container);
+    color: var(--color-on-secondary-container);
+
+    &:hover {
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  .button--outlined {
+    outline: 1px solid var(--color-outline);
+    outline-offset: -1px;
+  }
+
+  .button--text {
+    color: var(--color-primary);
+    padding: 0 12px;
+  }
+}
