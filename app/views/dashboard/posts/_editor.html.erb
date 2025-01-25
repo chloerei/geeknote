@@ -8,7 +8,7 @@
   >
 
   <%# Top bar %>
-  <div class="flex items-center p-3 gap-2 sticky top-0 z-10 bg-surface">
+  <div class="flex items-center p-3 gap-2 sticky top-0 z-10 bg-surface-container-low">
     <a href="<%= dashboard_posts_path(@account.name) %>" class="icon-button">
       <x-icon>arrow_back</x-icon>
     </a>
@@ -104,9 +104,9 @@
     <div class="flex px-4 justify-center">
 
       <%# Container %>
-      <div class="card flex-grow p-8 mb-4 max-w-screen-md group/container" data-post-editor-target="container" data-turbo-permanent>
+      <div class="card bg-surface flex-grow p-8 mb-4 max-w-screen-md group/container" data-post-editor-target="container" data-turbo-permanent>
         <div class="block group-[.previewing]/container:hidden min-h-screen">
-          <%= form.text_area :title, class: "block w-full px-0 py-2 border-none focus:ring-0 bg-transparent text-3xl font-bold resize-none", placeholder: Post.human_attribute_name("title"), autocomplete: "off", data: { post_editor_target: "titleInput", action: "input->post-editor#resizeTitleInput keydown.enter->post-editor#focus:prevent" } %>
+          <%= form.text_area :title, class: "block w-full px-0 py-2 border-none outline-none bg-transparent text-3xl font-bold resize-none", placeholder: Post.human_attribute_name("title"), autocomplete: "off", data: { post_editor_target: "titleInput", action: "input->post-editor#resizeTitleInput keydown.enter->post-editor#focus:prevent" } %>
           <%= form.hidden_field :content, id: "post_content", placeholder: "Markdown...", data: { post_editor_target: "contentInput" } %>
           <div id="post_content_markdown" class="mt-4" data-post-editor-target="contentMarkdown"></div>
         </div>
@@ -140,9 +140,9 @@
         <input id="settings" type="checkbox" class="peer hidden" oninput="event.stopPropagation()" data-turbo-permanent>
         <div class="
           transition-all origin-right peer-checked:ml-4 w-80 overflow-hidden
-          fixed top-0 right-0 bottom-0 bg-surface-container-lowest rounded-l-2xl shadow-lg
+          fixed top-0 right-0 bottom-0 bg-surface rounded-l-2xl shadow-lg
           max-xl:z-20 max-xl:translate-x-full max-xl:peer-checked:translate-x-0
-          xl:card xl:sticky xl:top-16 xl:max-h-[calc(100vh-64px-16px)] xl:w-0 xl:peer-checked:w-80 xl:shadow-none
+          xl:card xl:sticky xl:top-16 xl:max-h-[calc(100vh-64px-16px)] xl:w-0 xl:peer-checked:w-80 xl:shadow-none xl:rounded-2xl
           flex flex-col
           ">
           <div class="flex-grow min-h-0 flex flex-col w-80">
