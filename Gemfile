@@ -23,7 +23,7 @@ gem "propshaft"
 # Use Active Storage variant
 gem "image_processing", "~> 1.2"
 
-gem "active_storage_validations"
+gem "active_storage_validations", "~> 2.0"
 
 gem "solid_cache", "~> 1.0"
 gem "solid_cable", "~> 3.0"
