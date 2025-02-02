@@ -1,21 +1,43 @@
 @layer components {
   .menu {
-    @apply relative;
+    position: relative;
   }
 
   .menu__content {
-    @apply w-56 py-3 bg-surface rounded-xl shadow-lg absolute z-10 scale-0 transition-transform origin-top-left;
+    display: none;
+    width: 224px;
+    padding: 12px 0;
+    background-color: var(--color-surface);
+    color: var(--color-on-surface-variant);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    position: absolute;
+    z-index: 10;
+    opacity: 0;
+    transition: all 150ms ease;
+    transition-behavior: allow-discrete;
+    transform-origin: top left;
   }
 
   .menu:focus-within .menu__content {
-    @apply scale-100;
+    opacity: 1;
+    display: block;
+
+    @starting-style {
+      opacity: 0;
+    }
   }
 
   .menu__item {
-    @apply flex items-center w-full px-4 py-2 gap-4 text-sm font-medium interactive;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 8px 16px;
+    gap: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
 
-    svg {
-      @apply w-6 h-6 fill-current;
-    }
+    @apply interactive;
   }
 }

@@ -92,6 +92,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     font-feature-settings: "liga";
+    color: currentColor;
   }
 
   x-icon[fill] {

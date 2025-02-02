@@ -1,35 +1,42 @@
 @layer components {
   .dialog {
-    @apply p-0 rounded-3xl bg-surface-container-high min-w-[280px] max-w-[560px] shadow-md
-    -translate-y-10 opacity-0
-    transition-all origin-top;
-
-    transition-behavior: allow-discrete;
+    padding: 0;
+    border-radius: 24px;
+    background-color: var(--color-surface-container-high);
+    min-width: 280px;
+    max-width: 560px;
+    box-shadow: var(--shadow-md);
+    transform: translateY(-40px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    transform-origin: top;
   }
 
   .dialog[open] {
-    @apply translate-y-0 opacity-100;
+    transform: translateY(0);
+    opacity: 1;
   }
 
   @starting-style {
     .dialog[open] {
-      @apply -translate-y-10 opacity-0;
+      transform: translateY(-40px);
+      opacity: 0;
     }
   }
 
   .dialog::backdrop {
-    @apply bg-scrim/40 opacity-0 transition-all;
-
-    transition-behavior: allow-discrete;
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: all 0.3s ease;
   }
 
   .dialog[open]::backdrop {
-    @apply opacity-100;
+    opacity: 1;
   }
 
   @starting-style {
     .dialog[open]::backdrop {
-      @apply opacity-0;
+      opacity: 0;
     }
   }
 }

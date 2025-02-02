@@ -1,13 +1,23 @@
 @layer components {
   .form-field {
-    @apply mt-4 first-of-type:mt-0;
+    margin-top: 16px;
+
+    &:first-of-type {
+      margin-top: 0px;
+    }
   }
 
   .form-label {
-    @apply block mb-2 text-sm font-medium text-on-surface-variant;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-on-surface-variant);
   }
 
   .form-text {
-    @apply mt-2 text-sm text-on-surface-variant;
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--color-on-surface-variant);
   }
 }

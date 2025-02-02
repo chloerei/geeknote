@@ -24,36 +24,37 @@
 .cmt-heading4,
 .cmt-heading5,
 .cmt-heading6 {
-  @apply font-medium;
+  font-weight: 500;
 }
 
 .cmt-strong {
-  @apply font-medium;
+  font-weight: 500;
 }
 
 .cmt-emphasis {
-  @apply italic;
+  font-style: italic;
 }
 
 .cmt-strikethrough {
-  @apply line-through;
+  text-decoration: line-through;
 }
 
 .cmt-link.cmt-processingInstruction,
 .cmt-link.cmt-url {
-  @apply opacity-50;
+  opacity: 0.5;
 }
 
 .cmt-comment {
-  @apply opacity-50;
+  opacity: 0.5;
 }
 
 .cmt-url {
-  @apply underline;
+  text-decoration: underline;
 }
 
 .cmt-monospace {
-  @apply font-mono text-sm;
+  font-family: monospace;
+  font-size: 0.875rem;
 }
 
 .post-editor {
@@ -64,6 +65,7 @@
 
 .markdown-field {
   .cm-content {
-    @apply min-h-[160px] p-4;
+    min-height: 160px;
+    padding: 16px;
   }
 }

@@ -1,9 +1,31 @@
 @layer components {
   .checkbox {
-    @apply h-10 w-10 flex items-center justify-center cursor-pointer interactive rounded-full;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 9999px;
+
+    @apply interactive;
 
     input[type="checkbox"] {
-      @apply w-4 h-4 border border-outline bg-transparent focus:ring-0 focus:ring-offset-0 checked:bg-primary-container checked:border-primary-container cursor-pointer;
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--color-outline, #ccc);
+      background: transparent;
+      cursor: pointer;
+
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+
+      &:checked {
+        background-color: var(--color-primary-container);
+        border-color: var(--color-primary-container);
+      }
     }
   }
 }

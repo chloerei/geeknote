@@ -1,13 +1,18 @@
 @layer components {
   .data-table {
-    @apply table-auto w-full;
+    table-layout: auto;
+    width: 100%;
 
     th {
-      @apply px-4 py-3 border-b border-outline-variant font-medium text-left;
+      padding: 12px 16px;
+      border: 1px solid var(--color-outline-variant);
+      font-weight: 500;
+      text-align: left;
     }
 
     td {
-      @apply px-4 py-3 border-b border-outline-variant;
+      padding: 12px 16px;
+      border: 1px solid var(--color-outline-variant);
     }
   }
 }

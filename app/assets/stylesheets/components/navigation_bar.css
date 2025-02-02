@@ -1,31 +1,72 @@
 @layer components {
   .navigation-bar {
-    @apply flex items-center fixed left-0 right-0 bottom-0 h-20 bg-surface-container z-10;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    height: 80px;
+    background-color: var(--color-surface-container);
+    z-index: 10;
   }
 
   .navigation-bar__item {
-    @apply flex-grow basis-0 h-14 flex flex-col gap-1 items-center relative cursor-pointer select-none;
+    flex-grow: 1;
+    flex-basis: 0;
+    height: 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
   }
 
   .navigation-bar__item__icon {
-    @apply h-8 px-4 py-1 rounded-full interactive after:absolute after:inset-0;
+    height: 32px;
+    padding: 4px 16px;
+    border-radius: 9999px;
+    position: relative;
+    @apply interactive;
+  }
+  .navigation-bar__item__icon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 
   .navigation-bar__item__icon svg {
-    @apply w-6 h-6 fill-current;
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
   }
 
   .navigation-bar__item__label {
-    @apply text-xs font-medium text-on-surface-variant;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-on-surface-variant);
   }
 
   .navigation-rail__item__badge {
-    @apply absolute top-0 left-1/2 px-1 text-xs font-medium bg-error rounded-full;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    padding: 0 4px;
+    font-size: 12px;
+    font-weight: 500;
+    background-color: var(--color-error);
+    border-radius: 9999px;
   }
 
   .navigation-bar__item--active {
     .navigation-bar__item__label {
-      @apply font-bold text-on-surface;
+      font-weight: 700;
+      color: var(--color-on-surface);
     }
 
     .navigation-bar__item__icon {

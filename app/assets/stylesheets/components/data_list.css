@@ -1,15 +1,19 @@
 @layer components {
   .data-list {
     & > div {
-      @apply grid grid-cols-4 gap-4 p-4 border-b border-outline-variant;
-
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 16px;
+      border-bottom: 1px solid var(--color-outline-variant);
     }
+
     dt {
-      @apply font-medium;
+      font-weight: 500;
     }
 
     dd {
-      @apply col-span-3;
+      grid-column: span 3 / span 3;
     }
   }
 }
