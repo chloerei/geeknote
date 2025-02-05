@@ -65,6 +65,7 @@
   right: 0;
   background-color: var(--color-surface);
   z-index: 10;
+  box-shadow: var(--shadow-md);
 
   .create,
   .option,
@@ -85,7 +86,7 @@
   }
 
   .highlight {
-    background-color: var(--color-surface-container-high);
     color: var(--color-on-surface);
+    font-weight: bolder;
   }
 }
