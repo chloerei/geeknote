@@ -8,7 +8,7 @@
     "@material-symbols/font-400": "^0.28.1",
     "@rails/activestorage": "^8.0.100",
     "@rails/request.js": "^0.0.11",
-    "@tailwindcss/cli": "^4.0.3",
+    "@tailwindcss/cli": "^4.0.5",
     "@tailwindcss/typography": "^0.5.16",
     "codemirror": "^6.0.1",
     "esbuild": "^0.25.0",
