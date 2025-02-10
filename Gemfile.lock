@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/rails/mission_control-jobs.git
-  revision: 7d5b542cb5b3fead8bfc82a112a6cf37f5e8e348
+  revision: 07ef10275857d9c1e5b06b7152c7b5ba40515d03
   specs:
     mission_control-jobs (1.0.1)
       actioncable (>= 7.1)
@@ -383,7 +383,7 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
       ffi (~> 1.0)
-    rdoc (6.11.0)
+    rdoc (6.12.0)
       psych (>= 4.0.0)
     recaptcha (5.19.0)
     regexp_parser (2.10.0)
