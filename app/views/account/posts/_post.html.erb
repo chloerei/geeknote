@@ -30,9 +30,9 @@
       <div class="text-sm text-on-surface-variant mt-2">
         <span><%= format_time post.published_at %></span>
         &centerdot;
-        <span><%= post.likes_count %> likes</span>
+        <span><%= post.likes_count %> <%= t "general.likes" %></span>
         &centerdot;
-        <span><%= post.comments_count %> comments</span>
+        <span><%= post.comments_count %> <%= t "general.comments" %></span>
       </div>
     </div>
 
