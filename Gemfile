@@ -28,7 +28,7 @@ gem "active_storage_validations", "~> 2.0"
 gem "solid_cache", "~> 1.0"
 gem "solid_cable", "~> 3.0"
 gem "solid_queue", "~> 1.1"
-gem "mission_control-jobs", github: "rails/mission_control-jobs"
+gem "mission_control-jobs", "~> 1.0.2"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
