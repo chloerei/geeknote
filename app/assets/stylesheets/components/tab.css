@@ -5,7 +5,7 @@
     justify-content: center;
     gap: 8px;
     padding: 0 16px;
-    height: 48px;
+    height: 40px;
     font-size: 14px;
     font-weight: 500;
     color: var(--color-on-surface-variant);
@@ -20,7 +20,7 @@
   }
 
   .tab--primary {
-    border-radius: 24px;
+    border-radius: 9999px;
   }
 
   .tab--primary.tab--active {

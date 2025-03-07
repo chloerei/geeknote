@@ -17,7 +17,7 @@
 
 @layer base {
   html {
-    background-color: var(--color-surface-container-low);
+    background-color: var(--color-surface);
     color: var(--color-on-surface);
   }
 }

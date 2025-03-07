@@ -1,9 +1,5 @@
 <div class="">
-  <div class="text-lg font-medium">
-    <%= t "general.home" %>
-  </div>
-
-  <div class="flex items-center gap-2 mt-6">
+  <div class="flex items-center gap-2">
     <a href="<%= root_path %>" class="tab tab--primary <%= "tab--active" if current_page?(root_path) %>">
       <x-icon>trending_up</x-icon>
       <%= t "general.popular" %>
@@ -18,7 +14,7 @@
     </a>
   </div>
 
-  <div class="layout-main-sidebar mt-6">
+  <div class="layout-main-sidebar mt-4">
     <div class="">
       <%= render "components/scroll_pagination", pagy: @pagy do %>
         <%= render partial: "account/posts/post", collection: @posts, cached: -> post { [ post.account, post.user, post ] } %>
