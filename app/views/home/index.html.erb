@@ -1,28 +1,38 @@
-<div class="">
-  <div class="flex items-center gap-2">
-    <a href="<%= root_path %>" class="tab tab--primary <%= "tab--active" if current_page?(root_path) %>">
-      <x-icon>trending_up</x-icon>
-      <%= t "general.popular" %>
-    </a>
-    <a href="<%= following_path %>" class="tab tab--primary <%= "tab--active" if current_page?(following_path) %>">
-      <x-icon>inbox</x-icon>
-      <%= t "general.following" %>
-    </a>
-    <a href="<%= newest_path %>" class="tab tab--primary <%= "tab--active" if current_page?(newest_path) %>">
-      <x-icon>bolt</x-icon>
-      <%= t "general.newest" %>
-    </a>
-  </div>
+<div class="layout-main-sidebar">
+  <div class="">
+    <div class="relative">
+      <div class="icon h-6 w-6 absolute left-3 top-3">
+        <x-icon>search</x-icon>
+      </div>
+      <%= form_with url: search_url, method: :get do |form| %>
+        <%= form.hidden_field :type, value: @type %>
+        <%= form.text_field :q, value: params[:q], placeholder: t("general.search"), class: "h-12 w-full pl-12 border-none rounded-full bg-surface-container hover:bg-surface-container-high focus:bg-surface-container-highest transition-colors outline-0" %>
+      <% end %>
+    </div>
 
-  <div class="layout-main-sidebar mt-4">
-    <div class="">
+    <div class="flex items-center gap-2 mt-4">
+      <a href="<%= root_path %>" class="tab tab--primary <%= "tab--active" if current_page?(root_path) %>">
+        <x-icon>trending_up</x-icon>
+        <%= t "general.popular" %>
+      </a>
+      <a href="<%= following_path %>" class="tab tab--primary <%= "tab--active" if current_page?(following_path) %>">
+        <x-icon>inbox</x-icon>
+        <%= t "general.following" %>
+      </a>
+      <a href="<%= newest_path %>" class="tab tab--primary <%= "tab--active" if current_page?(newest_path) %>">
+        <x-icon>bolt</x-icon>
+        <%= t "general.newest" %>
+      </a>
+    </div>
+
+    <div class="mt-4">
       <%= render "components/scroll_pagination", pagy: @pagy do %>
         <%= render partial: "account/posts/post", collection: @posts, cached: -> post { [ post.account, post.user, post ] } %>
       <% end %>
     </div>
+  </div>
 
-    <div class="hidden md:block">
-      <%= render "sidebar" %>
-    </div>
+  <div class="hidden md:block">
+    <%= render "sidebar" %>
   </div>
 </div>

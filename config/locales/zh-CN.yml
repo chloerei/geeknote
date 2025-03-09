@@ -216,6 +216,7 @@ zh-CN:
     publish: 发布
     published: 已发布
     recommend_users: 推荐用户
+    relevant: 相关
     replies: 回复
     reply: 回复
     reset_password: 重置密码
@@ -229,6 +230,7 @@ zh-CN:
     sign_in: 登录
     sign_out: 登出
     sign_up: 注册
+    sort_by: 排序：
     submit: 提交
     table_of_contents: 目录
     tags: 标签

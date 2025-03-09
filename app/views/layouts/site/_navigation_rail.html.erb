@@ -1,5 +1,5 @@
 <div class="navigation-rail hidden md:flex 2xl:hidden">
-  <a href="/" class="p-2">
+  <a href="/" class="p-2 mt-1">
     <img src="<%= asset_path "icon.svg" %>" alt="logo" class="size-10">
   </a>
 
@@ -16,15 +16,6 @@
       </div>
       <div class="navigation-rail__item__label">
         <%= t "general.home" %>
-      </div>
-    </a>
-
-    <a href="<%= search_path %>" class="navigation-rail__item <%= "navigation-rail__item--active" if current_page?(search_path) %>">
-      <div class="navigation-rail__item__icon">
-        <x-icon>search</x-icon>
-      </div>
-      <div class="navigation-rail__item__label">
-        <%= t "general.search" %>
       </div>
     </a>
 

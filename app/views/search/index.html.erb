@@ -1,50 +1,77 @@
-<div class="max-w-screen-lg mx-auto">
-  <div class="relative">
-    <div class="icon h-6 w-6 absolute left-3 top-3">
-      <x-icon>search</x-icon>
-    </div>
-    <%= form_with url: search_url, method: :get do |form| %>
-      <%= form.hidden_field :tab, value: @tab %>
-      <%= form.text_field :q, value: params[:q], class: "h-12 w-full pl-12 border-none rounded-full interactive-bg-surface-container-lowest focus:ring-0" %>
-    <% end %>
-  </div>
-
-  <div class="flex items-center gap-2 mt-6">
-    <%= render "components/tab", url: url_for(request.GET.merge(tab: nil)), label: "Posts", active: (@tab == "posts") %>
-    <%= render "components/tab", url: url_for(request.GET.merge(tab: "comments")), label: "Comments", active: (@tab == "comments") %>
-    <%= render "components/tab", url: url_for(request.GET.merge(tab: "accounts")), label: "Accounts", active: (@tab == "accounts") %>
-    <div class="flex-grow"></div>
-    <div class="menu">
-      <label tabindex="0" type="button" class="button button--text text-on-surface-variant">
-        <span>
-          Sort by: <%= @sort %>
-        </span>
-        <x-icon>arrow_drop_down</x-icon>
-      </label>
-      <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
-        <a href="<%= url_for(request.GET.merge(sort: nil)) %>" class="menu__item">
-          Relevant
-        </a>
-        <a href="<%= url_for(request.GET.merge(sort: "newest")) %>" class="menu__item">
-          Newest
-        </a>
-        <a href="<%= url_for(request.GET.merge(sort: "oldest")) %>" class="menu__item">
-          Oldest
-        </a>
+<div class="layout-main-sidebar">
+  <div class="">
+    <div class="flex items-center gap-2">
+      <a href="/" class="icon-button">
+        <x-icon>arrow_back</x-icon>
+      </a>
+      <div class="grow">
+        <div class="relative">
+          <div class="icon h-6 w-6 absolute left-3 top-3">
+            <x-icon>search</x-icon>
+          </div>
+          <%= form_with url: search_url, method: :get do |form| %>
+            <%= form.hidden_field :type, value: @type %>
+            <%= form.text_field :q, value: params[:q], placeholder: t("general.search"), class: "h-12 w-full pl-12 border-none rounded-full bg-surface-container hover:bg-surface-container-high focus:bg-surface-container-highest transition-colors outline-0" %>
+          <% end %>
+        </div>
       </div>
     </div>
+
+    <div class="flex items-center gap-2 mt-4">
+      <a href="<%= url_for(search_params.merge(type: nil)) %>" class="tab tab--primary <%= "tab--active" if @type == "posts" %>">
+        <%= t "general.posts" %>
+      </a>
+      <a href="<%= url_for(search_params.merge(type: "comments")) %>" class="tab tab--primary <%= "tab--active" if @type == "comments" %>">
+        <%= t "general.comments" %>
+      </a>
+      <a href="<%= url_for(search_params.merge(type: "accounts")) %>" class="tab tab--primary <%= "tab--active" if @type == "accounts" %>">
+        <%= t "general.accounts" %>
+      </a>
+      <div class="flex-grow"></div>
+      <div class="menu">
+        <label tabindex="0" type="button" class="button button--text text-on-surface-variant">
+          <span>
+            <%= t "general.sort_by" %>
+            <% case @sort %>
+            <% when "newest" %>
+              <%= t "general.newest" %>
+            <% when "oldest" %>
+              <%= t "general.oldest" %>
+            <% else %>
+              <%= t "general.relevant" %>
+            <% end %>
+          </span>
+          <x-icon>arrow_drop_down</x-icon>
+        </label>
+        <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
+          <a href="<%= url_for(search_params.merge(sort: nil)) %>" class="menu__item">
+            <%= t "general.relevant" %>
+          </a>
+          <a href="<%= url_for(search_params.merge(sort: "newest")) %>" class="menu__item">
+            <%= t "general.newest" %>
+          </a>
+          <a href="<%= url_for(search_params.merge(sort: "oldest")) %>" class="menu__item">
+            <%= t "general.oldest" %>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <%= render "components/scroll_pagination", pagy: @pagy do %>
+        <% case @type %>
+        <% when "posts" %>
+          <%= render partial: "post", collection: @posts %>
+        <% when "comments" %>
+          <%= render partial: "comment", collection: @comments %>
+        <% when "accounts" %>
+          <%= render partial: "account", collection: @accounts %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 
-  <div class="mt-6">
-    <%= render "components/scroll_pagination", pagy: @pagy do %>
-      <% case @tab %>
-      <% when "posts" %>
-        <%= render partial: "post", collection: @posts %>
-      <% when "comments" %>
-        <%= render partial: "comment", collection: @comments %>
-      <% when "accounts" %>
-        <%= render partial: "account", collection: @accounts %>
-      <% end %>
-    <% end %>
+  <div class="hidden md:block">
+    <%= render "home/sidebar" %>
   </div>
 </div>

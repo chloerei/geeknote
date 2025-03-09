@@ -1,7 +1,9 @@
 <div class="navigation-drawer hidden 2xl:flex">
-  <a href="/" class="p-2">
-    <img src="<%= asset_path "icon.svg" %>" alt="logo" class="size-10">
-  </a>
+  <div class="mt-1">
+    <a href="/" class="inline-block p-2">
+      <img src="<%= asset_path "icon.svg" %>" alt="logo" class="size-10">
+    </a>
+  </div>
 
   <% if Current.user %>
     <div class="">
@@ -19,15 +21,6 @@
       </div>
       <div class="navigation-drawer__item__label">
         <%= t "general.home" %>
-      </div>
-    </a>
-
-    <a href="<%= search_path %>" class="navigation-drawer__item <%= "navigation-drawer__item--active" if current_page?(search_path) %>">
-      <div class="navigation-drawer__item__icon">
-        <x-icon>search</x-icon>
-      </div>
-      <div class="navigation-drawer__item__label">
-        <%= t "general.search" %>
       </div>
     </a>
 
