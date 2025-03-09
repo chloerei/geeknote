@@ -162,7 +162,8 @@ zh-CN:
     comments: 评论
     copy_link: 复制链接
     created_at: 创建于
-    dashboard: 仪表盘
+    dashboard: 创作中心
+    dashboard_short: 创作
     delete: 删除
     delete_forever: 永久删除
     download: 下载

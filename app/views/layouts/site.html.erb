@@ -2,17 +2,17 @@
   <div class="flex container mx-auto">
     <div class="shrink-0">
       <%= render "layouts/site/navigation_rail" %>
+      <%= render "layouts/site/navigation_drawer" %>
     </div>
 
     <div class="flex-grow min-w-0">
-      <div class="p-6">
+      <div class="p-4 md:p-6">
         <%= yield %>
       </div>
+
+      <%= render "layouts/site/navigation_bar" %>
     </div>
   </div>
-
-  <%= render "layouts/site/navigation_bar" %>
-
 <% end %>
 
 <%= render template: "layouts/application" %>

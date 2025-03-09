@@ -63,6 +63,6 @@
 
   .navigation-rail__item--active .navigation-rail__item__label {
     font-weight: 700;
-    color: var(--color-on-surface);
+    color: var(--color-on-secondary-container);
   }
 }

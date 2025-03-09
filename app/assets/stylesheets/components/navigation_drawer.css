@@ -1,0 +1,58 @@
+@layer components {
+  .navigation-drawer {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    z-index: 10;
+  }
+
+  .navigation-drawer__item {
+    height: 48px;
+    display: flex;
+    gap: 16px;
+    padding: 0 16px;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 9999px;
+
+    @apply interactive;
+  }
+
+  .navigation-drawer__item__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .navigation-drawer__item__label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-on-surface-variant);
+  }
+
+  .navigation-drawer__item__badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    padding: 0 4px;
+    font-size: 12px;
+    font-weight: 500;
+    background-color: var(--color-error);
+    border-radius: 9999px;
+  }
+
+  .navigation-drawer__item--active {
+    background-color: var(--color-secondary-container);
+  }
+
+  .navigation-drawer__item--active .navigation-drawer__item__label {
+    font-weight: 700;
+    color: var(--color-on-secondary-container);
+  }
+}
