@@ -58,6 +58,7 @@
     font-size: 12px;
     font-weight: 500;
     background-color: var(--color-error);
+    color: var(--color-on-error);
     border-radius: 9999px;
   }
 

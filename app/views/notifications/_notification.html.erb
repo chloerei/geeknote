@@ -1,4 +1,4 @@
-<div id="<%= dom_id notification %>" class="relative">
+<div id="<%= dom_id notification %>" class="<%= "bg-secondary-container" if notification.unread? %>">
   <%=
     begin
       render "notifications/notification/#{notification.type.demodulize.underscore}", notification: notification
