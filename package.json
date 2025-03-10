@@ -17,7 +17,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "esbuild": "^0.25.0",
     "local-time": "^3.0.2",
-    "tailwindcss": "^4.0.9",
+    "tailwindcss": "^4.0.12",
     "tom-select": "^2.4.3"
   },
   "scripts": {
