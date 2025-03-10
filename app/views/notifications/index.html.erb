@@ -1,13 +1,13 @@
+<div class="h-14 flex items-center">
+  <div class="text-lg font-medium px-4">
+    <%= t "general.notifications" %>
+  </div>
+</div>
+
 <div class="layout-main-sidebar">
   <div class="">
     <div class="card">
-      <div class="h-14 flex items-center">
-        <div class="text-lg font-medium px-4">
-          <%= t "general.notifications" %>
-        </div>
-      </div>
-
-      <div class="pb-4">
+      <div class="py-4">
         <%= render "components/scroll_pagination", pagy: @pagy do %>
           <%= render partial: "notification", collection: @notifications %>
         <% end %>
