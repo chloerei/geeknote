@@ -1,11 +1,17 @@
-<div class="max-w-screen-lg mx-auto">
-  <div class="text-lg font-medium">
-    <%= t "general.notifications" %>
-  </div>
+<div class="layout-main-sidebar">
+  <div class="">
+    <div class="card">
+      <div class="h-14 flex items-center">
+        <div class="text-lg font-medium px-4">
+          <%= t "general.notifications" %>
+        </div>
+      </div>
 
-  <div class="card py-3 mt-6">
-    <%= render "components/scroll_pagination", pagy: @pagy do %>
-      <%= render partial: "notification", collection: @notifications %>
-    <% end %>
+      <div class="pb-4">
+        <%= render "components/scroll_pagination", pagy: @pagy do %>
+          <%= render partial: "notification", collection: @notifications %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
