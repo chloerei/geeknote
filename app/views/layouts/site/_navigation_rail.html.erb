@@ -19,6 +19,15 @@
       </div>
     </a>
 
+    <a href="<%= search_path %>" class="navigation-rail__item <%= "navigation-rail__item--active" if current_page?(search_path) %>">
+      <div class="navigation-rail__item__icon">
+        <x-icon>search</x-icon>
+      </div>
+      <div class="navigation-rail__item__label">
+        <%= t "general.search" %>
+      </div>
+    </a>
+
     <% if Current.user %>
       <a href="<%= notifications_path %>" class="navigation-rail__item <%= "navigation-rail__item--active" if current_page?(notifications_path) %>">
         <div class="navigation-rail__item__icon">
