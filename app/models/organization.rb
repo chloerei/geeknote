@@ -1,6 +1,7 @@
 class Organization < ApplicationRecord
   has_one :account, as: :owner, autosave: true
   has_many :members
+  has_many :users, through: :members
 
   has_one_attached :avatar do |attachable|
     attachable.variant :thumb, resize_to_fill: [ 320, 320 ]

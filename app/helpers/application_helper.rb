@@ -9,9 +9,6 @@ module ApplicationHelper
     end
   end
 
-  def avatar_image_tag(avatar)
-  end
-
   def banner_image_tag(banner_image)
     if banner_image.attached?
       image_tag banner_image.variant(:large)
@@ -62,6 +59,12 @@ module ApplicationHelper
   def format_time(time)
     if time
       local_time time, format: :long, data: { turbo_permanent: true }
+    end
+  end
+
+  def format_date(date)
+    if date
+      local_date date, format: :long, data: { turbo_permanent: true }
     end
   end
 

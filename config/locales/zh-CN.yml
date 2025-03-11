@@ -180,6 +180,7 @@ zh-CN:
     import: 导入
     in: 在
     joined: 加入
+    joined_on: 加入于
     last_created: 最近创建
     last_fetched_at: 最后抓取于
     last_updated: 最近更新
@@ -221,6 +222,7 @@ zh-CN:
     reply: 回复
     reset_password: 重置密码
     restore: 恢复
+    rss_feed: RSS 订阅
     save: 保存
     save_changes: 保存修改
     search: 搜索
@@ -231,6 +233,7 @@ zh-CN:
     sign_out: 登出
     sign_up: 注册
     sort_by: 排序：
+    stats: 统计
     submit: 提交
     table_of_contents: 目录
     tags: 标签
