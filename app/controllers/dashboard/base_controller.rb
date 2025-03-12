@@ -3,6 +3,8 @@ class Dashboard::BaseController < ApplicationController
   before_action :set_account
   before_action :require_account_member
 
+  layout "dashboard"
+
   private
 
   def set_account

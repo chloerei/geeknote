@@ -32,6 +32,16 @@
       grid-template-columns: 1fr 360px;
     }
   }
+
+  .layout-nav-main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+
+    @media (min-width: 1280px) {
+      grid-template-columns: 320px 1fr;
+    }
+  }
 }
 
 @layer utilities {
