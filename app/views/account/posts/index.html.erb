@@ -4,6 +4,15 @@
   <%= auto_discovery_link_tag :atom, account_feed_url(@account.name, format: :atom) %>
 <% end %>
 
+<div class="top-app-bar">
+  <a href="/" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    <%= @account.display_name %>
+  </div>
+</div>
+
 <div class="layout-main-sidebar">
   <div>
     <%= render "account/header", account: @account %>

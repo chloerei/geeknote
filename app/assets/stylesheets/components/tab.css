@@ -27,4 +27,19 @@
     background-color: var(--color-primary-container);
     color: var(--color-on-primary-container);
   }
+
+  .tab--secondary {
+  }
+
+  .tab--secondary.tab--active {
+    &::after {
+      content: "";
+      position: absolute;
+      height: 2px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--color-primary);
+    }
+  }
 }

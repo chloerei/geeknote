@@ -1,22 +1,22 @@
-<div class="flex flex-col md:flex-row gap-6">
-  <div class="flex-grow min-w-0">
-    <div class="card">
-      <div class="flex items-center h-14 gap-2 p-2">
-        <div class="flex-shrink-0">
-          <a href="<%= account_root_path(@account.name) %>" class="icon-button">
-            <x-icon>arrow_back</x-icon>
-          </a>
-        </div>
-        <div class="flex-grow text-lg">
-          <span class="font-medium">
-            <%= @account.name %>
-          </span>
-        </div>
-      </div>
+<div class="top-app-bar">
+  <a href="<%= account_root_path(@account.name) %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    <%= @account.display_name %>
+  </div>
+</div>
 
-      <div class="flex gap-2 items-center border-b border-outline-variant">
-        <%= render "components/primary_tab", url: account_followings_path(@account.name), label: t("general.following"), active: current_page?(account_followings_path(@account.name)) %>
-        <%= render "components/primary_tab", url: account_followers_path(@account.name), label: t("general.followers"), active: current_page?(account_followers_path(@account.name)) %>
+<div class="layout-main-sidebar">
+  <div>
+    <div class="card">
+      <div class="flex items-center border-b border-outline-variant rounded-t-xl overflow-hidden">
+        <a href="<%= account_followings_path(@account.name) %>" class="tab tab--secondary tab--active grow">
+          <%= t "general.following" %>
+        </a>
+        <a href="<%= account_followers_path(@account.name) %>" class="tab tab--secondary grow">
+          <%= t "general.followers" %>
+        </a>
       </div>
 
       <%= render "components/scroll_pagination", pagy: @pagy do %>
@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <div class="flex-shrink-0 md:w-80">
+  <div>
     <%= render "account/profile_card", account: @account %>
   </div>
 </div>
