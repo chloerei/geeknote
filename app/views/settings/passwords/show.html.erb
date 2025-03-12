@@ -1,15 +1,15 @@
-<div class="max-w-screen-sm mx-auto">
-  <div class="card">
-    <div class="flex items-center p-2">
-      <a href="<%= settings_root_path %>" class="icon-button">
-        <x-icon>arrow_back</x-icon>
-      </a>
-      <div class="text-lg font-medium flex-grow px-2">
-        <%= t "general.password" %>
-      </div>
-    </div>
+<div class="top-app-bar">
+  <a href="<%= settings_root_path %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    <%= t "general.password" %>
+  </div>
+</div>
 
-    <div class="p-4">
+<div class="layout-main-sidebar">
+  <div>
+    <div class="card p-4">
       <%= form_with model: @user, url: settings_password_path do |form| %>
         <div class="form-field">
           <%= form.label :password_challenge, class: "form-label" %>

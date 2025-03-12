@@ -1,25 +1,27 @@
-<div class="max-w-screen-sm mx-auto">
-  <div class="card">
-    <div class="flex items-center h-14 p-2">
-      <div class="text-lg font-medium flex-grow px-2">
-        <%= t "general.settings" %>
-      </div>
-    </div>
-    <div class="pb-4">
+<div class="top-app-bar">
+  <a href="/" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    <%= t "general.settings" %>
+  </div>
+</div>
+
+<div class="layout-main-sidebar">
+  <div>
+    <div class="card py-4">
       <% [
         { icon: :contact_mail, label: t("general.email"), href: settings_email_path, description: t(".email_description") },
         { icon: :lock, label: t("general.password"), href: settings_password_path, description: t(".password_description") },
         { icon: :notifications, label: t("general.notification"), href: settings_notification_path, description: t(".notification_description") },
       ].each do |item| %>
-        <a href="<%= item[:href] %>" class="flex items-center h-16 gap-4 px-4 interactive-bg-surface-container-lowest">
-          <div class="icon w-6 h-6">
-            <x-icon><%= item[:icon] %></x-icon>
-          </div>
+        <a href="<%= item[:href] %>" class="flex py-3 px-4 gap-4 interactive">
+          <x-icon class="text-on-surface-variant"><%= item[:icon] %></x-icon>
           <div class="flex-grow">
-            <div class="font-medium line-clamp-1">
+            <div class="line-clamp-1">
               <%= item[:label] %>
             </div>
-            <div class="text-sm font-medium text-on-surface-variant line-clamp-1">
+            <div class="text-sm text-on-surface-variant line-clamp-1">
               <%= item[:description] %>
             </div>
           </div>
