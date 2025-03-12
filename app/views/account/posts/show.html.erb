@@ -24,6 +24,15 @@
   <link rel="canonical" href="<%= @post.canonical_url || account_post_url(@account.name, @post) %>">
 <% end %>
 
+<div class="top-app-bar">
+  <a href="<%= account_root_path(@account.name) %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    <%= t "general.post" %>
+  </div>
+</div>
+
 <div class="layout-main-sidebar">
   <div class="min-w-0">
 
@@ -43,7 +52,7 @@
           <div class="flex-grow">
             <div class="text-sm">
               <a href="<%= account_root_path(@post.user.account.name) %>" class="font-medium">
-                <%= @post.user.account.name %>
+                <%= @post.user.name %>
               </a>
               <% if @post.account != @post.user.account %>
                 <span>in</span>
