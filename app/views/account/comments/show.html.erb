@@ -1,16 +1,29 @@
+<div class="top-app-bar">
+  <a href="<%= account_post_comments_path(@account.name, @comment.commentable) %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    <%= t "general.comment" %>
+  </div>
+</div>
+
 <div class="max-w-screen-xl mx-auto flex gap-6">
   <div class="flex-grow min-w-0">
-    <div class="card p-4">
-      <div class="text-lg">
-        <%= t "general.commented_on" %>
+    <div class="card">
+      <div class="text-lg p-4 pb-0">
+        <%= t "general.post" %>
         <a href="<%= account_post_path(@comment.commentable.account.name, @comment.commentable) %>" class="text-primary underline">
           <%= @comment.commentable.title %>
         </a>
       </div>
-    </div>
 
-    <div class="card mt-4">
       <%= render "comment", comment: @comment, showpage: true %>
+
+      <% if Current.user %>
+        <div class="p-4">
+          <%= render "form", comment: Current.user.comments.new(commentable: @comment.commentable, parent: @comment), open: params[:comment].present? %>
+        </div>
+      <% end %>
     </div>
 
     <div id="comments" class="">
@@ -47,14 +60,6 @@
           </div>
         </div>
       </div>
-
-      <% if Current.user %>
-        <div class="card">
-          <div class="p-4">
-            <%= render "form", comment: Current.user.comments.new(commentable: @comment.commentable, parent: @comment), open: params[:comment].present? %>
-          </div>
-        </div>
-      <% end %>
 
       <div class="group replies mt-4">
         <%= render "components/scroll_pagination", pagy: @pagy, content_id: "comments_list" do %>

@@ -56,7 +56,7 @@
 
   <% if comment.parent %>
     <div class="px-4 pb-4 group-[.replies]:hidden">
-      <a href="<%= account_comment_path(comment.parent.user.account.name, comment.parent) %>" class="block interactive-bg-surface-container rounded-lg p-4">
+      <a href="<%= account_comment_path(comment.parent.user.account.name, comment.parent) %>" class="block bg-surface-container-low interactive rounded-lg p-4">
         <div class="flex items-center gap-2">
           <img src="<%= avatar_url(comment.parent.user) %>" alt="avatar" class="h-6 w-6 rounded-full">
           <span class="font-medium">
