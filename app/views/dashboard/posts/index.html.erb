@@ -3,79 +3,23 @@
     <%= t "general.posts" %>
   </div>
 
-  <div class="menu hidden md:block">
-    <label tabindex="0" class="button button--text text-on-surface-variant">
-      <span>
-        <%=
-          case params[:status]
-          when "draft"
-            t "general.draft"
-          when "published"
-            t "general.published"
-          when "trashed"
-            t "general.trashed"
-          else
-            t "general.all_posts"
-          end
-        %>
-      </span>
-      <x-icon>arrow_drop_down</x-icon>
-    </label>
-    <div class="menu__content">
-      <a href="<%= url_for(request.GET.merge(status: nil)) %>" class="menu__item">
-        <%= t "general.all_posts" %>
-      </a>
-      <a href="<%= url_for(request.GET.merge(status: "draft")) %>" class="menu__item">
-        <%= t "general.draft" %>
-      </a>
-      <a href="<%= url_for(request.GET.merge(status: "published")) %>" class="menu__item">
-        <%= t "general.published" %>
-      </a>
-      <a href="<%= url_for(request.GET.merge(status: "trashed")) %>" class="menu__item">
-        <%= t "general.trashed" %>
-      </a>
-    </div>
-  </div>
-
-  <div class="menu hidden md:block">
-    <label tabindex="0" class="button button--text text-on-surface-variant">
-      <span>
-        <%=
-          case params[:sort]
-          when "updated"
-            t "general.last_updated"
-          else
-            t "general.last_created"
-          end
-        %>
-      </span>
-      <x-icon>arrow_drop_down</x-icon>
-    </label>
-    <div class="menu__content">
-      <a href="<%= url_for(request.GET.merge(sort: nil)) %>" class="menu__item">
-        <%= t "general.last_created" %>
-      </a>
-      <a href="<%= url_for(request.GET.merge(sort: "updated")) %>" class="menu__item">
-        <%= t "general.last_updated" %>
-      </a>
-    </div>
-  </div>
-
-  <a href="<%= new_dashboard_post_path(@account.name) %>" class="button button--filled">
+  <a href="<%= new_dashboard_post_path(@account.name) %>" class="button button--filled -mr-2">
+    <x-icon>add</x-icon>
     <%= t "general.new_post" %>
   </a>
 </div>
 
 <div class="card">
-  <div class="p-4 border-b border-outline-variant">
-    <div class="relative">
-      <div class="icon w-6 h-6 absolute top-2 left-2">
-        <x-icon>search</x-icon>
-      </div>
-      <%= form_with url: url_for, method: :get do |form| %>
-        <%= form.text_field :q, value: params[:q], placeholder: t("general.search"), class: "h-10 w-full pl-12 border-none rounded-full bg-surface-container hover:bg-surface-container-high focus:bg-surface-container-highest transition-colors outline-0" %>
-      <% end %>
-    </div>
+  <div class="flex items-center border-b border-outline-variant rounded-t-xl overflow-hidden">
+    <a href="<%= url_for(status: nil) %>" class="tab tab--secondary grow <%= "tab--active" if @status == "draft" %>">
+      <%= t "general.draft" %> <%= account_posts.draft.count %>
+    </a>
+    <a href="<%= url_for(status: "published") %>" class="tab tab--secondary grow <%= "tab--active" if @status == "published" %>">
+      <%= t "general.published" %> <%= account_posts.published.count %>
+    </a>
+    <a href="<%= url_for(status: "trashed") %>" class="tab tab--secondary grow <%= "tab--active" if @status == "trashed" %>">
+      <%= t "general.trashed" %> <%= account_posts.trashed.count %>
+    </a>
   </div>
 
   <div class="pb-3">
