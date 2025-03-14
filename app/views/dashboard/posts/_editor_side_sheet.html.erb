@@ -3,7 +3,7 @@
   <%# Side sheet toggle %>
   <input id="side-sheet-toggle" type="checkbox" class="side-sheet__toggle" data-turbo-permanent>
   <div class="side-sheet__content">
-    <div class="top-app-bar px-4 sticky top-0 z-10 bg-surface-container-lowest">
+    <div class="top-app-bar sticky top-0 z-10 bg-surface-container-lowest">
       <div class="top-app-bar__headline">
         <%= t "general.settings" %>
       </div>
@@ -11,7 +11,7 @@
         <x-icon>close</x-icon>
       </label>
     </div>
-    <div class="p-6 flex-grow overflow-auto">
+    <div class="p-4 flex-grow overflow-auto">
       <%# Featured image %>
       <div class="form-field">
         <%= form.label :featured_image, class: "form-label" %>

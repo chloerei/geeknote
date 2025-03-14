@@ -1,7 +1,7 @@
 @layer components {
   .top-app-bar {
     display: flex;
-    height: 56px;
+    height: 64px;
     align-items: center;
     padding: 0 8px;
     gap: 8px;
