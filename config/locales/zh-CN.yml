@@ -115,8 +115,9 @@ zh-CN:
       destroy:
         success: 文章已删除。
       editor:
-        canonical_url_description: 如果文章之前已发布在其他地方，可以填写原文链接。
         delete_forever_confirm: 永久删除文章？
+      editor_side_sheet:
+        canonical_url_description: 如果文章之前已发布在其他地方，可以填写原文链接。
         featured_image_description: 作为文章封面、社交分享图像。
         tag_description: 便于分类和检索。
       publishes:

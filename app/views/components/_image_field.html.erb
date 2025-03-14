@@ -6,8 +6,10 @@
 
 <div>
   <div class="group/image-field <%= 'attached' if form.object.send(name).attached? %>" data-controller="image-field">
-    <%= form.file_field name, options.merge(data: { class: "hidden", direct_upload: true, image_field_target: "input", action: "image-field#preview" }) %>
-    <%= form.check_box "remove_#{name}", class: "hidden", data: { image_field_target: "removeInput", action: "image-field#remove" } %>
+    <div class="hidden">
+      <%= form.file_field name, options.merge(data: {direct_upload: true, image_field_target: "input", action: "image-field#preview" }) %>
+      <%= form.check_box "remove_#{name}", data: { image_field_target: "removeInput", action: "image-field#remove" } %>
+    </div>
     <div class="relative w-full aspect-video">
       <div class="absolute inset-0 [&>img]:object-cover [&>img]:h-full [&>img]:w-full [&>img]:rounded" data-image-field-target="preview">
         <% if form.object.send(name).attached? %>
