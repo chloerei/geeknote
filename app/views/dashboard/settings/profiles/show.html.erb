@@ -1,22 +1,20 @@
-<%= render "dashboard/header" %>
-
-<div class="layout-nav-main">
-  <div>
+<div class="top-app-bar">
+  <a href="<%= dashboard_settings_root_path %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    <%= t "general.profile" %>
   </div>
+</div>
 
-  <div>
-    <div class="card mt-4">
-      <%= render "dashboard/settings/tabs" %>
-
-      <div class="max-w-screen-sm mx-auto">
-        <div class="p-4">
-          <% if @account.user? %>
-            <%= render "user_form", user: @account.owner %>
-          <% else %>
-            <%= render "organization_form", organization: @account.owner %>
-          <% end %>
-        </div>
-      </div>
+<div class="card">
+  <div class="p-4">
+    <div class="max-w-screen-sm">
+      <% if @account.user? %>
+        <%= render "user_form", user: @account.owner %>
+      <% else %>
+        <%= render "organization_form", organization: @account.owner %>
+      <% end %>
     </div>
   </div>
 </div>

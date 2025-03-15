@@ -1,0 +1,65 @@
+<div class="top-app-bar">
+  <div class="top-app-bar__headline">
+    <%= t "general.settings" %>
+  </div>
+</div>
+
+<div class="card p-4">
+  <div class="grid xl:grid-cols-3 gap-4">
+    <a href="<%= dashboard_settings_profile_path %>" class="flex gap-4 p-4 interactive rounded">
+      <div class="shrink-0">
+        <x-icon>account_box</x-icon>
+      </div>
+      <div class="grow">
+        <div class="">
+          <%= t "general.profile" %>
+        </div>
+        <div class="text-sm text-on-surface-variant">
+          <%= t ".profile_description" %>
+        </div>
+      </div>
+    </a>
+
+    <% if @account.organization? %>
+      <a href="<%= dashboard_settings_members_path %>" class="flex gap-4 p-4 interactive rounded">
+        <div class="shrink-0">
+          <x-icon>group</x-icon>
+        </div>
+        <div class="grow">
+          <div class="">
+            <%= t "general.members" %>
+          </div>
+          <div class="text-sm text-on-surface-variant">
+            <%= t ".members_description" %>
+          </div>
+        </div>
+      </a>
+    <% end %>
+
+    <a href="<%= dashboard_settings_import_path %>" class="flex gap-4 p-4 interactive rounded">
+      <div class="shrink-0">
+        <x-icon>cloud_upload</x-icon>
+      </div>
+      <div class="grow">
+        <div class="">
+          <%= t "general.import" %>
+        </div>
+        <div class="text-sm text-on-surface-variant">
+          <%= t ".import_description" %>
+        </div>
+      </div>
+    <a href="<%= dashboard_settings_export_path %>" class="flex gap-4 p-4 interactive rounded">
+      <div class="shrink-0">
+        <x-icon>cloud_download</x-icon>
+      </div>
+      <div class="grow">
+        <div class="">
+          <%= t "general.export" %>
+        </div>
+        <div class="text-sm text-on-surface-variant">
+          <%= t ".export_description" %>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

@@ -75,7 +75,7 @@
         </div>
       </a>
 
-      <a href="<%= dashboard_settings_profile_path %>" class="navigation-drawer__item <%= "navigation-drawer__item--active" if current_page?(dashboard_settings_profile_path) %>">
+      <a href="<%= dashboard_settings_root_path %>" class="navigation-drawer__item <%= "navigation-drawer__item--active" if request.path.start_with?(dashboard_settings_root_path) %>">
         <div class="navigation-drawer__item__icon">
           <x-icon>settings</x-icon>
         </div>
