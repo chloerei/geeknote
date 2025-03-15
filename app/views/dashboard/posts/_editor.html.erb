@@ -132,15 +132,17 @@
   <% end %>
 
   <div class="hidden">
-    <%= form_with model: @post, url: dashboard_post_publish_path(@account.name, @post), id: "publish-form", method: :patch do %>
-    <% end %>
-    <%= form_with model: @post, url: dashboard_post_publish_path(@account.name, @post), id: "unpublish-form", method: :delete do %>
-    <% end %>
-    <%= form_with model: @post, url: dashboard_post_trash_path(@account.name, @post), id: "restore-form", method: :delete do %>
-    <% end %>
-    <%= form_with model: @post, url: dashboard_post_trash_path(@account.name, @post), id: "trash-form", method: :patch do %>
-    <% end %>
-    <%= form_with model: @post, url: dashboard_post_path(@account.name, @post), id: "delete-form", method: :delete, data: { turbo_confirm: t(".delete_forever_confirm") } do %>
+    <% if @post.persisted? %>
+      <%= form_with model: @post, url: dashboard_post_publish_path(@account.name, @post), id: "publish-form", method: :patch do %>
+      <% end %>
+      <%= form_with model: @post, url: dashboard_post_publish_path(@account.name, @post), id: "unpublish-form", method: :delete do %>
+      <% end %>
+      <%= form_with model: @post, url: dashboard_post_trash_path(@account.name, @post), id: "restore-form", method: :delete do %>
+      <% end %>
+      <%= form_with model: @post, url: dashboard_post_trash_path(@account.name, @post), id: "trash-form", method: :patch do %>
+      <% end %>
+      <%= form_with model: @post, url: dashboard_post_path(@account.name, @post), id: "delete-form", method: :delete, data: { turbo_confirm: t(".delete_forever_confirm") } do %>
+      <% end %>
     <% end %>
   </div>
 </div>

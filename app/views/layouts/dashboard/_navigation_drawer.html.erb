@@ -58,7 +58,7 @@
     </div>
 
     <div class="flex flex-col gap-2 grow">
-      <a href="#" class="navigation-drawer__item">
+      <a href="<%= dashboard_root_path %>" class="navigation-drawer__item <%= "navigation-drawer__item--active" if current_page?(dashboard_root_path) %>"">
         <div class="navigation-drawer__item__icon">
           <x-icon>dashboard</x-icon>
         </div>
