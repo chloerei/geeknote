@@ -251,7 +251,7 @@ GEM
     matrix (0.4.2)
     meilisearch (0.28.4)
       httparty (~> 0.17)
-    meilisearch-rails (0.14.2)
+    meilisearch-rails (0.14.3)
       meilisearch (~> 0.28.4)
       mutex_m (~> 0.2)
     mime-types (3.6.0)
