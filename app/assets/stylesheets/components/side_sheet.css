@@ -3,11 +3,13 @@
     width: 400px;
     height: 100vh;
     overflow: auto;
-    margin-right: -400px;
-    transition: margin 0.2s;
     background-color: var(--color-surface-container-lowest);
 
     /* modal */
+    display: none;
+    margin-right: -400px;
+    transition: all 0.2s;
+    transition-behavior: allow-discrete;
     position: fixed;
     top: 0;
     right: 0;
@@ -32,7 +34,12 @@
   }
 
   .side-sheet__toggle:checked ~ .side-sheet__content {
+    display: block;
     margin-right: 0;
+
+    @starting-style {
+      margin-right: -400px;
+    }
   }
 
   .side-sheet__toggle:checked ~ .side-sheet__scrim {
