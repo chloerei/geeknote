@@ -5,7 +5,7 @@ class Dashboard::PostsController < Dashboard::BaseController
     posts = account_posts
 
     @status = params[:status].presence_in(%w[draft published trashed]) || "draft"
-    posts = posts.where(status: @status)
+    posts = posts.where(status: @status).order(updated_at: :desc)
 
     @pagy, @posts = pagy(posts)
   end
