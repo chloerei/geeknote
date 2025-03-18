@@ -109,6 +109,14 @@ zh-CN:
     require_sign_in:
       require_sign_in: Require sign in
   dashboard:
+    home:
+      index:
+        new_post: 新文章
+        new_post_description: 分享你的想法、经验和见解。
+        posts: 文章
+        posts_description: 管理你的文章。
+        settings: 设置
+        settings_description: 管理账号的资料和其他设置。
     posts:
       create:
         success: 文章已创建。
@@ -138,6 +146,12 @@ zh-CN:
           export_description: 导出文章和附件并打包为.tar.gz 压缩包。一天可以导出一次。
           export_in_progress: 导出中
           last_exported_at: 上次导出于
+      home:
+        index:
+          export_description: 导出文章。
+          import_description: 导入文章。
+          members_description: 管理账号成员。
+          profile_description: 管理账号资料。
       imports:
         show:
           feed_mark_canonical_description: 标记导入文章的链接作为原文链接。
@@ -220,6 +234,7 @@ zh-CN:
     public_link: 公开链接
     publish: 发布
     published: 已发布
+    quick_links: 快捷链接
     recommend_users: 推荐用户
     relevant: 相关
     replies: 回复
@@ -249,6 +264,7 @@ zh-CN:
     user: 用户
     users: 用户
     view: 查看
+    view_site: 查看网站
     weekly_digest: 每周摘要
     weekly_digest_subject: '"%{title}" - %{count} 篇热门文章'
     write: 写作
@@ -295,6 +311,13 @@ zh-CN:
     errors:
       recaptcha_unreachable: 无法连接 reCAPTCHA 服务器，请检查网络连接。
       verification_failed: reCAPTCHA 验证失败，请重试。
+  registrations:
+    new:
+      already_have_an_account: 已经有账号？
+  sessions:
+    new:
+      dont_have_an_account: 还没有账号？
+      forgot_password: 忘记密码？
   settings:
     emails:
       resend:
