@@ -1,39 +1,35 @@
-<div class="">
-  <div class="card">
-    <div class="flex items-center h-14 gap-2 px-2">
-      <a href="<%= admin_settings_root_path %>" class="icon-button">
-        <x-icon>arrow_back</x-icon>
-      </a>
-      <div class="flex-grow text-lg font-medium px-2">
-        <%= t 'general.weekly_digest' %>
-      </div>
-      <a href="<%= admin_settings_weekly_digest_preview_path %>" class="button button--text">
-        <%= t 'general.send_preview' %>
-      </a>
-    </div>
-
-    <div class="p-4">
-      <%= form_with url: admin_settings_weekly_digest_path, model: @site do |form| %>
-        <div class="form-field">
-          <%= render "components/checkbox_field", form: form, name: :weekly_digest_email_enabled %>
-        </div>
-
-        <div class="form-field">
-          <%= form.label :weekly_digest_header_html, class: "form-label" %>
-          <%= render "components/text_field", form: form, name: :weekly_digest_header_html, type: :text_area %>
-        </div>
-
-        <div class="form-field">
-          <%= form.label :weekly_digest_footer_html, class: "form-label" %>
-          <%= render "components/text_field", form: form, name: :weekly_digest_footer_html, type: :text_area %>
-        </div>
-
-        <div class="form-field">
-          <button type="submit" class="button button--filled">
-            <%= t 'general.save_changes' %>
-          </button>
-        </div>
-      <% end %>
-    </div>
+<div class="top-app-bar">
+  <a href="<%= admin_settings_root_path %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    <%= t 'general.weekly_digest' %>
   </div>
+  <a href="<%= admin_settings_weekly_digest_preview_path %>" class="button button--text">
+    <%= t 'general.send_preview' %>
+  </a>
+</div>
+
+<div class="card p-4">
+  <%= form_with url: admin_settings_weekly_digest_path, model: @site do |form| %>
+    <div class="form-field">
+      <%= render "components/checkbox_field", form: form, name: :weekly_digest_email_enabled %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :weekly_digest_header_html, class: "form-label" %>
+      <%= render "components/text_field", form: form, name: :weekly_digest_header_html, type: :text_area %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :weekly_digest_footer_html, class: "form-label" %>
+      <%= render "components/text_field", form: form, name: :weekly_digest_footer_html, type: :text_area %>
+    </div>
+
+    <div class="form-field">
+      <button type="submit" class="button button--filled">
+        <%= t 'general.save_changes' %>
+      </button>
+    </div>
+  <% end %>
 </div>

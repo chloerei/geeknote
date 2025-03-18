@@ -1,62 +1,63 @@
-<div class="">
-  <div class="card">
-    <div class="flex items-center h-14 px-2">
-      <div class="text-lg font-medium px-2">
-        <%= t 'general.posts' %>
-      </div>
-    </div>
+<div class="top-app-bar">
+  <label for="navigation-drawer-toggle" class="icon-button xl:hidden">
+    <x-icon>menu</x-icon>
+  </label>
+  <div class="top-app-bar__headline">
+    <%= t "general.posts" %>
+  </div>
+</div>
 
-    <table class="data-table">
-      <thead>
+<div class="card">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>
+          ID
+        </th>
+        <th>
+          Title
+        </th>
+        <th>
+          Account
+        </th>
+        <th>
+          User
+        </th>
+        <th>
+          Created at
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @posts.each do |post| %>
         <tr>
-          <th>
-            ID
-          </th>
-          <th>
-            Title
-          </th>
-          <th>
-            Account
-          </th>
-          <th>
-            User
-          </th>
-          <th>
-            Created at
-          </th>
-          <th></th>
+          <td>
+            <%= post.id %>
+          </td>
+          <td>
+            <%= post.title.presence || 'Untitile' %>
+          </td>
+          <td>
+            <%= post.account.name %>
+          </td>
+          <td>
+            <%= post.user.name %>
+          </td>
+          <td>
+            <%= format_time post.created_at %>
+          </td>
+          <td class="text-right">
+            <a href="<%= admin_post_path(post) %>" class="button button--text">
+              View
+            </a>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% @posts.each do |post| %>
-          <tr>
-            <td>
-              <%= post.id %>
-            </td>
-            <td>
-              <%= post.title.presence || 'Untitile' %>
-            </td>
-            <td>
-              <%= post.account.name %>
-            </td>
-            <td>
-              <%= post.user.name %>
-            </td>
-            <td>
-              <%= format_time post.created_at %>
-            </td>
-            <td class="text-right">
-              <a href="<%= admin_post_path(post) %>" class="button button--text">
-                View
-              </a>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+      <% end %>
+    </tbody>
+  </table>
 
-    <div class="p-4">
-      <%= render "components/page_pagination", pagy: @pagy %>
-    </div>
+  <div class="p-4">
+    <%= render "components/page_pagination", pagy: @pagy %>
   </div>
 </div>

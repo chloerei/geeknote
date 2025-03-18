@@ -1,27 +1,23 @@
-<div class="">
-  <div class="card">
-    <div class="flex items-center h-14 px-2">
-      <a href="<%= admin_tag_path(@tag) %>" class="icon-button">
-        <x-icon>arrow_back</x-icon>
-      </a>
-      <div class="flex-grow text-lg font-medium">
-        Edit tag #<%= @tag.id %>
-      </div>
-    </div>
-
-    <div class="p-4">
-      <%= form_with model: @tag, url: admin_tag_path(@tag) do |form| %>
-        <div class="form-field">
-          <%= form.label :name, class: "form-label" %>
-          <%= render "components/text_field", form: form, name: :name %>
-        </div>
-
-        <div class="form-field">
-          <button type="submit" class="button button--filled">
-            <%= t 'general.save_changes' %>
-          </button>
-        </div>
-      <% end %>
-    </div>
+<div class="top-app-bar">
+  <a href="<%= admin_tag_path(@tag) %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    Edit tag #<%= @tag.id %>
   </div>
+</div>
+
+<div class="card p-4">
+  <%= form_with model: @tag, url: admin_tag_path(@tag) do |form| %>
+    <div class="form-field">
+      <%= form.label :name, class: "form-label" %>
+      <%= render "components/text_field", form: form, name: :name %>
+    </div>
+
+    <div class="form-field">
+      <button type="submit" class="button button--filled">
+        <%= t 'general.save_changes' %>
+      </button>
+    </div>
+  <% end %>
 </div>

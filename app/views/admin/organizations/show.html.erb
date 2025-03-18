@@ -1,30 +1,29 @@
-<div class="">
-  <div class="card">
-    <div class="flex items-center h-14 gap-2 px-2">
-      <a href="<%= admin_organizations_path %>" class="icon-button">
-        <x-icon>arrow_back</x-icon>
-      </a>
-      <div class="flex-grow text-lg font-medium px-2">
-        Organization #<%= @organization.id %>
-      </div>
-      <a href="<%= edit_admin_organization_path(@organization) %>" class="icon-button">
-        <x-icon>edit</x-icon>
-      </a>
-      <div class="menu">
-        <label tabindex="0" class="icon-button">
-          <x-icon>more_vert</x-icon>
-        </label>
-        <div class="menu__content top-full right-0 origin-top-right">
-          <%= form_with url: admin_organization_path(@organization), method: :delete, data: { turbo_confirm: "Delete organization?" } do %>
-            <button type="submit" class="menu__item">
-              <x-icon>delete</x-icon>
-              <span>Delete</span>
-            </button>
-          <% end %>
-        </div>
-      </div>
+<div class="top-app-bar">
+  <a href="<%= admin_organizations_path %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    Organization #<%= @organization.id %>
+  </div>
+  <a href="<%= edit_admin_organization_path(@organization) %>" class="icon-button">
+    <x-icon>edit</x-icon>
+  </a>
+  <div class="menu">
+    <label tabindex="0" class="icon-button">
+      <x-icon>more_vert</x-icon>
+    </label>
+    <div class="menu__content top-full right-0 origin-top-right">
+      <%= form_with url: admin_organization_path(@organization), method: :delete, data: { turbo_confirm: "Delete organization?" } do %>
+        <button type="submit" class="menu__item">
+          <x-icon>delete</x-icon>
+          <span>Delete</span>
+        </button>
+      <% end %>
     </div>
+  </div>
+</div>
 
+  <div class="card">
     <dl class="data-list">
       <div>
         <dt>
@@ -50,37 +49,36 @@
     </dl>
   </div>
 
-  <div class="card mt-4">
-    <div class="flex items-center h-14 px-2">
-      <div class="flex-grow text-lg font-medium px-2">
-        <%= t 'general.members' %>
-      </div>
+<div class="card mt-4">
+  <div class="flex items-center h-14 px-2">
+    <div class="flex-grow text-lg font-medium px-2">
+      <%= t 'general.members' %>
     </div>
-    <table class="data-table">
-      <% @organization.members.each do |member| %>
-        <tr>
-          <td>
-            <% if member.user %>
-              <%= member.user.name %>
-            <% else %>
-              <%= member.invitation_email %>
-            <% end %>
-          </td>
-          <td>
-            <%= member.role %>
-          </td>
-          <td>
-            <%= format_time member.created_at %>
-          </td>
-          <td class="text-right">
-            <% if member.user %>
-              <a href="<%= admin_user_path(member.user) %>" class="button button--text">
-                View
-              </a>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
   </div>
+  <table class="data-table">
+    <% @organization.members.each do |member| %>
+      <tr>
+        <td>
+          <% if member.user %>
+            <%= member.user.name %>
+          <% else %>
+            <%= member.invitation_email %>
+          <% end %>
+        </td>
+        <td>
+          <%= member.role %>
+        </td>
+        <td>
+          <%= format_time member.created_at %>
+        </td>
+        <td class="text-right">
+          <% if member.user %>
+            <a href="<%= admin_user_path(member.user) %>" class="button button--text">
+              View
+            </a>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 </div>

@@ -1,63 +1,61 @@
-<div class="">
-  <div class="card pb-3">
-    <div class="flex items-center h-14 gap-2 px-2">
-      <a href="<%= admin_accounts_path %>" class="icon-button">
-        <x-icon>arrow_back</x-icon>
-      </a>
-      <div class="flex-grow text-lg font-medium px-2">
-        Account #<%= @account.id %>
-      </div>
-      <a href="<%= edit_admin_account_path(@account) %>" class="icon-button">
-        <x-icon>edit</x-icon>
-      </a>
-      <div class="menu">
-        <label tabindex="0" class="icon-button">
-          <x-icon>more_vert</x-icon>
-        </label>
-        <div class="menu__content top-full right-0 origin-top-right">
-          <%= form_with url: admin_account_path(@account), method: :delete, data: { turbo_confirm: "Delete account?" } do %>
-            <button type="submit" class="menu__item">
-              <x-icon>delete</x-icon>
-              <span>Delete</span>
-            </button>
-          <% end %>
-        </div>
-      </div>
+<div class="top-app-bar">
+  <a href="<%= admin_accounts_path %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    Account #<%= @account.id %>
+  </div>
+  <a href="<%= edit_admin_account_path(@account) %>" class="icon-button">
+    <x-icon>edit</x-icon>
+  </a>
+  <div class="menu">
+    <label tabindex="0" class="icon-button">
+      <x-icon>more_vert</x-icon>
+    </label>
+    <div class="menu__content top-full right-0 origin-top-right">
+      <%= form_with url: admin_account_path(@account), method: :delete, data: { turbo_confirm: "Delete account?" } do %>
+        <button type="submit" class="menu__item">
+          <x-icon>delete</x-icon>
+          <span>Delete</span>
+        </button>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="card pb-3">
+  <dl class="data-list">
+    <div>
+      <dt>
+        <%= t 'general.owner' %>
+      </dt>
+      <dd>
+        <a href="<%= url_for([:admin, @account.owner]) %>" class="text-primary underline">
+          <%= url_for([:admin, @account.owner]) %>
+        </a>
+      </dd>
     </div>
 
-    <dl class="data-list">
+    <div>
+      <dt>
+        <%= t 'general.public_link' %>
+      </dt>
+      <dd>
+        <a href="<%= account_root_path(@account.name) %>" class="text-primary underline">
+          <%= account_root_path(@account.name) %>
+        </a>
+      </dd>
+    </div>
+
+    <% @account.attributes.each do |name, value| %>
       <div>
         <dt>
-          <%= t 'general.owner' %>
+          <%= name %>
         </dt>
-        <dd>
-          <a href="<%= url_for([:admin, @account.owner]) %>" class="text-primary underline">
-            <%= url_for([:admin, @account.owner]) %>
-          </a>
+        <dd class="text-break-all">
+          <%= value %>
         </dd>
       </div>
-
-      <div>
-        <dt>
-          <%= t 'general.public_link' %>
-        </dt>
-        <dd>
-          <a href="<%= account_root_path(@account.name) %>" class="text-primary underline">
-            <%= account_root_path(@account.name) %>
-          </a>
-        </dd>
-      </div>
-
-      <% @account.attributes.each do |name, value| %>
-        <div>
-          <dt>
-            <%= name %>
-          </dt>
-          <dd class="text-break-all">
-            <%= value %>
-          </dd>
-        </div>
-      <% end %>
-    </dl>
-  </div>
+    <% end %>
+  </dl>
 </div>

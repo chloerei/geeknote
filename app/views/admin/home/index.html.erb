@@ -1,6 +1,49 @@
+<div class="top-app-bar">
+  <label for="navigation-drawer-toggle" class="icon-button xl:hidden">
+    <x-icon>menu</x-icon>
+  </label>
+  <div class="top-app-bar__headline">
+    <%= t "general.overview" %>
+  </div>
+</div>
+
 <div class="">
   <div class="card p-4">
-    <h1>Admin::Home#index</h1>
-    <p>Find me in app/views/admin/home/index.html.erb</p>
+    <h3 class="text-lg font-medium">
+      <%= t "general.stats" %>
+    </h3>
+    <div class="grid grid-cols-3 gap-4 mt-4">
+      <div class="card border border-outline-variant">
+        <div class="p-4">
+          <div class="text-sm font-medium text-on-surface-variant">
+            <%= t "general.posts" %>
+          </div>
+          <div class="text-2xl font-medium">
+            <%= Post.count %>
+          </div>
+        </div>
+      </div>
+
+      <div class="card border border-outline-variant">
+        <div class="p-4">
+          <div class="text-sm font-medium text-on-surface-variant">
+            <%= t "general.comments" %>
+          </div>
+          <div class="text-2xl font-medium">
+            <%= Comment.count %>
+          </div>
+        </div>
+      </div>
+
+      <div class="card border border-outline-variant">
+        <div class="p-4">
+          <div class="text-sm font-medium text-on-surface-variant">
+            <%= t "general.users" %>
+          </div>
+          <div class="text-2xl font-medium">
+            <%= User.count %>
+          </div>
+        </div>
+    </div>
   </div>
 </div>

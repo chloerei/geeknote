@@ -1,38 +1,38 @@
-<div class="">
-  <div class="card pb-3">
-    <div class="flex items-center h-14 gap-2 px-2">
-      <div class="flex-grow text-lg font-medium px-2">
-        <%= t 'general.settings' %>
+<div class="top-app-bar">
+  <label for="navigation-drawer-toggle" class="icon-button xl:hidden">
+    <x-icon>menu</x-icon>
+  </label>
+
+  <div class="top-app-bar__headline">
+    <%= t 'general.settings' %>
+  </div>
+</div>
+
+<div class="card py-3">
+  <a href="<%= admin_settings_appearance_path %>" class="flex gap-4 p-4 interactive">
+    <div class="icon h-6 w-6">
+      <x-icon>web</x-icon>
+    </div>
+    <div class="flex-grow">
+      <div class="text-lg font-medium">
+        <%= t '.appearance' %>
+      </div>
+      <div class="">
+        <%= t '.appearance_desription' %>
       </div>
     </div>
-
-    <div class="">
-      <a href="<%= admin_settings_appearance_path %>" class="flex gap-4 p-4 interactive-bg-surface-container-lowest">
-        <div class="icon h-6 w-6">
-          <x-icon>web</x-icon>
-        </div>
-        <div class="flex-grow">
-          <div class="text-lg font-medium">
-            <%= t '.appearance' %>
-          </div>
-          <div class="">
-            <%= t '.appearance_desription' %>
-          </div>
-        </div>
-      </a>
-      <a href="<%= admin_settings_weekly_digest_path %>" class="flex gap-4 p-4 interactive-bg-surface-container-lowest">
-        <div class="icon h-6 w-6">
-          <x-icon>mail</x-icon>
-        </div>
-        <div class="flex-grow">
-          <div class="text-lg font-medium">
-            <%= t '.weekly_digest' %>
-          </div>
-          <div class="">
-            <%= t '.weekly_digest_desription' %>
-          </div>
-        </div>
-      </a>
+  </a>
+  <a href="<%= admin_settings_weekly_digest_path %>" class="flex gap-4 p-4 interactive">
+    <div class="icon h-6 w-6">
+      <x-icon>mail</x-icon>
     </div>
-  </div>
+    <div class="flex-grow">
+      <div class="text-lg font-medium">
+        <%= t '.weekly_digest' %>
+      </div>
+      <div class="">
+        <%= t '.weekly_digest_desription' %>
+      </div>
+    </div>
+  </a>
 </div>

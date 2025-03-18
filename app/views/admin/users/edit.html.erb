@@ -1,42 +1,38 @@
-<div class="">
-  <div class="card">
-    <div class="flex items-center h-14 gap-2 px-2">
-      <a href="<%= admin_user_path(@user) %>" class="icon-button">
-        <x-icon>arrow_back</x-icon>
-      </a>
-      <div class="flex-grow text-lg font-medium px-2">
-        Edit user #<%= @user.id %>
-      </div>
-    </div>
-
-    <div class="p-4">
-      <%= form_with model: @user, url: admin_user_path(@user) do |form| %>
-        <div class="form-field">
-          <%= form.label :name, class: "form-label" %>
-          <%= render "components/text_field", form: form, name: :name %>
-        </div>
-
-        <div class="form-field">
-          <%= form.label :email, class: "form-label" %>
-          <%= render "components/text_field", form: form, name: :email %>
-        </div>
-
-        <div class="form-field">
-          <%= form.label :bio, class: "form-label" %>
-          <%= render "components/text_field", form: form, name: :bio, type: :text_area %>
-        </div>
-
-        <div class="form-field">
-          <%= render "components/checkbox_field", form: form, name: :email_notification_enabled %>
-          <%= render "components/checkbox_field", form: form, name: :weekly_digest_email_enabled %>
-        </div>
-
-        <div class="form-field">
-          <button type="submit" class="button button--filled">
-            <%= t 'general.save_changes' %>
-          </button>
-        </div>
-      <% end %>
-    </div>
+<div class="top-app-bar">
+  <a href="<%= admin_user_path(@user) %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    Edit user #<%= @user.id %>
   </div>
+</div>
+
+<div class="card p-4">
+  <%= form_with model: @user, url: admin_user_path(@user) do |form| %>
+    <div class="form-field">
+      <%= form.label :name, class: "form-label" %>
+      <%= render "components/text_field", form: form, name: :name %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :email, class: "form-label" %>
+      <%= render "components/text_field", form: form, name: :email %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :bio, class: "form-label" %>
+      <%= render "components/text_field", form: form, name: :bio, type: :text_area %>
+    </div>
+
+    <div class="form-field">
+      <%= render "components/checkbox_field", form: form, name: :email_notification_enabled %>
+      <%= render "components/checkbox_field", form: form, name: :weekly_digest_email_enabled %>
+    </div>
+
+    <div class="form-field">
+      <button type="submit" class="button button--filled">
+        <%= t 'general.save_changes' %>
+      </button>
+    </div>
+  <% end %>
 </div>
