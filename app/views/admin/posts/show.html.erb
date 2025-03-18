@@ -1,92 +1,88 @@
-<div class="">
-  <div class="card">
-    <div class="flex items-center h-14 px-2">
-      <a href="<%= admin_posts_path %>" class="icon-button">
-        <x-icon>arrow_back</x-icon>
-      </a>
+<div class="top-app-bar">
+  <a href="<%= admin_posts_path %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+      Post #<%= @post.id %>
+  </div>
 
-      <div class="flex-grow px-2 text-lg font-medium">
-        Posts #<%= @post.id %>
-      </div>
+  <a href="<%= edit_admin_post_path(@post) %>" class="icon-button">
+    <x-icon>edit</x-icon>
+  </a>
+  <div class="menu">
+    <label tabindex="0" class="icon-button">
+      <x-icon>more_vert</x-icon>
+    </label>
+    <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
+      <% if @post.restricted? %>
+        <%= form_with url: unrestrict_admin_post_path(@post), method: :patch do %>
+          <button type="submit" class="menu__item">
+            <x-icon>block</x-icon>
+            <span>Unblock</span>
+          </button>
+        <% end %>
+      <% else  %>
+        <%= form_with url: restrict_admin_post_path(@post), method: :patch, data: { turbo_confirm: t('.restrict_post_confirm') } do %>
+          <button type="submit" class="menu__item">
+            <x-icon>block</x-icon>
+            <span>Block</span>
+          </button>
+        <% end %>
+      <% end %>
+      <%= form_with url: admin_post_path(@post), method: :delete, data: { turbo_confirm: "Delete post?" } do %>
+        <button type="submit" class="menu__item">
+          <x-icon>delete</x-icon>
+          <span>Delete</span>
+        </button>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-      <a href="<%= edit_admin_post_path(@post) %>" class="icon-button">
-        <x-icon>edit</x-icon>
-      </a>
-
-      <div class="menu">
-        <label tabindex="0" class="icon-button">
-          <x-icon>more_vert</x-icon>
-        </label>
-        <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
-          <% if @post.restricted? %>
-            <%= form_with url: unrestrict_admin_post_path(@post), method: :patch do %>
-              <button type="submit" class="menu__item">
-                <x-icon>block</x-icon>
-                <span>Unblock</span>
-              </button>
-            <% end %>
-          <% else  %>
-            <%= form_with url: restrict_admin_post_path(@post), method: :patch, data: { turbo_confirm: t('.restrict_post_confirm') } do %>
-              <button type="submit" class="menu__item">
-                <x-icon>block</x-icon>
-                <span>Block</span>
-              </button>
-            <% end %>
-          <% end %>
-          <%= form_with url: admin_post_path(@post), method: :delete, data: { turbo_confirm: "Delete post?" } do %>
-            <button type="submit" class="menu__item">
-              <x-icon>delete</x-icon>
-              <span>Delete</span>
-            </button>
-          <% end %>
-        </div>
-      </div>
+<div class="card">
+  <dl class="data-list">
+    <div>
+      <dt>
+        <%= t 'general.account' %>
+      </dt>
+      <dd>
+        <a href="<%= admin_account_path(@post.account.id) %>" class="text-primary underline">
+          <%= @post.account.name %>
+        </a>
+      </dd>
     </div>
 
-    <dl class="data-list pb-3">
+    <div>
+      <dt>
+        <%= t 'general.user' %>
+      </dt>
+      <dd>
+        <a href="<%= admin_user_path(@post.user) %>" class="text-primary underline">
+          <%= @post.user.name %>
+        </a>
+      </dd>
+    </div>
+
+    <div>
+      <dt>
+        <%= t 'general.public_link' %>
+      </dt>
+      <dd>
+        <a href="<%= account_post_path(@post.account, @post) %>" class="text-primary underline">
+          <%= account_post_path(@post.account, @post) %>
+        </a>
+      </dd>
+    </div>
+
+    <% @post.attributes.each do |name, value| %>
       <div>
         <dt>
-          <%= t 'general.account' %>
+          <%= name %>
         </dt>
-        <dd>
-          <a href="<%= admin_account_path(@post.account.id) %>" class="text-primary underline">
-            <%= @post.account.name %>
-          </a>
+        <dd class="break-words">
+          <%= value %>
         </dd>
       </div>
-
-      <div>
-        <dt>
-          <%= t 'general.user' %>
-        </dt>
-        <dd>
-          <a href="<%= admin_user_path(@post.user) %>" class="text-primary underline">
-            <%= @post.user.name %>
-          </a>
-        </dd>
-      </div>
-
-      <div>
-        <dt>
-          <%= t 'general.public_link' %>
-        </dt>
-        <dd>
-          <a href="<%= account_post_path(@post.account, @post) %>" class="text-primary underline">
-            <%= account_post_path(@post.account, @post) %>
-          </a>
-        </dd>
-      </div>
-
-      <% @post.attributes.each do |name, value| %>
-        <div>
-          <dt>
-            <%= name %>
-          </dt>
-          <dd class="break-words">
-            <%= value %>
-          </dd>
-        </div>
-      <% end %>
-    </dl>
-  </div>
+    <% end %>
+  </dl>
 </div>

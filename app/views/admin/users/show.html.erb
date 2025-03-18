@@ -1,52 +1,50 @@
-<div class="">
-  <div class="card">
-    <div class="flex items-center h-14 gap-2 px-2">
-      <a href="<%= admin_users_path %>" class="icon-button">
-        <x-icon>arrow_back</x-icon>
-      </a>
-      <div class="flex-grow text-lg font-medium px-2">
-        User #<%= @user.id %>
-      </div>
-      <a href="<%= edit_admin_user_path(@user) %>" class="icon-button">
-        <x-icon>edit</x-icon>
-      </a>
-      <div class="menu">
-        <label tabindex="0" class="icon-button">
-          <x-icon>more_vert</x-icon>
-        </label>
-        <div class="menu__content top-full right-0 origin-top-right">
-          <%= form_with url: admin_user_path(@user), method: :delete, data: { turbo_confirm: "Delete user?" } do %>
-            <button type="submit" class="menu__item">
-              <x-icon>delete</x-icon>
-              <span>Delete</span>
-            </button>
-          <% end %>
-        </div>
-      </div>
+<div class="top-app-bar">
+  <a href="<%= admin_users_path %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    User #<%= @user.id %>
+  </div>
+  <a href="<%= edit_admin_user_path(@user) %>" class="icon-button">
+    <x-icon>edit</x-icon>
+  </a>
+  <div class="menu">
+    <label tabindex="0" class="icon-button">
+      <x-icon>more_vert</x-icon>
+    </label>
+    <div class="menu__content top-full right-0 origin-top-right">
+      <%= form_with url: admin_user_path(@user), method: :delete, data: { turbo_confirm: "Delete user?" } do %>
+        <button type="submit" class="menu__item">
+          <x-icon>delete</x-icon>
+          <span>Delete</span>
+        </button>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <dl class="data-list">
+    <div>
+      <dt>
+        <%= t 'general.account' %>
+      </dt>
+      <dd>
+        <a href="<%= admin_account_path(@user.account) %>" class="text-primary underline">
+          <%= admin_account_path(@user.account) %>
+        </a>
+      </dd>
     </div>
 
-    <dl class="data-list">
+    <% @user.attributes.except('password_digest', 'auth_token').each do |name, value| %>
       <div>
         <dt>
-          <%= t 'general.account' %>
+          <%= name %>
         </dt>
         <dd>
-          <a href="<%= admin_account_path(@user.account) %>" class="text-primary underline">
-            <%= admin_account_path(@user.account) %>
-          </a>
+          <%= value %>
         </dd>
       </div>
-
-      <% @user.attributes.except('password_digest', 'auth_token').each do |name, value| %>
-        <div>
-          <dt>
-            <%= name %>
-          </dt>
-          <dd>
-            <%= value %>
-          </dd>
-        </div>
-      <% end %>
-    </dl>
-  </div>
+    <% end %>
+  </dl>
 </div>

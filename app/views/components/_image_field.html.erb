@@ -1,4 +1,4 @@
-<%# locals: (form:, name:, label: nil, options: {}) %>
+<%# locals: (form:, name:, label: nil, description: nil, options: {}) %>
 
 <%
   error ||= form.object && form.object.errors[name].first
@@ -6,13 +6,47 @@
 
 <div>
   <div class="group/image-field <%= 'attached' if form.object.send(name).attached? %>" data-controller="image-field">
-    <%= form.file_field name, class: "hidden", direct_upload: true, data: { image_field_target: "input", action: "image-field#preview" } %>
-    <%= form.check_box "remove_#{name}", class: "hidden", data: { image_field_target: "removeInput", action: "image-field#remove" } %>
-    <%= yield %>
+    <div class="hidden">
+      <%= form.file_field name, options.merge( data: {direct_upload: true, image_field_target: "input", action: "image-field#preview" }) %>
+      <input type="checkbox" name="<%= form.field_name name %>" value="" id="<%= form.field_id(name, :remove) %>" data-image-field-target="removeInput" data-action="image-field#remove">
+    </div>
+    <div class="relative w-full aspect-video">
+      <div class="absolute inset-0 [&>img]:object-cover [&>img]:h-full [&>img]:w-full [&>img]:rounded" data-image-field-target="preview">
+        <% if form.object.send(name).attached? %>
+          <%= image_tag form.object.send(name) %>
+        <% end %>
+      </div>
+
+      <label for="<%= form.field_id name %>" class="absolute inset-0 flex flex-col items-center justify-center gap-2 group-[.attached]/image-field:hidden rounded border-2 border-dashed border-outline-variant interactive text-on-surface-variant cursor-pointer">
+        <div class="icon w-6 h-6">
+          <x-icon>add_photo_alternate</x-icon>
+        </div>
+        <div class="text-sm font-medium">
+          <%= t "general.click_to_select_image" %>
+        </div>
+      </label>
+
+      <div class="absolute top-2 right-2 items-center gap-2 hidden group-[.attached]/image-field:flex">
+        <div class="bg-surface-variant rounded-full">
+          <label for="<%= form.field_id name %>" class="icon-button">
+            <x-icon>add_photo_alternate</x-icon>
+          </label>
+        </div>
+        <div class="bg-surface-variant rounded-full">
+          <label for="<%= form.field_id name, :remove %>" class="icon-button">
+            <x-icon>delete</x-icon>
+          </label>
+        </div>
+      </div>
+    </div>
   </div>
   <% if error %>
     <div class="mt-2 text-sm text-error">
       <%= error %>
+    </div>
+  <% elsif description %>
+    <div class="mt-2 text-sm text-on-surface-variant">
+      <%= description %>
     </div>
   <% end %>
 </div>

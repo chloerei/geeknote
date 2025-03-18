@@ -3,26 +3,22 @@
 <nav class="flex gap-1">
   <%# Previous page link %>
   <% if pagy.prev %>
-    <a href="<%= pagy_url_for(pagy, pagy.prev) %>" class="inline-flex items-center h-8 px-2 interactive-bg-surface-container rounded">
-      <div class="icon w-4 h-4">
-        <x-icon>chevron_left</x-icon>
-      </div>
+    <a href="<%= pagy_url_for(pagy, pagy.prev) %>" class="inline-flex items-center h-8 px-2 interactive rounded">
+      <x-icon>chevron_left</x-icon>
     </a>
   <% else %>
-    <span class="inline-flex items-center h-8 px-2 bg-surface-container-low rounded">
-      <div class="icon w-4 h-4">
-        <x-icon>chevron_left</x-icon>
-      </div>
+    <span class="inline-flex items-center h-8 px-2 pointer-events-none opacity-50 rounded">
+      <x-icon>chevron_left</x-icon>
     </span>
   <% end %>
   <%# Page links (series example: [1, :gap, 7, 8, "9", 10, 11, :gap, 36]) %>
   <% pagy.series.each do |item| %>
     <% if item.is_a?(Integer) %>
-      <a href="<%= pagy_url_for(pagy, item) %>" class="inline-flex items-center h-8 px-3 interactive-bg-surface-container rounded">
+      <a href="<%= pagy_url_for(pagy, item) %>" class="inline-flex items-center h-8 px-3 interactive rounded">
         <%= item %>
       </a>
     <% elsif item.is_a?(String) %>
-      <a href="<%= pagy_url_for(pagy, item) %>" class="inline-flex items-center h-8 px-3 interactive-bg-secondary-container rounded">
+      <a href="<%= pagy_url_for(pagy, item) %>" class="inline-flex items-center h-8 px-3 bg-secondary-container interactive rounded">
         <%= item %>
       </a>
     <% elsif item == :gap %>
@@ -33,16 +29,12 @@
   <% end %>
   <%# Next page link %>
   <% if pagy.next %>
-    <a href="<%= pagy_url_for(pagy, pagy.next) %>" class="inline-flex items-center h-8 px-2 interactive-bg-surface-container rounded">
-      <div class="icon w-4 h-4">
-        <x-icon>chevron_right</x-icon>
-      </div>
+    <a href="<%= pagy_url_for(pagy, pagy.next) %>" class="inline-flex items-center h-8 px-2 interactive rounded">
+      <x-icon>chevron_right</x-icon>
     </a>
   <% else %>
-    <span class="inline-flex items-center h-8 px-2 bg-surface-container-low rounded">
-      <div class="icon w-4 h-4">
-        <x-icon>chevron_right</x-icon>
-      </div>
+    <span class="inline-flex items-center h-8 px-2 pointer-events-none opacity-50 rounded">
+      <x-icon>chevron_right</x-icon>
     </span>
   <% end %>
 </nav>

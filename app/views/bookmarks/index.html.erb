@@ -1,9 +1,15 @@
-<div class="max-w-screen-lg mx-auto">
-  <div class="text-lg font-medium">
+<div class="top-app-bar">
+  <a href="/" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+
+  <div class="top-app-bar__headline">
     <%= t "general.bookmarks" %>
   </div>
+</div>
 
-  <div class="mt-6">
+<div class="layout-main-sidebar">
+  <div class="max-w-screen-lg mx-auto">
     <%= render "components/scroll_pagination", pagy: @pagy do %>
       <%= render partial: "account/posts/post", collection: @posts %>
     <% end %>

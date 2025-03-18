@@ -8,7 +8,17 @@
     background-color: var(--color-primary-container);
     color: var(--color-on-primary-container);
     border-radius: 12px;
+    transition: box-shadow 0.2s;
 
     @apply interactive;
+  }
+
+  .fab--extended {
+    width: auto;
+    padding: 0 16px;
+    justify-content: start;
+    gap: 16px;
+    font-size: 14px;
+    font-weight: 500;
   }
 }

@@ -1,31 +1,27 @@
-<div class="">
-  <div class="card">
-    <div class="flex items-center h-14 px-2 gap-2">
-      <a href="<%= admin_tag_path(@tag) %>" class="icon-button">
-        <x-icon>arrow_back</x-icon>
-      </a>
-      <div class="flex-grow text-lg font-medium px-2">
-        <%= t 'general.merge_tags' %>
+<div class="top-app-bar">
+  <a href="<%= admin_tag_path(@tag) %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    <%= t 'general.merge_tags' %>
+  </div>
+</div>
+
+<div class="card p-4">
+  <%= form_with url: admin_tag_merge_path do |form| %>
+    <div class="form-field">
+      <%= t '.merge_to', name: @tag.name %>
+    </div>
+    <div class="form-field">
+      <%= form.label :tag_list, class: "form-label" %>
+      <div data-controller="tag-field">
+        <%= form.hidden_field :tag_list, data: { tag_field_target: "input" } %>
       </div>
     </div>
-
-    <div class="p-4">
-      <%= form_with url: admin_tag_merge_path do |form| %>
-        <div class="form-field">
-          <%= t '.merge_to', name: @tag.name %>
-        </div>
-        <div class="form-field">
-          <%= form.label :tag_list, class: "form-label" %>
-          <div data-controller="tag-field">
-            <%= form.hidden_field :tag_list, data: { tag_field_target: "input" } %>
-          </div>
-        </div>
-        <div class="form-field">
-          <button type="submit" class="button button--filled">
-            <%= t '.merge' %>
-          </button>
-        </div>
-      <% end %>
+    <div class="form-field">
+      <button type="submit" class="button button--filled">
+        <%= t '.merge' %>
+      </button>
     </div>
-  </div>
+  <% end %>
 </div>

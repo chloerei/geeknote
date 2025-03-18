@@ -1,49 +1,50 @@
-<div class="">
-  <div class="card">
-    <div class="flex items-center h-14 px-2">
-      <div class="flex-grow text-lg font-medium px-2">
-        <%= t 'general.organizations' %>
-      </div>
-    </div>
+<div class="top-app-bar">
+  <label for="navigation-drawer-toggle" class="icon-button xl:hidden">
+    <x-icon>menu</x-icon>
+  </label>
+  <div class="top-app-bar__headline">
+    <%= t 'general.organizations' %>
+  </div>
+</div>
 
-    <table class="data-table">
-      <thead>
+<div class="card">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>
+          <%= t 'general.id' %>
+        </th>
+        <th>
+          <%= t 'general.name' %>
+        </th>
+        <th>
+          <%= t 'general.created_at' %>
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @organizations.each do |organization| %>
         <tr>
-          <th>
-            <%= t 'general.id' %>
-          </th>
-          <th>
-            <%= t 'general.name' %>
-          </th>
-          <th>
-            <%= t 'general.created_at' %>
-          </th>
-          <th></th>
+          <td>
+            <%= organization.id %>
+          </td>
+          <td>
+            <%= organization.name %>
+          </td>
+          <td>
+            <%= format_time organization.created_at %>
+          </td>
+          <td class="text-right">
+            <a href="<%= admin_organization_path(organization) %>" class="button button--text">
+              View
+            </a>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% @organizations.each do |organization| %>
-          <tr>
-            <td>
-              <%= organization.id %>
-            </td>
-            <td>
-              <%= organization.name %>
-            </td>
-            <td>
-              <%= format_time organization.created_at %>
-            </td>
-            <td class="text-right">
-              <a href="<%= admin_organization_path(organization) %>" class="button button--text">
-                View
-              </a>
-            </td>
-          </tr>
-        <% end %>
-    </table>
+      <% end %>
+  </table>
 
-    <div class="padding-3">
-      <%= paginate @organizations %>
-    </div>
+  <div class="padding-3">
+    <%= paginate @organizations %>
   </div>
 </div>

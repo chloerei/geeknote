@@ -1,25 +1,11 @@
 class Dashboard::PostsController < Dashboard::BaseController
+  helper_method :account_posts
+
   def index
-    posts = post_scope
+    posts = account_posts
 
-    @status = params[:status].presence_in(Post.statuses)
-    if @status
-      posts = posts.where(status: @status)
-    else
-      posts = posts.where.not(status: "trashed")
-    end
-
-    @sort = params[:sort].presence_in(%w[ updated created ]) || "created"
-    case @sort
-    when "updated"
-      posts = posts.order(updated_at: :desc)
-    when "created"
-      posts = posts.order(created_at: :desc)
-    end
-
-    if params[:q].present?
-      posts = posts.where("title ILIKE ?", "%#{params[:q]}%")
-    end
+    @status = params[:status].presence_in(%w[draft published trashed]) || "draft"
+    posts = posts.where(status: @status)
 
     @pagy, @posts = pagy(posts)
   end
@@ -40,12 +26,12 @@ class Dashboard::PostsController < Dashboard::BaseController
   end
 
   def edit
-    @post = post_scope.find(params[:id])
+    @post = account_posts.find(params[:id])
     render layout: "application"
   end
 
   def update
-    @post = post_scope.find(params[:id])
+    @post = account_posts.find(params[:id])
 
     if @post.update(post_params)
       redirect_to edit_dashboard_post_path(@account.name, @post), notice: t(".success")
@@ -55,7 +41,7 @@ class Dashboard::PostsController < Dashboard::BaseController
   end
 
   def destroy
-    @post = post_scope.find(params[:id])
+    @post = account_posts.find(params[:id])
     @post.destroy
     redirect_to dashboard_posts_path(@account.name), notice: t(".success")
   end
@@ -67,7 +53,7 @@ class Dashboard::PostsController < Dashboard::BaseController
 
   private
 
-  def post_scope
+  def account_posts
     if @account.user?
       Current.user.posts
     else

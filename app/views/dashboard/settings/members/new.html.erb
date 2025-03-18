@@ -1,21 +1,15 @@
-<%= render "dashboard/header" %>
-
-<div class="card mt-6 flex flex-col md:flex-row">
-  <div class="flex-shrink-0 md:w-64">
-    <%= render "dashboard/settings/nav" %>
+<div class="top-app-bar">
+  <a href="<%= dashboard_settings_members_path %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    Add member
   </div>
+</div>
 
-  <div class="flex-grow min-w-0">
-    <div class="flex h-14 items-center px-2 gap-2">
-      <a href="<%= dashboard_settings_members_path %>" class="icon-button">
-        <x-icon>arrow_back</x-icon>
-      </a>
-      <div class="flex-grow text-lg font-medium px-2">
-        Add member
-      </div>
-    </div>
-
-    <div class="p-4 max-w-screen-sm">
+<div class="card">
+  <div class="p-4">
+    <div class="max-w-screen-sm">
       <%= form_with model: @member, url: dashboard_settings_members_path(@account.name) do |form| %>
         <div class="form-field">
           <%= form.label :invitation_email, class: "form-label" %>

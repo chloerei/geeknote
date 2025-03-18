@@ -1,11 +1,20 @@
-<div class="max-w-screen-lg mx-auto">
-  <div class="text-lg font-medium">
+<div class="top-app-bar">
+  <a href="/" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
     <%= t "general.notifications" %>
   </div>
+</div>
 
-  <div class="card py-3 mt-6">
-    <%= render "components/scroll_pagination", pagy: @pagy do %>
-      <%= render partial: "notification", collection: @notifications %>
-    <% end %>
+<div class="layout-main-sidebar">
+  <div class="">
+    <div class="card">
+      <div class="py-4">
+        <%= render "components/scroll_pagination", pagy: @pagy do %>
+          <%= render partial: "notification", collection: @notifications %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

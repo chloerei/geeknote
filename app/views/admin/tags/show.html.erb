@@ -1,49 +1,47 @@
-<div class="">
-  <div class="card pb-3">
-    <div class="flex items-center h-14 px-2">
-      <a href="<%= admin_tags_path %>" class="icon-button">
-        <x-icon>arrow_back</x-icon>
-      </a>
+<div class="top-app-bar">
+  <a href="<%= admin_tags_path %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
 
-      <div class="flex-grow text-lg font-medium">
-        Tag #<%= @tag.id %>
-      </div>
-
-      <a href="<%= edit_admin_tag_path(@tag) %>" class="icon-button">
-        <x-icon>edit</x-icon>
-      </a>
-
-      <div class="menu">
-        <label tabindex="0" class="icon-button">
-          <x-icon>more_vert</x-icon>
-        </label>
-        <div class="menu__content top-full right-0 origin-top-right">
-          <a href="<%= new_admin_tag_merge_path(@tag) %>" class="menu__item">
-            <x-icon>merge</x-icon>
-            <span>Merge</span>
-          </a>
-
-          <%= form_with url: admin_tag_path(@tag), method: :delete, data: { turbo_confirm: "Delete tag?" } do %>
-            <button type="submit" class="menu__item">
-              <x-icon>delete</x-icon>
-              <span>Delete</span>
-            </button>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <table class="data-table">
-      <% @tag.attributes.each do |name, value| %>
-        <tr>
-          <th>
-            <%= name %>
-          </th>
-          <td class="text-break-all">
-            <%= value %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
+  <div class="top-app-bar__headline">
+    Tag #<%= @tag.id %>
   </div>
+
+  <a href="<%= edit_admin_tag_path(@tag) %>" class="icon-button">
+    <x-icon>edit</x-icon>
+  </a>
+
+  <div class="menu">
+    <label tabindex="0" class="icon-button">
+      <x-icon>more_vert</x-icon>
+    </label>
+    <div class="menu__content top-full right-0 origin-top-right">
+      <a href="<%= new_admin_tag_merge_path(@tag) %>" class="menu__item">
+        <x-icon>merge</x-icon>
+        <span>Merge</span>
+      </a>
+
+      <%= form_with url: admin_tag_path(@tag), method: :delete, data: { turbo_confirm: "Delete tag?" } do %>
+        <button type="submit" class="menu__item">
+          <x-icon>delete</x-icon>
+          <span>Delete</span>
+        </button>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <table class="data-table">
+    <% @tag.attributes.each do |name, value| %>
+      <tr>
+        <th>
+          <%= name %>
+        </th>
+        <td class="text-break-all">
+          <%= value %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 </div>

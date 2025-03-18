@@ -1,0 +1,114 @@
+@layer components {
+  .navigation-drawer {
+  }
+
+  .navigation-drawer__toggle {
+    display: none;
+  }
+
+  .navigation-drawer__content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    z-index: 50;
+    background-color: var(--color-surface-container-lowest);
+
+    /* modal */
+    margin-left: -280px;
+    display: none;
+    transition: all 0.2s;
+    transition-behavior: allow-discrete;
+  }
+
+  .navigation-drawer__scrim {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+
+    /* modal */
+    display: none;
+    opacity: 0;
+    transition: all 0.2s;
+    transition-behavior: allow-discrete;
+  }
+
+  .navigation-drawer__toggle:checked ~ .navigation-drawer__content {
+    display: block;
+    margin-left: 0;
+
+    @starting-style {
+      margin-left: -280px;
+    }
+  }
+
+  .navigation-drawer__toggle:checked ~ .navigation-drawer__scrim {
+    display: block;
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  /* standard */
+  @media (min-width: 1280px) {
+    .navigation-drawer {
+      position: sticky;
+      top: 0;
+    }
+
+    .navigation-drawer__content {
+      display: block;
+      position: relative;
+      margin-left: 0;
+      background-color: transparent;
+    }
+
+    .navigation-drawer__scrim {
+      display: none !important;
+    }
+  }
+
+  .navigation-drawer__item {
+    height: 48px;
+    display: flex;
+    gap: 16px;
+    padding: 0 16px;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 9999px;
+
+    @apply interactive;
+  }
+
+  .navigation-drawer__item__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .navigation-drawer__item__label {
+    flex-grow: 1;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-on-surface-variant);
+  }
+
+  .navigation-drawer__item__badge {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .navigation-drawer__item--active {
+    background-color: var(--color-secondary-container);
+  }
+
+  .navigation-drawer__item--active .navigation-drawer__item__label {
+    font-weight: 700;
+    color: var(--color-on-secondary-container);
+  }
+}

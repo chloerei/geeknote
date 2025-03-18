@@ -1,50 +1,103 @@
+<div class="h-20 pb-safe md:hidden"></div>
+
 <div class="navigation-bar md:hidden pb-safe">
-  <% if request.path.in?([ "/", "/following", "/newest", "/notifications", "/bookmarks", "/me" ]) %>
-    <% if Current.user %>
-      <div class="fixed right-4 bottom-24 pb-safe">
-        <a href="<%= new_dashboard_post_path(Current.user.account.name) %>" class="floating-action-button">
-          <x-icon>edit_square</x-icon>
-        </a>
-      </div>
-    <% end %>
+  <% if Current.user && request.path.in?([ "/", "/following", "/newest", account_root_path(Current.user.account.name) ]) %>
+    <div class="fixed right-4 bottom-24 pb-safe">
+      <a href="<%= new_dashboard_post_path(Current.user.account.name) %>" class="fab shadow-md hover:shadow-lg">
+        <x-icon>edit_square</x-icon>
+      </a>
+    </div>
   <% end %>
 
-  <%= render "components/navigation_bar_item", url: root_path, icon: :home, label: t("general.home"), active: request.path.in?([root_path]) %>
+  <a href="/" class="navigation-bar__item <%= "navigation-bar__item--active" if request.path.in?(["/", "/following", "/newest"]) %>">
+    <div class="navigation-bar__item__icon">
+      <x-icon>home</x-icon>
+    </div>
+    <div class="navigation-bar__item__label">
+      <%= t "general.home" %>
+    </div>
+  </a>
+
+  <a href="<%= search_path %>" class="navigation-bar__item <%= "navigation-bar__item--active" if current_page?(search_path) %>">
+    <div class="navigation-bar__item__icon">
+      <x-icon>search</x-icon>
+    </div>
+    <div class="navigation-bar__item__label">
+      <%= t "general.search" %>
+    </div>
+  </a>
 
   <% if Current.user %>
-    <%= render "components/navigation_bar_item", url: notifications_path, icon: :notifications, label: t("general.notifications"), active: current_page?(notifications_path), badge: Current.user.notifications.unread.count %>
-
-    <%= render "components/navigation_bar_item", url: bookmarks_path, icon: :bookmarks, label: t("general.bookmarks"), active: current_page?(bookmarks_path) %>
-
-    <%= render "components/navigation_bar_item", url: dashboard_root_path(Current.user.account.name), icon: :post, label: t("general.posts"), active: request.path.start_with?("/dashboard") %>
-  <% end %>
-
-  <div class="menu flex-grow basis-0">
-    <label tabindex="0" class="navigation-bar__item">
+    <a href="<%= notifications_path %>" class="navigation-bar__item <%= "navigation-bar__item--active" if current_page?(notifications_path) %>">
       <div class="navigation-bar__item__icon">
-        <% if Current.user %>
-          <img src="<%= avatar_url(Current.user) %>" class="h-6 w-6 rounded-full">
-        <% else %>
-          <img src="<%= asset_path("avatar.png") %>" class="h-6 w-6 rounded-full">
+        <x-icon>notifications</x-icon>
+        <% notification_count = Current.user.notifications.unread.count %>
+        <% if notification_count > 0 %>
+          <div class="navigation-bar__item__badge">
+            <%= notification_count > 99 ? "99+" : notification_count %>
+          </div>
         <% end %>
       </div>
       <div class="navigation-bar__item__label">
-        <%= t "general.me" %>
+        <%= t "general.notifications" %>
       </div>
-    </label>
-    <div tabindex="0" class="menu__content top-auto left-auto bottom-full right-0 origin-bottom-right md:left-full md:bottom-0 md:origin-bottom-left">
-      <% if Current.user %>
+    </a>
+
+    <a href="<%= dashboard_root_path(Current.user.account.name) %>" class="navigation-bar__item <%= "navigation-bar__item--active" if request.path.start_with?("/dashboard") %>">
+      <div class="navigation-bar__item__icon">
+        <x-icon>dashboard</x-icon>
+      </div>
+      <div class="navigation-bar__item__label">
+        <%= t "general.dashboard_short" %>
+      </div>
+    </a>
+  <% else %>
+    <a href="<%= sign_in_path %>" class="navigation-bar__item  <%= "navigation-bar__item--active" if current_page?(sign_in_path) %>">
+      <div class="navigation-bar__item__icon">
+        <x-icon>login</x-icon>
+      </div>
+      <div class="navigation-bar__item__label">
+        <%= t "general.sign_in" %>
+      </div>
+    </a>
+
+    <a href="<%= sign_up_path %>" class="navigation-bar__item  <%= "navigation-bar__item--active" if current_page?(sign_up_path) %>">
+      <div class="navigation-bar__item__icon">
+        <x-icon>person_add</x-icon>
+      </div>
+      <div class="navigation-bar__item__label">
+        <%= t "general.sign_up" %>
+      </div>
+    </a>
+  <% end %>
+
+  <% if Current.user %>
+    <div class="menu flex-grow basis-0">
+      <label tabindex="0" class="navigation-bar__item">
+        <div class="navigation-bar__item__icon">
+          <img src="<%= avatar_url(Current.user) %>" class="h-6 w-6 rounded-full">
+        </div>
+        <div class="navigation-bar__item__label">
+          <%= t "general.me" %>
+        </div>
+      </label>
+      <div tabindex="0" class="menu__content top-auto left-auto bottom-full right-0 origin-bottom-right md:left-full md:bottom-0 md:origin-bottom-left">
         <a href="<%= account_root_path(Current.user.account.name) %>" class="menu__item">
           <x-icon>account_circle</x-icon>
           <span>
-            Profile
+            <%= t "general.profile" %>
           </span>
+        </a>
+
+        <a href="<%= bookmarks_path %>" class="menu__item">
+          <x-icon>bookmarks</x-icon>
+          <span><%= t "general.bookmarks" %></span>
         </a>
 
         <a href="<%= settings_root_path %>" class="menu__item">
           <x-icon>settings</x-icon>
           <span>
-            Settings
+            <%= t "general.settings" %>
           </span>
         </a>
 
@@ -52,25 +105,11 @@
           <button type="submit" class="menu__item">
             <x-icon>logout</x-icon>
             <span>
-              Sign out
+              <%= t "general.sign_out" %>
             </span>
           </button>
         <% end %>
-      <% else %>
-        <a href="<%= sign_in_path %>" class="menu__item">
-          <x-icon>login</x-icon>
-          <span>
-            Sign in
-          </span>
-        </a>
-
-        <a href="<%= sign_up_path %>" class="menu__item">
-          <x-icon>person_add</x-icon>
-          <span>
-            Sign up
-          </span>
-        </a>
-      <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>

@@ -1,32 +1,28 @@
-<div class="">
-  <div class="card">
-    <div class="flex items-center h-14 gap-2 px-2">
-      <a href="<%= admin_organization_path(@organization) %>" class="icon-button">
-        <x-icon>arrow_back</x-icon>
-      </a>
-      <div class="flex-grow text-lg font-medium px-2">
-        Edit organization #<%= @organization.id %>
-      </div>
-    </div>
-
-    <div class="p-4">
-      <%= form_with model: @organization, url: admin_organization_path(@organization) do |form| %>
-        <div class="form-field">
-          <%= form.label :name, class: "form-label" %>
-          <%= render "components/text_field", form: form, name: :name %>
-        </div>
-
-        <div class="form-field">
-          <%= form.label :description, class: "form-label" %>
-          <%= render "components/text_field", form: form, name: :description, type: :text_area %>
-        </div>
-
-        <div class="form-field">
-          <button type="submit" class="button button--filled">
-            <%= t 'general.save_changes' %>
-          </button>
-        </div>
-      <% end %>
-    </div>
+<div class="flex items-center h-14 gap-2 px-2">
+  <a href="<%= admin_organization_path(@organization) %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="flex-grow text-lg font-medium px-2">
+    Edit organization #<%= @organization.id %>
   </div>
+</div>
+
+<div class="card p-4">
+  <%= form_with model: @organization, url: admin_organization_path(@organization) do |form| %>
+    <div class="form-field">
+      <%= form.label :name, class: "form-label" %>
+      <%= render "components/text_field", form: form, name: :name %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :description, class: "form-label" %>
+      <%= render "components/text_field", form: form, name: :description, type: :text_area %>
+    </div>
+
+    <div class="form-field">
+      <button type="submit" class="button button--filled">
+        <%= t 'general.save_changes' %>
+      </button>
+    </div>
+  <% end %>
 </div>

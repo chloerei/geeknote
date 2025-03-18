@@ -1,1 +1,15 @@
-<%= yield %>
+<% content_for :body do %>
+  <div class="flex container mx-auto">
+    <div class="shrink-0">
+      <%= render "layouts/dashboard/navigation_drawer" %>
+    </div>
+
+    <div class="flex-grow min-w-0">
+      <div class="px-4 md:px-6">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= render template: "layouts/application" %>

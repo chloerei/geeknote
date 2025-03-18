@@ -1,10 +1,16 @@
 <% content_for :body do %>
-  <%= render "layouts/site/navigation_rail" %>
-  <%= render "layouts/site/navigation_bar" %>
+  <div class="flex container mx-auto">
+    <div class="shrink-0">
+      <%= render "layouts/site/navigation_rail" %>
+      <%= render "layouts/site/navigation_drawer" %>
+    </div>
 
-  <div class="md:ml-20">
-    <div class="max-w-screen-xl mx-auto p-4 md:p-6">
-      <%= yield %>
+    <div class="flex-grow min-w-0">
+      <div class="px-4 md:px-6">
+        <%= yield %>
+      </div>
+
+      <%= render "layouts/site/navigation_bar" %>
     </div>
   </div>
 <% end %>

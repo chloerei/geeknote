@@ -1,16 +1,12 @@
-<div class="flex items-center gap-2">
-  <div class="text-lg font-medium flex-grow">
+<div class="top-app-bar">
+  <div class="top-app-bar__headline">
     <%= t "general.dashboard" %>
   </div>
-  <a href="<%= account_root_path(@account.name) %>" class="button button--text">
-    <x-icon>north_east</x-icon>
-    <span><%= t "general.view" %></span>
-  </a>
   <div class="menu">
     <label tabindex="0" class="button button--text">
       <img src="<%= avatar_url(@account.owner) %>" alt="avatar" class="w-6 h-6 rounded-full">
       <div>
-        <%= @account.name %>
+        <%= @account.owner.name %>
       </div>
       <x-icon>arrow_drop_down</x-icon>
     </label>
@@ -51,9 +47,13 @@
       </a>
     </div>
   </div>
+  <a href="<%= account_root_path(@account.name) %>" class="button button--text">
+    <x-icon>north_east</x-icon>
+    <span><%= t "general.view" %></span>
+  </a>
 </div>
 
-<div class="flex gap-2 mt-6">
+<div class="flex gap-2">
   <a href="<%= dashboard_root_path(@account.name) %>" class="tab tab--primary <%= "tab--active" if current_page?(dashboard_root_path(@account.name)) %>">
     <x-icon>article</x-icon>
     <%= t "general.posts" %>

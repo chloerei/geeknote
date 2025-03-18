@@ -17,7 +17,7 @@
 
 @layer base {
   html {
-    background-color: var(--color-surface-container-low);
+    background-color: var(--color-surface);
     color: var(--color-on-surface);
   }
 }
@@ -28,8 +28,18 @@
     grid-template-columns: 1fr;
     gap: 24px;
 
-    @media (min-width: 768px) {
+    @media (min-width: 1280px) {
       grid-template-columns: 1fr 360px;
+    }
+  }
+
+  .layout-nav-main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+
+    @media (min-width: 1280px) {
+      grid-template-columns: 320px 1fr;
     }
   }
 }

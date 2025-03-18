@@ -1,6 +1,8 @@
 class SearchController < ApplicationController
+  helper_method :search_params
+
   def index
-    @tab = params[:tab].presence_in(%w[posts comments accounts]) || "posts"
+    @type = params[:type].presence_in(%w[posts comments accounts]) || "posts"
 
     options = {}
 
@@ -12,7 +14,7 @@ class SearchController < ApplicationController
       [ "created_at:asc" ]
     end
 
-    case @tab
+    case @type
     when "posts"
       options[:filter] = "status = 'published'"
       posts = Post.published.pagy_search(params[:q], options)
@@ -24,5 +26,11 @@ class SearchController < ApplicationController
       accounts = Account.pagy_search(params[:q], options)
       @pagy, @accounts = pagy_meilisearch(accounts)
     end
+  end
+
+  private
+
+  def search_params
+    params.permit(:q, :type, :sort)
   end
 end

@@ -1,56 +1,57 @@
-<div class="">
-  <div class="card">
-    <div class="flex items-center h-14 px-2">
-      <div class="flex-grow px-2 text-lg font-medium">
-        Tags
-      </div>
-    </div>
+<div class="top-app-bar">
+  <label for="navigation-drawer-toggle" class="icon-button xl:hidden">
+    <x-icon>menu</x-icon>
+  </label>
+  <div class="top-app-bar__headline">
+    Tags
+  </div>
+</div>
 
-    <table class="data-table">
-      <thead>
+<div class="card">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>
+          ID
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Taggings
+        </th>
+        <th>
+          Created at
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tags.each do |tag| %>
         <tr>
-          <th>
-            ID
-          </th>
-          <th>
-            Name
-          </th>
-          <th>
-            Taggings
-          </th>
-          <th>
-            Created at
-          </th>
-          <th></th>
+          <td>
+            <%= tag.id %>
+          </td>
+          <td>
+            <%= tag.name %>
+          </td>
+          <td>
+            <%= tag.taggings_count %>
+          </td>
+          <td>
+            <%= format_time tag.created_at %>
+          </td>
+          <td class="text-right">
+            <a href="<%= admin_tag_path(tag) %>" class="button button--text">
+              View
+            </a>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% @tags.each do |tag| %>
-          <tr>
-            <td>
-              <%= tag.id %>
-            </td>
-            <td>
-              <%= tag.name %>
-            </td>
-            <td>
-              <%= tag.taggings_count %>
-            </td>
-            <td>
-              <%= format_time tag.created_at %>
-            </td>
-            <td class="text-right">
-              <a href="<%= admin_tag_path(tag) %>" class="button button--text">
-                View
-              </a>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+      <% end %>
+    </tbody>
+  </table>
 
-    <div class="p-4">
-      <%= render "components/page_pagination", pagy: @pagy %>
-    </div>
+  <div class="p-4">
+    <%= render "components/page_pagination", pagy: @pagy %>
   </div>
 </div>

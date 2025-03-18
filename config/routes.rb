@@ -86,7 +86,7 @@ Rails.application.routes.draw do
   get "up", to: "rails/health#show", as: :rails_health_check
 
   scope "/dashboard/:account_name", module: "dashboard", as: :dashboard do
-    root to: "posts#index"
+    root to: "home#index"
     resources :posts, only: [ :index, :new, :create, :edit, :update, :destroy ] do
       collection do
         post "preview"
@@ -99,6 +99,7 @@ Rails.application.routes.draw do
     end
 
     namespace :settings do
+      root to: "home#index"
       resource :profile, only: [ :show, :update ]
       resources :members
       resource :import, only: [ :show, :update ]

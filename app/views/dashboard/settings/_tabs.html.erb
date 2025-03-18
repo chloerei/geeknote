@@ -1,0 +1,19 @@
+<div class="flex border-b border-outline-variant rounded-t-xl overflow-hidden">
+  <a href="<%= dashboard_settings_profile_path %>" class="tab tab--secondary grow <%= "tab--active" if current_page?(dashboard_settings_profile_path) %>">
+    <%= t "general.profile" %>
+  </a>
+
+  <% if @account.organization? %>
+    <a href="<%= dashboard_settings_members_path %>" class="tab tab--secondary grow <%= "tab--active" if current_page?(dashboard_settings_members_path) %>">
+      <%= t "general.members" %>
+    </a>
+  <% end %>
+
+  <a href="<%= dashboard_settings_import_path %>" class="tab tab--secondary grow <%= "tab--active" if current_page?(dashboard_settings_import_path) %>">
+    <%= t "general.import" %>
+  </a>
+
+  <a href="<%= dashboard_settings_export_path %>" class="tab tab--secondary grow <%= "tab--active" if current_page?(dashboard_settings_export_path) %>">
+    <%= t "general.export" %>
+  </a>
+</div>

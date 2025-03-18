@@ -1,58 +1,59 @@
-<div class="">
-  <div class="card">
-    <div class="flex items-center h-14 px-2">
-      <div class="px-2 text-lg font-medium">
-        <%= t 'general.comments' %>
-      </div>
-    </div>
+<div class="top-app-bar">
+  <label for="navigation-drawer-toggle" class="icon-button xl:hidden">
+    <x-icon>menu</x-icon>
+  </label>
+  <div class="top-app-bar__headline">
+    <%= t "general.comments" %>
+  </div>
+</div>
 
-    <table class="data-table">
-      <thead>
+<div class="card">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>
+          ID
+        </th>
+        <th>
+          Content
+        </th>
+        <th>
+          User
+        </th>
+        <th>
+          Created at
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @comments.each do |comment| %>
         <tr>
-          <th>
-            ID
-          </th>
-          <th>
-            Content
-          </th>
-          <th>
-            User
-          </th>
-          <th>
-            Created at
-          </th>
-          <th></th>
+          <td>
+            <%= comment.id %>
+          </td>
+          <td>
+            <div class="line-clamp-1">
+              <%= truncate comment.content, length: 35 %>
+            </div>
+          </td>
+          <td>
+            <%= comment.user.name %>
+          </td>
+          <td>
+            <%= format_time comment.created_at %>
+          </td>
+          <td class="text-right">
+            <a href="<%= admin_comment_path(comment) %>" class="button button--text">
+              View
+            </a>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% @comments.each do |comment| %>
-          <tr>
-            <td>
-              <%= comment.id %>
-            </td>
-            <td>
-              <div class="line-clamp-1">
-                <%= truncate comment.content, length: 35 %>
-              </div>
-            </td>
-            <td>
-              <%= comment.user.name %>
-            </td>
-            <td>
-              <%= format_time comment.created_at %>
-            </td>
-            <td class="text-right">
-              <a href="<%= admin_comment_path(comment) %>" class="button button--text">
-                View
-              </a>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+      <% end %>
+    </tbody>
+  </table>
 
-    <div class="p-4">
-      <%= render "components/page_pagination", pagy: @pagy %>
-    </div>
+  <div class="p-4">
+    <%= render "components/page_pagination", pagy: @pagy %>
   </div>
 </div>

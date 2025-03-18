@@ -1,31 +1,33 @@
-<div class="max-w-screen-sm mx-auto">
-  <div class="card">
-    <div class="flex items-center p-2">
-      <a href="<%= sign_in_path %>" class="icon-button">
-        <x-icon>arrow_back</x-icon>
-      </a>
-      <div class="flex-grow px-2 text-lg font-medium">
-        <%= t "general.reset_password" %>
-      </div>
+<div class="container mx-auto">
+  <div class="top-app-bar">
+    <a href="<%= sign_in_path %>" class="icon-button">
+      <x-icon>arrow_back</x-icon>
+    </a>
+    <div class="top-app-bar__headline">
+      <%= t "general.reset_password" %>
     </div>
+  </div>
 
-    <div class="p-4">
-      <%= form_with model: @user, url: identity_password_path, method: :post do |form| %>
-        <div class="form-field">
-          <%= form.label :email, class: "form-label" %>
-          <%= render "components/text_field", form: form, name: :email, options: { required: true, autofocus: true } %>
-        </div>
+  <div class="max-w-lg mx-auto p-4">
+    <div class="card">
+      <div class="p-4">
+        <%= form_with model: @user, url: identity_password_path, method: :post do |form| %>
+          <div class="form-field">
+            <%= form.label :email, class: "form-label" %>
+            <%= render "components/text_field", form: form, name: :email, options: { required: true, autofocus: true } %>
+          </div>
 
-        <div class="form-field">
-          <%= render "components/recaptcha_field", form: form %>
-        </div>
+          <div class="form-field">
+            <%= render "components/recaptcha_field", form: form %>
+          </div>
 
-        <div class="form-field">
-          <button type="submit" class="button button--filled">
-            <%= t ".send_reset_email" %>
-          </button>
-        </div>
-      <% end %>
+          <div class="form-field">
+            <button type="submit" class="button button--filled">
+              <%= t ".send_reset_email" %>
+            </button>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

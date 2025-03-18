@@ -1,15 +1,9 @@
 @layer components {
   .navigation-rail {
-    display: flex;
-    flex-direction: column;
-    padding: 16px 0;
-    gap: 12px;
-    align-items: center;
-    position: fixed;
+    position: sticky;
     top: 0;
-    left: 0;
-    bottom: 0;
     width: 80px;
+    height: 100vh;
     z-index: 10;
   }
 
@@ -59,11 +53,12 @@
     font-size: 12px;
     font-weight: 500;
     background-color: var(--color-error);
+    color: var(--color-on-error);
     border-radius: 9999px;
   }
 
   .navigation-rail__item--active .navigation-rail__item__label {
     font-weight: 700;
-    color: var(--color-on-surface);
+    color: var(--color-on-secondary-container);
   }
 }

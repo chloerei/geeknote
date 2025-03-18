@@ -1,108 +1,103 @@
-<%= render "dashboard/header" %>
-
-<div class="card mt-6 flex flex-col md:flex-row">
-  <div class="flex-shrink-0 md:w-64">
-    <%= render "dashboard/settings/nav" %>
+<div class="top-app-bar">
+  <a href="<%= dashboard_settings_root_path %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    <%= t "general.members" %>
   </div>
+  <a href="<%= new_dashboard_settings_member_path(@account.name) %>" class="button button--filled">
+    Add member
+  </a>
+</div>
 
-  <div class="flex-grow min-w-0">
-    <div class="flex h-14 items-center p-2 gap-2">
-      <div class="flex-grow text-lg font-medium px-2">
-        Members
-      </div>
-      <a href="<%= new_dashboard_settings_member_path(@account.name) %>" class="button button--text">
-        Add member
-      </a>
-    </div>
+<div class="card">
+  <div class="p-4">
 
-    <div class="p-4">
-
-      <div class="divide-y">
-        <% @account.owner.members.active.order(id: :asc).includes(:user).each do |member| %>
-          <div class="flex items-center gap-4 py-4">
-            <div class="flex-shrink-0">
-              <img src="<%= avatar_url(member.user) %>" class="w-10 h-10 rounded-full">
+    <div class="divide-y">
+      <% @account.owner.members.active.order(id: :asc).includes(:user).each do |member| %>
+        <div class="flex items-center gap-4 py-4">
+          <div class="flex-shrink-0">
+            <img src="<%= avatar_url(member.user) %>" class="w-10 h-10 rounded-full">
+          </div>
+          <div class="flex-grow">
+            <div class="font-medium">
+              <%= member.user.name %>
             </div>
-            <div class="flex-grow">
-              <div class="font-medium">
-                <%= member.user.name %>
-              </div>
-              <div class="text-on-surface-variant">
-                <%= member.user.email %>
-              </div>
-            </div>
-            <div class="flex-shrink-0">
-              <span class="font-medium">
-                <%= member.role %>
-              </span>
-            </div>
-            <div class="flex-shrink-0">
-              <div class="menu">
-                <label tabindex="0" class="icon-button">
-                  <x-icon>more_vert</x-icon>
-                </label>
-                <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
-                  <a href="<%= edit_dashboard_settings_member_path(@account.name, member) %>" class="menu__item">
-                    Edit
-                  </a>
-                  <%= form_with url: dashboard_settings_member_path(@account.name, member), method: :delete, data: { turbo_confirm: "Delete this member?" } do %>
-                    <button type="submit" class="menu__item">
-                      Delete
-                    </button>
-                  <% end %>
-                </div>
-              </div>
+            <div class="text-on-surface-variant">
+              <%= member.user.email %>
             </div>
           </div>
-        <% end %>
-      </div>
-
-      <% if @account.owner.members.pending.any? %>
-        <div class="mt-6">
-          <div class="text-sm font-medium">
-            Invitations
+          <div class="flex-shrink-0">
+            <span class="font-medium">
+              <%= member.role %>
+            </span>
           </div>
-
-          <div class="mt-2 divide-y">
-            <% @account.owner.members.pending.order(id: :asc).includes(:user).each do |member| %>
-              <div class="flex items-center gap-4 py-4">
-                <div class="flex-shrink-0">
-                  <img src="<%= asset_path("avatar.png") %>" class="w-10 h-10 rounded-full">
-                </div>
-                <div class="flex-grow">
-                  <div class="text-on-surface-variant">
-                    <%= member.invitation_email %>
-                  </div>
-                </div>
-                <div class="flex-shrink-0">
-                  <span class="font-medium">
-                    <%= member.role %>
-                  </span>
-                </div>
-                <div class="flex-shrink-0">
-                  <div class="menu">
-                    <label tabindex="0" class="icon-button">
-                      <x-icon>more_vert</x-icon>
-                    </label>
-                    <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
-                      <a href="<%= edit_dashboard_settings_member_path(@account.name, member) %>" class="menu__item">
-                        Edit
-                      </a>
-                      <%= form_with url: dashboard_settings_member_path(@account.name, member), method: :delete, data: { turbo_confirm: "Delete this member?" } do %>
-                        <button type="submit" class="menu__item">
-                          Delete
-                        </button>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
+          <div class="flex-shrink-0">
+            <div class="menu">
+              <label tabindex="0" class="icon-button">
+                <x-icon>more_vert</x-icon>
+              </label>
+              <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
+                <a href="<%= edit_dashboard_settings_member_path(@account.name, member) %>" class="menu__item">
+                  Edit
+                </a>
+                <%= form_with url: dashboard_settings_member_path(@account.name, member), method: :delete, data: { turbo_confirm: "Delete this member?" } do %>
+                  <button type="submit" class="menu__item">
+                    Delete
+                  </button>
+                <% end %>
               </div>
-            <% end %>
+            </div>
           </div>
         </div>
       <% end %>
-
     </div>
 
+    <% if @account.owner.members.pending.any? %>
+      <div class="mt-6">
+        <div class="text-sm font-medium">
+          Invitations
+        </div>
+
+        <div class="mt-2 divide-y">
+          <% @account.owner.members.pending.order(id: :asc).includes(:user).each do |member| %>
+            <div class="flex items-center gap-4 py-4">
+              <div class="flex-shrink-0">
+                <img src="<%= asset_path("avatar.png") %>" class="w-10 h-10 rounded-full">
+              </div>
+              <div class="flex-grow">
+                <div class="text-on-surface-variant">
+                  <%= member.invitation_email %>
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <span class="font-medium">
+                  <%= member.role %>
+                </span>
+              </div>
+              <div class="flex-shrink-0">
+                <div class="menu">
+                  <label tabindex="0" class="icon-button">
+                    <x-icon>more_vert</x-icon>
+                  </label>
+                  <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
+                    <a href="<%= edit_dashboard_settings_member_path(@account.name, member) %>" class="menu__item">
+                      Edit
+                    </a>
+                    <%= form_with url: dashboard_settings_member_path(@account.name, member), method: :delete, data: { turbo_confirm: "Delete this member?" } do %>
+                      <button type="submit" class="menu__item">
+                        Delete
+                      </button>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
   </div>
+
 </div>

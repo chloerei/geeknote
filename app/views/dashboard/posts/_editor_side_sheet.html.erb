@@ -1,0 +1,43 @@
+<%# locals: (form:) %>
+<div class="side-sheet">
+  <%# Side sheet toggle %>
+  <input id="side-sheet-toggle" type="checkbox" class="side-sheet__toggle" data-turbo-permanent oninput="event.stopPropagation()">
+  <div class="side-sheet__content">
+    <div class="top-app-bar sticky top-0 z-10 bg-surface-container-lowest px-5">
+      <div class="top-app-bar__headline">
+        <%= t "general.settings" %>
+      </div>
+      <label for="side-sheet-toggle" class="icon-button">
+        <x-icon>close</x-icon>
+      </label>
+    </div>
+    <div class="p-6 flex-grow overflow-auto">
+      <%# Featured image %>
+      <div class="form-field">
+        <%= form.label :featured_image, class: "form-label" %>
+        <%= render "components/image_field", form: form, name: :featured_image %>
+        <div class="form-text">
+          <%= t ".featured_image_description" %>
+        </div>
+      </div>
+
+      <%# Tags %>
+      <div class="form-field" data-turbo-permanent>
+        <%= form.label :tag_list, class: "form-label" %>
+        <div data-controller="tag-field">
+          <%= form.hidden_field :tag_list, data: { tag_field_target: "input" }, form: "post-form" %>
+        </div>
+        <div class="form-text">
+          <%= t ".tag_description" %>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <%= form.label :canonical_url, class: "form-label" %>
+        <%= render "components/text_field", form: form, name: :canonical_url, description: t(".canonical_url_description") %>
+        <%= form.text_field :canonical_url %>
+      </div>
+    </div>
+  </div>
+  <label class="side-sheet__scrim" for="side-sheet-toggle"></label>
+</div>

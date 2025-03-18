@@ -1,25 +1,88 @@
-<div class="w-80 p-3">
-  <div class="p-4">
-    <div class="text-sm font-medium text-on-surface-variant">
-      Admin
+<div class="navigation-drawer">
+  <input type="checkbox" id="navigation-drawer-toggle" class="navigation-drawer__toggle">
+  <div class="navigation-drawer__content px-3">
+    <div class="flex items-center h-16">
+      <a href="#" class="inline-flex items-center p-2 gap-2">
+        <img src="<%= asset_path "icon.svg" %>" alt="logo" class="size-10">
+        <div class="text-lg font-medium text-on-surface-variant">
+          <%= t "general.admin" %>
+        </div>
+      </a>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <a href="<%= admin_root_path %>" class="navigation-drawer__item <%= "navigation-drawer__item--active" if request.path == "/admin" %>">
+        <div class="navigation-drawer__item__icon">
+          <x-icon>dashboard</x-icon>
+        </div>
+        <div class="navigation-drawer__item__label">
+          Dashboard
+        </div>
+      </a>
+
+      <a href="<%= admin_posts_path %>" class="navigation-drawer__item <%= "navigation-drawer__item--active" if request.path.start_with?("/admin/posts") %>">
+        <div class="navigation-drawer__item__icon">
+          <x-icon>article</x-icon>
+        </div>
+        <div class="navigation-drawer__item__label">
+          Posts
+        </div>
+      </a>
+
+      <a href="<%= admin_comments_path %>" class="navigation-drawer__item <%= "navigation-drawer__item--active" if request.path.start_with?("/admin/comments") %>">
+        <div class="navigation-drawer__item__icon">
+          <x-icon>comment</x-icon>
+        </div>
+        <div class="navigation-drawer__item__label">
+          Comments
+        </div>
+      </a>
+
+      <a href="<%= admin_tags_path %>" class="navigation-drawer__item <%= "navigation-drawer__item--active" if request.path.start_with?("/admin/tags") %>">
+        <div class="navigation-drawer__item__icon">
+          <x-icon>label</x-icon>
+        </div>
+        <div class="navigation-drawer__item__label">
+          Tags
+        </div>
+      </a>
+
+      <a href="<%= admin_accounts_path %>" class="navigation-drawer__item <%= "navigation-drawer__item--active" if request.path.start_with?("/admin/accounts") %>">
+        <div class="navigation-drawer__item__icon">
+          <x-icon>account_circle</x-icon>
+        </div>
+        <div class="navigation-drawer__item__label">
+          Accounts
+        </div>
+      </a>
+
+      <a href="<%= admin_users_path %>" class="navigation-drawer__item <%= "navigation-drawer__item--active" if request.path.start_with?("/admin/users") %>">
+        <div class="navigation-drawer__item__icon">
+          <x-icon>person</x-icon>
+        </div>
+        <div class="navigation-drawer__item__label">
+          Users
+        </div>
+      </a>
+
+      <a href="<%= admin_organizations_path %>" class="navigation-drawer__item <%= "navigation-drawer__item--active" if request.path.start_with?("/admin/organizations") %>">
+        <div class="navigation-drawer__item__icon">
+          <x-icon>group</x-icon>
+        </div>
+        <div class="navigation-drawer__item__label">
+          Organizations
+        </div>
+      </a>
+
+      <a href="<%= admin_settings_root_path %>" class="navigation-drawer__item <%= "navigation-drawer__item--active" if request.path.start_with?("/admin/settings") %>">
+        <div class="navigation-drawer__item__icon">
+          <x-icon>settings</x-icon>
+        </div>
+        <div class="navigation-drawer__item__label">
+          Settings
+        </div>
+      </a>
     </div>
   </div>
-
-  <div class="flex flex-col gap-2">
-    <%= render "components/navigation_drawer_item", icon: :dashboard, label: "Dashboard", url: admin_root_path, active: (request.path == "/admin") %>
-
-    <%= render "components/navigation_drawer_item", icon: :article, label: "Posts", url: admin_posts_path, active: (request.path.start_with?("/admin/posts")) %>
-
-    <%= render "components/navigation_drawer_item", icon: :comment, label: "Comments", url: admin_comments_path, active: (request.path.start_with?("/admin/comments")) %>
-
-    <%= render "components/navigation_drawer_item", icon: :label, label: "Tags", url: admin_tags_path, active: (request.path.start_with?("/admin/tags")) %>
-
-    <%= render "components/navigation_drawer_item", icon: :account_circle, label: "Accounts", url: admin_accounts_path, active: (request.path.start_with?("/admin/accounts")) %>
-
-    <%= render "components/navigation_drawer_item", icon: :person, label: "Users", url: admin_users_path, active: (request.path.start_with?("/admin/users")) %>
-
-    <%= render "components/navigation_drawer_item", icon: :group, label: "Organizations", url: admin_organizations_path, active: (request.path.start_with?("/admin/organizations")) %>
-
-    <%= render "components/navigation_drawer_item", icon: :settings, label: "Settings", url: admin_settings_root_path, active: (request.path.start_with?("/admin/settings")) %>
-  </div>
+  <label for="navigation-drawer-toggle" class="navigation-drawer__scrim"></label>
 </div>

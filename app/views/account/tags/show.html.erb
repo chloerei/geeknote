@@ -5,9 +5,6 @@
     <div class="display-flex margin-bottom-3">
       <a href="<%= account_root_path(@account) %>" class="link-text">
         <div class="display-flex gap-2 align-items-center">
-          <div class="avatar flex-shrink-0">
-            <%= avatar_image_tag @account.owner.avatar %>
-          </div>
           <div class="flex-grow-1">
             <div class="title-medium">
               <%= @account.owner.name %>

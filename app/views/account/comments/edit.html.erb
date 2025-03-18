@@ -1,20 +1,16 @@
-<div class="max-w-screen-xl mx-auto flex gap-6">
-  <div class="flex-grow min-w-0">
-    <div class="bg-surface-container-lowest rounded-xl">
-      <div class="flex items-center p-2 gap-2">
-        <a href="<%= account_comment_path(@account.name, @comment) %>" class="icon-button">
-          <x-icon>arrow_back</x-icon>
-        </a>
-        <div class="flex-grow px-2 text-lg font-medium">
-          Edit comment
-        </div>
-      </div>
+<div class="top-app-bar">
+  <a href="<%= account_comment_path(@account.name, @comment) %>" class="icon-button">
+    <x-icon>arrow_back</x-icon>
+  </a>
+  <div class="top-app-bar__headline">
+    <%= t "general.edit_comment" %>
+  </div>
+</div>
 
-      <div class="p-4">
-        <%= render "form", comment: @comment, open: true %>
-      </div>
+<div class="layout-main-sidebar">
+  <div>
+    <div class="card p-4">
+      <%= render "form", comment: @comment, open: true %>
     </div>
   </div>
-
-  <div class="flex-shrink-0 w-80"></div>
 </div>
