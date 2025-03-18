@@ -343,3 +343,6 @@ zh-CN:
     passwords:
       update:
         success: 密码更新成功。
+  tags:
+    show:
+      headline: 标签：%{name}
