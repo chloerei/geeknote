@@ -1,34 +1,36 @@
-<div class="max-w-screen-sm mx-auto">
-  <div class="card">
-    <div class="flex items-center p-2">
-      <a href="<%= sign_in_path %>" class="icon-button">
-        <x-icon>arrow_back</x-icon>
-      </a>
-      <div class="flex-grow px-2 text-lg font-medium">
-        <%= t 'general.reset_password' %>
-      </div>
+<div class="container mx-auto">
+  <div class="top-app-bar">
+    <a href="<%= sign_in_path %>" class="icon-button">
+      <x-icon>arrow_back</x-icon>
+    </a>
+    <div class="top-app-bar__headline">
+      <%= t "general.reset_password" %>
     </div>
+  </div>
 
-    <div class="p-4">
-      <div class="">
-        <%= t ".reset_password_for", name: @user.email %>
-      </div>
-      <div class="mt-4">
-        <%= form_with model: @user, url: identity_password_path(token: params[:token]), id: 'password-reset-form' do |form| %>
-          <div class="form-field">
-            <%= form.label :password, class: "form-label" %>
-            <%= render "components/text_field", form: form, name: :password, type: :password_field, options: { required: true, autofocus: true, autocomplete: "new-password" } %>
-          </div>
-          <div class="form-field">
-            <%= form.label :password_confirmation, class: "form-label" %>
-            <%= render "components/text_field", form: form, name: :password_confirmation, type: :password_field, options: { required: true, autocomplete: "new-password" } %>
-          </div>
-          <div class="form-field">
-            <button type="submit" class="button button--filled">
-              <%= t('general.submit') %>
-            </button>
-          </div>
-        <% end %>
+  <div class="max-w-lg mx-auto p-4">
+    <div class="card">
+      <div class="p-4">
+        <div class="">
+          <%= t ".reset_password_for", name: @user.email %>
+        </div>
+        <div class="mt-4">
+          <%= form_with model: @user, url: identity_password_path(token: params[:token]), id: 'password-reset-form' do |form| %>
+            <div class="form-field">
+              <%= form.label :password, class: "form-label" %>
+              <%= render "components/text_field", form: form, name: :password, type: :password_field, options: { required: true, autofocus: true, autocomplete: "new-password" } %>
+            </div>
+            <div class="form-field">
+              <%= form.label :password_confirmation, class: "form-label" %>
+              <%= render "components/text_field", form: form, name: :password_confirmation, type: :password_field, options: { required: true, autocomplete: "new-password" } %>
+            </div>
+            <div class="form-field">
+              <button type="submit" class="button button--filled">
+                <%= t('general.submit') %>
+              </button>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

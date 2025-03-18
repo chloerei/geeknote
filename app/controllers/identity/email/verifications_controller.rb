@@ -1,5 +1,6 @@
 class Identity::Email::VerificationsController < ApplicationController
   before_action :set_user
+  layout "application"
 
   def show
   end

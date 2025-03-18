@@ -1,5 +1,6 @@
 class Identity::PasswordsController < ApplicationController
   before_action :set_user, only: [ :edit, :update ]
+  layout "application"
 
   def new
     @user = User.new

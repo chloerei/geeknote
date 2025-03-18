@@ -1,4 +1,6 @@
 class RegistrationsController < ApplicationController
+  layout "application"
+
   def new
     if params[:return_to]
       uri = URI(params[:return_to])
