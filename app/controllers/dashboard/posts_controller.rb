@@ -4,7 +4,7 @@ class Dashboard::PostsController < Dashboard::BaseController
   def index
     posts = account_posts
 
-    @status = params[:status].presence_in(%w(draft published trashed)) || "draft"
+    @status = params[:status].presence_in(%w[draft published trashed]) || "draft"
     posts = posts.where(status: @status)
 
     @pagy, @posts = pagy(posts)
