@@ -13,7 +13,7 @@
     "@material-symbols/font-400": "^0.29.1",
     "@rails/activestorage": "^8.0.200",
     "@rails/request.js": "^0.0.11",
-    "@tailwindcss/cli": "^4.0.12",
+    "@tailwindcss/cli": "^4.0.14",
     "@tailwindcss/typography": "^0.5.16",
     "esbuild": "^0.25.1",
     "local-time": "^3.0.3",
