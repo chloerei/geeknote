@@ -22,11 +22,19 @@ class MarkdownEditor extends HTMLElement {
   }
 
   connectedCallback() {
-    this.inputElement = document.getElementById(this.getAttribute("input"))
+    const inputElement = document.getElementById(this.getAttribute("input"))
+
+    this.editElement = document.createElement("div")
+    this.appendChild(this.editElement)
+
+    this.previewElement = document.createElement("div")
+    this.previewElement.classList.add("prose")
+    this.previewElement.style.display = "none"
+    this.appendChild(this.previewElement)
 
     this.markdownMirror = new MarkdownMirror({
-      parent: this,
-      input: this.inputElement,
+      parent: this.editElement,
+      input: inputElement,
       onFileAccept: (file) => {
         return acceptFileTypes.includes(file.type) && file.size <= acceptFileSize
       },
@@ -55,6 +63,8 @@ class MarkdownEditor extends HTMLElement {
   disconnectedCallback() {
     this.markdownMirror.destroy()
     this.markdownMirror = null
+    this.editElement.remove()
+    this.previewElement.remove()
   }
 
   focus() {
@@ -63,6 +73,33 @@ class MarkdownEditor extends HTMLElement {
 
   attachFile(file) {
     this.markdownMirror.attachFile(file)
+  }
+
+  async preview() {
+    this.classList.add("loading")
+
+    const formData = new FormData()
+    formData.append("content", this.markdownMirror.getValue())
+    const response = await post("/preview", {
+      body: formData
+    })
+
+    if (response.ok) {
+      this.classList.remove("loading")
+
+      this.editElement.style.display = "none"
+      this.previewElement.style.display = "block"
+
+      const html = await response.html
+
+      this.previewElement.innerHTML = html
+    }
+  }
+
+  edit() {
+    this.editElement.style.display = "block"
+    this.previewElement.style.display = "none"
+    this.previewElement.innerHTML = ""
   }
 }
 

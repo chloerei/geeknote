@@ -94,6 +94,10 @@ class MarkdownMirror {
     this.editorView.focus()
   }
 
+  getValue() {
+    return this.editorView.state.doc.toString()
+  }
+
   insertText(text) {
     const range = this.editorView.state.selection.ranges[0]
 

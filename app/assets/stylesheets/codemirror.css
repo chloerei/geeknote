@@ -2,6 +2,10 @@ markdown-editor {
   display: block;
 }
 
+markdown-editor.loading {
+  opacity: 0.5;
+}
+
 .cm-editor {
   position: relative;
 }

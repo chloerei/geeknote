@@ -106,10 +106,10 @@
 
               <div class="sticky flex justify-center px-4 mt-8 bottom-4 pb-safe">
                 <div class="flex items-center gap-1 p-1 bg-surface-container rounded-full shadow-md">
-                  <button type="button" class="icon-button text-on-secondary-container bg-secondary-container group-[.previewing]/container:text-on-surface-variant group-[.previewing]/container:bg-transparent" data-action="post-editor#write">
+                  <button type="button" class="icon-button icon-button--active" data-post-editor-target="editButton" data-action="post-editor#edit">
                     <x-icon>edit</x-icon>
                   </button>
-                  <button type="button" class="icon-button group-[.previewing]/container:text-on-secondary-container group-[.previewing]/container:bg-secondary-container" data-action="post-editor#preview">
+                  <button type="button" class="icon-button" data-post-editor-target="previewButton" data-action="post-editor#preview">
                     <x-icon>preview</x-icon>
                   </button>
 

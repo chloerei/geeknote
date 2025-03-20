@@ -3,7 +3,7 @@ import { post } from '@rails/request.js'
 
 // Connects to data-controller="post-editor"
 export default class extends Controller {
-  static targets = [ "form", "submitButton", "publishButton", "container", "titleInput", "contentInput", "markdownEditor", "preview", "toolbarButton" ]
+  static targets = [ "form", "submitButton", "publishButton", "titleInput", "contentInput", "markdownEditor", "editButton", "previewButton", "toolbarButton" ]
 
   static values = {
     previewUrl: String
@@ -45,35 +45,24 @@ export default class extends Controller {
     input.click()
   }
 
-  async preview() {
-    this.previewTarget.innerHTML = ''
-    this.containerTarget.classList.add('previewing')
-    window.scrollTo(0, 0)
+  preview() {
+    this.markdownEditorTarget.preview()
+    this.editButtonTarget.classList.remove("icon-button--active")
+    this.previewButtonTarget.classList.add("icon-button--active")
     this.toolbarButtonTargets.forEach(button => {
       button.disabled = true
     })
-
-    const formData = new FormData(this.formTarget)
-    formData.delete('_method')
-
-    const response = await post(this.previewUrlValue, {
-        body: formData
-      }
-    )
-
-    if (response.ok) {
-      const html = await response.html
-
-      this.previewTarget.innerHTML = html
-    }
+    this.titleInputTarget.disabled = true
   }
 
-  write() {
-    this.containerTarget.classList.remove('previewing')
-    window.scrollTo(0, 0)
+  edit() {
+    this.markdownEditorTarget.edit()
+    this.editButtonTarget.classList.add("icon-button--active")
+    this.previewButtonTarget.classList.remove("icon-button--active")
     this.toolbarButtonTargets.forEach(button => {
       button.disabled = false
     })
+    this.titleInputTarget.disabled = false
   }
 
   handleChanges() {
