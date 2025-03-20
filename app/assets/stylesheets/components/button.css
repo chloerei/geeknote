@@ -53,4 +53,9 @@
     color: var(--color-primary);
     padding: 0 12px;
   }
+
+  .button--text.button--active {
+    background-color: var(--color-primary-container);
+    color: var(--color-on-primary-container);
+  }
 }

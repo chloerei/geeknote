@@ -25,10 +25,11 @@ class MarkdownEditor extends HTMLElement {
     const inputElement = document.getElementById(this.getAttribute("input"))
 
     this.editElement = document.createElement("div")
+    this.editElement.classList.add("edit")
     this.appendChild(this.editElement)
 
     this.previewElement = document.createElement("div")
-    this.previewElement.classList.add("prose")
+    this.previewElement.classList.add("preview", "prose")
     this.previewElement.style.display = "none"
     this.appendChild(this.previewElement)
 

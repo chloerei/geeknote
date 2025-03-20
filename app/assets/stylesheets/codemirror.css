@@ -76,4 +76,9 @@ markdown-editor.loading {
     min-height: 160px;
     padding: 16px;
   }
+
+  .preview {
+    min-height: 160px;
+    padding: 16px;
+  }
 }
