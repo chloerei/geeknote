@@ -36,6 +36,7 @@ class MarkdownEditor extends HTMLElement {
     this.markdownMirror = new MarkdownMirror({
       parent: this.editElement,
       input: inputElement,
+      scrollMargin: { top: 0, bottom: 100 },
       onFileAccept: (file) => {
         return acceptFileTypes.includes(file.type) && file.size <= acceptFileSize
       },
