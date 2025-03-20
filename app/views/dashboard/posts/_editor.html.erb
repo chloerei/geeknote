@@ -98,7 +98,8 @@
               <div class="block group-[.previewing]/container:hidden min-h-screen">
                 <%= form.text_area :title, class: "block w-full px-0 py-2 border-none outline-none bg-transparent text-3xl font-bold resize-none", placeholder: Post.human_attribute_name("title"), autocomplete: "off", data: { post_editor_target: "titleInput", action: "input->post-editor#resizeTitleInput keydown.enter->post-editor#focus:prevent" } %>
                 <%= form.hidden_field :content, id: "post_content", placeholder: "Markdown...", data: { post_editor_target: "contentInput" } %>
-                <div id="post_content_markdown" class="mt-4" data-post-editor-target="contentMarkdown"></div>
+
+                <markdown-editor input="post_content" data-post-editor-target="markdownEditor" class="mt-4"></markdown-editor>
               </div>
 
               <div data-post-editor-target="preview" class="hidden group-[.previewing]/container:block break-words min-h-screen prose dark:prose-invert max-w-none"></div>

@@ -1,3 +1,7 @@
+markdown-editor {
+  display: block;
+}
+
 .cm-editor {
   position: relative;
 }

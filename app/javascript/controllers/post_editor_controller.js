@@ -1,25 +1,18 @@
 import { Controller } from "@hotwired/stimulus"
 import { post } from '@rails/request.js'
-import { MarkdownEditor } from "../lib/markdown-editor"
 
 // Connects to data-controller="post-editor"
 export default class extends Controller {
-  static targets = [ "form", "submitButton", "publishButton", "container", "titleInput", "contentInput", "contentMarkdown", "preview", "toolbarButton" ]
+  static targets = [ "form", "submitButton", "publishButton", "container", "titleInput", "contentInput", "markdownEditor", "preview", "toolbarButton" ]
 
   static values = {
     previewUrl: String
   }
 
   connect() {
-    this.markdownEditor = new MarkdownEditor({
-      parent: this.contentMarkdownTarget,
-      input: this.contentInputTarget,
-      scrollMargin: { top: 64, bottom: 64 },
-    })
   }
 
   disconnect() {
-    this.markdownEditor.destroy()
   }
 
   titleInputTargetConnected() {
@@ -32,7 +25,7 @@ export default class extends Controller {
   }
 
   focus() {
-    this.markdownOutlet.focus()
+    this.markdownEditorTarget.focus()
   }
 
   submit() {
@@ -40,7 +33,16 @@ export default class extends Controller {
   }
 
   attachFile() {
-    this.markdownEditor.attachFile()
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = 'image/png, image/gif, image/jpeg, image/svg+xml, video/mp4, video/quicktime, video/webm'
+    input.multiple = true
+    input.onchange = (event) => {
+      Array.from(event.target.files).forEach(file => {
+        this.markdownEditorTarget.attachFile(file)
+      })
+    }
+    input.click()
   }
 
   async preview() {
