@@ -17,9 +17,11 @@ const classHighlightStyle = HighlightStyle.define(
 )
 
 class MarkdownMirror {
-  constructor({ parent, input, scrollMargin } = {
+  constructor({ parent, input, scrollMargin, onFileAccept, onFileAttach } = {
     scrollMargin: { top: 0, bottom: 0 }
   }) {
+    this.onFileAccept = onFileAccept
+    this.onFileAttach = onFileAttach
     this.editorView = new EditorView({
       state: EditorState.create({
         doc: input.value,
@@ -63,13 +65,17 @@ class MarkdownMirror {
             paste: (event, view) => {
               if (event.clipboardData.files.length) {
                 event.preventDefault()
-                parent.dispatchEvent(new CustomEvent("attach", { detail: { files: event.clipboardData.files }, bubbles: true }))
+                Array.from(event.clipboardData.files).forEach((file) => {
+                  this.attachFile(file)
+                })
               }
             },
             drop: (event, view) => {
               if (event.dataTransfer.files.length) {
                 event.preventDefault()
-                parent.dispatchEvent(new CustomEvent("attach", { detail: { files: event.dataTransfer.files }, bubbles: true }))
+                Array.from(event.dataTransfer.files).forEach((file) => {
+                  this.attachFile(file)
+                })
               }
             }
           })
@@ -86,6 +92,10 @@ class MarkdownMirror {
 
   focus() {
     this.editorView.focus()
+  }
+
+  getValue() {
+    return this.editorView.state.doc.toString()
   }
 
   insertText(text) {
@@ -131,6 +141,26 @@ class MarkdownMirror {
       }
     }))
     this.editorView.focus()
+  }
+
+  attachFile(file) {
+    if (this.onFileAccept && !this.onFileAccept(file)) {
+      alert(`File ${file.name} is not allowed.`)
+      return
+    }
+
+    const placeholder = `<!-- Uploading ${file.name}... -->`
+    this.insertText(placeholder)
+
+    if (this.onFileAttach) {
+      this.onFileAttach(file, ({ url, name }) => {
+        if (file.type.startsWith("image")) {
+          this.findAndReplace(placeholder, `![${name}](${url})`)
+        } else {
+          this.findAndReplace(placeholder, `[${name}](${url})`)
+        }
+      })
+    }
   }
 }
 

@@ -1,64 +1,47 @@
 import { Controller } from "@hotwired/stimulus"
-import { post } from '@rails/request.js'
-import { MarkdownEditor } from "../lib/markdown-editor"
 
 // Connects to data-controller="markdown-field"
 export default class extends Controller {
-  static targets = [ "contentInput", "contentMarkdown", "preview" ]
-
-  static values = {
-    autofocus: Boolean
-  }
+  static targets = [ "contentInput", "markdownEditor", "editButton", "previewButton", "toolbarButton" ]
 
   connect() {
-    this.markdownEditor = new MarkdownEditor({
-      parent: this.contentMarkdownTarget,
-      input: this.contentInputTarget
-    })
-
-    if (this.autofocusValue) {
-      // wait for the next frame to focus
-      setTimeout(() => {
-        this.markdownEditor.focus()
-      }, 0)
-    }
   }
 
   disconnect() {
-    this.markdownEditor.destroy()
-  }
-
-  reconnect(event) {
-    this.disconnect()
-    this.connect()
   }
 
   attachFile() {
-    this.markdownEditor.attachFile()
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = 'image/png, image/gif, image/jpeg, image/svg+xml, video/mp4, video/quicktime, video/webm'
+    input.multiple = true
+    input.onchange = (event) => {
+      Array.from(event.target.files).forEach(file => {
+        this.markdownEditorTarget.attachFile(file)
+      })
+    }
+    input.click()
   }
 
-  async preview() {
-    this.previewTarget.innerHTML = ""
-    this.element.classList.add('previewing')
-
-    const formData = new FormData()
-    formData.append("content", this.contentInputTarget.value)
-    const response = await post("/preview", {
-      body: formData
+  preview() {
+    this.markdownEditorTarget.preview()
+    this.editButtonTarget.classList.remove("button--active")
+    this.previewButtonTarget.classList.add("button--active")
+    this.toolbarButtonTargets.forEach(button => {
+      button.disabled = true
     })
-
-    if (response.ok) {
-      const html = await response.html
-
-      this.previewTarget.innerHTML = html
-    }
   }
 
   write() {
-    this.element.classList.remove("previewing")
+    this.markdownEditorTarget.edit()
+    this.previewButtonTarget.classList.remove("button--active")
+    this.editButtonTarget.classList.add("button--active")
+    this.toolbarButtonTargets.forEach(button => {
+      button.disabled = false
+    })
   }
 
   focus() {
-    this.markdownEditor.focus()
+    this.markdownEditorTarget.focus()
   }
 }

@@ -1,3 +1,11 @@
+markdown-editor {
+  display: block;
+}
+
+markdown-editor.loading {
+  opacity: 0.5;
+}
+
 .cm-editor {
   position: relative;
 }
@@ -65,6 +73,11 @@
 
 .markdown-field {
   .cm-content {
+    min-height: 160px;
+    padding: 16px;
+  }
+
+  .preview {
     min-height: 160px;
     padding: 16px;
   }

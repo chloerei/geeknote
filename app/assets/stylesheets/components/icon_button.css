@@ -11,4 +11,13 @@
 
     @apply interactive;
   }
+
+  .icon-button--active {
+    background-color: var(--color-primary-container);
+  }
+
+  .icon-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 }
