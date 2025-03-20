@@ -4,7 +4,6 @@
     keydown.ctrl+s@window->post-editor#submit:prevent
     keydown.meta+s@window->post-editor#submit:prevent
   "
-  data-post-editor-preview-url-value="<%= preview_dashboard_posts_path(@account.name) %>"
   >
   <%= form_with model: @post, url: @post.new_record? ? dashboard_posts_path(@account.name) : dashboard_post_path(@account.name, @post), id: "post-form", data: { post_editor_target: "form", controller: "form-unsave-checker", action: "input->post-editor#handleChanges" } do |form| %>
     <div class="flex overflow-y-hidden">
@@ -93,24 +92,21 @@
 
           <div class="flex px-4 justify-center">
 
-            <%# Container %>
             <div class="card flex-grow p-8 mb-4 max-w-screen-md group/container" data-post-editor-target="container" data-turbo-permanent>
-              <div class="block group-[.previewing]/container:hidden min-h-screen">
+              <div class="min-h-screen">
                 <%= form.text_area :title, class: "block w-full px-0 py-2 border-none outline-none bg-transparent text-3xl font-bold resize-none", placeholder: Post.human_attribute_name("title"), autocomplete: "off", data: { post_editor_target: "titleInput", action: "input->post-editor#resizeTitleInput keydown.enter->post-editor#focus:prevent" } %>
                 <%= form.hidden_field :content, id: "post_content", placeholder: "Markdown...", data: { post_editor_target: "contentInput" } %>
 
                 <markdown-editor input="post_content" data-post-editor-target="markdownEditor" class="mt-4"></markdown-editor>
               </div>
 
-              <div data-post-editor-target="preview" class="hidden group-[.previewing]/container:block break-words min-h-screen prose dark:prose-invert max-w-none"></div>
-
               <div class="sticky flex justify-center px-4 mt-8 bottom-4 pb-safe">
                 <div class="flex items-center gap-1 p-1 bg-surface-container rounded-full shadow-md">
-                  <button type="button" class="icon-button icon-button--active" data-post-editor-target="editButton" data-action="post-editor#edit">
-                    <x-icon>edit</x-icon>
+                  <button type="button" class="button button--text text-on-surface-variant button--active" data-post-editor-target="editButton" data-action="post-editor#edit">
+                    <%= t "general.edit" %>
                   </button>
-                  <button type="button" class="icon-button" data-post-editor-target="previewButton" data-action="post-editor#preview">
-                    <x-icon>preview</x-icon>
+                  <button type="button" class="button button--text text-on-surface-variant" data-post-editor-target="previewButton" data-action="post-editor#preview">
+                    <%= t "general.preview" %>
                   </button>
 
                   <div class="border-l border-outline-variant h-6 mx-1"></div>

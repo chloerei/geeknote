@@ -47,8 +47,8 @@ export default class extends Controller {
 
   preview() {
     this.markdownEditorTarget.preview()
-    this.editButtonTarget.classList.remove("icon-button--active")
-    this.previewButtonTarget.classList.add("icon-button--active")
+    this.editButtonTarget.classList.remove("button--active")
+    this.previewButtonTarget.classList.add("button--active")
     this.toolbarButtonTargets.forEach(button => {
       button.disabled = true
     })
@@ -57,8 +57,8 @@ export default class extends Controller {
 
   edit() {
     this.markdownEditorTarget.edit()
-    this.editButtonTarget.classList.add("icon-button--active")
-    this.previewButtonTarget.classList.remove("icon-button--active")
+    this.editButtonTarget.classList.add("button--active")
+    this.previewButtonTarget.classList.remove("button--active")
     this.toolbarButtonTargets.forEach(button => {
       button.disabled = false
     })
