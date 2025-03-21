@@ -16,6 +16,8 @@ const classHighlightStyle = HighlightStyle.define(
   })
 )
 
+EditorView.EDIT_CONTEXT = false
+
 class MarkdownMirror {
   constructor({ parent, input, scrollMargin, onFileAccept, onFileAttach } = {
     scrollMargin: { top: 0, bottom: 0 }
