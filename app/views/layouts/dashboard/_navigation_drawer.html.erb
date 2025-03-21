@@ -85,6 +85,15 @@
             <%= t "general.settings" %>
           </div>
         </a>
+
+        <a href="/" class="navigation-drawer__item">
+          <div class="navigation-drawer__item__icon">
+            <x-icon>arrow_back</x-icon>
+          </div>
+          <div class="navigation-drawer__item__label">
+            <%= t "general.back_to_home" %>
+          </div>
+        </a>
       </div>
 
       <% if Current.user %>
