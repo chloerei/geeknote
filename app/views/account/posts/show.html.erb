@@ -41,7 +41,7 @@
         <img src="<%= polymorphic_url(@post.featured_image.variant(:large)) %>" alt="cover" class="rounded-xl object-cover w-full aspect-video">
       <% end %>
 
-      <div class="p-6">
+      <div class="p-4">
         <div class="flex gap-4">
           <div class="flex-shrink-0">
             <a href="<%= account_root_path(@post.user.account.name) %>">
@@ -147,6 +147,97 @@
         </div>
       </div>
     </div>
+
+    <%
+      hot_comments = @post.comments.includes(:user).where("likes_count > 5").order(likes_count: :desc, created_at: :desc).limit(3)
+      hot_comments_count = @post.comments.where("likes_count > 5").count
+    %>
+
+    <% if hot_comments_count > 0 %>
+      <div class="card mt-4">
+        <div class="flex items-center h-14 px-4 border-b border-outline-variant">
+          <div class="text-lg font-medium">
+            <%= t "general.hot_comments" %>
+          </div>
+        </div>
+
+        <div id="comments_list">
+          <%= render partial: "account/comments/comment", collection: hot_comments, cached: -> comment { [ comment.user, comment ]} %>
+
+          <% if hot_comments_count > 3 %>
+            <div class="p-4 text-center">
+              <a href="<%= account_post_comments_path(@account.name, @post, sort: "likes", anchor: "comments") %>" class="button button--text text-on-surface-variant w-full">
+                <%= t "general.view_all_hot_comments" %> <%= hot_comments_count %>
+              </a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="card mt-4">
+      <div class="flex items-center h-14 px-4 border-b border-outline-variant">
+        <div class="text-lg font-medium">
+          <%= t "general.new_comment" %>
+        </div>
+      </div>
+
+      <% if Current.user %>
+        <%= render "account/comments/form", comment: Current.user.comments.new(commentable: @post), open: params[:comment].present? %>
+      <% else %>
+        <div class="p-4">
+          <a href="<%= sign_in_path %>" class="button button--outlined">
+            <%= t "general.sign_in_to_comment" %>
+          </a>
+        </div>
+      <% end %>
+    </div>
+
+    <%
+      last_comments = @post.comments.includes(:user).order(created_at: :desc).limit(3)
+    %>
+
+    <div class="card mt-4">
+      <div class="flex items-center gap-4 h-14 px-4 border-b border-outline-variant">
+        <div class="flex-grow text-lg font-medium">
+          <%= t "general.all_comments" %> <%= @post.comments_count %>
+        </div>
+
+        <div class="menu">
+          <label tabindex="0" class="button button--text text-on-surface-variant">
+            <x-icon>sort</x-icon>
+            <span>
+              <%= t("general.newest") %>
+            </span>
+          </label>
+          <div class="menu__content top-full right-0 origin-top-right">
+            <a href="<%= account_post_comments_path(post_id: @post.id, sort: nil, anchor: "comments") %>" class="menu__item">
+              <%= t "general.newest" %>
+            </a>
+            <a href="<%= account_post_comments_path(post_id: @post.id, sort: "oldest", anchor: "comments") %>" class="menu__item">
+              <%= t "general.oldest" %>
+            </a>
+            <a href="<%= account_post_comments_path(post_id: @post.id, sort: "likes", anchor: "comments") %>" class="menu__item">
+              <%= t "general.most_likes" %>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div id="comments_list">
+        <%= render partial: "account/comments/comment", collection: last_comments, cached: -> comment { [ comment.user, comment ]} %>
+
+        <% if @post.comments_count > 3 %>
+          <div class="p-4 text-center">
+            <a href="<%= account_post_comments_path(@account.name, @post, anchor: "comments") %>" class="button button--text text-on-surface-variant w-full">
+              <%= t "general.view_all_comments" %> <%= @post.comments_count %>
+            </a>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+
   </div>
 
   <div class="">

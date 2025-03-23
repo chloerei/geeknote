@@ -1,9 +1,5 @@
 ---
 zh-CN:
-  account:
-    comments:
-      comment:
-        view_replies: 查看回复 %{count}
   activerecord:
     attributes:
       account:
@@ -174,7 +170,7 @@ zh-CN:
     accounts: 账号
     add_comment: 添加评论
     admin: 管理
-    all_posts: 所有文章
+    all_comments: 所有评论
     all_replies: 所有回复
     appearance: 外观
     back_to_home: 返回首页
@@ -201,14 +197,12 @@ zh-CN:
     followers: 关注者
     following: 关注中
     home: 首页
+    hot_comments: 热门评论
     id: Id
     import: 导入
     in: 在
-    joined: 加入
     joined_on: 加入于
-    last_created: 最近创建
     last_fetched_at: 最后抓取于
-    last_updated: 最近更新
     likes: 点赞
     load_more: 查看更多
     manage: 管理
@@ -246,7 +240,6 @@ zh-CN:
     quick_links: 快捷链接
     recommend_users: 推荐用户
     relevant: 相关
-    replies: 回复
     reply: 回复
     reset_password: 重置密码
     restore: 恢复
@@ -274,10 +267,12 @@ zh-CN:
     user: 用户
     users: 用户
     view: 查看
+    view_all_comments: 查看所有评论
+    view_all_hot_comments: 查看所有热门评论
+    view_replies: 查看回复
     view_site: 查看网站
     weekly_digest: 每周摘要
     weekly_digest_subject: '"%{title}" - %{count} 篇热门文章'
-    write: 写作
   home:
     sidebar:
       email_is_not_verified: Email 未验证，部分功能将受限。

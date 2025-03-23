@@ -85,6 +85,11 @@
         <a href="<%= account_comment_path(comment.user.account.name, comment, comment: true, anchor: "form_comment") %>" class="icon-button">
           <x-icon>reply</x-icon>
         </a>
+        <% if comment.replies_count > 0 %>
+          <span class="text-on-surface-variant tabular-nums px-1">
+            <%= comment.replies_count %>
+          </span>
+        <% end %>
       </div>
     <% end %>
 
@@ -94,7 +99,7 @@
       <% if comment.replies_count > 0 %>
         <a href="<%= account_comment_path(comment.user.account.name, comment, anchor: "comments") %>" class="button button--text text-on-surface-variant group-[.comment-show]:hidden">
           <span>
-            <%= t '.view_replies', count: comment.replies_count %>
+            <%= t 'general.view_replies' %>
           </span>
           <x-icon>arrow_right_alt</x-icon>
         </a>
