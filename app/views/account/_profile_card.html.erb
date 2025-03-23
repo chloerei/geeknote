@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between gap-4">
       <div class="flex-shrink-0">
         <a href="<%= account_root_path(account.name) %>">
-          <img src="<%= avatar_url(account.owner) %>" alt="avatar" class="w-14 h-14 rounded-full">
+          <img src="<%= avatar_url(account.owner) %>" alt="avatar" class="size-20 rounded-full">
         </a>
       </div>
 
@@ -29,16 +29,6 @@
 
       <div class="mt-4">
         <%= account.description %>
-      </div>
-
-      <div class="mt-4 text-on-surface-variant">
-        <div class="inline-flex items-center gap-2">
-          <div class="icon w-6 h-6">
-            <x-icon>calendar_month</x-icon>
-          </div>
-          <%= local_date account.created_at.to_date, data: { turbo_permanent: true } %>
-          <%= t "general.joined" %>
-        </div>
       </div>
 
       <div class="mt-2 flex gap-4">

@@ -1,5 +1,9 @@
 ---
 zh-CN:
+  account:
+    comments:
+      comment:
+        view_replies: 查看回复 %{count}
   activerecord:
     attributes:
       account:
@@ -168,8 +172,10 @@ zh-CN:
     account: 账号
     account_settings: 账号设置
     accounts: 账号
+    add_comment: 添加评论
     admin: 管理
     all_posts: 所有文章
+    all_replies: 所有回复
     appearance: 外观
     back_to_home: 返回首页
     bookmarks: 书签
@@ -213,6 +219,7 @@ zh-CN:
     most_likes: 最多赞
     move_to_trash: 移到回收站
     name: 名称
+    new_comment: 新评论
     new_organization: 新组织
     new_post: 新文章
     newest: 最新
@@ -251,6 +258,7 @@ zh-CN:
     send_preview: 发送预览
     settings: 设置
     sign_in: 登录
+    sign_in_to_comment: 登录后发表评论
     sign_out: 登出
     sign_up: 注册
     sort_by: 排序：

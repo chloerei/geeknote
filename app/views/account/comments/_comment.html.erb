@@ -1,7 +1,7 @@
 <%# locals: (comment:, showpage: false) %>
 
-<div id="<%= dom_id(comment) %>" class="card mt-4 first:mt-0">
-  <div class="flex gap-4 p-4">
+<div id="<%= dom_id(comment) %>" class="p-4 border-b border-surface-variant">
+  <div class="flex gap-4">
     <div class="flex-shrink-0">
       <img src="<%= avatar_url(comment.user) %>" alt="avatar" class="w-10 h-10 rounded-full">
     </div>
@@ -55,19 +55,16 @@
   </div>
 
   <% if comment.parent %>
-    <div class="px-4 pb-4 group-[.replies]:hidden">
+    <div class="mt-4 group-[.replies]:hidden">
       <a href="<%= account_comment_path(comment.parent.user.account.name, comment.parent) %>" class="block bg-surface-container-low interactive rounded-lg p-4">
         <div class="flex items-center gap-2">
-          <img src="<%= avatar_url(comment.parent.user) %>" alt="avatar" class="h-6 w-6 rounded-full">
+          <x-icon class="text-base">reply</x-icon>
           <span class="font-medium">
             <%= comment.parent.user.name %>
           </span>
           <span class="text-on-surface-variant">
             <%= format_time comment.parent.created_at %>
           </span>
-          <div class="icon w-6 h-6">
-            <x-icon>reply</x-icon>
-          </div>
         </div>
         <div class="text-on-surface-variant mt-2">
           <%= markdown_summary comment.parent.content %>
@@ -76,11 +73,11 @@
     </div>
   <% end %>
 
-  <article class="prose dark:prose-invert max-w-none px-4">
+  <article class="prose dark:prose-invert max-w-none mt-4">
     <%= markdown_render comment.content %>
   </article>
 
-  <div class="flex items-center gap-2 p-2">
+  <div class="flex items-center gap-2 mt-4">
     <%= render "account/comments/likes/button", comment: comment %>
 
     <% if !showpage %>
@@ -95,9 +92,9 @@
 
     <% if !showpage %>
       <% if comment.replies_count > 0 %>
-        <a href="<%= account_comment_path(comment.user.account.name, comment) %>" class="button button--text text-on-surface-variant group-[.comment-show]:hidden">
+        <a href="<%= account_comment_path(comment.user.account.name, comment, anchor: "comments") %>" class="button button--text text-on-surface-variant group-[.comment-show]:hidden">
           <span>
-            View <%= comment.replies_count %> replies
+            <%= t '.view_replies', count: comment.replies_count %>
           </span>
           <x-icon>arrow_right_alt</x-icon>
         </a>

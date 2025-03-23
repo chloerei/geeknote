@@ -1,6 +1,6 @@
 class Account::CommentsController < Account::BaseController
   before_action :require_user_account
-  before_action :require_sign_in
+  before_action :require_sign_in, except: [ :show ]
   before_action :require_current_user, except: [ :index, :show ]
 
   def show

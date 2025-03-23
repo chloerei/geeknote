@@ -3,30 +3,33 @@
     <x-icon>arrow_back</x-icon>
   </a>
   <div class="top-app-bar__headline">
-    <%= t "general.comments" %>
+    <%= @post.title %>
   </div>
 </div>
 
 <div class="layout-main-sidebar">
   <div>
-    <div class="card mt-4">
-      <div class="text-lg p-4 pb-0">
-        <%= t "general.post" %>
-        <a href="<%= account_post_path(@post.account.name, @post) %>" class="text-primary underline">
-          <%= @post.title %>
-        </a>
+    <div class="card">
+      <div class="flex items-center h-14 px-4 border-b border-outline-variant">
+        <div class="text-lg font-medium">
+          <%= t "general.new_comment" %>
+        </div>
       </div>
 
       <% if Current.user %>
+        <%= render "account/comments/form", comment: Current.user.comments.new(commentable: @post), open: params[:comment].present? %>
+      <% else %>
         <div class="p-4">
-          <%= render "account/comments/form", comment: Current.user.comments.new(commentable: @post), open: params[:comment].present? %>
+          <a href="<%= sign_in_path %>" class="button button--outlined">
+            <%= t "general.sign_in_to_comment" %>
+          </a>
         </div>
       <% end %>
     </div>
 
-    <div id="comments" class="">
-      <div class="flex items-center p-2 gap-4">
-        <div class="flex-grow font-medium px-2">
+    <div id="comments" class="card mt-4">
+      <div class="flex items-center gap-4 h-14 px-4 border-b border-outline-variant">
+        <div class="flex-grow text-lg font-medium">
           <%= t "general.comments" %> <%= @pagy.count %>
         </div>
         <div class="menu">

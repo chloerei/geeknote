@@ -3,33 +3,36 @@
     <x-icon>arrow_back</x-icon>
   </a>
   <div class="top-app-bar__headline">
-    <%= t "general.comment" %>
+    <%= @comment.commentable.title %>
   </div>
 </div>
 
 <div class="max-w-screen-xl mx-auto flex gap-6">
   <div class="flex-grow min-w-0">
     <div class="card">
-      <div class="text-lg p-4 pb-0">
-        <%= t "general.post" %>
-        <a href="<%= account_post_path(@comment.commentable.account.name, @comment.commentable) %>" class="text-primary underline">
-          <%= @comment.commentable.title %>
-        </a>
+      <div class="flex items-center h-14 px-4 border-b border-outline-variant">
+        <div class="text-lg font-medium">
+          <%= t "general.comment" %>
+        </div>
       </div>
 
       <%= render "comment", comment: @comment, showpage: true %>
 
       <% if Current.user %>
+        <%= render "form", comment: Current.user.comments.new(commentable: @comment.commentable, parent: @comment), open: params[:comment].present? %>
+      <% else %>
         <div class="p-4">
-          <%= render "form", comment: Current.user.comments.new(commentable: @comment.commentable, parent: @comment), open: params[:comment].present? %>
+          <a href="<%= sign_in_path %>" class="button button--outlined">
+            <%= t "general.sign_in_to_comment" %>
+          </a>
         </div>
       <% end %>
     </div>
 
-    <div id="comments" class="">
-      <div class="flex items-center p-2 gap-4">
-        <div class="flex-grow font-medium px-2">
-          <%= t "general.replies" %> <%= @comment.replies_count %>
+    <div id="comments" class=" card mt-4">
+      <div class="flex items-center h-14 px-4 gap-4 border-b border-outline-variant">
+        <div class="grow text-lg font-medium">
+          <%= t "general.all_replies" %> <%= @comment.replies_count %>
         </div>
         <div class="menu">
           <label tabindex="0" class="button button--text text-on-surface-variant">

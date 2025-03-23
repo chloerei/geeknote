@@ -1,7 +1,7 @@
-<%# locals: (pagy:, content_id: "scroll-pagination-content") %>
+<%# locals: (pagy:, content_id: "scroll-pagination-content", content_class: "") %>
 
 <div id="scroll-pagination" data-controller="scroll-pagination">
-  <div id="<%= content_id %>" class="" data-scroll-pagination-target="content">
+  <div id="<%= content_id %>" class="<%= content_class %>" data-scroll-pagination-target="content">
     <%= yield %>
   </div>
 
