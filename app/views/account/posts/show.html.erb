@@ -156,7 +156,7 @@
     <% if hot_comments_count > 0 %>
       <div class="card mt-4">
         <div class="flex items-center h-14 px-4 border-b border-outline-variant">
-          <div class="text-lg font-medium">
+          <div class="font-medium">
             <%= t "general.hot_comments" %> <%= hot_comments_count %>
           </div>
         </div>
@@ -179,7 +179,7 @@
 
     <div class="card mt-4">
       <div class="flex items-center h-14 px-4 border-b border-outline-variant">
-        <div class="text-lg font-medium">
+        <div class="font-medium">
           <%= t "general.new_comment" %>
         </div>
       </div>
@@ -201,7 +201,7 @@
 
     <div class="card mt-4">
       <div class="flex items-center gap-4 h-14 px-4 border-b border-outline-variant">
-        <div class="flex-grow text-lg font-medium">
+        <div class="flex-grow font-medium">
           <%= t "general.all_comments" %> <%= @post.comments_count %>
         </div>
 
@@ -256,12 +256,12 @@
       <%= render "account/profile_card", account: @post.user.account %>
 
       <div class="card">
-        <div class="text-lg font-medium p-4">
+        <div class="font-medium p-4">
           <%= t "general.more_from", name: @account.display_name %>
         </div>
         <div class="mb-3">
           <% @post.user.posts.published.order(published_at: :desc).where.not(id: @post.id).limit(3).each do |post| %>
-            <a href="<%= account_post_path(post.account.name, post) %>" class="flex p-4 interactive-bg-surface-container-lowest">
+            <a href="<%= account_post_path(post.account.name, post) %>" class="flex p-4 interactive">
               <%= post.title.presence || t("general.untitled") %>
             </a>
           <% end %>
