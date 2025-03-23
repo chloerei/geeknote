@@ -164,6 +164,8 @@
         <div id="comments_list">
           <%= render partial: "account/comments/comment", collection: hot_comments, cached: -> comment { [ comment.user, comment ]} %>
 
+          <%= render "account/comments/status", comments: hot_comments %>
+
           <% if hot_comments_count > 3 %>
             <div class="p-4 text-center">
               <a href="<%= account_post_comments_path(@account.name, @post, sort: "likes", anchor: "comments") %>" class="button button--text text-on-surface-variant w-full">
@@ -226,6 +228,8 @@
 
       <div id="comments_list">
         <%= render partial: "account/comments/comment", collection: last_comments, cached: -> comment { [ comment.user, comment ]} %>
+
+        <%= render "account/comments/status", comments: last_comments %>
 
         <% if @post.comments_count > 3 %>
           <div class="p-4 text-center">

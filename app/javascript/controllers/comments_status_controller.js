@@ -12,7 +12,6 @@ export default class extends Controller {
   }
 
   updateLikes() {
-    console.log(this.likedIdsValue)
     this.likedIdsValue.forEach(id => {
       const element = document.getElementById(`like_comment_${id}`)
       if (element) {
