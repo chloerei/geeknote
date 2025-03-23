@@ -40,8 +40,8 @@
                 case @sort
                 when "oldest"
                   t("general.oldest")
-                when "likes"
-                  t("general.most_likes")
+                when "popular"
+                  t("general.popular")
                 else
                   t("general.newest")
                 end
@@ -55,8 +55,8 @@
             <a href="<%= url_for(sort: "oldest") %>" class="menu__item">
               <%= t "general.oldest" %>
             </a>
-            <a href="<%= url_for(sort: "likes") %>" class="menu__item">
-              <%= t "general.most_likes" %>
+            <a href="<%= url_for(sort: "popular") %>" class="menu__item">
+              <%= t "general.popular" %>
             </a>
           </div>
         </div>

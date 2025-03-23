@@ -14,7 +14,7 @@ class Account::CommentsController < Account::BaseController
     when "oldest"
       comments.order(created_at: :asc)
     when "popular"
-      comments.popular
+      comments.order(likes_count: :desc, created_at: :desc)
     else
       comments.order(created_at: :desc)
     end

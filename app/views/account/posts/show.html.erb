@@ -157,7 +157,7 @@
       <div class="card mt-4">
         <div class="flex items-center h-14 px-4 border-b border-outline-variant">
           <div class="text-lg font-medium">
-            <%= t "general.hot_comments" %>
+            <%= t "general.hot_comments" %> <%= hot_comments_count %>
           </div>
         </div>
 
@@ -167,7 +167,7 @@
           <% if hot_comments_count > 3 %>
             <div class="p-4 text-center">
               <a href="<%= account_post_comments_path(@account.name, @post, sort: "likes", anchor: "comments") %>" class="button button--text text-on-surface-variant w-full">
-                <%= t "general.view_all_hot_comments" %> <%= hot_comments_count %>
+                <%= t "general.view_all_hot_comments" %>
               </a>
             </div>
           <% end %>
@@ -217,8 +217,8 @@
             <a href="<%= account_post_comments_path(post_id: @post.id, sort: "oldest", anchor: "comments") %>" class="menu__item">
               <%= t "general.oldest" %>
             </a>
-            <a href="<%= account_post_comments_path(post_id: @post.id, sort: "likes", anchor: "comments") %>" class="menu__item">
-              <%= t "general.most_likes" %>
+            <a href="<%= account_post_comments_path(post_id: @post.id, sort: "popular", anchor: "comments") %>" class="menu__item">
+              <%= t "general.popular" %>
             </a>
           </div>
         </div>
@@ -230,7 +230,7 @@
         <% if @post.comments_count > 3 %>
           <div class="p-4 text-center">
             <a href="<%= account_post_comments_path(@account.name, @post, anchor: "comments") %>" class="button button--text text-on-surface-variant w-full">
-              <%= t "general.view_all_comments" %> <%= @post.comments_count %>
+              <%= t "general.view_all_comments" %>
             </a>
           </div>
 

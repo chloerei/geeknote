@@ -8,7 +8,7 @@ class Account::Posts::CommentsController < Account::Posts::BaseController
     when "oldest"
       comments.order(created_at: :asc)
     when "likes"
-      comments.order(likes_count: :desc)
+      comments.order(likes_count: :desc, created_at: :desc)
     else
       comments.order(created_at: :desc)
     end
