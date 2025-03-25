@@ -20,6 +20,10 @@
     background-color: var(--color-surface);
     color: var(--color-on-surface);
   }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
 }
 
 @layer components {

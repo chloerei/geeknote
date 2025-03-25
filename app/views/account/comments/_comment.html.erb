@@ -23,20 +23,20 @@
         <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
           <button type="button" class="menu__item" data-controller="copy-link" data-action="copy-link#copy" data-copy-link-url-value="<%= account_comment_path(comment.user.account.name, comment) %>">
             <x-icon>link</x-icon>
-            Copy link
+            <%= t "general.copy_link" %>
           </button>
           <div class="hidden visible-to-user--<%= comment.user.id %>">
             <a href="<%= edit_account_comment_path(comment.user.account.name, comment) %>" class="menu__item">
               <x-icon>edit</x-icon>
               <span>
-                Edit
+                <%= t "general.edit" %>
               </span>
             </a>
             <%= form_with url: account_comment_path(comment.user.account.name, comment), method: :delete, data: { turbo_confirm: "Delete commnet?" } do |form| %>
               <button type="submit" class="menu__item">
                 <x-icon>delete</x-icon>
                 <span>
-                  Delete
+                  <%= t "general.delete" %>
                 </span>
               </button>
             <% end %>
@@ -45,7 +45,7 @@
             <button type="button" class="menu__item">
               <x-icon>build</x-icon>
               <span>
-                Manage
+                <%= t "general.manage" %>
               </span>
             </button>
           </div>

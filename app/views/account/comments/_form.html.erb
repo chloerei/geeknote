@@ -2,7 +2,7 @@
 
 <details id="<%= dom_id(comment, :form) %>" class="group comment-form p-4" <%= 'open' if open %> data-controller="comment-form" data-action="toggle->comment-form#focus" data-comment-form-markdown-field-outlet=".markdown-field">
   <summary class="block group-open:hidden">
-    <div class="flex items-center h-12 px-4 text-sm font-medium rounded-full select-none bg-surface-container-low interactive">
+    <div class="flex items-center h-12 px-4 text-sm text-on-surface-variant font-medium rounded-full select-none bg-surface-container-low interactive">
       <%= t "general.add_comment" %>
     </div>
   </summary>
