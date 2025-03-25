@@ -27,9 +27,7 @@ export default class extends Controller {
     this.markdownEditorTarget.focus()
   }
 
-  submit(event) {
-    console.log("submit")
-    console.log(event)
+  submit() {
     this.formTarget.dispatchEvent(new CustomEvent('submit', { bubbles: true, cancelable: true }))
   }
 
