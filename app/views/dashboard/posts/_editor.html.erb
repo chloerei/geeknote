@@ -1,10 +1,4 @@
-<div id="post-editor" class="post-editor"
-  data-controller="post-editor"
-  data-action="
-    keydown.ctrl+s@window->post-editor#submit:prevent
-    keydown.meta+s@window->post-editor#submit:prevent
-  "
-  >
+<div id="post-editor" class="post-editor" data-controller="post-editor">
   <%= form_with model: @post, url: @post.new_record? ? dashboard_posts_path(@account.name) : dashboard_post_path(@account.name, @post), id: "post-form", data: { post_editor_target: "form", controller: "form-unsave-checker", action: "input->post-editor#handleChanges" } do |form| %>
     <div class="flex overflow-y-hidden">
       <div class="grow h-screen overflow-auto">

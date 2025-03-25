@@ -9,9 +9,19 @@ export default class extends Controller {
   }
 
   connect() {
+    this.onKeydownHandler = this.onKeydown.bind(this)
+    window.addEventListener("keydown", this.onKeydownHandler)
   }
 
   disconnect() {
+    window.removeEventListener("keydown", this.onKeydownHandler)
+  }
+
+  onKeydown(event) {
+    if ((event.ctrlKey || event.metaKey) && event.key === "s") {
+      event.preventDefault()
+      this.submit()
+    }
   }
 
   titleInputTargetConnected() {
