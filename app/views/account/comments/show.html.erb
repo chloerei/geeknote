@@ -2,13 +2,13 @@
   <a href="<%= account_post_comments_path(@comment.commentable.account.name, @comment.commentable) %>" class="icon-button">
     <x-icon>arrow_back</x-icon>
   </a>
-  <div class="top-app-bar__headline">
+  <div class="top-app-bar__headline line-clamp-1">
     <%= @comment.commentable.title %>
   </div>
 </div>
 
-<div class="max-w-screen-xl mx-auto flex gap-6">
-  <div class="flex-grow min-w-0">
+<div class="layout-main-sidebar">
+  <div class="">
     <div class="card">
       <div class="flex items-center h-14 px-4 border-b border-outline-variant">
         <div class="font-medium">
@@ -74,7 +74,7 @@
     </div>
   </div>
 
-  <div class="flex-shrink-0 w-80">
+  <div class="">
     <%= render "account/profile_card", account: @comment.user.account %>
   </div>
 </div>

@@ -12,7 +12,5 @@
     font-weight: 400;
     padding: 0 4px;
     flex-grow: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 }
