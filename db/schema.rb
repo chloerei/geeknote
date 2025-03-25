@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_26_085645) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_25_062626) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.citext "name"
@@ -22,9 +22,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_26_085645) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "followers_count", default: 0
-    t.string "feed_url"
-    t.datetime "feed_fetched_at"
-    t.boolean "feed_mark_canonical", default: false
     t.index ["name"], name: "index_accounts_on_name", unique: true
     t.index ["owner_type", "owner_id"], name: "index_accounts_on_owner"
   end
@@ -194,12 +191,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_26_085645) do
     t.boolean "featured", default: false
     t.boolean "restricted", default: false
     t.string "canonical_url"
-    t.string "feed_source_id"
     t.bigint "user_id"
     t.integer "score", default: 0
     t.integer "bookmarks_count", default: 0
     t.index ["account_id"], name: "index_posts_on_account_id"
-    t.index ["feed_source_id", "account_id"], name: "index_posts_on_feed_source_id_and_account_id", unique: true, where: "(feed_source_id IS NOT NULL)"
     t.index ["published_at"], name: "index_posts_on_published_at"
     t.index ["score"], name: "index_posts_on_score"
     t.index ["user_id"], name: "index_posts_on_user_id"

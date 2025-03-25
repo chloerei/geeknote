@@ -42,9 +42,6 @@ gem "stimulus-rails"
 # markdown
 gem "commonmarker", "~> 0.23.8"
 
-# Html to Markdown
-gem "reverse_markdown"
-
 # code highlight
 gem "rouge"
 

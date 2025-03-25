@@ -393,8 +393,6 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    reverse_markdown (3.0.0)
-      nokogiri
     rexml (3.4.1)
     rouge (4.5.1)
     rubocop (1.73.2)
@@ -535,7 +533,6 @@ DEPENDENCIES
   rails_cursor_pagination
   recaptcha
   rest-client
-  reverse_markdown
   rouge
   rubocop-rails-omakase
   selenium-webdriver

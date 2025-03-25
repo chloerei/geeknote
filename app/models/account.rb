@@ -26,7 +26,6 @@ class Account < ApplicationRecord
 
   NAME_REGEXP = /\A[a-zA-Z0-9][a-zA-Z0-9\-]{1,61}[a-zA-Z0-9]\z/
   validates :name, uniqueness: true, format: { with: NAME_REGEXP }, presence: true
-  validates :feed_url, url: true, allow_blank: true
 
   NAME_EXCLUSION_LIST = %w[
     admin
@@ -98,10 +97,6 @@ class Account < ApplicationRecord
 
   def description
     user? ? owner.bio : owner.description
-  end
-
-  def feed_url=(value)
-    write_attribute :feed_url, value.presence
   end
 
   def used_tags
