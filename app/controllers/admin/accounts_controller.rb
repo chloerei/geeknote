@@ -31,6 +31,6 @@ class Admin::AccountsController < Admin::BaseController
   end
 
   def account_params
-    params.require(:account).permit(:name, :feed_url, :feed_mark_canonical)
+    params.require(:account).permit(:name, :feed_mark_canonical)
   end
 end
