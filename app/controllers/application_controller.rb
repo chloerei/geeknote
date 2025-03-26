@@ -7,34 +7,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
-  if Rails.env.production?
-    rescue_from StandardError, with: :render_server_error
-    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-  end
-
   private
 
   def set_site
     @site = Site.first_or_create(name: "Geeknote")
     @page_titles = [ @site.name ]
-  end
-
-  def render_not_found
-    respond_to do |format|
-      format.html { render "errors/404", layout: "application", status: 404 }
-      format.json { render json: { status: 404, error: "Not Found" }, status: 404 }
-    end
-  end
-
-  def render_server_error(exception)
-    if defined?(NewRelic)
-      NewRelic::Agent.notice_error(exception)
-    end
-
-    respond_to do |format|
-      format.html { render "errors/500", layout: "application", status: 500 }
-      format.json { render json: { status: 500, error: "Internal Server Error" }, status: 500 }
-    end
   end
 
   def require_sign_in
