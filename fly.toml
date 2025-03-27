@@ -1,6 +1,6 @@
 app = "geeknote"
 
-primary_region = "nrt"
+primary_region = "hkg"
 
 [build]
   dockerfile = "Dockerfile"
