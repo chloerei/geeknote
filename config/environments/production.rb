@@ -45,6 +45,11 @@ Rails.application.configure do
 
   config.assume_ssl = true
 
+  # Example ENV TRUSTED_PROXIES=192.168.0.0/24,172.0.0.1
+  if ENV["TRUSTED_PROXIES"].present?
+    config.action_dispatch.trusted_proxies = ActionDispatch::RemoteIp::TRUSTED_PROXIES + ENV["TRUSTED_PROXIES"].split(",").map { |proxy| IPAddr.new(proxy) }
+  end
+
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
   config.log_level = ENV.fetch("LOG_LEVEL", :info)
