@@ -13,6 +13,8 @@ s3:
   endpoint: <%= ENV.fetch("STORAGE_S3_ENDPOINT", nil) %>
   bucket: <%= ENV.fetch("STORAGE_S3_BUCKET", nil) %>
   region: auto
+  request_checksum_calculation: "when_required"
+  response_checksum_validation: "when_required"
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
