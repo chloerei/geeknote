@@ -7,7 +7,7 @@
 <div>
   <div class="group/image-field <%= 'attached' if form.object.send(name).attached? %>" data-controller="image-field">
     <div class="hidden">
-      <%= form.file_field name, options.merge( data: {direct_upload: true, image_field_target: "input", action: "image-field#preview" }) %>
+      <%= form.file_field name, options.merge( direct_upload: true, data: { image_field_target: "input", action: "image-field#preview" }) %>
       <input type="checkbox" name="<%= form.field_name name %>" value="" id="<%= form.field_id(name, :remove) %>" data-image-field-target="removeInput" data-action="image-field#remove">
     </div>
     <div class="relative w-full aspect-video">

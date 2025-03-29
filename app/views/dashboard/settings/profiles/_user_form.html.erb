@@ -6,29 +6,7 @@
 
   <div class="form-field">
     <%= form.label :avatar, class: "form-label" %>
-    <%= render "components/avatar_field", form: form, name: :avatar do %>
-      <div class="relative w-32 h-32">
-        <div class="absolute inset-0 [&>img]:object-cover [&>img]:h-full [&>img]:w-full [&>img]:rounded-full" data-image-field-target="preview">
-          <% if user.avatar.attached? %>
-            <%= image_tag user.avatar.variant(:thumb) %>
-          <% end %>
-        </div>
-
-        <label for="user_avatar" class="absolute inset-0 flex flex-col items-center justify-center gap-2 group-[.attached]/image-field:hidden rounded-full border-2 border-dashed border-outline-variant interactive-bg-surface text-on-surface-variant cursor-pointer">
-          <div class="icon w-6 h-6">
-            <x-icon>add_photo_alternate</x-icon>
-          </div>
-        </label>
-
-        <div class="absolute top-2 right-2 items-center gap-2 hidden group-[.attached]/image-field:flex">
-          <div class="bg-surface-variant rounded-full">
-            <label for="user_avatar" class="icon-button">
-              <x-icon>add_photo_alternate</x-icon>
-            </label>
-          </div>
-        </div>
-      </div>
-    <% end %>
+    <%= render "components/avatar_field", form: form, name: :avatar %>
   </div>
 
   <div class="form-field">
