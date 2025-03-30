@@ -29,7 +29,7 @@ class MarkdownEditor extends HTMLElement {
     this.appendChild(this.editElement)
 
     this.previewElement = document.createElement("div")
-    this.previewElement.classList.add("preview", "prose")
+    this.previewElement.classList.add("preview", "typography")
     this.previewElement.style.display = "none"
     this.appendChild(this.previewElement)
 

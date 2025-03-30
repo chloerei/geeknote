@@ -1,5 +1,4 @@
 @import "tailwindcss" source(none);
-@plugin "@tailwindcss/typography";
 
 @source "../stylesheets";
 @source "../../javascripts";
@@ -11,6 +10,8 @@
 @import "./icon.css";
 @import "./tom_select.css";
 @import "./components/all.css";
+
+@import "./typography.css";
 
 @theme {
 }
@@ -59,13 +60,6 @@
   .pb-safe {
     box-sizing: content-box;
     padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  .prose {
-    iframe {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-    }
   }
 }
 
