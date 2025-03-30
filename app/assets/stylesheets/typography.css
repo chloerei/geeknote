@@ -49,21 +49,21 @@
     }
 
     code {
-      font-size: 0.875rem;
+      font-size: 0.875em;
       font-family: var(--font-mono);
     }
 
     pre {
       margin: 1em 0;
       padding: 1em;
-      border-radius: 8px;
+      border-radius: 0.5em;
       overflow-x: auto;
     }
 
     *:not(pre) code {
       padding: 0.25em 0.5em;
       background-color: var(--color-surface-container-low);
-      border-radius: 4px;
+      border-radius: 0.25em;
     }
 
     ul {
@@ -90,10 +90,10 @@
     blockquote {
       margin: 1em 0;
       padding: 1em;
-      border-left: 4px solid var(--color-outline-variant);
+      border-left: 0.25em solid var(--color-outline-variant);
       background-color: var(--color-surface-container-low);
       font-style: italic;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 0.5em 0.5em 0;
     }
 
     table {
@@ -118,15 +118,15 @@
     iframe {
       width: 100%;
       aspect-ratio: 16 / 9;
-      border-radius: 8px;
+      border-radius: 0.5em;
     }
 
     video {
-      border-radius: 8px;
+      border-radius: 0.5em;
     }
 
     img {
-      border-radius: 8px;
+      border-radius: 0.5em;
       max-width: 100%;
     }
   }
