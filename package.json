@@ -7,7 +7,7 @@
     "@codemirror/language": "^6.11.0",
     "@codemirror/lint": "^6.8.4",
     "@codemirror/state": "^6.5.2",
-    "@codemirror/view": "^6.36.4",
+    "@codemirror/view": "^6.36.5",
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.13",
     "@material-symbols/font-400": "^0.29.2",
