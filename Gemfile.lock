@@ -143,7 +143,7 @@ GEM
     crass (1.0.6)
     css_parser (1.21.0)
       addressable
-    csv (3.3.2)
+    csv (3.3.3)
     date (3.4.1)
     debug (1.10.0)
       irb (~> 1.10)
@@ -187,7 +187,7 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.0.8)
       domain_name (~> 0.5)
-    httparty (0.22.0)
+    httparty (0.23.1)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -249,10 +249,10 @@ GEM
       mime-types
     marcel (1.0.4)
     matrix (0.4.2)
-    meilisearch (0.28.4)
-      httparty (~> 0.17)
-    meilisearch-rails (0.14.3)
-      meilisearch (~> 0.28.4)
+    meilisearch (0.31.0)
+      httparty (~> 0.22)
+    meilisearch-rails (0.15.0)
+      meilisearch (~> 0.31.0)
       mutex_m (~> 0.2)
     mime-types (3.6.0)
       logger
