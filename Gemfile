@@ -47,7 +47,6 @@ gem "rouge", "~> 4.5.1"
 
 # pagination
 gem "kaminari", "~> 1.2.2"
-gem "rails_cursor_pagination", "~> 0.4.0"
 gem "pagy", "~> 9.3.4"
 
 # inline email css
