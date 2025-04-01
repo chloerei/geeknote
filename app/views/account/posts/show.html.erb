@@ -247,6 +247,8 @@
   <div class="">
 
     <div class="flex flex-col gap-4">
+      <%= raw @site.sidebar_header_html %>
+
       <% if @post.account != @post.user.account %>
         <div class="card">
           <%= render "account/item", account: @post.account %>
@@ -267,7 +269,8 @@
           <% end %>
         </div>
       </div>
-    </div>
 
+      <%= raw @site.sidebar_footer_html %>
+    </div>
   </div>
 </div>

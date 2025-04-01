@@ -113,6 +113,40 @@
       "note": ""
     },
     {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "3a02d77d9858fbcaa49b1c293b58239a82694f8b8b5b90a56057212358c53203",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/account/posts/show.html.erb",
+      "line": 250,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_header_html",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Account::PostsController",
+          "method": "show",
+          "line": 14,
+          "file": "app/controllers/account/posts_controller.rb",
+          "rendered": {
+            "name": "account/posts/show",
+            "file": "app/views/account/posts/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "account/posts/show"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "Redirect",
       "warning_code": 18,
       "fingerprint": "3fd4fa0ee723c89d121c55d7fe670ddcc5a6061e6166d30dd375e800de8537b7",
@@ -136,6 +170,84 @@
       "note": ""
     },
     {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "895f0b81a09931aae4731d3e60d4d74471d2b2740fe96580e856454c3239688d",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/home/_sidebar.html.erb",
+      "line": 12,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_header_html",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "HomeController",
+          "method": "index",
+          "line": 6,
+          "file": "app/controllers/home_controller.rb",
+          "rendered": {
+            "name": "home/index",
+            "file": "app/views/home/index.html.erb"
+          }
+        },
+        {
+          "type": "template",
+          "name": "home/index",
+          "line": 32,
+          "file": "app/views/home/index.html.erb",
+          "rendered": {
+            "name": "home/_sidebar",
+            "file": "app/views/home/_sidebar.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "home/_sidebar"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "96274ae2c6281ff7b6bd03cb69f93139a0e27145b635c5986f1c4dd1001e8df5",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/account/posts/show.html.erb",
+      "line": 273,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_footer_html",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Account::PostsController",
+          "method": "show",
+          "line": 14,
+          "file": "app/controllers/account/posts_controller.rb",
+          "rendered": {
+            "name": "account/posts/show",
+            "file": "app/views/account/posts/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "account/posts/show"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "Mass Assignment",
       "warning_code": 105,
       "fingerprint": "a8dbb6efbe4ec243fb3181b08a0cc4312b1b7bd5b885f938d13c23302ff6b765",
@@ -155,6 +267,50 @@
       "confidence": "Medium",
       "cwe_id": [
         915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "ae02c92071665b5b0cc13ba3f12820251ae1a4a32e2625e4714f5a1b464a14eb",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/home/_sidebar.html.erb",
+      "line": 56,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_footer_html",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "HomeController",
+          "method": "index",
+          "line": 6,
+          "file": "app/controllers/home_controller.rb",
+          "rendered": {
+            "name": "home/index",
+            "file": "app/views/home/index.html.erb"
+          }
+        },
+        {
+          "type": "template",
+          "name": "home/index",
+          "line": 32,
+          "file": "app/views/home/index.html.erb",
+          "rendered": {
+            "name": "home/_sidebar",
+            "file": "app/views/home/_sidebar.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "home/_sidebar"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        79
       ],
       "note": ""
     },

@@ -9,7 +9,7 @@
     <% end %>
   </div>
 
-  <%= sanitize @site.sidebar_header_html %>
+  <%= raw @site.sidebar_header_html %>
 
   <% if current_user && !current_user.email_verified? %>
     <div class="bg-tertiary-container rounded-xl p-4">
@@ -53,5 +53,5 @@
     </div>
   </div>
 
-  <%= sanitize @site.sidebar_footer_html %>
+  <%= raw @site.sidebar_footer_html %>
 </div>
