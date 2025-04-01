@@ -1,5 +1,5 @@
 class Tag < ApplicationRecord
-  include MeiliSearch::Rails
+  include Meilisearch::Rails
 
   extend Pagy::Meilisearch
 

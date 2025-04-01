@@ -1,5 +1,5 @@
 class Account < ApplicationRecord
-  include MeiliSearch::Rails
+  include Meilisearch::Rails
 
   extend Pagy::Meilisearch
 

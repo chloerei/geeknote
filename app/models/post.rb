@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   include Taggable
   include Likable
   include Commentable
-  include MeiliSearch::Rails
+  include Meilisearch::Rails
 
   extend Pagy::Meilisearch
 

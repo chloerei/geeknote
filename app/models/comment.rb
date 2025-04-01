@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
-  include MeiliSearch::Rails
+  include Meilisearch::Rails
   include Likable
 
   extend Pagy::Meilisearch

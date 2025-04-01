@@ -73,7 +73,7 @@ gem "recaptcha", require: false
 
 gem "rest-client"
 
-gem "meilisearch-rails"
+gem "meilisearch-rails", "~> 0.15.0"
 
 gem "jwt"
 
