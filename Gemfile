@@ -64,7 +64,7 @@ gem "imgproxy-rails"
 gem "newrelic_rpm", require: false
 
 # Mailer deliver method
-gem "mailgun-ruby", "~>1.3.2", require: false
+gem "mailgun-ruby", "~>1.3.4", require: false
 gem "postal-rails", "~> 1.0", require: false
 
 gem "with_advisory_lock"
