@@ -27,13 +27,18 @@
     </div>
 
     <div class="form-field">
-      <%= form.label :header_html, class: "form-label" %>
-      <%= render "components/text_field", form: form, name: :header_html, type: :text_area %>
+      <%= form.label :global_head_html, class: "form-label" %>
+      <%= render "components/text_field", form: form, name: :global_head_html, type: :text_area %>
     </div>
 
     <div class="form-field">
-      <%= form.label :footer_html, class: "form-label" %>
-      <%= render "components/text_field", form: form, name: :footer_html, type: :text_area %>
+      <%= form.label :site_header_html, class: "form-label" %>
+      <%= render "components/text_field", form: form, name: :site_header_html, type: :text_area %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :site_footer_html, class: "form-label" %>
+      <%= render "components/text_field", form: form, name: :site_footer_html, type: :text_area %>
     </div>
 
     <div class="form-field">

@@ -26,6 +26,8 @@
     <% end %>
 
     <%= yield :head %>
+
+    <%= raw @site.global_head_html %>
   </head>
 
   <body>

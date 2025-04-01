@@ -1,6 +1,118 @@
 {
   "ignored_warnings": [
     {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "014cb9536d866e86e21f6d558b9d9ade7b1833317fdd27c44ac0e55fd380b28a",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/layouts/site.html.erb",
+      "line": 9,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Site.first_or_create(:name => \"Geeknote\").site_header_html",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Account::BaseController",
+          "method": "set_account",
+          "line": 10,
+          "file": "app/controllers/account/base_controller.rb",
+          "rendered": {
+            "name": "layouts/site",
+            "file": "app/views/layouts/site.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "layouts/site"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "1fb5c4707f9ca93ef165ce620cf8254c7794a19e915f8ab0c23915978f3b9072",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/layouts/site.html.erb",
+      "line": 15,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Site.first_or_create(:name => \"Geeknote\").site_footer_html",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Account::BaseController",
+          "method": "set_account",
+          "line": 10,
+          "file": "app/controllers/account/base_controller.rb",
+          "rendered": {
+            "name": "layouts/site",
+            "file": "app/views/layouts/site.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "layouts/site"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "2648be1cb7d5691b270e123a2c0560198ef406aa3ca5c5dcb0bc676d0a23a326",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/layouts/application.html.erb",
+      "line": 30,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Site.first_or_create(:name => \"Geeknote\").global_head_html",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Account::BaseController",
+          "method": "set_account",
+          "line": 10,
+          "file": "app/controllers/account/base_controller.rb",
+          "rendered": {
+            "name": "layouts/site",
+            "file": "app/views/layouts/site.html.erb"
+          }
+        },
+        {
+          "type": "template",
+          "name": "layouts/site",
+          "line": 22,
+          "file": "app/views/layouts/site.html.erb",
+          "rendered": {
+            "name": "layouts/application",
+            "file": "app/views/layouts/application.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "layouts/application"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "Redirect",
       "warning_code": 18,
       "fingerprint": "3fd4fa0ee723c89d121c55d7fe670ddcc5a6061e6166d30dd375e800de8537b7",
@@ -70,6 +182,5 @@
       "note": ""
     }
   ],
-  "updated": "2024-07-26 13:15:09 +0000",
-  "brakeman_version": "5.4.1"
+  "brakeman_version": "7.0.0"
 }

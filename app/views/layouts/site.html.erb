@@ -6,9 +6,13 @@
     </div>
 
     <div class="flex-grow min-w-0">
+      <%= raw @site.site_header_html %>
+
       <div class="px-4 md:px-6 pb-4">
         <%= yield %>
       </div>
+
+      <%= raw @site.site_footer_html %>
 
       <%= render "layouts/site/navigation_bar" %>
     </div>

@@ -39,8 +39,9 @@ zh-CN:
         trashed: 已废弃
       site:
         description: 描述
-        footer_html: 尾部 HTML
-        header_html: 头部 HTML
+        global_head_html: 全局 Head
+        site_footer_html: 网站尾部 HTML
+        site_header_html: 网站头部 HTML
         name: 名称
         sidebar_footer_html: 侧栏尾部 HTML
         sidebar_header_html: 侧栏头部 HTML

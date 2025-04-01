@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_25_062626) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_01_125424) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -203,8 +203,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_25_062626) do
   create_table "sites", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.text "header_html"
-    t.text "footer_html"
+    t.text "site_header_html"
+    t.text "site_footer_html"
     t.text "sidebar_header_html"
     t.text "sidebar_footer_html"
     t.datetime "created_at", null: false
@@ -212,6 +212,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_25_062626) do
     t.boolean "weekly_digest_email_enabled", default: true, null: false
     t.text "weekly_digest_header_html"
     t.text "weekly_digest_footer_html"
+    t.text "global_head_html"
   end
 
   create_table "taggings", force: :cascade do |t|
