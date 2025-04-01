@@ -46,7 +46,6 @@ gem "commonmarker", "~> 0.23.11"
 gem "rouge", "~> 4.5.1"
 
 # pagination
-gem "kaminari", "~> 1.2.2"
 gem "pagy", "~> 9.3.4"
 
 # inline email css

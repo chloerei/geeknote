@@ -44,7 +44,7 @@
       <% end %>
   </table>
 
-  <div class="padding-3">
-    <%= paginate @organizations %>
+  <div class="p-4">
+    <%= render "components/page_pagination", pagy: @pagy %>
   </div>
 </div>

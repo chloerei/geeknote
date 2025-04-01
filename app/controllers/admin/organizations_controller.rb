@@ -2,11 +2,7 @@ class Admin::OrganizationsController < Admin::BaseController
   before_action :set_organization, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @organizations = Organization.order(id: :desc).page(params[:page])
-
-    if params[:email]
-      @organizations = @organizations.where(email: params[:email])
-    end
+    @pagy, @organizations = pagy(Organization.order(id: :desc))
   end
 
   def show
