@@ -103,15 +103,20 @@
       overflow: hidden;
     }
 
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
     th {
-      padding: 0.5em;
+      padding: 0.75em;
       text-align: left;
       font-weight: 500;
       border-bottom: 1px solid var(--color-outline-variant);
+      white-space: nowrap;
     }
 
     td {
-      padding: 0.5em;
+      padding: 0.75em;
       border-bottom: 1px solid var(--color-outline-variant);
     }
 

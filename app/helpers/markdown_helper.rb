@@ -90,6 +90,10 @@ module MarkdownHelper
       end
     end
 
+    # wrap table with div
+    tables = doc.css("table")
+    tables.wrap("<div class='table-wrapper'></div>")
+
     sanitize doc.to_html, scrubber: MarkdownScruber.new
   end
 
