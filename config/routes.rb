@@ -134,7 +134,6 @@ Rails.application.routes.draw do
     resources :followers, only: [ :index ]
     resources :likes
     resources :members, only: [ :index ]
-    resources :tags, only: [ :show ]
 
     resource :invitation, only: [ :show, :update ]
 

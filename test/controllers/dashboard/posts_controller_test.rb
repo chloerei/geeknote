@@ -70,9 +70,8 @@ class Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
     post = create(:post)
     sign_in user
 
-    assert_raises(ActiveRecord::RecordNotFound) do
-      get edit_dashboard_post_url(user.account.name, post)
-    end
+    get edit_dashboard_post_url(user.account.name, post)
+    assert_response :not_found
   end
 
   test "should get edit as admin" do
@@ -104,9 +103,8 @@ class Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
     post = create(:post, account: organization.account)
     sign_in user
 
-    assert_raises(ActiveRecord::RecordNotFound) do
-      get edit_dashboard_post_url(organization.account.name, post)
-    end
+    get edit_dashboard_post_url(organization.account.name, post)
+    assert_response :not_found
   end
 
   test "should update post" do
