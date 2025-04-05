@@ -42,11 +42,11 @@ zh-CN:
       site:
         description: 描述
         global_head_html: 全局 Head
-        site_footer_html: 网站尾部 HTML
-        site_header_html: 网站头部 HTML
         name: 名称
         sidebar_footer_html: 侧栏尾部 HTML
         sidebar_header_html: 侧栏头部 HTML
+        site_footer_html: 网站尾部 HTML
+        site_header_html: 网站头部 HTML
         weekly_digest_email_enabled: 开启每周摘要邮件
         weekly_digest_footer_html: 每周摘要尾部 HTML
         weekly_digest_header_html: 每周摘要头部 HTML
@@ -182,8 +182,9 @@ zh-CN:
     bookmarks: 书签
     click_to_select_image: 点击选择图片
     comment: 评论
+    comment_is_closed: 评论已关闭
     commentable: 评论对象
-    commented_on: 评论于
+    commented_on: 评论了
     comments: 评论
     copy_link: 复制链接
     created_at: 创建于
@@ -191,6 +192,7 @@ zh-CN:
     dashboard_short: 创作
     delete: 删除
     delete_forever: 永久删除
+    deleted_item: 已删除的内容
     download: 下载
     draft: 草稿
     edit: 编辑

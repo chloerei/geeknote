@@ -1,9 +1,22 @@
+<% content_for :head do %>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="<%= t("general.commented_on") %><%= @comment.commentable&.title || t("general.deleted_item") %>">
+  <meta property="og:url" content="<%= account_comment_url(@account.name, @comment) %>">
+  <meta property="og:description" content="<%= truncate @comment.content %>">
+  <meta property="og:image" content="<%= avatar_url @comment.user %>">
+
+  <meta name="twitter:title" content="<%= t("general.commented_on") %><%= @comment.commentable&.title || t("general.deleted_item") %>">
+  <meta name="twitter:description" content="<%= truncate @comment.content %>">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="<%= avatar_url @comment.user %>">
+<% end %>
+
 <div class="top-app-bar">
-  <a href="<%= account_post_comments_path(@comment.commentable.account.name, @comment.commentable) %>" class="icon-button" data-controller="back-link">
+  <a href="<%= account_root_path(@comment.user.account.name) %>" class="icon-button" data-controller="back-link">
     <x-icon>arrow_back</x-icon>
   </a>
   <div class="top-app-bar__headline line-clamp-1">
-    <%= @comment.commentable.title %>
+    <%= t "general.comment" %>
   </div>
 </div>
 
@@ -12,14 +25,24 @@
     <div class="card">
       <div class="flex items-center h-14 px-4 border-b border-outline-variant">
         <div class="font-medium">
-          <%= t "general.comment" %>
+          <% if @comment.commentable %>
+            <%= t("general.commented_on") %><a href="<%= account_post_path(@comment.commentable.account.name, @comment.commentable) %>" class="underline"><%= @comment.commentable.title %></a>
+          <% else %>
+            <%= t("general.commented_on") %><%= t("general.deleted_item") %>
+          <% end %>
         </div>
       </div>
 
       <%= render "comment", comment: @comment, showpage: true %>
 
       <% if Current.user %>
-        <%= render "form", comment: Current.user.comments.new(commentable: @comment.commentable, parent: @comment), open: params[:comment].present? %>
+        <% if @comment.commentable %>
+          <%= render "form", comment: Current.user.comments.new(commentable: @comment.commentable, parent: @comment), open: params[:comment].present? %>
+        <% else %>
+          <div class="p-4 text-on-surface-variant text-center">
+            <%= t "general.comment_is_closed" %>
+          </div>
+        <% end %>
       <% else %>
         <div class="p-4">
           <a href="<%= sign_in_path %>" class="button button--outlined">
