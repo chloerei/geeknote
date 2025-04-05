@@ -89,19 +89,6 @@
                     <x-icon>edit</x-icon>
                     <span><%= t "general.edit" %></span>
                   </a>
-                  <%= form_with url: dashboard_post_path(@account.name, @post), method: :delete do |form| %>
-                    <button type="submit" class="menu__item">
-                      <x-icon>delete</x-icon>
-                      <span><%= t "general.delete" %></span>
-                    </button>
-                  <% end %>
-                </div>
-
-                <div class="hidden visible-to-admin">
-                  <button type="button" class="menu__item">
-                    <x-icon>build</x-icon>
-                    <span><%= t "general.manage" %></span>
-                  </button>
                 </div>
               </div>
             </div>
