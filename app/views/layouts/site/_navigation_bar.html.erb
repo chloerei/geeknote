@@ -51,6 +51,15 @@
         <%= t "general.dashboard_short" %>
       </div>
     </a>
+
+    <a href="<%= account_root_path(Current.user.account.name) %>" class="navigation-bar__item <%= "navigation-bar__item--active" if current_page?(account_root_path(Current.user.account.name)) %>">
+      <div class="navigation-bar__item__icon">
+        <img src="<%= avatar_url(Current.user) %>" class="h-6 w-6 rounded-full">
+      </div>
+      <div class="navigation-bar__item__label">
+        <%= t "general.me" %>
+      </div>
+    </a>
   <% else %>
     <a href="<%= sign_in_path %>" class="navigation-bar__item  <%= "navigation-bar__item--active" if current_page?(sign_in_path) %>">
       <div class="navigation-bar__item__icon">
@@ -69,47 +78,5 @@
         <%= t "general.sign_up" %>
       </div>
     </a>
-  <% end %>
-
-  <% if Current.user %>
-    <div class="menu flex-grow basis-0">
-      <label tabindex="0" class="navigation-bar__item">
-        <div class="navigation-bar__item__icon">
-          <img src="<%= avatar_url(Current.user) %>" class="h-6 w-6 rounded-full">
-        </div>
-        <div class="navigation-bar__item__label">
-          <%= t "general.me" %>
-        </div>
-      </label>
-      <div tabindex="0" class="menu__content top-auto left-auto bottom-full right-0 origin-bottom-right md:left-full md:bottom-0 md:origin-bottom-left">
-        <a href="<%= account_root_path(Current.user.account.name) %>" class="menu__item">
-          <x-icon>account_circle</x-icon>
-          <span>
-            <%= t "general.profile" %>
-          </span>
-        </a>
-
-        <a href="<%= bookmarks_path %>" class="menu__item">
-          <x-icon>bookmarks</x-icon>
-          <span><%= t "general.bookmarks" %></span>
-        </a>
-
-        <a href="<%= settings_root_path %>" class="menu__item">
-          <x-icon>settings</x-icon>
-          <span>
-            <%= t "general.settings" %>
-          </span>
-        </a>
-
-        <%= form_with url: sign_out_path, method: :delete do |form| %>
-          <button type="submit" class="menu__item">
-            <x-icon>logout</x-icon>
-            <span>
-              <%= t "general.sign_out" %>
-            </span>
-          </button>
-        <% end %>
-      </div>
-    </div>
   <% end %>
 </div>

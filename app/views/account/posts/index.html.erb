@@ -11,6 +11,32 @@
   <div class="top-app-bar__headline">
     <%= @account.display_name %>
   </div>
+
+  <% if @account.user? && @account.owner == Current.user %>
+    <div class="menu">
+      <label tabindex="0" class="icon-button">
+        <x-icon>settings</x-icon>
+      </label>
+      <div tabindex="0" class="menu__content top-full right-0">
+        <a href="<%= bookmarks_path %>" class="menu__item">
+          <x-icon>bookmarks</x-icon>
+          <span><%= t "general.bookmarks" %></span>
+        </a>
+
+        <a href="<%= settings_root_path %>" class="menu__item">
+          <x-icon>settings</x-icon>
+          <span><%= t "general.settings" %></span>
+        </a>
+
+        <%= form_with url: sign_out_path, method: :delete do |form| %>
+          <button type="submit" class="menu__item">
+            <x-icon>logout</x-icon>
+            <span><%= t "general.sign_out" %></span>
+          </button>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 <div class="layout-main-sidebar">
