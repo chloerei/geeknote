@@ -22,6 +22,8 @@ zh-CN:
         owner: 拥有者
         writer: 作者
       organization:
+        avatar: 头像
+        banner_image: 横幅
         description: 简介
         name: 名称
       post:
@@ -49,6 +51,8 @@ zh-CN:
         weekly_digest_footer_html: 每周摘要尾部 HTML
         weekly_digest_header_html: 每周摘要头部 HTML
       user:
+        avatar: 头像
+        banner_image: 横幅
         bio: 简介
         comment_email_notification_enabled: 评论通知邮件
         current_password: 当前密码
