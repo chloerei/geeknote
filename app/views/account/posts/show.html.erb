@@ -25,7 +25,7 @@
 <% end %>
 
 <div class="top-app-bar">
-  <a href="<%= account_root_path(@account.name) %>" class="icon-button">
+  <a href="<%= account_root_path(@account.name) %>" class="icon-button" data-controller="back-link">
     <x-icon>arrow_back</x-icon>
   </a>
   <div class="top-app-bar__headline">
@@ -213,13 +213,13 @@
             </span>
           </label>
           <div class="menu__content top-full right-0 origin-top-right">
-            <a href="<%= account_post_comments_path(post_id: @post.id, sort: nil, anchor: "comments") %>" class="menu__item">
+            <a href="<%= account_post_comments_path(post_id: @post.id, sort: nil) %>" class="menu__item">
               <%= t "general.newest" %>
             </a>
-            <a href="<%= account_post_comments_path(post_id: @post.id, sort: "oldest", anchor: "comments") %>" class="menu__item">
+            <a href="<%= account_post_comments_path(post_id: @post.id, sort: "oldest") %>" class="menu__item">
               <%= t "general.oldest" %>
             </a>
-            <a href="<%= account_post_comments_path(post_id: @post.id, sort: "popular", anchor: "comments") %>" class="menu__item">
+            <a href="<%= account_post_comments_path(post_id: @post.id, sort: "popular") %>" class="menu__item">
               <%= t "general.popular" %>
             </a>
           </div>
@@ -233,7 +233,7 @@
 
         <% if @post.comments_count > 3 %>
           <div class="p-4 text-center">
-            <a href="<%= account_post_comments_path(@account.name, @post, anchor: "comments") %>" class="button button--text text-on-surface-variant w-full">
+            <a href="<%= account_post_comments_path(@account.name, @post) %>" class="button button--text text-on-surface-variant w-full">
               <%= t "general.view_all_comments" %>
             </a>
           </div>

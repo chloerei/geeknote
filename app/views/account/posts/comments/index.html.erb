@@ -1,5 +1,5 @@
 <div class="top-app-bar">
-  <a href="<%= account_post_path(@account.name, @post) %>" class="icon-button">
+  <a href="<%= account_post_path(@account.name, @post) %>" class="icon-button" data-controller="back-link">
     <x-icon>arrow_back</x-icon>
   </a>
   <div class="top-app-bar__headline line-clamp-1">
