@@ -5,6 +5,13 @@ export default class extends Controller {
   static targets = [ "input", "preview", "removeInput" ]
 
   connect() {
+    this.form = this.element.closest('form')
+    this.form.addEventListener('turbo:submit-end', (event) => {
+      // avoid repeated submit after morphing
+      if (event.detail.success) {
+        this.inputTarget.value = ''
+      }
+    })
   }
 
   preview() {
