@@ -32,9 +32,9 @@
       <%= t "general.popular_tags" %>
     </div>
 
-    <div class="px-4 pb-4 flex gap-4 flex-wrap">
+    <div class="px-4 pb-4 flex gap-2 flex-wrap">
       <% popular_tags.each do |tag| %>
-        <a href="<%= tag_path(tag.name) %>" class="inline-flex items-center h-8 px-3 text-sm font-medium bg-surface-container interactive rounded-full">
+        <a href="<%= tag_path(tag.name) %>" class="chip">
           <%= tag.name %>
         </a>
       <% end %>
