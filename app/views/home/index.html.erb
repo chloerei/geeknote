@@ -4,28 +4,26 @@
   </div>
 </div>
 
-<div class="layout-main-sidebar">
-  <div class="">
-    <div class="flex items-center gap-2">
-      <a href="<%= root_path %>" class="tab tab--primary <%= "tab--active" if current_page?(root_path) %>">
-        <x-icon>trending_up</x-icon>
-        <%= t "general.popular" %>
-      </a>
-      <a href="<%= following_path %>" class="tab tab--primary <%= "tab--active" if current_page?(following_path) %>">
-        <x-icon>inbox</x-icon>
-        <%= t "general.following" %>
-      </a>
-      <a href="<%= newest_path %>" class="tab tab--primary <%= "tab--active" if current_page?(newest_path) %>">
-        <x-icon>bolt</x-icon>
-        <%= t "general.newest" %>
-      </a>
-    </div>
+<div class="flex items-center gap-2">
+  <a href="<%= root_path %>" class="tab tab--primary <%= "tab--active" if current_page?(root_path) %>">
+    <x-icon>trending_up</x-icon>
+    <%= t "general.popular" %>
+  </a>
+  <a href="<%= following_path %>" class="tab tab--primary <%= "tab--active" if current_page?(following_path) %>">
+    <x-icon>inbox</x-icon>
+    <%= t "general.following" %>
+  </a>
+  <a href="<%= newest_path %>" class="tab tab--primary <%= "tab--active" if current_page?(newest_path) %>">
+    <x-icon>bolt</x-icon>
+    <%= t "general.newest" %>
+  </a>
+</div>
 
-    <div class="mt-4">
-      <%= render "components/scroll_pagination", pagy: @pagy do %>
-        <%= render partial: "account/posts/post", collection: @posts, cached: -> post { [ post.account, post.user, post ] } %>
-      <% end %>
-    </div>
+<div class="layout-main-sidebar mt-4">
+  <div class="">
+    <%= render "components/scroll_pagination", pagy: @pagy do %>
+      <%= render partial: "account/posts/post", collection: @posts, cached: -> post { [ post.account, post.user, post ] } %>
+    <% end %>
   </div>
 
   <div class="hidden md:block">

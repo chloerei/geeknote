@@ -1,14 +1,4 @@
 <div class="space-y-4">
-  <div class="relative">
-    <div class="icon h-6 w-6 absolute left-3 top-3">
-      <x-icon>search</x-icon>
-    </div>
-    <%= form_with url: search_url, method: :get do |form| %>
-      <%= form.hidden_field :type, value: @type %>
-      <%= form.text_field :q, value: params[:q], placeholder: t("general.search"), class: "h-12 w-full pl-12 border-none rounded-full bg-surface-container hover:bg-surface-container-high focus:bg-surface-container-highest transition-colors outline-0" %>
-    <% end %>
-  </div>
-
   <%= raw @site.sidebar_header_html %>
 
   <% if current_user && !current_user.email_verified? %>
