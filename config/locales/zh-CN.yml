@@ -186,6 +186,8 @@ zh-CN:
     commentable: 评论对象
     commented_on: 评论了
     comments: 评论
+    comments_count: "%{count} 条评论"
+    community_stats: 社区统计
     copy_link: 复制链接
     created_at: 创建于
     dashboard: 创作中心
@@ -238,6 +240,7 @@ zh-CN:
     popular_tags: 热门标签
     post: 文章
     posts: 文章
+    posts_count: "%{count} 篇文章"
     preview: 预览
     profile: 资料
     public_link: 公开链接
@@ -272,6 +275,7 @@ zh-CN:
     update: 更新
     user: 用户
     users: 用户
+    users_count: "%{count} 位用户"
     view: 查看
     view_all_comments: 查看所有评论
     view_all_hot_comments: 查看所有热门评论
