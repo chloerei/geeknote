@@ -27,6 +27,7 @@
   </div>
 
   <div class="hidden md:block">
-    <%= render "sidebar" %>
+    <turbo-frame id="home_sidebar" src="/home/sidebar" loading="lazy" data-turbo-permanent>
+    </turbo-frame>
   </div>
 </div>

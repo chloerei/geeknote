@@ -119,7 +119,7 @@
       "check_name": "CrossSiteScripting",
       "message": "Unescaped model attribute",
       "file": "app/views/account/posts/show.html.erb",
-      "line": 250,
+      "line": 237,
       "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
       "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_header_html",
       "render_path": [
@@ -172,39 +172,29 @@
     {
       "warning_type": "Cross-Site Scripting",
       "warning_code": 2,
-      "fingerprint": "895f0b81a09931aae4731d3e60d4d74471d2b2740fe96580e856454c3239688d",
+      "fingerprint": "6ea631e39118f712f9e5687673245d32d20d45b0e6b64be44562421ac967b2c3",
       "check_name": "CrossSiteScripting",
       "message": "Unescaped model attribute",
-      "file": "app/views/home/_sidebar.html.erb",
-      "line": 12,
+      "file": "app/views/home/sidebar.html.erb",
+      "line": 4,
       "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
       "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_header_html",
       "render_path": [
         {
           "type": "controller",
           "class": "HomeController",
-          "method": "index",
-          "line": 6,
+          "method": "sidebar",
+          "line": 25,
           "file": "app/controllers/home_controller.rb",
           "rendered": {
-            "name": "home/index",
-            "file": "app/views/home/index.html.erb"
-          }
-        },
-        {
-          "type": "template",
-          "name": "home/index",
-          "line": 32,
-          "file": "app/views/home/index.html.erb",
-          "rendered": {
-            "name": "home/_sidebar",
-            "file": "app/views/home/_sidebar.html.erb"
+            "name": "home/sidebar",
+            "file": "app/views/home/sidebar.html.erb"
           }
         }
       ],
       "location": {
         "type": "template",
-        "template": "home/_sidebar"
+        "template": "home/sidebar"
       },
       "user_input": null,
       "confidence": "Medium",
@@ -220,7 +210,7 @@
       "check_name": "CrossSiteScripting",
       "message": "Unescaped model attribute",
       "file": "app/views/account/posts/show.html.erb",
-      "line": 273,
+      "line": 260,
       "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
       "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_footer_html",
       "render_path": [
@@ -273,39 +263,29 @@
     {
       "warning_type": "Cross-Site Scripting",
       "warning_code": 2,
-      "fingerprint": "ae02c92071665b5b0cc13ba3f12820251ae1a4a32e2625e4714f5a1b464a14eb",
+      "fingerprint": "b507c10f43864ac73351aa302cd4df66a7e3b64b05f9a11b20f5bea180a91bbe",
       "check_name": "CrossSiteScripting",
       "message": "Unescaped model attribute",
-      "file": "app/views/home/_sidebar.html.erb",
-      "line": 56,
+      "file": "app/views/home/sidebar.html.erb",
+      "line": 74,
       "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
       "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_footer_html",
       "render_path": [
         {
           "type": "controller",
           "class": "HomeController",
-          "method": "index",
-          "line": 6,
+          "method": "sidebar",
+          "line": 25,
           "file": "app/controllers/home_controller.rb",
           "rendered": {
-            "name": "home/index",
-            "file": "app/views/home/index.html.erb"
-          }
-        },
-        {
-          "type": "template",
-          "name": "home/index",
-          "line": 32,
-          "file": "app/views/home/index.html.erb",
-          "rendered": {
-            "name": "home/_sidebar",
-            "file": "app/views/home/_sidebar.html.erb"
+            "name": "home/sidebar",
+            "file": "app/views/home/sidebar.html.erb"
           }
         }
       ],
       "location": {
         "type": "template",
-        "template": "home/_sidebar"
+        "template": "home/sidebar"
       },
       "user_input": null,
       "confidence": "Medium",
@@ -338,5 +318,5 @@
       "note": ""
     }
   ],
-  "brakeman_version": "7.0.0"
+  "brakeman_version": "7.0.2"
 }

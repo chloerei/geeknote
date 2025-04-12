@@ -67,21 +67,19 @@
 
       <div class="card p-4">
         <div class="text-lg font-medium">
-          <%= t "general.stats" %>
+          <%= t "general.account_stats" %>
         </div>
         <div class="mt-4">
           <div class="flex items-center h-10 gap-4">
             <x-icon>article</x-icon>
             <div>
-              <%= @account.owner.posts.published.count %>
-              <%= t "general.posts" %>
+              <%= t "general.posts_count", count: @account.owner.posts.published.count %>
             </div>
           </div>
           <div class="flex items-center h-10 gap-4">
             <x-icon>comment</x-icon>
             <div>
-              <%= @account.owner.comments.count %>
-              <%= t "general.comments" %>
+              <%= t "general.comments_count", count: @account.owner.comments.count %>
             </div>
           </div>
         </div>
@@ -102,14 +100,13 @@
 
       <div class="card p-4">
         <div class="text-lg font-medium">
-          <%= t "general.stats" %>
+          <%= t "general.account_stats" %>
         </div>
         <div class="mt-4">
           <div class="flex items-center h-10 gap-4">
             <x-icon>article</x-icon>
             <div>
-              <%= @account.posts.published.count %>
-              <%= t "general.posts" %>
+              <%= t "general.posts_count", count: @account.posts.published.count %>
             </div>
           </div>
         </div>

@@ -154,15 +154,8 @@ zh-CN:
       home:
         index:
           export_description: 导出文章。
-          import_description: 导入文章。
           members_description: 管理账号成员。
           profile_description: 管理账号资料。
-      imports:
-        show:
-          feed_mark_canonical_description: 标记导入文章的链接作为原文链接。
-          save_and_fetch: 保存并抓取
-        update:
-          success: 导入设置已更新，抓取将在后台进行。
   email:
     email_verification: 验证邮箱地址
     reset_your_geeknote_password: 重置密码
@@ -172,6 +165,7 @@ zh-CN:
   general:
     account: 账号
     account_settings: 账号设置
+    account_stats: 账号统计
     accounts: 账号
     add_comment: 添加评论
     admin: 管理
@@ -211,7 +205,6 @@ zh-CN:
     import: 导入
     in: 在
     joined_on: 加入于
-    last_fetched_at: 最后抓取于
     likes: 点赞
     load_more: 查看更多
     manage: 管理

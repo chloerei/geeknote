@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: "home#index"
   get "following", to: "home#following", as: :following
   get "newest", to: "home#newest", as: :newest
+  get "home/sidebar", to: "home#sidebar", as: :home_sidebar
 
   get "/search", to: "search#index", as: :search
 

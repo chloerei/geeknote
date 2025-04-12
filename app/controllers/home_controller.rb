@@ -20,4 +20,8 @@ class HomeController < ApplicationController
     @pagy, @posts = pagy(Post.published.order(published_at: :desc).includes(:account, :user))
     render :index
   end
+
+  def sidebar
+    render layout: "application"
+  end
 end
