@@ -81,7 +81,7 @@ group :development, :test do
 
   gem "factory_bot_rails", "~> 6.4.4"
 
-  gem "dotenv-rails", "~> 3.1.7"
+  gem "dotenv-rails", "~> 3.1.8"
 
   gem "hotwire-spark", "~> 0.1.13"
 end
