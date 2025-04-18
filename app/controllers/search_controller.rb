@@ -26,6 +26,8 @@ class SearchController < ApplicationController
       accounts = Account.pagy_search(params[:q], options)
       @pagy, @accounts = pagy_meilisearch(accounts)
     end
+
+    @page_titles.prepend t("general.search")
   end
 
   private

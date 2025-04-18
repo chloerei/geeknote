@@ -6,6 +6,7 @@ class NotificationsController < ApplicationController
 
   def index
     @pagy, @notifications = pagy(Current.user.notifications.order(created_at: :desc))
+    @page_titles.prepend t("general.notifications")
   end
 
   private

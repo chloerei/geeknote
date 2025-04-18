@@ -2,10 +2,12 @@ class Dashboard::Settings::MembersController < Dashboard::Settings::BaseControll
   before_action :require_organization_account
 
   def index
+    @page_titles.prepend t("general.members")
   end
 
   def new
     @member = @organization.members.new role: "member"
+    @page_titles.prepend t("general.new_member")
   end
 
   def create
@@ -20,6 +22,7 @@ class Dashboard::Settings::MembersController < Dashboard::Settings::BaseControll
 
   def edit
     @member = @organization.members.find(params[:id])
+    @page_titles.prepend t("general.edit_member")
   end
 
   def update

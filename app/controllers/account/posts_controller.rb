@@ -11,5 +11,6 @@ class Account::PostsController < Account::BaseController
 
   def show
     @post = @account.posts.published.find params[:id]
+    @page_titles.prepend @post.title
   end
 end

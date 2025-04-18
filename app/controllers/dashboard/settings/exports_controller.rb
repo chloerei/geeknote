@@ -1,5 +1,6 @@
 class Dashboard::Settings::ExportsController < Dashboard::Settings::BaseController
   def show
+    @page_titles.prepend t("general.export")
   end
 
   def create

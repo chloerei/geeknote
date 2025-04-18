@@ -1,5 +1,6 @@
 class Settings::EmailsController < Settings::BaseController
   def show
+    @page_titles.prepend t("general.email")
   end
 
   def update

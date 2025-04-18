@@ -1,5 +1,6 @@
 class Settings::NotificationsController < Settings::BaseController
   def show
+    @page_titles.prepend t("general.notifications")
   end
 
   def update

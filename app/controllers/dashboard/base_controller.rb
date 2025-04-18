@@ -1,6 +1,7 @@
 class Dashboard::BaseController < ApplicationController
   before_action :require_sign_in
   before_action :set_account
+  before_action :set_title
   before_action :require_account_member
 
   layout "dashboard"
@@ -9,6 +10,11 @@ class Dashboard::BaseController < ApplicationController
 
   def set_account
     @account = Account.find_by!(name: params[:account_name])
+  end
+
+  def set_title
+    @page_titles.prepend t("general.dashboard")
+    @page_titles.prepend @account.name
   end
 
   def require_account_member

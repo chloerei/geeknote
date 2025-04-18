@@ -1,5 +1,6 @@
 class Dashboard::Settings::ProfilesController < Dashboard::Settings::BaseController
   def show
+    @page_titles.prepend t("general.profile")
   end
 
   def update

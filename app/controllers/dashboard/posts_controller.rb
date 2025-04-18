@@ -8,10 +8,14 @@ class Dashboard::PostsController < Dashboard::BaseController
     posts = posts.where(status: @status).order(updated_at: :desc)
 
     @pagy, @posts = pagy(posts)
+
+    @page_titles.prepend t("general.posts")
   end
 
   def new
     @post = @account.posts.new
+    @page_titles.prepend t("general.new_post")
+
     render layout: "application"
   end
 
@@ -27,6 +31,7 @@ class Dashboard::PostsController < Dashboard::BaseController
 
   def edit
     @post = account_posts.find(params[:id])
+    @page_titles.prepend t("general.edit_post")
     render layout: "application"
   end
 

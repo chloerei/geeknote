@@ -1,5 +1,6 @@
 class Account::BaseController < ApplicationController
   before_action :set_account
+  before_action :set_title
 
   helper_method :current_member
 
@@ -7,6 +8,10 @@ class Account::BaseController < ApplicationController
 
   def set_account
     @account = Account.find_by! name: params[:account_name]
+  end
+
+  def set_title
+    @page_titles.prepend @account.owner.name
   end
 
   def require_organization_account

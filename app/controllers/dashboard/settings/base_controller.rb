@@ -1,5 +1,6 @@
 class Dashboard::Settings::BaseController < Dashboard::BaseController
   before_action :require_account_admin
+  before_action :set_title
 
   private
 
@@ -21,5 +22,9 @@ class Dashboard::Settings::BaseController < Dashboard::BaseController
     else
       @organization = @account.owner
     end
+  end
+
+  def set_title
+    @page_titles.prepend t("general.settings")
   end
 end

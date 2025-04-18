@@ -1,5 +1,6 @@
 class Settings::PasswordsController < Settings::BaseController
   def show
+    @page_titles.prepend t("general.password")
   end
 
   def update

@@ -20,6 +20,8 @@ class Account::CommentsController < Account::BaseController
     end
 
     @pagy, @comments = pagy(comments.includes(:user))
+
+    @page_titles.prepend t("general.comments")
   end
 
   def create
