@@ -116,14 +116,16 @@
             <div class="flex gap-2 p-1 bg-surface-container rounded-full shadow-md">
               <%= render "account/posts/likes/button", post: @post %>
 
-              <div class="inline-flex items-center">
-                <a href="<%= account_post_comments_path(@account.name, @post, comment: true) %>" class="icon-button">
-                  <x-icon>mode_comment</x-icon>
-                </a>
-                <% if @post.comments_count > 0 %>
-                  <span class="text-on-surface-variant tabular-nums px-1"><%= @post.comments_count %></span>
-                <% end %>
-              </div>
+              <% if @post.allow_comments? %>
+                <div class="inline-flex items-center">
+                  <a href="<%= account_post_comments_path(@account.name, @post, comment: true) %>" class="icon-button">
+                    <x-icon>mode_comment</x-icon>
+                  </a>
+                  <% if @post.comments_count > 0 %>
+                    <span class="text-on-surface-variant tabular-nums px-1"><%= @post.comments_count %></span>
+                  <% end %>
+                </div>
+              <% end %>
 
               <%= render "account/posts/bookmarks/button", post: @post %>
             </div>
@@ -133,99 +135,110 @@
       </div>
     </div>
 
-    <%
-      hot_comments = @post.comments.includes(:user).where("likes_count > 5").order(likes_count: :desc, created_at: :desc).limit(3)
-      hot_comments_count = @post.comments.where("likes_count > 5").count
-    %>
+    <% if @post.allow_comments? %>
+      <%
+        hot_comments = @post.comments.includes(:user).where("likes_count > 5").order(likes_count: :desc, created_at: :desc).limit(3)
+        hot_comments_count = @post.comments.where("likes_count > 5").count
+      %>
 
-    <% if hot_comments_count > 0 %>
+      <% if hot_comments_count > 0 %>
+        <div class="card mt-4">
+          <div class="flex items-center h-14 px-4 border-b border-outline-variant">
+            <div class="font-medium">
+              <%= t "general.hot_comments" %> <%= hot_comments_count %>
+            </div>
+          </div>
+
+          <div id="comments_list">
+            <%= render partial: "account/comments/comment", collection: hot_comments, cached: -> comment { [ comment.user, comment ]} %>
+
+            <%= render "account/comments/status", comments: hot_comments %>
+
+            <% if hot_comments_count > 3 %>
+              <div class="p-4 text-center">
+                <a href="<%= account_post_comments_path(@account.name, @post, sort: "likes", anchor: "comments") %>" class="button button--text text-on-surface-variant w-full">
+                  <%= t "general.view_all_hot_comments" %>
+                </a>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
       <div class="card mt-4">
         <div class="flex items-center h-14 px-4 border-b border-outline-variant">
           <div class="font-medium">
-            <%= t "general.hot_comments" %> <%= hot_comments_count %>
+            <%= t "general.new_comment" %>
+          </div>
+        </div>
+
+        <% if Current.user %>
+          <%= render "account/comments/form", comment: Current.user.comments.new(commentable: @post), open: params[:comment].present? %>
+        <% else %>
+          <div class="p-4">
+            <a href="<%= sign_in_path %>" class="button button--outlined">
+              <%= t "general.sign_in_to_comment" %>
+            </a>
+          </div>
+        <% end %>
+      </div>
+
+      <%
+        last_comments = @post.comments.includes(:user).order(created_at: :desc).limit(3)
+      %>
+
+      <div class="card mt-4">
+        <div class="flex items-center gap-4 h-14 px-4 border-b border-outline-variant">
+          <div class="flex-grow font-medium">
+            <%= t "general.all_comments" %> <%= @post.comments_count %>
+          </div>
+
+          <div class="menu">
+            <label tabindex="0" class="button button--text text-on-surface-variant">
+              <x-icon>sort</x-icon>
+              <span>
+                <%= t("general.newest") %>
+              </span>
+            </label>
+            <div class="menu__content top-full right-0 origin-top-right">
+              <a href="<%= account_post_comments_path(post_id: @post.id, sort: nil) %>" class="menu__item">
+                <%= t "general.newest" %>
+              </a>
+              <a href="<%= account_post_comments_path(post_id: @post.id, sort: "oldest") %>" class="menu__item">
+                <%= t "general.oldest" %>
+              </a>
+              <a href="<%= account_post_comments_path(post_id: @post.id, sort: "popular") %>" class="menu__item">
+                <%= t "general.popular" %>
+              </a>
+            </div>
           </div>
         </div>
 
         <div id="comments_list">
-          <%= render partial: "account/comments/comment", collection: hot_comments, cached: -> comment { [ comment.user, comment ]} %>
+          <%= render partial: "account/comments/comment", collection: last_comments, cached: -> comment { [ comment.user, comment ]} %>
 
-          <%= render "account/comments/status", comments: hot_comments %>
+          <%= render "account/comments/status", comments: last_comments %>
 
-          <% if hot_comments_count > 3 %>
+          <% if @post.comments_count > 3 %>
             <div class="p-4 text-center">
-              <a href="<%= account_post_comments_path(@account.name, @post, sort: "likes", anchor: "comments") %>" class="button button--text text-on-surface-variant w-full">
-                <%= t "general.view_all_hot_comments" %>
+              <a href="<%= account_post_comments_path(@account.name, @post) %>" class="button button--text text-on-surface-variant w-full">
+                <%= t "general.view_all_comments" %>
               </a>
             </div>
+
           <% end %>
         </div>
       </div>
+    <% else %>
+      <div class="card p-4 mt-4">
+        <div class="flex items-center justify-center gap-4 text-on-surface-variant">
+          <x-icon>lock</x-icon>
+          <div class="text-sm">
+            <%= t "general.comments_is_disabled" %>
+          </div>
+        </div>
+      </div>
     <% end %>
-
-    <div class="card mt-4">
-      <div class="flex items-center h-14 px-4 border-b border-outline-variant">
-        <div class="font-medium">
-          <%= t "general.new_comment" %>
-        </div>
-      </div>
-
-      <% if Current.user %>
-        <%= render "account/comments/form", comment: Current.user.comments.new(commentable: @post), open: params[:comment].present? %>
-      <% else %>
-        <div class="p-4">
-          <a href="<%= sign_in_path %>" class="button button--outlined">
-            <%= t "general.sign_in_to_comment" %>
-          </a>
-        </div>
-      <% end %>
-    </div>
-
-    <%
-      last_comments = @post.comments.includes(:user).order(created_at: :desc).limit(3)
-    %>
-
-    <div class="card mt-4">
-      <div class="flex items-center gap-4 h-14 px-4 border-b border-outline-variant">
-        <div class="flex-grow font-medium">
-          <%= t "general.all_comments" %> <%= @post.comments_count %>
-        </div>
-
-        <div class="menu">
-          <label tabindex="0" class="button button--text text-on-surface-variant">
-            <x-icon>sort</x-icon>
-            <span>
-              <%= t("general.newest") %>
-            </span>
-          </label>
-          <div class="menu__content top-full right-0 origin-top-right">
-            <a href="<%= account_post_comments_path(post_id: @post.id, sort: nil) %>" class="menu__item">
-              <%= t "general.newest" %>
-            </a>
-            <a href="<%= account_post_comments_path(post_id: @post.id, sort: "oldest") %>" class="menu__item">
-              <%= t "general.oldest" %>
-            </a>
-            <a href="<%= account_post_comments_path(post_id: @post.id, sort: "popular") %>" class="menu__item">
-              <%= t "general.popular" %>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div id="comments_list">
-        <%= render partial: "account/comments/comment", collection: last_comments, cached: -> comment { [ comment.user, comment ]} %>
-
-        <%= render "account/comments/status", comments: last_comments %>
-
-        <% if @post.comments_count > 3 %>
-          <div class="p-4 text-center">
-            <a href="<%= account_post_comments_path(@account.name, @post) %>" class="button button--text text-on-surface-variant w-full">
-              <%= t "general.view_all_comments" %>
-            </a>
-          </div>
-
-        <% end %>
-      </div>
-    </div>
 
   </div>
 

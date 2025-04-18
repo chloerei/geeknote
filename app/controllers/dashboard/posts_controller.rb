@@ -71,6 +71,6 @@ class Dashboard::PostsController < Dashboard::BaseController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :featured_image, :remove_featured_image, :tag_list, :canonical_url)
+    params.require(:post).permit(:title, :content, :featured_image, :remove_featured_image, :tag_list, :canonical_url, :allow_comments)
   end
 end

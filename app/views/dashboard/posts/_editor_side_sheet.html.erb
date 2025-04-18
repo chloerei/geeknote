@@ -36,6 +36,20 @@
         <%= form.label :canonical_url, class: "form-label" %>
         <%= render "components/text_field", form: form, name: :canonical_url, description: t(".canonical_url_description") %>
       </div>
+
+      <div class="form-field">
+        <label class="form-label">
+          <%= t "general.options" %>
+        </label>
+        <label class="flex gap-4 items-center">
+          <div class="checkbox">
+            <%= form.checkbox :allow_comments %>
+          </div>
+          <div>
+            <%= t ".allow_comments" %>
+          </div>
+        </label>
+      </div>
     </div>
   </div>
   <label class="side-sheet__scrim" for="side-sheet-toggle"></label>

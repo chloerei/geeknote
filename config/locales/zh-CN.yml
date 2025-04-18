@@ -130,6 +130,7 @@ zh-CN:
       editor:
         delete_forever_confirm: 永久删除文章？
       editor_side_sheet:
+        allow_comments: 允许评论
         canonical_url_description: 如果文章之前已发布在其他地方，可以填写原文链接。
         featured_image_description: 作为文章封面、社交分享图像。
         tag_description: 便于分类和检索。
@@ -193,6 +194,8 @@ zh-CN:
     draft: 草稿
     edit: 编辑
     edit_comment: 编辑评论
+    edit_member: 编辑成员
+    edit_post: 编辑文章
     edit_profile: 编辑资料
     email: Email
     export: 导出
@@ -215,6 +218,7 @@ zh-CN:
     move_to_trash: 移到回收站
     name: 名称
     new_comment: 新评论
+    new_member: 新成员
     new_organization: 新组织
     new_post: 新文章
     newest: 最新
@@ -223,6 +227,7 @@ zh-CN:
     notification_settings: 通知设置
     notifications: 通知
     oldest: 最旧
+    options: 选项
     organizations: 组织
     originally_published_at: 原发布于
     overview: 概览

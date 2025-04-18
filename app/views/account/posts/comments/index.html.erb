@@ -9,66 +9,77 @@
 
 <div class="layout-main-sidebar">
   <div>
-    <div class="card">
-      <div class="flex items-center h-14 px-4 border-b border-outline-variant">
-        <div class="font-medium">
-          <%= t "general.new_comment" %>
+    <% if @post.allow_comments? %>
+      <div class="card">
+        <div class="flex items-center h-14 px-4 border-b border-outline-variant">
+          <div class="font-medium">
+            <%= t "general.new_comment" %>
+          </div>
         </div>
+
+        <% if Current.user %>
+          <%= render "account/comments/form", comment: Current.user.comments.new(commentable: @post), open: params[:comment].present? %>
+        <% else %>
+          <div class="p-4">
+            <a href="<%= sign_in_path %>" class="button button--outlined">
+              <%= t "general.sign_in_to_comment" %>
+            </a>
+          </div>
+        <% end %>
       </div>
 
-      <% if Current.user %>
-        <%= render "account/comments/form", comment: Current.user.comments.new(commentable: @post), open: params[:comment].present? %>
-      <% else %>
-        <div class="p-4">
-          <a href="<%= sign_in_path %>" class="button button--outlined">
-            <%= t "general.sign_in_to_comment" %>
-          </a>
+      <div id="comments" class="card mt-4">
+        <div class="flex items-center gap-4 h-14 px-4 border-b border-outline-variant">
+          <div class="flex-grow font-medium">
+            <%= t "general.all_comments" %> <%= @pagy.count %>
+          </div>
+          <div class="menu">
+            <label tabindex="0" class="button button--text text-on-surface-variant">
+              <x-icon>sort</x-icon>
+              <span>
+                <%=
+                  case @sort
+                  when "oldest"
+                    t("general.oldest")
+                  when "popular"
+                    t("general.popular")
+                  else
+                    t("general.newest")
+                  end
+                %>
+              </span>
+            </label>
+            <div class="menu__content top-full right-0 origin-top-right">
+              <a href="<%= url_for(sort: nil) %>" class="menu__item">
+                <%= t "general.newest" %>
+              </a>
+              <a href="<%= url_for(sort: "oldest") %>" class="menu__item">
+                <%= t "general.oldest" %>
+              </a>
+              <a href="<%= url_for(sort: "popular") %>" class="menu__item">
+                <%= t "general.popular" %>
+              </a>
+            </div>
+          </div>
         </div>
-      <% end %>
-    </div>
 
-    <div id="comments" class="card mt-4">
-      <div class="flex items-center gap-4 h-14 px-4 border-b border-outline-variant">
-        <div class="flex-grow font-medium">
-          <%= t "general.all_comments" %> <%= @pagy.count %>
+        <div class="">
+          <%= render "components/scroll_pagination", pagy: @pagy, content_id: "comments_list" do %>
+            <%= render partial: "account/comments/comment", collection: @comments, cached: -> comment { [ comment.user, comment ]} %>
+            <%= render "account/comments/status", comments: @comments %>
+          <% end %>
         </div>
-        <div class="menu">
-          <label tabindex="0" class="button button--text text-on-surface-variant">
-            <x-icon>sort</x-icon>
-            <span>
-              <%=
-                case @sort
-                when "oldest"
-                  t("general.oldest")
-                when "popular"
-                  t("general.popular")
-                else
-                  t("general.newest")
-                end
-              %>
-            </span>
-          </label>
-          <div class="menu__content top-full right-0 origin-top-right">
-            <a href="<%= url_for(sort: nil) %>" class="menu__item">
-              <%= t "general.newest" %>
-            </a>
-            <a href="<%= url_for(sort: "oldest") %>" class="menu__item">
-              <%= t "general.oldest" %>
-            </a>
-            <a href="<%= url_for(sort: "popular") %>" class="menu__item">
-              <%= t "general.popular" %>
-            </a>
+      </div>
+    <% else %>
+      <div class="card p-4">
+        <div class="flex items-center justify-center gap-4 text-on-surface-variant">
+          <x-icon>lock</x-icon>
+          <div class="text-sm">
+            <%= t "general.comments_is_disabled" %>
           </div>
         </div>
       </div>
-
-      <div class="">
-        <%= render "components/scroll_pagination", pagy: @pagy, content_id: "comments_list" do %>
-          <%= render partial: "account/comments/comment", collection: @comments, cached: -> comment { [ comment.user, comment ]} %>
-          <%= render "account/comments/status", comments: @comments %>
-        <% end %>
-      </div>
-    </div>
+    <% end %>
   </div>
 
   <div>
