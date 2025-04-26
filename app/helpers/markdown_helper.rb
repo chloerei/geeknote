@@ -1,6 +1,6 @@
 module MarkdownHelper
   MARKDOWN_ALLOW_TAGS = %w[strong em b i p code pre tt samp kbd var sub sup dfn cite big small address hr br div span h1 h2 h3 h4 h5 h6 ul ol li dl dt dd abbr acronym a img blockquote del ins input table thead tbody tr th td video]
-  MARKDOWN_ALLOW_ATTRIBUTES = %w[id href src width height alt cite datetime title class name xml:lang abbr type disabled checked controls allowfullscreen]
+  MARKDOWN_ALLOW_ATTRIBUTES = %w[id href src width height alt cite datetime title class name xml:lang abbr type disabled checked controls allowfullscreen start]
 
   class MarkdownScruber < Rails::Html::PermitScrubber
     def initialize
