@@ -45,7 +45,13 @@
 
     a {
       text-decoration: underline;
+      text-underline-offset: 0.25em;
       font-weight: 500;
+      color: var(--color-primary);
+
+      &:hover {
+        opacity: 0.9;
+      }
     }
 
     code {
