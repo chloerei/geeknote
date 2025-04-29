@@ -53,11 +53,7 @@ module MarkdownHelper
 
     # Add header anchor
     doc.css("h1, h2, h3, h4, h5, h6").each do |node|
-      anchor = Nokogiri::XML::Node.new "a", doc
-      anchor["id"] = CGI.escape(node.text)
-      anchor["href"] = "##{anchor['id']}"
-      anchor["class"] = "anchor"
-      node.prepend_child anchor
+      node["id"] = CGI.escape(node.text)
     end
 
     # search p a as only child
@@ -99,11 +95,31 @@ module MarkdownHelper
 
   def markdown_summary(text)
     html = CommonMarker.render_html(text, :DEFAULT, [ :table, :tasklist, :strikethrough, :autolink, :tagfilter ])
-    doc = Nokogiri::HTML.fragment(html)
+    doc = Nokogiri::HTML.fragment(sanitize html)
 
     first_paragraph = doc.css("p").first
 
     text = first_paragraph&.text || ""
     truncate(text, length: 140)
+  end
+
+  def markdown_toc(text)
+    html = CommonMarker.render_html(text, :DEFAULT, [ :table, :tasklist, :strikethrough, :autolink, :tagfilter ])
+    doc = Nokogiri::HTML5.fragment(sanitize html)
+
+    toc = []
+
+    doc.css("h2, h3").each do |node|
+      if node.name == "h2"
+        toc << { level: 2, text: node.text, id: CGI.escape(node.text) }
+      elsif node.name == "h3"
+        if toc.last && toc.last[:level] == 2
+          toc.last[:children] ||= []
+          toc.last[:children] << { level: 3, text: node.text, id: CGI.escape(node.text) }
+        end
+      end
+    end
+
+    toc
   end
 end

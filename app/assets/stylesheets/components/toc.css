@@ -1,0 +1,25 @@
+@layer components {
+  .toc {
+    a {
+      display: block;
+      border-left: 2px solid var(--color-outline-variant);
+      padding: 10px 16px;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 500;
+      color: var(--color-on-surface-variant);
+      border-radius: 0 4px 4px 0;
+
+      @apply interactive;
+
+      &.active {
+        color: var(--color-primary);
+        border-left: 2px solid var(--color-primary);
+      }
+    }
+
+    ol ol a {
+      padding-left: 32px;
+    }
+  }
+}

@@ -43,5 +43,8 @@ application.register("snackbar", SnackbarController)
 import TagFieldController from "./tag_field_controller"
 application.register("tag-field", TagFieldController)
 
+import TocController from "./toc_controller"
+application.register("toc", TocController)
+
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
