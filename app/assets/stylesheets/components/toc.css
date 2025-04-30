@@ -22,4 +22,18 @@
       padding-left: 32px;
     }
   }
+
+  @media (min-width: 1280px) {
+    .side-sheet--toc {
+      .side-sheet__content {
+        width: auto;
+        height: auto;
+        max-height: calc(100vh - 32px);
+        display: block;
+        margin-right: 0;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+    }
+  }
 }

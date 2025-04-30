@@ -182,6 +182,7 @@ zh-CN:
     commented_on: 评论了
     comments: 评论
     comments_count: "%{count} 条评论"
+    comments_is_disabled: 评论已关闭
     community_stats: 社区统计
     copy_link: 复制链接
     created_at: 创建于
