@@ -1,25 +1,35 @@
-<% cache post do %>
-  <% toc = post_toc(post) %>
+<%
+  toc = markdown_toc post.content
+%>
 
-  <% if toc.any? %>
-    <input type="checkbox" id="toc-sheet-toggle" class="sheet-toggle">
-    <div class="sheet sheet--toc">
-      <div class="sheet__container">
-        <div class="title-medium margin-bottom-2">
-          <%= t "general.table_of_contents" %>
-        </div>
-
-          <ul class="toc" data-controller="toc">
-            <% toc.each do |item| %>
-              <li class="toc__item toc__item--level-<%= item[:level] %>" data-toc-target="item" data-id="<%= item[:id] %>">
-                <a href="<%= item[:href] %>">
-                  <%= item[:title] %>
-                </a>
-              </li>
-            <% end %>
-          </ul>
-      </div>
-      <label for="toc-sheet-toggle" class="sheet__scrim">
+<div class="side-sheet side-sheet--toc">
+  <input id="toc-toggle" type="checkbox" class="side-sheet__toggle">
+  <div class="side-sheet__content p-4">
+    <div class="font-medium">
+      <%= t "general.table_of_contents" %>
     </div>
-  <% end %>
-<% end %>
+    <div class="toc mt-4" data-controller="toc" data-toc-content-id-value="post-content">
+      <ol>
+        <% toc.each do |item| %>
+          <li>
+            <a href="#<%= item[:id] %>" data-toc-target="item">
+              <%= item[:text] %>
+            </a>
+            <% if item[:children] %>
+              <ol>
+                <% item[:children].each do |child| %>
+                  <li>
+                    <a href="#<%= child[:id] %>" data-toc-target="item">
+                      <%= child[:text] %>
+                    </a>
+                  </li>
+                <% end %>
+              </ol>
+            <% end %>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+  <label class="side-sheet__scrim" for="toc-toggle"></label>
+</div>

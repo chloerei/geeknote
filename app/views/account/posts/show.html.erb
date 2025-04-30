@@ -261,40 +261,7 @@
     <%= render "account/profile_card", account: @post.user.account %>
 
     <div class="sticky top-4 mt-4 z-20">
-      <%
-        toc = markdown_toc @post.content
-      %>
-      <div class="side-sheet side-sheet--toc">
-        <input id="toc-toggle" type="checkbox" class="side-sheet__toggle">
-        <div class="side-sheet__content p-4">
-          <div class="font-medium">
-            <%= t "general.table_of_contents" %>
-          </div>
-          <div class="toc mt-4" data-controller="toc" data-toc-content-id-value="post-content">
-            <ol>
-              <% toc.each do |item| %>
-                <li>
-                  <a href="#<%= item[:id] %>" data-toc-target="item">
-                    <%= item[:text] %>
-                  </a>
-                  <% if item[:children] %>
-                    <ol>
-                      <% item[:children].each do |child| %>
-                        <li>
-                          <a href="#<%= child[:id] %>" data-toc-target="item">
-                            <%= child[:text] %>
-                          </a>
-                        </li>
-                      <% end %>
-                    </ol>
-                  <% end %>
-                </li>
-              <% end %>
-            </ol>
-          </div>
-        </div>
-        <label class="side-sheet__scrim" for="toc-toggle"></label>
-      </div>
+      <%= render "toc", post: @post %>
 
       <%= raw @site.sidebar_footer_html %>
     </div>
