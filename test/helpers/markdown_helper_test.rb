@@ -26,9 +26,9 @@ class MarkdownHelperTest < ActionView::TestCase
     EOF
 
     html = <<~EOF
-      <h1><a id="Header+1" href="#Header+1" class="anchor"></a>Header 1</h1>
-      <h2><a id="Header+2" href="#Header+2" class="anchor"></a>Header 2</h2>
-      <h2><a id="%E4%B8%AD%E6%96%87" href="#%E4%B8%AD%E6%96%87" class="anchor"></a>中文</h2>
+      <h1 id="Header+1">Header 1</h1>
+      <h2 id="Header+2">Header 2</h2>
+      <h2 id="%E4%B8%AD%E6%96%87">中文</h2>
     EOF
 
     assert_equal html, markdown_render(text)
@@ -56,5 +56,39 @@ class MarkdownHelperTest < ActionView::TestCase
     EOF
 
     assert_equal html, markdown_render(text)
+  end
+
+  test "should generate toc" do
+    text = <<~EOF
+      ## Header 2
+
+      ### Header 3
+
+      #### Header 4
+
+      ## Header 5
+
+      #### Header 6
+
+      ### Header 7
+
+      ### Header 8
+    EOF
+
+    toc = markdown_toc(text)
+
+    assert_equal [
+      {
+        level: 2, text: "Header 2", id: "Header+2", children: [
+          { level: 3, text: "Header 3", id: "Header+3" }
+        ]
+      },
+      {
+        level: 2, text: "Header 5", id: "Header+5", children: [
+          { level: 3, text: "Header 7", id: "Header+7" },
+          { level: 3, text: "Header 8", id: "Header+8" }
+        ]
+      }
+    ], toc
   end
 end
