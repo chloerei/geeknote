@@ -22,6 +22,10 @@
   <link rel="canonical" href="<%= @post.canonical_url || account_post_url(@account.name, @post) %>">
 <% end %>
 
+<%
+  toc = markdown_toc @post.content
+%>
+
 <div class="top-app-bar">
   <a href="<%= account_root_path(@account.name) %>" class="icon-button" data-controller="back-link">
     <x-icon>arrow_back</x-icon>
@@ -131,9 +135,11 @@
 
               <%= render "account/posts/bookmarks/button", post: @post %>
 
-              <label class="icon-button xl:hidden" for="toc-toggle">
-                <x-icon>toc</x-icon>
-              </label>
+              <% if toc.any? %>
+                <label class="icon-button xl:hidden" for="toc-toggle">
+                  <x-icon>toc</x-icon>
+                </label>
+              <% end %>
             </div>
           </div>
 
@@ -261,7 +267,9 @@
     <%= render "account/profile_card", account: @post.user.account %>
 
     <div class="sticky top-4 mt-4 z-20">
-      <%= render "toc", post: @post %>
+      <% if toc.any? %>
+        <%= render "toc", toc: toc %>
+      <% end %>
 
       <%= raw @site.sidebar_footer_html %>
     </div>
