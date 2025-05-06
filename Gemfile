@@ -43,7 +43,7 @@ gem "stimulus-rails", "~> 1.3.4"
 gem "commonmarker", "~> 0.23.11"
 
 # code highlight
-gem "rouge", "~> 4.5.1"
+gem "rouge", "~> 4.5.2"
 
 # pagination
 gem "pagy", "~> 9.3.4"
