@@ -4,6 +4,7 @@
     height: 100vh;
     overflow: auto;
     background-color: var(--color-surface-container-lowest);
+    max-width: calc(100vw - 64px);
 
     /* modal */
     display: none;
@@ -55,6 +56,7 @@
     .side-sheet__content {
       position: relative;
       border-radius: 0;
+      max-width: none;
     }
 
     .side-sheet__scrim {
