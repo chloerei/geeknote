@@ -14,7 +14,7 @@
     "@rails/activestorage": "^8.0.200",
     "@rails/request.js": "^0.0.12",
     "@tailwindcss/cli": "^4.1.5",
-    "esbuild": "^0.25.3",
+    "esbuild": "^0.25.4",
     "local-time": "^3.0.3",
     "tom-select": "^2.4.3"
   },
