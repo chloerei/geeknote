@@ -148,9 +148,12 @@ zh-CN:
         success: 更新成功
     settings:
       exports:
+        create:
+          processing: 正在导出……
+          rate_limit: 一天只能导出一次。
         show:
           export_description: 导出文章和附件并打包为.tar.gz 压缩包。一天可以导出一次。
-          export_in_progress: 导出中
+          export_in_progress: 导出中，完成时会发送邮件通知。
           last_exported_at: 上次导出于
       home:
         index:
