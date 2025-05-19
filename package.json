@@ -10,7 +10,7 @@
     "@codemirror/view": "^6.36.7",
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.13",
-    "@material-symbols/font-400": "^0.31.2",
+    "@material-symbols/font-400": "^0.31.3",
     "@rails/activestorage": "^8.0.200",
     "@rails/request.js": "^0.0.12",
     "@tailwindcss/cli": "^4.1.6",
