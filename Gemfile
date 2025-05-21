@@ -31,7 +31,7 @@ gem "solid_queue", "~> 1.1.5"
 gem "mission_control-jobs", "~> 1.0.2"
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", "~> 1.18.4", require: false
+gem "bootsnap", "~> 1.18.6", require: false
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails", "~> 2.0.13"
