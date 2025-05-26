@@ -71,7 +71,7 @@ gem "recaptcha", "~> 5.19.0", require: false
 
 gem "rest-client", "~> 2.1.0"
 
-gem "meilisearch-rails", "~> 0.15.0"
+gem "meilisearch-rails", "~> 0.16.0"
 
 gem "jwt", "~> 2.10.1"
 
