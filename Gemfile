@@ -65,7 +65,7 @@ gem "newrelic_rpm", require: false
 gem "mailgun-ruby", "~> 1.3.5", require: false
 gem "postal-rails", "~> 1.0.1", require: false
 
-gem "with_advisory_lock", "~> 5.1.0"
+gem "with_advisory_lock", "~> 5.3.0"
 
 gem "recaptcha", "~> 5.19.0", require: false
 

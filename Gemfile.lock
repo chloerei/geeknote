@@ -154,7 +154,7 @@ GEM
     dotenv-rails (3.1.8)
       dotenv (= 3.1.8)
       railties (>= 6.1)
-    drb (2.2.1)
+    drb (2.2.3)
     erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
@@ -480,12 +480,12 @@ GEM
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    with_advisory_lock (5.1.0)
+    with_advisory_lock (5.3.0)
       activerecord (>= 6.1)
       zeitwerk (>= 2.6)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.7.2)
+    zeitwerk (2.7.3)
 
 PLATFORMS
   aarch64-linux
@@ -536,7 +536,7 @@ DEPENDENCIES
   web-console (~> 4.2.1)
   webdrivers (~> 5.3.1)
   webmock (~> 3.25.1)
-  with_advisory_lock (~> 5.1.0)
+  with_advisory_lock (~> 5.3.0)
 
 RUBY VERSION
    ruby 3.4.1p0
