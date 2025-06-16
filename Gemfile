@@ -73,7 +73,7 @@ gem "rest-client", "~> 2.1.0"
 
 gem "meilisearch-rails", "~> 0.16.0"
 
-gem "jwt", "~> 2.10.1"
+gem "jwt", "~> 3.0.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
