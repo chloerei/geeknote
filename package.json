@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@codemirror/commands": "^6.8.0",
-    "@codemirror/lang-markdown": "^6.3.2",
+    "@codemirror/lang-markdown": "^6.3.3",
     "@codemirror/language": "^6.11.0",
     "@codemirror/lint": "^6.8.4",
     "@codemirror/state": "^6.5.2",
