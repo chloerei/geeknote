@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
         sign_in(@user)
         redirect_to session.delete(:return_to) || root_path
       else
-        @user.errors.add(:base, :email_or_password_error)
+        @user.errors.add(:password, :email_or_password_error)
         render :new, status: :unprocessable_entity
       end
     else
