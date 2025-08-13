@@ -1,6 +1,6 @@
 class Admin::Settings::WeeklyDigests::PreviewsController < Admin::Settings::BaseController
   def show
-    @user = User.new email: current_user.email
+    @user = User.new email: Current.user.email
   end
 
   def create

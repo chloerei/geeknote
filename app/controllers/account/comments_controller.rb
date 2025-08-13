@@ -1,7 +1,7 @@
 class Account::CommentsController < Account::BaseController
   before_action :require_user_account
-  before_action :require_sign_in, except: [ :show ]
-  before_action :require_current_user, except: [ :index, :show ]
+  before_action :require_authentication, except: [ :show ]
+  before_action :require_author, except: [ :index, :show ]
 
   def show
     @comment = @account.owner.comments.find params[:id]
@@ -60,7 +60,7 @@ class Account::CommentsController < Account::BaseController
 
   private
 
-  def require_current_user
+  def require_author
     if Current.user.account != @account
       redirect_to root_path, alert: "You are not allowed to access this page"
     end

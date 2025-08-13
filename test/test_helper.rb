@@ -22,14 +22,15 @@ end
 
 class ActionDispatch::IntegrationTest
   def sign_in(user)
-    cookies[:auth_token] = user.auth_token
+    session = user.sessions.create!
+
+    ActionDispatch::TestRequest.create.cookie_jar.tap do |cookie_jar|
+      cookie_jar.signed[:session_id] = session.id
+      cookies[:session_id] = cookie_jar[:session_id]
+    end
   end
 
   def sign_out
-    cookies[:auth_token] = nil
-  end
-
-  def current_user
-    User.find_by(auth_token: cookies[:auth_token]) if cookies[:auth_token].present?
+    cookies.delete(:session_id)
   end
 end

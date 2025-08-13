@@ -7,8 +7,8 @@
       <p class="text--secondary">
         Invited by @<%= @member.inviter.account.name %>
       </p>
-      <% if current_user %>
-        <% if @account.owner.members.active.where(user: current_user).exists? %>
+      <% if Current.user %>
+        <% if @account.owner.members.active.where(user: Current.user).exists? %>
           <p>
             You are already a member of @<%= @account.name %>.
             <a href="<%= sign_in_path(return_to: account_invitation_path(invitation_token: @member.invitation_token)) %>">Sign in</a> as another user if you want to join as another user.

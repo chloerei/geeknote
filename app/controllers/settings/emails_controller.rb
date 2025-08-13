@@ -15,13 +15,13 @@ class Settings::EmailsController < Settings::BaseController
   end
 
   def resend
-    cache_key = "email_verification:#{current_user.email}"
+    cache_key = "email_verification:#{Current.user.email}"
 
     if Rails.cache.exist?(cache_key)
       redirect_to settings_email_path, notice: t(".already_sent")
     else
       Rails.cache.write(cache_key, true, expires_in: 1.minute)
-      UserMailer.with(user: current_user).email_verification.deliver_later
+      UserMailer.with(user: Current.user).email_verification.deliver_later
       redirect_to settings_email_path, notice: t(".success")
     end
   end

@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  before_action :require_sign_in
+  before_action :require_authentication
   after_action :mark_notifications_as_read, only: :index
 
   layout "site"

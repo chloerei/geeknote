@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  before_action :require_sign_in
+  before_action :require_authentication
 
   def new
     @organization = Organization.new
@@ -10,7 +10,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new organization_params
 
     if @organization.save
-      @organization.members.create(role: "admin", user: current_user, status: :active)
+      @organization.members.create(role: "admin", user: Current.user, status: :active)
       redirect_to dashboard_root_path(@organization.account.name)
     else
       render :new, status: :unprocessable_entity

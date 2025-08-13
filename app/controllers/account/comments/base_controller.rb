@@ -1,6 +1,6 @@
 class Account::Comments::BaseController < Account::BaseController
   before_action :require_user_account
-  before_action :require_sign_in
+  before_action :require_authentication
   before_action :set_comment
 
   private

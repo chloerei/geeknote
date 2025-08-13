@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :require_sign_in, only: [ :following ]
+  before_action :require_authentication, only: [ :following ]
 
   def index
     @pagy, @posts = pagy(Post.published.order(score: :desc).includes(:account, :user))

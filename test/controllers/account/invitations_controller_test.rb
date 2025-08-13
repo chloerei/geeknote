@@ -39,13 +39,14 @@ class Account::InvitationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should accept invitation by token" do
     invitation = create(:invitation, organization: @organization)
-    sign_in create(:user)
+    user = create(:user)
+    sign_in user
     assert_difference "@organization.members.active.count" do
       patch account_invitation_path(@organization.account.name, invitation_token: invitation.invitation_token)
     end
     assert_redirected_to account_dashboard_posts_path(@organization.account.name)
     invitation.reload
     assert invitation.active?
-    assert current_user, invitation.user
+    assert user, invitation.user
   end
 end

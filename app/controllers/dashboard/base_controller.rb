@@ -1,5 +1,5 @@
 class Dashboard::BaseController < ApplicationController
-  before_action :require_sign_in
+  before_action :require_authentication
   before_action :set_account
   before_action :set_title
   before_action :require_account_member

@@ -2,11 +2,6 @@ class RegistrationsController < ApplicationController
   layout "application"
 
   def new
-    if params[:return_to]
-      uri = URI(params[:return_to])
-      session[:return_to] = [ uri.path, uri.query ].compact.join("?")
-    end
-
     @user = User.new account_attributes: { name: params[:account_name] }
   end
 
@@ -14,9 +9,9 @@ class RegistrationsController < ApplicationController
     @user = User.new user_params
 
     if optional_verify_recaptcha(model: @user) && @user.save
-      sign_in(@user)
+      start_new_session_for(@user)
       UserMailer.with(user: @user).email_verification.deliver_later
-      redirect_to session.delete(:return_to) || root_path
+      redirect_to after_authentication_url
     else
       render :new, status: :unprocessable_entity
     end

@@ -1,5 +1,5 @@
 class Settings::BaseController < ApplicationController
-  before_action :require_sign_in
+  before_action :require_authentication
   before_action :set_user
   before_action :set_title
 

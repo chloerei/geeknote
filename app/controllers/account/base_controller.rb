@@ -28,11 +28,11 @@ class Account::BaseController < ApplicationController
 
   def current_member
     @current_member ||= if @account.user?
-      if @account.owner == current_user
-        Member.new(user: current_user, role: :owner)
+      if @account.owner == Current.user
+        Member.new(user: Current.user, role: :owner)
       end
     else
-      @account.owner.members.find_by(user: current_user)
+      @account.owner.members.find_by(user: Current.user)
     end
   end
 end

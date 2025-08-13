@@ -2,11 +2,6 @@ class SessionsController < ApplicationController
   layout "application"
 
   def new
-    if params[:return_to]
-      uri = URI(params[:return_to])
-      session[:return_to] = [ uri.path, uri.query ].compact.join("?")
-    end
-
     @user = User.new
   end
 
@@ -15,8 +10,8 @@ class SessionsController < ApplicationController
 
     if optional_verify_recaptcha(model: @user)
       if @user.authenticate(params[:user][:password])
-        sign_in(@user)
-        redirect_to session.delete(:return_to) || root_path
+        start_new_session_for @user
+        redirect_to after_authentication_url
       else
         @user.errors.add(:password, :email_or_password_error)
         render :new, status: :unprocessable_entity
@@ -27,7 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    sign_out
+    terminate_session
     redirect_to root_url
   end
 end

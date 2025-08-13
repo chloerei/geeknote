@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get "/search", to: "search#index", as: :search
 
+  resource :session, only: [ :new, :create, :destroy ]
+  resource :registration, only: [ :new, :create ]
   get  "sign_in", to: "sessions#new"
   post "sign_in", to: "sessions#create"
   get  "sign_up", to: "registrations#new"

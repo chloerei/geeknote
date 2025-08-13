@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :bookmarked_posts, through: :bookmarks, source: :post
 
   has_secure_password
+  has_many :sessions, dependent: :destroy
   has_secure_token :auth_token
 
   generates_token_for :email_verification, expires_in: 2.days do

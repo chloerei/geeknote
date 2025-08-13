@@ -1,5 +1,5 @@
 class Sso::FeedbacktraceController < ApplicationController
-  before_action :require_sign_in
+  before_action :require_authentication
   layout "application"
 
   def show
@@ -8,10 +8,10 @@ class Sso::FeedbacktraceController < ApplicationController
   def create
     token = JWT.encode({
       exp: 1.minute.from_now.to_i,
-      external_id: current_user.id,
-      email: current_user.email,
-      name: current_user.name,
-      username: current_user.account.name
+      external_id: Current.user.id,
+      email: Current.user.email,
+      name: Current.user.name,
+      username: Current.user.account.name
     }, Rails.configuration.x.feedbacktrace_jwt_sso_secret_key, "HS256")
 
     uri = URI(Rails.configuration.x.feedbacktrace_jwt_sso_callback_url)

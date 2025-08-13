@@ -1,13 +1,13 @@
 class Account::InvitationsController < Account::BaseController
   layout "application"
   before_action :require_organization_account, :set_member
-  before_action :require_sign_in, :check_user_match, only: [ :update ]
+  before_action :require_authentication, :check_user_match, only: [ :update ]
 
   def show
   end
 
   def update
-    if @member.update(user: current_user, status: :active, actived_at: Time.now)
+    if @member.update(user: Current.user, status: :active, actived_at: Time.now)
       redirect_to account_dashboard_posts_path(@member.organization.account.name)
     else
       redirect_to account_invitation_path(invitation_token: @member.invitation_token)
@@ -25,7 +25,7 @@ class Account::InvitationsController < Account::BaseController
   end
 
   def check_user_match
-    if @member.user && @member.user != current_user
+    if @member.user && @member.user != Current.user
       redirect_to account_invitation_path, notice: "User not match"
     end
   end

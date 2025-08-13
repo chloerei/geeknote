@@ -3,7 +3,7 @@
     <div class="space-y-4">
       <%= raw @site.sidebar_header_html %>
 
-      <% if current_user && !current_user.email_verified? %>
+      <% if Current.user && !Current.user.email_verified? %>
         <div class="bg-tertiary-container rounded-xl p-4">
           <h3 class="font-medium">
             <%= t '.email_is_not_verified' %>
