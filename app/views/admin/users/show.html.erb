@@ -36,7 +36,7 @@
       </dd>
     </div>
 
-    <% @user.attributes.except('password_digest', 'auth_token').each do |name, value| %>
+    <% @user.attributes.except('password_digest').each do |name, value| %>
       <div>
         <dt>
           <%= name %>
