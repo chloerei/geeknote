@@ -72,7 +72,7 @@
             </div>
           </a>
         <% else %>
-          <a href="<%= sign_in_path %>" class="navigation-drawer__item  <%= "navigation-drawer__item--active" if current_page?(sign_in_path) %>">
+          <a href="<%= new_session_path %>" class="navigation-drawer__item  <%= "navigation-drawer__item--active" if current_page?(new_session_path) %>">
             <div class="navigation-drawer__item__icon">
               <x-icon>login</x-icon>
             </div>
@@ -81,7 +81,7 @@
             </div>
           </a>
 
-          <a href="<%= sign_up_path %>" class="navigation-drawer__item  <%= "navigation-drawer__item--active" if current_page?(sign_up_path) %>">
+          <a href="<%= new_registration_path %>" class="navigation-drawer__item  <%= "navigation-drawer__item--active" if current_page?(new_registration_path) %>">
             <div class="navigation-drawer__item__icon">
               <x-icon>person_add</x-icon>
             </div>

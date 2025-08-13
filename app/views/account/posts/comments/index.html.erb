@@ -21,7 +21,7 @@
           <%= render "account/comments/form", comment: Current.user.comments.new(commentable: @post), open: params[:comment].present? %>
         <% else %>
           <div class="p-4">
-            <a href="<%= sign_in_path %>" class="button button--outlined">
+            <a href="<%= new_session_path %>" class="button button--outlined">
               <%= t "general.sign_in_to_comment" %>
             </a>
           </div>

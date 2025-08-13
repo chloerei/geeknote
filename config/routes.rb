@@ -8,11 +8,6 @@ Rails.application.routes.draw do
 
   resource :session, only: [ :new, :create, :destroy ]
   resource :registration, only: [ :new, :create ]
-  get  "sign_in", to: "sessions#new"
-  post "sign_in", to: "sessions#create"
-  get  "sign_up", to: "registrations#new"
-  post "sign_up", to: "registrations#create"
-  delete "sign_out", to: "sessions#destroy"
 
   resources :attachments, only: [ :create ]
   get "/attachments/:key(/*filename)", to: "attachments#show", as: :attachment

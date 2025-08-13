@@ -26,7 +26,7 @@
           <span><%= t "general.settings" %></span>
         </a>
 
-        <%= form_with url: sign_out_path, method: :delete do |form| %>
+        <%= form_with url: session_path, method: :delete do |form| %>
           <button type="submit" class="menu__item">
             <x-icon>logout</x-icon>
             <span><%= t "general.sign_out" %></span>

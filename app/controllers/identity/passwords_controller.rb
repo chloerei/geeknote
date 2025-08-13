@@ -17,7 +17,7 @@ class Identity::PasswordsController < ApplicationController
       else
         UserMailer.with(user: @user).password_reset_email.deliver_later
         Rails.cache.write(cache_key, true, expires_in: 1.minute)
-        redirect_to sign_in_path, notice: t(".success")
+        redirect_to new_session_path, notice: t(".success")
       end
     else
       if @user.new_record?
@@ -33,7 +33,7 @@ class Identity::PasswordsController < ApplicationController
 
   def update
     if @user.update user_params
-      redirect_to sign_in_path, notice: "Password has been reset."
+      redirect_to new_session_path, notice: "Password has been reset."
     else
       render :edit, status: :unprocessable_entity
     end

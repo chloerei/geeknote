@@ -19,7 +19,7 @@ class Identity::PasswordsControllerTest < ActionDispatch::IntegrationTest
     assert_emails 1 do
       post identity_password_path, params: { user: { email: user.email } }
     end
-    assert_redirected_to sign_in_path
+    assert_redirected_to new_session_path
   end
 
   test "should not access reset form if token invalid" do
@@ -42,7 +42,7 @@ class Identity::PasswordsControllerTest < ActionDispatch::IntegrationTest
   test "should update if token valid" do
     user = create(:user)
     patch identity_password_path(token: user.generate_token_for(:password_reset)), params: { user: { password: "12345678", password_confirmation: "12345678" } }
-    assert_redirected_to sign_in_path
+    assert_redirected_to new_session_path
     assert user.reload.authenticate("12345678")
   end
 end

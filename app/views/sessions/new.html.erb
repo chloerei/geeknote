@@ -11,7 +11,7 @@
   <div class="max-w-lg mx-auto p-4">
     <div class="card p-4">
       <div class="mt-4">
-        <%= form_with(url: sign_in_path, model: @user, method: :post) do |form| %>
+        <%= form_with(url: session_path, model: @user, method: :post) do |form| %>
           <div class="form-field">
             <%= form.label :email, class: "form-label" %>
             <%= render "components/text_field", form: form, name: :email, options: { required: true, autofocus: true, autocomplete: "email" } %>
@@ -38,7 +38,7 @@
     <div class="p-4 space-y-2 text-on-surface-variant">
       <div>
         <%= t(".dont_have_an_account") %>
-        <a href="<%= sign_up_path %>" class="text-primary hover:underline">
+        <a href="<%= new_registration_path %>" class="text-primary hover:underline">
           <%= t("general.sign_up") %>
         </a>
       </div>
