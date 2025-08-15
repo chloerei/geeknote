@@ -30,3 +30,12 @@ export function throttle(func, limit) {
     }
   }
 }
+
+export function flashMessage(message, type = 'info') {
+  const toast = document.getElementById('toast')
+  toast.insertAdjacentHTML('beforeend', `
+    <div class="alert alert-${type}" data-controller="autoremove" data-turbo-temporary>
+      ${message}
+    </div>
+  `)
+}

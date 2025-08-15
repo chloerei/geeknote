@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import AutoremoveController from "./autoremove_controller"
+application.register("autoremove", AutoremoveController)
+
 import BackLinkController from "./back_link_controller"
 application.register("back-link", BackLinkController)
 
@@ -36,9 +39,6 @@ application.register("recaptcha", RecaptchaController)
 
 import ScrollPaginationController from "./scroll_pagination_controller"
 application.register("scroll-pagination", ScrollPaginationController)
-
-import SnackbarController from "./snackbar_controller"
-application.register("snackbar", SnackbarController)
 
 import TagFieldController from "./tag_field_controller"
 application.register("tag-field", TagFieldController)

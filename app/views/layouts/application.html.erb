@@ -47,12 +47,17 @@
 
     <%= content_for?(:body) ? yield(:body) : yield %>
 
-    <% if notice || alert %>
-      <div class="fixed bottom-4 left-4 z-10 pb-safe">
-        <div class="snackbar" data-controller="snackbar" data-turbo-temporary>
-          <%= notice || alert %>
+    <div id="toast" class="toast">
+      <% if notice %>
+        <div class="alert alert-success" data-controller="autoremove" data-turbo-temporary>
+          <%= notice %>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+      <% if alert %>
+        <div class="alert alert-error" data-controller="autoremove" data-turbo-temporary>
+          <%= alert %>
+        </div>
+      <% end %>
+    </div>
   </body>
 </html>
