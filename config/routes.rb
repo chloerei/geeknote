@@ -77,10 +77,6 @@ Rails.application.routes.draw do
     mount MissionControl::Jobs::Engine, at: "/jobs"
   end
 
-  namespace :sso do
-    resource :feedbacktrace, controller: "feedbacktrace"
-  end
-
   get "up", to: "rails/health#show", as: :rails_health_check
 
   scope "/dashboard/:account_name", module: "dashboard", as: :dashboard do
