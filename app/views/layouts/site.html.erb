@@ -1,21 +1,103 @@
 <% content_for :body do %>
-  <div class="flex container mx-auto">
-    <div class="shrink-0">
-      <%= render "layouts/site/navigation_rail" %>
-      <%= render "layouts/site/navigation_drawer" %>
-    </div>
-
-    <div class="flex-grow min-w-0">
-      <%= raw @site.site_header_html %>
-
-      <div class="px-4 md:px-6 pb-4">
-        <%= yield %>
+  <div class="shadow-sm">
+    <div class="max-w-7xl mx-auto">
+      <div class="navbar bg-base-100 py-0">
+        <div class="flex-1">
+          <a href="/" class="inline-flex items-center p-2 gap-2">
+            <img src="<%= asset_path "icon.svg" %>" alt="logo" class="size-10">
+            <div class="text-xl">
+              <%= @site.name %>
+            </div>
+          </a>
+        </div>
+        <div class="flex-none">
+          <% if !current_page?(search_path) %>
+            <div class="hidden md:inline-flex">
+              <%= form_with url: search_path, method: :get do %>
+                <label class="input">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search opacity-50"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+                  <input type="search" placeholder="<%= t 'general.search' %>" name="q" autocomplete="off">
+                </label>
+              <% end %>
+            </div>
+            <a href="<%= search_path %>" class="btn btn-ghost btn-square md:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+            </a>
+          <% end %>
+          <% if Current.user %>
+            <a href="<%= new_dashboard_post_path(Current.user.account.name) %>" class="btn btn-ghost btn-square">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+            </a>
+            <a href="<%= notifications_path %>" class="btn btn-ghost btn-square">
+              <div class="indicator">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell-icon lucide-bell"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+                <% notification_count = Current.user.notifications.unread.count %>
+                <% if notification_count > 0 %>
+                  <div class="badge badge-xs badge-primary indicator-item">
+                    <%= notification_count > 99 ? "99+" : notification_count %>
+                  </div>
+                <% end %>
+              </div>
+            </a>
+            <div class="dropdown dropdown-end">
+              <label tabindex="0" class="btn btn-ghost btn-square">
+                <div class="avatar">
+                  <div class="size-8 rounded-full">
+                    <img src="<%= avatar_url(Current.user) %>">
+                  </div>
+                </div>
+              </label>
+              <div tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                <li>
+                  <a href="<%= account_root_path(Current.user.account.name) %>">
+                    <div>
+                      <div class="font-medium">
+                        <%= Current.user.name %>
+                      </div>
+                      <div class="text-sm text-base-content/75">
+                        @<%= Current.user.account.name %>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li></li>
+                <li>
+                  <a href="<%= dashboard_root_path(Current.user.account.name) %>">
+                    <%= t "general.dashboard" %>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= bookmarks_path %>">
+                    <%= t "general.bookmarks" %>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= settings_root_path %>">
+                    <%= t "general.settings" %>
+                  </a>
+                </li>
+                <li></li>
+                <li>
+                  <%= form_with url: session_path, method: :delete do %>
+                    <button type="submit">
+                      <%= t "general.sign_out" %>
+                    </button>
+                  <% end %>
+                </li>
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
-
-      <%= raw @site.site_footer_html %>
-
-      <%= render "layouts/site/navigation_bar" %>
     </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto p-4">
+    <%= raw @site.site_header_html %>
+
+    <%= yield %>
+
+    <%= raw @site.site_footer_html %>
   </div>
 <% end %>
 
