@@ -1,29 +1,20 @@
 @import "tailwindcss" source(none);
 
+@plugin "daisyui";
+
 @source "../stylesheets";
 @source "../../javascripts";
 @source "../../views";
 
-@import "./color.css";
+/* @import "./color.css"; */
 @import "./codemirror.css";
 @import "./icon.css";
 @import "./tom_select.css";
-@import "./components/all.css";
+/* @import "./components/all.css"; */
 
 @import "./typography.css";
 
 @theme {
-}
-
-@layer base {
-  html {
-    background-color: var(--color-surface);
-    color: var(--color-on-surface);
-  }
-
-  summary::-webkit-details-marker {
-    display: none;
-  }
 }
 
 @layer components {
