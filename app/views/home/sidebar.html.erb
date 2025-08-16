@@ -4,12 +4,12 @@
       <%= raw @site.sidebar_header_html %>
 
       <% if Current.user && !Current.user.email_verified? %>
-        <div class="bg-tertiary-container rounded-xl p-4">
+        <div class="card bg-warning text-warning-content p-4">
           <h3 class="font-medium">
             <%= t '.email_is_not_verified' %>
           </h3>
           <div class="mt-4">
-            <a href="<%= settings_email_path %>" class="underline">
+            <a href="<%= settings_email_path %>" class="btn">
               <%= t '.verify_email' %>
             </a>
           </div>
@@ -19,15 +19,15 @@
       <%
         popular_tags = Tag.order(taggings_count: :desc).limit(10)
       %>
-      <div class="card">
-        <div class="p-4 font-medium">
+      <div class="card card-border border-base-300 bg-base-100 p-4">
+        <h3 class="font-medium mb-4">
           <%= t "general.popular_tags" %>
-        </div>
+        </h3>
 
-        <div class="px-4 pb-4 flex gap-2 flex-wrap">
+        <div class="flex gap-1 flex-wrap">
           <% popular_tags.each do |tag| %>
-            <a href="<%= tag_path(tag.name) %>" class="chip">
-              <%= tag.name %>
+            <a href="<%= tag_path(tag.name) %>" class="btn btn-ghost btn-sm">
+              #<%= tag.name %>
             </a>
           <% end %>
         </div>
@@ -36,8 +36,8 @@
       <%
         recommend_accounts = Account.where(id: Account.order(followers_count: :desc).excluding(Current.user&.account).limit(100)).order("RANDOM()").limit(3)
       %>
-      <div class="card">
-        <div class="p-4 font-medium">
+      <div class="card card-border border-base-300 bg-base-100 p-4">
+        <div class="font-medium mb-4">
           <%= t "general.recommend_users" %>
         </div>
         <div class="">
@@ -45,28 +45,26 @@
         </div>
       </div>
 
-      <div class="card p-4">
-        <div class="font-medium">
+      <div class="card card-border border-base-300 bg-base-100 p-4">
+        <div class="font-medium mb-4">
           <%= t "general.community_stats" %>
         </div>
-        <div class="mt-4">
-          <div class="flex items-center h-10 gap-4">
-            <x-icon>person</x-icon>
-            <div>
-              <%= t "general.users_count", count: User.count %>
-            </div>
+        <div class="flex items-center h-10 gap-4">
+          <x-icon>person</x-icon>
+          <div>
+            <%= t "general.users_count", count: User.count %>
           </div>
-          <div class="flex items-center h-10 gap-4">
-            <x-icon>article</x-icon>
-            <div>
-              <%= t "general.posts_count", count: Post.count %>
-            </div>
+        </div>
+        <div class="flex items-center h-10 gap-4">
+          <x-icon>article</x-icon>
+          <div>
+            <%= t "general.posts_count", count: Post.count %>
           </div>
-          <div class="flex items-center h-10 gap-4">
-            <x-icon>comment</x-icon>
-            <div>
-              <%= t "general.comments_count", count: Comment.count %>
-            </div>
+        </div>
+        <div class="flex items-center h-10 gap-4">
+          <x-icon>comment</x-icon>
+          <div>
+            <%= t "general.comments_count", count: Comment.count %>
           </div>
         </div>
       </div>
