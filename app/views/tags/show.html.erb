@@ -1,15 +1,10 @@
-<div class="top-app-bar">
-  <a href="/" class="icon-button">
-    <x-icon>arrow_back</x-icon>
-  </a>
-  <div class="top-app-bar__headline">
-    <%= t ".headline", name: @tag.name %>
-  </div>
+<div class="text-lg font-medium">
+  #<%= @tag.name %>
 </div>
 
-<div class="layout-main-sidebar">
+<div class="layout-main-sidebar mt-4">
   <div class="">
-    <%= render "components/scroll_pagination", pagy: @pagy do %>
+    <%= render "components/scroll_pagination", pagy: @pagy, content_class: "space-y-4" do %>
       <%= render partial: "account/posts/post", collection: @posts, cached: -> post { [ post.account, post.user, post ] } %>
     <% end %>
   </div>
