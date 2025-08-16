@@ -1,6 +1,4 @@
 class RegistrationsController < ApplicationController
-  layout "application"
-
   def new
     @user = User.new account_attributes: { name: params[:account_name] }
   end

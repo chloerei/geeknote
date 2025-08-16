@@ -4,27 +4,32 @@
   error ||= form.object && form.object.errors[name].first
 %>
 
-<div class="text-field <%= "text-field--error" if error %>">
-  <div class="text-field__container">
+<fieldset class="fieldset">
+  <legend class="fieldset-legend">
+    <%= form.label name %>
+  </legend>
+
+  <label class="input w-full <%= "input-error" if error %>">
     <% if prefix %>
-      <div class="text-field__prefix">
+      <span class="label">
         <%= prefix %>
-      </div>
+      </span>
     <% end %>
-    <%= form.public_send type, name, options.merge(class: "text-field__input") %>
+    <%= form.text_field name, options %>
     <% if suffix %>
-      <div class="text-field__suffix">
+      <span class="label">
         <%= suffix %>
-      </div>
+      </span>
     <% end %>
-  </div>
+  </label>
+
   <% if error %>
-    <div class="text-field__supporting-text">
+    <p class="label text-error">
       <%= error %>
-    </div>
+    </p>
   <% elsif description %>
-    <div class="text-field__supporting-text">
+    <p class="label">
       <%= description %>
-    </div>
+    </p>
   <% end %>
-</div>
+</fieldset>

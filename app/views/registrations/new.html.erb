@@ -1,64 +1,33 @@
-<div class="container mx-auto">
-  <div class="top-app-bar">
-    <a href="/" class="icon-button">
-      <x-icon>arrow_back</x-icon>
-    </a>
-    <div class="top-app-bar__headline">
+<div class="max-w-md mx-auto p-4">
+  <div class="card bg-base-100 shadow-sm p-4">
+    <h2 class="font-medium mb-4">
       <%= t "general.sign_up" %>
-    </div>
+    </h2>
+
+    <%= form_with(url: registration_path, model: @user, method: :post) do |form| %>
+      <%= render "components/text_field", form: form, name: :email, options: { required: true, autocomplete: "email" } %>
+
+      <%= form.fields_for :account do |account_form| %>
+        <%= render "components/text_field", form: account_form, name: :name, prefix: "@", options: { autocomplete: "username" } %>
+      <% end %>
+
+      <%= render "components/text_field", form: form, name: :name, options: { required: true, autocomplete: "name" } %>
+
+      <%= render "components/text_field", form: form, name: :password, type: :password_field, options: { type: :password, value: nil, required: true, autocomplete: "new-password" } %>
+
+      <%= render "components/text_field", form: form, name: :password_confirmation, type: :password_field, options: { type: :password, value: nil, required: true, autocomplete: "new-password" } %>
+
+      <%= render "components/recaptcha_field", form: form %>
+
+      <button type="submit" class="btn btn-primary btn-block mt-4">
+        <%= t "general.sign_up" %>
+      </button>
+    <% end %>
   </div>
 
-  <div class="max-w-lg mx-auto p-4">
-    <div class="card p-4">
-      <div class="mt-4">
-        <%= form_with(url: registration_path, model: @user, method: :post) do |form| %>
-          <div class="form-field">
-            <%= form.label :email, class: "form-label" %>
-            <%= render "components/text_field", form: form, name: :email, options: { required: true, autofocus: true, autocomplete: "email" } %>
-          </div>
-
-          <%= form.fields_for :account do |account_form| %>
-            <div class="form-field">
-              <%= account_form.label :name, class: "form-label" %>
-              <%= render "components/text_field", form: account_form, name: :name, prefix: "@", options: { required: true, autocomplete: "username" } %>
-            </div>
-          <% end %>
-
-          <div class="form-field">
-            <%= form.label :name, class: "form-label" %>
-            <%= render "components/text_field", form: form, name: :name, options: { required: true, autocomplete: "name" } %>
-          </div>
-
-          <div class="form-field">
-            <%= form.label :password, class: "form-label" %>
-            <%= render "components/text_field", form: form, name: :password, type: :password_field, options: { required: true, autocomplete: "new-password" } %>
-          </div>
-
-          <div class="form-field">
-            <%= form.label :password_confirmation, class: "form-label" %>
-            <%= render "components/text_field", form: form, name: :password_confirmation, type: :password_field, options: { required: true, autocomplete: "new-password" } %>
-          </div>
-
-          <div class="form-field">
-            <%= render "components/recaptcha_field", form: form %>
-          </div>
-
-          <div class="form-field">
-            <button type="submit" class="button button--filled">
-              <%= t "general.sign_up" %>
-            </button>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="p-4 text-on-surface-variant">
-      <div>
-        <%= t(".already_have_an_account") %>
-        <a href="<%= new_session_path %>" class="text-primary hover:underline">
-          <%= t("general.sign_in") %>
-        </a>
-      </div>
-    </div>
+  <div class="p-4">
+    <a href="<%= new_session_path %>" class="btn btn-link btn-block">
+      <%= t("general.sign_in") %>
+    </a>
   </div>
 </div>

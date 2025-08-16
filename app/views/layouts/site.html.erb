@@ -1,7 +1,7 @@
 <% content_for :body do %>
-  <div class="shadow-sm">
+  <div class="bg-base-100 shadow-sm">
     <div class="max-w-7xl mx-auto">
-      <div class="navbar bg-base-100 py-0">
+      <div class="navbar py-0">
         <div class="flex-1">
           <a href="/" class="inline-flex items-center p-2 gap-2">
             <img src="<%= asset_path "icon.svg" %>" alt="logo" class="size-10">
@@ -78,21 +78,26 @@
                 </li>
                 <li></li>
                 <li>
-                  <%= form_with url: session_path, method: :delete do %>
-                    <button type="submit">
-                      <%= t "general.sign_out" %>
-                    </button>
-                  <% end %>
+                  <a href="<%= session_path %>" data-turbo-method="delete">
+                    <%= t "general.sign_out" %>
+                  </a>
                 </li>
               </div>
             </div>
+          <% else %>
+            <a href="<%= new_session_path %>" class="btn btn-ghost">
+              <%= t "general.sign_up" %>
+            </a>
+            <a href="<%= new_session_path %>" class="btn btn-ghost">
+              <%= t "general.sign_in" %>
+            </a>
           <% end %>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="max-w-7xl mx-auto p-4">
+  <div class="">
     <%= raw @site.site_header_html %>
 
     <%= yield %>
