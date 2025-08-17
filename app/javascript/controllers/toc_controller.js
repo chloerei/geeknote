@@ -5,6 +5,8 @@ import { throttle } from "../lib/utils"
 export default class extends Controller {
   static targets = ["item"]
 
+  static classes = ["active"]
+
   static values = {
     contentId: String,
   }
@@ -48,7 +50,7 @@ export default class extends Controller {
 
     // Remove active class from all items first
     this.itemTargets.forEach(item => {
-      item.classList.remove("active")
+      item.classList.remove(this.activeClass)
     })
 
     if (firstVisibleHeading) {
@@ -56,7 +58,7 @@ export default class extends Controller {
       if (id) {
         const activeItem = this.itemTargets.find(item => item.getAttribute("href") === `#${id}`)
         if (activeItem) {
-          activeItem.classList.add("active")
+          activeItem.classList.add(this.activeClass)
         }
       }
     }

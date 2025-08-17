@@ -24,9 +24,9 @@
           <%= t "general.popular_tags" %>
         </h3>
 
-        <div class="flex gap-1 flex-wrap">
+        <div class="flex gap-2 flex-wrap">
           <% popular_tags.each do |tag| %>
-            <a href="<%= tag_path(tag.name) %>" class="btn btn-ghost btn-sm">
+            <a href="<%= tag_path(tag.name) %>" class="btn btn-soft btn-sm">
               #<%= tag.name %>
             </a>
           <% end %>

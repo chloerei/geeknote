@@ -2,24 +2,22 @@
   liked = Current.user.present? && post.liked_by?(Current.user)
 %>
 
-<div id="<%= dom_id(post, :like) %>" class="inline-flex items-center group <%= 'liked' if liked %>">
-  <div class="group-[.liked]:hidden">
+<div id="<%= dom_id(post, :like) %>" class="inline-flex items-center group <%= 'active' if liked %>">
+  <div class="group-[.active]:hidden">
     <%= form_with url: account_post_like_path(post.account.name, post), method: :post do %>
-      <button type="submit" class="icon-button hover:text-red-500">
-        <x-icon>favorite</x-icon>
+      <button type="submit" class="btn btn-ghost btn-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-icon lucide-heart"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>
       </button>
     <% end %>
   </div>
-  <div class="hidden group-[.liked]:block">
+  <div class="hidden group-[.active]:block">
     <%= form_with url: account_post_like_path(post.account.name, post), method: :delete do %>
-      <button type="submit" class="icon-button text-red-500">
-        <x-icon fill>favorite</x-icon>
+      <button type="submit" class="btn btn-ghost btn-circle text-red-500">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-icon lucide-heart"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>
       </button>
     <% end %>
   </div>
-  <% if @post.likes_count > 0 %>
-    <span class="text-on-surface-variant tabular-nums px-1">
-      <%= post.likes_count %>
-    </span>
-  <% end %>
+  <span class="text-sm tabular-nums">
+    <%= post.likes_count %>
+  </span>
 </div>

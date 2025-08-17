@@ -2,24 +2,22 @@
   liked = Current.user.present? && post.bookmarks.where(user: Current.user).exists?
 %>
 
-<div id="<%= dom_id(post, :bookmark) %>" class="inline-flex items-center group <%= 'liked' if liked %>">
-  <div class="group-[.liked]:hidden">
+<div id="<%= dom_id(post, :bookmark) %>" class="inline-flex items-center group <%= 'active' if liked %>">
+  <div class="group-[.active]:hidden">
     <%= form_with url: account_post_bookmark_path(post.account.name, post), method: :post do %>
-      <button type="submit" class="icon-button hover:text-primary hover:bg-primary/10 active:bg-primary/20">
-        <x-icon>bookmark</x-icon>
+      <button type="submit" class="btn btn-ghost btn-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark-icon lucide-bookmark"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
       </button>
     <% end %>
   </div>
-  <div class="hidden group-[.liked]:block">
+  <div class="hidden group-[.active]:block">
     <%= form_with url: account_post_bookmark_path(post.account.name, post), method: :delete do %>
-      <button type="submit" class="icon-button text-primary hover:text-primary hover:bg-primary/10 active:bg-primary/20">
-        <x-icon fill>bookmark</x-icon>
+      <button type="submit" class="btn btn-ghost btn-circle text-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark-icon lucide-bookmark"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
       </button>
     <% end %>
   </div>
-  <% if @post.bookmarks_count > 0 %>
-    <span class="text-on-surface-variant tabular-nums px-1">
-      <%= post.bookmarks_count %>
-    </span>
-  <% end %>
+  <span class="text-sm tabular-nums">
+    <%= post.bookmarks_count %>
+  </span>
 </div>

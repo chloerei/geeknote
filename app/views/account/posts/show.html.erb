@@ -26,21 +26,14 @@
   toc = markdown_toc @post.content
 %>
 
-<div class="top-app-bar">
-  <a href="<%= account_root_path(@account.name) %>" class="icon-button" data-controller="back-link">
-    <x-icon>arrow_back</x-icon>
-  </a>
-  <div class="top-app-bar__headline">
-    <%= t "general.post" %>
-  </div>
-</div>
-
 <div class="layout-main-sidebar">
   <div class="min-w-0">
 
-    <div class="card">
+    <div class="card card-border border-base-300 bg-base-100">
       <% if @post.featured_image.attached? %>
-        <img src="<%= polymorphic_url(@post.featured_image.variant(:large)) %>" alt="cover" class="rounded-xl object-cover w-full aspect-video">
+        <figure>
+          <img src="<%= polymorphic_url(@post.featured_image.variant(:large)) %>" alt="cover" class="object-cover w-full aspect-video">
+        </figure>
       <% end %>
 
       <div class="p-4">
@@ -74,72 +67,63 @@
               <% end %>
             </div>
           </div>
-
-          <div class="flex-shrink-0">
-            <div class="menu">
-              <label tabindex="0" type="button" class="icon-button">
-                <x-icon>more_vert</x-icon>
-              </label>
-              <div tabindex="0" class="menu__content top-full right-0 origin-top-right">
-                <button type="button" class="menu__item" data-controller="copy-link" data-action="copy-link#copy" data-copy-link-url-value="<%= account_post_path(@account.name, @post) %>">
-                  <x-icon>link</x-icon>
-                  <span><%= t "general.copy_link" %></span>
-                </button>
-
-                <div class="hidden visible-to-user--<%= @post.user.id %>">
-                  <a href="<%= edit_dashboard_post_path(@account.name, @post) %>" class="menu__item">
-                    <x-icon>edit</x-icon>
-                    <span><%= t "general.edit" %></span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div class="mt-6">
           <article class="mt-6">
-            <h1 class="text-3xl font-medium mb-4">
+            <h1 class="text-3xl font-medium">
               <%= @post.title %>
             </h1>
 
-            <div id="post-content" class="typography">
+            <% if @post.tags.any? %>
+              <div class="flex flex-wrap gap-2 mt-6">
+                <% @post.tags.each do |tag| %>
+                  <a href="<%= tag_path(tag.name) %>" class="btn btn-soft btn-sm">
+                    #<%= tag.name %>
+                  </a>
+                <% end %>
+              </div>
+            <% end %>
+
+            <div id="post-content" class="typography mt-6">
               <%= markdown_render @post.content %>
             </div>
           </article>
 
-          <% if @post.tags.any? %>
-            <div class="flex gap-2 mt-6">
-              <% @post.tags.each do |tag| %>
-                <a href="<%= tag_path(tag.name) %>" class="chip">
-                  <%= tag.name %>
-                </a>
-              <% end %>
-            </div>
-          <% end %>
-
-          <div class="sticky flex justify-center px-4 mt-8 bottom-24 md:bottom-4 pb-safe">
-            <div class="flex gap-2 p-1 bg-surface-container rounded-full shadow-md">
+          <div class="sticky flex justify-center px-4 mt-8 bottom-4">
+            <div class="flex gap-2 p-2 bg-base-100 border border-base-300 rounded-full">
               <%= render "account/posts/likes/button", post: @post %>
 
               <% if @post.allow_comments? %>
                 <div class="inline-flex items-center">
-                  <a href="<%= account_post_comments_path(@account.name, @post, comment: true) %>" class="icon-button">
-                    <x-icon>mode_comment</x-icon>
+                  <a href="<%= account_post_comments_path(@account.name, @post, comment: true) %>" class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-icon lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
                   </a>
-                  <% if @post.comments_count > 0 %>
-                    <span class="text-on-surface-variant tabular-nums px-1"><%= @post.comments_count %></span>
-                  <% end %>
+                  <span class="text-sm tabular-nums"><%= @post.comments_count %></span>
                 </div>
               <% end %>
 
               <%= render "account/posts/bookmarks/button", post: @post %>
 
-              <% if toc.any? %>
-                <label class="icon-button xl:hidden" for="toc-toggle">
-                  <x-icon>toc</x-icon>
+              <div class="dropdown dropdown-end dropdown-top">
+                <label tabindex="0" type="button" class="btn btn-ghost btn-circle">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical-icon lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
                 </label>
-              <% end %>
+                <div tabindex="0" class="dropdown-content menu bg-base-100 rounded-box w-52 p-2">
+                  <li>
+                    <button type="button" class="menu__item" data-controller="copy-link" data-action="copy-link#copy" data-copy-link-url-value="<%= account_post_path(@account.name, @post) %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                      <span><%= t "general.copy_link" %></span>
+                    </button>
+                  </li>
+                  <li class="hidden visible-to-user--<%= @post.user.id %>">
+                    <a href="<%= edit_dashboard_post_path(@account.name, @post) %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+                      <span><%= t "general.edit" %></span>
+                    </a>
+                  </li>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -154,7 +138,7 @@
       %>
 
       <% if hot_comments_count > 0 %>
-        <div class="card mt-4">
+        <div class="card card-border border-base-300 bg-base-100 mt-4">
           <div class="flex items-center h-14 px-4 border-b border-outline-variant">
             <div class="font-medium">
               <%= t "general.hot_comments" %> <%= hot_comments_count %>
@@ -177,11 +161,9 @@
         </div>
       <% end %>
 
-      <div class="card mt-4">
-        <div class="flex items-center h-14 px-4 border-b border-outline-variant">
-          <div class="font-medium">
-            <%= t "general.new_comment" %>
-          </div>
+      <div class="card card-border border-base-300 bg-base-100 mt-4">
+        <div class="font-medium p-4">
+          <%= t "general.new_comment" %>
         </div>
 
         <% if Current.user %>
@@ -199,29 +181,35 @@
         last_comments = @post.comments.includes(:user).order(created_at: :desc).limit(3)
       %>
 
-      <div class="card mt-4">
-        <div class="flex items-center gap-4 h-14 px-4 border-b border-outline-variant">
+      <div class="card card-border border-base-300 bg-base-100 mt-4">
+        <div class="flex items-center gap-4 h-14 px-4">
           <div class="flex-grow font-medium">
             <%= t "general.all_comments" %> <%= @post.comments_count %>
           </div>
 
-          <div class="menu">
-            <label tabindex="0" class="button button--text text-on-surface-variant">
-              <x-icon>sort</x-icon>
+          <div class="dropdown dropdown-end">
+            <label tabindex="0" class="btn btn-ghost">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="M11 4h10"/><path d="M11 8h7"/><path d="M11 12h4"/></svg>
               <span>
                 <%= t("general.newest") %>
               </span>
             </label>
-            <div class="menu__content top-full right-0 origin-top-right">
-              <a href="<%= account_post_comments_path(post_id: @post.id, sort: nil) %>" class="menu__item">
-                <%= t "general.newest" %>
-              </a>
-              <a href="<%= account_post_comments_path(post_id: @post.id, sort: "oldest") %>" class="menu__item">
-                <%= t "general.oldest" %>
-              </a>
-              <a href="<%= account_post_comments_path(post_id: @post.id, sort: "popular") %>" class="menu__item">
-                <%= t "general.popular" %>
-              </a>
+            <div class="dropdown-content menu">
+              <li>
+                <a href="<%= account_post_comments_path(post_id: @post.id, sort: nil) %>">
+                  <%= t "general.newest" %>
+                </a>
+              </li>
+              <li>
+                <a href="<%= account_post_comments_path(post_id: @post.id, sort: "oldest") %>">
+                  <%= t "general.oldest" %>
+                </a>
+              </li>
+              <li>
+                <a href="<%= account_post_comments_path(post_id: @post.id, sort: "popular") %>">
+                  <%= t "general.popular" %>
+                </a>
+              </li>
             </div>
           </div>
         </div>
@@ -254,21 +242,23 @@
 
   </div>
 
-  <div class="">
+  <div class="space-y-4">
 
     <%= raw @site.sidebar_header_html %>
 
+    <%= render "account/profile_card", account: @post.user.account %>
+
     <% if @post.account != @post.user.account %>
-      <div class="card">
+      <div class="card card-border border-base-300 bg-base-100 p-4">
         <%= render "account/item", account: @post.account %>
       </div>
     <% end %>
 
-    <%= render "account/profile_card", account: @post.user.account %>
-
-    <div class="sticky top-4 mt-4 z-20">
+    <div class="sticky top-4">
       <% if toc.any? %>
-        <%= render "toc", toc: toc %>
+        <div class="card card-border border-base-300 bg-base-100 p-4 hidden xl:block">
+          <%= render "toc", toc: toc %>
+        </div>
       <% end %>
 
       <%= raw @site.sidebar_footer_html %>

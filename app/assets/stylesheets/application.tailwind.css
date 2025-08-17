@@ -23,7 +23,7 @@
     grid-template-columns: 1fr;
     gap: 24px;
 
-    @media (min-width: 1280px) {
+    @media (min-width: 1024px) {
       grid-template-columns: 1fr 360px;
     }
   }
@@ -33,7 +33,7 @@
     grid-template-columns: 1fr;
     gap: 24px;
 
-    @media (min-width: 1280px) {
+    @media (min-width: 1024px) {
       grid-template-columns: 320px 1fr;
     }
   }
