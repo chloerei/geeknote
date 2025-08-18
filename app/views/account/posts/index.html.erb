@@ -2,114 +2,25 @@
   <%= auto_discovery_link_tag :atom, account_feed_url(@account.name, format: :atom) %>
 <% end %>
 
-<div class="top-app-bar">
-  <a href="/" class="icon-button" data-controller="back-link">
-    <x-icon>arrow_back</x-icon>
-  </a>
-  <div class="top-app-bar__headline">
-    <%= @account.display_name %>
+<div class="layout-nav-main">
+  <div>
+    <%= render "account/nav", account: @account %>
   </div>
 
-  <% if @account.user? && @account.owner == Current.user %>
-    <div class="menu">
-      <label tabindex="0" class="icon-button">
-        <x-icon>settings</x-icon>
-      </label>
-      <div tabindex="0" class="menu__content top-full right-0">
-        <a href="<%= bookmarks_path %>" class="menu__item">
-          <x-icon>bookmarks</x-icon>
-          <span><%= t "general.bookmarks" %></span>
-        </a>
-
-        <a href="<%= settings_root_path %>" class="menu__item">
-          <x-icon>settings</x-icon>
-          <span><%= t "general.settings" %></span>
-        </a>
-
-        <%= form_with url: session_path, method: :delete do |form| %>
-          <button type="submit" class="menu__item">
-            <x-icon>logout</x-icon>
-            <span><%= t "general.sign_out" %></span>
-          </button>
-        <% end %>
-      </div>
+  <div class="">
+    <div class="tabs tabs-border">
+      <a href="<%= account_root_path(@account.name) %>" class="tab tab-active">
+        <%= t "general.posts" %>
+      </a>
+      <a href="#comments" class="tab">
+        <%= t "general.comments" %>
+      </a>
     </div>
-  <% end %>
-</div>
-
-<div class="layout-main-sidebar">
-  <div>
-    <%= render "account/header", account: @account %>
 
     <div class="mt-4">
-      <%= render partial: "account/posts/post", collection: @posts, cached: -> post { [ post.account, post.user, post ] } %>
-    </div>
-  </div>
-
-  <div class="space-y-4">
-    <% if @account.user? %>
-      <% if @account.owner.organizations.any? %>
-        <div class="card p-4">
-          <div class="text-lg font-medium">
-            <%= t "general.organizations" %>
-          </div>
-          <div class="flex flex-wrap gap-2 mt-4">
-            <% @account.owner.organizations.includes(:account).each do |organization| %>
-              <a href="<%= account_root_path(organization.account.name) %>" class="block">
-                <img src="<%= avatar_url(organization) %>" alt="avatar" class="w-10 h-10 rounded-full">
-              </a>
-            <% end %>
-          </div>
-        </div>
+      <%= render "components/scroll_pagination", pagy: @pagy, content_class: "space-y-4" do %>
+        <%= render partial: "account/posts/post", collection: @posts, cached: -> post { [ post.account, post.user, post ] } %>
       <% end %>
-
-      <div class="card p-4">
-        <div class="text-lg font-medium">
-          <%= t "general.account_stats" %>
-        </div>
-        <div class="mt-4">
-          <div class="flex items-center h-10 gap-4">
-            <x-icon>article</x-icon>
-            <div>
-              <%= t "general.posts_count", count: @account.owner.posts.published.count %>
-            </div>
-          </div>
-          <div class="flex items-center h-10 gap-4">
-            <x-icon>comment</x-icon>
-            <div>
-              <%= t "general.comments_count", count: @account.owner.comments.count %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% elsif @account.organization? %>
-      <div class="card p-4">
-        <div class="text-lg font-medium">
-          <%= t "general.members" %>
-        </div>
-        <div class="flex flex-wrap gap-2 mt-4">
-          <% @account.owner.users.includes(:account).each do |user| %>
-            <a href="<%= account_root_path(user.account.name) %>" class="block">
-              <img src="<%= avatar_url(user) %>" alt="avatar" class="w-10 h-10 rounded-full">
-            </a>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="card p-4">
-        <div class="text-lg font-medium">
-          <%= t "general.account_stats" %>
-        </div>
-        <div class="mt-4">
-          <div class="flex items-center h-10 gap-4">
-            <x-icon>article</x-icon>
-            <div>
-              <%= t "general.posts_count", count: @account.posts.published.count %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-
+    </div>
   </div>
 </div>

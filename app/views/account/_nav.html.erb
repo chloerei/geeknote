@@ -1,0 +1,116 @@
+<div class="space-y-4">
+  <div class="card card-border border-base-300 bg-base-100">
+    <figure class="w-full aspect-[3/1] bg-primary">
+      <% if account.owner.banner_image.attached? %>
+        <img src="<%= polymorphic_url(account.owner.banner_image.variant(:large)) %>" alt="banner image">
+      <% end %>
+    </figure>
+
+    <div class="card-body">
+      <div>
+        <div class="avatar -mt-18">
+          <div class="size-24 rounded-full border-4 border-base-100">
+            <img src="<%= avatar_url(account.owner) %>" alt="avatar">
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-2xl font-bold">
+          <%= account.owner.name %>
+        </div>
+
+        <div class="text-on-surface-variant">
+          @<%= account.name %>
+        </div>
+      </div>
+
+      <% if account.user? %>
+        <div>
+          <%= account.owner.bio %>
+        </div>
+      <% else %>
+        <div>
+          <%= account.owner.description %>
+        </div>
+      <% end %>
+
+      <div class="flex items-center gap-2">
+        <% if account.user? %>
+          <a href="<%= account_followings_path(account.name) %>" class="hover:underline">
+            <span class="tabular-nums font-medium"><%= account.owner.followings_count %></span>
+            <span class=""><%= t "general.following" %></span>
+          </a>
+        <% end %>
+        <a href="<%= account_followers_path(account.name) %>" class="hover:underline">
+          <span class="tabular-nums font-medium"><%= account.followers_count %></span>
+          <span class=""><%= t "general.followers" %></span>
+        </a>
+      </div>
+
+      <div class="flex items-center flex-wrap gap-2">
+        <div class="inline-flex items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-icon lucide-calendar"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+          <%= t "general.joined_on" %> <%= format_date account.created_at.to_date %>
+        </div>
+
+        <a href="<%= account_feed_url(account.name, format: :atom) %>" class="inline-flex items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rss-icon lucide-rss"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+          <%= t "general.rss_feed" %>
+        </a>
+      </div>
+
+      <div class="flex items-center gap-2 mt-4">
+        <% if Current.user && account.user? && account.owner == Current.user %>
+          <a href="<%= dashboard_settings_profile_path %>" class="btn">
+            <%= t "general.edit_profile" %>
+          </a>
+        <% else %>
+          <%= render "account/follows/button", account: account %>
+        <% end %>
+
+        <% if Current.user && (account.user? && account.owner == Current.user) || (account.organization? && account.owner.members.active.where(user: Current.user).exists?) %>
+          <div class="">
+            <a href="<%= dashboard_root_path(account.name) %>" class="btn">
+              <%= t "general.dashboard" %>
+            </a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% if account.user? %>
+    <% if account.owner.organizations.any? %>
+      <div class="card card-border border-base-300 bg-base-100">
+        <div class="card-body">
+          <h3 class="card-title">
+            <%= t "general.organizations" %>
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <% account.owner.organizations.includes(:account).each do |organization| %>
+              <a href="<%= account_root_path(organization.account.name) %>" class="block">
+                <img src="<%= avatar_url(organization) %>" alt="avatar" class="w-10 h-10 rounded-full">
+              </a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% elsif account.organization? %>
+    <div class="card card-border border-base-300 bg-base-100">
+      <div class="card-body">
+        <h3 class="card-title">
+          <%= t "general.members" %>
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <% account.owner.users.includes(:account).each do |user| %>
+            <a href="<%= account_root_path(user.account.name) %>" class="block">
+              <img src="<%= avatar_url(user) %>" alt="avatar" class="w-10 h-10 rounded-full">
+            </a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

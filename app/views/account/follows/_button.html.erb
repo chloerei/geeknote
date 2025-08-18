@@ -2,11 +2,11 @@
 
 <%= form_with url: account_follow_path(account.name), id: "account-#{account.name}-follow-button", method: (followed ? 'delete' : 'post') do |form| %>
   <% if followed %>
-    <button type="submit" class="button button--outlined">
+    <button type="submit" class="btn">
       <%= t "general.unfollow" %>
     </button>
   <% else %>
-    <button type="submit" class="button button--filled">
+    <button type="submit" class="btn btn-primary">
       <%= t "general.follow" %>
     </button>
   <% end %>
