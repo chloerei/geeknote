@@ -1,42 +1,71 @@
-<section id="<%= dom_id(post) %>" class="card card-side card-border border-base-300 bg-base-100">
-  <div class="card-body p-4">
-    <div class="flex gap-2">
-      <div class="flex-shrink-0">
-        <img src="<%= avatar_url(post.user) %>" alt="avatar" class="size-6 rounded-full">
+<section id="<%= dom_id(post) %>" class="card card-side card-border border-base-300 bg-base-100 relative">
+  <div class="card-body">
+    <div class="flex gap-4">
+      <div class="flex-none">
+        <a href="<%= account_root_path(post.user.account.name) %>" class="avatar">
+          <div class="size-10 rounded-full">
+            <img src="<%= avatar_url(post.user) %>" alt="avatar">
+          </div>
+        </a>
       </div>
       <div class="flex-grow">
-        <span class="font-medium"><%= post.user.name %></span>
-        <% if post.account != post.user.account %>
-          <span class="text-on-surface-variant">in</span>
-          <span class="font-medium"><%= post.account.owner.name %></span>
+        <div>
+          <a href="<%= account_root_path(post.user.account.name) %>" class="font-medium"><%= post.user.name %></a>
+          <% if post.account != post.user.account %>
+            <span class="text-on-surface-variant">in</span>
+            <a href="<%= account_root_path(post.account.name) %>" class="font-medium"><%= post.account.owner.name %></a>
+          <% end %>
+        </div>
+        <div class="text-sm text-base-content/80">
+          <span><%= format_time post.published_at %></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-4 py-2 relative">
+      <div class="flex-grow line-clamp-3">
+        <h3 class="text-xl font-medium">
+          <a href="<%= account_post_path(post.account.name, post) %>" class="after:absolute after:inset-0">
+            <%= post.title.presence || t("general.untitled") %>
+          </a>
+        </h3>
+
+        <div class="mt-2 text-base text-base-content/80">
+          <%= markdown_summary post.content %>
+        </div>
+      </div>
+
+      <% if post.featured_image.attached? %>
+        <div class="flex-none hidden sm:block">
+          <img src="<%= polymorphic_url(post.featured_image.variant(:large)) %>" alt="Featured image" class="w-40 aspect-video object-cover rounded-box">
+        </div>
+      <% end %>
+    </div>
+
+    <div class="flex items-start gap-4">
+      <div class="flex-grow">
+        <% if post.tags.any? %>
+          <div class="flex flex-wrap gap-2">
+            <% post.tags.each do |tag| %>
+              <a href="<%= tag_path(tag.name) %>" class="btn btn-soft btn-sm">
+                #<%= tag.name %>
+              </a>
+            <% end %>
+          </div>
         <% end %>
       </div>
-    </div>
 
-    <div class="line-clamp-3 mt-2">
-      <h3 class="text-xl font-medium">
-        <a href="<%= account_post_path(post.account.name, post) %>" class="after:absolute after:inset-0">
-          <%= post.title %>
-        </a>
-      </h3>
-
-      <div class="mt-2 text-sm text-on-surface-variant">
-        <%= markdown_summary post.content %>
+      <div class="flex-none flex items-center gap-4 h-8">
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-icon lucide-heart"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>
+          <span class="tabular-nums"><%= post.likes_count %></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-icon lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
+          <span class="tabular-nums"><%= post.comments_count %></span>
+        </div>
       </div>
-    </div>
 
-    <div class="text-sm text-on-surface-variant mt-2">
-      <span><%= format_time post.published_at %></span>
-      &centerdot;
-      <span><%= post.likes_count %> <%= t "general.likes" %></span>
-      &centerdot;
-      <span><%= post.comments_count %> <%= t "general.comments" %></span>
     </div>
   </div>
-
-  <% if post.featured_image.attached? %>
-    <figure class="w-40 flex-shrink-0">
-      <img src="<%= polymorphic_url(post.featured_image.variant(:large)) %>" alt="Featured image" class="">
-    </figure>
-  <% end %>
 </section>
