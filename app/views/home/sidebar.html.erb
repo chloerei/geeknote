@@ -19,52 +19,60 @@
       <%
         popular_tags = Tag.order(taggings_count: :desc).limit(10)
       %>
-      <div class="card card-border border-base-300 bg-base-100 p-4">
-        <h3 class="font-medium mb-4">
-          <%= t "general.popular_tags" %>
-        </h3>
+      <div class="card card-border border-base-300 bg-base-100">
+        <div class="card-body">
+          <h3 class="card-title">
+            <%= t "general.popular_tags" %>
+          </h3>
 
-        <div class="flex gap-2 flex-wrap">
-          <% popular_tags.each do |tag| %>
-            <a href="<%= tag_path(tag.name) %>" class="btn btn-soft btn-sm">
-              #<%= tag.name %>
-            </a>
-          <% end %>
+          <div class="flex gap-2 flex-wrap mt-4">
+            <% popular_tags.each do |tag| %>
+              <a href="<%= tag_path(tag.name) %>" class="btn btn-soft btn-sm">
+                #<%= tag.name %>
+              </a>
+            <% end %>
+          </div>
         </div>
       </div>
 
       <%
         recommend_accounts = Account.where(id: Account.order(followers_count: :desc).excluding(Current.user&.account).limit(100)).order("RANDOM()").limit(3)
       %>
-      <div class="card card-border border-base-300 bg-base-100 p-4">
-        <div class="font-medium mb-4">
-          <%= t "general.recommend_users" %>
-        </div>
-        <div class="list">
-          <%= render partial: "account/item", collection: recommend_accounts, as: :account %>
+      <div class="card card-border border-base-300 bg-base-100">
+        <div class="card-body">
+          <div class="card-title">
+            <%= t "general.recommend_users" %>
+          </div>
+          <div class="list mt-4 -mx-4">
+            <%= render partial: "account/item", collection: recommend_accounts, as: :account %>
+          </div>
         </div>
       </div>
 
-      <div class="card card-border border-base-300 bg-base-100 p-4">
-        <div class="font-medium mb-4">
-          <%= t "general.community_stats" %>
-        </div>
-        <div class="flex items-center h-10 gap-4">
-          <x-icon>person</x-icon>
-          <div>
-            <%= t "general.users_count", count: User.count %>
+      <div class="card card-border border-base-300 bg-base-100">
+        <div class="card-body">
+          <div class="card-title">
+            <%= t "general.community_stats" %>
           </div>
-        </div>
-        <div class="flex items-center h-10 gap-4">
-          <x-icon>article</x-icon>
-          <div>
-            <%= t "general.posts_count", count: Post.count %>
-          </div>
-        </div>
-        <div class="flex items-center h-10 gap-4">
-          <x-icon>comment</x-icon>
-          <div>
-            <%= t "general.comments_count", count: Comment.count %>
+          <div class="mt-4 space-y-2">
+            <div class="flex items-center gap-4">
+              <x-icon>person</x-icon>
+              <div>
+                <%= t "general.users_count", count: User.count %>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <x-icon>article</x-icon>
+              <div>
+                <%= t "general.posts_count", count: Post.count %>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <x-icon>comment</x-icon>
+              <div>
+                <%= t "general.comments_count", count: Comment.count %>
+              </div>
+            </div>
           </div>
         </div>
       </div>

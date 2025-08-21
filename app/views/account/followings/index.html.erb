@@ -16,9 +16,11 @@
     </div>
 
     <div class="card card-border border-base-300 bg-base-100 mt-4">
-      <%= render "components/scroll_pagination", pagy: @pagy, content_class: "list" do %>
-        <%= render partial: "account/item", collection: @accounts, as: :account %>
-      <% end %>
+      <div class="card-body">
+        <%= render "components/scroll_pagination", pagy: @pagy, content_class: "list" do %>
+          <%= render partial: "account/item", collection: @accounts, as: :account %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 <div class="card card-border border-base-300 bg-base-100">
-  <div class="flex flex-col p-4 gap-4">
+  <div class="card-body">
     <div class="flex items-center justify-between gap-4">
       <div class="flex-shrink-0">
         <a href="<%= account_root_path(account.name) %>">
@@ -16,33 +16,21 @@
 
     <div class="">
       <div class="relative">
-        <div class="text-2xl font-bold">
+        <div class="text-xl font-medium">
           <a href="<%= account_root_path(account.name) %>" class="hover:underline after:absolute after:inset-0">
             <%= account.display_name %>
           </a>
         </div>
 
-        <div class="text-on-surface-variant">
+        <div class="text-base-content/80">
           @<%= account.name %>
         </div>
       </div>
 
-      <div class="mt-4">
-        <%= account.description %>
-      </div>
+    </div>
 
-      <div class="mt-2 flex gap-4">
-        <% if account.user? %>
-          <a href="<%= account_followings_path(account.name) %>">
-            <span class="tabular-nums font-medium"><%= account.owner.followings_count %></span>
-            <span class="text-on-surface-variant"><%= t "general.following" %></span>
-          </a>
-        <% end %>
-        <a href="<%= account_followers_path(account.name) %>">
-          <span class="tabular-nums font-medium"><%= account.followers_count %></span>
-          <span class="text-on-surface-variant"><%= t "general.followers" %></span>
-        </a>
-      </div>
+    <div class="">
+      <%= account.description %>
     </div>
   </div>
 </div>

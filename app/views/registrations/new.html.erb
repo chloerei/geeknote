@@ -1,32 +1,34 @@
 <div class="max-w-md mx-auto">
-  <div class="card card-border border-base-300 bg-base-100 p-4">
-    <h2 class="font-medium mb-4">
-      <%= t "general.sign_up" %>
-    </h2>
-
-    <%= form_with(url: registration_path, model: @user, method: :post) do |form| %>
-      <%= render "components/text_field", form: form, name: :email, options: { required: true, autocomplete: "email" } %>
-
-      <%= form.fields_for :account do |account_form| %>
-        <%= render "components/text_field", form: account_form, name: :name, prefix: "@", options: { autocomplete: "username" } %>
-      <% end %>
-
-      <%= render "components/text_field", form: form, name: :name, options: { required: true, autocomplete: "name" } %>
-
-      <%= render "components/text_field", form: form, name: :password, type: :password_field, options: { type: :password, value: nil, required: true, autocomplete: "new-password" } %>
-
-      <%= render "components/text_field", form: form, name: :password_confirmation, type: :password_field, options: { type: :password, value: nil, required: true, autocomplete: "new-password" } %>
-
-      <%= render "components/recaptcha_field", form: form %>
-
-      <button type="submit" class="btn btn-primary btn-block mt-4">
+  <div class="card card-border border-base-300 bg-base-100">
+    <div class="card-body">
+      <h2 class="card-title mb-4">
         <%= t "general.sign_up" %>
-      </button>
-    <% end %>
+      </h2>
+
+      <%= form_with(url: registration_path, model: @user, method: :post) do |form| %>
+        <%= render "components/text_field", form: form, name: :email, options: { required: true, autocomplete: "email" } %>
+
+        <%= form.fields_for :account do |account_form| %>
+          <%= render "components/text_field", form: account_form, name: :name, prefix: "@", options: { autocomplete: "username" } %>
+        <% end %>
+
+        <%= render "components/text_field", form: form, name: :name, options: { required: true, autocomplete: "name" } %>
+
+        <%= render "components/text_field", form: form, name: :password, type: :password_field, options: { type: :password, value: nil, required: true, autocomplete: "new-password" } %>
+
+        <%= render "components/text_field", form: form, name: :password_confirmation, type: :password_field, options: { type: :password, value: nil, required: true, autocomplete: "new-password" } %>
+
+        <%= render "components/recaptcha_field", form: form %>
+
+        <button type="submit" class="btn btn-primary btn-block mt-4">
+          <%= t "general.sign_up" %>
+        </button>
+      <% end %>
+    </div>
   </div>
 
-  <div class="p-4">
-    <a href="<%= new_session_path %>" class="btn btn-link btn-block">
+  <div class="p-6">
+    <a href="<%= new_session_path %>" class="btn btn-ghost btn-block">
       <%= t("general.sign_in") %>
     </a>
   </div>

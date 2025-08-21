@@ -1,17 +1,19 @@
 <div class="max-w-md mx-auto">
-  <div class="card card-border border-base-300 bg-base-100 p-4">
-    <h2 class="font-medium mb-4">
-      <%= t "general.reset_password" %>
-    </h2>
+  <div class="card card-border border-base-300 bg-base-100">
+    <div class="card-body">
+      <h2 class="card-title mb-4">
+        <%= t "general.reset_password" %>
+      </h2>
 
-    <%= form_with model: @user, url: identity_password_path(token: params[:token]), id: 'password-reset-form' do |form| %>
-      <%= render "components/text_field", form: form, name: :password, options: { type: :password, value: nil, required: true, autofocus: true, autocomplete: "new-password" } %>
+      <%= form_with model: @user, url: identity_password_path(token: params[:token]), id: 'password-reset-form' do |form| %>
+        <%= render "components/text_field", form: form, name: :password, options: { type: :password, value: nil, required: true, autofocus: true, autocomplete: "new-password" } %>
 
-      <%= render "components/text_field", form: form, name: :password_confirmation, options: { type: :password, value: nil, required: true, autocomplete: "new-password" } %>
+        <%= render "components/text_field", form: form, name: :password_confirmation, options: { type: :password, value: nil, required: true, autocomplete: "new-password" } %>
 
-      <button type="submit" class="btn btn-primary btn-block mt-4">
-        <%= t('general.submit') %>
-      </button>
-    <% end %>
+        <button type="submit" class="btn btn-primary btn-block mt-4">
+          <%= t('general.submit') %>
+        </button>
+      <% end %>
+    </div>
   </div>
 </div>

@@ -1,28 +1,30 @@
 <div class="max-w-md mx-auto">
-  <div class="card card-border border-base-300 bg-base-100 p-4">
-    <h2 class="font-medium mb-4">
-      <%= t "general.sign_in" %>
-    </h2>
-
-    <%= form_with(url: session_path, model: @user, method: :post) do |form| %>
-      <%= render "components/text_field", form: form, name: :email, options: { required: true, autocomplete: "email" } %>
-
-      <%= render "components/text_field", form: form, name: :password, type: :password, options: { type: :password, value: nil, required: true, autocomplete: "email" } %>
-
-      <%= render "components/recaptcha_field", form: form %>
-
-      <button type="submit" class="btn btn-primary btn-block mt-4">
+  <div class="card card-border border-base-300 bg-base-100">
+    <div class="card-body">
+      <h2 class="card-title mb-4">
         <%= t "general.sign_in" %>
-      </button>
-    <% end %>
+      </h2>
+
+      <%= form_with(url: session_path, model: @user, method: :post) do |form| %>
+        <%= render "components/text_field", form: form, name: :email, options: { required: true, autocomplete: "email" } %>
+
+        <%= render "components/text_field", form: form, name: :password, type: :password, options: { type: :password, value: nil, required: true, autocomplete: "email" } %>
+
+        <%= render "components/recaptcha_field", form: form %>
+
+        <button type="submit" class="btn btn-primary btn-block mt-4">
+          <%= t "general.sign_in" %>
+        </button>
+      <% end %>
+    </div>
   </div>
 
-  <div class="p-4">
-    <a href="<%= new_registration_path %>" class="btn btn-link btn-block">
+  <div class="p-6 space-y-2">
+    <a href="<%= new_registration_path %>" class="btn btn-ghost btn-block">
       <%= t("general.sign_up_account") %>
     </a>
 
-    <a href="<%= new_identity_password_path %>" class="btn btn-link btn-block">
+    <a href="<%= new_identity_password_path %>" class="btn btn-ghost btn-block">
       <%= t("general.reset_password") %>
     </a>
   </div>

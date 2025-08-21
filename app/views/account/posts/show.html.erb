@@ -249,15 +249,19 @@
     <%= render "account/profile_card", account: @post.user.account %>
 
     <% if @post.account != @post.user.account %>
-      <div class="card card-border border-base-300 bg-base-100 p-4">
-        <%= render "account/item", account: @post.account %>
+      <div class="card card-border border-base-300 bg-base-100">
+        <div class="card-body">
+          <%= render "account/item", account: @post.account %>
+        </div>
       </div>
     <% end %>
 
     <div class="sticky top-4">
       <% if toc.any? %>
-        <div class="card card-border border-base-300 bg-base-100 p-4 hidden xl:block">
-          <%= render "toc", toc: toc %>
+        <div class="card card-border border-base-300 bg-base-100 hidden xl:block">
+          <div class="card-body">
+            <%= render "toc", toc: toc %>
+          </div>
         </div>
       <% end %>
 
