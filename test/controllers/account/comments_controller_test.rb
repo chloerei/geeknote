@@ -7,6 +7,13 @@ class Account::CommentsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
   end
 
+  test "should get index" do
+    create(:comment, commentable: @post, user: @user)
+
+    get account_comments_url(@user.account.name)
+    assert_response :success
+  end
+
   test "should create comment" do
     assert_difference("Comment.count") do
       post account_comments_url(@user.account.name), params: { comment: { content: "Content", commentable_sgid: @post.to_sgid(for: :commentable) } }

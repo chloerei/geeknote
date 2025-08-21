@@ -1,0 +1,29 @@
+<div class="card card-border bg-base-100 relative">
+  <div class="card-body">
+    <h3 class="card-title">
+      <a href="<%= account_comment_path(comment.user.account.name, comment) %>" class="flex items-center gap-2 after:absolute after:inset-0">
+        <%= comment.commentable.title %>
+      </a>
+    </h3>
+
+    <div class="text-base-content/80">
+      <%= markdown_summary comment.content %>
+    </div>
+
+    <div class="text-base-content/80">
+      <span>
+        <%= format_time comment.created_at %>
+      </span>
+      &centerdot;
+      <span>
+        <%= comment.likes_count %>
+        <%= t "general.likes" %>
+      </span>
+      &centerdot;
+      <span>
+        <%= comment.replies_count %>
+        <%= t "general.replies" %>
+      </span>
+    </div>
+  </div>
+</div>

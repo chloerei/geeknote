@@ -3,6 +3,10 @@ class Account::CommentsController < Account::BaseController
   before_action :require_authentication, except: [ :show ]
   before_action :require_author, except: [ :index, :show ]
 
+  def index
+    @pagy, @comments = pagy(@account.owner.comments.includes(:user).order(created_at: :desc))
+  end
+
   def show
     @comment = @account.owner.comments.find params[:id]
 
