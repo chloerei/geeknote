@@ -1,32 +1,29 @@
 <%# locals: (account:) %>
 
-<div class="flex gap-4 p-4 relative">
-  <div class="flex-shrink-0">
-      <img src="<%= avatar_url(account.owner) %>" alt="avatar" class="w-10 h-10 rounded-full">
-  </div>
-  <div class="flex-grow min-w-0">
-    <div class="flex justify-between">
-      <div class="flex-grow">
-        <div class="text-sm font-medium">
-          <a href="<%= account_root_path(account.name) %>" class="hover:underline after:absolute after:inset-0">
-            <%= account.display_name %>
-          </a>
-        </div>
-        <div class="text-sm text-on-surface-variant">
-          @<%= account.name %>
-        </div>
-      </div>
-
-      <% if account != Current.user&.account %>
-        <div class="flex-shrink-0">
-          <%= render "account/follows/button", account: account %>
-        </div>
-      <% end %>
+<div class="list-row hover">
+  <div class="avatar">
+    <div class="size-10 rounded-full">
+      <img src="<%= avatar_url(account.owner) %>" alt="avatar">
     </div>
-    <% if account.description.present? %>
-      <div class="mt-2 text-sm text-on-surface-variant line-clamp-1">
-        <%= account.description %>
-      </div>
-    <% end %>
   </div>
+  <div>
+    <div>
+      <a href="<%= account_root_path(account.name) %>" class="hover:underline after:absolute after:inset-0">
+        <%= account.owner.name %>
+      </a>
+    </div>
+    <div class="text-sm text-base-content/80">
+      @<%= account.name %>
+    </div>
+  </div>
+  <% if account.description.present? %>
+    <div class="list-col-wrap text-sm text-base-content/80 line-clamp-2">
+      <%= account.description %>
+    </div>
+  <% end %>
+  <% if account != Current.user&.account %>
+    <div class="relative">
+      <%= render "account/follows/button", account: account %>
+    </div>
+  <% end %>
 </div>

@@ -1,33 +1,24 @@
-<div class="top-app-bar">
-  <a href="<%= account_root_path(@account.name) %>" class="icon-button" data-controller="back-link">
-    <x-icon>arrow_back</x-icon>
-  </a>
-  <div class="top-app-bar__headline">
-    <%= @account.display_name %>
-  </div>
-</div>
-
-<div class="layout-main-sidebar">
+<div class="layout-nav-main">
   <div>
-    <div class="card">
-      <div class="flex items-center border-b border-outline-variant rounded-t-xl overflow-hidden">
-        <% if @account.user? %>
-          <a href="<%= account_followings_path(@account.name) %>" class="tab tab--secondary grow">
-            <%= t "general.following" %>
-          </a>
-        <% end %>
-        <a href="<%= account_followers_path(@account.name) %>" class="tab tab--secondary tab--active grow">
-          <%= t "general.followers" %>
-        </a>
-      </div>
+    <%= render "account/nav", account: @account %>
+  </div>
 
-      <%= render "components/scroll_pagination", pagy: @pagy do %>
+  <div>
+    <div class="tabs tabs-border">
+      <% if @account.user? %>
+        <a href="<%= account_followings_path(@account.name) %>" class="tab">
+          <%= t "general.following" %>
+        </a>
+      <% end %>
+      <a href="<%= account_followers_path(@account.name) %>" class="tab tab-active">
+        <%= t "general.followers" %>
+      </a>
+    </div>
+
+    <div class="card card-border border-base-300 bg-base-100 mt-4">
+      <%= render "components/scroll_pagination", pagy: @pagy, content_class: "list" do %>
         <%= render partial: "account/item", collection: @accounts, as: :account %>
       <% end %>
     </div>
-  </div>
-
-  <div>
-    <%= render "account/profile_card", account: @account %>
   </div>
 </div>
