@@ -11,56 +11,70 @@
   <meta name="twitter:image" content="<%= avatar_url @comment.user %>">
 <% end %>
 
-<div class="top-app-bar">
-  <a href="<%= account_root_path(@comment.user.account.name) %>" class="icon-button" data-controller="back-link">
-    <x-icon>arrow_back</x-icon>
-  </a>
-  <div class="top-app-bar__headline line-clamp-1">
-    <%= t "general.comment" %>
+<% if @comment.commentable %>
+  <div class="breadcrumbs">
+    <ul>
+      <li>
+        <a href="<%= account_post_path(@comment.commentable.account.name, @comment.commentable) %>">
+          <%= @comment.commentable.title %>
+        </a>
+      </li>
+      <li>
+        <a href="<%= account_post_comments_path(@comment.commentable.account.name, @comment.commentable) %>">
+          <%= t "general.comments" %>
+        </a>
+      </li>
+    </ul>
   </div>
-</div>
+<% else %>
+  <div class="text-base-content/80">
+    <%= t "general.deleted_item" %>
+  </div>
+<% end %>
+
 
 <div class="layout-main-sidebar">
   <div class="">
-    <div class="card">
-      <div class="flex items-center h-14 px-4 border-b border-outline-variant">
-        <div class="font-medium">
-          <% if @comment.commentable %>
-            <%= t("general.commented_on") %><a href="<%= account_post_path(@comment.commentable.account.name, @comment.commentable) %>" class="underline"><%= @comment.commentable.title %></a>
-          <% else %>
-            <%= t("general.commented_on") %><%= t("general.deleted_item") %>
-          <% end %>
-        </div>
+    <div class="card card-border border-base-300 bg-base-100 mt-4">
+      <div class="card-body">
+        <%= render "comment", comment: @comment, showpage: true %>
       </div>
 
-      <%= render "comment", comment: @comment, showpage: true %>
+    </div>
+
+    <div class="card card-border border-base-300 bg-base-100 mt-4">
+      <div class="card-body">
+        <div class="card-title border-b border-base-300 pb-4">
+          <%= t "general.reply" %>
+        </div>
 
       <% if Current.user %>
         <% if @comment.commentable %>
           <%= render "form", comment: Current.user.comments.new(commentable: @comment.commentable, parent: @comment), open: params[:comment].present? %>
         <% else %>
-          <div class="p-4 text-on-surface-variant text-center">
+          <div class="p-4 text-base-content/80 text-center">
             <%= t "general.comment_is_closed" %>
           </div>
         <% end %>
       <% else %>
-        <div class="p-4">
-          <a href="<%= new_session_path %>" class="button button--outlined">
+        <div class="py-4">
+          <a href="<%= new_session_path %>" class="btn btn-primary">
             <%= t "general.sign_in_to_comment" %>
           </a>
         </div>
       <% end %>
+      </div>
     </div>
 
-    <div id="comments" class=" card mt-4">
-      <div class="flex items-center h-14 px-4 gap-4 border-b border-outline-variant">
-        <div class="grow font-medium">
-          <%= t "general.all_replies" %> <%= @comment.replies_count %>
-        </div>
-        <div class="menu">
-          <label tabindex="0" class="button button--text text-on-surface-variant">
-            <x-icon>sort</x-icon>
-            <span>
+    <div id="comments" class="card card-border border-base-300 bg-base-100 mt-4">
+      <div class="card-body">
+        <div class="flex items-center gap-4 pb-4 border-b border-base-300">
+          <div class="grow font-medium">
+            <%= t "general.all_replies" %> <%= @comment.replies_count %>
+          </div>
+          <div class="dropdown dropdown-end">
+            <label tabindex="0" class="btn btn-ghost">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="M11 4h10"/><path d="M11 8h7"/><path d="M11 12h4"/></svg>
               <%=
                 case @sort
                 when "oldest"
@@ -71,29 +85,34 @@
                   t("general.newest")
                 end
               %>
-            </span>
-          </label>
-          <div class="menu__content top-full right-0 origin-top-right">
-            <a href="<%= url_for(sort: nil, anchor: "comments") %>" class="menu__item">
-              <%= t "general.newest" %>
-            </a>
-            <a href="<%= url_for(sort: "oldest", anchor: "comments") %>" class="menu__item">
-              <%= t "general.oldest" %>
-            </a>
-            <a href="<%= url_for(sort: "popular", anchor: "comments") %>" class="menu__item">
-              <%= t "general.popular" %>
-            </a>
+            </label>
+            <ul class="dropdown-content menu w-52 bg-base-100 p-2 shadow-sm">
+              <li>
+                <a href="<%= url_for(sort: nil, anchor: "comments") %>">
+                  <%= t "general.newest" %>
+                </a>
+              </li>
+              <li>
+                <a href="<%= url_for(sort: "oldest", anchor: "comments") %>">
+                  <%= t "general.oldest" %>
+                </a>
+              </li>
+              <li>
+                <a href="<%= url_for(sort: "popular", anchor: "comments") %>">
+                  <%= t "general.popular" %>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
 
-      <div class="group replies mt-4">
-        <%= render "components/scroll_pagination", pagy: @pagy, content_id: "comments_list" do %>
-          <%= render partial: "comment", collection: @comments, cached: -> comment { [ comment.user, comment ] } %>
-          <%= render "account/comments/status", comments: @comments %>
-        <% end %>
+        <div class="group replies mt-4">
+          <%= render "components/scroll_pagination", pagy: @pagy, content_id: "comments_list" do %>
+            <%= render partial: "comment", collection: @comments, cached: -> comment { [ comment.user, comment ] } %>
+            <%= render "account/comments/status", comments: @comments %>
+          <% end %>
+        </div>
       </div>
-
     </div>
   </div>
 

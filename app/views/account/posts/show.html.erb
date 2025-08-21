@@ -107,9 +107,9 @@
 
               <div class="dropdown dropdown-end dropdown-top">
                 <label tabindex="0" type="button" class="btn btn-ghost btn-circle">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical-icon lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-icon lucide-ellipsis"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
                 </label>
-                <div tabindex="0" class="dropdown-content menu bg-base-100 rounded-box w-52 p-2">
+                <div tabindex="0" class="dropdown-content menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
                   <li>
                     <button type="button" class="menu__item" data-controller="copy-link" data-action="copy-link#copy" data-copy-link-url-value="<%= account_post_path(@account.name, @post) %>">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
@@ -139,42 +139,44 @@
 
       <% if hot_comments_count > 0 %>
         <div class="card card-border border-base-300 bg-base-100 mt-4">
-          <div class="flex items-center h-14 px-4 border-b border-outline-variant">
-            <div class="font-medium">
+          <div class="card-body">
+            <div class="card-title border-b border-base-300 pb-4">
               <%= t "general.hot_comments" %> <%= hot_comments_count %>
             </div>
-          </div>
 
-          <div id="comments_list">
-            <%= render partial: "account/comments/comment", collection: hot_comments, cached: -> comment { [ comment.user, comment ]} %>
+            <div>
+              <%= render partial: "account/comments/comment", collection: hot_comments, cached: -> comment { [ comment.user, comment ]} %>
 
-            <%= render "account/comments/status", comments: hot_comments %>
+              <%= render "account/comments/status", comments: hot_comments %>
 
-            <% if hot_comments_count > 3 %>
-              <div class="p-4 text-center">
-                <a href="<%= account_post_comments_path(@account.name, @post, sort: "likes", anchor: "comments") %>" class="button button--text text-on-surface-variant w-full">
-                  <%= t "general.view_all_hot_comments" %>
-                </a>
-              </div>
-            <% end %>
+              <% if hot_comments_count > 3 %>
+                <div class="mt-4">
+                  <a href="<%= account_post_comments_path(@account.name, @post, sort: "likes", anchor: "comments") %>" class="btn btn-ghost btn-block">
+                    <%= t "general.view_all_hot_comments" %>
+                  </a>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       <% end %>
 
       <div class="card card-border border-base-300 bg-base-100 mt-4">
-        <div class="font-medium p-4">
-          <%= t "general.new_comment" %>
-        </div>
-
-        <% if Current.user %>
-          <%= render "account/comments/form", comment: Current.user.comments.new(commentable: @post), open: params[:comment].present? %>
-        <% else %>
-          <div class="p-4">
-            <a href="<%= new_session_path %>" class="button button--outlined">
-              <%= t "general.sign_in_to_comment" %>
-            </a>
+        <div class="card-body">
+          <div class="card-title pb-4 border-b border-base-300">
+            <%= t "general.new_comment" %>
           </div>
-        <% end %>
+
+          <% if Current.user %>
+            <%= render "account/comments/form", comment: Current.user.comments.new(commentable: @post), open: params[:comment].present? %>
+          <% else %>
+            <div class="mt-4">
+              <a href="<%= new_session_path %>" class="btn btn-primary">
+                <%= t "general.sign_in_to_comment" %>
+              </a>
+            </div>
+          <% end %>
+        </div>
       </div>
 
       <%
@@ -182,56 +184,57 @@
       %>
 
       <div class="card card-border border-base-300 bg-base-100 mt-4">
-        <div class="flex items-center gap-4 h-14 px-4">
-          <div class="flex-grow font-medium">
-            <%= t "general.all_comments" %> <%= @post.comments_count %>
-          </div>
-
-          <div class="dropdown dropdown-end">
-            <label tabindex="0" class="btn btn-ghost">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="M11 4h10"/><path d="M11 8h7"/><path d="M11 12h4"/></svg>
-              <span>
-                <%= t("general.newest") %>
-              </span>
-            </label>
-            <div class="dropdown-content menu">
-              <li>
-                <a href="<%= account_post_comments_path(post_id: @post.id, sort: nil) %>">
-                  <%= t "general.newest" %>
-                </a>
-              </li>
-              <li>
-                <a href="<%= account_post_comments_path(post_id: @post.id, sort: "oldest") %>">
-                  <%= t "general.oldest" %>
-                </a>
-              </li>
-              <li>
-                <a href="<%= account_post_comments_path(post_id: @post.id, sort: "popular") %>">
-                  <%= t "general.popular" %>
-                </a>
-              </li>
-            </div>
-          </div>
-        </div>
-
-        <div id="comments_list">
-          <%= render partial: "account/comments/comment", collection: last_comments, cached: -> comment { [ comment.user, comment ]} %>
-
-          <%= render "account/comments/status", comments: last_comments %>
-
-          <% if @post.comments_count > 3 %>
-            <div class="p-4 text-center">
-              <a href="<%= account_post_comments_path(@account.name, @post) %>" class="button button--text text-on-surface-variant w-full">
-                <%= t "general.view_all_comments" %>
-              </a>
+        <div class="card-body">
+          <div class="flex items-center gap-4 border-b border-base-300 pb-4">
+            <div class="card-title flex-grow">
+              <%= t "general.all_comments" %> <%= @post.comments_count %>
             </div>
 
-          <% end %>
+            <div class="dropdown dropdown-end">
+              <label tabindex="0" class="btn btn-ghost">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="M11 4h10"/><path d="M11 8h7"/><path d="M11 12h4"/></svg>
+                <span>
+                  <%= t("general.newest") %>
+                </span>
+              </label>
+              <div class="dropdown-content menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li>
+                  <a href="<%= account_post_comments_path(post_id: @post.id, sort: nil) %>">
+                    <%= t "general.newest" %>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= account_post_comments_path(post_id: @post.id, sort: "oldest") %>">
+                    <%= t "general.oldest" %>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= account_post_comments_path(post_id: @post.id, sort: "popular") %>">
+                    <%= t "general.popular" %>
+                  </a>
+                </li>
+              </div>
+            </div>
+          </div>
+
+          <div id="comments_list">
+            <%= render partial: "account/comments/comment", collection: last_comments, cached: -> comment { [ comment.user, comment ]} %>
+
+            <%= render "account/comments/status", comments: last_comments %>
+
+            <% if @post.comments_count > 3 %>
+              <div class="mt-4">
+                <a href="<%= account_post_comments_path(@account.name, @post) %>" class="btn btn-ghost btn-block">
+                  <%= t "general.view_all_comments" %>
+                </a>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     <% else %>
       <div class="card p-4 mt-4">
-        <div class="flex items-center justify-center gap-4 text-on-surface-variant">
+        <div class="flex items-center justify-center gap-4 text-sm text-base-content/80">
           <x-icon>lock</x-icon>
           <div class="text-sm">
             <%= t "general.comments_is_disabled" %>
