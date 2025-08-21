@@ -12,9 +12,11 @@
       <a href="<%= account_root_path(@account.name) %>" class="tab tab-active">
         <%= t "general.posts" %>
       </a>
-      <a href="<%= account_comments_path(@account.name) %>" class="tab">
-        <%= t "general.comments" %>
-      </a>
+      <% if @account.user? %>
+        <a href="<%= account_comments_path(@account.name) %>" class="tab">
+          <%= t "general.comments" %>
+        </a>
+      <% end %>
     </div>
 
     <div class="mt-4">
