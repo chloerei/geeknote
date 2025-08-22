@@ -1,85 +1,36 @@
-<div class="top-app-bar">
-  <label for="navigation-drawer-toggle" class="icon-button xl:hidden">
-    <x-icon>menu</x-icon>
-  </label>
-  <div class="top-app-bar__headline">
-    <%= t "general.overview" %>
-  </div>
-  <a href="<%= account_root_path(@account.name) %>" class="button button--outlined">
-    <%= t "general.view_site" %>
-    <x-icon>arrow_right_alt</x-icon>
-  </a>
-</div>
+<div class="card card-border border-base-300 bg-base-100">
+  <div class="card-body">
+    <h2 class="card-title">
+      <%= t "general.overview" %>
+    </h2>
 
-<div class="card p-4">
-  <div>
-    <h3 class="text-lg font-medium">
-      <%= t "general.stats" %>
-    </h3>
-    <div class="grid grid-cols-3 gap-4 mt-4">
-      <div class="card border border-outline-variant">
-        <div class="p-4">
-          <div class="text-sm font-medium text-on-surface-variant">
-            <%= t "general.posts" %>
-          </div>
-          <div class="text-2xl font-medium">
-            <%= @account.posts.count %>
-          </div>
+    <div class="stats stats-vertical md:stats-horizontal border border-base-300">
+      <div class="stat">
+        <div class="stat-title">
+          <%= t "general.followers" %>
+        </div>
+        <div class="stat-value">
+          <%= @account.followers.count %>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="mt-6">
-    <h3 class="text-lg font-medium">
-      <%= t "general.quick_links" %>
-    </h3>
-    <div class="grid md:grid-cols-3 gap-4 mt-4">
-      <a href="<%= new_dashboard_post_path(@account.name) %>" class="card border border-outline-variant p-4 interactive">
-        <div class="flex gap-4">
-          <div class="shrink-0">
-            <x-icon>edit_square</x-icon>
-          </div>
-          <div class="grow">
-            <div class="font-medium">
-              <%= t ".new_post" %>
-            </div>
-            <div class="text-sm text-on-surface-variant">
-              <%= t ".new_post_description" %>
-            </div>
-          </div>
+      <div class="stat">
+        <div class="stat-title">
+          <%= t "general.page_view" %>
         </div>
-      </a>
-      <a href="<%= dashboard_posts_path(@account.name) %>" class="card border border-outline-variant p-4 interactive">
-        <div class="flex gap-4">
-          <div class="shrink-0">
-            <x-icon>article</x-icon>
-          </div>
-          <div class="grow">
-            <div class="font-medium">
-              <%= t ".posts" %>
-            </div>
-            <div class="text-sm text-on-surface-variant">
-              <%= t ".posts_description" %>
-            </div>
-          </div>
+        <div class="stat-value">
+          #todo
         </div>
-      </a>
-      <a href="<%= dashboard_settings_root_path(@account.name) %>" class="card border border-outline-variant p-4 interactive">
-        <div class="flex gap-4">
-          <div class="shrink-0">
-            <x-icon>settings</x-icon>
-          </div>
-          <div class="grow">
-            <div class="font-medium">
-              <%= t ".settings" %>
-            </div>
-            <div class="text-sm text-on-surface-variant">
-              <%= t ".settings_description" %>
-            </div>
-          </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-title">
+          <%= t "general.likes" %>
         </div>
-      </a>
+        <div class="stat-value">
+          #todo
+        </div>
+      </div>
     </div>
   </div>
 </div>

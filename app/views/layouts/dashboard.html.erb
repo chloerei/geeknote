@@ -1,15 +1,70 @@
-<% content_for :body do %>
-  <div class="flex container mx-auto">
-    <div class="shrink-0">
-      <%= render "layouts/dashboard/navigation_drawer" %>
+<% content_for :site_content do %>
+  <div class="flex items-center">
+    <div class="flex-grow">
+      <div class="dropdown">
+        <label tabindex="0" class="btn btn-ghost">
+          <div class="avatar">
+            <div class="size-5 rounded-full">
+              <img src="<%= avatar_url(@account.owner) %>" alt="avatar">
+            </div>
+          </div>
+          <%= @account.owner.name %>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+        </label>
+        <ul class="dropdown-content menu bg-base-100 w-52 shadow-sm">
+          <% ([Current.user.account] + Current.user.member_accounts).each do |account| %>
+            <li>
+              <a href="<%= dashboard_root_path(account.name) %>" class="<%= "menu-active" if account == @account %>">
+                <div class="avatar">
+                  <div class="size-5 rounded-full">
+                    <img src="<%= avatar_url(account.owner) %>" alt="avatar">
+                  </div>
+                </div>
+                <span><%= account.owner.name %></span>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
 
-    <div class="flex-grow min-w-0">
-      <div class="px-4 md:px-6 pb-4">
-        <%= yield %>
-      </div>
+    <div class="flex-none">
+      <a href="<%= account_root_path(@account.name) %>" class="btn btn-ghost">
+        <%= t "general.public_page" %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
+      </a>
+    </div>
+  </div>
+
+
+  <div class="layout-nav-main mt-4">
+    <div>
+      <ul class="menu menu-horizontal lg:menu-vertical menu-lg lg:w-full p-0">
+        <li>
+          <a href="<%= dashboard_root_path(@account.name) %>" class="<%= "menu-active" if current_page?("/dashboard/#{@account.name}") %>">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard-icon lucide-layout-dashboard"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+            <%= t "general.overview" %>
+          </a>
+        </li>
+        <li>
+          <a href="<%= dashboard_posts_path(@account.name) %>" class="<%= "menu-active" if request.path.start_with?("/dashboard/#{@account.name}/posts") %>">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text-icon lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+            <%= t "general.posts" %>
+          </a>
+        </li>
+        <li>
+          <a href="<%= dashboard_settings_root_path(@account.name) %>" class="<%= "menu-active" if request.path.start_with?("/dashboard/#{@account.name}/settings") %>">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-icon lucide-settings"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg>
+            <%= t "general.settings" %>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <%= yield %>
     </div>
   </div>
 <% end %>
 
-<%= render template: "layouts/application" %>
+<%= render template: "layouts/site" %>

@@ -45,7 +45,7 @@
       <% end %>
     </style>
 
-    <%= content_for?(:body) ? yield(:body) : yield %>
+    <%= content_for?(:content) ? yield(:content) : yield %>
 
     <div id="toast" class="toast">
       <% if notice %>
