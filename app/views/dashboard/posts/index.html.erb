@@ -1,33 +1,59 @@
-<div class="top-app-bar">
-  <label for="navigation-drawer-toggle" class="icon-button xl:hidden">
-    <x-icon>menu</x-icon>
-  </label>
+<div class="card card-board border-base-300 bg-base-100">
+  <div class="card-body">
+    <div class="flex items-center gap-4 pb-4 border-b border-base-300">
+      <div class="flex-grow">
+        <div class="card-title">
+          <%= t "general.posts" %>
+        </div>
+      </div>
 
-  <div class="top-app-bar__headline">
-    <%= t "general.posts" %>
-  </div>
+      <div class="flex-none">
+        <div class="dropdown dropdown-end">
+          <label tabindex="0" class="btn btn-ghost">
+            <% case @status %>
+            <% when "all" %>
+              <%= t "general.all" %>
+            <% when "published" %>
+              <%= t "general.published" %>
+            <% when "draft" %>
+              <%= t "general.draft" %>
+            <% when "trashed" %>
+              <%= t "general.trashed" %>
+            <% end %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+          </label>
+          <ul tabindex="0" class="dropdown-content menu w-52 bg-base-100 p-2 shadow-sm">
+            <li>
+              <a href="<%= url_for(status: nil) %>" class="<%= "menu-active" if @status == "all" %>">
+                <%= t "general.all" %>
+              </a>
+            </li>
+            <li>
+              <a href="<%= url_for(status: "published") %>" class="<%= "menu-active" if @status == "published" %>">
+                <%= t "general.published" %>
+              </a>
+            </li>
+            <li>
+              <a href="<%= url_for(status: "draft") %>" class="<%= "menu-active" if @status == "draft" %>">
+                <%= t "general.draft" %>
+              </a>
+            </li>
+            <li>
+              <a href="<%= url_for(status: "trashed") %>" class="<%= "menu-active" if @status == "trashed" %>">
+                <%= t "general.trashed" %>
+              </a>
+            </li>
+          </ul>
+        </div>
 
-  <a href="<%= new_dashboard_post_path(@account.name) %>" class="button button--filled -mr-2">
-    <x-icon>add</x-icon>
-    <%= t "general.new_post" %>
-  </a>
-</div>
+        <a href="<%= new_dashboard_post_path(@account.name) %>" class="btn btn-soft">
+          <x-icon>add</x-icon>
+          <%= t "general.new_post" %>
+        </a>
+      </div>
+    </div>
 
-<div class="card">
-  <div class="flex items-center border-b border-outline-variant rounded-t-xl overflow-hidden">
-    <a href="<%= url_for(status: nil) %>" class="tab tab--secondary grow <%= "tab--active" if @status == "draft" %>">
-      <%= t "general.draft" %> <%= account_posts.draft.count %>
-    </a>
-    <a href="<%= url_for(status: "published") %>" class="tab tab--secondary grow <%= "tab--active" if @status == "published" %>">
-      <%= t "general.published" %> <%= account_posts.published.count %>
-    </a>
-    <a href="<%= url_for(status: "trashed") %>" class="tab tab--secondary grow <%= "tab--active" if @status == "trashed" %>">
-      <%= t "general.trashed" %> <%= account_posts.trashed.count %>
-    </a>
-  </div>
-
-  <div class="pb-3">
-    <%= render "components/scroll_pagination", pagy: @pagy do %>
+    <%= render "components/scroll_pagination", pagy: @pagy, content_class: "list" do %>
       <%= render partial: "post", collection: @posts %>
     <% end %>
   </div>

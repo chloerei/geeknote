@@ -1,11 +1,11 @@
-<div class="flex items-center justify-between px-4 py-3 border-b border-outline-variant gap-4 relative interactive">
-  <div class="flex-grow min-w-0">
+<div class="list-row relative">
+  <div class="list-col-grow">
     <div>
-      <a href="<%= edit_dashboard_post_path(post.account.name, post) %>" class="font-medium line-clamp-1 after:absolute after:inset-0">
+      <a href="<%= edit_dashboard_post_path(post.account.name, post) %>" class="text-base font-medium line-clamp-1 after:absolute after:inset-0">
         <%= post.title.presence || t("general.untitled") %>
       </a>
     </div>
-    <div class="text-sm text-on-surface-variant mt-1">
+    <div class="text-sm text-base-content/80 mt-2">
       <span>
         <%= post.user.name %>
       </span>
@@ -20,5 +20,18 @@
         <%= format_time post.updated_at %>
       </span>
     </div>
+  </div>
+
+  <div>
+    <% case post.status %>
+    <% when "published" %>
+      <div class="badge badge-primary badge-soft">
+        <%= t "general.published" %>
+      </div>
+    <% when "draft" %>
+      <div class="badge badge-neutral badge-soft">
+        <%= t "general.draft" %>
+      </div>
+    <% end %>
   </div>
 </div>

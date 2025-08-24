@@ -4,8 +4,12 @@ class Dashboard::PostsController < Dashboard::BaseController
   def index
     posts = account_posts
 
-    @status = params[:status].presence_in(%w[draft published trashed]) || "draft"
-    posts = posts.where(status: @status).order(updated_at: :desc)
+    @status = params[:status].presence_in(%w[draft published trashed]) || "all"
+    if @status == "all"
+      posts = posts.where.not(status: "trashed").order(updated_at: :desc)
+    else
+      posts = posts.where(status: @status).order(updated_at: :desc)
+    end
 
     @pagy, @posts = pagy(posts)
 
