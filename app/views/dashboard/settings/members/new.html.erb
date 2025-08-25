@@ -1,31 +1,32 @@
-<div class="top-app-bar">
-  <a href="<%= dashboard_settings_members_path %>" class="icon-button">
-    <x-icon>arrow_back</x-icon>
-  </a>
-  <div class="top-app-bar__headline">
-    Add member
-  </div>
-</div>
-
-<div class="card">
-  <div class="p-4">
-    <div class="max-w-screen-sm">
+<div class="card card-border border-base-300 bg-base-100">
+  <div class="card-body">
+    <div class="flex items-center gap-2 pb-4 border-b border-base-300">
+      <a href="<%= dashboard_settings_members_path %>" class="btn btn-ghost btn-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+      </a>
+      <div class="flex-grow">
+        <h2 class="card-title">
+          <%= t "general.add_member" %>
+        </h2>
+      </div>
+    </div>
+    <div class="max-w-screen-sm mt-4">
       <%= form_with model: @member, url: dashboard_settings_members_path(@account.name) do |form| %>
-        <div class="form-field">
-          <%= form.label :invitation_email, class: "form-label" %>
-          <%= render "components/text_field", form: form, name: :invitation_email %>
-        </div>
-        <div class="form-field">
-          <div class="text-sm font-medium">
-            Role
-          </div>
+        <%= render "components/text_field", form: form, name: :invitation_email %>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">
+            <%= t "general.role" %>
+          </legend>
+
           <div class="space-y-2">
             <%= render "components/radio_button_field", form: form, name: :role, value: "admin", label: "Admin", description: "Can manage member's posts and change dashboard settings." %>
             <%= render "components/radio_button_field", form: form, name: :role, value: "member", label: "Member", description: "Can write and publish their own posts." %>
           </div>
-        </div>
-        <div class="form-field">
-          <button type="submit" class="button button--filled">
+        </fieldset>
+
+        <div class="mt-4">
+          <button type="submit" class="btn btn-primary">
             Send invitation
           </button>
         </div>

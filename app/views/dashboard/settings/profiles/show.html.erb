@@ -4,7 +4,7 @@
       <%= t "general.profile" %>
     </h2>
 
-    <div class="max-w-screen-sm">
+    <div class="max-w-screen-sm mt-4">
       <% if @account.user? %>
         <%= render "user_form", user: @account.owner %>
       <% else %>

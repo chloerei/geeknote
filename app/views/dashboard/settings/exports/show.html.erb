@@ -1,22 +1,17 @@
-<div class="top-app-bar">
-  <a href="<%= dashboard_settings_root_path %>" class="icon-button">
-    <x-icon>arrow_back</x-icon>
-  </a>
-  <div class="top-app-bar__headline">
-    <%= t "general.export" %>
-  </div>
-</div>
+<div class="card card-border border-base-300 bg-base-100">
+  <div class="card-body">
+    <h2 class="card-title">
+      <%= t "general.export" %>
+    </h2>
 
-<div class="card">
-  <div class="p-4">
-    <div class="max-w-screen-sm">
+    <div class="max-w-screen-sm mt-4">
       <p>
         <%= t ".export_description" %>
       </p>
 
       <div class="mt-4">
         <%= form_with url: dashboard_settings_export_path, method: :post do |form| %>
-          <button type="submit" class="button button--filled">
+          <button type="submit" class="btn btn-primary">
             <%= t "general.export" %>
           </button>
         <% end %>
@@ -31,11 +26,11 @@
 
           <div class="mt-4">
             <% if @account.export.completed? %>
-              <a href="<%= url_for(@account.export.file) %>" class="button button--outlined">
+              <a href="<%= url_for(@account.export.file) %>" class="btn btn-soft">
                 <%= t "general.download" %>
               </a>
             <% else %>
-              <span class="text-on-surface-variant">
+              <span class="text-sm text-base-content/80">
                 <%= t ".export_in_progress" %>
               </span>
             <% end %>
