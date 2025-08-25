@@ -1,14 +1,9 @@
-<div class="top-app-bar">
-  <a href="<%= dashboard_settings_root_path %>" class="icon-button">
-    <x-icon>arrow_back</x-icon>
-  </a>
-  <div class="top-app-bar__headline">
-    <%= t "general.profile" %>
-  </div>
-</div>
+<div class="card cardd-border border-base-300 bg-base-100">
+  <div class="card-body">
+    <h2 class="card-title">
+      <%= t "general.profile" %>
+    </h2>
 
-<div class="card">
-  <div class="p-4">
     <div class="max-w-screen-sm">
       <% if @account.user? %>
         <%= render "user_form", user: @account.owner %>

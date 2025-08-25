@@ -1,57 +1,52 @@
-<div class="top-app-bar">
-  <label for="navigation-drawer-toggle" class="icon-button xl:hidden">
-    <x-icon>menu</x-icon>
-  </label>
-
-  <div class="top-app-bar__headline">
-    <%= t "general.settings" %>
-  </div>
-</div>
-
-<div class="card p-4">
-  <div class="grid xl:grid-cols-3 gap-4">
-    <a href="<%= dashboard_settings_profile_path %>" class="flex gap-4 p-4 interactive rounded">
-      <div class="shrink-0">
-        <x-icon>account_box</x-icon>
-      </div>
-      <div class="grow">
-        <div class="">
-          <%= t "general.profile" %>
-        </div>
-        <div class="text-sm text-on-surface-variant">
-          <%= t ".profile_description" %>
-        </div>
-      </div>
-    </a>
-
-    <% if @account.organization? %>
-      <a href="<%= dashboard_settings_members_path %>" class="flex gap-4 p-4 interactive rounded">
-        <div class="shrink-0">
-          <x-icon>group</x-icon>
-        </div>
-        <div class="grow">
-          <div class="">
-            <%= t "general.members" %>
+<div class="card card-border border-base-300 bg-base-100">
+  <div class="card-body">
+    <h2 class="card-title">
+      <%= t "general.settings" %>
+    </h2>
+    <div class="list">
+      <a href="<%= dashboard_settings_profile_path %>" class="list-row hover:bg-base-200">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-user-icon lucide-square-user"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M7 21v-2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/></svg>
+        <div>
+          <div class="font-medium">
+            <%= t "general.profile" %>
           </div>
-          <div class="text-sm text-on-surface-variant">
-            <%= t ".members_description" %>
+          <div class="text-sm text-base-content/80">
+            <%= t ".profile_description" %>
           </div>
         </div>
       </a>
-    <% end %>
+    </div>
+    <div class="grid xl:grid-cols-3 gap-4">
 
-    <a href="<%= dashboard_settings_export_path %>" class="flex gap-4 p-4 interactive rounded">
-      <div class="shrink-0">
-        <x-icon>cloud_download</x-icon>
-      </div>
-      <div class="grow">
-        <div class="">
-          <%= t "general.export" %>
+      <% if @account.organization? %>
+        <a href="<%= dashboard_settings_members_path %>" class="flex gap-4 p-4 interactive rounded">
+          <div class="shrink-0">
+            <x-icon>group</x-icon>
+          </div>
+          <div class="grow">
+            <div class="">
+              <%= t "general.members" %>
+            </div>
+            <div class="text-sm text-on-surface-variant">
+              <%= t ".members_description" %>
+            </div>
+          </div>
+        </a>
+      <% end %>
+
+      <a href="<%= dashboard_settings_export_path %>" class="flex gap-4 p-4 interactive rounded">
+        <div class="shrink-0">
+          <x-icon>cloud_download</x-icon>
         </div>
-        <div class="text-sm text-on-surface-variant">
-          <%= t ".export_description" %>
+        <div class="grow">
+          <div class="">
+            <%= t "general.export" %>
+          </div>
+          <div class="text-sm text-on-surface-variant">
+            <%= t ".export_description" %>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
   </div>
 </div>

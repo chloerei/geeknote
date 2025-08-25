@@ -1,0 +1,23 @@
+<%# locals: (form:, name:, type: :text_field, prefix: nil, suffix: nil, error: nil, label: nil, description: nil, options: {}) %>
+
+<%
+  error ||= form.object && form.object.errors[name].first
+%>
+
+<fieldset class="fieldset">
+  <legend class="fieldset-legend">
+    <%= form.label name %>
+  </legend>
+
+  <%= form.text_area name, options.merge(class: "textarea w-full") %>
+
+  <% if error %>
+    <p class="label text-error">
+      <%= error %>
+    </p>
+  <% elsif description %>
+    <p class="label">
+      <%= description %>
+    </p>
+  <% end %>
+</fieldset>

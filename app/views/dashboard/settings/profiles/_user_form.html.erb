@@ -1,34 +1,19 @@
 <%= form_with model: user, url: dashboard_settings_profile_path do |form| %>
-  <div class="form-field">
-    <%= form.label :banner_image, class: "form-label" %>
-    <%= render "components/image_field", form: form, name: :banner_image %>
-  </div>
+  <%= render "components/image_field", form: form, name: :banner_image %>
 
-  <div class="form-field">
-    <%= form.label :avatar, class: "form-label" %>
-    <%= render "components/avatar_field", form: form, name: :avatar %>
-  </div>
+  <%= render "components/avatar_field", form: form, name: :avatar %>
 
-  <div class="form-field">
-    <%= form.label :name, class: "form-label" %>
-    <%= render "components/text_field", form: form, name: :name %>
-  </div>
+  <%= render "components/text_field", form: form, name: :name %>
 
   <%= form.fields_for :account do |account_form| %>
-    <div class="form-field">
-      <%= account_form.label :name, class: "form-label" %>
-      <%= render "components/text_field", form: account_form, name: :name, prefix: "@" %>
-    </div>
+    <%= render "components/text_field", form: account_form, name: :name, prefix: "@" %>
   <% end %>
 
-  <div class="form-field">
-    <%= form.label :bio, class: "form-label" %>
-    <%= render "components/text_field", form: form, name: :bio, type: :text_area, options: { rows: 3 } %>
-  </div>
+  <%= render "components/text_field", form: form, name: :bio, type: :text_area, options: { rows: 3 } %>
 
-  <div class="form-field">
-    <button type="submit" class="button button--filled">
-      Save changes
+  <div class="mt-4">
+    <button type="submit" class="btn btn-primary">
+      <%= t "general.save_changes" %>
     </button>
   </div>
 <% end %>
