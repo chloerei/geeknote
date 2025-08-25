@@ -55,7 +55,7 @@ gem "rails-i18n", "~> 8.0.1"
 
 gem "local_time", "~> 3.0.3"
 
-gem "aws-sdk-s3", "~> 1.186.1", require: false
+gem "aws-sdk-s3", "~> 1.197.0", require: false
 
 gem "imgproxy-rails", "~> 0.3.0"
 
