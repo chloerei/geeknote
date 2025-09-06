@@ -7,6 +7,9 @@ import { application } from "./application"
 import AutoremoveController from "./autoremove_controller"
 application.register("autoremove", AutoremoveController)
 
+import AutoresizeController from "./autoresize_controller"
+application.register("autoresize", AutoresizeController)
+
 import BackLinkController from "./back_link_controller"
 application.register("back-link", BackLinkController)
 

@@ -25,7 +25,21 @@ export default class extends Controller {
         } else {
           callback()
         }
-      }
+      },
+      loadingClass: "ts-loading", // conflict with daisyUI's loading class
+      render: {
+        loading: () => {
+          return `
+            <div class="p-2 text-base-content/80">
+              <div class="loading loading-spinner"></div>
+            </div>
+          `
+        }
+      },
+      onItemAdd: () => {
+        this.tomSelect.setTextboxValue("")
+        this.tomSelect.refreshOptions()
+      },
     })
   }
 

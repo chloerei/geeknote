@@ -1,92 +1,70 @@
-.ts-wrapper {
-  display: flex;
-  position: relative;
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.ts-control {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  width: 100%;
-  outline: 1px solid var(--color-outline);
-  outline-offset: -1px;
-  padding: 8px;
-  border-radius: 4px;
+.ts-wrapper {
+  @apply relative;
+  width: clamp(3rem,20rem,100%);
 
-  &:focus-within {
-    outline-width: 2px;
-    outline-color: var(--color-primary);
-    outline-offset: -2px;
-  }
-
-  input {
-    flex-grow: 1;
-    height: 32px;
-    padding-left: 4px;
-    flex-shrink: 1;
-    border: none;
-    outline: none;
-    min-width: 40px;
-
-    &:focus {
-      box-shadow: none;
-    }
+  .ts-control {
+    @apply textarea flex flex-wrap gap-2 h-auto min-h-0;
   }
 
   .item {
-    display: inline-flex;
-    align-items: center;
-    height: 32px;
-    padding: 0 8px;
-    gap: 8px;
-    border: 1px solid var(--color-outline);
-    border-radius: 4px;
+    @apply h-8 outline-1 rounded-sm flex items-center gap-2 px-2;
+
+    outline-color: var(--input-color);
   }
 
   .remove {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 24px;
-    width: 24px;
-    margin-left: -4px;
-    margin-right: -4px;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 9999px;
-    cursor: pointer;
+    @apply size-6 -mx-1 flex items-center justify-center rounded-full hover:bg-gray-200;
+  }
+
+  input {
+    @apply h-8 flex-1 min-w-[7rem] outline-none;
+  }
+
+  .ts-dropdown {
+  }
+
+  .ts-dropdown-content {
+    @apply absolute bg-base-100 rounded-box shadow-sm z-1 w-full p-2;
+  }
+
+  .create {
+    @apply p-2 rounded-sm cursor-pointer;
+
+    &.active {
+      @apply bg-base-300;
+    }
+  }
+
+  .option {
+    @apply p-2 rounded-sm cursor-pointer;
+
+    &.active {
+      @apply bg-base-300;
+    }
+
+    .highlight {
+      @apply font-bold;
+    }
+  }
+
+  .no-results {
+    @apply opacity-80 text-sm p-2;
+  }
+
+  .ts-dropdown-content {
+    @apply overflow-auto max-h-40;
   }
 }
 
-.ts-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background-color: var(--color-surface);
-  z-index: 10;
-  box-shadow: var(--shadow-md);
-
-  .create,
-  .option,
-  .no-results {
-    padding: 8px 16px;
-    cursor: pointer;
-  }
-
-  .create,
-  .option {
-    &:hover {
-      background-color: var(--color-surface-container);
-    }
-
-    &.active {
-      background-color: var(--color-surface-container);
-    }
-  }
-
-  .highlight {
-    color: var(--color-on-surface);
-    font-weight: bolder;
-  }
+.ts-hidden-accessible {
+  @apply hidden;
 }
