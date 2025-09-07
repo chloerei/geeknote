@@ -1,84 +1,87 @@
 markdown-editor {
-  display: block;
-}
+  display: flex;
+  flex-direction: column;
 
-markdown-editor.loading {
-  opacity: 0.5;
-}
-
-.cm-editor {
-  position: relative;
-}
-
-.cm-content {
-  white-space: pre-wrap;
-}
-
-.cm-content:focus {
-  outline: 0;
-}
-
-.cm-announced {
-  display: none;
-}
-
-.cm-placeholder {
-  opacity: 70%;
-}
-
-.cmt-heading1,
-.cmt-heading2,
-.cmt-heading3,
-.cmt-heading4,
-.cmt-heading5,
-.cmt-heading6 {
-  font-weight: 500;
-}
-
-.cmt-strong {
-  font-weight: 500;
-}
-
-.cmt-emphasis {
-  font-style: italic;
-}
-
-.cmt-strikethrough {
-  text-decoration: line-through;
-}
-
-.cmt-link.cmt-processingInstruction,
-.cmt-link.cmt-url {
-  opacity: 0.5;
-}
-
-.cmt-comment {
-  opacity: 0.5;
-}
-
-.cmt-url {
-  text-decoration: underline;
-}
-
-.cmt-monospace {
-  font-family: monospace;
-  font-size: 0.875rem;
-}
-
-.post-editor {
-  .cm-content {
-    min-height: 100vh;
+  &.fetching {
+    opacity: 0.5;
   }
-}
 
-.markdown-field {
-  .cm-content {
-    min-height: 160px;
-    padding: 16px;
+  .edit {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .preview {
-    min-height: 160px;
-    padding: 16px;
+    flex-grow: 1;
+  }
+
+  .cm-editor {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cm-scroller {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cm-content {
+    white-space: pre-wrap;
+    flex-grow: 1;
+  }
+
+  .cm-content:focus {
+    outline: 0;
+  }
+
+  .cm-announced {
+    display: none;
+  }
+
+  .cm-placeholder {
+    opacity: 70%;
+  }
+
+  .cmt-heading1,
+  .cmt-heading2,
+  .cmt-heading3,
+  .cmt-heading4,
+  .cmt-heading5,
+  .cmt-heading6 {
+    font-weight: 500;
+  }
+
+  .cmt-strong {
+    font-weight: 500;
+  }
+
+  .cmt-emphasis {
+    font-style: italic;
+  }
+
+  .cmt-strikethrough {
+    text-decoration: line-through;
+  }
+
+  .cmt-link.cmt-processingInstruction,
+  .cmt-link.cmt-url {
+    opacity: 0.5;
+  }
+
+  .cmt-comment {
+    opacity: 0.5;
+  }
+
+  .cmt-url {
+    text-decoration: underline;
+  }
+
+  .cmt-monospace {
+    font-family: monospace;
+    font-size: 0.875rem;
   }
 }

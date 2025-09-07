@@ -78,7 +78,7 @@ class MarkdownEditor extends HTMLElement {
   }
 
   async preview() {
-    this.classList.add("loading")
+    this.classList.add("fetching")
 
     const formData = new FormData()
     formData.append("content", this.markdownMirror.getValue())
@@ -87,7 +87,7 @@ class MarkdownEditor extends HTMLElement {
     })
 
     if (response.ok) {
-      this.classList.remove("loading")
+      this.classList.remove("fetching")
 
       this.editElement.style.display = "none"
       this.previewElement.style.display = "block"
