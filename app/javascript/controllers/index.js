@@ -28,6 +28,9 @@ application.register("dialog", DialogController)
 import FormUnsaveCheckerController from "./form_unsave_checker_controller"
 application.register("form-unsave-checker", FormUnsaveCheckerController)
 
+import HotkeyController from "./hotkey_controller"
+application.register("hotkey", HotkeyController)
+
 import ImageFieldController from "./image_field_controller"
 application.register("image-field", ImageFieldController)
 
