@@ -34,9 +34,6 @@ application.register("image-field", ImageFieldController)
 import MarkdownFieldController from "./markdown_field_controller"
 application.register("markdown-field", MarkdownFieldController)
 
-import PostEditorController from "./post_editor_controller"
-application.register("post-editor", PostEditorController)
-
 import RecaptchaController from "./recaptcha_controller"
 application.register("recaptcha", RecaptchaController)
 
