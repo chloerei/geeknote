@@ -13,7 +13,6 @@ export default class extends Controller {
   }
 
   resize() {
-    console.log("resizing")
     this.element.style.height = 0
     this.element.style.height = (this.element.scrollHeight) + 'px'
   }

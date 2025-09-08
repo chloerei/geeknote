@@ -57,23 +57,26 @@
           <div class="card card-lg card-border border-base-300 bg-base-100" data-turbo-permanent>
             <div class="card-body">
               <%= form.text_area :title, class: "text-3xl font-medium resize-none outline-none", placeholder: "Title", data: { controller: "autoresize" } %>
-              <%= form.hidden_field :content, id: "post_content", placeholder: "Markdown..." %>
-              <markdown-editor input="post_content" class="mt-4 min-h-screen"></markdown-editor>
 
-              <div class="sticky bottom-4 flex justify-center mt-4">
-                <div class="bg-base-200 p-1 rounded-box flex gap-1 shadow-sm">
-                  <div class="join">
-                    <button type="button" class="btn btn-ghost join-item">
-                      <%= t "general.edit" %>
-                    </button>
-                    <button type="button" class="btn btn-ghost join-item">
-                      <%= t "general.preview" %>
-                    </button>
-                  </div>
-                  <div class="">
-                    <button type="button" class="btn btn-ghost btn-square">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paperclip-icon lucide-paperclip"><path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"/></svg>
-                    </button>
+              <div class="group" data-controller="markdown-field">
+                <%= form.hidden_field :content, id: "post_content", placeholder: "Markdown..." %>
+                <markdown-editor input="<%= form.field_id :content %>" class="mt-4 min-h-screen" data-markdown-field-target="markdownEditor"></markdown-editor>
+
+                <div class="sticky bottom-4 flex justify-center mt-4">
+                  <div class="bg-base-200 p-1 rounded-box flex gap-1 shadow-sm">
+                    <div class="join">
+                      <button type="button" class="btn btn-ghost join-item not-group-[.previewing]:btn-active!" data-action="markdown-field#edit">
+                        <%= t "general.edit" %>
+                      </button>
+                      <button type="button" class="btn btn-ghost join-item group-[.previewing]:btn-active!" data-action="markdown-field#preview">
+                        <%= t "general.preview" %>
+                      </button>
+                    </div>
+                    <div class="block group-[.previewing]:hidden">
+                      <button type="button" class="btn btn-ghost btn-square" data-action="markdown-field#attachFile">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paperclip-icon lucide-paperclip"><path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"/></svg>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

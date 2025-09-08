@@ -11,7 +11,7 @@
     <%= form.hidden_field :commentable_sgid, value: comment.commentable.to_sgid(for: :commentable) %>
     <%= form.hidden_field :parent_id %>
     <div class="">
-      <%= render "components/markdown_field", form: form, name: :content, autofocus: open %>
+      <%= render "components/markdown_field", form: form, name: :content, autofocus: open, options: { placeholder: "Markdown..." } %>
     </div>
     <div class="mt-4">
       <button type="submit" class="btn btn-primary">

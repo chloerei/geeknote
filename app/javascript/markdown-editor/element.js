@@ -99,7 +99,7 @@ class MarkdownEditor extends HTMLElement {
   }
 
   edit() {
-    this.editElement.style.display = "block"
+    this.editElement.style.display = "flex"
     this.previewElement.style.display = "none"
     this.previewElement.innerHTML = ""
   }

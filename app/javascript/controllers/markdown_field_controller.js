@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="markdown-field"
 export default class extends Controller {
-  static targets = [ "contentInput", "markdownEditor", "editButton", "previewButton", "toolbarButton" ]
+  static targets = [ "markdownEditor" ]
 
   connect() {
   }
@@ -26,17 +26,11 @@ export default class extends Controller {
   preview() {
     this.markdownEditorTarget.preview()
     this.element.classList.add("previewing")
-    this.toolbarButtonTargets.forEach(button => {
-      button.disabled = true
-    })
   }
 
-  write() {
+  edit() {
     this.markdownEditorTarget.edit()
     this.element.classList.remove("previewing")
-    this.toolbarButtonTargets.forEach(button => {
-      button.disabled = false
-    })
   }
 
   focus() {
