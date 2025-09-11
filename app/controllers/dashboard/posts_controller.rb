@@ -2,13 +2,13 @@ class Dashboard::PostsController < Dashboard::BaseController
   helper_method :account_posts
 
   def index
-    posts = account_posts
+    posts = account_posts.order(updated_at: :desc)
 
-    @status = params[:status].presence_in(%w[draft published trashed]) || "all"
+    @status = params[:status].presence_in(%w[draft published]) || "all"
     if @status == "all"
-      posts = posts.where.not(status: "trashed").order(updated_at: :desc)
+      posts = posts
     else
-      posts = posts.where(status: @status).order(updated_at: :desc)
+      posts = posts.where(status: @status)
     end
 
     @pagy, @posts = pagy(posts)

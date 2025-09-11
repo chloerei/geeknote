@@ -17,8 +17,6 @@
               <%= t "general.published" %>
             <% when "draft" %>
               <%= t "general.draft" %>
-            <% when "trashed" %>
-              <%= t "general.trashed" %>
             <% end %>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
           </label>
@@ -36,11 +34,6 @@
             <li>
               <a href="<%= url_for(status: "draft") %>" class="<%= "menu-active" if @status == "draft" %>">
                 <%= t "general.draft" %>
-              </a>
-            </li>
-            <li>
-              <a href="<%= url_for(status: "trashed") %>" class="<%= "menu-active" if @status == "trashed" %>">
-                <%= t "general.trashed" %>
               </a>
             </li>
           </ul>

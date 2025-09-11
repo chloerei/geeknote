@@ -20,8 +20,7 @@ class Post < ApplicationRecord
 
   enum :status, {
     draft: 0,
-    published: 1,
-    trashed: 2
+    published: 1
   }
 
   attribute :remove_featured_image, :boolean

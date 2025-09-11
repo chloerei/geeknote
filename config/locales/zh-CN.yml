@@ -38,7 +38,6 @@ zh-CN:
       post/status:
         draft: 草稿
         published: 已发布
-        trashed: 已废弃
       site:
         description: 描述
         global_head_html: 全局 Head
@@ -139,11 +138,6 @@ zh-CN:
           success: 文章已取消发布。
         update:
           success: 文章已发布。
-      trashes:
-        destroy:
-          success: 文章已恢复。
-        update:
-          success: 文章已移到回收站。
       update:
         success: 更新成功
     settings:
@@ -219,7 +213,6 @@ zh-CN:
     members: 成员
     merge_tags: 合并标签
     more_from: 更多来自 %{name}
-    move_to_trash: 移到回收站
     name: 名称
     new_comment: 新评论
     new_member: 新成员
@@ -270,7 +263,6 @@ zh-CN:
     submit: 提交
     table_of_contents: 目录
     tags: 标签
-    trashed: 回收站
     unfollow: 取消关注
     unpublish: 取消发布
     untitled: 无标题

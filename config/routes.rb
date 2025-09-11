@@ -88,7 +88,6 @@ Rails.application.routes.draw do
 
       scope module: :posts do
         resource :publish, only: [ :update, :destroy ]
-        resource :trash, only: [ :update, :destroy ]
       end
     end
 
@@ -137,8 +136,6 @@ Rails.application.routes.draw do
         member do
           patch :publish
           patch :unpublish
-          patch :trash
-          patch :restore
         end
 
         scope module: "posts" do
