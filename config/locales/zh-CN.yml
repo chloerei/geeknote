@@ -166,7 +166,9 @@ zh-CN:
     account_stats: 账号统计
     accounts: 账号
     add_comment: 添加评论
+    add_member: Add member
     admin: 管理
+    all: 全部
     all_comments: 所有评论
     all_replies: 所有回复
     appearance: 外观
@@ -187,6 +189,7 @@ zh-CN:
     dashboard_short: 创作
     delete: 删除
     delete_forever: 永久删除
+    delete_post: 删除文章
     deleted_item: 已删除的内容
     download: 下载
     draft: 草稿
@@ -205,6 +208,7 @@ zh-CN:
     id: Id
     import: 导入
     in: 在
+    invitations: 邀请
     joined_on: 加入于
     likes: 点赞
     load_more: 查看更多
@@ -229,6 +233,7 @@ zh-CN:
     originally_published_at: 原发布于
     overview: 概览
     owner: 拥有者
+    page_view: 页面浏览
     password: 密码
     personal: 个人
     popular: 热门
@@ -239,14 +244,17 @@ zh-CN:
     preview: 预览
     profile: 资料
     public_link: 公开链接
+    public_page: 公开页面
     publish: 发布
     published: 已发布
     quick_links: 快捷链接
     recommend_users: 推荐用户
     relevant: 相关
+    replies: 回复
     reply: 回复
     reset_password: 重置密码
     restore: 恢复
+    role: 角色
     rss_feed: RSS 订阅
     save: 保存
     save_changes: 保存修改
@@ -258,11 +266,13 @@ zh-CN:
     sign_in_to_comment: 登录后发表评论
     sign_out: 登出
     sign_up: 注册
+    sign_up_account: 注册账号
     sort_by: 排序：
     stats: 统计
     submit: 提交
     table_of_contents: 目录
     tags: 标签
+    toc: 目录
     unfollow: 取消关注
     unpublish: 取消发布
     untitled: 无标题
