@@ -44,7 +44,7 @@ class Account::InvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_difference "@organization.members.active.count" do
       patch account_invitation_path(@organization.account.name, invitation_token: invitation.invitation_token)
     end
-    assert_redirected_to account_dashboard_posts_path(@organization.account.name)
+    assert_redirected_to dashboard_posts_path(@organization.account.name, @organization.account.name)
     invitation.reload
     assert invitation.active?
     assert user, invitation.user

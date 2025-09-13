@@ -129,21 +129,6 @@ Rails.application.routes.draw do
     resources :members, only: [ :index ]
 
     resource :invitation, only: [ :show, :update ]
-
-    namespace :dashboard do
-      root to: "home#index"
-      resources :posts do
-        member do
-          patch :publish
-          patch :unpublish
-        end
-
-        scope module: "posts" do
-          resource :settings, only: [ :show, :update ]
-          resource :featured_image, only: [ :update, :destroy ]
-        end
-      end
-    end
   end
 
   direct :custom_imgproxy_active_storage do |model, options|
