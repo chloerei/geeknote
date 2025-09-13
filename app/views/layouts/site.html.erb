@@ -1,76 +1,103 @@
 <% content_for :content do %>
-  <div class="bg-base-100 border-b border-base-300">
-    <div class="max-w-7xl mx-auto">
-      <div class="navbar py-0">
-        <div class="flex-1">
-          <a href="/" class="inline-flex items-center p-2 gap-2">
-            <img src="<%= asset_path "icon.svg" %>" alt="logo" class="size-10">
-            <div class="text-xl">
-              <%= @site.name %>
-            </div>
-          </a>
-        </div>
-        <div class="flex-none">
-          <% if !current_page?(search_path) %>
-            <div class="hidden md:inline-flex">
-              <%= form_with url: search_path, method: :get do %>
-                <label class="input">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search opacity-50"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
-                  <input type="search" placeholder="<%= t 'general.search' %>" name="q" autocomplete="off">
-                </label>
-              <% end %>
-            </div>
-            <a href="<%= search_path %>" class="btn btn-ghost btn-square md:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
-            </a>
-          <% end %>
-          <% if Current.user %>
-            <a href="<%= new_dashboard_post_path(Current.user.account.name) %>" class="btn btn-ghost btn-square">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-            </a>
-            <a href="<%= notifications_path %>" class="btn btn-ghost btn-square">
-              <div class="indicator">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell-icon lucide-bell"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
-                <% notification_count = Current.user.notifications.unread.count %>
-                <% if notification_count > 0 %>
-                  <div class="badge badge-xs badge-primary indicator-item">
-                    <%= notification_count > 99 ? "99+" : notification_count %>
-                  </div>
-                <% end %>
+  <div class="drawer lg:drawer-open">
+    <input type="checkbox" class="drawer-toggle" id="drawer" />
+
+    <div class="drawer-side">
+      <div class="flex flex-col w-80 h-full bg-base-100">
+        <div class="navbar">
+          <div class="flex-grow flex">
+            <a href="/" class="inline-flex items-center p-1 gap-2">
+              <img src="<%= asset_path "icon.svg" %>" alt="logo" class="size-10">
+              <div class="text-xl">
+                <%= @site.name %>
               </div>
             </a>
-            <div class="dropdown dropdown-end">
-              <label tabindex="0" class="btn btn-ghost btn-square">
+          </div>
+        </div>
+
+        <% if Current.user %>
+          <div class="p-3">
+            <a href="" class="btn btn-primary btn-lg btn-soft">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+              <%= t "general.new_post" %>
+            </a>
+          </div>
+        <% end %>
+
+        <div class="flex-grow overflow-auto">
+          <ul class="menu menu-lg w-full p-3">
+            <li>
+              <a href="<%= root_path %>" class="<%= "menu-active" if current_page?(root_path) %>">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                <%= t "general.home" %>
+              </a>
+            </li>
+            <li>
+              <a href="<%= search_path %>" class="<%= "menu-active" if current_page?(search_path) %>">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+                <%= t "general.search" %>
+              </a>
+            </li>
+            <% if Current.user %>
+              <li>
+                <a href="<%= notifications_path %>" class="<%= "menu-active" if current_page?(notifications_path) %>">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell-icon lucide-bell"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+                  <%= t "general.notifications" %>
+                  <% notification_count = Current.user.notifications.unread.count %>
+                  <% if notification_count > 0 %>
+                    <div class="badge badge-xs badge-primary badge-soft">
+                      <%= notification_count > 99 ? "99+" : notification_count %>
+                    </div>
+                  <% end %>
+                </a>
+              </li>
+              <li>
+                <a href="<%= bookmarks_path %>" class="<%= "menu-active" if current_page?(bookmarks_path) %>">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark-icon lucide-bookmark"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+                  <%= t "general.bookmarks" %>
+                </a>
+              </li>
+              <li>
+                <a href="<%= account_root_path(Current.user.account.name) %>" class="<%= "menu-active" if current_page?(account_root_path(Current.user.account.name)) %>">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  <%= t "general.profile" %>
+                </a>
+              </li>
+              <li>
+                <a href="<%= dashboard_root_path(Current.user.account.name) %>">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard-icon lucide-layout-dashboard"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+                  <%= t "general.dashboard" %>
+                </a>
+              </li>
+            <% else %>
+              <li>
+                <a href="<%= new_session_path %>" class="<%= "menu-active" if current_page?(new_session_path) %>">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in-icon lucide-log-in"><path d="m10 17 5-5-5-5"/><path d="M15 12H3"/><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/></svg>
+                  <%= t "general.sign_in" %>
+                </a>
+              </li>
+              <li>
+                <a href="<%= new_registration_path %>" class="<%= "menu-active" if current_page?(new_registration_path) %>">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-plus-icon lucide-user-round-plus"><path d="M2 21a8 8 0 0 1 13.292-6"/><circle cx="10" cy="8" r="5"/><path d="M19 16v6"/><path d="M22 19h-6"/></svg>
+                  <%= t "general.sign_up" %>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+        <div class="p-3">
+          <% if Current.user %>
+            <div class="dropdown dropdown-top">
+              <label tabindex="0" class="btn btn-ghost btn-lg">
                 <div class="avatar">
                   <div class="size-8 rounded-full">
                     <img src="<%= avatar_url(Current.user) %>">
                   </div>
                 </div>
+                <%= t Current.user.name %>
               </label>
-              <div tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-                <li>
-                  <a href="<%= account_root_path(Current.user.account.name) %>">
-                    <div>
-                      <div class="font-medium">
-                        <%= Current.user.name %>
-                      </div>
-                      <div class="text-sm text-base-content/75">
-                        @<%= Current.user.account.name %>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li></li>
-                <li>
-                  <a href="<%= dashboard_root_path(Current.user.account.name) %>">
-                    <%= t "general.dashboard" %>
-                  </a>
-                </li>
-                <li>
-                  <a href="<%= bookmarks_path %>">
-                    <%= t "general.bookmarks" %>
-                  </a>
-                </li>
+              <ul tabindex="0" class="dropdown-content menu w-40 bg-base-200 rounded-box shadow p-2 z-1">
                 <li>
                   <a href="<%= settings_root_path %>">
                     <%= t "general.settings" %>
@@ -82,27 +109,22 @@
                     <%= t "general.sign_out" %>
                   </a>
                 </li>
-              </div>
+              </ul>
             </div>
-          <% else %>
-            <a href="<%= new_registration_path %>" class="btn btn-ghost">
-              <%= t "general.sign_up" %>
-            </a>
-            <a href="<%= new_session_path %>" class="btn btn-ghost">
-              <%= t "general.sign_in" %>
-            </a>
           <% end %>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="max-w-7xl mx-auto p-4">
-    <%= raw @site.site_header_html %>
+    <div class="drawer-content">
+      <%= raw @site.site_header_html %>
 
-    <%= content_for?(:site_content) ? yield(:site_content) : yield %>
+      <div class="container mx-auto px-6">
+        <%= yield %>
+      </div>
 
-    <%= raw @site.site_footer_html %>
+      <%= raw @site.site_footer_html %>
+    </div>
   </div>
 <% end %>
 
