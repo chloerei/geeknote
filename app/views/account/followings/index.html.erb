@@ -1,26 +1,31 @@
-<div class="layout-nav-main">
-  <div>
-    <%= render "account/nav", account: @account %>
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <a href="<%= account_root_path(@account.name) %>" class="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+    </a>
   </div>
-
-  <div>
-    <div class="tabs tabs-border">
-      <% if @account.user? %>
-        <a href="<%= account_followings_path(@account.name) %>" class="tab tab-active">
-          <%= t "general.following" %>
-        </a>
-      <% end %>
-      <a href="<%= account_followers_path(@account.name) %>" class="tab">
-        <%= t "general.followers" %>
-      </a>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      <%= @account.owner.name %>
     </div>
+  </div>
+</div>
 
-    <div class="card card-border border-base-300 bg-base-100 mt-4">
-      <div class="card-body">
-        <%= render "components/scroll_pagination", pagy: @pagy, content_class: "list" do %>
-          <%= render partial: "account/item", collection: @accounts, as: :account %>
-        <% end %>
-      </div>
-    </div>
+<div class="tabs tabs-border">
+  <% if @account.user? %>
+    <a href="<%= account_followings_path(@account.name) %>" class="tab tab-active">
+      <%= t "general.following" %>
+    </a>
+  <% end %>
+  <a href="<%= account_followers_path(@account.name) %>" class="tab">
+    <%= t "general.followers" %>
+  </a>
+</div>
+
+<div class="card card-border border-base-300 bg-base-100 mt-4">
+  <div class="card-body">
+    <%= render "components/scroll_pagination", pagy: @pagy, content_class: "list" do %>
+      <%= render partial: "account/item", collection: @accounts, as: :account %>
+    <% end %>
   </div>
 </div>

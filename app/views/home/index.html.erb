@@ -1,3 +1,16 @@
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <label for="drawer" class="btn btn-square btn-ghost lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </label>
+  </div>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      <%= t "general.home" %>
+    </div>
+  </div>
+</div>
+
 <div class="tabs tabs-border">
   <a href="<%= root_path %>" class="tab <%= "tab-active" if current_page?(root_path) %>">
     <%= t "general.popular" %>

@@ -1,5 +1,18 @@
-<div class="max-w-3xl mx-auto">
-  <div class="top-app-bar">
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <label for="drawer" class="btn btn-square btn-ghost lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </label>
+  </div>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      <%= t "general.search" %>
+    </div>
+  </div>
+</div>
+
+<div class="layout-main-sidebar">
+  <div>
     <%= form_with url: search_url, method: :get do |form| %>
       <%= form.hidden_field :type, value: @type %>
       <label class="input w-full">
@@ -7,65 +20,65 @@
         <%= form.text_field :q, value: params[:q], placeholder: t("general.search") %>
       </label>
     <% end %>
-  </div>
 
-  <div class="flex items-center gap-4 mt-4">
-    <div class="flex-grow">
-      <div class="tabs tabs-border">
-        <a href="<%= url_for(search_params.merge(type: nil)) %>" class="tab <%= "tab-active" if @type == "posts" %>">
-          <%= t "general.posts" %>
-        </a>
-        <a href="<%= url_for(search_params.merge(type: "comments")) %>" class="tab <%= "tab-active" if @type == "comments" %>">
-          <%= t "general.comments" %>
-        </a>
-        <a href="<%= url_for(search_params.merge(type: "accounts")) %>" class="tab <%= "tab-active" if @type == "accounts" %>">
-          <%= t "general.accounts" %>
-        </a>
-      </div>
-    </div>
-    <div class="dropdown dropdown-end">
-      <label tabindex="0" type="button" class="btn btn-ghost">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="M11 4h10"/><path d="M11 8h7"/><path d="M11 12h4"/></svg>
-        <%= t "general.sort_by" %>
-        <% case @sort %>
-        <% when "newest" %>
-          <%= t "general.newest" %>
-        <% when "oldest" %>
-          <%= t "general.oldest" %>
-        <% else %>
-          <%= t "general.relevant" %>
-        <% end %>
-      </label>
-      <div tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-        <li>
-          <a href="<%= url_for(search_params.merge(sort: nil)) %>" class="menu__item">
-            <%= t "general.relevant" %>
+    <div class="flex items-center gap-4 mt-4">
+      <div class="flex-grow">
+        <div class="tabs tabs-border">
+          <a href="<%= url_for(search_params.merge(type: nil)) %>" class="tab <%= "tab-active" if @type == "posts" %>">
+            <%= t "general.posts" %>
           </a>
-        </li>
-        <li>
-          <a href="<%= url_for(search_params.merge(sort: "newest")) %>" class="menu__item">
+          <a href="<%= url_for(search_params.merge(type: "comments")) %>" class="tab <%= "tab-active" if @type == "comments" %>">
+            <%= t "general.comments" %>
+          </a>
+          <a href="<%= url_for(search_params.merge(type: "accounts")) %>" class="tab <%= "tab-active" if @type == "accounts" %>">
+            <%= t "general.accounts" %>
+          </a>
+        </div>
+      </div>
+      <div class="dropdown dropdown-end">
+        <label tabindex="0" type="button" class="btn btn-ghost">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="M11 4h10"/><path d="M11 8h7"/><path d="M11 12h4"/></svg>
+          <%= t "general.sort_by" %>
+          <% case @sort %>
+          <% when "newest" %>
             <%= t "general.newest" %>
-          </a>
-        </li>
-        <li>
-          <a href="<%= url_for(search_params.merge(sort: "oldest")) %>" class="menu__item">
+          <% when "oldest" %>
             <%= t "general.oldest" %>
-          </a>
-        </li>
+          <% else %>
+            <%= t "general.relevant" %>
+          <% end %>
+        </label>
+        <div tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+          <li>
+            <a href="<%= url_for(search_params.merge(sort: nil)) %>" class="menu__item">
+              <%= t "general.relevant" %>
+            </a>
+          </li>
+          <li>
+            <a href="<%= url_for(search_params.merge(sort: "newest")) %>" class="menu__item">
+              <%= t "general.newest" %>
+            </a>
+          </li>
+          <li>
+            <a href="<%= url_for(search_params.merge(sort: "oldest")) %>" class="menu__item">
+              <%= t "general.oldest" %>
+            </a>
+          </li>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="mt-4">
-    <%= render "components/scroll_pagination", pagy: @pagy, content_class: "space-y-4" do %>
-      <% case @type %>
-      <% when "posts" %>
-        <%= render partial: "post", collection: @posts %>
-      <% when "comments" %>
-        <%= render partial: "comment", collection: @comments %>
-      <% when "accounts" %>
-        <%= render partial: "account", collection: @accounts %>
+    <div class="mt-4">
+      <%= render "components/scroll_pagination", pagy: @pagy, content_class: "space-y-4" do %>
+        <% case @type %>
+        <% when "posts" %>
+          <%= render partial: "post", collection: @posts %>
+        <% when "comments" %>
+          <%= render partial: "comment", collection: @comments %>
+        <% when "accounts" %>
+          <%= render partial: "account", collection: @accounts %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </div>

@@ -1,17 +1,21 @@
-<div class="top-app-bar">
-  <a href="/" class="icon-button">
-    <x-icon>arrow_back</x-icon>
-  </a>
-  <div class="top-app-bar__headline">
-    <%= t "general.notifications" %>
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <label for="drawer" class="btn btn-square btn-ghost lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </label>
+  </div>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      <%= t "general.notifications" %>
+    </div>
   </div>
 </div>
 
 <div class="layout-main-sidebar">
   <div class="">
-    <div class="card">
-      <div class="py-4">
-        <%= render "components/scroll_pagination", pagy: @pagy do %>
+    <div class="card bg-base-100">
+      <div class="card-body">
+        <%= render "components/scroll_pagination", pagy: @pagy, content_class: "list" do %>
           <%= render partial: "notification", collection: @notifications %>
         <% end %>
       </div>

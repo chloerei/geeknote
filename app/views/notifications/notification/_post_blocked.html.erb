@@ -2,18 +2,16 @@
   post = notification.post
 %>
 
-<a href="<%= account_post_path(post.account.name, post) %>" class="flex p-4 gap-4 interactive">
-  <div class="shrink-0">
-    <x-icon>block</x-icon>
-  </div>
-  <div class="grow">
-    <div class="font-medium line-clamp-1">
+<div>
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-alert-icon lucide-circle-alert"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+</div>
+<div>
+  <div class="line-clamp-1">
+    <a href="<%= dashboard_posts_path(post.account.name) %>" class="list-row hover:bg-base-200">
       <%= t ".title", title: post.title %>
-    </div>
+    </a>
   </div>
-  <div class="shrink-0">
-    <div class="text-sm text-on-surface-variant">
-      <%= format_time notification.created_at %>
-    </div>
-  </div>
-</a>
+</div>
+<div class="text-sm text-base-content/80">
+  <%= format_time notification.created_at %>
+</div>

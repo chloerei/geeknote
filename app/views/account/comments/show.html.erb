@@ -11,35 +11,40 @@
   <meta name="twitter:image" content="<%= avatar_url @comment.user %>">
 <% end %>
 
-<% if @comment.commentable %>
-  <div class="breadcrumbs">
-    <ul>
-      <li>
-        <a href="<%= account_post_path(@comment.commentable.account.name, @comment.commentable) %>">
-          <%= @comment.commentable.title %>
-        </a>
-      </li>
-      <li>
-        <a href="<%= account_post_comments_path(@comment.commentable.account.name, @comment.commentable) %>">
-          <%= t "general.comments" %>
-        </a>
-      </li>
-    </ul>
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <a href="<%= account_root_path(@account.name) %>" class="btn btn-square btn-ghost" data-controller="back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+    </a>
   </div>
-<% else %>
-  <div class="text-base-content/80">
-    <%= t "general.deleted_item" %>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      <%= t "general.comment" %>
+    </div>
   </div>
-<% end %>
-
+</div>
 
 <div class="layout-main-sidebar">
   <div class="">
-    <div class="card card-border border-base-300 bg-base-100 mt-4">
+    <div class="card card-border border-base-300 bg-base-100">
       <div class="card-body">
+        <div class="card-title">
+          <span class="text-base-content/80">
+            <%= t "general.comment_on" %>
+          </span>
+          <% if @comment.commentable %>
+            <a href="<%= account_post_path(@comment.commentable.account.name, @comment.commentable) %>" class="">
+              <%= @comment.commentable.title %>
+            </a>
+          <% else %>
+            <span class="text-base-content/80 italic">
+              <%= t "general.deleted_item" %>
+            </span>
+          <% end %>
+        </div>
+
         <%= render "comment", comment: @comment, showpage: true %>
       </div>
-
     </div>
 
     <div class="card card-border border-base-300 bg-base-100 mt-4">

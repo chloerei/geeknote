@@ -1,16 +1,19 @@
-<div class="top-app-bar">
-  <a href="<%= account_root_path(Current.user.account.name) %>" class="icon-button">
-    <x-icon>arrow_back</x-icon>
-  </a>
-
-  <div class="top-app-bar__headline">
-    <%= t "general.bookmarks" %>
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <label for="drawer" class="btn btn-square btn-ghost lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </label>
+  </div>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      <%= t "general.bookmarks" %>
+    </div>
   </div>
 </div>
 
 <div class="layout-main-sidebar">
   <div class="max-w-screen-lg mx-auto">
-    <%= render "components/scroll_pagination", pagy: @pagy do %>
+    <%= render "components/scroll_pagination", pagy: @pagy, content_class: "space-y-4" do %>
       <%= render partial: "account/posts/post", collection: @posts %>
     <% end %>
   </div>
