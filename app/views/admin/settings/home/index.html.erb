@@ -1,38 +1,47 @@
-<div class="top-app-bar">
-  <label for="navigation-drawer-toggle" class="icon-button xl:hidden">
-    <x-icon>menu</x-icon>
-  </label>
 
-  <div class="top-app-bar__headline">
-    <%= t 'general.settings' %>
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <label for="navigation-drawer-toggle" class="btn btn-square btn-ghost xl:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </label>
+  </div>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      <%= t 'general.settings' %>
+    </div>
   </div>
 </div>
 
-<div class="card py-3">
-  <a href="<%= admin_settings_appearance_path %>" class="flex gap-4 p-4 interactive">
-    <div class="icon h-6 w-6">
-      <x-icon>web</x-icon>
+
+<div class="card card-default">
+  <div class="card-body">
+    <div class="list">
+      <a href="<%= admin_settings_appearance_path %>" class="list-row hover:bg-base-200">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-template-icon lucide-layout-template"><rect width="18" height="7" x="3" y="3" rx="1"/><rect width="9" height="7" x="3" y="14" rx="1"/><rect width="5" height="7" x="16" y="14" rx="1"/></svg>
+        </div>
+        <div>
+          <div class="text-lg font-medium">
+            <%= t '.appearance' %>
+          </div>
+          <div class="">
+            <%= t '.appearance_desription' %>
+          </div>
+        </div>
+      </a>
+      <a href="<%= admin_settings_weekly_digest_path %>" class="list-row hover:bg-base-200">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail-icon lucide-mail"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+        </div>
+        <div class="flex-grow">
+          <div class="text-lg font-medium">
+            <%= t '.weekly_digest' %>
+          </div>
+          <div class="">
+            <%= t '.weekly_digest_desription' %>
+          </div>
+        </div>
+      </a>
     </div>
-    <div class="flex-grow">
-      <div class="text-lg font-medium">
-        <%= t '.appearance' %>
-      </div>
-      <div class="">
-        <%= t '.appearance_desription' %>
-      </div>
-    </div>
-  </a>
-  <a href="<%= admin_settings_weekly_digest_path %>" class="flex gap-4 p-4 interactive">
-    <div class="icon h-6 w-6">
-      <x-icon>mail</x-icon>
-    </div>
-    <div class="flex-grow">
-      <div class="text-lg font-medium">
-        <%= t '.weekly_digest' %>
-      </div>
-      <div class="">
-        <%= t '.weekly_digest_desription' %>
-      </div>
-    </div>
-  </a>
+  </div>
 </div>

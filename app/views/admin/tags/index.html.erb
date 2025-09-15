@@ -1,57 +1,46 @@
-<div class="top-app-bar">
-  <label for="navigation-drawer-toggle" class="icon-button xl:hidden">
-    <x-icon>menu</x-icon>
-  </label>
-  <div class="top-app-bar__headline">
-    Tags
+
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <label for="navigation-drawer-toggle" class="btn btn-square btn-ghost xl:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </label>
+  </div>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      Tags
+    </div>
   </div>
 </div>
 
-<div class="card">
-  <table class="data-table">
-    <thead>
-      <tr>
-        <th>
-          ID
-        </th>
-        <th>
-          Name
-        </th>
-        <th>
-          Taggings
-        </th>
-        <th>
-          Created at
-        </th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @tags.each do |tag| %>
-        <tr>
-          <td>
-            <%= tag.id %>
-          </td>
-          <td>
-            <%= tag.name %>
-          </td>
-          <td>
-            <%= tag.taggings_count %>
-          </td>
-          <td>
-            <%= format_time tag.created_at %>
-          </td>
-          <td class="text-right">
-            <a href="<%= admin_tag_path(tag) %>" class="button button--text">
-              View
-            </a>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
 
-  <div class="p-4">
-    <%= render "components/page_pagination", pagy: @pagy %>
+<div class="card card-default">
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Taggings</th>
+          <th>Created at</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tags.each do |tag| %>
+          <tr>
+            <td><%= tag.id %></td>
+            <td><%= tag.name %></td>
+            <td><%= tag.taggings_count %></td>
+            <td><%= format_time tag.created_at %></td>
+            <td class="text-right">
+              <a href="<%= admin_tag_path(tag) %>" class="btn btn-ghost">View</a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="p-4">
+      <%= render "components/page_pagination", pagy: @pagy %>
+    </div>
   </div>
 </div>
