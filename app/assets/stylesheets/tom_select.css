@@ -9,10 +9,9 @@
 
 .ts-wrapper {
   @apply relative;
-  width: clamp(3rem,20rem,100%);
 
   .ts-control {
-    @apply textarea flex flex-wrap gap-2 h-auto min-h-0;
+    @apply textarea flex flex-wrap gap-2 h-auto min-h-0 w-full;
   }
 
   .item {

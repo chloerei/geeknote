@@ -1,9 +1,79 @@
-<% content_for :body do %>
-  <div class="flex container mx-auto">
-    <%= render "layouts/admin/navigation" %>
+<% content_for :content do %>
+  <div class="drawer lg:drawer-open">
+    <input type="checkbox" class="drawer-toggle" id="drawer" />
 
-    <div class="flex-grow min-w-0">
-      <div class="px-4 md:px-6">
+    <div class="drawer-side">
+      <label for="drawer" class="drawer-overlay"></label>
+
+      <div class="flex flex-col w-60 h-full bg-base-100">
+        <div class="navbar">
+          <div class="flex-grow flex">
+            <a href="<%= admin_root_path %>" class="inline-flex items-center p-1 gap-2">
+              <img src="<%= asset_path "icon.svg" %>" alt="logo" class="size-10">
+              <div class="text-xl">
+                <%= t "general.admin" %>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="flex-grow overflow-auto">
+          <ul class="menu w-full p-3">
+            <li>
+              <a href="<%= admin_root_path %>" class="<%= "menu-active" if request.path == "/admin" %>">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard-icon lucide-layout-dashboard"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+                <%= t "general.overview" %>
+              </a>
+            </li>
+            <li>
+              <a href="<%= admin_posts_path %>" class="<%= "menu-active" if request.path.start_with?("/admin/posts") %>">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text-icon lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                <%= t "general.posts" %>
+              </a>
+            </li>
+            <li>
+              <a href="<%= admin_comments_path %>" class="<%= "menu-active" if request.path.start_with?("/admin/comments") %>">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-icon lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
+                <%= t "general.comments" %>
+              </a>
+            </li>
+            <li>
+              <a href="<%= admin_tags_path %>" class="<%= "menu-active" if request.path.start_with?("/admin/tags") %>">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag-icon lucide-tag"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+                <%= t "general.tags" %>
+              </a>
+            </li>
+            <li>
+              <a href="<%= admin_accounts_path %>" class="<%= "menu-active" if request.path.start_with?("/admin/accounts") %>">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-user-icon lucide-square-user"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M7 21v-2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/></svg>
+                <%= t "general.accounts" %>
+              </a>
+            </li>
+            <li>
+              <a href="<%= admin_users_path %>" class="<%= "menu-active" if request.path.start_with?("/admin/users") %>">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <%= t "general.users" %>
+              </a>
+            </li>
+            <li>
+              <a href="<%= admin_organizations_path %>" class="<%= "menu-active" if request.path.start_with?("/admin/organizations") %>">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+                <%= t "general.organizations" %>
+              </a>
+            </li>
+            <li>
+              <a href="<%= admin_settings_root_path %>" class="<%= "menu-active" if request.path.start_with?("/admin/settings") %>">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-icon lucide-settings"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg>
+                <%= t "general.settings" %>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-content">
+      <div class="max-w-7xl mx-auto px-6 pb-6">
         <%= yield %>
       </div>
     </div>

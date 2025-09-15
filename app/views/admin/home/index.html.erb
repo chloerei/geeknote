@@ -1,49 +1,41 @@
-<div class="top-app-bar">
-  <label for="navigation-drawer-toggle" class="icon-button xl:hidden">
-    <x-icon>menu</x-icon>
-  </label>
-  <div class="top-app-bar__headline">
-    <%= t "general.overview" %>
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <label for="drawer" class="btn btn-square btn-ghost lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </label>
+  </div>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      <%= t "general.overview" %>
+    </div>
   </div>
 </div>
 
-<div class="">
-  <div class="card p-4">
-    <h3 class="text-lg font-medium">
-      <%= t "general.stats" %>
-    </h3>
-    <div class="grid grid-cols-3 gap-4 mt-4">
-      <div class="card border border-outline-variant">
-        <div class="p-4">
-          <div class="text-sm font-medium text-on-surface-variant">
-            <%= t "general.posts" %>
-          </div>
-          <div class="text-2xl font-medium">
-            <%= Post.count %>
-          </div>
-        </div>
+<div class="card card-default">
+  <div class="stats ">
+    <div class="stat">
+      <div class="stat-title">
+        <%= t "general.posts" %>
       </div>
-
-      <div class="card border border-outline-variant">
-        <div class="p-4">
-          <div class="text-sm font-medium text-on-surface-variant">
-            <%= t "general.comments" %>
-          </div>
-          <div class="text-2xl font-medium">
-            <%= Comment.count %>
-          </div>
-        </div>
+      <div class="stat-value">
+        <%= Post.count %>
       </div>
-
-      <div class="card border border-outline-variant">
-        <div class="p-4">
-          <div class="text-sm font-medium text-on-surface-variant">
-            <%= t "general.users" %>
-          </div>
-          <div class="text-2xl font-medium">
-            <%= User.count %>
-          </div>
-        </div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">
+        <%= t "general.comments" %>
+      </div>
+      <div class="stat-value">
+        <%= Comment.count %>
+      </div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">
+        <%= t "general.users" %>
+      </div>
+      <div class="stat-value">
+        <%= User.count %>
+      </div>
     </div>
   </div>
 </div>
