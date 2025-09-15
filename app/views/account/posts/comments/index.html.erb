@@ -14,7 +14,7 @@
 <div class="layout-main-sidebar">
   <div>
     <% if @post.allow_comments? %>
-      <div class="card card-border border-base-300 bg-base-100">
+      <div class="card card-default">
         <div class="card-body">
           <div class="card-title">
             <%= t "general.new_comment" %>
@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <div id="comments" class="card card-border border-base-300 bg-base-100 mt-4">
+      <div id="comments" class="card card-default mt-4">
         <div class="card-body">
           <div class="flex items-center gap-4 pb-4 border-b border-base-300">
             <div class="card-title flex-grow">
@@ -81,11 +81,13 @@
         </div>
       </div>
     <% else %>
-      <div class="card p-4">
-        <div class="flex items-center justify-center gap-4 text-on-surface-variant">
-          <x-icon>lock</x-icon>
-          <div class="text-sm">
-            <%= t "general.comments_is_disabled" %>
+      <div class="card card-default p-4">
+        <div class="card-body">
+          <div class="flex items-center justify-center gap-4 text-base-content/80">
+            <x-icon>lock</x-icon>
+            <div class="text-sm">
+              <%= t "general.comments_is_disabled" %>
+            </div>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@
 
 <div class="layout-main-sidebar">
   <div>
-    <div class="card bg-base-100">
+    <div class="card card-default">
       <div class="card-body">
         <%= form_with model: @user, url: settings_email_path do |form| %>
           <%= render "components/text_field", form: form, name: :email %>

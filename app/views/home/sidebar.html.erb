@@ -19,7 +19,7 @@
       <%
         popular_tags = Tag.order(taggings_count: :desc).limit(10)
       %>
-      <div class="card card-border border-base-300 bg-base-100">
+      <div class="card card-default">
         <div class="card-body">
           <h3 class="card-title">
             <%= t "general.popular_tags" %>
@@ -38,7 +38,7 @@
       <%
         recommend_accounts = Account.where(id: Account.order(followers_count: :desc).excluding(Current.user&.account).limit(100)).order("RANDOM()").limit(3)
       %>
-      <div class="card card-border border-base-300 bg-base-100">
+      <div class="card card-default">
         <div class="card-body">
           <div class="card-title">
             <%= t "general.recommend_users" %>
@@ -49,7 +49,7 @@
         </div>
       </div>
 
-      <div class="card card-border border-base-300 bg-base-100">
+      <div class="card card-default">
         <div class="card-body">
           <div class="card-title">
             <%= t "general.community_stats" %>

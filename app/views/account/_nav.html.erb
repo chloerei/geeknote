@@ -1,5 +1,5 @@
 <div class="space-y-4">
-  <div class="card card-border border-base-300 bg-base-100">
+  <div class="card card-default">
     <figure class="w-full aspect-[3/1] bg-primary">
       <% if account.owner.banner_image.attached? %>
         <img src="<%= polymorphic_url(account.owner.banner_image.variant(:large)) %>" alt="banner image">
@@ -82,7 +82,7 @@
 
   <% if account.user? %>
     <% if account.owner.organizations.any? %>
-      <div class="card card-border border-base-300 bg-base-100">
+      <div class="card card-default">
         <div class="card-body">
           <h3 class="card-title">
             <%= t "general.organizations" %>
@@ -98,7 +98,7 @@
       </div>
     <% end %>
   <% elsif account.organization? %>
-    <div class="card card-border border-base-300 bg-base-100">
+    <div class="card card-default">
       <div class="card-body">
         <h3 class="card-title">
           <%= t "general.members" %>

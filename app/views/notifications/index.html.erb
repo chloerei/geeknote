@@ -13,7 +13,7 @@
 
 <div class="layout-main-sidebar">
   <div class="">
-    <div class="card bg-base-100">
+    <div class="card card-default">
       <div class="card-body">
         <%= render "components/scroll_pagination", pagy: @pagy, content_class: "list" do %>
           <%= render partial: "notification", collection: @notifications %>

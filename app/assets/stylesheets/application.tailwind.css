@@ -76,3 +76,7 @@
     opacity: 0.1;
   }
 }
+
+@utility card-default {
+  @apply bg-base-100 border border-base-300;
+}

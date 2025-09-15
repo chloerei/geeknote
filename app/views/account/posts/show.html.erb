@@ -42,7 +42,7 @@
 <div class="layout-main-sidebar">
   <div class="min-w-0">
 
-    <div class="card card-border border-base-300 bg-base-100">
+    <div class="card card-default">
       <% if @post.featured_image.attached? %>
         <figure>
           <img src="<%= polymorphic_url(@post.featured_image.variant(:large)) %>" alt="cover" class="object-cover w-full aspect-video">
@@ -151,7 +151,7 @@
       %>
 
       <% if hot_comments_count > 0 %>
-        <div class="card card-border border-base-300 bg-base-100 mt-4">
+        <div class="card card-default mt-4">
           <div class="card-body">
             <div class="card-title border-b border-base-300 pb-4">
               <%= t "general.hot_comments" %> <%= hot_comments_count %>
@@ -174,7 +174,7 @@
         </div>
       <% end %>
 
-      <div class="card card-border border-base-300 bg-base-100 mt-4">
+      <div class="card card-default mt-4">
         <div class="card-body">
           <div class="card-title pb-4 border-b border-base-300">
             <%= t "general.new_comment" %>
@@ -196,7 +196,7 @@
         last_comments = @post.comments.includes(:user).order(created_at: :desc).limit(3)
       %>
 
-      <div class="card card-border border-base-300 bg-base-100 mt-4">
+      <div class="card card-default mt-4">
         <div class="card-body">
           <div class="flex items-center gap-4 border-b border-base-300 pb-4">
             <div class="card-title flex-grow">
@@ -246,11 +246,13 @@
         </div>
       </div>
     <% else %>
-      <div class="card p-4 mt-4">
-        <div class="flex items-center justify-center gap-4 text-sm text-base-content/80">
-          <x-icon>lock</x-icon>
-          <div class="text-sm">
-            <%= t "general.comments_is_disabled" %>
+      <div class="card card-default mt-4">
+        <div class="card-body">
+          <div class="flex items-center justify-center gap-4 text-sm text-base-content/80">
+            <x-icon>lock</x-icon>
+            <div class="text-sm">
+              <%= t "general.comments_is_disabled" %>
+            </div>
           </div>
         </div>
       </div>
@@ -265,7 +267,7 @@
     <%= render "account/profile_card", account: @post.user.account %>
 
     <% if @post.account != @post.user.account %>
-      <div class="card card-border border-base-300 bg-base-100">
+      <div class="card card-default">
         <div class="card-body">
           <%= render "account/item", account: @post.account %>
         </div>
@@ -274,7 +276,7 @@
 
     <div class="sticky top-4">
       <% if toc.any? %>
-        <div class="card card-border border-base-300 bg-base-100 hidden xl:block">
+        <div class="card card-default hidden xl:block">
           <div class="card-body">
             <%= render "toc", toc: toc %>
           </div>
