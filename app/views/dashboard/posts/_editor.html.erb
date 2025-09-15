@@ -4,52 +4,52 @@
       <input type="checkbox" id="drawer-toggle" class="drawer-toggle" />
 
       <div class="drawer-content">
-        <div class="sticky top-0 z-10 bg-base-200 border-b border-base-300">
-          <div class="max-w-7xl mx-auto">
-            <div class="navbar">
-              <div class="flex-grow">
-                <a href="<%= dashboard_posts_path(@account.name) %>" class="btn btn-ghost">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
-                  <%= t "general.posts" %>
-                </a>
-                <% if @post.draft? %>
-                  <div class="btn btn-disabled btn-ghost text-base-content/80">
-                    <%= t "general.draft" %>
-                  </div>
-                <% elsif @post.published? %>
-                  <a href="<%= account_post_path(@account.name, @post) %>" class="btn btn-ghost text-base-content/80" target="_blank">
-                    <%= t "general.published" %>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-                  </a>
-                <% end %>
-              </div>
-              <div class="flex-none">
-                <% if @post.draft? %>
-                  <button type="submit" class="btn btn-ghost" data-controller="hotkey" data-hotkey="Mod+s" data-hotkey-global>
-                    <%= t "general.save" %>
-                  </button>
-                  <% if @post.persisted? %>
-                    <button type="submit" class="btn btn-ghost text-primary" form="publish-form">
-                      <%= t "general.publish" %>
-                    </button>
-                  <% else %>
-                    <button type="button" class="btn btn-ghost" disabled>
-                      <%= t "general.publish" %>
-                    </button>
-                  <% end %>
-                <% elsif @post.published? %>
-                  <button type="submit" class="btn btn-ghost text-primary" data-controller="hotkey" data-hotkey="Mod+s" data-hotkey-global>
-                    <%= t "general.update" %>
-                  </button>
-                  <button type="submit" class="btn btn-ghost" form="unpublish-form">
-                    <%= t "general.unpublish" %>
-                  </button>
-                <% end %>
-                <label for="drawer-toggle" class="btn btn-ghost btn-square">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-right-icon lucide-panel-right"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/></svg>
-                </label>
-              </div>
+        <div class="navbar sticky top-0 z-10 px-4 gap-4 bg-base-200">
+          <div class="flex-none">
+            <a href="<%= dashboard_posts_path(@account.name) %>" class="btn btn-ghost btn-square">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            </a>
+          </div>
+          <div class="flex-grow flex items-center gap-2">
+            <div class="text-xl font-medium">
+              <%= t "general.posts" %>
             </div>
+            <% if @post.draft? %>
+              <div class="btn btn-disabled btn-ghost text-base-content/80">
+                <%= t "general.draft" %>
+              </div>
+            <% elsif @post.published? %>
+              <a href="<%= account_post_path(@account.name, @post) %>" class="btn btn-ghost text-base-content/80" target="_blank">
+                <%= t "general.published" %>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+              </a>
+            <% end %>
+          </div>
+          <div class="flex-none">
+            <% if @post.draft? %>
+              <button type="submit" class="btn btn-ghost" data-controller="hotkey" data-hotkey="Mod+s" data-hotkey-global>
+                <%= t "general.save" %>
+              </button>
+              <% if @post.persisted? %>
+                <button type="submit" class="btn btn-ghost text-primary" form="publish-form">
+                  <%= t "general.publish" %>
+                </button>
+              <% else %>
+                <button type="button" class="btn btn-ghost" disabled>
+                  <%= t "general.publish" %>
+                </button>
+              <% end %>
+            <% elsif @post.published? %>
+              <button type="submit" class="btn btn-ghost text-primary" data-controller="hotkey" data-hotkey="Mod+s" data-hotkey-global>
+                <%= t "general.update" %>
+              </button>
+              <button type="submit" class="btn btn-ghost" form="unpublish-form">
+                <%= t "general.unpublish" %>
+              </button>
+            <% end %>
+            <label for="drawer-toggle" class="btn btn-ghost btn-square">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-right-icon lucide-panel-right"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/></svg>
+            </label>
           </div>
         </div>
 
@@ -91,7 +91,9 @@
         <div class="bg-base-100 text-base-content h-full w-80 flex flex-col">
           <div class="navbar border-b border-base-300">
             <div class="flex-grow px-2">
-              <%= t "general.settings" %>
+              <div class="text-xl font-medium">
+                <%= t "general.settings" %>
+              </div>
             </div>
             <label for="drawer-toggle" class="btn btn-ghost btn-square">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>

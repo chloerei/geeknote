@@ -1,17 +1,26 @@
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <label for="drawer" class="btn btn-square btn-ghost lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </label>
+  </div>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      <%= t "general.members" %>
+    </div>
+  </div>
+  <div class="flex-none">
+    <a href="<%= new_dashboard_settings_member_path(@account.name) %>" class="btn btn-primary">
+      <%= t "general.add_member" %>
+    </a>
+  </div>
+</div>
+
 <div class="card card-border border-base-300 bg-base-100">
   <div class="card-body">
-    <div class="flex items-center gap-2 pb-4 border-b border-base-300">
-      <div class="flex-grow">
-        <h2 class="card-title">
-          <%= t "general.members" %>
-        </h2>
-      </div>
-
-      <a href="<%= new_dashboard_settings_member_path(@account.name) %>" class="btn btn-primary">
-        Add member
-      </a>
-    </div>
-
+    <h2 class="card-title">
+      <%= t "general.members" %>
+    </h2>
 
     <ul class="list">
       <% @account.owner.members.active.order(id: :asc).includes(:user).each do |member| %>
@@ -57,7 +66,7 @@
 
     <% if @account.owner.members.pending.any? %>
       <div class="mt-6">
-        <div class="text-sm font-medium">
+        <div class="card-title">
           <%= t "general.invitations" %>
         </div>
 
