@@ -12,7 +12,9 @@ export default class extends Controller {
 
   connect() {
     this.handleInput = (event) => {
-      this.unsaveValue = true
+      if (event.target.hasAttribute("name")) {
+        this.unsaveValue = true
+      }
     }
 
     this.handleTurboSubmitEnd = () => {

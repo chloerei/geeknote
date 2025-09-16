@@ -48,7 +48,7 @@ class MarkdownMirror {
               update: (viewUpdate) => {
                 if (input && viewUpdate.docChanged) {
                   input.value = view.state.doc.toString()
-                  parent.dispatchEvent(new Event("input", { bubbles: true }))
+                  input.dispatchEvent(new Event("input", { bubbles: true }))
                 }
               }
             }
