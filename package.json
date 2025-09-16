@@ -13,7 +13,7 @@
     "@hotwired/turbo-rails": "^8.0.13",
     "@rails/activestorage": "^8.0.200",
     "@rails/request.js": "^0.0.12",
-    "@tailwindcss/cli": "^4.1.7",
+    "@tailwindcss/cli": "^4.1.13",
     "daisyui": "^5.0.50",
     "esbuild": "^0.25.4",
     "local-time": "^3.0.3",
