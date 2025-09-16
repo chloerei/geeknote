@@ -39,6 +39,9 @@ gem "turbo-rails", "~> 2.0.13"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails", "~> 1.3.4"
 
+gem "jsbundling-rails"
+gem "cssbundling-rails"
+
 # markdown
 gem "commonmarker", "~> 0.23.11"
 

@@ -20,7 +20,7 @@
     "tom-select": "^2.4.3"
   },
   "scripts": {
-    "build:js": "esbuild app/javascript/*.* --bundle --format=esm --outdir=app/assets/builds",
+    "build": "esbuild app/javascript/*.* --bundle --format=esm --outdir=app/assets/builds",
     "build:css": "npx @tailwindcss/cli -i app/assets/stylesheets/application.tailwind.css -o app/assets/builds/tailwind.css"
   },
   "version": "0.1.0"

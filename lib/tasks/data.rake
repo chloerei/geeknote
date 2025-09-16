@@ -1,2 +1,0 @@
-namespace :data do
-end
