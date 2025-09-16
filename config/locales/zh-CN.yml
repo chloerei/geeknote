@@ -87,7 +87,7 @@ zh-CN:
   admin:
     posts:
       show:
-        delete_post_confirm: Delete post confirm
+        delete_post_confirm: 确认删除文章？
         restrict_post_confirm: 确认限制发布？（将会发送邮件通知用户）
     settings:
       appearances:
@@ -112,7 +112,7 @@ zh-CN:
           merge_to: 将以下标签合并到“%{name}”
   application:
     require_sign_in:
-      require_sign_in: Require sign in
+      require_sign_in: 需要登录后才能访问此页面。
   dashboard:
     home:
       index:
@@ -167,7 +167,7 @@ zh-CN:
     account_stats: 账号统计
     accounts: 账号
     add_comment: 添加评论
-    add_member: Add member
+    add_member: 添加成员
     admin: 管理
     all: 全部
     all_comments: 所有评论
@@ -179,7 +179,7 @@ zh-CN:
     click_to_select_image: 点击选择图片
     comment: 评论
     comment_is_closed: 评论已关闭
-    comment_on: Comment on
+    comment_on: 评论于
     commentable: 评论对象
     commented_on: 评论了
     comments: 评论
@@ -265,7 +265,7 @@ zh-CN:
     save_changes: 保存修改
     search: 搜索
     send_email: 发送邮件
-    send_invitation: Send invitation
+    send_invitation: 发送邀请
     send_preview: 发送预览
     settings: 设置
     sign_in: 登录
