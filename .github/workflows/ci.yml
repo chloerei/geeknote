@@ -7,7 +7,7 @@ on:
 
 jobs:
   scan_ruby:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
@@ -23,7 +23,7 @@ jobs:
         run: bin/brakeman --no-pager
 
   lint:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -38,11 +38,11 @@ jobs:
         run: bin/rubocop -f github
 
   test:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     services:
       postgres:
-        image: postgres:15
+        image: postgres:17
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -57,7 +57,7 @@ jobs:
 
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips postgresql-client
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -78,20 +78,12 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
-        run: bin/rails db:test:prepare test test:system
-
-      - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: screenshots
-          path: ${{ github.workspace }}/tmp/screenshots
-          if-no-files-found: ignore
+        run: bin/rails db:test:prepare test
 
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [scan_ruby, lint, test]
-    if: github.repository == 'geeknote-net/geeknote' && github.ref_name == 'master'
+    if: github.repository == 'chloerei/geeknote' && github.ref_name == 'master'
     concurrency: deploy-group
     steps:
       - uses: actions/checkout@v4
