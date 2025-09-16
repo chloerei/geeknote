@@ -1,6 +1,0 @@
-@layer components {
-  .card {
-    background-color: var(--color-surface-container-lowest);
-    border-radius: 12px;
-  }
-}

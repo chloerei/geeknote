@@ -7,11 +7,9 @@
       <%= t '.please_resend_email_veification' %>
     </div>
     <div class="mt-4">
-      <a href="<%= settings_email_path %>" class="button button--outlined">
-        <div>
-          <%= t 'general.account_settings' %>
-        </div>
-        <x-icon>arrow_forward</x-icon>
+      <a href="<%= settings_email_path %>" class="btn btn-outline">
+        <%= t 'general.account_settings' %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
       </a>
     </div>
   </div>
