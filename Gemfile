@@ -68,15 +68,9 @@ gem "newrelic_rpm", require: false
 gem "mailgun-ruby", "~> 1.3.5", require: false
 gem "postal-rails", "~> 1.0.1", require: false
 
-gem "with_advisory_lock", "~> 5.3.0"
-
 gem "recaptcha", "~> 5.19.0", require: false
 
-gem "rest-client", "~> 2.1.0"
-
 gem "meilisearch-rails", "~> 0.16.0"
-
-gem "jwt", "~> 2.10.1"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
