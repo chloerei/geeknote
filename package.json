@@ -14,7 +14,7 @@
     "@rails/activestorage": "^8.0.201",
     "@rails/request.js": "^0.0.12",
     "@tailwindcss/cli": "^4.1.13",
-    "daisyui": "^5.0.50",
+    "daisyui": "^5.1.13",
     "esbuild": "^0.25.9",
     "local-time": "^3.0.3",
     "tom-select": "^2.4.3"
