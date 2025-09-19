@@ -1,24 +1,19 @@
-# README
+# Geeknote
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Source code of https://geeknote.net , a blog community platform.
 
-Things you may want to cover:
+## Development
 
-* Ruby version
+Open project in VSCode and it will prompt you to open in devcontainer.
 
-* System dependencies
+## Deployment
 
-* Configuration
+Visit [Wiki](https://github.com/chloerei/geeknote/wiki) for deployment guide.
 
-* Database creation
+## Contributing
 
-* Database initialization
+Feel free to open issues or submit pull requests.
 
-* How to run the test suite
+## License
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+MIT License.
