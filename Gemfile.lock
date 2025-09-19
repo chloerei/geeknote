@@ -165,9 +165,9 @@ GEM
       tzinfo
     factory_bot (6.5.5)
       activesupport (>= 6.1.0)
-    factory_bot_rails (6.4.4)
+    factory_bot_rails (6.5.1)
       factory_bot (~> 6.5)
-      railties (>= 5.0.0)
+      railties (>= 6.1.0)
     faraday (2.13.4)
       faraday-net_http (>= 2.0, < 3.5)
       json
@@ -510,7 +510,7 @@ DEPENDENCIES
   cssbundling-rails
   debug (~> 1.10.0)
   dotenv-rails (~> 3.1.8)
-  factory_bot_rails (~> 6.4.4)
+  factory_bot_rails (~> 6.5.1)
   hotwire-spark (~> 0.1.13)
   i18n-tasks!
   image_processing (~> 1.14.0)
