@@ -14,6 +14,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
       nodejs \
       npm
 
-RUN gem install bundler -v 2.6.3
+RUN gem install bundler -v 2.7.2
 
 WORKDIR /rails

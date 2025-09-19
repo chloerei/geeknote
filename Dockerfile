@@ -19,7 +19,7 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libjemalloc2 libvips postgresql-client && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-RUN gem install bundler -v 2.6.3
+RUN gem install bundler -v 2.7.2
 
 # Set production environment
 ENV RAILS_ENV="production" \
