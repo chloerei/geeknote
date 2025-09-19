@@ -1,4 +1,4 @@
 web: env RUBY_DEBUG_OPEN=true bin/rails server
 worker: bin/jobs
-js: npm run build:js -- --watch
+js: npm run build -- --watch
 css: npm run build:css -- --watch
