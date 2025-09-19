@@ -15,7 +15,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   test "should not sign in with wrong password" do
     create(:user, email: "username@example.com", password: "password")
     post session_path, params: { user: { email: "username@example.com", password: "wrong" } }
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "should sign out" do

@@ -15,7 +15,7 @@ class Admin::AccountsController < Admin::BaseController
     if @account.update account_params
       redirect_to admin_account_path(@account.id), notice: "Account updated."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

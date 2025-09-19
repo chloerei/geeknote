@@ -12,7 +12,7 @@ class Identity::PasswordsController < ApplicationController
       cache_key = "password_reset:#{@user.email}"
       if Rails.cache.exist?(cache_key)
         @user.errors.add :email, t(".please_wait_one_minute")
-        render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_content
       else
         UserMailer.with(user: @user).password_reset_email.deliver_later
         Rails.cache.write(cache_key, true, expires_in: 1.minute)
@@ -23,7 +23,7 @@ class Identity::PasswordsController < ApplicationController
         @user.errors.add :email, :not_exists
       end
 
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -34,7 +34,7 @@ class Identity::PasswordsController < ApplicationController
     if @user.update user_params
       redirect_to new_session_path, notice: "Password has been reset."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

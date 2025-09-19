@@ -11,7 +11,7 @@ class RegistrationsController < ApplicationController
       UserMailer.with(user: @user).email_verification.deliver_later
       redirect_to after_authentication_url
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

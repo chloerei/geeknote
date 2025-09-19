@@ -6,7 +6,7 @@ class Admin::Settings::WeeklyDigestsController < Admin::Settings::BaseController
     if @site.update site_params
       redirect_to admin_settings_weekly_digest_path, notice: t(".success")
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

@@ -15,7 +15,7 @@ class Admin::TagsController < Admin::BaseController
     if @tag.update tag_params
       redirect_to admin_tag_path(@tag), notice: "User updated."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

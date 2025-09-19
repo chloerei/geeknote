@@ -52,7 +52,7 @@ class Account::CommentsController < Account::BaseController
     if @comment.update(params.require(:comment).permit(:content))
       redirect_to account_comment_path(@account.name, @comment), notice: "Comment updated"
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

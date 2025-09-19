@@ -6,7 +6,7 @@ class Admin::Settings::AppearancesController < Admin::Settings::BaseController
     if @site.update site_params
       redirect_to admin_settings_appearance_path, notice: t(".success")
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

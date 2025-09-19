@@ -20,7 +20,7 @@ class Settings::EmailsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not update with invalid password" do
     patch settings_email_url, params: { user: { email: "new@example.com", password_challenge: "wrong" } }
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_not_equal "new@example.com", @user.reload.email
   end
 

@@ -10,7 +10,7 @@ class Settings::EmailsController < Settings::BaseController
       end
       redirect_to settings_email_path, notice: t(".success")
     else
-      render :show, status: :unprocessable_entity
+      render :show, status: :unprocessable_content
     end
   end
 

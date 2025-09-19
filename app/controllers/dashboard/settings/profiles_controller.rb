@@ -7,7 +7,7 @@ class Dashboard::Settings::ProfilesController < Dashboard::Settings::BaseControl
     if @account.owner.update(profile_params)
       redirect_to dashboard_settings_profile_path(@account.reload.name), notice: "Profile updated"
     else
-      render :show, status: :unprocessable_entity
+      render :show, status: :unprocessable_content
     end
   end
 

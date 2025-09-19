@@ -12,7 +12,7 @@ class Admin::Settings::WeeklyDigests::PreviewsController < Admin::Settings::Base
     else
       @user = User.new email: params[:user][:email]
       @user.errors.add :email, :not_exists
-      render :show, status: :unprocessable_entity
+      render :show, status: :unprocessable_content
     end
   end
 end

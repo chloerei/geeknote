@@ -13,7 +13,7 @@ class OrganizationsController < ApplicationController
       @organization.members.create(role: "admin", user: Current.user, status: :active)
       redirect_to dashboard_root_path(@organization.account.name)
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

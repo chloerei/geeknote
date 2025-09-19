@@ -7,7 +7,7 @@ class Settings::PasswordsController < Settings::BaseController
     if @user.update(user_params.with_defaults(password_challenge: ""))
       redirect_to settings_password_path, notice: t(".success")
     else
-      render :show, status: :unprocessable_entity
+      render :show, status: :unprocessable_content
     end
   end
 

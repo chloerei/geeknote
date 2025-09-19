@@ -29,7 +29,7 @@ class Dashboard::PostsController < Dashboard::BaseController
     if @post.save
       redirect_to edit_dashboard_post_path(@account.name, @post), notice: t(".success")
     else
-      render :edit, layout: "application", status: :unprocessable_entity
+      render :edit, layout: "application", status: :unprocessable_content
     end
   end
 
@@ -45,7 +45,7 @@ class Dashboard::PostsController < Dashboard::BaseController
     if @post.update(post_params)
       redirect_to edit_dashboard_post_path(@account.name, @post), notice: t(".success")
     else
-      render :edit, layout: "application", status: :unprocessable_entity
+      render :edit, layout: "application", status: :unprocessable_content
     end
   end
 

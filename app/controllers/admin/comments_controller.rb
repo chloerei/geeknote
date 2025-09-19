@@ -15,7 +15,7 @@ class Admin::CommentsController < Admin::BaseController
     if @comment.update comment_params
       redirect_to admin_comment_path(@comment), notice: "Comment updated."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

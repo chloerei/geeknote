@@ -12,10 +12,10 @@ class SessionsController < ApplicationController
         redirect_to after_authentication_url
       else
         @user.errors.add(:password, :email_or_password_error)
-        render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_content
       end
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

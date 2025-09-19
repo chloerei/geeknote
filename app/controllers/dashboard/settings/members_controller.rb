@@ -16,7 +16,7 @@ class Dashboard::Settings::MembersController < Dashboard::Settings::BaseControll
     if @member.save
       redirect_to dashboard_settings_members_path, notice: "Member has been added"
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -31,7 +31,7 @@ class Dashboard::Settings::MembersController < Dashboard::Settings::BaseControll
     if @member.update(params.require(:member).permit(:role))
       redirect_to dashboard_settings_members_path, notice: "Member has been updated"
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

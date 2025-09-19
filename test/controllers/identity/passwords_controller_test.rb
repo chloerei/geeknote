@@ -10,7 +10,7 @@ class Identity::PasswordsControllerTest < ActionDispatch::IntegrationTest
     assert_emails 0 do
       post identity_password_path, params: { user: { email: "account@example.com" } }
     end
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "should create reset if email exists" do

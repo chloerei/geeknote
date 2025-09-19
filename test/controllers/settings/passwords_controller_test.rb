@@ -18,6 +18,6 @@ class Settings::PasswordsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not update with invalid password" do
     patch settings_password_url, params: { user: { password: "newpassword", password_confirmation: "newpassword", password_challenge: "invalid" } }
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 end
