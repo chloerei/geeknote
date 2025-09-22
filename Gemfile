@@ -12,7 +12,7 @@ gem "puma", "~> 6.6.0"
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", "~> 0.1.15", require: false
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "jbuilder", "~> 2.13.0"
+gem "jbuilder", "~> 2.14.1"
 
 # Use Active Model has_secure_password
 gem "bcrypt", "~> 3.1.20"
