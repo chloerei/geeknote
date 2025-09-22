@@ -6,7 +6,7 @@ ruby "3.4.1"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 8.0.2"
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.5.9"
+gem "pg", "~> 1.6.2"
 # Use Puma as the app server
 gem "puma", "~> 6.6.0"
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
@@ -27,7 +27,7 @@ gem "active_storage_validations", "~> 3.0.2"
 
 gem "solid_cache", "~> 1.0.7"
 gem "solid_cable", "~> 3.0.8"
-gem "solid_queue", "~> 1.1.5"
+gem "solid_queue", "~> 1.2.1"
 gem "mission_control-jobs", "~> 1.1.0"
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -46,7 +46,7 @@ gem "cssbundling-rails"
 gem "commonmarker", "~> 0.23.11"
 
 # code highlight
-gem "rouge", "~> 4.5.2"
+gem "rouge", "~> 4.6.0"
 
 # pagination
 gem "pagy", "~> 9.4.0"
