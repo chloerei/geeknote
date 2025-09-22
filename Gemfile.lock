@@ -372,7 +372,7 @@ GEM
     rdoc (6.14.2)
       erb
       psych (>= 4.0.0)
-    recaptcha (5.19.0)
+    recaptcha (5.21.1)
     regexp_parser (2.11.3)
     reline (0.6.2)
       io-console (~> 0.5)
@@ -511,7 +511,7 @@ DEPENDENCIES
   puma (~> 6.6.0)
   rails (~> 8.0.2)
   rails-i18n (~> 8.0.1)
-  recaptcha (~> 5.19.0)
+  recaptcha (~> 5.21.1)
   rouge (~> 4.5.2)
   rubocop-rails-omakase (~> 1.1.0)
   selenium-webdriver (~> 4.10.0)
