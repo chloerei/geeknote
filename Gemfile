@@ -8,7 +8,7 @@ gem "rails", "~> 8.0.2"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.6.2"
 # Use Puma as the app server
-gem "puma", "~> 6.6.0"
+gem "puma", "~> 7.0.3"
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", "~> 0.1.15", require: false
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
