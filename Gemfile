@@ -68,7 +68,7 @@ gem "newrelic_rpm", require: false
 gem "mailgun-ruby", "~> 1.3.5", require: false
 gem "postal-rails", "~> 1.0.1", require: false
 
-gem "recaptcha", "~> 5.19.0", require: false
+gem "recaptcha", "~> 5.21.1", require: false
 
 gem "meilisearch-rails", "~> 0.16.0"
 
