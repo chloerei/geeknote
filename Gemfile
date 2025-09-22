@@ -18,7 +18,7 @@ gem "jbuilder", "~> 2.13.0"
 gem "bcrypt", "~> 3.1.20"
 
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
-gem "propshaft", "~> 1.1.0"
+gem "propshaft", "~> 1.2.1"
 
 # Use Active Storage variant
 gem "image_processing", "~> 1.14.0"
