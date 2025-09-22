@@ -64,7 +64,7 @@ class Dashboard::PostsController < Dashboard::BaseController
 
   def account_posts
     if @account.user?
-      Current.user.posts
+      @account.posts
     else
       if @member.owner? || @member.admin?
         @account.posts

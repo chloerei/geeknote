@@ -58,7 +58,7 @@ class Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
 
   test "should get edit as personal" do
     user = create(:user)
-    post = create(:post, user: user)
+    post = create(:post, user: user, account: user.account)
     sign_in user
 
     get edit_dashboard_post_url(user.account.name, post)
@@ -109,7 +109,7 @@ class Dashboard::PostsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update post" do
     user = create(:user)
-    post = create(:post, user: user)
+    post = create(:post, user: user, account: user.account)
     sign_in user
 
     patch dashboard_post_url(user.account.name, post), params: { post: { title: "New Title" } }
