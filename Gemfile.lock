@@ -294,7 +294,9 @@ GEM
     parser (3.3.9.0)
       ast (~> 2.4.1)
       racc
-    pg (1.5.9)
+    pg (1.6.2)
+    pg (1.6.2-aarch64-linux)
+    pg (1.6.2-x86_64-linux)
     postal-rails (1.0.1)
       postal-ruby (>= 0.0.2, < 2.0)
     postal-ruby (1.0.1)
@@ -504,7 +506,7 @@ DEPENDENCIES
   mission_control-jobs (~> 1.0.2)
   newrelic_rpm
   pagy (~> 9.4.0)
-  pg (~> 1.5.9)
+  pg (~> 1.6.2)
   postal-rails (~> 1.0.1)
   premailer-rails (~> 1.12.0)
   propshaft (~> 1.1.0)
