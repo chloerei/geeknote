@@ -34,7 +34,7 @@ gem "mission_control-jobs", "~> 1.1.0"
 gem "bootsnap", "~> 1.18.6", require: false
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails", "~> 2.0.13"
+gem "turbo-rails", "~> 2.0.17"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails", "~> 1.3.4"
