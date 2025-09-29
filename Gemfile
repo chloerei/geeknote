@@ -8,7 +8,7 @@ gem "rails", "~> 8.0.3"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.6.2"
 # Use Puma as the app server
-gem "puma", "~> 7.0.3"
+gem "puma", "~> 7.0.4"
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", "~> 0.1.15", require: false
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -18,7 +18,7 @@ gem "jbuilder", "~> 2.14.1"
 gem "bcrypt", "~> 3.1.20"
 
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
-gem "propshaft", "~> 1.2.1"
+gem "propshaft", "~> 1.3.1"
 
 # Use Active Storage variant
 gem "image_processing", "~> 1.14.0"
@@ -34,7 +34,7 @@ gem "mission_control-jobs", "~> 1.1.0"
 gem "bootsnap", "~> 1.18.6", require: false
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails", "~> 2.0.13"
+gem "turbo-rails", "~> 2.0.17"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails", "~> 1.3.4"
@@ -46,7 +46,7 @@ gem "cssbundling-rails"
 gem "commonmarker", "~> 0.23.11"
 
 # code highlight
-gem "rouge", "~> 4.6.0"
+gem "rouge", "~> 4.6.1"
 
 # pagination
 gem "pagy", "~> 9.4.0"
@@ -58,7 +58,7 @@ gem "rails-i18n", "~> 8.0.1"
 
 gem "local_time", "~> 3.0.3"
 
-gem "aws-sdk-s3", "~> 1.199.0", require: false
+gem "aws-sdk-s3", "~> 1.199.1", require: false
 
 gem "imgproxy-rails", "~> 0.3.0"
 
