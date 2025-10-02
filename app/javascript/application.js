@@ -6,3 +6,7 @@ ActiveStorage.start()
 
 import LocalTime from "local-time"
 LocalTime.start()
+
+import ahoy from "ahoy.js"
+
+window.ahoy = ahoy

@@ -72,6 +72,8 @@ gem "recaptcha", "~> 5.21.1", require: false
 
 gem "meilisearch-rails", "~> 0.16.0"
 
+gem "ahoy_matey", "~> 5.4.1"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", "~> 1.11.0", platforms: %i[ mri windows ]
