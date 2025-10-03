@@ -1,17 +1,17 @@
 import { Controller } from "@hotwired/stimulus"
-import ahoy from "ahoy.js"
+import { post } from "@rails/request.js"
 
 // Connects to data-controller="post-view-tracker"
 export default class extends Controller {
   static values = {
-    postId: Number
+    url: String
   }
 
   connect() {
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          ahoy.track("post_view", { post_id: this.postIdValue })
+          post(this.urlValue)
           this.observer.disconnect()
         }
       })

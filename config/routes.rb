@@ -113,6 +113,7 @@ Rails.application.routes.draw do
         resource :like, only: [ :create, :destroy ]
         resource :bookmark, only: [ :create, :destroy ]
         resources :comments, only: [ :index ]
+        resources :views, only: [ :create ]
       end
     end
 

@@ -103,7 +103,7 @@
             </div>
           </article>
 
-          <div data-controller="post-view-tracker" data-post-view-tracker-post-id-value="<%= @post.id %>"></div>
+          <div data-controller="post-view-tracker" data-post-view-tracker-url-value="<%= account_post_views_path(@account.name, @post) %>"></div>
 
           <div class="sticky flex justify-center px-4 mt-8 bottom-4">
             <div class="flex gap-2 p-2 bg-base-100 border border-base-300 rounded-full">
