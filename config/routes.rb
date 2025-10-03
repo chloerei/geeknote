@@ -91,6 +91,10 @@ Rails.application.routes.draw do
       end
     end
 
+    namespace :analytics do
+      root to: "home#index"
+    end
+
     namespace :settings do
       root to: "home#index"
       resource :profile, only: [ :show, :update ]
