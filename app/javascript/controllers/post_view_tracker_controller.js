@@ -11,7 +11,7 @@ export default class extends Controller {
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          ahoy.track("Viewed post", { post_id: this.postIdValue })
+          ahoy.track("post_view", { post_id: this.postIdValue })
           this.observer.disconnect()
         }
       })
