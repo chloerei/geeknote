@@ -74,6 +74,10 @@ gem "meilisearch-rails", "~> 0.16.0"
 
 gem "ahoy_matey", "~> 5.4.1"
 
+gem "chartkick", "~> 5.2"
+
+gem "groupdate", "~> 6.7"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", "~> 1.11.0", platforms: %i[ mri windows ]

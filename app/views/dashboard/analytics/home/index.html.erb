@@ -16,5 +16,32 @@
     <h2 class="card-title">
       <%= t "general.post_views" %>
     </h2>
+
+    <%= line_chart @post_views_data, library: { scales: { x: { time: { tooltipFormat: "MM-dd", displayFormats: { day: "MM-dd" } } } } } %>
+  </div>
+</div>
+
+<div class="card card-default mt-4">
+  <div class="card-body">
+    <h2 class="card-title">
+      <%= t "general.top_referers" %>
+    </h2>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= t "general.referrer" %></th>
+          <th><%= t "general.count" %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @references_data.each do |referrer, count| %>
+          <tr>
+            <td><%= referrer.present? ? referrer : t("general.direct_traffic") %></td>
+            <td><%= count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
