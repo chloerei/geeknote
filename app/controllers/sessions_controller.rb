@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
     if optional_verify_recaptcha(model: @user)
       if @user.authenticate(params[:user][:password])
         start_new_session_for @user
+        ahoy.authenticate @user
         redirect_to after_authentication_url
       else
         @user.errors.add(:password, :email_or_password_error)

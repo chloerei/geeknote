@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :following_users, through: :followings, source: :owner, source_type: "User"
   has_many :bookmarks
   has_many :bookmarked_posts, through: :bookmarks, source: :post
+  has_many :visits, class_name: "Ahoy::Visit"
 
   has_secure_password
   has_many :sessions, dependent: :destroy

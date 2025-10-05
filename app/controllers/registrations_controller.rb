@@ -8,6 +8,7 @@ class RegistrationsController < ApplicationController
 
     if optional_verify_recaptcha(model: @user) && @user.save
       start_new_session_for(@user)
+      ahoy.authenticate @user
       UserMailer.with(user: @user).email_verification.deliver_later
       redirect_to after_authentication_url
     else

@@ -40,6 +40,7 @@ module GeekNote
 
     config.i18n.available_locales = [ "zh-CN" ]
     config.i18n.default_locale = "zh-CN"
+    config.time_zone = "Beijing"
 
     config.generators do |generate|
       generate.helper false

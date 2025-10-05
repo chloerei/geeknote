@@ -61,7 +61,7 @@ class AccountExportDataJobTest < ActiveJob::TestCase
           title: post title 2
           author: User Name
           tags: [Ruby, JavaScript]
-          date: 2022-01-01 00:00:00 UTC
+          date: 2022-01-01 08:00:00 +0800
           ---
 
           post content 2
@@ -74,7 +74,7 @@ class AccountExportDataJobTest < ActiveJob::TestCase
           title: Attachment
           author: User Name
           tags: []
-          date: 2022-01-01 00:00:00 UTC
+          date: 2022-01-01 08:00:00 +0800
           ---
 
           ![](http://www.example.com/attachments/#{attachment.key})

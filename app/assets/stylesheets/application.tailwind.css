@@ -77,3 +77,7 @@
 @utility card-default {
   @apply bg-base-100 border border-base-300;
 }
+
+@utility menu-default {
+  @apply bg-base-100 rounded-box p-2 shadow w-52;
+}

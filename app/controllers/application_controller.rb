@@ -27,4 +27,8 @@ class ApplicationController < ActionController::Base
       true
     end
   end
+
+  def current_user
+    Current.user
+  end
 end

@@ -1,0 +1,80 @@
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <label for="drawer" class="btn btn-square btn-ghost lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </label>
+  </div>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      <%= t "general.analytics" %>
+    </div>
+  </div>
+  <div class="flex-none">
+    <div class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost">
+        <%= t "analytics.period.#{@period}" %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+      </label>
+      <ul class="dropdown-content menu menu-default">
+        <li>
+          <a href="<%= dashboard_analytics_root_path(period: "7d") %>" class="<%= "active" if @period == "7d" %>">
+            <%= t "analytics.period.7d" %>
+          </a>
+        </li>
+        <li>
+          <a href="<%= dashboard_analytics_root_path(period: "30d") %>" class="<%= "active" if @period == "30d" %>">
+            <%= t "analytics.period.30d" %>
+          </a>
+        </li>
+        <li>
+          <a href="<%= dashboard_analytics_root_path(period: "90d") %>" class="<%= "active" if @period == "90d" %>">
+            <%= t "analytics.period.90d" %>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card card-default">
+  <div class="card-body">
+    <h2 class="card-title">
+      <%= t "general.post_views" %>
+    </h2>
+
+    <%= area_chart @post_views_data, library: { scales: { x: { time: { tooltipFormat: "MM-dd", displayFormats: { day: "MM-dd" } } } } } %>
+  </div>
+</div>
+
+<div class="card card-default mt-4">
+  <div class="card-body">
+    <h2 class="card-title">
+      <%= t "general.top_posts" %>
+    </h2>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= t "general.title" %></th>
+          <th><%= t "general.views" %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @top_posts.each do |post| %>
+          <tr>
+            <td>
+              <a href="<%= dashboard_analytics_post_path(@account.name, post, period: @period) %>" class="hover:underline">
+                <%= post.title %>
+              </a>
+            </td>
+            <td><%= post.period_views_count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <a href="<%= dashboard_analytics_posts_path(period: @period) %>" class="btn btn-ghost btn-block">
+      <%= t "general.view_all_posts" %>
+    </a>
+  </div>
+</div>

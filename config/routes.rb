@@ -91,6 +91,11 @@ Rails.application.routes.draw do
       end
     end
 
+    namespace :analytics do
+      root to: "home#index"
+      resources :posts, only: [ :index, :show ]
+    end
+
     namespace :settings do
       root to: "home#index"
       resource :profile, only: [ :show, :update ]
@@ -109,6 +114,7 @@ Rails.application.routes.draw do
         resource :like, only: [ :create, :destroy ]
         resource :bookmark, only: [ :create, :destroy ]
         resources :comments, only: [ :index ]
+        resources :views, only: [ :create ]
       end
     end
 
