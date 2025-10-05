@@ -1,0 +1,55 @@
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <a href="<%= dashboard_analytics_posts_path(@account.name, period: @period) %>" class="btn btn-ghost btn-square">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+    </a>
+  </div>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      <%= t "general.post_analytics" %>
+    </div>
+  </div>
+  <div class="flex-none">
+    <div class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost">
+        <%= t "analytics.period.#{@period}" %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+      </label>
+      <ul class="dropdown-content menu menu-default">
+        <li>
+          <a href="<%= url_for(period: "7d") %>" class="<%= "active" if @period == "7d" %>">
+            <%= t "analytics.period.7d" %>
+          </a>
+        </li>
+        <li>
+          <a href="<%= url_for(period: "30d") %>" class="<%= "active" if @period == "30d" %>">
+            <%= t "analytics.period.30d" %>
+          </a>
+        </li>
+        <li>
+          <a href="<%= url_for(period: "90d") %>" class="<%= "active" if @period == "90d" %>">
+            <%= t "analytics.period.90d" %>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card card-default">
+  <div class="card-body">
+    <h2 class="card-title">
+      <%= @post.title %>
+    </h2>
+  </div>
+</div>
+
+<div class="card card-default mt-4">
+  <div class="card-body">
+    <h2 class="card-title">
+      <%= t "general.post_views" %>
+    </h2>
+
+    <%= area_chart @post_views_data, library: { scales: { x: { time: { tooltipFormat: "MM-dd", displayFormats: { day: "MM-dd" } } } } } %>
+  </div>
+</div>

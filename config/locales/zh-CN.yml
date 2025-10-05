@@ -110,6 +110,11 @@ zh-CN:
         new:
           merge: 合并
           merge_to: 将以下标签合并到“%{name}”
+  analytics:
+    period:
+      30d: 最近 30 天
+      7d: 最近 7 天
+      90d: 最近 90 天
   application:
     require_sign_in:
       require_sign_in: 需要登录后才能访问此页面。
@@ -256,6 +261,7 @@ zh-CN:
     popular: 热门
     popular_tags: 热门标签
     post: 文章
+    post_analytics: 文章统计
     post_views: 文章浏览
     posts: 文章
     posts_count: "%{count} 篇文章"
@@ -305,6 +311,7 @@ zh-CN:
     view: 查看
     view_all_comments: 查看所有评论
     view_all_hot_comments: 查看所有热门评论
+    view_all_posts: 查看所有文章
     view_replies: 查看回复
     view_site: 查看网站
     views: 浏览

@@ -29,7 +29,7 @@ class Dashboard::Analytics::HomeController < Dashboard::Analytics::BaseControlle
       .where("ahoy_events.name = ?", "post_view")
       .where("ahoy_events.time >= ?", days.days.ago.beginning_of_day)
       .group("posts.id")
-      .select("posts.*, COUNT(ahoy_events.id) AS period_views_count")
+      .select("posts.id, posts.title, COUNT(ahoy_events.id) AS period_views_count")
       .order("period_views_count DESC")
       .limit(5)
   end
