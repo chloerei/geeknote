@@ -9,6 +9,31 @@
       <%= t "general.analytics" %>
     </div>
   </div>
+  <div class="flex-none">
+    <div class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost">
+        <%= t ".period_#{@period}" %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+      </label>
+      <ul class="dropdown-content menu menu-default">
+        <li>
+          <a href="<%= dashboard_analytics_root_path(period: "7d") %>" class="<%= "active" if @period == "7d" %>">
+            <%= t ".period_7d" %>
+          </a>
+        </li>
+        <li>
+          <a href="<%= dashboard_analytics_root_path(period: "30d") %>" class="<%= "active" if @period == "30d" %>">
+            <%= t ".period_30d" %>
+          </a>
+        </li>
+        <li>
+          <a href="<%= dashboard_analytics_root_path(period: "90d") %>" class="<%= "active" if @period == "90d" %>">
+            <%= t ".period_90d" %>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <div class="card card-default">
@@ -42,7 +67,7 @@
                 <%= post.title %>
               </a>
             </td>
-            <td><%= post.range_views_count %></td>
+            <td><%= post.period_views_count %></td>
           </tr>
         <% end %>
       </tbody>

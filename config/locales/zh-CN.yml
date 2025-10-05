@@ -114,6 +114,12 @@ zh-CN:
     require_sign_in:
       require_sign_in: 需要登录后才能访问此页面。
   dashboard:
+    analytics:
+      home:
+        index:
+          period_30d: 最近 30 天
+          period_7d: 最近 7 天
+          period_90d: 最近 90 天
     home:
       index:
         new_post: 新文章
@@ -172,6 +178,7 @@ zh-CN:
     all: 全部
     all_comments: 所有评论
     all_replies: 所有回复
+    analytics: 统计
     appearance: 外观
     back_to_home: 返回首页
     block: Block
@@ -199,10 +206,14 @@ zh-CN:
     download: 下载
     draft: 草稿
     edit: 编辑
+    edit_account: 编辑账号
     edit_comment: 编辑评论
     edit_member: 编辑成员
+    edit_organization: 编辑组织
     edit_post: 编辑文章
     edit_profile: 编辑资料
+    edit_tag: 编辑标签
+    edit_user: 编辑用户
     email: Email
     export: 导出
     follow: 关注
@@ -220,6 +231,7 @@ zh-CN:
     manage: 管理
     me: 我
     members: 成员
+    merge: 合并
     merge_tags: 合并标签
     more_from: 更多来自 %{name}
     name: 名称
@@ -244,6 +256,7 @@ zh-CN:
     popular: 热门
     popular_tags: 热门标签
     post: 文章
+    post_views: 文章浏览
     posts: 文章
     posts_count: "%{count} 篇文章"
     preview: 预览
@@ -278,8 +291,10 @@ zh-CN:
     submit: 提交
     table_of_contents: 目录
     tags: 标签
+    title: 标题
     toc: 目录
-    unblock: Unblock
+    top_posts: 热门文章
+    unblock: 取消屏蔽
     unfollow: 取消关注
     unpublish: 取消发布
     untitled: 无标题
@@ -292,6 +307,7 @@ zh-CN:
     view_all_hot_comments: 查看所有热门评论
     view_replies: 查看回复
     view_site: 查看网站
+    views: 浏览
     weekly_digest: 每周摘要
     weekly_digest_subject: '"%{title}" - %{count} 篇热门文章'
   home:

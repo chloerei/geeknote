@@ -93,6 +93,7 @@ Rails.application.routes.draw do
 
     namespace :analytics do
       root to: "home#index"
+      resource :overview, only: [ :show ]
     end
 
     namespace :settings do
