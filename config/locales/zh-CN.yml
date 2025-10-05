@@ -115,24 +115,7 @@ zh-CN:
       30d: 最近 30 天
       7d: 最近 7 天
       90d: 最近 90 天
-  application:
-    require_sign_in:
-      require_sign_in: 需要登录后才能访问此页面。
   dashboard:
-    analytics:
-      home:
-        index:
-          period_30d: 最近 30 天
-          period_7d: 最近 7 天
-          period_90d: 最近 90 天
-    home:
-      index:
-        new_post: 新文章
-        new_post_description: 分享你的想法、经验和见解。
-        posts: 文章
-        posts_description: 管理你的文章。
-        settings: 设置
-        settings_description: 管理账号的资料和其他设置。
     posts:
       create:
         success: 文章已创建。
@@ -140,11 +123,6 @@ zh-CN:
         success: 文章已删除。
       editor:
         delete_forever_confirm: 永久删除文章？
-      editor_side_sheet:
-        allow_comments: 允许评论
-        canonical_url_description: 如果文章之前已发布在其他地方，可以填写原文链接。
-        featured_image_description: 作为文章封面、社交分享图像。
-        tag_description: 便于分类和检索。
       publishes:
         destroy:
           success: 文章已取消发布。
@@ -169,13 +147,9 @@ zh-CN:
   email:
     email_verification: 验证邮箱地址
     reset_your_geeknote_password: 重置密码
-  errors:
-    messages:
-      email_or_password_error: Email 或密码错误
   general:
     account: 账号
     account_settings: 账号设置
-    account_stats: 账号统计
     accounts: 账号
     add_comment: 添加评论
     add_member: 添加成员
@@ -185,7 +159,6 @@ zh-CN:
     all_replies: 所有回复
     analytics: 统计
     appearance: 外观
-    back_to_home: 返回首页
     block: Block
     bookmarks: 书签
     click_to_select_image: 点击选择图片
@@ -202,10 +175,8 @@ zh-CN:
     copy_link: 复制链接
     created_at: 创建于
     dashboard: 创作中心
-    dashboard_short: 创作
     data: Data
     delete: 删除
-    delete_forever: 永久删除
     delete_post: 删除文章
     deleted_item: 已删除的内容
     download: 下载
@@ -234,15 +205,12 @@ zh-CN:
     likes: 点赞
     load_more: 查看更多
     manage: 管理
-    me: 我
     members: 成员
     merge: 合并
     merge_tags: 合并标签
-    more_from: 更多来自 %{name}
     name: 名称
     new_comment: 新评论
     new_member: 新成员
-    new_organization: 新组织
     new_post: 新文章
     newest: 最新
     no_more_content: 没有更多内容。
@@ -257,7 +225,6 @@ zh-CN:
     owner: 拥有者
     page_view: 页面浏览
     password: 密码
-    personal: 个人
     popular: 热门
     popular_tags: 热门标签
     post: 文章
@@ -268,16 +235,13 @@ zh-CN:
     preview: 预览
     profile: 资料
     public_link: 公开链接
-    public_page: 公开页面
     publish: 发布
     published: 已发布
-    quick_links: 快捷链接
     recommend_users: 推荐用户
     relevant: 相关
     replies: 回复
     reply: 回复
     reset_password: 重置密码
-    restore: 恢复
     role: 角色
     rss_feed: RSS 订阅
     save: 保存
@@ -293,9 +257,7 @@ zh-CN:
     sign_up: 注册
     sign_up_account: 注册账号
     sort_by: 排序：
-    stats: 统计
     submit: 提交
-    table_of_contents: 目录
     tags: 标签
     title: 标题
     toc: 目录
@@ -308,12 +270,9 @@ zh-CN:
     user: 用户
     users: 用户
     users_count: "%{count} 位用户"
-    view: 查看
     view_all_comments: 查看所有评论
     view_all_hot_comments: 查看所有热门评论
     view_all_posts: 查看所有文章
-    view_replies: 查看回复
-    view_site: 查看网站
     views: 浏览
     weekly_digest: 每周摘要
     weekly_digest_subject: '"%{title}" - %{count} 篇热门文章'
@@ -339,14 +298,11 @@ zh-CN:
           please_resend_email_veification: 请重新发送验证邮件。
           token_expired: 链接已过期
         show:
-          email_verification: 验证邮箱地址
           verifying: 验证中
     passwords:
       create:
         please_wait_one_minute: 请等待一分钟后重发邮件。
         success: 重置邮件已发送，请检查收件箱。
-      edit:
-        reset_password_for: 为账号 %{name} 重置密码。
       new:
         send_reset_email: 发送重置邮件
   mailer:
@@ -360,13 +316,6 @@ zh-CN:
     errors:
       recaptcha_unreachable: 无法连接 reCAPTCHA 服务器，请检查网络连接。
       verification_failed: reCAPTCHA 验证失败，请重试。
-  registrations:
-    new:
-      already_have_an_account: 已经有账号？
-  sessions:
-    new:
-      dont_have_an_account: 还没有账号？
-      forgot_password: 忘记密码？
   settings:
     emails:
       resend:
@@ -392,6 +341,3 @@ zh-CN:
     passwords:
       update:
         success: 密码更新成功。
-  tags:
-    show:
-      headline: 标签：%{name}
