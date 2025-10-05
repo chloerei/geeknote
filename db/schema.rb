@@ -237,7 +237,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_03_113429) do
     t.bigint "user_id"
     t.integer "score", default: 0
     t.integer "bookmarks_count", default: 0
-    t.integer "views_count", default: 0, null: false
+    t.integer "views_count", default: 0
     t.index ["account_id"], name: "index_posts_on_account_id"
     t.index ["published_at"], name: "index_posts_on_published_at"
     t.index ["score"], name: "index_posts_on_score"
