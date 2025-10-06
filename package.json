@@ -13,7 +13,7 @@
     "@hotwired/turbo-rails": "^8.0.18",
     "@rails/activestorage": "^8.0.300",
     "@rails/request.js": "^0.0.12",
-    "@tailwindcss/cli": "^4.1.13",
+    "@tailwindcss/cli": "^4.1.14",
     "ahoy.js": "^0.4.4",
     "chart.js": "^4.5.0",
     "chartkick": "^5.0.1",
