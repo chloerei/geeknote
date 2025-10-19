@@ -25,7 +25,7 @@ gem "image_processing", "~> 1.14.0"
 
 gem "active_storage_validations", "~> 3.0.2"
 
-gem "solid_cache", "~> 1.0.7"
+gem "solid_cache", "~> 1.0.8"
 gem "solid_cable", "~> 3.0.8"
 gem "solid_queue", "~> 1.2.1"
 gem "mission_control-jobs", "~> 1.1.0"
