@@ -10,7 +10,7 @@ gem "pg", "~> 1.6.2"
 # Use Puma as the app server
 gem "puma", "~> 7.0.4"
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
-gem "thruster", "~> 0.1.15", require: false
+gem "thruster", "~> 0.1.16", require: false
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.14.1"
 
