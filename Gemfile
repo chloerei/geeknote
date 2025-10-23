@@ -97,6 +97,8 @@ group :development do
 
   gem "brakeman", "~> 7.1.0"
 
+  gem "bundler-audit", require: false
+
   gem "rubocop-rails-omakase", "~> 1.1.0", require: false
 end
 
