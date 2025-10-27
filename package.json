@@ -5,7 +5,7 @@
     "@codemirror/commands": "^6.9.0",
     "@codemirror/lang-markdown": "^6.4.0",
     "@codemirror/language": "^6.11.3",
-    "@codemirror/lint": "^6.9.0",
+    "@codemirror/lint": "^6.9.1",
     "@codemirror/state": "^6.5.2",
     "@codemirror/view": "^6.38.5",
     "@github/hotkey": "^3.1.1",
