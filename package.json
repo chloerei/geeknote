@@ -2,7 +2,7 @@
   "name": "geeknote",
   "private": true,
   "dependencies": {
-    "@codemirror/commands": "^6.9.0",
+    "@codemirror/commands": "^6.10.0",
     "@codemirror/lang-markdown": "^6.4.0",
     "@codemirror/language": "^6.11.3",
     "@codemirror/lint": "^6.9.0",
