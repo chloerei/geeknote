@@ -50,30 +50,6 @@
   }
 }
 
-@utility interactive {
-  position: relative;
-  cursor: pointer;
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: currentColor;
-    border-radius: inherit;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  &:hover::before {
-    opacity: 0.08;
-  }
-
-  &:active::before {
-    opacity: 0.1;
-  }
-}
-
 @utility card-default {
   @apply bg-base-100 border border-base-300;
 }
