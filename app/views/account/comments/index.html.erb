@@ -28,7 +28,7 @@
 
     <div class="mt-4">
       <%= render "components/scroll_pagination", pagy: @pagy, content_class: "space-y-4" do %>
-        <%= render partial: "account/comments/comment_item", collection: @comments, as: :comment, cached: -> comment { [ comment.account, comment.user, comment ] } %>
+        <%= render partial: "account/comments/comment_item", collection: @comments, as: :comment, cached: -> comment { [ comment.user, comment ] } %>
       <% end %>
     </div>
   </div>
