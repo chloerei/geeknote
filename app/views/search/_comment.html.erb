@@ -8,8 +8,15 @@
       <%= format_time comment.created_at %>
     </div>
   </div>
-  <div class="search-result mt-2 text-lg font-medium">
-    <%= comment.commentable.title %>
+  <div class="search-result mt-2 font-medium">
+    <%= t "general.comment_on" %>
+    <% if comment.commentable %>
+      <%= comment.commentable.title %>
+    <% else %>
+      <span class="text-base-content/80 italic">
+        <%= t "general.deleted_item" %>
+      </span>
+    <% end %>
   </div>
   <div class="search-result mt-2 line-clamp-3 text-sm text-on-surface-variant">
     <%= sanitize comment.formatted["content"] %>

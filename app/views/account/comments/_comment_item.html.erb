@@ -1,9 +1,16 @@
 <div class="card card-default relative">
   <div class="card-body">
     <div class="line-clamp-3">
-      <h3 class="text-xl font-medium">
+      <h3 class="font-medium">
         <a href="<%= account_comment_path(comment.user.account.name, comment) %>" class="flex items-center gap-2 after:absolute after:inset-0">
-          <%= comment.commentable.title %>
+          <%= t "general.comment_on" %>
+          <% if comment.commentable %>
+            <%= comment.commentable.title %>
+          <% else %>
+            <span class="text-base-content/80 italic">
+              <%= t "general.deleted_item" %>
+            </span>
+          <% end %>
         </a>
       </h3>
 
