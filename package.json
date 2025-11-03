@@ -18,7 +18,7 @@
     "chart.js": "^4.5.0",
     "chartkick": "^5.0.1",
     "daisyui": "^5.3.7",
-    "esbuild": "^0.25.9",
+    "esbuild": "^0.25.12",
     "local-time": "^3.0.3",
     "tom-select": "^2.4.3"
   },
