@@ -43,40 +43,6 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :admin do
-    root to: "home#index"
-
-    resources :posts do
-      member do
-        patch :restrict
-        patch :unrestrict
-      end
-    end
-
-    resources :tags do
-      scope module: :tags do
-        resource :merge, only: [ :new, :create ]
-      end
-    end
-
-    resources :comments
-    resources :accounts
-    resources :users
-    resources :organizations
-
-    namespace :settings do
-      root to: "home#index"
-      resource :appearance, only: [ :show, :update ]
-      resource :weekly_digest, only: [ :show, :update ] do
-        scope module: :weekly_digests do
-          resource :preview, only: [ :show, :create ]
-        end
-      end
-    end
-
-    mount MissionControl::Jobs::Engine, at: "/jobs"
-  end
-
   get "up", to: "rails/health#show", as: :rails_health_check
 
   scope "/dashboard/:account_name", module: "dashboard", as: :dashboard do
