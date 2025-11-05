@@ -45,6 +45,20 @@ Rails.application.routes.draw do
 
   get "up", to: "rails/health#show", as: :rails_health_check
 
+  namespace :admin do
+    resources :accounts, only: [ :index, :show ]
+    resources :attachments, only: [ :index, :show, :destroy ]
+    resources :comments, only: [ :index, :show, :destroy ]
+    resources :members, only: [ :show, :destroy ]
+    resources :organizations, only: [ :index, :show ]
+    resources :posts, only: [ :index, :show, :edit, :update, :destroy ]
+    resources :sites, only: [ :index, :show, :edit, :update ]
+    resources :tags
+    resources :users, only: [ :index, :show, :edit, :update ]
+
+    root to: "posts#index"
+  end
+
   scope "/dashboard/:account_name", module: "dashboard", as: :dashboard do
     root to: "home#index"
     resources :posts, only: [ :index, :new, :create, :edit, :update, :destroy ] do
