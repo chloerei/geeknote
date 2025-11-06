@@ -1,0 +1,17 @@
+<div class="field-unit__label">
+  <%= f.label field.attribute %>
+</div>
+<div class="field-unit__field">
+  <% if field.data.attached? %>
+    <% if field.data.image? %>
+      <div style="max-width: 100px;">
+        <%= image_tag field.data %>
+      </div>
+    <% else %>
+      <%= link_to field.data.filename, url_for(field.data) %>
+    <% end %>
+
+  <% end %>
+
+  <%= f.file_field field.attribute %>
+</div>

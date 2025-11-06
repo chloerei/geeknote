@@ -1,0 +1,9 @@
+<% if field.data.attached? %>
+  <% if field.data.image? %>
+    <div style="max-width: 500px;">
+      <%= image_tag field.data %>
+    </div>
+  <% else %>
+    <%= link_to field.data.filename, url_for(field.data) %>
+  <% end %>
+<% end %>

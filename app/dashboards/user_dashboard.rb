@@ -10,10 +10,8 @@ class UserDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     account: Field::HasOne,
-    # avatar_attachment: Field::HasOne,
-    # avatar_blob: Field::HasOne,
-    # banner_image_attachment: Field::HasOne,
-    # banner_image_blob: Field::HasOne,
+    avatar: ActiveStorageField,
+    banner_image: ActiveStorageField,
     name: Field::String,
     bio: Field::Text,
     comment_email_notification_enabled: Field::Boolean,
@@ -46,6 +44,8 @@ class UserDashboard < Administrate::BaseDashboard
     account
     name
     bio
+    avatar
+    banner_image
     email
     email_verified_at
     comment_email_notification_enabled
@@ -63,6 +63,8 @@ class UserDashboard < Administrate::BaseDashboard
     account
     name
     bio
+    avatar
+    banner_image
     email
     email_verified_at
     comment_email_notification_enabled

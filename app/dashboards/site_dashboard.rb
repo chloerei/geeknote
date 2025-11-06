@@ -11,12 +11,8 @@ class SiteDashboard < Administrate::BaseDashboard
     id: Field::Number,
     description: Field::String,
     global_head_html: Field::Text,
-    # icon_attachment: Field::HasOne,
-    # icon_blob: Field::HasOne,
-    # logo_attachment: Field::HasOne,
-    # logo_blob: Field::HasOne,
-    # logo_dark_attachment: Field::HasOne,
-    # logo_dark_blob: Field::HasOne,
+    icon: ActiveStorageField,
+    logo: ActiveStorageField,
     name: Field::String,
     sidebar_footer_html: Field::Text,
     sidebar_header_html: Field::Text,
@@ -44,9 +40,11 @@ class SiteDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    description
-    global_head_html
     name
+    description
+    icon
+    logo
+    global_head_html
     sidebar_footer_html
     sidebar_header_html
     site_footer_html
@@ -62,8 +60,10 @@ class SiteDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    description
     name
+    description
+    icon
+    logo
     global_head_html
     sidebar_footer_html
     sidebar_header_html

@@ -10,8 +10,9 @@ class AttachmentDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     account: Field::BelongsTo,
-    key: Field::String,
     user: Field::BelongsTo,
+    key: Field::String,
+    file: ActiveStorageField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -31,8 +32,9 @@ class AttachmentDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    key
     user
+    key
+    file
     created_at
     updated_at
   ].freeze
@@ -41,7 +43,7 @@ class AttachmentDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    key
+    file
     user
   ].freeze
 
