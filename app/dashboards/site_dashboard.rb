@@ -38,41 +38,52 @@ class SiteDashboard < Administrate::BaseDashboard
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = %i[
-    id
-    name
-    description
-    icon
-    logo
-    global_head_html
-    sidebar_footer_html
-    sidebar_header_html
-    site_footer_html
-    site_header_html
-    weekly_digest_email_enabled
-    weekly_digest_footer_html
-    weekly_digest_header_html
-    created_at
-    updated_at
-  ].freeze
+  SHOW_PAGE_ATTRIBUTES = {
+    "Basic Info" => %i[
+      name
+      description
+      icon
+      logo
+      created_at
+      updated_at
+    ],
+    "HTML Settings" => %i[
+      global_head_html
+      sidebar_header_html
+      sidebar_footer_html
+      site_header_html
+      site_footer_html
+    ],
+    "Weekly Digest" => %i[
+      weekly_digest_email_enabled
+      weekly_digest_header_html
+      weekly_digest_footer_html
+    ]
+  }
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = %i[
-    name
-    description
-    icon
-    logo
-    global_head_html
-    sidebar_footer_html
-    sidebar_header_html
-    site_footer_html
-    site_header_html
-    weekly_digest_email_enabled
-    weekly_digest_footer_html
-    weekly_digest_header_html
-  ].freeze
+  FORM_ATTRIBUTES = {
+    "Basic Info" => %i[
+      name
+      description
+      icon
+      logo
+    ],
+    "HTML Settings" => %i[
+      global_head_html
+      sidebar_header_html
+      sidebar_footer_html
+      site_header_html
+      site_footer_html
+    ],
+    "Weekly Digest" => %i[
+      weekly_digest_email_enabled
+      weekly_digest_header_html
+      weekly_digest_footer_html
+    ]
+  }
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search
