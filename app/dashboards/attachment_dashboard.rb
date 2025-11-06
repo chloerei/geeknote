@@ -13,6 +13,21 @@ class AttachmentDashboard < Administrate::BaseDashboard
     user: Field::BelongsTo,
     key: Field::String,
     file: ActiveStorageField,
+    filename: Field::String.with_options(
+      getter: ->(field) {
+        field.resource.file.filename.to_s if field.resource.file.attached?
+      }
+    ),
+    file_size: Field::String.with_options(
+      getter: ->(field) {
+        ActiveSupport::NumberHelper.number_to_human_size(field.resource.file.byte_size) if field.resource.file.attached?
+      }
+    ),
+    content_type: Field::String.with_options(
+      getter: ->(field) {
+        field.resource.file.content_type if field.resource.file.attached?
+      }
+    ),
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -25,6 +40,9 @@ class AttachmentDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     key
+    filename
+    file_size
+    content_type
     user
   ].freeze
 
@@ -35,6 +53,8 @@ class AttachmentDashboard < Administrate::BaseDashboard
     user
     key
     file
+    file_size
+    content_type
     created_at
     updated_at
   ].freeze
