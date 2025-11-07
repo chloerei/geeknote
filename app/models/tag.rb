@@ -21,20 +21,16 @@ class Tag < ApplicationRecord
     pagination max_total_hits: 1000
   end
 
-  def merge(tag_list)
-    tag_list.split(",").each do |tag_name|
-      tag = Tag.find_by name: tag_name
-
-      if tag && tag != self
-        tag.taggings.each do |tagging|
-          taggable = tagging.taggable
-          taggable.tags.destroy(tag)
-          if !taggable.tags.exists?(self.id)
-            taggable.tags << self
-          end
+  def merge(tag)
+    if tag != self
+      tag.taggings.each do |tagging|
+        taggable = tagging.taggable
+        taggable.tags.destroy(tag)
+        if !taggable.tags.exists?(self.id)
+          taggable.tags << self
         end
-        tag.destroy
       end
+      tag.destroy
     end
   end
 end

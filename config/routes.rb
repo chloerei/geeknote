@@ -58,7 +58,11 @@ Rails.application.routes.draw do
       end
     end
     resources :sites, only: [ :index, :show, :edit, :update ]
-    resources :tags
+    resources :tags do
+      scope module: :tags do
+        resource :merge, only: [ :new, :create ]
+      end
+    end
     resources :users, only: [ :index, :show, :edit, :update ]
     resources :email_tests, only: [ :index, :create ]
 

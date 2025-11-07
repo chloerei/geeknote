@@ -1,0 +1,35 @@
+<% content_for(:title) do %>
+  <%= t(
+    "administrate.actions.merge_tag",
+    name: @tag.name
+  ) %>
+<% end %>
+
+<header class="main-content__header">
+  <h1 class="main-content__page-title">
+    <%= content_for(:title) %>
+  </h1>
+
+  <div>
+    <%= link_to t("administrate.actions.back"), admin_tag_path(@tag), class: "button" %>
+  </div>
+</header>
+
+<section class="main-content__body">
+  <%= form_with url: admin_tag_merge_url, class: "form" do |f| %>
+    <div class="field-unit">
+      <div class="field-unit__label">
+        <%= f.label :tags %>
+      </div>
+      <div class="field-unit__field">
+        <%= f.select(:tag_list, nil, {}, multiple: true, data: { controller: "select" }) do %>
+          <%= options_for_select(Tag.where.not(id: @tag.id).pluck(:name, :id), {}) %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit t("administrate.actions.merge_tags") %>
+    </div>
+  <% end %>
+</section>

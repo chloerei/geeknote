@@ -112,6 +112,19 @@ zh-CN:
         new:
           merge: 合并
           merge_to: 将以下标签合并到“%{name}”
+  administrate:
+    actions:
+      back: 返回
+      confirm: 确认操作？
+      destroy: 删除资源
+      edit_resource: 编辑 %{name}
+      merge_tag: 合并标签 %{name}
+      merge_tags: 合并标签
+      restrict: 限制发布
+      show_resource: 查看 %{name}
+      unrestrict: 取消限制
+    email_tests:
+      send_test_email: Send test email
   analytics:
     period:
       30d: 最近 30 天

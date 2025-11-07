@@ -12,11 +12,11 @@ class PostTest < ActiveSupport::TestCase
 
   test "should restricted post" do
     post = create(:post, status: "published")
-    post.restricted!
+    post.restrict!
     assert post.restricted?
     assert post.draft?
 
-    post.remove_restricted
+    post.unrestrict!
     assert_not post.restricted?
   end
 
