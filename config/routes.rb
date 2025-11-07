@@ -51,7 +51,12 @@ Rails.application.routes.draw do
     resources :comments, only: [ :index, :show, :destroy ]
     resources :members, only: [ :show, :destroy ]
     resources :organizations, only: [ :index, :show ]
-    resources :posts, only: [ :index, :show, :edit, :update, :destroy ]
+    resources :posts, only: [ :index, :show, :edit, :update, :destroy ] do
+      member do
+        patch :restrict
+        patch :unrestrict
+      end
+    end
     resources :sites, only: [ :index, :show, :edit, :update ]
     resources :tags
     resources :users, only: [ :index, :show, :edit, :update ]

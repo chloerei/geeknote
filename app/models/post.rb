@@ -60,7 +60,7 @@ class Post < ApplicationRecord
     end
   end
 
-  def restricted!
+  def restrict!
     update(
       restricted: true,
       status: "draft"
@@ -69,7 +69,7 @@ class Post < ApplicationRecord
     PostRestrictedNotificationJob.perform_later(self)
   end
 
-  def remove_restricted
+  def unrestrict!
     update(
       restricted: false
     )

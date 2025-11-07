@@ -42,5 +42,15 @@ module Admin
 
     # See https://administrate-demo.herokuapp.com/customizing_controller_actions
     # for more information
+
+    def restrict
+      requested_resource.restrict!
+      redirect_to [ namespace, requested_resource ], notice: "Post restricted successfully."
+    end
+
+    def unrestrict
+      requested_resource.unrestrict!
+      redirect_to [ namespace, requested_resource ], notice: "Post unrestricted successfully."
+    end
   end
 end
