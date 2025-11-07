@@ -46,6 +46,8 @@ Rails.application.routes.draw do
   get "up", to: "rails/health#show", as: :rails_health_check
 
   namespace :admin do
+    root to: "posts#index"
+
     resources :accounts, only: [ :index, :show, :edit, :update ]
     resources :attachments, only: [ :index, :show, :destroy ]
     resources :comments, only: [ :index, :show, :edit, :update, :destroy ]
@@ -66,7 +68,7 @@ Rails.application.routes.draw do
     resources :users, only: [ :index, :show, :edit, :update ]
     resources :email_tests, only: [ :index, :create ]
 
-    root to: "posts#index"
+    mount MissionControl::Jobs::Engine, at: "/jobs"
   end
 
   scope "/dashboard/:account_name", module: "dashboard", as: :dashboard do

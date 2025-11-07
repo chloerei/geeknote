@@ -35,8 +35,8 @@ module GeekNote
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    # config.mission_control.jobs.base_controller_class = "Admin::BaseController"
-    # config.mission_control.jobs.http_basic_auth_enabled = false
+    config.mission_control.jobs.base_controller_class = "Admin::BaseController"
+    config.mission_control.jobs.http_basic_auth_enabled = false
 
     config.i18n.available_locales = [ "zh-CN" ]
     config.i18n.default_locale = "zh-CN"
