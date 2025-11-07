@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     resources :sites, only: [ :index, :show, :edit, :update ]
     resources :tags
     resources :users, only: [ :index, :show, :edit, :update ]
+    resources :email_tests, only: [ :index, :create ]
 
     root to: "posts#index"
   end
