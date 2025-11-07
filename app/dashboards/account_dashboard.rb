@@ -52,7 +52,6 @@ class AccountDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     name
-    owner
   ].freeze
 
   # COLLECTION_FILTERS
@@ -70,7 +69,7 @@ class AccountDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how accounts are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(account)
-  #   "Account ##{account.id}"
-  # end
+  def display_resource(account)
+    account.name
+  end
 end

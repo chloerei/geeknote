@@ -53,14 +53,7 @@ class CommentDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    commentable
     content
-    likes
-    likes_count
-    parent
-    replies
-    replies_count
-    user
   ].freeze
 
   # COLLECTION_FILTERS

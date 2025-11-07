@@ -46,11 +46,11 @@ Rails.application.routes.draw do
   get "up", to: "rails/health#show", as: :rails_health_check
 
   namespace :admin do
-    resources :accounts, only: [ :index, :show ]
+    resources :accounts, only: [ :index, :show, :edit, :update ]
     resources :attachments, only: [ :index, :show, :destroy ]
-    resources :comments, only: [ :index, :show, :destroy ]
+    resources :comments, only: [ :index, :show, :edit, :update, :destroy ]
     resources :members, only: [ :show, :destroy ]
-    resources :organizations, only: [ :index, :show ]
+    resources :organizations, only: [ :index, :show, :edit, :update ]
     resources :posts, only: [ :index, :show, :edit, :update, :destroy ] do
       member do
         patch :restrict

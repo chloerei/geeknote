@@ -30,6 +30,7 @@ class MemberDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     user
+    role
     actived_at
   ].freeze
 

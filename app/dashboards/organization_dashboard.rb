@@ -41,7 +41,6 @@ class OrganizationDashboard < Administrate::BaseDashboard
     account
     description
     members
-    users
     created_at
     updated_at
   ].freeze
