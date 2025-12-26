@@ -1,6 +1,6 @@
 module MarkdownHelper
   MARKDOWN_ALLOW_TAGS = %w[strong em b i p code pre tt samp kbd var sub sup dfn cite big small address hr br div span h1 h2 h3 h4 h5 h6 ul ol li dl dt dd abbr acronym a img blockquote del ins input table thead tbody tr th td video]
-  MARKDOWN_ALLOW_ATTRIBUTES = %w[id href src width height alt cite datetime title class name xml:lang abbr type disabled checked controls allowfullscreen start]
+  MARKDOWN_ALLOW_ATTRIBUTES = %w[id href src width height alt cite datetime title class name xml:lang abbr type disabled checked controls allowfullscreen start lang]
 
   class MarkdownScruber < Rails::Html::PermitScrubber
     def initialize
@@ -39,12 +39,12 @@ module MarkdownHelper
   end
 
   def markdown_render(text)
-    html = CommonMarker.render_html(text, :DEFAULT, [ :table, :tasklist, :strikethrough, :autolink, :tagfilter ])
+    html = markdown_to_html(text)
     doc = Nokogiri::HTML5.fragment(html)
 
     # code highlight
     doc.css("pre code").each do |node|
-      lang = node["class"].to_s.gsub("language-", "")
+      lang = node.parent["lang"]
       lexer = Rouge::Lexer.find_fancy(lang) || Rouge::Lexer.find_fancy("text")
       formatter = Rouge::Formatters::HTML.new
       node.inner_html = formatter.format(lexer.lex(node.content))
@@ -94,7 +94,7 @@ module MarkdownHelper
   end
 
   def markdown_summary(text)
-    html = CommonMarker.render_html(text, :DEFAULT, [ :table, :tasklist, :strikethrough, :autolink, :tagfilter ])
+    html = markdown_to_html(text)
     doc = Nokogiri::HTML.fragment(sanitize html)
 
     first_paragraph = doc.css("p").first
@@ -104,7 +104,7 @@ module MarkdownHelper
   end
 
   def markdown_toc(text)
-    html = CommonMarker.render_html(text, :DEFAULT, [ :table, :tasklist, :strikethrough, :autolink, :tagfilter ])
+    html = markdown_to_html(text)
     doc = Nokogiri::HTML5.fragment(sanitize html)
 
     toc = []
@@ -121,5 +121,17 @@ module MarkdownHelper
     end
 
     toc
+  end
+
+  def markdown_to_html(text)
+    Commonmarker.to_html(
+      text,
+      options: {
+        extension: {
+          header_ids: nil
+        }
+      },
+      plugins: { syntax_highlighter: nil }
+    )
   end
 end

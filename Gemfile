@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.4.7"
+ruby "4.0.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 8.1.0"
+gem "rails", "~> 8.1.1"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.6.2"
 # Use Puma as the app server
@@ -43,7 +43,7 @@ gem "jsbundling-rails"
 gem "cssbundling-rails"
 
 # markdown
-gem "commonmarker", "~> 0.23.11"
+gem "commonmarker", "~> 2.6.1"
 
 # code highlight
 gem "rouge", "~> 4.6.1"
@@ -79,6 +79,10 @@ gem "chartkick", "~> 5.2"
 gem "groupdate", "~> 6.7"
 
 gem "administrate", "~> 1.0.0"
+
+# minitest 6 is not compatible with rails 8.1.1
+# https://github.com/rails/rails/issues/56406#issuecomment-3686824808
+gem "minitest", "< 6"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

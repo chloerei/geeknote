@@ -41,7 +41,7 @@ class Post < ApplicationRecord
   meilisearch sanitize: true do
     attribute :title, :status, :account_id, :user_id, :score, :published_at, :created_at, :updated_at
     attribute :content do
-      CommonMarker.render_html(content.to_s, :DEFAULT, [ :table, :tasklist, :strikethrough, :autolink, :tagfilter ])
+      Commonmarker.to_html(content.to_s, options: { extension: { header_ids: nil } }, plugins: { syntax_highlighter: nil })
     end
 
     searchable_attributes [ :title, :content ]

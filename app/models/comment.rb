@@ -23,7 +23,7 @@ class Comment < ApplicationRecord
   meilisearch sanitize: true do
     attribute :user_id, :created_at
     attribute :content do
-      CommonMarker.render_html(content.to_s, :DEFAULT, [ :table, :tasklist, :strikethrough, :autolink, :tagfilter ])
+      Commonmarker.to_html(content.to_s, options: { extension: { header_ids: nil } }, plugins: { syntax_highlighter: nil })
     end
 
     searchable_attributes [ :content ]
