@@ -9,7 +9,7 @@ class MarkdownHelperTest < ActionView::TestCase
     EOF
 
     html = <<~EOF
-      <pre class="highlight"><code class="language-ruby"><span class="nb">puts</span> <span class="s2">"hello"</span>
+      <pre lang="ruby" class="highlight"><code><span class="nb">puts</span> <span class="s2">"hello"</span>
       </code></pre>
     EOF
 
