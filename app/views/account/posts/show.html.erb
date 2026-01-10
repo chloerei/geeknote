@@ -278,7 +278,7 @@
 
     <div class="sticky top-4">
       <% if toc.any? %>
-        <div class="card card-default hidden xl:block">
+        <div class="card card-default hidden xl:block overflow-auto max-h-[calc(100vh-32px)]">
           <div class="card-body">
             <%= render "toc", toc: toc %>
           </div>

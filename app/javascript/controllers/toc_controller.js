@@ -59,6 +59,7 @@ export default class extends Controller {
         const activeItem = this.itemTargets.find(item => item.getAttribute("href") === `#${id}`)
         if (activeItem) {
           activeItem.classList.add(this.activeClass)
+          activeItem.scrollIntoView({ block: "nearest" })
         }
       }
     }
