@@ -54,7 +54,7 @@ gem "pagy", "~> 9.4.0"
 # inline email css
 gem "premailer-rails", "~> 1.12.0"
 
-gem "rails-i18n", "~> 8.0.1"
+gem "rails-i18n", "~> 8.1.0"
 
 gem "local_time", "~> 3.0.3"
 
