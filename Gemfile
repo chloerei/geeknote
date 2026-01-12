@@ -82,7 +82,7 @@ gem "administrate", "~> 1.0.0"
 
 # minitest 6 is not compatible with rails 8.1.1
 # https://github.com/rails/rails/issues/56406#issuecomment-3686824808
-gem "minitest", "< 6"
+gem "minitest", "< 7"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
