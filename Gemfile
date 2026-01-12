@@ -90,7 +90,7 @@ group :development, :test do
 
   gem "factory_bot_rails", "~> 6.5.1"
 
-  gem "dotenv-rails", "~> 3.1.8"
+  gem "dotenv-rails", "~> 3.2.0"
 
   gem "hotwire-spark", "~> 0.1.13"
 end
