@@ -49,7 +49,7 @@ gem "commonmarker", "~> 2.6.1"
 gem "rouge", "~> 4.7.0"
 
 # pagination
-gem "pagy", "~> 9.4.0"
+gem "pagy", "~> 43.2.4"
 
 # inline email css
 gem "premailer-rails", "~> 1.12.0"
