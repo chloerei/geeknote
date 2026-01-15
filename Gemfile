@@ -27,11 +27,11 @@ gem "active_storage_validations", "~> 3.0.2"
 
 gem "solid_cache", "~> 1.0.8"
 gem "solid_cable", "~> 3.0.8"
-gem "solid_queue", "~> 1.2.1"
+gem "solid_queue", "~> 1.3.0"
 gem "mission_control-jobs", "~> 1.1.0"
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", "~> 1.18.6", require: false
+gem "bootsnap", "~> 1.20.1", require: false
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails", "~> 2.0.17"
@@ -46,7 +46,7 @@ gem "cssbundling-rails"
 gem "commonmarker", "~> 2.6.1"
 
 # code highlight
-gem "rouge", "~> 4.6.1"
+gem "rouge", "~> 4.7.0"
 
 # pagination
 gem "pagy", "~> 9.4.0"
@@ -54,11 +54,11 @@ gem "pagy", "~> 9.4.0"
 # inline email css
 gem "premailer-rails", "~> 1.12.0"
 
-gem "rails-i18n", "~> 8.0.1"
+gem "rails-i18n", "~> 8.1.0"
 
 gem "local_time", "~> 3.0.3"
 
-gem "aws-sdk-s3", "~> 1.208.0", require: false
+gem "aws-sdk-s3", "~> 1.211.0", require: false
 
 gem "imgproxy-rails", "~> 0.3.0"
 
@@ -86,7 +86,7 @@ group :development, :test do
 
   gem "factory_bot_rails", "~> 6.5.1"
 
-  gem "dotenv-rails", "~> 3.1.8"
+  gem "dotenv-rails", "~> 3.2.0"
 
   gem "hotwire-spark", "~> 0.1.13"
 end
