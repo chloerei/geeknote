@@ -135,7 +135,7 @@ GEM
     bcrypt (3.1.21)
     bigdecimal (4.0.1)
     bindex (0.8.1)
-    bootsnap (1.20.1)
+    bootsnap (1.21.1)
       msgpack (~> 1.2)
     brakeman (7.1.2)
       racc
@@ -519,7 +519,7 @@ DEPENDENCIES
   ahoy_matey (~> 5.4.1)
   aws-sdk-s3 (~> 1.211.0)
   bcrypt (~> 3.1.20)
-  bootsnap (~> 1.20.1)
+  bootsnap (~> 1.21.1)
   brakeman (~> 7.1.0)
   bundler-audit
   capybara (~> 3.40.0)
