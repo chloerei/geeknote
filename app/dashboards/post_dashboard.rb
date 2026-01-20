@@ -22,7 +22,6 @@ class PostDashboard < Administrate::BaseDashboard
     preview_token: Field::String,
     published_at: Field::DateTime,
     restricted: Field::Boolean,
-    revisions: Field::HasMany,
     score: Field::Number,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     taggings: Field::HasMany,
