@@ -97,7 +97,7 @@ group :development do
 
   gem "i18n-tasks", github: "chloerei/i18n-tasks"
 
-  gem "brakeman", "~> 7.1.0"
+  gem "brakeman", "~> 8.0.2"
 
   gem "bundler-audit", require: false
 
