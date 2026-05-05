@@ -14,4 +14,4 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
       nodejs \
       npm
 
-WORKDIR /rails
+ENV BINDING="0.0.0.0"
