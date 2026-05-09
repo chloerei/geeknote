@@ -11,7 +11,14 @@
 
 @import "./typography.css";
 
-@theme {
+@plugin "daisyui/theme" {
+  name: "geeknote";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --radius-field: 32px;
+  --radius-box: 16px;
 }
 
 @layer components {
@@ -56,4 +63,9 @@
 
 @utility menu-default {
   @apply bg-base-100 rounded-box p-2 shadow w-52;
+}
+
+.menu {
+  --menu-active-fg: var(--color-primary);
+  --menu-active-bg: color-mix(in srgb, var(--color-primary) 10%, transparent);
 }
