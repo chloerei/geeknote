@@ -1,6 +1,6 @@
 <% content_for :content do %>
   <div class="drawer lg:drawer-open">
-    <input type="checkbox" class="drawer-toggle" id="drawer" />
+    <input type="checkbox" class="drawer-toggle" id="drawer">
 
     <div class="drawer-side">
       <label for="drawer" class="drawer-overlay"></label>
@@ -8,7 +8,7 @@
       <div class="flex flex-col w-60 h-full bg-base-200 border-r border-base-300">
         <div class="navbar px-4 py-3 border-b border-base-300">
           <a href="/ui" class="inline-flex items-center gap-3">
-            <img src="<%= asset_path "icon.svg" %>" alt="logo" class="size-9">
+            <%= image_tag "icon.svg", alt: "Logo", class: "size-9" %>
             <div class="text-xl font-semibold">
               <%= @site.name %>
             </div>
@@ -16,7 +16,7 @@
         </div>
 
         <% if Current.user %>
-          <div class="p-3">
+          <div class="px-3 pt-3">
             <a href="<%= new_dashboard_post_path(Current.user.account.name) %>" class="btn btn-primary">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
               <%= t "general.new_post" %>
@@ -24,7 +24,7 @@
           </div>
         <% end %>
 
-        <div class="flex-grow overflow-auto">
+        <div class="grow overflow-auto">
           <ul class="menu w-full p-3 gap-1">
             <li>
               <a href="<%= root_path %>" class="px-4 py-2 <%= "menu-active" if request.path.in?(["/", "/newest", "/following"]) %>">
@@ -92,7 +92,7 @@
               <label tabindex="0" class="btn btn-ghost btn-block justify-start gap-3 px-3">
                 <div class="avatar">
                   <div class="size-9 rounded-full">
-                    <img src="<%= avatar_url(Current.user) %>">
+                    <%= image_tag avatar_url(Current.user), alt: "Avatar" %>
                   </div>
                 </div>
                 <div class="flex-1 text-left">
@@ -121,9 +121,27 @@
     </div>
 
     <div class="drawer-content">
+      <div class="navbar bg-base-200/80 border-b border-base-300 lg:hidden gap-2">
+        <div class="flex-none">
+          <label for="drawer" class="btn btn-square btn-ghost">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+          </label>
+        </div>
+        <div class="flex-1 flex items-center">
+          <a href="/" class="inline-flex items-center gap-3">
+            <%= image_tag "icon.svg", alt: "Logo", class: "size-9" %>
+            <div class="text-xl font-semibold">
+              <%= @site.name %>
+            </div>
+          </a>
+        </div>
+        <div class="flex-none">
+        </div>
+      </div>
+
       <%= raw @site.site_header_html %>
 
-      <div class="max-w-7xl mx-auto px-6 pb-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
         <%= yield %>
       </div>
 
