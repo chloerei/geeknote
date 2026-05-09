@@ -16,6 +16,10 @@ services:
       DATABASE_URL: postgres://postgres:postgres@postgres:5432
       MEILISEARCH_URL: http://meilisearch:7700
 
+    depends_on:
+      - postgres
+      - meilisearch
+
   postgres:
     image: postgres:17
     restart: unless-stopped
