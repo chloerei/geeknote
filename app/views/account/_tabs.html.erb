@@ -1,0 +1,10 @@
+<div class="tabs tabs-border">
+  <a href="<%= account_root_path(@account.name) %>" class="tab <%= 'tab-active' if active_tab == 'posts' %>">
+    <%= t "general.posts" %>
+  </a>
+  <% if @account.user? %>
+    <a href="<%= account_comments_path(@account.name) %>" class="tab <%= 'tab-active' if active_tab == 'comments' %>">
+      <%= t "general.comments" %>
+    </a>
+  <% end %>
+</div>

@@ -1,29 +1,22 @@
-<div class="navbar px-0 gap-4">
-  <div class="flex-none">
-    <a href="<%= root_path %>" class="btn btn-square btn-ghost" data-controller="back-link">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-    </a>
-  </div>
-  <div class="flex-grow">
-    <div class="text-xl font-medium">
+<div class="breadcrumbs">
+  <ul>
+    <li>
+      <a href="<%= root_path %>">
+        <%= t "general.home" %>
+      </a>
+    </li>
+    <li>
       <%= @account.owner.name %>
-    </div>
-  </div>
+    </li>
+  </ul>
 </div>
 
-<div class="layout-nav-main">
+<div class="layout-main-sidebar mt-4">
   <div>
-    <%= render "account/nav", account: @account %>
-  </div>
+    <%= render "account/profile_card", account: @account %>
 
-  <div class="">
-    <div class="tabs tabs-border">
-      <a href="<%= account_root_path(@account.name) %>" class="tab">
-        <%= t "general.posts" %>
-      </a>
-      <a href="<%= account_comments_path(@account.name) %>" class="tab tab-active">
-        <%= t "general.comments" %>
-      </a>
+    <div class="mt-4">
+      <%= render "account/tabs", active_tab: "comments" %>
     </div>
 
     <div class="mt-4">
@@ -32,4 +25,6 @@
       <% end %>
     </div>
   </div>
+
+  <%= render "account/sidebar" %>
 </div>

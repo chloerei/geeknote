@@ -1,0 +1,82 @@
+<div class="space-y-4">
+
+  <%= raw @site.sidebar_header_html %>
+
+  <% if @account.used_tags.any? %>
+    <div class="card card-default">
+      <div class="card-body">
+        <h3 class="card-title">
+          <%= t "general.popular_tags" %>
+        </h3>
+        <div class="flex gap-2 flex-wrap mt-4">
+          <% @account.used_tags.take(15).each do |tag_name, count| %>
+            <a href="<%= tag_path(tag_name) %>" class="badge badge-ghost">
+              #<%= tag_name %>
+            </a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="card card-default">
+    <div class="card-body">
+      <h3 class="card-title">
+        <%= t "general.statistics" %>
+      </h3>
+      <div class="grid grid-cols-3 gap-4 mt-4 text-center">
+        <div>
+          <div class="text-xl font-bold"><%= @account.posts.published.count %></div>
+          <div class="text-xs text-base-content/60"><%= t "general.posts" %></div>
+        </div>
+        <% if @account.user? %>
+          <div>
+            <div class="text-xl font-bold"><%= @account.owner.comments.count %></div>
+            <div class="text-xs text-base-content/60"><%= t "general.comments" %></div>
+          </div>
+          <div>
+            <div class="text-xl font-bold">
+              <%= Like.where(likable_type: "Post", likable_id: @account.posts.published.select(:id)).count %>
+            </div>
+            <div class="text-xs text-base-content/60"><%= t "general.likes" %></div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% if @account.user? && @account.owner.organizations.any? %>
+    <div class="card card-default">
+      <div class="card-body">
+        <h3 class="card-title">
+          <%= t "general.organizations" %>
+        </h3>
+        <div class="flex flex-wrap gap-2 mt-4">
+          <% @account.owner.organizations.includes(:account).each do |organization| %>
+            <a href="<%= account_root_path(organization.account.name) %>" class="tooltip" data-tip="<%= organization.name %>">
+              <img src="<%= avatar_url(organization) %>" alt="<%= organization.name %>" class="w-10 h-10 rounded-full">
+            </a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% elsif @account.organization? %>
+    <div class="card card-default">
+      <div class="card-body">
+        <h3 class="card-title">
+          <%= t "general.members" %>
+        </h3>
+        <div class="flex flex-wrap gap-2 mt-4">
+          <% @account.owner.users.includes(:account).each do |user| %>
+            <a href="<%= account_root_path(user.account.name) %>" class="tooltip" data-tip="<%= user.name %>">
+              <img src="<%= avatar_url(user) %>" alt="<%= user.name %>" class="w-10 h-10 rounded-full">
+            </a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <%= raw @site.sidebar_footer_html %>
+
+</div>
