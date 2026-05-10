@@ -1,36 +1,74 @@
-<div class="card card-default">
-  <div class="card-body">
-    <div class="flex items-center justify-between gap-4">
-      <div class="flex-shrink-0">
-        <a href="<%= account_root_path(account.name) %>">
-          <img src="<%= avatar_url(account.owner) %>" alt="avatar" class="size-20 rounded-full">
-        </a>
+<% has_banner = account.owner.respond_to?(:banner_image) && account.owner.banner_image.attached? %>
+
+<div class="card card-default overflow-hidden">
+  <!-- Banner -->
+  <div class="relative overflow-hidden <%= has_banner ? 'h-32 sm:h-40' : 'h-12 sm:h-16' %>">
+    <% if has_banner %>
+      <%= image_tag account.owner.banner_image.variant(:large), class: "w-full h-full object-cover", alt: "" %>
+    <% else %>
+      <div class="w-full h-full bg-primary/10"></div>
+    <% end %>
+  </div>
+
+  <div class="card-body px-5 pb-5 pt-0">
+    <div class="flex gap-4">
+      <div class="shrink-0 -mt-8 sm:-mt-10 relative z-10">
+        <div class="avatar indicator">
+          <div class="size-24 rounded-full ring-4 ring-base-100 shadow-lg">
+            <a href="<%= account_root_path(account.name) %>">
+              <img src="<%= avatar_url(account.owner) %>" alt="avatar" class="rounded-full">
+            </a>
+          </div>
+        </div>
       </div>
 
-      <% if account != Current.user&.account %>
-        <div class="flex-shrink-0">
-          <%= render "account/follows/button", account: account %>
-        </div>
-      <% end %>
-    </div>
+      <!-- Profile Info (no overlap) -->
+      <div class="flex-1 min-w-0 mt-3">
+        <div class="flex items-start justify-between gap-2">
+          <div class="min-w-0">
+            <h1 class="text-lg font-bold">
+              <a href="<%= account_root_path(account.name) %>" class="hover:underline">
+                <%= account.display_name %>
+              </a>
+            </h1>
+            <p class="text-sm text-base-content/60">@<%= account.name %></p>
+          </div>
 
-    <div class="">
-      <div class="relative">
-        <div class="text-xl font-medium">
-          <a href="<%= account_root_path(account.name) %>" class="hover:underline after:absolute after:inset-0">
-            <%= account.display_name %>
+          <div class="shrink-0 mt-0.5">
+            <% if Current.user && account.user? && account.owner == Current.user %>
+              <a href="<%= dashboard_settings_profile_path %>" class="btn btn-sm btn-soft">
+                <%= t "general.edit_profile" %>
+              </a>
+            <% else %>
+              <%= render "account/follows/button", account: account %>
+            <% end %>
+          </div>
+        </div>
+
+        <% if account.description.present? %>
+          <p class="text-sm text-base-content/60 mt-1.5 line-clamp-3">
+            <%= account.description %>
+          </p>
+        <% end %>
+
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-sm text-base-content/60">
+          <span class="inline-flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-icon lucide-calendar"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+            加入于 <%= account.created_at.strftime("%Y年%-m月") %>
+          </span>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-sm">
+          <a href="<%= account_followers_path(account.name) %>" class="hover:underline">
+            <span class="font-semibold"><%= account.followers.count %></span>
+            <span class="text-base-content/60">关注者</span>
+          </a>
+          <a href="<%= account_followings_path(account.name) %>" class="hover:underline">
+            <span class="font-semibold"><%= account.owner.respond_to?(:followings) ? account.owner.followings.count : 0 %></span>
+            <span class="text-base-content/60">关注中</span>
           </a>
         </div>
-
-        <div class="text-base-content/80">
-          @<%= account.name %>
-        </div>
       </div>
-
-    </div>
-
-    <div class="">
-      <%= account.description %>
     </div>
   </div>
 </div>
