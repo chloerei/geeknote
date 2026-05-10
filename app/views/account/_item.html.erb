@@ -1,18 +1,18 @@
 <%# locals: (account:) %>
 
-<div class="list-row hover">
+<div class="list-row hover:bg-base-200/50">
   <div class="avatar">
     <div class="size-10 rounded-full">
-      <img src="<%= avatar_url(account.owner) %>" alt="avatar">
+      <%= image_tag avatar_url(account.owner), alt: "Avatar" %>
     </div>
   </div>
   <div>
-    <div>
-      <a href="<%= account_root_path(account.name) %>" class="hover:underline after:absolute after:inset-0">
+    <div class="text-sm font-medium">
+      <a href="<%= account_root_path(account.name) %>" class="after:absolute after:inset-0">
         <%= account.owner.name %>
       </a>
     </div>
-    <div class="text-sm text-base-content/80">
+    <div class="text-sm text-base-content/60">
       @<%= account.name %>
     </div>
   </div>

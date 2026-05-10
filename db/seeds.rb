@@ -31,4 +31,13 @@ if Rails.env.development?
     user: user,
     content: "This is a comment on the README post."
   )
+
+  user = User.create!(
+    name: "Test",
+    email: "test@example.com",
+    password: "password",
+    account_attributes: {
+      name: "test"
+    }
+  )
 end
