@@ -1,7 +1,7 @@
 <div id="post-editor">
   <%= form_with model: @post, url: @post.new_record? ? dashboard_posts_path(@account.name) : dashboard_post_path(@account.name, @post), data: { controller: "form-unsave-checker" } do |form| %>
     <div class="drawer drawer-end">
-      <input type="checkbox" id="drawer-toggle" class="drawer-toggle" />
+      <input type="checkbox" id="drawer-toggle" class="drawer-toggle">
 
       <div class="drawer-content">
         <div class="navbar sticky top-0 z-10 px-4 gap-4 bg-base-200">

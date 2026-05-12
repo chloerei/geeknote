@@ -2,55 +2,52 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from "./application";
 
-import AutoremoveController from "./autoremove_controller"
-application.register("autoremove", AutoremoveController)
+import AutoremoveController from "./autoremove_controller";
+application.register("autoremove", AutoremoveController);
 
-import AutoresizeController from "./autoresize_controller"
-application.register("autoresize", AutoresizeController)
+import AutoresizeController from "./autoresize_controller";
+application.register("autoresize", AutoresizeController);
 
-import BackLinkController from "./back_link_controller"
-application.register("back-link", BackLinkController)
+import CommentFormController from "./comment_form_controller";
+application.register("comment-form", CommentFormController);
 
-import CommentFormController from "./comment_form_controller"
-application.register("comment-form", CommentFormController)
+import CommentsStatusController from "./comments_status_controller";
+application.register("comments-status", CommentsStatusController);
 
-import CommentsStatusController from "./comments_status_controller"
-application.register("comments-status", CommentsStatusController)
+import CopyLinkController from "./copy_link_controller";
+application.register("copy-link", CopyLinkController);
 
-import CopyLinkController from "./copy_link_controller"
-application.register("copy-link", CopyLinkController)
+import DialogController from "./dialog_controller";
+application.register("dialog", DialogController);
 
-import DialogController from "./dialog_controller"
-application.register("dialog", DialogController)
+import FormUnsaveCheckerController from "./form_unsave_checker_controller";
+application.register("form-unsave-checker", FormUnsaveCheckerController);
 
-import FormUnsaveCheckerController from "./form_unsave_checker_controller"
-application.register("form-unsave-checker", FormUnsaveCheckerController)
+import HotkeyController from "./hotkey_controller";
+application.register("hotkey", HotkeyController);
 
-import HotkeyController from "./hotkey_controller"
-application.register("hotkey", HotkeyController)
+import ImageFieldController from "./image_field_controller";
+application.register("image-field", ImageFieldController);
 
-import ImageFieldController from "./image_field_controller"
-application.register("image-field", ImageFieldController)
+import MarkdownFieldController from "./markdown_field_controller";
+application.register("markdown-field", MarkdownFieldController);
 
-import MarkdownFieldController from "./markdown_field_controller"
-application.register("markdown-field", MarkdownFieldController)
+import PostViewTrackerController from "./post_view_tracker_controller";
+application.register("post-view-tracker", PostViewTrackerController);
 
-import PostViewTrackerController from "./post_view_tracker_controller"
-application.register("post-view-tracker", PostViewTrackerController)
+import RecaptchaController from "./recaptcha_controller";
+application.register("recaptcha", RecaptchaController);
 
-import RecaptchaController from "./recaptcha_controller"
-application.register("recaptcha", RecaptchaController)
+import ScrollPaginationController from "./scroll_pagination_controller";
+application.register("scroll-pagination", ScrollPaginationController);
 
-import ScrollPaginationController from "./scroll_pagination_controller"
-application.register("scroll-pagination", ScrollPaginationController)
+import TagFieldController from "./tag_field_controller";
+application.register("tag-field", TagFieldController);
 
-import TagFieldController from "./tag_field_controller"
-application.register("tag-field", TagFieldController)
+import TocController from "./toc_controller";
+application.register("toc", TocController);
 
-import TocController from "./toc_controller"
-application.register("toc", TocController)
-
-import ToggleController from "./toggle_controller"
-application.register("toggle", ToggleController)
+import ToggleController from "./toggle_controller";
+application.register("toggle", ToggleController);
