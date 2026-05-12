@@ -1,10 +1,14 @@
 <% @show_dock = true %>
 
-<div class="mt-6">
-  <h1 class="text-2xl sm:text-3xl font-bold"><%= t "general.home" %></h1>
+<div class="navbar px-0 gap-4">
+  <div class="grow">
+    <div class="text-xl font-medium">
+      <%= t "general.home" %>
+    </div>
+  </div>
 </div>
 
-<div class="tabs tabs-border mt-6">
+<div class="tabs tabs-border">
   <a href="<%= root_path %>" class="tab px-4 gap-2 <%= "tab-active" if current_page?(root_path) %>">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up-icon lucide-trending-up"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>
     <%= t "general.popular" %>
