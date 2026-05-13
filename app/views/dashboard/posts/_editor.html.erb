@@ -56,10 +56,10 @@
         <div class="max-w-4xl mx-auto p-4">
           <div class="card card-lg card-default" data-turbo-permanent>
             <div class="card-body">
-              <%= form.text_area :title, class: "text-3xl font-medium resize-none outline-none", placeholder: "Title", data: { controller: "autoresize" } %>
+              <%= form.text_area :title, class: "text-3xl font-medium resize-none outline-none", placeholder: t(".title_placeholder"), data: { controller: "autoresize" } %>
 
               <div class="group" data-controller="markdown-field">
-                <%= form.hidden_field :content, id: "post_content", placeholder: "Markdown..." %>
+                <%= form.hidden_field :content, id: "post_content", placeholder: t(".content_placeholder") %>
                 <markdown-editor input="<%= form.field_id :content %>" class="mt-4 min-h-screen" data-markdown-field-target="markdownEditor"></markdown-editor>
 
                 <div class="sticky bottom-4 flex justify-center mt-4">
