@@ -4,7 +4,7 @@ class Dashboard::BaseController < ApplicationController
   before_action :set_title
   before_action :require_account_member
 
-  layout "site"
+  layout "dashboard"
 
   private
 
