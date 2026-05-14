@@ -212,6 +212,7 @@ zh-CN:
     edit_profile: 编辑资料
     edit_tag: 编辑标签
     edit_user: 编辑用户
+    end_label: "- END -"
     email: Email
     export: 导出
     follow: 关注
@@ -235,7 +236,6 @@ zh-CN:
     new_member: 新成员
     new_post: 新文章
     newest: 最新
-    no_more_content: 没有更多内容。
     notification: 通知
     notification_settings: 通知设置
     notifications: 通知
