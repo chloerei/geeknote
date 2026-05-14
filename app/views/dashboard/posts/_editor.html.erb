@@ -1,36 +1,38 @@
+<%# locals: (post:) %>
+
 <div id="post-editor">
-  <%= form_with model: @post, url: @post.new_record? ? dashboard_posts_path(@account.name) : dashboard_post_path(@account.name, @post), data: { controller: "form-unsave-checker" } do |form| %>
+  <%= form_with model: post, url: post.new_record? ? dashboard_posts_path(post.account.name) : dashboard_post_path(post.account.name, post), data: { controller: "form-unsave-checker" } do |form| %>
     <div class="drawer drawer-end">
       <input type="checkbox" id="drawer-toggle" class="drawer-toggle">
 
       <div class="drawer-content">
         <div class="navbar sticky top-0 z-10 px-4 gap-4 bg-base-200">
           <div class="flex-none">
-            <a href="<%= dashboard_posts_path(@account.name) %>" class="btn btn-ghost btn-square">
+            <a href="<%= dashboard_posts_path(post.account.name) %>" class="btn btn-ghost btn-square">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
             </a>
           </div>
-          <div class="flex-grow flex items-center gap-2">
+          <div class="grow flex items-center gap-2">
             <div class="text-xl font-medium">
               <%= t "general.posts" %>
             </div>
-            <% if @post.draft? %>
+            <% if post.draft? %>
               <div class="btn btn-disabled btn-ghost text-base-content/80">
                 <%= t "general.draft" %>
               </div>
-            <% elsif @post.published? %>
-              <a href="<%= account_post_path(@account.name, @post) %>" class="btn btn-ghost text-base-content/80" target="_blank">
+            <% elsif post.published? %>
+              <a href="<%= account_post_path(post.account.name, post) %>" class="btn btn-ghost text-base-content/80" target="_blank">
                 <%= t "general.published" %>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
               </a>
             <% end %>
           </div>
           <div class="flex-none">
-            <% if @post.draft? %>
+            <% if post.draft? %>
               <button type="submit" class="btn btn-ghost" data-controller="hotkey" data-hotkey="Mod+s" data-hotkey-global>
                 <%= t "general.save" %>
               </button>
-              <% if @post.persisted? %>
+              <% if post.persisted? %>
                 <button type="submit" class="btn btn-ghost text-primary" form="publish-form">
                   <%= t "general.publish" %>
                 </button>
@@ -39,7 +41,7 @@
                   <%= t "general.publish" %>
                 </button>
               <% end %>
-            <% elsif @post.published? %>
+            <% elsif post.published? %>
               <button type="submit" class="btn btn-ghost text-primary" data-controller="hotkey" data-hotkey="Mod+s" data-hotkey-global>
                 <%= t "general.update" %>
               </button>
@@ -54,7 +56,7 @@
         </div>
 
         <div class="max-w-4xl mx-auto p-4">
-          <div class="card card-lg card-default" data-turbo-permanent>
+          <div id="editor-card" class="card card-lg card-default" data-turbo-permanent>
             <div class="card-body">
               <%= form.text_area :title, class: "text-3xl font-medium resize-none outline-none", placeholder: t(".title_placeholder"), data: { controller: "autoresize" } %>
 
@@ -63,7 +65,7 @@
                 <markdown-editor input="<%= form.field_id :content %>" class="mt-4 min-h-screen" data-markdown-field-target="markdownEditor"></markdown-editor>
 
                 <div class="sticky bottom-4 flex justify-center mt-4">
-                  <div class="bg-base-200 p-1 rounded-box flex gap-1 shadow-sm">
+                  <div class="bg-base-200 p-1 rounded-full flex gap-1 shadow-sm">
                     <div class="join">
                       <button type="button" class="btn btn-ghost join-item not-group-[.previewing]:btn-active!" data-action="markdown-field#edit">
                         <%= t "general.edit" %>
@@ -90,7 +92,7 @@
 
         <div class="bg-base-100 text-base-content h-full w-80 flex flex-col">
           <div class="navbar border-b border-base-300">
-            <div class="flex-grow px-2">
+            <div class="grow px-2">
               <div class="text-xl font-medium">
                 <%= t "general.settings" %>
               </div>
@@ -100,7 +102,7 @@
             </label>
           </div>
 
-          <div class="flex-grow p-4 overflow-auto">
+          <div class="grow p-4 overflow-auto">
             <div class="space-y-2">
               <%= render "components/image_field", form: form, name: :featured_image %>
 
@@ -123,7 +125,7 @@
               </fieldset>
             </div>
 
-            <% if @post.persisted? %>
+            <% if post.persisted? %>
               <div class="divider"></div>
 
               <button type="submit" class="btn btn-outline btn-error" form="delete-form">
@@ -138,12 +140,12 @@
 </div>
 
 <div class="hidden">
-  <% if @post.persisted? %>
-    <%= form_with model: @post, url: dashboard_post_publish_path(@account.name, @post), id: "publish-form", method: :patch do %>
+  <% if post.persisted? %>
+    <%= form_with model: post, url: dashboard_post_publish_path(post.account.name, post), id: "publish-form", method: :patch do %>
     <% end %>
-    <%= form_with model: @post, url: dashboard_post_publish_path(@account.name, @post), id: "unpublish-form", method: :delete do %>
+    <%= form_with model: post, url: dashboard_post_publish_path(post.account.name, post), id: "unpublish-form", method: :delete do %>
     <% end %>
-    <%= form_with model: @post, url: dashboard_post_path(@account.name, @post), id: "delete-form", method: :delete, data: { turbo_confirm: t(".delete_forever_confirm") } do %>
+    <%= form_with model: post, url: dashboard_post_path(post.account.name, post), id: "delete-form", method: :delete, data: { turbo_confirm: t(".delete_forever_confirm") } do %>
     <% end %>
   <% end %>
 </div>
