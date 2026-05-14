@@ -11,7 +11,11 @@
       <%= t "general.overview" %>
     </div>
   </div>
-  <div class="flex-none">
+  <div class="flex-none flex items-center gap-2">
+    <a href="<%= account_root_path(@account.name) %>" class="btn btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-up-right-icon lucide-move-up-right"><path d="M13 5H19V11"/><path d="M19 5L5 19"/></svg>
+      <%= t "general.view_front_page" %>
+    </a>
     <a href="<%= new_dashboard_post_path(@account.name) %>" class="btn btn-primary">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
       <%= t "general.new_post" %>

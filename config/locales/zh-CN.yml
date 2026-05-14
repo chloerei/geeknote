@@ -296,6 +296,7 @@ zh-CN:
     view_all_comments: 查看所有评论
     view_all_hot_comments: 查看所有热门评论
     view_all_posts: 查看所有文章
+    view_front_page: 查看前台
     views: 浏览
     weekly_digest: 每周摘要
     weekly_digest_subject: '"%{title}" - %{count} 篇热门文章'
