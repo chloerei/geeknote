@@ -61,11 +61,39 @@
   @apply bg-base-100 border border-base-300;
 }
 
-.menu {
+@utility menu {
   --menu-active-fg: var(--color-primary);
   --menu-active-bg: color-mix(in srgb, var(--color-primary) 10%, transparent);
 }
 
-.btn {
+@utility btn {
   --radius-field: 9999px;
+}
+
+@utility input {
+  outline-width: 1px;
+  outline-offset: 0;
+
+  &:focus,
+  &:focus-within {
+    --input-color: var(--color-primary);
+  }
+
+  &.input-error {
+    --input-color: var(--color-error);
+  }
+}
+
+@utility textarea {
+  outline-width: 1px;
+  outline-offset: 0;
+
+  &:focus,
+  &:focus-within {
+    --input-color: var(--color-primary);
+  }
+
+  &.input-error {
+    --input-color: var(--color-error);
+  }
 }
