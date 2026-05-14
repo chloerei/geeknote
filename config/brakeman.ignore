@@ -7,7 +7,7 @@
       "check_name": "CrossSiteScripting",
       "message": "Unescaped model attribute",
       "file": "app/views/layouts/site.html.erb",
-      "line": 9,
+      "line": 8,
       "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
       "code": "Site.first_or_create(:name => \"Geeknote\").site_header_html",
       "render_path": [
@@ -15,7 +15,7 @@
           "type": "controller",
           "class": "Account::BaseController",
           "method": "set_account",
-          "line": 10,
+          "line": 11,
           "file": "app/controllers/account/base_controller.rb",
           "rendered": {
             "name": "layouts/site",
@@ -41,7 +41,7 @@
       "check_name": "CrossSiteScripting",
       "message": "Unescaped model attribute",
       "file": "app/views/layouts/site.html.erb",
-      "line": 15,
+      "line": 14,
       "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
       "code": "Site.first_or_create(:name => \"Geeknote\").site_footer_html",
       "render_path": [
@@ -49,7 +49,7 @@
           "type": "controller",
           "class": "Account::BaseController",
           "method": "set_account",
-          "line": 10,
+          "line": 11,
           "file": "app/controllers/account/base_controller.rb",
           "rendered": {
             "name": "layouts/site",
@@ -83,7 +83,7 @@
           "type": "controller",
           "class": "Account::BaseController",
           "method": "set_account",
-          "line": 10,
+          "line": 11,
           "file": "app/controllers/account/base_controller.rb",
           "rendered": {
             "name": "layouts/site",
@@ -93,7 +93,7 @@
         {
           "type": "template",
           "name": "layouts/site",
-          "line": 22,
+          "line": 23,
           "file": "app/views/layouts/site.html.erb",
           "rendered": {
             "name": "layouts/application",
@@ -119,7 +119,7 @@
       "check_name": "CrossSiteScripting",
       "message": "Unescaped model attribute",
       "file": "app/views/account/posts/show.html.erb",
-      "line": 237,
+      "line": 267,
       "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
       "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_header_html",
       "render_path": [
@@ -127,7 +127,7 @@
           "type": "controller",
           "class": "Account::PostsController",
           "method": "show",
-          "line": 14,
+          "line": 15,
           "file": "app/controllers/account/posts_controller.rb",
           "rendered": {
             "name": "account/posts/show",
@@ -172,6 +172,50 @@
     {
       "warning_type": "Cross-Site Scripting",
       "warning_code": 2,
+      "fingerprint": "4723943b10082e6a913f81c3bd39193b58c4f90885b21b434634c1a0eeeb19ca",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/account/_sidebar.html.erb",
+      "line": 80,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_footer_html",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Account::CommentsController",
+          "method": "index",
+          "line": 8,
+          "file": "app/controllers/account/comments_controller.rb",
+          "rendered": {
+            "name": "account/comments/index",
+            "file": "app/views/account/comments/index.html.erb"
+          }
+        },
+        {
+          "type": "template",
+          "name": "account/comments/index",
+          "line": 30,
+          "file": "app/views/account/comments/index.html.erb",
+          "rendered": {
+            "name": "account/_sidebar",
+            "file": "app/views/account/_sidebar.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "account/_sidebar"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
       "fingerprint": "6ea631e39118f712f9e5687673245d32d20d45b0e6b64be44562421ac967b2c3",
       "check_name": "CrossSiteScripting",
       "message": "Unescaped model attribute",
@@ -184,7 +228,7 @@
           "type": "controller",
           "class": "HomeController",
           "method": "sidebar",
-          "line": 25,
+          "line": 28,
           "file": "app/controllers/home_controller.rb",
           "rendered": {
             "name": "home/sidebar",
@@ -210,7 +254,7 @@
       "check_name": "CrossSiteScripting",
       "message": "Unescaped model attribute",
       "file": "app/views/account/posts/show.html.erb",
-      "line": 260,
+      "line": 290,
       "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
       "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_footer_html",
       "render_path": [
@@ -218,7 +262,7 @@
           "type": "controller",
           "class": "Account::PostsController",
           "method": "show",
-          "line": 14,
+          "line": 15,
           "file": "app/controllers/account/posts_controller.rb",
           "rendered": {
             "name": "account/posts/show",
@@ -244,7 +288,7 @@
       "check_name": "PermitAttributes",
       "message": "Potentially dangerous key allowed for mass assignment",
       "file": "app/controllers/dashboard/settings/members_controller.rb",
-      "line": 28,
+      "line": 31,
       "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
       "code": "params.require(:member).permit(:role)",
       "render_path": null,
@@ -267,7 +311,7 @@
       "check_name": "CrossSiteScripting",
       "message": "Unescaped model attribute",
       "file": "app/views/home/sidebar.html.erb",
-      "line": 74,
+      "line": 52,
       "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
       "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_footer_html",
       "render_path": [
@@ -275,7 +319,7 @@
           "type": "controller",
           "class": "HomeController",
           "method": "sidebar",
-          "line": 25,
+          "line": 28,
           "file": "app/controllers/home_controller.rb",
           "rendered": {
             "name": "home/sidebar",
@@ -301,7 +345,7 @@
       "check_name": "PermitAttributes",
       "message": "Potentially dangerous key allowed for mass assignment",
       "file": "app/controllers/dashboard/settings/members_controller.rb",
-      "line": 12,
+      "line": 14,
       "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
       "code": "params.require(:member).permit(:invitation_email, :role)",
       "render_path": null,
@@ -316,7 +360,51 @@
         915
       ],
       "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "f67084482384d7361e4d76e3a6f7836e574eca5488f9e0924a3eceb3d0619a5c",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/account/_sidebar.html.erb",
+      "line": 3,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_header_html",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Account::CommentsController",
+          "method": "index",
+          "line": 8,
+          "file": "app/controllers/account/comments_controller.rb",
+          "rendered": {
+            "name": "account/comments/index",
+            "file": "app/views/account/comments/index.html.erb"
+          }
+        },
+        {
+          "type": "template",
+          "name": "account/comments/index",
+          "line": 30,
+          "file": "app/views/account/comments/index.html.erb",
+          "rendered": {
+            "name": "account/_sidebar",
+            "file": "app/views/account/_sidebar.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "account/_sidebar"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
     }
   ],
-  "brakeman_version": "7.0.2"
+  "brakeman_version": "7.1.2"
 }
