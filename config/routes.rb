@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resources :tags, only: [ :index ]
   end
 
-  resources :organizations, only: [ :new, :create ]
+  resources :organizations, only: [ :index, :new, :create ]
   resources :notifications, only: [ :index ]
   resources :bookmarks, only: [ :index ]
 

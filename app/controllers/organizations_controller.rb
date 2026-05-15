@@ -1,6 +1,13 @@
 class OrganizationsController < ApplicationController
   before_action :require_authentication
 
+  def index
+    @organizations = Current.user.organizations
+      .select("organizations.*, members.role AS member_role")
+      .includes(:account)
+      .order(created_at: :desc)
+  end
+
   def new
     @organization = Organization.new
     @organization.build_account

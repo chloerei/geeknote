@@ -19,6 +19,7 @@ zh-CN:
         admin: 管理员
         contributor: 贡献者
         editor: 编辑
+        member: 成员
         owner: 拥有者
         writer: 作者
       organization:
@@ -125,6 +126,12 @@ zh-CN:
       unrestrict: 取消限制
     email_tests:
       send_test_email: Send test email
+  organizations:
+    index:
+      create_organization: 创建组织
+      no_organizations: 还没有加入任何组织
+      no_organizations_description: 你可以创建一个新组织，或者接受他人的邀请加入组织。
+
   account:
     comments:
       form:
@@ -232,6 +239,7 @@ zh-CN:
     merge: 合并
     merge_tags: 合并标签
     name: 名称
+    new: 新建
     new_comment: 新评论
     new_member: 新成员
     new_post: 新文章
