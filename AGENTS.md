@@ -9,7 +9,7 @@ Geeknote is a blog community platform built with Ruby on Rails 8.1.2, using Post
 ## Development Environment
 
 ### Setup
-- Ruby 3.4.7
+- Ruby 4.0.4
 - Rails 8.1.2
 - PostgreSQL database
 - Node.js for JavaScript/CSS bundling
