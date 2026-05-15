@@ -1,11 +1,11 @@
 <% content_for :content do %>
   <div class="drawer lg:drawer-open">
-    <input type="checkbox" class="drawer-toggle" id="drawer" />
+    <input type="checkbox" class="drawer-toggle" id="drawer">
 
     <%= render "layouts/dashboard/drawer_side" %>
 
     <div class="drawer-content">
-      <div class="max-w-7xl mx-auto px-6 pb-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 pb-6">
         <%= yield %>
       </div>
     </div>
