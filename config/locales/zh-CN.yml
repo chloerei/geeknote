@@ -131,6 +131,9 @@ zh-CN:
       create_organization: 创建组织
       no_organizations: 还没有加入任何组织
       no_organizations_description: 你可以创建一个新组织，或者接受他人的邀请加入组织。
+    new:
+      title: 新组织
+      submit: 创建组织
 
   account:
     comments:
