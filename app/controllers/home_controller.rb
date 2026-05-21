@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   before_action :require_authentication, only: [ :following ]
 
   def index
-    @pagy, @posts = pagy(Post.published.order(score: :desc).includes(:account, :user))
+    @pagy, @posts = pagy(Post.published.where("likes_count > 0").order(score: :desc).includes(:account, :user))
     @page_titles.prepend t("general.home")
   end
 
