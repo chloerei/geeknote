@@ -128,7 +128,8 @@ module MarkdownHelper
       text,
       options: {
         extension: {
-          header_ids: nil
+          header_ids: nil,
+          alerts: true
         }
       },
       plugins: { syntax_highlighter: nil }

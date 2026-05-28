@@ -101,6 +101,62 @@
       }
     }
 
+    .markdown-alert {
+      margin: 1em 0;
+      padding: 1em;
+      border-left: 0.25em solid;
+      border-radius: 0 0.5em 0.5em 0;
+      background-color: color-mix(in srgb, var(--alert-color) 10%, transparent);
+      border-left-color: var(--alert-color);
+
+      .markdown-alert-title {
+        margin: 0 0 0.5em;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.35em;
+        color: var(--alert-color);
+
+        svg {
+          width: 1em;
+          height: 1em;
+          fill: currentColor;
+        }
+      }
+
+      p {
+        margin: 0.5em 0;
+
+        &:first-of-type {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .markdown-alert-note {
+      --alert-color: var(--color-info);
+    }
+
+    .markdown-alert-tip {
+      --alert-color: var(--color-success);
+    }
+
+    .markdown-alert-important {
+      --alert-color: var(--color-primary);
+    }
+
+    .markdown-alert-warning {
+      --alert-color: var(--color-warning);
+    }
+
+    .markdown-alert-caution {
+      --alert-color: var(--color-error);
+    }
+
     blockquote {
       margin: 1em 0;
       padding: 1em;
