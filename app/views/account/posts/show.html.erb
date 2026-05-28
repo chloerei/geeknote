@@ -49,8 +49,12 @@
         </figure>
       <% end %>
 
-      <div class="p-4">
-        <div class="flex gap-4">
+      <div class="card-body">
+        <h1 class="text-3xl font-medium">
+          <%= @post.title %>
+        </h1>
+
+        <div class="flex gap-4 mt-4">
           <div class="shrink-0">
             <a href="<%= account_root_path(@post.user.account.name) %>">
               <%= image_tag avatar_url(@post.user), alt: "avatar", class: "w-10 h-10 rounded-full" %>
@@ -82,67 +86,61 @@
           </div>
         </div>
 
-        <div class="mt-6">
-          <article class="mt-6">
-            <h1 class="text-3xl font-medium">
-              <%= @post.title %>
-            </h1>
+        <% if @post.tags.any? %>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <% @post.tags.each do |tag| %>
+              <a href="<%= tag_path(tag.name) %>" class="btn btn-soft btn-sm">
+                #<%= tag.name %>
+              </a>
+            <% end %>
+          </div>
+        <% end %>
 
-            <% if @post.tags.any? %>
-              <div class="flex flex-wrap gap-2 mt-6">
-                <% @post.tags.each do |tag| %>
-                  <a href="<%= tag_path(tag.name) %>" class="btn btn-soft btn-sm">
-                    #<%= tag.name %>
-                  </a>
-                <% end %>
+        <article class="mt-4">
+          <div id="post-content" class="typography">
+            <%= markdown_render @post.content %>
+          </div>
+        </article>
+
+        <div data-controller="post-view-tracker" data-post-view-tracker-url-value="<%= account_post_views_path(@account.name, @post) %>"></div>
+
+        <div class="sticky flex justify-center px-4 mt-8 bottom-4">
+          <div class="flex gap-2 p-2 bg-base-100 border border-base-300 rounded-full">
+            <%= render "account/posts/likes/button", post: @post %>
+
+            <% if @post.allow_comments? %>
+              <div class="inline-flex items-center">
+                <a href="<%= account_post_comments_path(@account.name, @post, comment: true) %>" class="btn btn-ghost btn-circle">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-icon lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
+                </a>
+                <span class="text-sm tabular-nums"><%= @post.comments_count %></span>
               </div>
             <% end %>
 
-            <div id="post-content" class="typography mt-6">
-              <%= markdown_render @post.content %>
-            </div>
-          </article>
+            <%= render "account/posts/bookmarks/button", post: @post %>
 
-          <div data-controller="post-view-tracker" data-post-view-tracker-url-value="<%= account_post_views_path(@account.name, @post) %>"></div>
-
-          <div class="sticky flex justify-center px-4 mt-8 bottom-4">
-            <div class="flex gap-2 p-2 bg-base-100 border border-base-300 rounded-full">
-              <%= render "account/posts/likes/button", post: @post %>
-
-              <% if @post.allow_comments? %>
-                <div class="inline-flex items-center">
-                  <a href="<%= account_post_comments_path(@account.name, @post, comment: true) %>" class="btn btn-ghost btn-circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-icon lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
+            <div class="dropdown dropdown-end dropdown-top">
+              <label tabindex="0" type="button" class="btn btn-ghost btn-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-icon lucide-ellipsis"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </label>
+              <div tabindex="0" class="dropdown-content menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li>
+                  <button type="button" class="menu__item" data-controller="copy-link" data-action="copy-link#copy" data-copy-link-url-value="<%= account_post_path(@account.name, @post) %>">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    <span><%= t "general.copy_link" %></span>
+                  </button>
+                </li>
+                <li class="hidden visible-to-user--<%= @post.user.id %>">
+                  <a href="<%= edit_dashboard_post_path(@account.name, @post) %>">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+                    <span><%= t "general.edit" %></span>
                   </a>
-                  <span class="text-sm tabular-nums"><%= @post.comments_count %></span>
-                </div>
-              <% end %>
-
-              <%= render "account/posts/bookmarks/button", post: @post %>
-
-              <div class="dropdown dropdown-end dropdown-top">
-                <label tabindex="0" type="button" class="btn btn-ghost btn-circle">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-icon lucide-ellipsis"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-                </label>
-                <div tabindex="0" class="dropdown-content menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
-                  <li>
-                    <button type="button" class="menu__item" data-controller="copy-link" data-action="copy-link#copy" data-copy-link-url-value="<%= account_post_path(@account.name, @post) %>">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                      <span><%= t "general.copy_link" %></span>
-                    </button>
-                  </li>
-                  <li class="hidden visible-to-user--<%= @post.user.id %>">
-                    <a href="<%= edit_dashboard_post_path(@account.name, @post) %>">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
-                      <span><%= t "general.edit" %></span>
-                    </a>
-                  </li>
-                </div>
+                </li>
               </div>
             </div>
           </div>
-
         </div>
+
       </div>
     </div>
 

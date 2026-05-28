@@ -1,5 +1,7 @@
 @layer utilities {
   .typography {
+    font-size: 1rem;
+
     *:first-child {
       margin-top: 0;
     }
@@ -8,7 +10,12 @@
       margin-bottom: 0;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       margin: 1.5em 0 0.75em;
       font-weight: 500;
       line-height: 1.25;
@@ -154,7 +161,10 @@
         margin: 0;
       }
 
-      .c, .ch, .cd, .cpf {
+      .c,
+      .ch,
+      .cd,
+      .cpf {
         color: #75715e;
         font-style: italic;
       }
@@ -228,7 +238,8 @@
         color: #aaaaaa;
       }
 
-      .k, .kv {
+      .k,
+      .kv {
         color: #66d9ef;
         font-weight: bold;
       }
@@ -293,7 +304,9 @@
         color: #ae81ff;
       }
 
-      .m, .mb, .mx {
+      .m,
+      .mb,
+      .mx {
         color: #ae81ff;
       }
 
@@ -346,7 +359,8 @@
         color: #e6db74;
       }
 
-      .s, .dl {
+      .s,
+      .dl {
         color: #e6db74;
       }
 
@@ -369,7 +383,8 @@
         font-weight: bold;
       }
 
-      .nf, .fm {
+      .nf,
+      .fm {
         color: #a6e22e;
         font-weight: bold;
       }
@@ -406,7 +421,8 @@
         color: #f8f8f2;
       }
 
-      .nv, .vm {
+      .nv,
+      .vm {
         color: #f8f8f2;
       }
 
