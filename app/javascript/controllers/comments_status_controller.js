@@ -1,22 +1,22 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="comments-status"
 export default class extends Controller {
   static values = {
     likedIds: Array,
-  }
+  };
 
   connect() {
-    this.updateLikes()
-    this.element.remove()
+    this.updateLikes();
+    this.element.remove();
   }
 
   updateLikes() {
-    this.likedIdsValue.forEach(id => {
-      const element = document.getElementById(`like_comment_${id}`)
+    this.likedIdsValue.forEach((id) => {
+      const element = document.getElementById(`like_comment_${id}`);
       if (element) {
-        element.classList.add("liked")
+        element.classList.add("active");
       }
-    })
+    });
   }
 }
