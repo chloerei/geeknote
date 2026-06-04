@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source "https://rubygems.org", cooldown: 7
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "4.0.5"
