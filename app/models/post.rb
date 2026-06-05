@@ -10,6 +10,7 @@ class Post < ApplicationRecord
 
   belongs_to :account
   belongs_to :user
+  belongs_to :series, optional: true
   has_many :bookmarks
 
   has_secure_token :preview_token
@@ -21,6 +22,8 @@ class Post < ApplicationRecord
     draft: 0,
     published: 1
   }
+
+  positioned on: [ :account, :series ]
 
   attribute :remove_featured_image, :boolean
 
