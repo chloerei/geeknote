@@ -1,0 +1,12 @@
+<%# locals: (series:) %>
+
+<li class="list-row items-center hover:bg-base-200">
+  <div class="list-col-grow min-w-0">
+    <div class="font-medium">
+      <a href="<%= dashboard_series_path(series.account.name, series) %>" class="before:absolute before:inset-0"><%= series.title %></a>
+    </div>
+  </div>
+  <div class="text-sm text-base-content/70 whitespace-nowrap">
+    <span class="tabular-nums"><%= series.posts.count %></span> <%= t("general.posts") %>
+  </div>
+</li>

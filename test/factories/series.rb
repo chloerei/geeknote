@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :series do
-    account
+    account factory: :user_account
     title { "Series Title" }
   end
 end

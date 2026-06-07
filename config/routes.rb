@@ -88,6 +88,8 @@ Rails.application.routes.draw do
       resources :posts, only: [ :index, :show ]
     end
 
+    resources :series
+
     namespace :settings do
       root to: "home#index"
       resource :profile, only: [ :show, :update ]

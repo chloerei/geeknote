@@ -1,0 +1,32 @@
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <label for="drawer" class="btn btn-square btn-ghost lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </label>
+  </div>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      <%= t "general.series" %>
+    </div>
+  </div>
+  <div class="flex-none">
+    <a href="<%= new_dashboard_series_path(@account.name) %>" class="btn btn-primary">
+      <%= t "general.new_series" %>
+    </a>
+  </div>
+</div>
+
+<div class="card card-default">
+  <div class="card-body">
+    <% if @series.any? %>
+      <%= render "components/scroll_pagination", pagy: @pagy, content_class: "list" do %>
+        <%= render partial: "series", collection: @series %>
+      <% end %>
+    <% else %>
+      <div class="flex flex-col items-center gap-3 py-12 text-base-content/50">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-text-icon lucide-book-text"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/><path d="M8 11h8"/><path d="M8 7h6"/></svg>
+        <p><%= t "dashboard.series.index.empty" %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

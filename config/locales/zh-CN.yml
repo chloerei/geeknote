@@ -6,6 +6,15 @@ zh-CN:
         feed_mark_canonical: 标记原文链接
         feed_url: RSS/Atom Feed URL
         name: 账号名
+      series:
+        add_new_at: 新增文章位置
+        description: 简介
+        title: 名称
+        posts_count: 文章数量
+        created_at: 创建时间
+      "series/add_new_at":
+        bottom: 列表底部
+        top: 列表顶部
       comment:
         content: 评论
       export/status:
@@ -161,6 +170,21 @@ zh-CN:
           success: 文章已发布。
       update:
         success: 更新成功
+    series:
+      create:
+        success: 系列已创建。
+      update:
+        success: 系列已更新。
+      destroy:
+        success: 系列已删除。
+        confirm: 确认删除此系列？
+      index:
+        empty: 还没有创建任何系列
+      show:
+        empty: 这个系列还没有文章
+      form:
+        add_new_at_bottom_description: 新增的文章将添加到系列列表的底部
+        add_new_at_top_description: 新增的文章将添加到系列列表的顶部
     settings:
       exports:
         create:
@@ -220,6 +244,7 @@ zh-CN:
     edit_organization: 编辑组织
     edit_post: 编辑文章
     edit_profile: 编辑资料
+    edit_series: 编辑系列
     edit_tag: 编辑标签
     edit_user: 编辑用户
     end_label: "- END -"
@@ -246,6 +271,7 @@ zh-CN:
     new_comment: 新评论
     new_member: 新成员
     new_post: 新文章
+    new_series: 新系列
     newest: 最新
     notification: 通知
     notification_settings: 通知设置
@@ -266,6 +292,8 @@ zh-CN:
     post_views: 文章浏览
     posts: 文章
     posts_count: "%{count} 篇文章"
+    series: 系列
+    series_count: "%{count} 个系列"
     preview: 预览
     profile: 资料
     public_link: 公开链接

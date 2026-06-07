@@ -1,0 +1,37 @@
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <a href="<%= dashboard_series_path(@account.name, @series) %>" class="btn btn-ghost btn-square">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+    </a>
+  </div>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      <%= t "general.edit_series" %>
+    </div>
+  </div>
+</div>
+
+<div class="card card-default">
+  <div class="card-body">
+    <div class="max-w-screen-sm">
+      <%= form_with model: @series, url: dashboard_series_path(@account.name, @series) do |form| %>
+        <%= render "components/text_field", form: form, name: :title %>
+        <%= render "components/text_area", form: form, name: :description, options: { rows: 4 } %>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend"><%= t "activerecord.attributes.series.add_new_at" %></legend>
+          <div class="space-y-2">
+            <%= render "components/radio_button_field", form: form, name: :add_new_at, value: "bottom", label: t("activerecord.attributes.series/add_new_at.bottom"), description: t("dashboard.series.form.add_new_at_bottom_description") %>
+            <%= render "components/radio_button_field", form: form, name: :add_new_at, value: "top", label: t("activerecord.attributes.series/add_new_at.top"), description: t("dashboard.series.form.add_new_at_top_description") %>
+          </div>
+        </fieldset>
+
+        <div class="mt-4">
+          <button type="submit" class="btn btn-primary">
+            <%= t "general.save_changes" %>
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
