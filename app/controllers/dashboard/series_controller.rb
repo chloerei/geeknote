@@ -9,8 +9,8 @@ class Dashboard::SeriesController < Dashboard::BaseController
 
   def show
     @series = @account.series.find(params[:id])
-    posts = @series.posts.order(position: :asc)
-    @pagy, @posts = pagy(posts)
+    @posts = @series.posts.order(position: :asc)
+    # @pagy, @posts = pagy(posts)
 
     @page_titles.prepend @series.title
   end

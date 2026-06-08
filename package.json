@@ -20,6 +20,7 @@
     "daisyui": "^5.5.5",
     "esbuild": "^0.27.2",
     "local-time": "^3.0.3",
+    "sortablejs": "^1.15.7",
     "tom-select": "^2.4.3"
   },
   "scripts": {

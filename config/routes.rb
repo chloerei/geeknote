@@ -88,7 +88,11 @@ Rails.application.routes.draw do
       resources :posts, only: [ :index, :show ]
     end
 
-    resources :series
+    resources :series do
+      scope module: "series" do
+        resources :posts, only: [ :update ]
+      end
+    end
 
     namespace :settings do
       root to: "home#index"
