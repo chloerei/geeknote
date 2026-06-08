@@ -115,6 +115,13 @@
                 </div>
               </fieldset>
 
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend">
+                  <%= t "general.series" %>
+                </legend>
+                <%= form.collection_select :series_id, post.account.series.order(:title), :id, :title, { include_blank: t(".no_series") }, class: "select" %>
+              </fieldset>
+
               <%= render "components/text_field", form: form, name: :canonical_url %>
 
               <fieldset class="fieldset">
