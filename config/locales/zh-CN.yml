@@ -88,6 +88,8 @@ zh-CN:
           attributes:
             canonical_url:
               invalid_url: 不是有效的 URL。
+            series:
+              account_mismatch: 必须属于同一个账号。
         user:
           attributes:
             current_password:
