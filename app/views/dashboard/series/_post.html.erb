@@ -1,0 +1,27 @@
+<div class="list-row items-center hover:bg-base-200">
+  <div class="cursor-grab text-base-content/40">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grip-vertical-icon lucide-grip-vertical"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+  </div>
+  <div class="list-col-grow">
+    <span class="text-base font-medium line-clamp-1">
+      <%= post.title.presence || t("general.untitled") %>
+    </span>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <% case post.status %>
+    <% when "published" %>
+      <div class="badge badge-primary badge-soft">
+        <%= t "general.published" %>
+      </div>
+    <% when "draft" %>
+      <div class="badge badge-neutral badge-soft">
+        <%= t "general.draft" %>
+      </div>
+    <% end %>
+
+    <a href="<%= edit_dashboard_post_path(post.account.name, post) %>" class="btn btn-ghost btn-sm btn-square">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+    </a>
+  </div>
+</div>

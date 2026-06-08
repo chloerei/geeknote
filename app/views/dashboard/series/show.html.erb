@@ -51,7 +51,7 @@
 
     <% if @posts.any? %>
       <div class="list">
-        <%= render partial: "dashboard/posts/post", collection: @posts %>
+        <%= render partial: "post", collection: @posts %>
       </div>
 
       <%= render "components/scroll_pagination", pagy: @pagy %>
