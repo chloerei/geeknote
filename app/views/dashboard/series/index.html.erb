@@ -19,7 +19,7 @@
 <div class="card card-default">
   <div class="card-body">
     <% if @series.any? %>
-      <%= render "components/scroll_pagination", pagy: @pagy, content_class: "list" do %>
+      <%= render "components/scroll_pagination", pagy: @pagy, content_html: { class: "list" } do %>
         <%= render partial: "series", collection: @series %>
       <% end %>
     <% else %>

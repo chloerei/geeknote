@@ -20,7 +20,7 @@
     </div>
 
     <div class="mt-4">
-      <%= render "components/scroll_pagination", pagy: @pagy, content_class: "space-y-4" do %>
+      <%= render "components/scroll_pagination", pagy: @pagy, content_html: { class: "space-y-4" } do %>
         <%= render partial: "account/series/series", collection: @series, as: :series %>
       <% end %>
     </div>

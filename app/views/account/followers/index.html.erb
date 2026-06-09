@@ -24,7 +24,7 @@
 
 <div class="card card-default mt-4">
   <div class="card-body">
-    <%= render "components/scroll_pagination", pagy: @pagy, content_class: "list" do %>
+    <%= render "components/scroll_pagination", pagy: @pagy, content_html: { class: "list" } do %>
       <%= render partial: "account/item", collection: @accounts, as: :account %>
     <% end %>
   </div>
