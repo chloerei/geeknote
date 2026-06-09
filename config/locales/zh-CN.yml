@@ -184,7 +184,7 @@ zh-CN:
       index:
         empty: 还没有创建任何系列
       show:
-        empty: 这个系列还没有文章
+        empty: 此系列还没有任何文章
       form:
         add_new_at_bottom_description: 新增的文章将添加到系列列表的底部
         add_new_at_top_description: 新增的文章将添加到系列列表的顶部

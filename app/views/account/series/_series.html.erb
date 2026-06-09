@@ -1,0 +1,28 @@
+<%# locals: (series:) %>
+
+<div class="card card-default relative">
+  <div class="card-body">
+    <h3 class="font-medium">
+      <a href="<%= account_series_path(series.account.name, series) %>" class="after:absolute after:inset-0">
+        <%= series.title %>
+      </a>
+    </h3>
+
+    <% if series.description.present? %>
+      <div class="text-base-content/80 mt-2 line-clamp-2">
+        <%= series.description %>
+      </div>
+    <% end %>
+
+    <div class="text-base-content/80 mt-2 text-sm">
+      <span>
+        <%= series.posts.count %>
+        <%= t "general.posts" %>
+      </span>
+      &centerdot;
+      <span>
+        <%= format_time series.updated_at %>
+      </span>
+    </div>
+  </div>
+</div>

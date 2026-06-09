@@ -9,7 +9,7 @@
 <div class="border-t border-b border-base-300 py-4">
   <div class="text-base mb-4">
     <span><%= t "general.series" %>: </span>
-    <a href="#" class="font-medium text-base-content hover:text-primary transition-colors"><%= series.title %></a>
+    <a href="<%= account_series_path(post.account.name, series) %>" class="font-medium text-base-content hover:text-primary transition-colors"><%= series.title %></a>
     <% if current_index %>
       <span class="text-base-content/50"><%= current_index + 1 %>/<%= total_count %></span>
     <% end %>

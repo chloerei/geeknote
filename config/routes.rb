@@ -116,6 +116,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :series, only: [ :index, :show ]
+
     resources :comments do
       scope module: "comments" do
         resource :like, only: [ :create, :destroy ]

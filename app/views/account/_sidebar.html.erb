@@ -29,6 +29,10 @@
           <div class="text-xl font-bold"><%= account.posts.published.count %></div>
           <div class="text-xs text-base-content/60"><%= t "general.posts" %></div>
         </div>
+        <div>
+          <div class="text-xl font-bold"><%= account.series.count %></div>
+          <div class="text-xs text-base-content/60"><%= t "general.series" %></div>
+        </div>
         <% if account.user? %>
           <div>
             <div class="text-xl font-bold"><%= account.owner.comments.count %></div>
