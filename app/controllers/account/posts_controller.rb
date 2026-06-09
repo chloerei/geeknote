@@ -11,6 +11,6 @@ class Account::PostsController < Account::BaseController
 
   def show
     @post = @account.posts.published.find params[:id]
-    @page_titles.prepend @post.title
+    @page_titles.prepend [ @post.series&.title, @post.title ].compact.join(" › ")
   end
 end
