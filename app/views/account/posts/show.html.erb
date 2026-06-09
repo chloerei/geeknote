@@ -96,10 +96,22 @@
           </div>
         <% end %>
 
-        <article class="mt-4">
+        <article class="mt-6">
+          <% if @post.series.present? %>
+            <div class="mb-6">
+              <%= render "series_navigation", post: @post %>
+            </div>
+          <% end %>
+
           <div id="post-content" class="typography">
             <%= markdown_render @post.content %>
           </div>
+
+          <% if @post.series.present? %>
+            <div class="mt-6">
+              <%= render "series_navigation", post: @post %>
+            </div>
+          <% end %>
         </article>
 
         <div data-controller="post-view-tracker" data-post-view-tracker-url-value="<%= account_post_views_path(@account.name, @post) %>"></div>
