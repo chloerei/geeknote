@@ -31,13 +31,19 @@ class Post < ApplicationRecord
   validates :featured_image, content_type: [ :png, :jpg, :jpeg ], size: { less_than: 5.megabytes }
   validate :series_account_match
 
-  before_save :set_published_at
+  before_save :set_published_at, :set_position
   after_save :condition_remove_featured_image
   after_touch :update_score
 
   def series_account_match
     if series.present? && series.account_id != account_id
       errors.add(:series, :account_mismatch)
+    end
+  end
+
+  def set_position
+    if series_id_changed? && series.present?
+      self.position = series.add_new_at_top? ? :first : :last
     end
   end
 

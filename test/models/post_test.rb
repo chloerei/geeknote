@@ -50,4 +50,38 @@ class PostTest < ActiveSupport::TestCase
     post.valid?
     assert_not post.errors.added?(:series, :account_mismatch)
   end
+
+  test "set_position adds post to top when series add_new_at is top" do
+    account = create(:user_account)
+    series = create(:series, account: account, add_new_at: :top)
+
+    create(:post, account: account, series: series, status: :published)
+    create(:post, account: account, series: series, status: :published)
+    top_post = create(:post, account: account, series: series, status: :published)
+
+    assert_equal 1, top_post.position
+  end
+
+  test "set_position adds post to bottom when series add_new_at is bottom" do
+    account = create(:user_account)
+    series = create(:series, account: account, add_new_at: :bottom)
+
+    create(:post, account: account, series: series, status: :published)
+    create(:post, account: account, series: series, status: :published)
+    bottom_post = create(:post, account: account, series: series, status: :published)
+
+    assert_equal 3, bottom_post.position
+  end
+
+  test "set_position does not change position when series_id is unchanged" do
+    account = create(:user_account)
+    series = create(:series, account: account, add_new_at: :bottom)
+
+    post = create(:post, account: account, series: series, status: :published)
+    create(:post, account: account, series: series, status: :published)
+    assert_equal 1, post.reload.position
+
+    post.update(title: "Updated title")
+    assert_equal 1, post.reload.position
+  end
 end
