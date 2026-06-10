@@ -96,7 +96,7 @@
               <tr class="hover">
                 <td>
                   <a href="<%= edit_dashboard_post_path(@account.name, post) %>" class="line-clamp-1 hover:underline">
-                    <%= post.title.presence || t("general.untitled") %>
+                    <%= post_title(post) %>
                   </a>
                 </td>
                 <td class="text-center"><%= post.likes_count %></td>
@@ -131,7 +131,7 @@
           <a href="<%= edit_dashboard_post_path(@account.name, post) %>" class="flex items-center justify-between p-3 rounded-lg hover:bg-base-200 transition-colors">
             <div class="flex items-center gap-3 min-w-0">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-icon lucide-file shrink-0 text-base-content/40"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
-              <span class="line-clamp-1"><%= post.title.presence || t("general.untitled") %></span>
+              <span class="line-clamp-1"><%= post_title(post) %></span>
             </div>
             <span class="text-xs text-base-content/50 shrink-0 ml-2 whitespace-nowrap">
               <%= post.updated_at.strftime("%Y-%m-%d") %>

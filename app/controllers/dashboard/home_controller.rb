@@ -9,12 +9,10 @@ class Dashboard::HomeController < Dashboard::BaseController
     @total_bookmarks = @posts_published.sum(:bookmarks_count)
 
     @recent_posts = @posts_published
-      .select(:id, :title, :published_at, :likes_count, :comments_count)
       .order(published_at: :desc)
       .limit(5)
 
     @recent_drafts = @posts_draft
-      .select(:id, :title, :updated_at)
       .order(updated_at: :desc)
       .limit(3)
   end

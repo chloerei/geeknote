@@ -2,7 +2,7 @@
   <div class="list-col-grow">
     <div>
       <a href="<%= edit_dashboard_post_path(post.account.name, post) %>" class="text-base font-medium line-clamp-1 after:absolute after:inset-0">
-        <%= post.title.presence || t("general.untitled") %>
+        <%= post_title(post) %>
       </a>
     </div>
     <div class="text-sm text-base-content/80 mt-2">
