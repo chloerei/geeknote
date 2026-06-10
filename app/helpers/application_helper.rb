@@ -38,6 +38,14 @@ module ApplicationHelper
     end
   end
 
+  def post_title(post)
+    if post.title.present?
+      [ post.series&.title, post.title ].compact.join(" › ")
+    else
+      t("general.untitled")
+    end
+  end
+
   def post_toc(post)
     doc = Nokogiri::HTML.fragment(markdown_render(post.content || ""))
     toc = doc.css("h2, h3").map do |heading|

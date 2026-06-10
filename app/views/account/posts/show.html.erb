@@ -1,6 +1,11 @@
+<%
+  @page_titles.prepend post_title(@post)
+  toc = markdown_toc @post.content
+%>
+
 <% content_for :head do %>
   <meta property="og:type" content="article">
-  <meta property="og:title" content="<%= @post.title %>">
+  <meta property="og:title" content="<%= post_title(@post) %>">
   <meta property="og:url" content="<%= account_post_url(@account.name, @post) %>">
   <meta property="og:description" content="<%= post_summary @post %>">
   <% if @post.featured_image.attached? %>
@@ -9,7 +14,7 @@
     <meta property="og:image" content="<%= avatar_url @post.user %>">
   <% end %>
 
-  <meta name="twitter:title" content="<%= @post.title %>">
+  <meta name="twitter:title" content="<%= post_title(@post) %>">
   <meta name="twitter:description" content="<%= post_summary @post %>">
   <% if @post.featured_image.attached? %>
     <meta name="twitter:card" content="summary_large_image">
@@ -21,10 +26,6 @@
 
   <link rel="canonical" href="<%= @post.canonical_url || account_post_url(@account.name, @post) %>">
 <% end %>
-
-<%
-  toc = markdown_toc @post.content
-%>
 
 <div class="navbar px-0 gap-4">
   <div class="flex-none">

@@ -6,11 +6,7 @@
           <div class="flex-1 min-w-0">
             <h3 class="text-base sm:text-lg font-semibold hover:text-primary transition-colors line-clamp-2">
               <a href="<%= account_post_path(post.account.name, post) %>" class="after:absolute after:inset-0">
-                <% if post.series.present? %>
-                  <span><%= post.series.title %></span>
-                  <span class="p-1">›</span>
-                <% end %>
-                <%= post.title.presence || t("general.untitled") %>
+                <%= post_title post %>
               </a>
             </h3>
             <p class="text-sm text-base-content/60 mt-2 line-clamp-2">
