@@ -119,7 +119,7 @@
       "check_name": "CrossSiteScripting",
       "message": "Unescaped model attribute",
       "file": "app/views/account/posts/show.html.erb",
-      "line": 267,
+      "line": 276,
       "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
       "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_header_html",
       "render_path": [
@@ -127,7 +127,7 @@
           "type": "controller",
           "class": "Account::PostsController",
           "method": "show",
-          "line": 15,
+          "line": 14,
           "file": "app/controllers/account/posts_controller.rb",
           "rendered": {
             "name": "account/posts/show",
@@ -176,7 +176,7 @@
       "check_name": "CrossSiteScripting",
       "message": "Unescaped model attribute",
       "file": "app/views/account/_sidebar.html.erb",
-      "line": 80,
+      "line": 84,
       "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
       "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_footer_html",
       "render_path": [
@@ -205,6 +205,40 @@
       "location": {
         "type": "template",
         "template": "account/_sidebar"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "4b54b9f654a684c26f57aacc9ed4e45aea4138d0ed296cdc356b463126f080e8",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/account/series/show.html.erb",
+      "line": 80,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_footer_html",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Account::SeriesController",
+          "method": "show",
+          "line": 17,
+          "file": "app/controllers/account/series_controller.rb",
+          "rendered": {
+            "name": "account/series/show",
+            "file": "app/views/account/series/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "account/series/show"
       },
       "user_input": null,
       "confidence": "Medium",
@@ -254,7 +288,7 @@
       "check_name": "CrossSiteScripting",
       "message": "Unescaped model attribute",
       "file": "app/views/account/posts/show.html.erb",
-      "line": 290,
+      "line": 299,
       "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
       "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_footer_html",
       "render_path": [
@@ -262,7 +296,7 @@
           "type": "controller",
           "class": "Account::PostsController",
           "method": "show",
-          "line": 15,
+          "line": 14,
           "file": "app/controllers/account/posts_controller.rb",
           "rendered": {
             "name": "account/posts/show",
@@ -330,6 +364,40 @@
       "location": {
         "type": "template",
         "template": "home/sidebar"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "d6d9ba83b27eb0e0cd0a0ed77a7b417993e7f881e0df48de5cd9a43c00ba1025",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/account/series/show.html.erb",
+      "line": 70,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Site.first_or_create(:name => \"Geeknote\").sidebar_header_html",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Account::SeriesController",
+          "method": "show",
+          "line": 17,
+          "file": "app/controllers/account/series_controller.rb",
+          "rendered": {
+            "name": "account/series/show",
+            "file": "app/views/account/series/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "account/series/show"
       },
       "user_input": null,
       "confidence": "Medium",
