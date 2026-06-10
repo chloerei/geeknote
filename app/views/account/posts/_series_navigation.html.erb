@@ -6,7 +6,7 @@
 <% previous_post = published_posts.where("position < ?", post.position).last %>
 <% next_post = published_posts.where("position > ?", post.position).first %>
 
-<div class="border-t border-b border-base-300 py-4">
+<div>
   <div class="text-base mb-4">
     <span><%= t "general.series" %>: </span>
     <a href="<%= account_series_path(post.account.name, series) %>" class="font-medium text-base-content hover:text-primary transition-colors"><%= series.title %></a>
