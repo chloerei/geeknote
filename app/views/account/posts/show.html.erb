@@ -1,6 +1,11 @@
+<%
+  @page_titles.prepend post_title(@post)
+  toc = markdown_toc @post.content
+%>
+
 <% content_for :head do %>
   <meta property="og:type" content="article">
-  <meta property="og:title" content="<%= @post.title %>">
+  <meta property="og:title" content="<%= post_title(@post) %>">
   <meta property="og:url" content="<%= account_post_url(@account.name, @post) %>">
   <meta property="og:description" content="<%= post_summary @post %>">
   <% if @post.featured_image.attached? %>
@@ -9,7 +14,7 @@
     <meta property="og:image" content="<%= avatar_url @post.user %>">
   <% end %>
 
-  <meta name="twitter:title" content="<%= @post.title %>">
+  <meta name="twitter:title" content="<%= post_title(@post) %>">
   <meta name="twitter:description" content="<%= post_summary @post %>">
   <% if @post.featured_image.attached? %>
     <meta name="twitter:card" content="summary_large_image">
@@ -21,10 +26,6 @@
 
   <link rel="canonical" href="<%= @post.canonical_url || account_post_url(@account.name, @post) %>">
 <% end %>
-
-<%
-  toc = markdown_toc @post.content
-%>
 
 <div class="navbar px-0 gap-4">
   <div class="flex-none">
@@ -50,6 +51,12 @@
       <% end %>
 
       <div class="card-body">
+        <% if @post.series.present? %>
+          <div class="mb-6 pb-4 border-b border-base-300">
+            <%= render "series_navigation", post: @post %>
+          </div>
+        <% end %>
+
         <h1 class="text-3xl font-medium">
           <%= @post.title %>
         </h1>
@@ -96,11 +103,17 @@
           </div>
         <% end %>
 
-        <article class="mt-4">
+        <article class="mt-6">
           <div id="post-content" class="typography">
             <%= markdown_render @post.content %>
           </div>
         </article>
+
+        <% if @post.series.present? %>
+          <div class="mt-6 pt-4 border-t border-base-300">
+            <%= render "series_navigation", post: @post %>
+          </div>
+        <% end %>
 
         <div data-controller="post-view-tracker" data-post-view-tracker-url-value="<%= account_post_views_path(@account.name, @post) %>"></div>
 

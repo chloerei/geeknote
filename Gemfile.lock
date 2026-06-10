@@ -332,6 +332,9 @@ GEM
       racc
     pg (1.6.3-aarch64-linux)
     pg (1.6.3-x86_64-linux)
+    positioning (0.4.8)
+      activerecord (>= 6.1)
+      activesupport (>= 6.1)
     postal-rails (1.0.1)
       postal-ruby (>= 0.0.2, < 2.0)
     postal-ruby (1.0.1)
@@ -548,6 +551,7 @@ DEPENDENCIES
   newrelic_rpm
   pagy (~> 9.4.0)
   pg (~> 1.6.2)
+  positioning
   postal-rails (~> 1.0.1)
   premailer-rails (~> 1.12.0)
   propshaft (~> 1.3.1)

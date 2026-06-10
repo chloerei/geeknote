@@ -66,7 +66,7 @@
     </div>
 
     <div class="mt-4">
-      <%= render "components/scroll_pagination", pagy: @pagy, content_class: "space-y-4" do %>
+      <%= render "components/scroll_pagination", pagy: @pagy, content_html: { class: "space-y-4" } do %>
         <% case @type %>
         <% when "posts" %>
           <%= render partial: "post", collection: @posts %>

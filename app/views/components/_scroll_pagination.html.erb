@@ -1,9 +1,9 @@
-<%# locals: (pagy:, content_id: "scroll-pagination-content", content_class: "") %>
+<%# locals: (pagy:, content_html: {}) %>
 
 <div id="scroll-pagination" data-controller="scroll-pagination">
-  <div id="<%= content_id %>" class="<%= content_class %>" data-scroll-pagination-target="content">
+  <%= content_tag :div, **{ id: "scroll-pagination-content", class: "", data: { scroll_pagination_target: "content" } }.deep_merge(content_html) do %>
     <%= yield %>
-  </div>
+  <% end %>
 
   <div id="scroll-pagination-info" class="p-4" data-scroll-pagination-target="next">
     <% if pagy.next %>

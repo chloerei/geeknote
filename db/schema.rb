@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_20_093830) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_05_125602) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -206,19 +206,33 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_20_093830) do
     t.text "excerpt"
     t.boolean "featured", default: false
     t.integer "likes_count", default: 0
+    t.integer "position", null: false
     t.string "preview_token"
     t.datetime "published_at", precision: nil
     t.boolean "restricted", default: false
     t.integer "score", default: 0
+    t.bigint "series_id"
     t.integer "status", default: 0
     t.string "title"
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.integer "views_count", default: 0
+    t.index ["account_id", "series_id", "position"], name: "index_posts_on_account_id_and_series_id_and_position", unique: true
     t.index ["account_id"], name: "index_posts_on_account_id"
     t.index ["published_at"], name: "index_posts_on_published_at"
     t.index ["score"], name: "index_posts_on_score"
+    t.index ["series_id"], name: "index_posts_on_series_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "series", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.integer "add_new_at", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_series_on_account_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -280,6 +294,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_20_093830) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "series", "accounts"
   add_foreign_key "sessions", "users"
   add_foreign_key "taggings", "tags"
 end

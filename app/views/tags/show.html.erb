@@ -13,7 +13,7 @@
 
 <div class="layout-main-sidebar">
   <div class="">
-    <%= render "components/scroll_pagination", pagy: @pagy, content_class: "space-y-4" do %>
+    <%= render "components/scroll_pagination", pagy: @pagy, content_html: { class: "space-y-4" } do %>
       <%= render partial: "account/posts/post", collection: @posts, cached: -> post { [ post.account, post.user, post ] } %>
     <% end %>
   </div>

@@ -1,0 +1,63 @@
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <a href="<%= dashboard_series_index_path(@account.name) %>" class="btn btn-ghost btn-square">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+    </a>
+  </div>
+  <div class="grow min-w-0">
+    <div class="text-xl font-medium truncate">
+      <%= t "general.series" %>
+    </div>
+  </div>
+  <div class="flex-none flex gap-2">
+    <a href="<%= edit_dashboard_series_path(@account.name, @series) %>" class="btn btn-ghost">
+      <%= t "general.edit" %>
+    </a>
+    <div class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost btn-square">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical-icon lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      </label>
+      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+        <li>
+          <a href="<%= dashboard_series_path(@account.name, @series) %>" data-turbo-method="delete" data-turbo-confirm="<%= t("dashboard.series.destroy.confirm") %>" class="text-error">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2-icon lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+            <%= t "general.delete" %>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card card-default">
+  <div class="card-body">
+    <div class="flex items-start justify-between gap-4">
+      <div class="min-w-0">
+        <h2 class="card-title"><%= @series.title %></h2>
+        <% if @series.description.present? %>
+          <p class="mt-1 text-sm text-base-content/70"><%= @series.description %></p>
+        <% end %>
+      </div>
+    </div>
+    <div class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-base-content/60">
+      <span><%= t("activerecord.attributes.series.add_new_at") %>：<%= t("activerecord.attributes.series/add_new_at.#{@series.add_new_at}") %></span>
+    </div>
+  </div>
+</div>
+
+<div class="card card-default mt-4">
+  <div class="card-body">
+    <h3 class="text-lg font-medium mb-2"><%= t("general.posts") %></h3>
+
+    <% if @posts.any? %>
+      <%= render "components/scroll_pagination", pagy: @pagy, content_html: { class: "list", data: { controller: "sortable", sortable_handle_value: ".handle", sortable_resource_name_value: "post" } } do %>
+        <%= render partial: "post", collection: @posts %>
+      <% end %>
+    <% else %>
+      <div class="flex flex-col items-center gap-3 py-12 text-base-content/50">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text-icon lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+        <p><%= t("dashboard.series.show.empty") %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

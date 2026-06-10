@@ -88,6 +88,12 @@ Rails.application.routes.draw do
       resources :posts, only: [ :index, :show ]
     end
 
+    resources :series do
+      scope module: "series" do
+        resources :posts, only: [ :update ]
+      end
+    end
+
     namespace :settings do
       root to: "home#index"
       resource :profile, only: [ :show, :update ]
@@ -109,6 +115,8 @@ Rails.application.routes.draw do
         resources :views, only: [ :create ]
       end
     end
+
+    resources :series, only: [ :index, :show ]
 
     resources :comments do
       scope module: "comments" do

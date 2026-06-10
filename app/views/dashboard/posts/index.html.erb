@@ -52,7 +52,7 @@
 
 <div class="card card-default">
   <div class="card-body">
-    <%= render "components/scroll_pagination", pagy: @pagy, content_class: "list" do %>
+    <%= render "components/scroll_pagination", pagy: @pagy, content_html: { class: "list" } do %>
       <%= render partial: "post", collection: @posts %>
     <% end %>
   </div>

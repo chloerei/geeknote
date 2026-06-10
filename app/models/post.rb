@@ -10,6 +10,7 @@ class Post < ApplicationRecord
 
   belongs_to :account
   belongs_to :user
+  belongs_to :series, optional: true
   has_many :bookmarks
 
   has_secure_token :preview_token
@@ -22,14 +23,23 @@ class Post < ApplicationRecord
     published: 1
   }
 
+  positioned on: [ :account, :series ]
+
   attribute :remove_featured_image, :boolean
 
   validates :canonical_url, url: true, allow_blank: true
   validates :featured_image, content_type: [ :png, :jpg, :jpeg ], size: { less_than: 5.megabytes }
+  validate :series_account_match
 
   before_save :set_published_at
   after_save :condition_remove_featured_image
   after_touch :update_score
+
+  def series_account_match
+    if series.present? && series.account_id != account_id
+      errors.add(:series, :account_mismatch)
+    end
+  end
 
   scope :following_by, ->(user) {
     where(account: user.followings).or(where(user: user.following_users)).distinct

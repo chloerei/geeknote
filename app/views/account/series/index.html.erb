@@ -1,12 +1,7 @@
-<% content_for :head do %>
-  <%= auto_discovery_link_tag :atom, account_feed_url(@account.name, format: :atom) %>
-<% end %>
-
 <div class="navbar px-0 gap-4">
   <div class="flex-none">
     <a href="<%= root_path %>" class="btn btn-square btn-ghost">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ar
-ow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
     </a>
   </div>
   <div class="grow">
@@ -21,12 +16,12 @@ ow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></
     <%= render "account/profile_card", account: @account %>
 
     <div class="mt-4">
-      <%= render "account/tabs", active_tab: "posts" %>
+      <%= render "account/tabs", active_tab: "series" %>
     </div>
 
     <div class="mt-4">
       <%= render "components/scroll_pagination", pagy: @pagy, content_html: { class: "space-y-4" } do %>
-        <%= render partial: "account/posts/post", collection: @posts, cached: -> post { [ post.account, post.user, post ] } %>
+        <%= render partial: "account/series/series", collection: @series, as: :series %>
       <% end %>
     </div>
   </div>

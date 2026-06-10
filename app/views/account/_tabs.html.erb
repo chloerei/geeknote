@@ -7,4 +7,7 @@
       <%= t "general.comments" %>
     </a>
   <% end %>
+  <a href="<%= account_series_index_path(@account.name) %>" class="tab <%= 'tab-active' if active_tab == 'series' %>">
+    <%= t "general.series" %>
+  </a>
 </div>

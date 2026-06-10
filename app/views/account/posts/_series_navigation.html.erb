@@ -1,0 +1,43 @@
+<%# locals: (post:) %>
+<% series = post.series %>
+<% published_posts = series.posts.published.order(:position) %>
+<% total_count = published_posts.count %>
+<% current_index = published_posts.index(post) %>
+<% previous_post = published_posts.where("position < ?", post.position).last %>
+<% next_post = published_posts.where("position > ?", post.position).first %>
+
+<div>
+  <div class="text-base mb-4">
+    <span><%= t "general.series" %>: </span>
+    <a href="<%= account_series_path(post.account.name, series) %>" class="font-medium text-base-content hover:text-primary transition-colors"><%= series.title %></a>
+    <% if current_index %>
+      <span class="text-base-content/50"><%= current_index + 1 %>/<%= total_count %></span>
+    <% end %>
+  </div>
+
+  <div class="flex gap-2">
+    <% if previous_post %>
+      <a href="<%= account_post_path(previous_post.account.name, previous_post) %>" class="flex-1 flex items-center gap-3 p-3 rounded-box hover:bg-base-200 transition-colors group min-w-0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left shrink-0 text-base-content/40 group-hover:text-base-content/70 transition-colors"><path d="m15 18-6-6 6-6"/></svg>
+        <div class="min-w-0">
+          <div class="text-xs text-base-content/50"><%= t "general.previous" %></div>
+          <div class="text-sm font-medium truncate"><%= previous_post.title %></div>
+        </div>
+      </a>
+    <% else %>
+      <div class="flex-1"></div>
+    <% end %>
+
+    <% if next_post %>
+      <a href="<%= account_post_path(next_post.account.name, next_post) %>" class="flex-1 flex items-center gap-3 p-3 rounded-box hover:bg-base-200 transition-colors group min-w-0">
+        <div class="min-w-0 grow text-right">
+          <div class="text-xs text-base-content/50"><%= t "general.next" %></div>
+          <div class="text-sm font-medium truncate"><%= next_post.title %></div>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right shrink-0 text-base-content/40 group-hover:text-base-content/70 transition-colors"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    <% else %>
+      <div class="flex-1"></div>
+    <% end %>
+  </div>
+</div>
