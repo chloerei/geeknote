@@ -39,7 +39,7 @@
               </a>
             </div>
             <div class="text-sm text-base-content/60">
-              <%= @series.posts.count %> <%= t("general.posts") %>
+              <%= @series.posts.published.count %> <%= t("general.posts") %>
               &centerdot;
               <%= format_time @series.updated_at %>
             </div>
