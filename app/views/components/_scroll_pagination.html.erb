@@ -8,8 +8,9 @@
   <div id="scroll-pagination-info" class="p-4" data-scroll-pagination-target="next">
     <% if pagy.next %>
       <div class="text-center">
-        <a href="<%= pagy_url_for(pagy, pagy.next) %>" class="button button--text" data-scroll-pagination-target="nextLink">
+        <a href="<%= pagy_url_for(pagy, pagy.next) %>" class="btn btn-soft btn-block" data-action="scroll-pagination#load" data-scroll-pagination-target="nextLink" data-turbo-prefetch="false">
           <%= t "general.load_more" %>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
         </a>
       </div>
     <% else %>
