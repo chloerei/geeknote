@@ -136,7 +136,7 @@ GEM
     bcrypt (3.1.22)
     bigdecimal (4.1.2)
     bindex (0.8.1)
-    bootsnap (1.21.1)
+    bootsnap (1.24.6)
       msgpack (~> 1.2)
     brakeman (7.1.2)
       racc
@@ -302,7 +302,7 @@ GEM
       turbo-rails
     moonrope-client (1.0.5)
       json
-    msgpack (1.8.0)
+    msgpack (1.8.1)
     multi_xml (0.9.1)
       bigdecimal (>= 3.1, < 5)
     multipart-post (2.4.1)
@@ -527,7 +527,7 @@ DEPENDENCIES
   ahoy_matey (~> 5.4.1)
   aws-sdk-s3 (~> 1.212.0)
   bcrypt (~> 3.1.20)
-  bootsnap (~> 1.21.1)
+  bootsnap (~> 1.24.6)
   brakeman (~> 7.1.0)
   bundler-audit
   capybara (~> 3.40.0)
