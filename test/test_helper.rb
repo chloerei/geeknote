@@ -18,6 +18,14 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   include FactoryBot::Syntax::Methods
+
+  def png_file
+    @png_file ||= {
+      io: StringIO.new(Base64.decode64("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==")),
+      filename: "pixel.png",
+      content_type: "image/png"
+    }
+  end
 end
 
 class ActionDispatch::IntegrationTest

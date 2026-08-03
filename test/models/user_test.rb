@@ -1,8 +1,6 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-  PNG_1PX = Base64.decode64("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==")
-
   test "account name should be unique" do
     user_one = create(:user, account_attributes: { name: "user" })
     assert user_one.valid?
@@ -47,7 +45,7 @@ class UserTest < ActiveSupport::TestCase
     notification = create(:notification, user: user)
     member = create(:member, user: user)
     session = create(:session, user: user)
-    attachment = create(:attachment, user: user, file: { io: StringIO.new(PNG_1PX), filename: "pixel.png", content_type: "image/png" })
+    attachment = create(:attachment, user: user, file: png_file)
     visit = Ahoy::Visit.create!(user: user, visit_token: "visit-token-1", visitor_token: "visitor-token-1", started_at: Time.current)
     event = Ahoy::Event.create!(visit: visit, user: user, name: "Test event", time: Time.current)
     export = create(:export, account: account)
