@@ -1,6 +1,6 @@
 class Organization < ApplicationRecord
-  has_one :account, as: :owner, autosave: true
-  has_many :members
+  has_one :account, as: :owner, autosave: true, dependent: :destroy
+  has_many :members, dependent: :destroy
   has_many :users, through: :members
 
   has_one_attached :avatar do |attachable|
