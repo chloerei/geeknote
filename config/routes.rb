@@ -52,7 +52,7 @@ Rails.application.routes.draw do
     resources :attachments, only: [ :index, :show, :destroy ]
     resources :comments, only: [ :index, :show, :edit, :update, :destroy ]
     resources :members, only: [ :show, :destroy ]
-    resources :organizations, only: [ :index, :show, :edit, :update ]
+    resources :organizations, only: [ :index, :show, :edit, :update, :destroy ]
     resources :posts, only: [ :index, :show, :edit, :update, :destroy ] do
       member do
         patch :restrict
@@ -65,7 +65,7 @@ Rails.application.routes.draw do
         resource :merge, only: [ :new, :create ]
       end
     end
-    resources :users, only: [ :index, :show, :edit, :update ]
+    resources :users, only: [ :index, :show, :edit, :update, :destroy ]
     resources :email_tests, only: [ :index, :create ]
 
     mount MissionControl::Jobs::Engine, at: "/jobs"
