@@ -1,21 +1,22 @@
 class User < ApplicationRecord
-  has_one :account, as: :owner, autosave: true
-  has_many :posts
-  has_many :comments
-  has_many :members
+  has_one :account, as: :owner, autosave: true, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :members, dependent: :destroy
+  has_many :invited_members, class_name: "Member", foreign_key: :inviter_id, dependent: :nullify
   has_many :organizations, through: :members
   has_many :manage_accounts, -> { where(members: { role: Member.roles.values_at(:owner, :admin) }) }, through: :organizations, source: :account
   has_many :member_accounts, through: :organizations, source: :account
-  has_many :attachments
-  has_many :likes
+  has_many :attachments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: :likable, source_type: "Post"
-  has_many :notifications
-  has_many :follows
+  has_many :notifications, dependent: :destroy
+  has_many :follows, dependent: :destroy
   has_many :followings, through: :follows, source: :account
   has_many :following_users, through: :followings, source: :owner, source_type: "User"
-  has_many :bookmarks
+  has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_posts, through: :bookmarks, source: :post
-  has_many :visits, class_name: "Ahoy::Visit"
+  has_many :visits, class_name: "Ahoy::Visit", dependent: :destroy
 
   has_secure_password
   has_many :sessions, dependent: :destroy

@@ -4,10 +4,10 @@ class Account < ApplicationRecord
   extend Pagy::Meilisearch
 
   belongs_to :owner, polymorphic: true
-  has_many :posts
-  has_many :series
-  has_many :attachments
-  has_many :follows
+  has_many :posts, dependent: :destroy
+  has_many :series, dependent: :destroy
+  has_many :attachments, dependent: :destroy
+  has_many :follows, dependent: :destroy
   has_many :followers, through: :follows, source: :user
   has_many :follower_accounts, through: :followers, source: :account
   has_one :export, dependent: :destroy
