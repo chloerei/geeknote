@@ -1,5 +1,11 @@
 module Admin
   class OrganizationsController < Admin::ApplicationController
+    def destroy
+      OrganizationDeletionJob.perform_later(requested_resource)
+      flash[:notice] = t("admin.organizations.destroy.scheduled")
+      redirect_to after_resource_destroyed_path(requested_resource), status: :see_other
+    end
+
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
