@@ -28,8 +28,8 @@
           </p>
 
           <ul class="list-disc list-inside mt-3 space-y-1 text-sm text-base-content/80">
-            <li><%= t ".notice_posts" %></li>
-            <li><%= t ".notice_comments" %></li>
+            <li><%= t ".notice_posts_html", count: tag.strong(@user.account.posts.count) %></li>
+            <li><%= t ".notice_comments_html", count: tag.strong(@user.comments.count) %></li>
             <li><%= t ".notice_irreversible" %></li>
           </ul>
         </div>

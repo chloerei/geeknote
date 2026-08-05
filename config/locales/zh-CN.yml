@@ -219,8 +219,8 @@ zh-CN:
         show:
           warning: 此操作无法撤销，请谨慎操作。
           notice_html: 删除组织「%{name}」后，其下所有文章和成员关系将被永久删除。
-          notice_posts: 删除该组织发布的全部文章
-          notice_members: 删除全部成员及成员关系
+          notice_posts_html: 将删除该组织发布的 %{count} 篇文章
+          notice_members_html: 将删除该组织的 %{count} 条成员关系
           notice_irreversible: 此操作无法撤销
           account_name_label_html: 请输入 %{name} 以确认删除
       home:
@@ -439,8 +439,8 @@ zh-CN:
       show:
         warning: 此操作无法撤销，请谨慎操作。
         notice_html: 删除账号「%{name}」后，其下所有文章和评论将被永久删除。
-        notice_posts: 删除该账号发布的全部文章
-        notice_comments: 删除该账号发布的全部评论
+        notice_posts_html: 将删除该账号发布的 %{count} 篇文章
+        notice_comments_html: 将删除该账号发布的 %{count} 条评论
         notice_irreversible: 此操作无法撤销
         account_name_label_html: 请输入 %{name} 以确认删除
     notifications:
