@@ -5,7 +5,7 @@ class Member < ApplicationRecord
   has_secure_token :invitation_token
 
   enum :role, {
-    owner: 0,
+    owner: 0, # Deprecated: no longer assigned, kept for existing database records
     admin: 1,
     member: 2
   }

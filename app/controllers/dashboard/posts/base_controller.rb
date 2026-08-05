@@ -11,7 +11,7 @@ class Dashboard::Posts::BaseController < Dashboard::BaseController
     if @account.user?
       Current.user.posts
     else
-      if @member.owner? || @member.admin?
+      if @member.admin?
         @account.posts
       else
         @account.posts.where(user: Current.user)
