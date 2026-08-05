@@ -1,6 +1,6 @@
 <% @page_titles.prepend t("general.organizations") %>
 
-<div class="max-w-screen-sm mx-auto">
+<div class="max-w-screen-md mx-auto">
   <div class="navbar px-0 gap-4">
     <div class="flex-none">
       <a href="<%= root_path %>" class="btn btn-square btn-ghost">
@@ -25,7 +25,7 @@
       <% if @organizations.any? %>
         <ul class="list divide-y divide-base-300/50">
           <% @organizations.each do |organization| %>
-            <li class="list-row items-center gap-4 hover:bg-base-200/50 transition-colors relative">
+            <li class="list-row items-center gap-4">
               <div class="avatar">
                 <div class="size-12 rounded-full ring-2 ring-base-300/30">
                   <img src="<%= avatar_url(organization) %>" alt="<%= organization.name %>">
@@ -34,7 +34,7 @@
               <div class="list-col-grow min-w-0">
                 <div class="flex items-center gap-2">
                   <div class="font-semibold truncate">
-                    <a href="<%= account_root_path(organization.account.name) %>" class="after:absolute after:inset-0">
+                    <a href="<%= account_root_path(organization.account.name) %>" class="link link-hover">
                       <%= organization.name %>
                     </a>
                   </div>
@@ -46,11 +46,11 @@
                   @<%= organization.account.name %>
                 </div>
               </div>
-              <a href="<%= dashboard_root_path(organization.account.name) %>" class="btn btn-soft shrink-0 relative">
+              <a href="<%= dashboard_root_path(organization.account.name) %>" class="btn btn-soft shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard-icon lucide-layout-dashboard"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
                 <%= t "general.dashboard" %>
               </a>
-              <a href="<%= organization_leave_path(organization) %>" data-turbo-method="delete" data-turbo-confirm="<%= t(".leave_confirm") %>" class="btn btn-soft btn-error shrink-0 relative">
+              <a href="<%= organization_leave_path(organization) %>" data-turbo-method="delete" data-turbo-confirm="<%= t(".leave_confirm") %>" class="btn btn-soft btn-error shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
                 <%= t "general.leave" %>
               </a>
