@@ -1,5 +1,8 @@
 <div class="navbar px-0 gap-4">
-  <div class="flex-none">
+  <div class="flex-none flex items-center gap-2">
+    <a href="<%= dashboard_settings_root_path(@account.name) %>" class="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+    </a>
     <label for="drawer" class="btn btn-square btn-ghost lg:hidden">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
     </label>
@@ -16,74 +19,31 @@
   </div>
 </div>
 
-<div class="card card-default">
-  <div class="card-body">
-    <h2 class="card-title">
-      <%= t "general.members" %>
-    </h2>
+<div class="layout-main-sidebar">
+  <div>
+    <div class="card card-default">
+      <div class="card-body">
+        <h2 class="card-title">
+          <%= t "general.members" %>
+        </h2>
 
-    <ul class="list">
-      <% @account.owner.members.active.order(id: :asc).includes(:user).each do |member| %>
-        <li class="list-row items-center">
-          <div class="avatar">
-            <div class="size-10 rounded-full">
-              <img src="<%= avatar_url(member.user) %>">
-            </div>
-          </div>
-          <div class="">
-            <div class="font-medium">
-              <%= member.user.name %>
-            </div>
-            <div class="text-on-surface-variant">
-              <%= member.user.email %>
-            </div>
-          </div>
-          <div class="">
-            <span class="font-medium">
-              <%= member.role %>
-            </span>
-          </div>
-          <div class="dropdown dropdown-end">
-            <label tabindex="0" class="btn btn-ghost btn-circle">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical-icon lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-            </label>
-            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-              <li>
-                <a href="<%= edit_dashboard_settings_member_path(@account.name, member) %>">
-                  <%= t "general.edit" %>
-                </a>
-              </li>
-              <li>
-                <a href="<%= dashboard_settings_member_path(@account.name, member) %>" data-turbo-method="delete" data-turbo-confirm="Delete this member?">
-                  <%= t "general.delete" %>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-      <% end %>
-    </ul>
-
-    <% if @account.owner.members.pending.any? %>
-      <div class="mt-6">
-        <div class="card-title">
-          <%= t "general.invitations" %>
-        </div>
-
-        <ul class="list mt-4">
-          <% @account.owner.members.pending.order(id: :asc).includes(:user).each do |member| %>
+        <ul class="list">
+          <% @account.owner.members.active.order(id: :asc).includes(:user).each do |member| %>
             <li class="list-row items-center">
               <div class="avatar">
                 <div class="size-10 rounded-full">
-                  <img src="<%= asset_path("avatar.png") %>">
+                  <img src="<%= avatar_url(member.user) %>">
                 </div>
               </div>
-              <div>
+              <div class="">
+                <div class="font-medium">
+                  <%= member.user.name %>
+                </div>
                 <div class="text-on-surface-variant">
-                  <%= member.invitation_email %>
+                  <%= member.user.email %>
                 </div>
               </div>
-              <div>
+              <div class="">
                 <span class="font-medium">
                   <%= member.role %>
                 </span>
@@ -108,7 +68,54 @@
             </li>
           <% end %>
         </ul>
+
+        <% if @account.owner.members.pending.any? %>
+          <div class="mt-6">
+            <div class="card-title">
+              <%= t "general.invitations" %>
+            </div>
+
+            <ul class="list mt-4">
+              <% @account.owner.members.pending.order(id: :asc).includes(:user).each do |member| %>
+                <li class="list-row items-center">
+                  <div class="avatar">
+                    <div class="size-10 rounded-full">
+                      <img src="<%= asset_path("avatar.png") %>">
+                    </div>
+                  </div>
+                  <div>
+                    <div class="text-on-surface-variant">
+                      <%= member.invitation_email %>
+                    </div>
+                  </div>
+                  <div>
+                    <span class="font-medium">
+                      <%= member.role %>
+                    </span>
+                  </div>
+                  <div class="dropdown dropdown-end">
+                    <label tabindex="0" class="btn btn-ghost btn-circle">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical-icon lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                    </label>
+                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                      <li>
+                        <a href="<%= edit_dashboard_settings_member_path(@account.name, member) %>">
+                          <%= t "general.edit" %>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="<%= dashboard_settings_member_path(@account.name, member) %>" data-turbo-method="delete" data-turbo-confirm="Delete this member?">
+                          <%= t "general.delete" %>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>

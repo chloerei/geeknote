@@ -1,0 +1,66 @@
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <label for="drawer" class="btn btn-square btn-ghost lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </label>
+  </div>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      <%= t "general.settings" %>
+    </div>
+  </div>
+</div>
+
+<div class="layout-main-sidebar">
+  <div>
+    <div class="card card-default">
+      <div class="card-body">
+        <div class="list">
+          <a href="<%= dashboard_settings_profile_path(@account.name) %>" class="list-row hover:bg-base-200">
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-user-icon lucide-square-user"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M7 21v-2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/></svg>
+            </div>
+            <div>
+              <div class="font-medium">
+                <%= t "general.profile" %>
+              </div>
+              <div class="text-sm text-base-content/80">
+                <%= t ".profile_description" %>
+              </div>
+            </div>
+          </a>
+
+          <% if @account.organization? %>
+            <a href="<%= dashboard_settings_members_path(@account.name) %>" class="list-row hover:bg-base-200">
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+              </div>
+              <div>
+                <div class="font-medium">
+                  <%= t "general.members" %>
+                </div>
+                <div class="text-sm text-base-content/80">
+                  <%= t ".members_description" %>
+                </div>
+              </div>
+            </a>
+          <% end %>
+
+          <a href="<%= dashboard_settings_export_path(@account.name) %>" class="list-row hover:bg-base-200">
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-down-icon lucide-folder-down"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 10v6"/><path d="m15 13-3 3-3-3"/></svg>
+            </div>
+            <div>
+              <div class="font-medium">
+                <%= t "general.export" %>
+              </div>
+              <div class="text-sm text-base-content/80">
+                <%= t ".export_description" %>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

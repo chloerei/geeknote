@@ -1,6 +1,6 @@
 <div class="navbar px-0 gap-4">
   <div class="flex-none">
-    <a href="<%= dashboard_settings_members_path(@account.name) %>" class="btn btn-ghost btn-square">
+    <a href="<%= dashboard_settings_root_path(@account.name) %>" class="btn btn-ghost btn-square">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
     </a>
   </div>
@@ -11,53 +11,55 @@
   </div>
 </div>
 
-<div class="card card-default">
-  <div class="card-body">
-    <div class="max-w-screen-sm">
-      <div class="mb-4">
-        <% if @member.user %>
-          <div class="flex gap-4">
-            <div class="flex-shrink-0">
-              <img src="<%= avatar_url(@member.user) %>" class="w-10 h-10 rounded-full">
-            </div>
-            <div class="flex-grow">
-              <div class="font-medium">
-                <%= @member.user.name %>
+<div class="layout-main-sidebar">
+  <div>
+    <div class="card card-default">
+      <div class="card-body">
+        <div class="mb-4">
+          <% if @member.user %>
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <img src="<%= avatar_url(@member.user) %>" class="w-10 h-10 rounded-full">
               </div>
-              <div class="text-on-surface-variant">
-                <%= @member.user.email %>
-              </div>
-            </div>
-          </div>
-        <% else %>
-          <div class="flex items-center gap-4">
-            <div class="flex-shrink-0">
-              <img src="<%= asset_path("avatar.png") %>" class="w-10 h-10 rounded-full">
-            </div>
-            <div class="flex-grow">
-              <div class="text-on-surface-variant">
-                <%= @member.invitation_email %>
+              <div class="flex-grow">
+                <div class="font-medium">
+                  <%= @member.user.name %>
+                </div>
+                <div class="text-on-surface-variant">
+                  <%= @member.user.email %>
+                </div>
               </div>
             </div>
+          <% else %>
+            <div class="flex items-center gap-4">
+              <div class="flex-shrink-0">
+                <img src="<%= asset_path("avatar.png") %>" class="w-10 h-10 rounded-full">
+              </div>
+              <div class="flex-grow">
+                <div class="text-on-surface-variant">
+                  <%= @member.invitation_email %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <%= form_with model: @member, url: dashboard_settings_member_path(@account.name, @member) do |form| %>
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">
+              <%= t "general.role" %>
+            </legend>
+            <div class="space-y-2">
+              <%= render "components/radio_button_field", form: form, name: :role, value: "admin", label: "Admin", description: "Can manage member's posts and change dashboard settings." %>
+              <%= render "components/radio_button_field", form: form, name: :role, value: "member", label: "Member", description: "Can write and publish their own posts." %>
+            </div>
+          </fieldset>
+          <div class="mt-4">
+            <button type="submit" class="btn btn-primary">
+              <%= t "general.save_changes" %>
+            </button>
           </div>
         <% end %>
       </div>
-      <%= form_with model: @member, url: dashboard_settings_member_path(@account.name, @member) do |form| %>
-        <fieldset class="fieldset">
-          <legend class="fieldset-legend">
-            <%= t "general.role" %>
-          </legend>
-          <div class="space-y-2">
-            <%= render "components/radio_button_field", form: form, name: :role, value: "admin", label: "Admin", description: "Can manage member's posts and change dashboard settings." %>
-            <%= render "components/radio_button_field", form: form, name: :role, value: "member", label: "Member", description: "Can write and publish their own posts." %>
-          </div>
-        </fieldset>
-        <div class="mt-4">
-          <button type="submit" class="btn btn-primary">
-            <%= t "general.save_changes" %>
-          </button>
-        </div>
-      <% end %>
     </div>
   </div>
 </div>

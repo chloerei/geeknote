@@ -1,5 +1,8 @@
 <div class="navbar px-0 gap-4">
-  <div class="flex-none">
+  <div class="flex-none flex items-center gap-2">
+    <a href="<%= dashboard_settings_root_path(@account.name) %>" class="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+    </a>
     <label for="drawer" class="btn btn-square btn-ghost lg:hidden">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
     </label>
@@ -11,41 +14,43 @@
   </div>
 </div>
 
-<div class="card card-default">
-  <div class="card-body">
-    <div class="max-w-screen-sm">
-      <p>
-        <%= t ".export_description" %>
-      </p>
+<div class="layout-main-sidebar">
+  <div>
+    <div class="card card-default">
+      <div class="card-body">
+        <p>
+          <%= t ".export_description" %>
+        </p>
 
-      <div class="mt-4">
-        <%= form_with url: dashboard_settings_export_path, method: :post do |form| %>
-          <button type="submit" class="btn btn-primary">
-            <%= t "general.export" %>
-          </button>
+        <div class="mt-4">
+          <%= form_with url: dashboard_settings_export_path, method: :post do |form| %>
+            <button type="submit" class="btn btn-primary">
+              <%= t "general.export" %>
+            </button>
+          <% end %>
+        </div>
+
+        <% if @account.export %>
+          <div class="mt-4">
+            <div>
+              <%= t ".last_exported_at" %>
+              <%= format_time @account.export.created_at %>
+            </div>
+
+            <div class="mt-4">
+              <% if @account.export.completed? %>
+                <a href="<%= url_for(@account.export.file) %>" class="btn btn-soft">
+                  <%= t "general.download" %>
+                </a>
+              <% else %>
+                <span class="text-sm text-base-content/80">
+                  <%= t ".export_in_progress" %>
+                </span>
+              <% end %>
+            </div>
+          </div>
         <% end %>
       </div>
-
-      <% if @account.export %>
-        <div class="mt-4">
-          <div>
-            <%= t ".last_exported_at" %>
-            <%= format_time @account.export.created_at %>
-          </div>
-
-          <div class="mt-4">
-            <% if @account.export.completed? %>
-              <a href="<%= url_for(@account.export.file) %>" class="btn btn-soft">
-                <%= t "general.download" %>
-              </a>
-            <% else %>
-              <span class="text-sm text-base-content/80">
-                <%= t ".export_in_progress" %>
-              </span>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
     </div>
   </div>
 </div>
