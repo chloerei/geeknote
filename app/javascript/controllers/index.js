@@ -16,6 +16,9 @@ application.register("comment-form", CommentFormController)
 import CommentsStatusController from "./comments_status_controller"
 application.register("comments-status", CommentsStatusController)
 
+import ConfirmationController from "./confirmation_controller"
+application.register("confirmation", ConfirmationController)
+
 import CopyLinkController from "./copy_link_controller"
 application.register("copy-link", CopyLinkController)
 

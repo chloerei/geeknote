@@ -104,6 +104,7 @@ Rails.application.routes.draw do
       resources :members
       resource :import, only: [ :show, :update ]
       resource :export, only: [ :show, :create ]
+      resource :organization_deletion, only: [ :show, :create ]
     end
   end
 
