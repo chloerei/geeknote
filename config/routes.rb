@@ -22,7 +22,11 @@ Rails.application.routes.draw do
     resources :tags, only: [ :index ]
   end
 
-  resources :organizations, only: [ :index, :new, :create ]
+  resources :organizations, only: [ :index, :new, :create ] do
+    scope module: "organizations" do
+      resource :leave, only: [ :destroy ]
+    end
+  end
   resources :notifications, only: [ :index ]
   resources :bookmarks, only: [ :index ]
 

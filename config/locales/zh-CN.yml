@@ -148,6 +148,11 @@ zh-CN:
       create_organization: 创建组织
       no_organizations: 还没有加入任何组织
       no_organizations_description: 你可以创建一个新组织，或者接受他人的邀请加入组织。
+      leave_confirm: 确认离开该组织？离开后你将无法管理在该组织下发布的文章。
+    leaves:
+      destroy:
+        left: 已离开组织。
+        cannot_leave_last_admin: 你是该组织的唯一管理员，无法离开。请先添加另一位管理员，或者删除该组织。
     new:
       title: 新组织
       submit: 创建组织
@@ -271,6 +276,7 @@ zh-CN:
     joined_on: 加入于
     likes: 点赞
     load_more: 查看更多
+    leave: 离开
     manage: 管理
     members: 成员
     merge: 合并
