@@ -219,13 +219,9 @@ zh-CN:
           notice_members: 删除全部成员及成员关系
           notice_irreversible: 此操作无法撤销
           account_name_label_html: 请输入 %{name} 以确认删除
-      profiles:
-        show:
-          delete_organization_title: 删除组织
-          delete_organization_description: 删除后组织下的所有文章和成员关系将被永久删除，且无法撤销。
-          delete_organization_button: 删除组织
       home:
         index:
+          delete_organization_description: 永久删除组织及其全部文章和成员关系。此操作无法撤销。
           export_description: 导出文章。
           members_description: 管理账号成员。
           profile_description: 管理账号资料。

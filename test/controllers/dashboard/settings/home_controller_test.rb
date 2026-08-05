@@ -30,6 +30,24 @@ class Dashboard::Settings::HomeControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get dashboard_settings_root_path(organization.account.name)
     assert_response :success
+    assert_select "a[href='#{dashboard_settings_members_path(organization.account.name)}']"
+  end
+
+  test "should show delete organization link for organization account" do
+    organization = create(:organization)
+    create(:member, organization: organization, user: @user, role: "admin")
+
+    sign_in @user
+    get dashboard_settings_root_path(organization.account.name)
+    assert_response :success
+    assert_select "a[href='#{dashboard_settings_organization_deletion_path(organization.account.name)}']"
+  end
+
+  test "should not show delete organization link for user account" do
+    sign_in @user
+    get dashboard_settings_root_path(@user.account.name)
+    assert_response :success
+    assert_select "a[href='#{dashboard_settings_organization_deletion_path(@user.account.name)}']", count: 0
   end
 
   test "ordinary member should not get index" do
