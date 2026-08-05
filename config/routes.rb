@@ -38,7 +38,10 @@ Rails.application.routes.draw do
     resource :password
     resource :profile, only: [ :show, :update ]
     resource :notification
+    resource :account_deletion, only: [ :show, :create ]
   end
+
+  get "account-deleted", to: "pages#account_deleted", as: :account_deleted
 
   namespace :identity do
     resource :password, only: [ :new, :create, :edit, :update ]

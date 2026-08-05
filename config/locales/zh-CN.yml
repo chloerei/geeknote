@@ -157,6 +157,10 @@ zh-CN:
       title: 新组织
       submit: 创建组织
 
+  pages:
+    account_deleted:
+      title: 账号删除已开始
+      description: 你的资料正在后台删除，完成后将无法找回。感谢你使用 Geeknote。
   account:
     comments:
       form:
@@ -259,6 +263,7 @@ zh-CN:
     dashboard: 创作中心
     data: Data
     delete: 删除
+    delete_account: 删除账号
     delete_organization: 删除组织
     delete_post: 删除文章
     deleted_item: 已删除的内容
@@ -423,10 +428,21 @@ zh-CN:
         success: Email 更新成功。
     home:
       index:
+        delete_account_description: 永久删除账号及其全部文章和评论。此操作无法撤销。
         email_description: 更改邮箱地址
         notification_description: 更改通知设置
         password_description: 更改登录密码
         profile_description: 管理个人资料
+    account_deletions:
+      create:
+        account_name_mismatch: 输入的账号名不匹配，无法删除账号。
+      show:
+        warning: 此操作无法撤销，请谨慎操作。
+        notice_html: 删除账号「%{name}」后，其下所有文章和评论将被永久删除。
+        notice_posts: 删除该账号发布的全部文章
+        notice_comments: 删除该账号发布的全部评论
+        notice_irreversible: 此操作无法撤销
+        account_name_label_html: 请输入 %{name} 以确认删除
     notifications:
       show:
         comment_email_notification_description: 当有人评论我的内容时发送邮件通知。

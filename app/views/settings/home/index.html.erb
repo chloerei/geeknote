@@ -72,6 +72,20 @@ ow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></
               </div>
             </div>
           </a>
+
+          <a href="<%= settings_account_deletion_path %>" class="list-row hover:bg-base-200">
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2-icon lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+            </div>
+            <div>
+              <div class="font-medium">
+                <%= t "general.delete_account" %>
+              </div>
+              <div class="text-sm text-base-content/80">
+                <%= t ".delete_account_description" %>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </div>
