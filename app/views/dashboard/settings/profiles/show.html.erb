@@ -18,11 +18,7 @@
   <div>
     <div class="card card-default">
       <div class="card-body">
-        <% if @account.user? %>
-          <%= render "user_form", user: @account.owner %>
-        <% else %>
-          <%= render "organization_form", organization: @account.owner %>
-        <% end %>
+        <%= render "organization_form", organization: @organization %>
       </div>
     </div>
   </div>

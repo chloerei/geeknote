@@ -36,7 +36,7 @@
 
           <div class="shrink-0 mt-0.5">
             <% if Current.user && account.user? && account.owner == Current.user %>
-              <a href="<%= dashboard_settings_profile_path %>" class="btn btn-sm btn-soft">
+              <a href="<%= settings_profile_path %>" class="btn btn-sm btn-soft">
                 <%= t "general.edit_profile" %>
               </a>
             <% else %>

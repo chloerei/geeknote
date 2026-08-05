@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       post :resend
     end
     resource :password
+    resource :profile, only: [ :show, :update ]
     resource :notification
   end
 

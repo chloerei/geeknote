@@ -18,7 +18,7 @@ class Dashboard::Settings::BaseController < Dashboard::BaseController
 
   def require_organization_account
     if !@account.organization?
-      redirect_to dashboard_settings_root_path, alert: "You are not allowed to access this page"
+      redirect_to dashboard_settings_root_path(@account.name), alert: "You are not allowed to access this page"
     else
       @organization = @account.owner
     end

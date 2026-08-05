@@ -223,8 +223,8 @@ zh-CN:
         index:
           delete_organization_description: 永久删除组织及其全部文章和成员关系。此操作无法撤销。
           export_description: 导出文章。
-          members_description: 管理账号成员。
-          profile_description: 管理账号资料。
+          members_description: 管理组织成员。
+          profile_description: 管理组织资料。
   email:
     email_verification: 验证邮箱地址
     reset_your_geeknote_password: 重置密码
@@ -426,6 +426,7 @@ zh-CN:
         email_description: 更改邮箱地址
         notification_description: 更改通知设置
         password_description: 更改登录密码
+        profile_description: 管理个人资料
     notifications:
       show:
         comment_email_notification_description: 当有人评论我的内容时发送邮件通知。
@@ -435,3 +436,6 @@ zh-CN:
     passwords:
       update:
         success: 密码更新成功。
+    profiles:
+      update:
+        success: 资料更新成功。
