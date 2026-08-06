@@ -436,6 +436,7 @@ zh-CN:
     account_deletions:
       create:
         account_name_mismatch: 输入的账号名不匹配，无法删除账号。
+        must_leave_organizations: 你需要先退出所有组织后才能删除账号。
       show:
         warning: 此操作无法撤销，请谨慎操作。
         notice_html: 删除账号「%{name}」后，其下所有文章和评论将被永久删除。
@@ -443,6 +444,8 @@ zh-CN:
         notice_comments_html: 将删除该账号发布的 %{count} 条评论
         notice_irreversible: 此操作无法撤销
         account_name_label_html: 请输入 %{name} 以确认删除
+        must_leave_organizations: 删除账号前，你需要先退出所有组织。
+        view_organizations: 查看我的组织
     notifications:
       show:
         comment_email_notification_description: 当有人评论我的内容时发送邮件通知。
