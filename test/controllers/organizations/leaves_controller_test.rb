@@ -38,6 +38,19 @@ class Organizations::LeavesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to organizations_url
   end
 
+  test "admin cannot leave when the only other admin is pending" do
+    organization = create(:organization, name: "LeaveOrg")
+    create(:member, organization: organization, user: @user, role: :admin, status: :active)
+    pending_admin = create(:user)
+    create(:member, organization: organization, user: pending_admin, role: :admin, status: :pending)
+
+    sign_in @user
+    assert_no_difference "@user.members.count" do
+      delete organization_leave_path(organization)
+    end
+    assert_redirected_to dashboard_settings_root_path(organization.account.name)
+  end
+
   test "last admin cannot leave organization" do
     organization = create(:organization, name: "LeaveOrg")
     create(:member, organization: organization, user: @user, role: :admin)
@@ -46,7 +59,7 @@ class Organizations::LeavesControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference "@user.members.count" do
       delete organization_leave_path(organization)
     end
-    assert_redirected_to organizations_url
+    assert_redirected_to dashboard_settings_root_path(organization.account.name)
   end
 
   test "should not leave organization user does not belong to" do
