@@ -13,4 +13,13 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     user = User.last
     assert_enqueued_email_with UserMailer, :email_verification, params: { user: user }
   end
+
+  test "should not create user with blocked email domain" do
+    stub_const(User, :BLOCKED_EMAIL_DOMAINS, [ "spam.com" ]) do
+      assert_no_difference("User.count") do
+        post registration_url, params: { user: attributes_for(:user).merge(email: "user@spam.com") }
+      end
+      assert_response :unprocessable_content
+    end
+  end
 end

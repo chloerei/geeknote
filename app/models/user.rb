@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  ADMIN_EMAILS = ENV.fetch("ADMIN_EMAILS", "").split(",")
+  BLOCKED_EMAIL_DOMAINS = ENV.fetch("BLOCKED_EMAIL_DOMAINS", "").split(",")
+
   has_one :account, as: :owner, autosave: true, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -51,6 +54,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true
+  validate :email_domain_not_blocked, on: :create
   validates :avatar, content_type: [ :png, :jpg, :jpeg ], size: { less_than: 5.megabytes }
   validates :banner_image, content_type: [ :png, :jpg, :jpeg ], size: { less_than: 5.megabytes }
 
@@ -78,8 +82,16 @@ class User < ApplicationRecord
     self.email_verified_at = nil
   end
 
-  ADMIN_EMAILS = ENV.fetch("ADMIN_EMAILS", "").split(",")
   def admin?
     ADMIN_EMAILS.include?(email)
+  end
+
+  private
+
+  def email_domain_not_blocked
+    return if email.blank? || BLOCKED_EMAIL_DOMAINS.empty?
+
+    domain = email.split("@").last.to_s.downcase
+    errors.add(:email, :blocked_domain) if BLOCKED_EMAIL_DOMAINS.include?(domain)
   end
 end

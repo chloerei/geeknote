@@ -1,6 +1,22 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
+  test "should reject email with blocked domain on create" do
+    stub_const(User, :BLOCKED_EMAIL_DOMAINS, %w[spam.com blocked.org]) do
+      assert_not build(:user, email: "user@spam.com").valid?
+      assert_not build(:user, email: "user@BLOCKED.org").valid?
+      assert build(:user, email: "user@example.com").valid?
+    end
+  end
+
+  test "should allow blocked domain email on update for existing users" do
+    user = create(:user, email: "existing@spam.com")
+    assert user.valid?
+
+    user.update(name: "New Name")
+    assert user.valid?
+  end
+
   test "account name should be unique" do
     user_one = create(:user, account_attributes: { name: "user" })
     assert user_one.valid?
