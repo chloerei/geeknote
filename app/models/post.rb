@@ -12,6 +12,7 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :series, optional: true
   has_many :bookmarks
+  has_many :revisions, class_name: "PostRevision", dependent: :delete_all
 
   has_secure_token :preview_token
   has_one_attached :featured_image do |attachable|
@@ -26,6 +27,7 @@ class Post < ApplicationRecord
   positioned on: [ :account, :series ]
 
   attribute :remove_featured_image, :boolean
+  attribute :skip_revision, :boolean
 
   validates :canonical_url, url: true, allow_blank: true
   validates :featured_image, content_type: [ :png, :jpg, :jpeg ], size: { less_than: 5.megabytes }
@@ -33,6 +35,9 @@ class Post < ApplicationRecord
 
   before_save :set_published_at, :set_position
   after_save :condition_remove_featured_image
+  after_save :create_revision,
+    if: -> { saved_change_to_title? || saved_change_to_content? },
+    unless: :skip_revision
   after_touch :update_score
 
   def series_account_match
@@ -98,5 +103,9 @@ class Post < ApplicationRecord
 
   def condition_remove_featured_image
     featured_image.purge_later if remove_featured_image
+  end
+
+  def create_revision
+    revisions.create!(user: Current.user, title: title, content: content)
   end
 end

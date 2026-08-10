@@ -84,4 +84,52 @@ class PostTest < ActiveSupport::TestCase
     post.update(title: "Updated title")
     assert_equal 1, post.reload.position
   end
+
+  test "creates a revision when title or content changes" do
+    post = create(:post)
+    editor = create(:user)
+
+    Current.set(session: editor.sessions.create!) do
+      post.update(title: "New title", content: "New content")
+    end
+
+    revision = post.revisions.last
+    assert_equal "New title", revision.title
+    assert_equal "New content", revision.content
+    assert_equal editor, revision.user
+  end
+
+  test "creates a revision when a post is created with content" do
+    post = create(:post)
+    assert_equal 1, post.revisions.count
+    assert_equal "Title", post.revisions.last.title
+    assert_equal "Content", post.revisions.last.content
+  end
+
+  test "does not create an additional revision when only non-content fields change" do
+    post = create(:post)
+    post.update(status: :published)
+    assert_equal 1, post.revisions.count
+  end
+
+  test "does not create an additional revision when title and content are unchanged" do
+    post = create(:post)
+    post.update(excerpt: "Updated excerpt")
+    assert_equal 1, post.revisions.count
+  end
+
+  test "skips revision creation when skip_revision is set" do
+    post = create(:post, skip_revision: true)
+    post.update(title: "Changed")
+    assert_equal 0, post.revisions.count
+  end
+
+  test "deleting a post deletes its revisions" do
+    post = create(:post)
+    post.update(title: "New title")
+    assert_equal 2, post.revisions.count
+
+    post.destroy
+    assert_equal 0, PostRevision.where(post_id: post.id).count
+  end
 end
