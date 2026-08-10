@@ -135,7 +135,12 @@
             <% if post.persisted? %>
               <div class="divider"></div>
 
-              <button type="submit" class="btn btn-outline btn-error" form="delete-form">
+              <a href="<%= dashboard_post_revisions_path(post.account.name, post) %>" class="btn btn-outline w-full">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history-icon lucide-history"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+                <%= t ".revisions" %>
+              </a>
+
+              <button type="submit" class="btn btn-outline btn-error w-full mt-2" form="delete-form">
                 <%= t "general.delete_post" %>
               </button>
             <% end %>

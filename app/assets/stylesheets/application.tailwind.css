@@ -57,6 +57,39 @@
   }
 }
 
+@layer components {
+  .diff-text {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      padding: 0.125rem 0.5rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .del {
+      background: color-mix(in srgb, var(--color-error) 12%, transparent);
+
+      del {
+        color: var(--color-error);
+      }
+    }
+
+    .ins {
+      background: color-mix(in srgb, var(--color-success) 12%, transparent);
+
+      ins {
+        color: var(--color-success);
+        text-decoration: none;
+      }
+    }
+  }
+}
+
 @utility card-default {
   @apply bg-base-100 border border-base-300;
 }

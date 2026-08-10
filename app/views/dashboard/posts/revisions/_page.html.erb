@@ -1,0 +1,76 @@
+<%# locals: (revision:, previous:) %>
+
+<div class="drawer drawer-end lg:drawer-open">
+  <input type="checkbox" id="revisions-drawer-toggle" class="drawer-toggle">
+
+  <div class="drawer-content min-w-0">
+    <div class="navbar sticky top-0 z-10 px-4 gap-4 bg-base-200">
+      <div class="flex-none">
+        <a href="<%= edit_dashboard_post_path(@account.name, @post) %>" class="btn btn-ghost btn-square">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+        </a>
+      </div>
+      <div class="flex-grow min-w-0">
+        <div class="text-xl font-medium truncate"><%= @post.title %></div>
+        <div class="text-sm text-base-content/60"><%= t "dashboard.posts.revisions.index.title" %></div>
+      </div>
+      <div class="flex-none flex items-center gap-2">
+        <% if revision %>
+          <%= button_to t(".restore"), restore_dashboard_post_revision_path(@account.name, @post, revision),
+                method: :patch, class: "btn btn-primary" %>
+        <% end %>
+        <label for="revisions-drawer-toggle" class="btn btn-ghost btn-square lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-right-icon lucide-panel-right"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/></svg>
+        </label>
+      </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto p-4">
+      <% if revision.nil? %>
+        <div class="card card-default">
+          <div class="card-body text-center text-base-content/60">
+            <%= t ".empty" %>
+          </div>
+        </div>
+      <% elsif previous.nil? %>
+        <div class="card card-default">
+          <div class="card-body space-y-3">
+            <div class="diff-text text-3xl font-medium overflow-x-auto">
+              <%= diff_text("", revision.title) %>
+            </div>
+            <div class="diff-text text-base overflow-x-auto">
+              <%= diff_text("", revision.content) %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="card card-default">
+          <div class="card-body space-y-4">
+            <div class="diff-text text-3xl font-medium overflow-x-auto">
+              <%= diff_text(previous.title, revision.title) %>
+            </div>
+            <div class="diff-text text-base overflow-x-auto">
+              <%= diff_text(previous.content, revision.content) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="drawer-side z-10">
+    <label for="revisions-drawer-toggle" class="drawer-overlay"></label>
+    <div class="bg-base-100 border-l border-base-300 h-full w-80 flex flex-col">
+      <div class="navbar border-b border-base-300 px-4">
+        <div class="text-lg font-medium">
+          <%= t "dashboard.posts.revisions.index.title" %>
+        </div>
+      </div>
+      <div class="grow overflow-y-auto">
+        <ul class="list p-2">
+          <%= render partial: "revision_item", collection: @revisions, as: :revision, locals: { current: revision } %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

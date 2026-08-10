@@ -51,6 +51,9 @@ gem "rouge", "~> 4.7.0"
 # pagination
 gem "pagy", "~> 9.4.0"
 
+# version diffs
+gem "diffy"
+
 # inline email css
 gem "premailer-rails", "~> 1.12.0"
 

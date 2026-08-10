@@ -82,4 +82,10 @@ module ApplicationHelper
       link_to uri.host, uri.to_s
     end
   end
+
+  def diff_text(old, new)
+    html = Diffy::Diff.new(old.to_s, new.to_s, allow_empty_diff: false).to_s(:html)
+    # DaisyUI 5 自带名为 diff 的组件，避免类名冲突
+    sanitize html.gsub('class="diff"', 'class="diff-text"'), attributes: %w[class]
+  end
 end

@@ -1,6 +1,6 @@
-<%# locals: (pagy:, content_html: {}) %>
+<%# locals: (pagy:, content_html: {}, auto_load: false) %>
 
-<div id="scroll-pagination" data-controller="scroll-pagination">
+<div id="scroll-pagination" data-controller="scroll-pagination" data-scroll-pagination-auto-load-value="<%= auto_load %>">
   <%= content_tag :div, **{ id: "scroll-pagination-content", class: "", data: { scroll_pagination_target: "content" } }.deep_merge(content_html) do %>
     <%= yield %>
   <% end %>
