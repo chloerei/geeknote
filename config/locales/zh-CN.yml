@@ -196,8 +196,6 @@ zh-CN:
         page:
           restore: 恢复到此版本
           empty: 暂无历史版本
-        show:
-          title: 版本详情
         revision_item:
           by_system: 系统
         restore:

@@ -11,7 +11,7 @@ class Dashboard::Posts::RevisionsController < Dashboard::Posts::BaseController
     @revision = @post.revisions.find(params[:id])
     @previous = @post.revisions.where(id: ...@revision.id).order(id: :desc).first
 
-    @page_titles.prepend "#{t(".show.title")} · #{I18n.l(@revision.created_at, format: :long)}"
+    @page_titles.prepend t(".index.title")
     render layout: "application"
   end
 

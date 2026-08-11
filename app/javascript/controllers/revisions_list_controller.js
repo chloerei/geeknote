@@ -8,7 +8,7 @@ export default class extends Controller {
 
     this.mainFrame.addEventListener("turbo:frame-load", this.onFrameLoad);
 
-    // Re-sync highlight/title when scroll pagination appends more items
+    // Re-sync highlight when scroll pagination appends more items
     this.observer = new MutationObserver(this.syncState);
     this.observer.observe(this.element, { childList: true, subtree: true });
 
@@ -46,9 +46,5 @@ export default class extends Controller {
         String(item.dataset.revisionId) === String(revisionId),
       );
     });
-
-    if (meta.dataset.title) {
-      document.title = meta.dataset.title;
-    }
   };
 }
