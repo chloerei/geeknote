@@ -1,8 +1,11 @@
-<%# locals: (revision:, current:) %>
+<%# locals: (revision:) %>
 
 <li>
   <a href="<%= dashboard_post_revision_path(revision.post.account.name, revision.post, revision) %>"
-     class="flex flex-col gap-0.5 px-3 py-2 rounded-lg hover:bg-base-200 <%= "bg-primary/10" if revision.id == current&.id %>">
+     data-turbo-frame="revisions-main"
+     data-turbo-action="advance"
+     data-revision-id="<%= revision.id %>"
+     class="flex flex-col gap-0.5 px-3 py-2 rounded-lg hover:bg-base-200">
     <span class="text-sm font-medium"><%= revision.user&.name.presence || t(".by_system") %></span>
     <span class="text-xs text-base-content/60"><%= time_ago_in_words(revision.created_at) %></span>
   </a>

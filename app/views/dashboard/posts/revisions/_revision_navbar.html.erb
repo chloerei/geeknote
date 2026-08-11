@@ -1,0 +1,18 @@
+<%# locals: (subtitle:) %>
+
+<div class="navbar sticky top-0 z-10 px-4 gap-4 bg-base-200">
+  <div class="flex-none">
+    <a href="<%= edit_dashboard_post_path(@account.name, @post) %>" data-turbo-frame="_top" class="btn btn-ghost btn-square">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+    </a>
+  </div>
+  <div class="flex-grow min-w-0">
+    <div class="text-xl font-medium truncate"><%= @post.title %></div>
+    <div class="text-sm text-base-content/60"><%= subtitle %></div>
+  </div>
+  <div class="flex-none flex items-center gap-2">
+    <label for="revisions-drawer-toggle" class="btn btn-ghost btn-square lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-right-icon lucide-panel-right"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/></svg>
+    </label>
+  </div>
+</div>

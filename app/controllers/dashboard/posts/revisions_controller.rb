@@ -1,11 +1,9 @@
 class Dashboard::Posts::RevisionsController < Dashboard::Posts::BaseController
   def index
-    @revisions = @post.revisions.includes(:user).order(id: :desc)
-
     @revision = @post.revisions.order(id: :desc).first
     @previous = @post.revisions.where(id: ...@revision.id).order(id: :desc).first if @revision
 
-    @page_titles.prepend t(".title")
+    @page_titles.prepend t(".index.title")
     render layout: "application"
   end
 
@@ -13,10 +11,13 @@ class Dashboard::Posts::RevisionsController < Dashboard::Posts::BaseController
     @revision = @post.revisions.find(params[:id])
     @previous = @post.revisions.where(id: ...@revision.id).order(id: :desc).first
 
-    @revisions = @post.revisions.includes(:user).order(id: :desc)
-
-    @page_titles.prepend t(".title")
+    @page_titles.prepend "#{t(".show.title")} · #{I18n.l(@revision.created_at, format: :long)}"
     render layout: "application"
+  end
+
+  def list
+    @pagy, @revisions = pagy(@post.revisions.includes(:user).order(id: :desc))
+    render partial: "revision_list"
   end
 
   def restore

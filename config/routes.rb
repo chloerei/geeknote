@@ -89,6 +89,10 @@ Rails.application.routes.draw do
       scope module: :posts do
         resource :publish, only: [ :update, :destroy ]
         resources :revisions, only: [ :index, :show ] do
+          collection do
+            get :list
+          end
+
           member do
             patch :restore
           end

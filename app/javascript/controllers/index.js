@@ -43,6 +43,9 @@ application.register("post-view-tracker", PostViewTrackerController)
 import RecaptchaController from "./recaptcha_controller"
 application.register("recaptcha", RecaptchaController)
 
+import RevisionsListController from "./revisions_list_controller"
+application.register("revisions-list", RevisionsListController)
+
 import ScrollPaginationController from "./scroll_pagination_controller"
 application.register("scroll-pagination", ScrollPaginationController)
 

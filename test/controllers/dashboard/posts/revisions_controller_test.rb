@@ -11,6 +11,25 @@ class Dashboard::Posts::RevisionsControllerTest < ActionDispatch::IntegrationTes
     assert_response :success
   end
 
+  test "should get list" do
+    user = create(:user)
+    post = create(:post, user: user, account: user.account)
+    post.update(title: "New title")
+    sign_in user
+
+    get list_dashboard_post_revisions_url(user.account.name, post)
+    assert_response :success
+  end
+
+  test "should not get list of other post" do
+    user = create(:user)
+    post = create(:post)
+    sign_in user
+
+    get list_dashboard_post_revisions_url(user.account.name, post)
+    assert_response :not_found
+  end
+
   test "should not get index of other post" do
     user = create(:user)
     post = create(:post)
