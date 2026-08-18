@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "new_ai_message" do %>
+  <%= render "ai/messages/form",
+    ai_chat: @ai_chat,
+    ai_message: @ai_chat.ai_messages.build %>
+<% end %>

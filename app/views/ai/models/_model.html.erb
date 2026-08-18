@@ -1,0 +1,16 @@
+<% row_id = [model.provider, model.id].join("_").parameterize(separator: "_") %>
+<tr id="model_<%= row_id %>">
+  <td class="px-3 py-2 text-sm text-gray-700"><%= model.provider_class&.name || model.provider %></td>
+  <td class="px-3 py-2 text-sm text-gray-900"><%= model.name %></td>
+  <td class="px-3 py-2 text-sm text-gray-700"><%= number_with_delimiter(model.context_window) if model.context_window %></td>
+  <td class="px-3 py-2 text-sm text-gray-700">
+    <% input = model.price(:input) %>
+    <% output = model.price(:output) %>
+    <% if input && output %>
+      $<%= "%.2f" % input %> / $<%= "%.2f" % output %>
+    <% end %>
+  </td>
+  <td class="px-3 py-2 text-sm">
+    <%= link_to "Start ai chat", new_ai_chat_path(model: [model.provider, model.id].join(":")), class: "text-blue-600 hover:text-blue-500" %>
+  </td>
+</tr>

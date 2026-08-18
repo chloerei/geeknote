@@ -1,0 +1,4 @@
+<% message = local_assigns[:message] || tool_calls %>
+<% message.tool_calls.each_value do |tool_call| %>
+  <%= render tool_call_partial(tool_call), message: message, tool_call: tool_call %>
+<% end %>
