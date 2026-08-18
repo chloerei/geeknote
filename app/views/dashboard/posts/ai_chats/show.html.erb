@@ -12,9 +12,6 @@
     <div class="text-xl font-medium truncate">
       <%= @ai_chat.title || t(".untitled") %>
     </div>
-    <div class="text-sm text-base-content/60">
-      <%= @ai_chat.model&.label || default_model_display_name %>
-    </div>
   </div>
   <div class="flex-none">
     <%= button_to t("general.delete"), dashboard_post_ai_chat_path(@account.name, @post, @ai_chat), method: :delete, class: "btn btn-ghost btn-square text-error", data: { turbo_confirm: t(".delete_confirm") } %>

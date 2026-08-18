@@ -30,13 +30,14 @@ class Dashboard::Posts::AIChatsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create chat" do
+    RubyLLM.config.default_model = "deepseek-v4-flash"
     user = create(:user)
     post = create(:post, account: user.account, user: user)
     sign_in user
 
     assert_difference "post.ai_chats.count", 1 do
       post dashboard_post_ai_chats_url(user.account.name, post), params: {
-        ai_chat: { prompt: "Help me write an opening", model: "deepseek:deepseek-v4-flash" }
+        ai_chat: { prompt: "Help me write an opening" }
       }
     end
 

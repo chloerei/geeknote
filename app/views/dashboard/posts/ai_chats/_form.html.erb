@@ -1,4 +1,4 @@
-<%# locals: (ai_chat:, chat_models:, selected_model:) %>
+<%# locals: (ai_chat:) %>
 
 <div class="card card-default mt-4">
   <div class="card-body">
@@ -7,27 +7,15 @@
     </div>
 
     <%= form_with model: ai_chat, url: dashboard_post_ai_chats_path(@account.name, @post) do |form| %>
-      <div class="grid gap-4">
-        <fieldset class="fieldset">
-          <legend class="fieldset-legend">
-            <%= t ".model" %>
-          </legend>
-          <%= form.select :model,
-            options_for_select(chat_models.map { |model| [ model.label, [ model.provider, model.id ].join(":") ] }.unshift([ default_model_display_name, nil ]), selected_model),
-            {},
-            class: "select w-full" %>
-        </fieldset>
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          <%= t ".prompt" %>
+        </legend>
+        <%= form.text_area :prompt, rows: 4, placeholder: t(".prompt_placeholder"), autofocus: true, class: "textarea w-full" %>
+      </fieldset>
 
-        <fieldset class="fieldset">
-          <legend class="fieldset-legend">
-            <%= t ".prompt" %>
-          </legend>
-          <%= form.text_area :prompt, rows: 4, placeholder: t(".prompt_placeholder"), autofocus: true, class: "textarea w-full" %>
-        </fieldset>
-
-        <div>
-          <%= form.submit t(".submit"), class: "btn btn-primary" %>
-        </div>
+      <div class="mt-4">
+        <%= form.submit t(".submit"), class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>

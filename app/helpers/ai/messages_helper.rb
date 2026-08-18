@@ -1,10 +1,4 @@
 module AI::MessagesHelper
-  def default_model_display_name
-    "Default: #{RubyLLM.models.find(RubyLLM.config.default_model).label}"
-  rescue RubyLLM::ModelNotFoundError
-    "Default"
-  end
-
   def tool_result_partial(message)
     name = message.respond_to?(:parent_tool_call) ? message.parent_tool_call&.name.to_s : ""
     partial_for(prefix: "ai/messages/tool_results", name: name)

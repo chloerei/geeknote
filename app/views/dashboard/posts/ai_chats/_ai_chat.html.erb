@@ -9,10 +9,6 @@
     </div>
     <div class="text-sm text-base-content/80 mt-2">
       <span>
-        <%= ai_chat.model&.label || default_model_display_name %>
-      </span>
-      &centerdot;
-      <span>
         <%= t(".messages_count", count: ai_chat.ai_messages.size) %>
       </span>
       &centerdot;

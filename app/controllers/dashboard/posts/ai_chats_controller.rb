@@ -2,10 +2,8 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
   before_action :set_ai_chat, only: [ :show, :destroy ]
 
   def index
-    @ai_chats = @post.ai_chats.includes(:model, :ai_messages).order(created_at: :desc)
+    @ai_chats = @post.ai_chats.includes(:ai_messages).order(created_at: :desc)
     @ai_chat = @post.ai_chats.new(user: Current.user)
-    @chat_models = available_chat_models
-    @selected_model = params[:provider] ? [ params[:provider], params[:model] ].join(":") : params[:model]
 
     @page_titles.prepend t(".index.title")
   end
@@ -18,8 +16,7 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
   def create
     prompt = params.dig(:ai_chat, :prompt)
     if prompt.present?
-      provider, model = params.dig(:ai_chat, :model).to_s.split(":", 2)
-      @ai_chat = @post.ai_chats.new(user: Current.user, model: model.presence, provider: provider.presence)
+      @ai_chat = @post.ai_chats.new(user: Current.user)
 
       if @ai_chat.save
         AIChatResponseJob.perform_later(@ai_chat.id, prompt)

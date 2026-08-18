@@ -206,7 +206,6 @@ zh-CN:
           success: 对话已删除。
         form:
           title: 新建对话
-          model: 模型
           prompt: 提示词
           prompt_placeholder: 你想让 AI 帮你写点什么？
           submit: 开始新对话
