@@ -1,14 +1,4 @@
 Rails.application.routes.draw do
-  namespace :ai do
-    resources :models, only: [ :index, :show ] do
-      collection do
-        post :refresh
-      end
-    end
-    resources :chats do
-      resources :messages, only: [ :create ]
-    end
-  end
   root to: "home#index"
   get "following", to: "home#following", as: :following
   get "newest", to: "home#newest", as: :newest

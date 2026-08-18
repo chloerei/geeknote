@@ -100,9 +100,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_18_113138) do
   create_table "ai_chats", force: :cascade do |t|
     t.boolean "cancelled", default: false, null: false
     t.datetime "created_at", null: false
+    t.bigint "post_id", null: false
     t.bigint "ruby_llm_model_id", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["post_id"], name: "index_ai_chats_on_post_id"
     t.index ["ruby_llm_model_id"], name: "index_ai_chats_on_ruby_llm_model_id"
+    t.index ["user_id"], name: "index_ai_chats_on_user_id"
   end
 
   create_table "ai_messages", force: :cascade do |t|
