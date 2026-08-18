@@ -1,0 +1,8 @@
+<%# locals: (ai_chat:, ai_message:) %>
+
+<%= form_with model: ai_message, url: dashboard_post_ai_chat_messages_path(@account.name, @post, ai_chat), id: "new_ai_message" do |form| %>
+  <div class="join w-full mt-4">
+    <%= form.text_area :content, rows: 1, placeholder: t(".content_placeholder"), autofocus: true, data: { controller: "autoresize" }, class: "textarea w-full join-item" %>
+    <%= form.submit t(".submit"), class: "btn btn-primary join-item", data: { controller: "hotkey", hotkey: "Mod+Enter", hotkey_global: true } %>
+  </div>
+<% end %>

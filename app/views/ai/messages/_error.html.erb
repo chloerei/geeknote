@@ -1,13 +1,7 @@
-<div id="ai_message_<%= message.id %>" class="w-full sm:w-auto my-5 space-y-3 rounded-md px-3 py-2 bg-red-50 border border-red-200">
-  <div>
-    <span class="inline-block rounded px-2 py-0.5 text-xs font-medium bg-red-100 text-red-700">
-      <%= title.presence || "Error" %>
-    </span>
+<div id="ai_message_<%= message.id %>" class="chat chat-start">
+  <div class="chat-header">
+    <%= title.presence || t(".name") %>
+    <time class="text-xs opacity-50"><%= format_time message.created_at %></time>
   </div>
-
-  <pre class="whitespace-pre-wrap text-red-900 text-sm overflow-x-auto"><%= error_message %></pre>
-
-  <div>
-    <span class="text-sm text-red-700"><%= message.created_at&.strftime("%I:%M %p") %></span>
-  </div>
+  <div class="chat-bubble chat-bubble-error whitespace-pre-wrap"><%= error_message %></div>
 </div>

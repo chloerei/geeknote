@@ -1,6 +1,8 @@
 module AI::MessagesHelper
   def default_model_display_name
     "Default: #{RubyLLM.models.find(RubyLLM.config.default_model).label}"
+  rescue RubyLLM::ModelNotFoundError
+    "Default"
   end
 
   def tool_result_partial(message)

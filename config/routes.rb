@@ -97,6 +97,10 @@ Rails.application.routes.draw do
             patch :restore
           end
         end
+
+        resources :ai_chats, only: [ :index, :show, :create, :destroy ] do
+          resources :messages, only: [ :create ], module: :ai_chats
+        end
       end
     end
 

@@ -1,0 +1,31 @@
+<%# locals: (ai_chat:) %>
+
+<div id="<%= dom_id(ai_chat) %>" class="list-row relative hover:bg-base-200">
+  <div class="list-col-grow">
+    <div>
+      <a href="<%= dashboard_post_ai_chat_path(@account.name, @post, ai_chat) %>" class="text-base font-medium line-clamp-1 after:absolute after:inset-0">
+        <%= ai_chat.title || t(".untitled") %>
+      </a>
+    </div>
+    <div class="text-sm text-base-content/80 mt-2">
+      <span>
+        <%= ai_chat.model&.label || default_model_display_name %>
+      </span>
+      &centerdot;
+      <span>
+        <%= t(".messages_count", count: ai_chat.ai_messages.size) %>
+      </span>
+      &centerdot;
+      <span>
+        <%= format_time ai_chat.created_at %>
+      </span>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-1 relative z-10">
+    <a href="<%= dashboard_post_ai_chat_path(@account.name, @post, ai_chat) %>" class="btn btn-ghost btn-sm">
+      <%= t ".open" %>
+    </a>
+    <%= button_to t(".delete"), dashboard_post_ai_chat_path(@account.name, @post, ai_chat), method: :delete, class: "btn btn-ghost btn-sm text-error", data: { turbo_confirm: t(".delete_confirm") } %>
+  </div>
+</div>

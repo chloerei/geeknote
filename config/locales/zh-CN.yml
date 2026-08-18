@@ -166,6 +166,24 @@ zh-CN:
     comments:
       form:
         content_placeholder: 内容（Markdown）
+  ai:
+    messages:
+      assistant:
+        name: AI 助手
+      user:
+        name: 我
+      system:
+        name: 系统
+      error:
+        name: 出错
+      tool_calls:
+        default:
+          name: 工具调用
+      tool_results:
+        default:
+          name: 工具
+          error_title: 工具结果出错
+          no_output: （无输出）
   analytics:
     period:
       30d: 最近 30 天
@@ -173,11 +191,46 @@ zh-CN:
       90d: 最近 90 天
   dashboard:
     posts:
+      ai_chats:
+        index:
+          title: AI 写作助手
+          history: 历史对话
+          empty: 还没有对话，在顶部发起一个新对话吧
+          back_to_editor: 返回编辑
+        create:
+          success: 对话已创建。
+          prompt_required: 请输入对话内容。
+          create_failed: 对话创建失败，请重试。
+          model_not_found: 未找到所选模型。
+        destroy:
+          success: 对话已删除。
+        form:
+          title: 新建对话
+          model: 模型
+          prompt: 提示词
+          prompt_placeholder: 你想让 AI 帮你写点什么？
+          submit: 开始新对话
+        ai_chat:
+          untitled: 新对话
+          messages_count: "%{count} 条消息"
+          open: 打开
+          delete: 删除
+          delete_confirm: 确认删除这个对话？
+        show:
+          title: 对话
+          untitled: 新对话
+          delete_confirm: 确认删除这个对话？
+          empty: 还没有消息，发送第一条消息开始对话吧
+        messages:
+          form:
+            content_placeholder: 输入消息，Cmd+Enter 发送
+            submit: 发送
       create:
         success: 文章已创建。
       destroy:
         success: 文章已删除。
       editor:
+        ai_chat: AI 写作助手
         delete_forever_confirm: 永久删除文章？
         no_series: 无系列
         revisions: 历史版本

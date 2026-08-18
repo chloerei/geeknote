@@ -1,14 +1,8 @@
 <% user ||= local_assigns[:message] %>
-<div id="ai_message_<%= user.id %>" class="w-full sm:w-auto my-5 space-y-3 rounded-md px-3 py-2 bg-blue-50">
-  <div>
-    <span class="inline-block rounded px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-700">
-      User
-    </span>
+<div id="ai_message_<%= user.id %>" class="chat chat-end">
+  <div class="chat-header">
+    <%= t ".name" %>
+    <time class="text-xs opacity-50"><%= format_time user.created_at %></time>
   </div>
-
-  <div id="ai_message_<%= user.id %>_content" class="whitespace-pre-wrap"><%= user.content %></div>
-
-  <div>
-    <span class="text-sm text-gray-600"><%= user.created_at&.strftime("%I:%M %p") %></span>
-  </div>
+  <div id="ai_message_<%= user.id %>_content" class="chat-bubble chat-bubble-primary whitespace-pre-wrap"><%= user.content %></div>
 </div>

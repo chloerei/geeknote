@@ -2,20 +2,11 @@
 <% if error_message.present? %>
   <%= render "ai/messages/error",
     message: tool,
-    title: "Tool Result Error",
+    title: t(".error_title"),
     error_message: error_message %>
 <% else %>
-  <div id="ai_message_tool_result_<%= tool.id %>" class="w-full sm:w-auto my-5 space-y-3 rounded-md px-3 py-2 bg-gray-50 border border-gray-200">
-    <div>
-      <span class="inline-block rounded px-2 py-0.5 text-xs font-medium bg-gray-200 text-gray-700">
-        Tool
-      </span>
-    </div>
-
-    <pre class="whitespace-pre-wrap text-gray-700 text-sm overflow-x-auto"><%= tool.content.presence || "(no output)" %></pre>
-
-    <div>
-      <span class="text-sm text-gray-600"><%= tool.created_at&.strftime("%I:%M %p") %></span>
-    </div>
+  <div id="ai_message_tool_result_<%= tool.id %>" class="chat chat-start">
+    <div class="chat-header"><%= t ".name" %></div>
+    <div class="chat-bubble chat-bubble-ghost whitespace-pre-wrap text-sm"><%= tool.content.presence || t(".no_output") %></div>
   </div>
 <% end %>

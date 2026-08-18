@@ -1,0 +1,45 @@
+<% @show_dock = true %>
+
+<div class="navbar px-0 gap-4">
+  <div class="flex-none">
+    <label for="drawer" class="btn btn-square btn-ghost lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </label>
+  </div>
+  <div class="flex-grow">
+    <div class="text-xl font-medium">
+      <%= t ".title" %>
+    </div>
+    <div class="text-sm text-base-content/60 truncate">
+      <%= link_to post_title(@post), edit_dashboard_post_path(@account.name, @post) %>
+    </div>
+  </div>
+  <div class="flex-none">
+    <a href="<%= edit_dashboard_post_path(@account.name, @post) %>" class="btn btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+      <%= t ".back_to_editor" %>
+    </a>
+  </div>
+</div>
+
+<%= render "form", ai_chat: @ai_chat, chat_models: @chat_models, selected_model: @selected_model %>
+
+<div class="card card-default mt-4">
+  <div class="card-body">
+    <div class="text-lg font-medium">
+      <%= t ".history" %>
+    </div>
+
+    <div id="ai_chats">
+      <% if @ai_chats.any? %>
+        <div class="list">
+          <%= render partial: "ai_chat", collection: @ai_chats %>
+        </div>
+      <% else %>
+        <div class="text-center text-base-content/60 py-8">
+          <%= t ".empty" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
