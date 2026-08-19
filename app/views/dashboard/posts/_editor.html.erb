@@ -90,63 +90,64 @@
       <div class="drawer-side z-10">
         <label for="drawer-toggle" class="drawer-overlay"></label>
 
-        <div class="bg-base-100 border-l border-base-300 text-base-content h-full w-80 flex flex-col lg:hidden lg:is-drawer-open:block">
-          <div class="navbar border-b border-base-300">
-            <div class="grow px-2">
-              <div class="text-xl font-medium">
-                <%= t "general.settings" %>
-              </div>
-            </div>
-            <label for="drawer-toggle" class="btn btn-ghost btn-square">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-            </label>
-          </div>
-
-          <div class="grow p-4 overflow-auto">
-            <div class="space-y-2">
-              <%= render "components/image_field", form: form, name: :featured_image %>
-
-              <fieldset class="fieldset">
-                <legend class="fieldset-legend">
-                  <%= t "general.tags" %>
-                </legend>
-                <div data-controller="tag-field">
-                  <%= form.hidden_field :tag_list, data: { tag_field_target: "input" } %>
+        <div class="bg-base-100 border-l border-base-300 text-base-content h-full w-80 flex flex-col overflow-hidden lg:is-drawer-close:w-0 lg:is-drawer-open:w-80">
+          <div class="w-80 flex flex-col grow min-h-0 lg:is-drawer-close:hidden">
+            <div class="navbar border-b border-base-300">
+              <div class="grow px-2">
+                <div class="text-xl font-medium">
+                  <%= t "general.settings" %>
                 </div>
-              </fieldset>
-
-              <fieldset class="fieldset">
-                <legend class="fieldset-legend">
-                  <%= t "general.series" %>
-                </legend>
-                <%= form.collection_select :series_id, post.account.series.order(:title), :id, :title, { include_blank: t(".no_series") }, class: "select" %>
-              </fieldset>
-
-              <%= render "components/text_field", form: form, name: :canonical_url %>
-
-              <fieldset class="fieldset">
-                <legend class="fieldset-legend">
-                  <%= t "general.options" %>
-                </legend>
-                <%= render "components/checkbox_field", form: form, name: :allow_comments %>
-              </fieldset>
+              </div>
+              <label for="drawer-toggle" class="btn btn-ghost btn-square">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              </label>
             </div>
 
-            <% if post.persisted? %>
-              <div class="divider"></div>
+            <div class="grow p-4 overflow-auto">
+              <div class="space-y-2">
+                <%= render "components/image_field", form: form, name: :featured_image %>
 
-              <a href="<%= dashboard_post_revisions_path(post.account.name, post) %>" class="btn btn-outline w-full">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history-icon lucide-history"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
-                <%= t ".revisions" %>
-              </a>
+                <fieldset class="fieldset">
+                  <legend class="fieldset-legend">
+                    <%= t "general.tags" %>
+                  </legend>
+                  <div data-controller="tag-field">
+                    <%= form.hidden_field :tag_list, data: { tag_field_target: "input" } %>
+                  </div>
+                </fieldset>
 
-              <button type="submit" class="btn btn-outline btn-error w-full mt-2" form="delete-form">
-                <%= t "general.delete_post" %>
-              </button>
-            <% end %>
+                <fieldset class="fieldset">
+                  <legend class="fieldset-legend">
+                    <%= t "general.series" %>
+                  </legend>
+                  <%= form.collection_select :series_id, post.account.series.order(:title), :id, :title, { include_blank: t(".no_series") }, class: "select" %>
+                </fieldset>
+
+                <%= render "components/text_field", form: form, name: :canonical_url %>
+
+                <fieldset class="fieldset">
+                  <legend class="fieldset-legend">
+                    <%= t "general.options" %>
+                  </legend>
+                  <%= render "components/checkbox_field", form: form, name: :allow_comments %>
+                </fieldset>
+              </div>
+
+              <% if post.persisted? %>
+                <div class="divider"></div>
+
+                <a href="<%= dashboard_post_revisions_path(post.account.name, post) %>" class="btn btn-outline w-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history-icon lucide-history"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+                  <%= t ".revisions" %>
+                </a>
+
+                <button type="submit" class="btn btn-outline btn-error w-full mt-2" form="delete-form">
+                  <%= t "general.delete_post" %>
+                </button>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
     </div>
   <% end %>
 </div>
