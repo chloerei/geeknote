@@ -14,6 +14,6 @@ class Settings::ProfilesController < Settings::BaseController
   private
 
   def profile_params
-    params.require(:user).permit(:name, :bio, :avatar, :remove_avatar, :banner_image, :remove_banner_image, account_attributes: [ :name ])
+    params.require(:user).permit(:name, :bio, :avatar, :banner_image, account_attributes: [ :name ])
   end
 end

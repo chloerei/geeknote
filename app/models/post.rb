@@ -26,7 +26,6 @@ class Post < ApplicationRecord
 
   positioned on: [ :account, :series ]
 
-  attribute :remove_featured_image, :boolean
   attribute :skip_revision, :boolean
 
   validates :canonical_url, url: true, allow_blank: true
@@ -34,7 +33,6 @@ class Post < ApplicationRecord
   validate :series_account_match
 
   before_save :set_published_at, :set_position
-  after_save :condition_remove_featured_image
   after_save :create_revision,
     if: -> { saved_change_to_title? || saved_change_to_content? },
     unless: :skip_revision
@@ -99,10 +97,6 @@ class Post < ApplicationRecord
     if published_at && likes_count > 0 && content.length > 100
       update_column :score, (Math.log([ likes_count, 1 ].max, 10) + published_at.to_i / 43200) * 100
     end
-  end
-
-  def condition_remove_featured_image
-    featured_image.purge_later if remove_featured_image
   end
 
   def create_revision

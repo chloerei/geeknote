@@ -11,8 +11,8 @@
 
   <div class="group/image-field <%= 'attached' if form.object.send(name).attached? %>" data-controller="image-field">
     <div class="hidden">
-      <%= form.file_field name, options.merge( direct_upload: true, data: { image_field_target: "input", action: "image-field#preview" }) %>
-      <input type="checkbox" name="<%= form.field_name name %>" value="" id="<%= form.field_id(name, :remove) %>" data-image-field-target="removeInput" data-action="image-field#remove">
+      <%= form.file_field name, options.merge(data: { image_field_target: "input", action: "image-field#upload", image_field_url_value: rails_direct_uploads_path }) %>
+      <%= form.text_field name, value: "", disabled: true, id: form.field_id(name, :signed_id), class: "hidden", data: { image_field_target: "signedIdInput" } %>
     </div>
     <div class="relative w-full aspect-video">
       <div class="absolute inset-0 [&>img]:object-cover [&>img]:h-full [&>img]:w-full [&>img]:rounded" data-image-field-target="preview">
@@ -35,9 +35,9 @@
           </label>
         </div>
         <div class="bg-surface-variant rounded-full">
-          <label for="<%= form.field_id name, :remove %>" class="btn btn-soft btn-square">
+          <button type="button" class="btn btn-soft btn-square" data-action="image-field#remove">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-          </label>
+          </button>
         </div>
       </div>
     </div>

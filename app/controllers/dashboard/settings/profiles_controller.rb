@@ -16,6 +16,6 @@ class Dashboard::Settings::ProfilesController < Dashboard::Settings::BaseControl
   private
 
   def profile_params
-    params.require(:organization).permit(:name, :description, :avatar, :remove_avatar, :banner_image, :remove_banner_image, account_attributes: [ :name ])
+    params.require(:organization).permit(:name, :description, :avatar, :banner_image, account_attributes: [ :name ])
   end
 end

@@ -11,14 +11,6 @@ class Organization < ApplicationRecord
     attachable.variant :large, resize_to_limit: [ 1920, 1920 ]
   end
 
-  attribute :remove_avatar, :boolean
-  attribute :remove_banner_image, :boolean
-
-  after_save do
-    avatar.purge_later if remove_avatar
-    banner_image.purge_later if remove_banner_image
-  end
-
   validates :name, presence: true
   validates :avatar, content_type: [ :png, :jpg, :jpeg ], size: { less_than: 5.megabytes }
   validates :banner_image, content_type: [ :png, :jpg, :jpeg ], size: { less_than: 5.megabytes }

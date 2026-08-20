@@ -44,14 +44,6 @@ class User < ApplicationRecord
     attachable.variant :large, resize_to_limit: [ 1920, 1920 ]
   end
 
-  attribute :remove_avatar, :boolean
-  attribute :remove_banner_image, :boolean
-
-  after_save do
-    avatar.purge_later if remove_avatar
-    banner_image.purge_later if remove_banner_image
-  end
-
   validates :name, presence: true
   validates :email, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true
   validate :email_domain_not_blocked, on: :create
