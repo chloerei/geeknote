@@ -6,7 +6,7 @@
 
 <fieldset class="fieldset">
   <legend class="fieldset-legend">
-    <%= form.label name %>
+    <%= form.label name, label %>
   </legend>
 
   <label class="input w-full <%= "input-error" if error %>">
@@ -15,7 +15,7 @@
         <%= prefix %>
       </span>
     <% end %>
-    <%= form.text_field name, options %>
+    <%= form.send(type, name, options) %>
     <% if suffix %>
       <span class="label">
         <%= suffix %>

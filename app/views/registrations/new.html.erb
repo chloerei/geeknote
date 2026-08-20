@@ -23,9 +23,9 @@
 
         <%= render "components/text_field", form: form, name: :name, options: { required: true, autocomplete: "name" } %>
 
-        <%= render "components/text_field", form: form, name: :password, type: :password_field, options: { type: :password, value: nil, required: true, autocomplete: "new-password" } %>
+        <%= render "components/text_field", form: form, name: :password, type: :password_field, options: { required: true, autocomplete: "new-password" } %>
 
-        <%= render "components/text_field", form: form, name: :password_confirmation, type: :password_field, options: { type: :password, value: nil, required: true, autocomplete: "new-password" } %>
+        <%= render "components/text_field", form: form, name: :password_confirmation, type: :password_field, options: { required: true, autocomplete: "new-password" } %>
 
         <%= render "components/recaptcha_field", form: form %>
 

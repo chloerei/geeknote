@@ -6,9 +6,9 @@
       </h2>
 
       <%= form_with model: @user, url: identity_password_path(token: params[:token]), id: 'password-reset-form' do |form| %>
-        <%= render "components/text_field", form: form, name: :password, options: { type: :password, value: nil, required: true, autofocus: true, autocomplete: "new-password" } %>
+        <%= render "components/text_field", form: form, name: :password, type: :password_field, options: { required: true, autofocus: true, autocomplete: "new-password" } %>
 
-        <%= render "components/text_field", form: form, name: :password_confirmation, options: { type: :password, value: nil, required: true, autocomplete: "new-password" } %>
+        <%= render "components/text_field", form: form, name: :password_confirmation, type: :password_field, options: { required: true, autocomplete: "new-password" } %>
 
         <button type="submit" class="btn btn-primary btn-block mt-4">
           <%= t('general.submit') %>

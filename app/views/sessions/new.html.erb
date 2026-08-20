@@ -17,7 +17,7 @@
       <%= form_with(url: session_path, model: @user, method: :post) do |form| %>
         <%= render "components/text_field", form: form, name: :email, options: { required: true, autocomplete: "email" } %>
 
-        <%= render "components/text_field", form: form, name: :password, type: :password, options: { type: :password, value: nil, required: true, autocomplete: "email" } %>
+        <%= render "components/text_field", form: form, name: :password, type: :password_field, options: { required: true, autocomplete: "current-password" } %>
 
         <%= render "components/recaptcha_field", form: form %>
 

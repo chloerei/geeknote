@@ -1,4 +1,4 @@
-<%# locals: (form:, name:, type: :text_field, prefix: nil, suffix: nil, error: nil, label: nil, description: nil, options: {}) %>
+<%# locals: (form:, name:, error: nil, label: nil, description: nil, options: {}) %>
 
 <%
   error ||= form.object && form.object.errors[name].first
@@ -6,7 +6,7 @@
 
 <fieldset class="fieldset">
   <legend class="fieldset-legend">
-    <%= form.label name %>
+    <%= form.label name, label %>
   </legend>
 
   <%= form.text_area name, options.merge(class: "textarea w-full") %>

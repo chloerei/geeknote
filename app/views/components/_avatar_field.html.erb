@@ -6,7 +6,7 @@
 
 <fieldset class="fieldset">
   <legend class="fieldset-legend">
-    <%= form.label name %>
+    <%= form.label name, label %>
   </legend>
 
   <div class="group/image-field <%= 'attached' if form.object.send(name).attached? %>" data-controller="image-field">

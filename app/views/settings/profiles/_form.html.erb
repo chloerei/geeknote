@@ -9,7 +9,7 @@
     <%= render "components/text_field", form: account_form, name: :name, prefix: "@" %>
   <% end %>
 
-  <%= render "components/text_field", form: form, name: :bio, type: :text_area, options: { rows: 3 } %>
+  <%= render "components/text_area", form: form, name: :bio, options: { rows: 3 } %>
 
   <div class="mt-4">
     <button type="submit" class="btn btn-primary">
