@@ -1,8 +1,8 @@
-<%# locals: (form:, name:, value:, label: nil, description: nil) %>
+<%# locals: (form:, name:, value:, label: nil, description: nil, options: {}) %>
 
 <label class="flex gap-4 relative">
   <div class="flex-none">
-    <%= form.radio_button name, value, class: "radio" %>
+    <%= form.radio_button name, value, options.merge(class: "radio") %>
   </div>
   <div class="flex-grow">
     <div class="font-medium">

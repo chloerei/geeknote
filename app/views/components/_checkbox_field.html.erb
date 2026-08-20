@@ -1,7 +1,7 @@
-<%# locals: (form:, name:, label: nil, description: nil) %>
+<%# locals: (form:, name:, label: nil, description: nil, options: {}) %>
 
 <div class="flex gap-4">
-  <%= form.check_box name, class: "checkbox" %>
+  <%= form.check_box name, options.merge(class: "checkbox") %>
   <div class="flex-grow">
     <%= form.label name, label, class: "leading-6 font-medium" %>
     <% if description %>
