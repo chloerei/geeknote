@@ -1,63 +1,64 @@
 <%# locals: (post:) %>
+<% editor_form_id = "editor-form" %>
 
-<div id="post-editor">
-  <%= form_with model: post, url: post.new_record? ? dashboard_posts_path(post.account.name) : dashboard_post_path(post.account.name, post), data: { controller: "form-unsave-checker" } do |form| %>
-    <div class="drawer drawer-end lg:drawer-open">
-      <input type="checkbox" id="drawer-toggle" class="drawer-toggle">
+<div id="post-editor" data-controller="form-unsave-checker">
+  <div class="drawer drawer-end lg:drawer-open">
+    <input type="checkbox" id="drawer-toggle" class="drawer-toggle" data-turbo-permanent>
 
-      <div class="drawer-content">
-        <div class="navbar sticky top-0 z-10 px-4 gap-4 bg-base-200 border-b border-base-300">
-          <div class="flex-none">
-            <a href="<%= dashboard_posts_path(post.account.name) %>" class="btn btn-ghost btn-square">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-            </a>
-          </div>
-          <div class="grow flex items-center gap-2">
-            <div class="text-xl font-medium">
-              <%= t "general.posts" %>
-            </div>
-            <% if post.draft? %>
-              <div class="btn btn-disabled btn-ghost text-base-content/80">
-                <%= t "general.draft" %>
-              </div>
-            <% elsif post.published? %>
-              <a href="<%= account_post_path(post.account.name, post) %>" class="btn btn-ghost text-base-content/80" target="_blank">
-                <%= t "general.published" %>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-              </a>
-            <% end %>
-          </div>
-          <div class="flex-none">
-            <% if post.draft? %>
-              <button type="submit" class="btn btn-ghost" data-controller="hotkey" data-hotkey="Mod+s" data-hotkey-global>
-                <%= t "general.save" %>
-              </button>
-              <% if post.persisted? %>
-                <button type="submit" class="btn btn-ghost text-primary" form="publish-form">
-                  <%= t "general.publish" %>
-                </button>
-              <% else %>
-                <button type="button" class="btn btn-ghost" disabled>
-                  <%= t "general.publish" %>
-                </button>
-              <% end %>
-            <% elsif post.published? %>
-              <button type="submit" class="btn btn-ghost text-primary" data-controller="hotkey" data-hotkey="Mod+s" data-hotkey-global>
-                <%= t "general.update" %>
-              </button>
-              <button type="submit" class="btn btn-ghost" form="unpublish-form">
-                <%= t "general.unpublish" %>
-              </button>
-            <% end %>
-            <label for="drawer-toggle" class="btn btn-ghost btn-square">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-right-icon lucide-panel-right"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/></svg>
-            </label>
-          </div>
+    <div class="drawer-content">
+      <div class="navbar sticky top-0 z-10 px-4 gap-4 bg-base-200 border-b border-base-300">
+        <div class="flex-none">
+          <a href="<%= dashboard_posts_path(post.account.name) %>" class="btn btn-ghost btn-square">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          </a>
         </div>
+        <div class="grow flex items-center gap-2">
+          <div class="text-xl font-medium">
+            <%= t "general.posts" %>
+          </div>
+          <% if post.draft? %>
+            <div class="btn btn-disabled btn-ghost text-base-content/80">
+              <%= t "general.draft" %>
+            </div>
+          <% elsif post.published? %>
+            <a href="<%= account_post_path(post.account.name, post) %>" class="btn btn-ghost text-base-content/80" target="_blank">
+              <%= t "general.published" %>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </a>
+          <% end %>
+        </div>
+        <div class="flex-none">
+          <% if post.draft? %>
+            <button type="submit" form="<%= editor_form_id %>" class="btn btn-ghost" data-controller="hotkey" data-hotkey="Mod+s" data-hotkey-global>
+              <%= t "general.save" %>
+            </button>
+            <% if post.persisted? %>
+              <button type="submit" class="btn btn-ghost text-primary" form="publish-form">
+                <%= t "general.publish" %>
+              </button>
+            <% else %>
+              <button type="button" class="btn btn-ghost" disabled>
+                <%= t "general.publish" %>
+              </button>
+            <% end %>
+          <% elsif post.published? %>
+            <button type="submit" form="<%= editor_form_id %>" class="btn btn-ghost text-primary" data-controller="hotkey" data-hotkey="Mod+s" data-hotkey-global>
+              <%= t "general.update" %>
+            </button>
+            <button type="submit" class="btn btn-ghost" form="unpublish-form">
+              <%= t "general.unpublish" %>
+            </button>
+          <% end %>
+          <label for="drawer-toggle" class="btn btn-ghost btn-square">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-right-icon lucide-panel-right"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/></svg>
+          </label>
+        </div>
+      </div>
 
-        <div class="max-w-4xl mx-auto p-4">
-          <div id="editor-card" class="card card-lg card-default" data-turbo-permanent>
-            <div class="card-body">
+      <div class="max-w-4xl mx-auto p-4">
+        <div id="editor-card" class="card card-lg card-default" data-turbo-permanent>
+          <div class="card-body">
+            <%= form_with model: post, url: post.new_record? ? dashboard_posts_path(post.account.name) : dashboard_post_path(post.account.name, post), id: editor_form_id do |form| %>
               <%= form.text_area :title, class: "text-3xl font-medium resize-none outline-none", placeholder: t(".title_placeholder"), data: { controller: "autoresize" } %>
 
               <div class="group" data-controller="markdown-field">
@@ -82,37 +83,39 @@
                   </div>
                 </div>
               </div>
-            </div>
+            <% end %>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="drawer-side z-10">
-        <label for="drawer-toggle" class="drawer-overlay"></label>
+    <div class="drawer-side z-10">
+      <label for="drawer-toggle" class="drawer-overlay"></label>
 
-        <div class="bg-base-100 border-l border-base-300 text-base-content h-full w-80 flex flex-col overflow-hidden lg:is-drawer-close:w-0 lg:is-drawer-open:w-80">
-          <div class="w-80 flex flex-col grow min-h-0 lg:is-drawer-close:hidden">
-            <div class="navbar border-b border-base-300">
-              <div class="grow px-2">
-                <div class="text-xl font-medium">
-                  <%= t "general.settings" %>
-                </div>
+      <div class="bg-base-100 border-l border-base-300 text-base-content h-full w-80 flex flex-col overflow-hidden lg:is-drawer-close:w-0 lg:is-drawer-open:w-80">
+        <div class="w-80 flex flex-col grow min-h-0 lg:is-drawer-close:hidden">
+          <div class="navbar border-b border-base-300">
+            <div class="grow px-2">
+              <div class="text-xl font-medium">
+                <%= t "general.settings" %>
               </div>
-              <label for="drawer-toggle" class="btn btn-ghost btn-square">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-              </label>
             </div>
+            <label for="drawer-toggle" class="btn btn-ghost btn-square">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </label>
+          </div>
 
-            <div class="grow p-4 overflow-auto">
+          <div class="grow p-4 overflow-auto">
+            <%= fields_for post do |form| %>
               <div class="space-y-2">
-                <%= render "components/image_field", form: form, name: :featured_image %>
+                <%= render "components/image_field", form: form, name: :featured_image, options: { form: editor_form_id } %>
 
                 <fieldset class="fieldset">
                   <legend class="fieldset-legend">
                     <%= t "general.tags" %>
                   </legend>
                   <div data-controller="tag-field">
-                    <%= form.hidden_field :tag_list, data: { tag_field_target: "input" } %>
+                    <%= form.hidden_field :tag_list, form: editor_form_id, data: { tag_field_target: "input" } %>
                   </div>
                 </fieldset>
 
@@ -120,36 +123,37 @@
                   <legend class="fieldset-legend">
                     <%= t "general.series" %>
                   </legend>
-                  <%= form.collection_select :series_id, post.account.series.order(:title), :id, :title, { include_blank: t(".no_series") }, class: "select" %>
+                  <%= form.collection_select :series_id, post.account.series.order(:title), :id, :title, { include_blank: t(".no_series") }, { class: "select", form: editor_form_id } %>
                 </fieldset>
 
-                <%= render "components/text_field", form: form, name: :canonical_url %>
+                <%= render "components/text_field", form: form, name: :canonical_url, options: { form: editor_form_id } %>
 
                 <fieldset class="fieldset">
                   <legend class="fieldset-legend">
                     <%= t "general.options" %>
                   </legend>
-                  <%= render "components/checkbox_field", form: form, name: :allow_comments %>
+                  <%= render "components/checkbox_field", form: form, name: :allow_comments, options: { form: editor_form_id } %>
                 </fieldset>
               </div>
+            <% end %>
 
-              <% if post.persisted? %>
-                <div class="divider"></div>
+            <% if post.persisted? %>
+              <div class="divider"></div>
 
-                <a href="<%= dashboard_post_revisions_path(post.account.name, post) %>" class="btn btn-outline w-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history-icon lucide-history"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
-                  <%= t ".revisions" %>
-                </a>
+              <a href="<%= dashboard_post_revisions_path(post.account.name, post) %>" class="btn btn-outline w-full">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history-icon lucide-history"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+                <%= t ".revisions" %>
+              </a>
 
-                <button type="submit" class="btn btn-outline btn-error w-full mt-2" form="delete-form">
-                  <%= t "general.delete_post" %>
-                </button>
-              <% end %>
-            </div>
+              <button type="submit" class="btn btn-outline btn-error w-full mt-2" form="delete-form">
+                <%= t "general.delete_post" %>
+              </button>
+            <% end %>
           </div>
         </div>
+      </div>
     </div>
-  <% end %>
+  </div>
 </div>
 
 <div class="hidden">
