@@ -1,7 +1,7 @@
-<%# locals: (form:, name:, type: :text_field, prefix: nil, suffix: nil, error: nil, label: nil, description: nil, options: {}) %>
+<%# locals: (form:, name:, type: :text_field, prefix: nil, suffix: nil, label: nil, description: nil, options: {}) %>
 
 <%
-  error ||= form.object && form.object.errors[name].first
+  error = form.object && form.object.errors[name].first
 %>
 
 <fieldset class="fieldset">

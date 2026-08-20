@@ -1,7 +1,7 @@
 <%# locals: (form:) %>
 
 <%
-  error ||= form.object.errors[:recaptcha].first
+  error = form.object.errors[:recaptcha].first
 %>
 
 <% if defined?(Recaptcha) %>
