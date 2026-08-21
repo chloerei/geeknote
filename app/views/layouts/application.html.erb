@@ -47,7 +47,7 @@
 
     <%= content_for?(:content) ? yield(:content) : yield %>
 
-    <div id="toast" class="toast">
+    <div id="toast" class="toast z-100">
       <% if notice %>
         <div class="alert alert-success" data-controller="autoremove" data-turbo-temporary>
           <%= notice %>
