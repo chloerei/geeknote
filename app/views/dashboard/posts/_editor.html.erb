@@ -63,7 +63,7 @@
         <div id="editor-card" class="card card-lg card-default" data-turbo-permanent>
           <div class="card-body">
             <%= form_with model: post, url: post.new_record? ? dashboard_posts_path(post.account.name) : dashboard_post_path(post.account.name, post), id: editor_form_id do |form| %>
-              <%= form.text_area :title, class: "text-3xl font-medium resize-none outline-none", placeholder: t(".title_placeholder"), data: { controller: "autoresize" } %>
+              <%= form.text_area :title, class: "text-3xl font-medium resize-none outline-none w-full", placeholder: t(".title_placeholder"), data: { controller: "autoresize" } %>
 
               <div class="group" data-controller="markdown-field">
                 <%= form.hidden_field :content, id: "post_content", placeholder: t(".content_placeholder") %>
