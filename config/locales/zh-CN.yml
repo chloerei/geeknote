@@ -260,6 +260,7 @@ zh-CN:
     block: Block
     back_to_home: 返回首页
     bookmarks: 书签
+    cancel_upload: 取消上传
     click_to_select_image: 点击选择图片
     comment: 评论
     comment_is_closed: 评论已关闭
@@ -378,6 +379,7 @@ zh-CN:
     unpublish: 取消发布
     untitled: 无标题
     update: 更新
+    uploading: 上传中
     user: 用户
     users: 用户
     users_count: "%{count} 位用户"
