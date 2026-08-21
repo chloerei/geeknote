@@ -118,7 +118,7 @@
                   <legend class="fieldset-legend">
                     <%= t "general.tags" %>
                   </legend>
-                  <div data-controller="tag-field">
+                  <div data-controller="tag-field" data-turbo-permanent>
                     <%= form.hidden_field :tag_list, form: editor_form_id, data: { tag_field_target: "input" } %>
                   </div>
                 </fieldset>
