@@ -11,7 +11,7 @@
 
   <div class="group/image-field <%= 'attached' if form.object.send(name).attached? %>" data-controller="image-field">
     <div class="hidden">
-      <%= form.file_field name, options.merge(data: { image_field_target: "input", action: "image-field#upload", image_field_url_value: rails_direct_uploads_path }) %>
+      <%= form.file_field name, options.merge(accept: "image/png,image/jpeg", data: { image_field_target: "input", action: "image-field#upload", image_field_url_value: rails_direct_uploads_path }) %>
       <%= form.text_field name, options.merge(value: "", disabled: true, id: form.field_id(name, :signed_id), class: "hidden", data: { image_field_target: "signedIdInput" }) %>
     </div>
     <div class="relative w-32 h-32">
