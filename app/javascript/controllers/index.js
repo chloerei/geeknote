@@ -25,6 +25,9 @@ application.register("copy-link", CopyLinkController)
 import DialogController from "./dialog_controller"
 application.register("dialog", DialogController)
 
+import DrawerPanelsController from "./drawer_panels_controller"
+application.register("drawer-panels", DrawerPanelsController)
+
 import FormUnsaveCheckerController from "./form_unsave_checker_controller"
 application.register("form-unsave-checker", FormUnsaveCheckerController)
 
