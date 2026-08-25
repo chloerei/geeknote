@@ -1,6 +1,6 @@
 <%# locals: (ai_chat:) %>
 
-<div id="<%= dom_id(ai_chat) %>" class="list-row relative hover:bg-base-200">
+<div id="<%= dom_id(ai_chat) %>" class="list-row relative items-center hover:bg-base-200">
   <div class="list-col-grow">
     <a href="<%= dashboard_post_ai_chat_path(@account.name, @post, ai_chat) %>" class="text-base line-clamp-1 after:absolute after:inset-0">
       <%= ai_chat.title || t(".untitled") %>
