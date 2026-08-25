@@ -1,6 +1,8 @@
 class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
   before_action :set_ai_chat, only: [ :show, :destroy ]
 
+  layout "application"
+
   def index
     @ai_chats = @post.ai_chats.includes(:ai_messages).order(created_at: :desc)
     @ai_chat = @post.ai_chats.new(user: Current.user)

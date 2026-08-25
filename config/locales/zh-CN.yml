@@ -229,7 +229,7 @@ zh-CN:
       destroy:
         success: 文章已删除。
       editor:
-        ai_assistant: AI 助手
+        ai_panel_save_first: 保存文章后即可使用 AI 助手
         ai_chat: AI 写作助手
         delete_forever_confirm: 永久删除文章？
         no_series: 无系列

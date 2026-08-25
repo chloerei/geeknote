@@ -1,37 +1,55 @@
-<% @show_dock = true %>
+<turbo-frame id="ai-panel" class="block">
+  <%= turbo_stream_from "ai_chat_#{@ai_chat.id}" %>
 
-<%= turbo_stream_from "ai_chat_#{@ai_chat.id}" %>
-
-<div class="navbar px-0 gap-4">
-  <div class="flex-none">
-    <a href="<%= dashboard_post_ai_chats_path(@account.name, @post) %>" class="btn btn-ghost btn-square">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-    </a>
-  </div>
-  <div class="flex-grow">
-    <div class="text-xl font-medium truncate">
-      <%= @ai_chat.title || t(".untitled") %>
+  <div class="navbar px-4 gap-2 border-b border-base-300 shrink-0">
+    <div class="flex-none">
+      <a href="<%= dashboard_post_ai_chats_path(@account.name, @post) %>" class="btn btn-ghost btn-square">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+      </a>
+    </div>
+    <div class="grow min-w-0">
+      <div class="text-lg font-medium truncate">
+        <%= @ai_chat.title || t(".untitled") %>
+      </div>
+    </div>
+    <div class="flex-none">
+      <div class="dropdown dropdown-end">
+        <label tabindex="0" class="btn btn-ghost btn-square">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical-icon lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+        </label>
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+          <li>
+            <a href="<%= dashboard_post_ai_chat_path(@account.name, @post, @ai_chat) %>" data-turbo-method="delete" data-turbo-confirm="<%= t ".delete_confirm" %>" class="text-error">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2-icon lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+              <%= t "general.delete" %>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-  <div class="flex-none">
-    <%= button_to t("general.delete"), dashboard_post_ai_chat_path(@account.name, @post, @ai_chat), method: :delete, class: "btn btn-ghost btn-square text-error", data: { turbo_confirm: t(".delete_confirm") } %>
-  </div>
-</div>
 
-<div class="card card-default">
-  <div class="card-body">
-    <div id="ai_messages" class="space-y-4 min-h-[50vh]">
-      <% if @ai_chat.ai_messages.any? %>
-        <% @ai_chat.ai_messages.each do |ai_message| %>
-          <%= render partial: ai_message.to_partial_path, object: ai_message %>
-        <% end %>
-      <% else %>
-        <div class="text-center text-base-content/60 py-8">
-          <%= t ".empty" %>
+  <div class="grow min-h-0 flex flex-col">
+    <div class="grow min-h-0 overflow-auto p-4">
+      <div class="card card-default">
+        <div class="card-body">
+          <div id="ai_messages" class="space-y-4">
+            <% if @ai_chat.ai_messages.any? %>
+              <% @ai_chat.ai_messages.each do |ai_message| %>
+                <%= render partial: ai_message.to_partial_path, object: ai_message %>
+              <% end %>
+            <% else %>
+              <div class="text-center text-base-content/60 py-8">
+                <%= t ".empty" %>
+              </div>
+            <% end %>
+          </div>
         </div>
-      <% end %>
+      </div>
+    </div>
+
+    <div class="p-4 pt-0">
+      <%= render "dashboard/posts/ai_chats/messages/form", ai_chat: @ai_chat, ai_message: @ai_message %>
     </div>
   </div>
-</div>
-
-<%= render "dashboard/posts/ai_chats/messages/form", ai_chat: @ai_chat, ai_message: @ai_message %>
+</turbo-frame>
