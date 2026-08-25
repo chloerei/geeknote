@@ -1,11 +1,11 @@
 <%# locals: (post:) %>
 <% editor_form_id = "editor-form" %>
 
-<div id="post-editor" data-controller="form-unsave-checker">
-  <div class="drawer drawer-end lg:drawer-open" data-controller="drawer-panels" data-action="turbo:morph@window->drawer-panels#afterMorph">
+<div id="post-editor" class="h-dvh flex flex-col overflow-hidden" data-controller="form-unsave-checker">
+  <div class="drawer drawer-end lg:drawer-open grow min-h-0 auto-rows-[minmax(0,1fr)]" data-controller="drawer-panels" data-action="turbo:morph@window->drawer-panels#afterMorph">
     <input type="checkbox" id="drawer-toggle" class="drawer-toggle" data-drawer-panels-target="toggle" data-action="change->drawer-panels#toggleChanged" data-turbo-permanent>
 
-    <div class="drawer-content">
+    <div class="drawer-content overflow-y-auto">
       <div class="navbar sticky top-0 z-10 px-4 gap-4 bg-base-200 border-b border-base-300">
         <div class="flex-none">
           <a href="<%= dashboard_posts_path(post.account.name) %>" class="btn btn-ghost btn-square">
