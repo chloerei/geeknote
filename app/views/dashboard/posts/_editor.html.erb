@@ -99,8 +99,8 @@
     <div class="drawer-side">
       <label for="drawer-toggle" class="drawer-overlay"></label>
 
-      <div class="bg-base-100 border-l border-base-300 text-base-content h-full flex flex-col overflow-hidden is-drawer-close:w-0 is-drawer-open:w-80">
-        <div class="w-80 flex flex-col grow min-h-0 lg:is-drawer-close:hidden" data-drawer-panels-target="panel" data-panel="settings">
+      <div class="bg-base-100 border-l border-base-300 text-base-content h-full flex flex-col overflow-hidden is-drawer-close:w-0 is-drawer-open:w-[400px]">
+        <div class="w-[400px] flex flex-col grow min-h-0 lg:is-drawer-close:hidden" data-drawer-panels-target="panel" data-panel="settings">
           <div class="navbar border-b border-base-300">
             <div class="grow px-2">
               <div class="text-xl font-medium">
@@ -130,7 +130,7 @@
                   <legend class="fieldset-legend">
                     <%= t "general.series" %>
                   </legend>
-                  <%= form.collection_select :series_id, post.account.series.order(:title), :id, :title, { include_blank: t(".no_series") }, { class: "select", form: editor_form_id } %>
+                  <%= form.collection_select :series_id, post.account.series.order(:title), :id, :title, { include_blank: t(".no_series") }, { class: "select w-full", form: editor_form_id } %>
                 </fieldset>
 
                 <%= render "components/text_field", form: form, name: :canonical_url, options: { form: editor_form_id } %>
@@ -166,7 +166,7 @@
           </div>
         </div>
 
-        <div class="w-80 flex flex-col grow min-h-0 lg:is-drawer-close:hidden" data-drawer-panels-target="panel" data-panel="ai">
+        <div class="w-[400px] flex flex-col grow min-h-0 lg:is-drawer-close:hidden" data-drawer-panels-target="panel" data-panel="ai">
           <% if post.persisted? %>
             <%= turbo_frame_tag "ai-panel", src: dashboard_post_ai_chats_path(post.account.name, post), loading: :lazy, class: "flex flex-col grow min-h-0", data: { turbo_permanent: true } do %>
               <div class="grow min-h-0 overflow-auto p-4">
