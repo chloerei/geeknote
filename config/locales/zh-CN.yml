@@ -217,7 +217,7 @@ zh-CN:
           empty: 还没有消息，发送第一条消息开始对话吧
         messages:
           form:
-            content_placeholder: 输入消息，Cmd+Enter 发送
+            content_placeholder: 输入消息
             submit: 发送
       create:
         success: 文章已创建。

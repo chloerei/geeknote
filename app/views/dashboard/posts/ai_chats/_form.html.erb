@@ -1,10 +1,9 @@
 <%# locals: (ai_chat:) %>
 
 <%= form_with model: ai_chat, url: dashboard_post_ai_chats_path(@account.name, @post) do |form| %>
-  <div class="flex items-end gap-2 rounded-2xl border border-base-300 bg-base-100 p-2 transition-colors focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
-    <%= form.text_area :prompt, rows: 4, placeholder: t(".prompt_placeholder"), autofocus: true, class: "textarea w-full border-0 bg-transparent resize-none px-2 py-1.5 shadow-none focus:outline-none" %>
-    <%= form.button class: "btn btn-primary btn-circle shrink-0", type: "submit", aria: { label: t(".submit") }, title: t(".submit") do %>
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-icon lucide-send"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-    <% end %>
-  </div>
+  <%= render "dashboard/posts/ai_chats/composer",
+    form: form,
+    field: :prompt,
+    placeholder: t(".prompt_placeholder"),
+    submit_label: t(".submit") %>
 <% end %>

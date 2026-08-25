@@ -1,0 +1,14 @@
+<%# locals: (form:, field:, rows: 2, placeholder:, submit_label:, resizable: false) %>
+
+<div class="rounded-2xl border border-base-300 bg-base-100 p-2 transition-colors focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
+  <%= form.text_area field, rows: rows, id: form.field_id(field), placeholder: placeholder, autofocus: true, data: (resizable ? { controller: "autoresize" } : {}), class: "textarea w-full border-0 bg-transparent resize-none px-2 py-1.5 min-h-[2lh] shadow-none focus:outline-none" %>
+
+  <div class="flex items-center justify-between gap-1 pt-1">
+    <div class="flex items-center gap-1">
+      <%# Reserved for future auxiliary buttons (e.g. attachments) %>
+    </div>
+    <%= form.button class: "btn btn-primary btn-circle shrink-0", type: "submit", aria: { label: submit_label }, title: submit_label, data: { controller: "hotkey", hotkey: "Enter", hotkey_scope: form.field_id(field) } do %>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-icon lucide-send"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+    <% end %>
+  </div>
+</div>
