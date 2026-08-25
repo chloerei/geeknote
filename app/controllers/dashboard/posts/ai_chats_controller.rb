@@ -4,7 +4,7 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
   layout "application"
 
   def index
-    @ai_chats = @post.ai_chats.includes(:ai_messages).order(created_at: :desc)
+    @pagy, @ai_chats = pagy(@post.ai_chats.includes(:ai_messages).order(created_at: :desc))
     @ai_chat = @post.ai_chats.new(user: Current.user)
 
     @page_titles.prepend t(".index.title")

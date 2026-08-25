@@ -19,17 +19,15 @@
           <%= t ".history" %>
         </div>
 
-        <div id="ai_chats">
-          <% if @ai_chats.any? %>
-            <div class="list">
-              <%= render partial: "ai_chat", collection: @ai_chats %>
-            </div>
-          <% else %>
-            <div class="text-center text-base-content/60 py-8">
-              <%= t ".empty" %>
-            </div>
+        <% if @ai_chats.any? %>
+          <%= render "components/scroll_pagination", pagy: @pagy, auto_load: true, content_html: { id: "ai-chats-items", class: "list" } do %>
+            <%= render partial: "ai_chat", collection: @ai_chats %>
           <% end %>
-        </div>
+        <% else %>
+          <div class="text-center text-base-content/60 py-8">
+            <%= t ".empty" %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
