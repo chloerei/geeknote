@@ -30,22 +30,16 @@
   </div>
 
   <div class="grow min-h-0 flex flex-col">
-    <div class="grow min-h-0 overflow-auto p-4">
-      <div class="card card-default">
-        <div class="card-body">
-          <div id="ai_messages" class="space-y-4">
-            <% if @ai_chat.ai_messages.any? %>
-              <% @ai_chat.ai_messages.each do |ai_message| %>
-                <%= render partial: ai_message.to_partial_path, object: ai_message %>
-              <% end %>
-            <% else %>
-              <div class="text-center text-base-content/60 py-8">
-                <%= t ".empty" %>
-              </div>
-            <% end %>
-          </div>
+    <div id="ai_messages" class="grow min-h-0 overflow-auto p-4 space-y-4">
+      <% if @ai_chat.ai_messages.any? %>
+        <% @ai_chat.ai_messages.each do |ai_message| %>
+          <%= render partial: ai_message.to_partial_path, object: ai_message %>
+        <% end %>
+      <% else %>
+        <div class="text-center text-base-content/60 py-8">
+          <%= t ".empty" %>
         </div>
-      </div>
+      <% end %>
     </div>
 
     <div class="p-4 pt-0">

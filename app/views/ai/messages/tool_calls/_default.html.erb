@@ -1,4 +1,8 @@
-<div id="ai_message_tool_call_<%= tool_call.id %>" class="chat chat-start">
-  <div class="chat-header"><%= t ".name" %></div>
-  <div class="chat-bubble chat-bubble-ghost whitespace-pre-wrap text-sm"><%= tool_call.name %>(<%= tool_call.arguments.map { |k, v| "#{k}: #{v.inspect}" }.join(", ") %>)</div>
+<div id="ai_message_tool_call_<%= tool_call.id %>" class="flex justify-start">
+  <div class="max-w-[85%]">
+    <div class="mb-1 px-1 text-xs text-base-content/50">
+      <%= t ".name" %>
+    </div>
+    <div class="rounded-xl border border-base-300 bg-base-200/60 px-3 py-2 font-mono text-xs whitespace-pre-wrap break-all"><%= tool_call.name %>(<%= tool_call.arguments.map { |k, v| "#{k}: #{v.inspect}" }.join(", ") %>)</div>
+  </div>
 </div>

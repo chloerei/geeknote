@@ -1,8 +1,9 @@
 <% user ||= local_assigns[:message] %>
-<div id="ai_message_<%= user.id %>" class="chat chat-end">
-  <div class="chat-header">
-    <%= t ".name" %>
-    <time class="text-xs opacity-50"><%= format_time user.created_at %></time>
+<div id="ai_message_<%= user.id %>" class="flex justify-end">
+  <div class="max-w-[85%]">
+    <div class="mb-1 px-1 text-right text-xs text-base-content/50">
+      <time><%= format_time user.created_at %></time>
+    </div>
+    <div id="ai_message_<%= user.id %>_content" class="rounded-2xl rounded-tr-sm bg-primary px-4 py-2.5 text-primary-content whitespace-pre-wrap break-words"><%= user.content %></div>
   </div>
-  <div id="ai_message_<%= user.id %>_content" class="chat-bubble chat-bubble-primary whitespace-pre-wrap"><%= user.content %></div>
 </div>

@@ -2,26 +2,24 @@
 
 <div id="<%= dom_id(ai_chat) %>" class="list-row relative hover:bg-base-200">
   <div class="list-col-grow">
-    <div>
-      <a href="<%= dashboard_post_ai_chat_path(@account.name, @post, ai_chat) %>" class="text-base font-medium line-clamp-1 after:absolute after:inset-0">
-        <%= ai_chat.title || t(".untitled") %>
-      </a>
-    </div>
-    <div class="text-sm text-base-content/80 mt-2">
-      <span>
-        <%= t(".messages_count", count: ai_chat.ai_messages.size) %>
-      </span>
-      &centerdot;
-      <span>
-        <%= format_time ai_chat.created_at %>
-      </span>
-    </div>
+    <a href="<%= dashboard_post_ai_chat_path(@account.name, @post, ai_chat) %>" class="text-base line-clamp-1 after:absolute after:inset-0">
+      <%= ai_chat.title || t(".untitled") %>
+    </a>
   </div>
 
-  <div class="flex items-center gap-1 relative z-10">
-    <a href="<%= dashboard_post_ai_chat_path(@account.name, @post, ai_chat) %>" class="btn btn-ghost btn-sm">
-      <%= t ".open" %>
-    </a>
-    <%= button_to t(".delete"), dashboard_post_ai_chat_path(@account.name, @post, ai_chat), method: :delete, class: "btn btn-ghost btn-sm text-error", data: { turbo_confirm: t(".delete_confirm") } %>
+  <div class="relative z-10">
+    <div class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost btn-square btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical-icon lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      </label>
+      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+        <li>
+          <a href="<%= dashboard_post_ai_chat_path(@account.name, @post, ai_chat) %>" data-turbo-method="delete" data-turbo-confirm="<%= t ".delete_confirm" %>" class="text-error">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2-icon lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+            <%= t "general.delete" %>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

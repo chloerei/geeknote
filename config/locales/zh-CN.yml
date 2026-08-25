@@ -205,15 +205,10 @@ zh-CN:
         destroy:
           success: 对话已删除。
         form:
-          title: 新建对话
-          prompt: 提示词
           prompt_placeholder: 你想让 AI 帮你写点什么？
           submit: 开始新对话
         ai_chat:
           untitled: 新对话
-          messages_count: "%{count} 条消息"
-          open: 打开
-          delete: 删除
           delete_confirm: 确认删除这个对话？
         show:
           title: 对话

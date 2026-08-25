@@ -5,8 +5,12 @@
     title: t(".error_title"),
     error_message: error_message %>
 <% else %>
-  <div id="ai_message_tool_result_<%= tool.id %>" class="chat chat-start">
-    <div class="chat-header"><%= t ".name" %></div>
-    <div class="chat-bubble chat-bubble-ghost whitespace-pre-wrap text-sm"><%= tool.content.presence || t(".no_output") %></div>
+  <div id="ai_message_tool_result_<%= tool.id %>" class="flex justify-start">
+    <div class="max-w-[85%]">
+      <div class="mb-1 px-1 text-xs text-base-content/50">
+        <%= t ".name" %>
+      </div>
+      <div class="rounded-xl border border-base-300 bg-base-200/60 px-3 py-2 font-mono text-xs whitespace-pre-wrap break-all"><%= tool.content.presence || t(".no_output") %></div>
+    </div>
   </div>
 <% end %>

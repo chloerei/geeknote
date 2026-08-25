@@ -1,5 +1,6 @@
 <% system ||= local_assigns[:message] %>
-<div id="ai_message_<%= system.id %>" class="chat chat-start">
-  <div class="chat-header"><%= t ".name" %></div>
-  <div class="chat-bubble whitespace-pre-wrap"><%= system.content %></div>
+<div id="ai_message_<%= system.id %>" class="flex justify-center">
+  <div class="max-w-[85%]">
+    <div class="rounded-full bg-base-200/70 px-3 py-1 text-xs text-base-content/60 whitespace-pre-wrap break-words"><%= system.content %></div>
+  </div>
 </div>
