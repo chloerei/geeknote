@@ -25,9 +25,17 @@
 
       <% if @ai_chats.any? %>
         <div class="mt-1">
-          <%= render "components/scroll_pagination", pagy: @pagy, auto_load: true, content_html: { id: "ai-chats-items", class: "list" } do %>
+          <div id="ai_chats_list" class="list" data-controller="scroll-pagination" data-scroll-pagination-auto-load-value="true">
             <%= render partial: "ai_chat", collection: @ai_chats %>
-          <% end %>
+            <% if @pagy.next %>
+              <a href="<%= pagy_url_for(@pagy, @pagy.next) %>" class="btn btn-ghost btn-block" data-action="scroll-pagination#load" data-scroll-pagination-target="nextLink" data-turbo-prefetch="false">
+                <%= t "general.load_more" %>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+              </a>
+            <% else %>
+              <div class="text-center text-xs opacity-60 py-4"><%= t "general.end_label" %></div>
+            <% end %>
+          </div>
         </div>
       <% else %>
         <div class="text-center text-base-content/60 py-8">

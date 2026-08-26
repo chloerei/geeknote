@@ -19,9 +19,17 @@
 <div class="card card-default">
   <div class="card-body">
     <% if @series.any? %>
-      <%= render "components/scroll_pagination", pagy: @pagy, content_html: { class: "list" } do %>
+      <div id="series_list" class="list" data-controller="scroll-pagination">
         <%= render partial: "series", collection: @series %>
-      <% end %>
+        <% if @pagy.next %>
+          <a href="<%= pagy_url_for(@pagy, @pagy.next) %>" class="btn btn-ghost btn-block" data-action="scroll-pagination#load" data-scroll-pagination-target="nextLink" data-turbo-prefetch="false">
+            <%= t "general.load_more" %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+          </a>
+        <% else %>
+          <div class="text-center text-xs opacity-60 py-4"><%= t "general.end_label" %></div>
+        <% end %>
+      </div>
     <% else %>
       <div class="flex flex-col items-center gap-3 py-12 text-base-content/50">
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-text-icon lucide-book-text"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/><path d="M8 11h8"/><path d="M8 7h6"/></svg>

@@ -3,7 +3,7 @@ import { get } from "@rails/request.js";
 
 // Connects to data-controller="scroll-pagination"
 export default class extends Controller {
-  static targets = ["wrapper", "nextLink"];
+  static targets = ["nextLink"];
 
   static values = {
     autoLoad: { type: Boolean, default: false },
@@ -48,7 +48,8 @@ export default class extends Controller {
 
     const html = await response.html;
     const dom = new DOMParser().parseFromString(html, "text/html");
-    const wrapper = dom.getElementById(this.wrapperTarget.id);
+    // The controller element is the wrapper itself.
+    const wrapper = dom.getElementById(this.element.id);
     if (!wrapper) return;
 
     // Replace the nextLink with the response wrapper's content

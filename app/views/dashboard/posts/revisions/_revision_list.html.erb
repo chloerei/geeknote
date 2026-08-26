@@ -1,21 +1,15 @@
 <turbo-frame id="revisions-list" class="grow overflow-y-auto block">
-  <div data-controller="scroll-pagination revisions-list" data-scroll-pagination-auto-load-value="true">
-    <ul class="list p-2" id="revisions-list-items" data-scroll-pagination-target="content">
+  <div id="revisions_list" data-controller="scroll-pagination revisions-list" data-scroll-pagination-auto-load-value="true">
+    <ul class="list p-2">
       <%= render partial: "revision_item", collection: @revisions, as: :revision %>
     </ul>
-    <div id="revisions-list-info" data-scroll-pagination-target="next" class="p-4">
-      <% if @pagy.next %>
-        <div class="text-center">
-          <a href="<%= pagy_url_for(@pagy, @pagy.next) %>" class="btn btn-soft btn-block" data-action="scroll-pagination#load" data-scroll-pagination-target="nextLink" data-turbo-prefetch="false">
-            <%= t "general.load_more" %>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
-          </a>
-        </div>
-      <% else %>
-        <div class="text-center text-xs opacity-60">
-          <%= t "general.end_label" %>
-        </div>
-      <% end %>
-    </div>
+    <% if @pagy.next %>
+      <a href="<%= pagy_url_for(@pagy, @pagy.next) %>" class="btn btn-ghost btn-block" data-action="scroll-pagination#load" data-scroll-pagination-target="nextLink" data-turbo-prefetch="false">
+        <%= t "general.load_more" %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+      </a>
+    <% else %>
+      <div class="text-center text-xs opacity-60 py-4"><%= t "general.end_label" %></div>
+    <% end %>
   </div>
 </turbo-frame>
