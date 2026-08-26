@@ -1,4 +1,4 @@
-<turbo-frame id="ai-panel" class="block">
+<turbo-frame id="ai-panel" class="flex flex-col min-h-0 h-screen">
   <%= turbo_stream_from "ai_chat_#{@ai_chat.id}" %>
 
   <div class="navbar px-4 gap-2 border-b border-base-300 shrink-0">
@@ -29,8 +29,8 @@
     </div>
   </div>
 
-  <div class="grow min-h-0 flex flex-col">
-    <div id="ai_messages" class="grow min-h-0 overflow-auto p-4 space-y-4">
+  <div class="grow min-h-0 flex flex-col-reverse overflow-auto">
+    <div id="ai_messages" class="p-4 space-y-4">
       <% if @ai_chat.ai_messages.any? %>
         <% @ai_chat.ai_messages.each do |ai_message| %>
           <%= render partial: ai_message.to_partial_path, object: ai_message %>
@@ -41,9 +41,9 @@
         </div>
       <% end %>
     </div>
+  </div>
 
-    <div class="p-4 pt-0">
-      <%= render "dashboard/posts/ai_chats/messages/form", ai_chat: @ai_chat, ai_message: @ai_message %>
-    </div>
+  <div class="p-4 pt-0">
+    <%= render "dashboard/posts/ai_chats/messages/form", ai_chat: @ai_chat, ai_message: @ai_message %>
   </div>
 </turbo-frame>
