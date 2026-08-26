@@ -30,11 +30,17 @@
   </div>
 
   <div class="grow min-h-0 flex flex-col-reverse overflow-auto">
-    <div id="ai_messages" class="p-4 space-y-4">
+    <div id="ai_messages" class="p-4 space-y-4" data-controller="scroll-pagination" data-scroll-pagination-auto-load-value="true">
       <div class="hidden only:block text-center text-base-content/60 py-8">
         <%= t ".empty" %>
       </div>
-      <% @ai_chat.ai_messages.each do |ai_message| %>
+      <% if @pagy.next %>
+        <a href="<%= pagy_url_for(@pagy, @pagy.next) %>" class="btn btn-ghost btn-block" data-action="scroll-pagination#load" data-scroll-pagination-target="nextLink" data-turbo-prefetch="false">
+          <%= t "general.load_more" %>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up-icon lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
+        </a>
+      <% end %>
+      <% @ai_messages.reverse.each do |ai_message| %>
         <%= render partial: ai_message.to_partial_path, object: ai_message %>
       <% end %>
     </div>

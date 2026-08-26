@@ -11,6 +11,7 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
   end
 
   def show
+    @pagy, @ai_messages = pagy(@ai_chat.ai_messages.reorder(id: :desc))
     @ai_message = AI::Message.new
     @page_titles.prepend t(".show.title")
   end
