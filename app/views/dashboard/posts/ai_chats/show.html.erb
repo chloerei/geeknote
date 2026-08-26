@@ -31,14 +31,11 @@
 
   <div class="grow min-h-0 flex flex-col-reverse overflow-auto">
     <div id="ai_messages" class="p-4 space-y-4">
-      <% if @ai_chat.ai_messages.any? %>
-        <% @ai_chat.ai_messages.each do |ai_message| %>
-          <%= render partial: ai_message.to_partial_path, object: ai_message %>
-        <% end %>
-      <% else %>
-        <div class="text-center text-base-content/60 py-8">
-          <%= t ".empty" %>
-        </div>
+      <div class="hidden only:block text-center text-base-content/60 py-8">
+        <%= t ".empty" %>
+      </div>
+      <% @ai_chat.ai_messages.each do |ai_message| %>
+        <%= render partial: ai_message.to_partial_path, object: ai_message %>
       <% end %>
     </div>
   </div>
