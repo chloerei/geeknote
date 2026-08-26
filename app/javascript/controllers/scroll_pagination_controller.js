@@ -3,7 +3,7 @@ import { get } from "@rails/request.js";
 
 // Connects to data-controller="scroll-pagination"
 export default class extends Controller {
-  static targets = ["content", "next", "nextLink"];
+  static targets = ["wrapper", "nextLink"];
 
   static values = {
     autoLoad: { type: Boolean, default: false },
@@ -40,20 +40,23 @@ export default class extends Controller {
   }
 
   async loadNextPage() {
-    const response = await get(this.nextLinkTarget.href);
-    if (response.ok) {
-      const html = await response.html;
-      const dom = new DOMParser().parseFromString(html, "text/html");
-      this.contentTarget.insertAdjacentHTML(
-        "beforeend",
-        dom.getElementById(this.contentTarget.id).innerHTML,
-      );
-      this.nextTarget.innerHTML = dom.getElementById(
-        this.nextTarget.id,
-      ).innerHTML;
-      if (this.observer && this.hasNextLinkTarget) {
-        this.observer.observe(this.nextLinkTarget);
-      }
+    const nextLink = this.nextLinkTarget;
+    if (!nextLink) return;
+
+    const response = await get(nextLink.href);
+    if (!response.ok) return;
+
+    const html = await response.html;
+    const dom = new DOMParser().parseFromString(html, "text/html");
+    const wrapper = dom.getElementById(this.wrapperTarget.id);
+    if (!wrapper) return;
+
+    // Replace the nextLink with the response wrapper's content
+    // (new items and the next nextLink).
+    nextLink.replaceWith(...wrapper.childNodes);
+
+    if (this.observer && this.hasNextLinkTarget) {
+      this.observer.observe(this.nextLinkTarget);
     }
   }
 
