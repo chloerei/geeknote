@@ -199,13 +199,11 @@ zh-CN:
           back_to_editor: 返回编辑
         create:
           success: 对话已创建。
-          prompt_required: 请输入对话内容。
           create_failed: 对话创建失败，请重试。
-          model_not_found: 未找到所选模型。
         destroy:
           success: 对话已删除。
         form:
-          prompt_placeholder: 你想让 AI 帮你写点什么？
+          content_placeholder: 你想让 AI 帮你写点什么？
           submit: 开始新对话
         ai_chat:
           untitled: 新对话

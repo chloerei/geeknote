@@ -1,9 +1,9 @@
-<%# locals: (ai_chat:) %>
+<%# locals: (ai_message:) %>
 
-<%= form_with model: ai_chat, url: dashboard_post_ai_chats_path(@account.name, @post) do |form| %>
+<%= form_with model: ai_message, url: dashboard_post_ai_chats_path(@account.name, @post) do |form| %>
   <%= render "dashboard/posts/ai_chats/composer",
     form: form,
-    field: :prompt,
-    placeholder: t(".prompt_placeholder"),
+    field: :content,
+    placeholder: t(".content_placeholder"),
     submit_label: t(".submit") %>
 <% end %>

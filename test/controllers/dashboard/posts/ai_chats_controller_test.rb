@@ -38,7 +38,7 @@ class Dashboard::Posts::AIChatsControllerTest < ActionDispatch::IntegrationTest
     assert_difference "post.ai_chats.count", 1 do
       assert_difference "AI::Message.count", 1 do
         post dashboard_post_ai_chats_url(user.account.name, post), params: {
-          ai_chat: { prompt: "Help me write an opening" }
+          ai_message: { content: "Help me write an opening" }
         }
       end
     end
@@ -51,18 +51,18 @@ class Dashboard::Posts::AIChatsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to dashboard_post_ai_chat_url(user.account.name, post, ai_chat)
   end
 
-  test "should not create chat without prompt" do
+  test "should not create chat without content" do
     user = create(:user)
     post = create(:post, account: user.account, user: user)
     sign_in user
 
     assert_no_difference "post.ai_chats.count" do
       post dashboard_post_ai_chats_url(user.account.name, post), params: {
-        ai_chat: { prompt: "" }
+        ai_message: { content: "" }
       }
     end
 
-    assert_redirected_to dashboard_post_ai_chats_url(user.account.name, post)
+    assert_response :no_content
   end
 
   test "should show chat" do
