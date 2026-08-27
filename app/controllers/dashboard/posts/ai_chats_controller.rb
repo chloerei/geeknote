@@ -22,7 +22,8 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
       @ai_chat = @post.ai_chats.new(user: Current.user)
 
       if @ai_chat.save
-        AIChatResponseJob.perform_later(@ai_chat.id, prompt)
+        @ai_chat.ask_later(prompt)
+        AIChatResponseJob.perform_later(@ai_chat)
         redirect_to dashboard_post_ai_chat_path(@account.name, @post, @ai_chat), notice: t(".success")
       else
         redirect_to dashboard_post_ai_chats_path(@account.name, @post), alert: t(".create_failed")

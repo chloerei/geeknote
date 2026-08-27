@@ -9,6 +9,9 @@ WebMock.disable_net_connect!(allow: [
 
 User::ADMIN_EMAILS.push "admin@example.com"
 
+# Stub provider credentials so ask_later can build a chat in tests.
+RubyLLM.config.deepseek_api_key = "test"
+
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)

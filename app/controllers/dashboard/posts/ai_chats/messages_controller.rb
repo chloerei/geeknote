@@ -4,7 +4,8 @@ class Dashboard::Posts::AIChats::MessagesController < Dashboard::Posts::BaseCont
   def create
     content = params.dig(:ai_message, :content)
     if content.present?
-      AIChatResponseJob.perform_later(@ai_chat.id, content)
+      @ai_chat.ask_later(content)
+      AIChatResponseJob.perform_later(@ai_chat)
 
       respond_to do |format|
         format.turbo_stream

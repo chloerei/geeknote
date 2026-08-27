@@ -36,14 +36,18 @@ class Dashboard::Posts::AIChatsControllerTest < ActionDispatch::IntegrationTest
     sign_in user
 
     assert_difference "post.ai_chats.count", 1 do
-      post dashboard_post_ai_chats_url(user.account.name, post), params: {
-        ai_chat: { prompt: "Help me write an opening" }
-      }
+      assert_difference "AI::Message.count", 1 do
+        post dashboard_post_ai_chats_url(user.account.name, post), params: {
+          ai_chat: { prompt: "Help me write an opening" }
+        }
+      end
     end
 
     ai_chat = post.ai_chats.last
     assert_equal user, ai_chat.user
     assert_equal "deepseek-v4-flash", ai_chat.model_id
+    assert_equal "user", ai_chat.ai_messages.last.role
+    assert_equal "Help me write an opening", ai_chat.ai_messages.last.content
     assert_redirected_to dashboard_post_ai_chat_url(user.account.name, post, ai_chat)
   end
 

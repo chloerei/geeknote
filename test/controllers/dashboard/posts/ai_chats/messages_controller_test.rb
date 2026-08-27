@@ -1,18 +1,22 @@
 require "test_helper"
 
 class Dashboard::Posts::AIChats::MessagesControllerTest < ActionDispatch::IntegrationTest
-  test "should enqueue response job on message" do
+  test "should create message and enqueue response job" do
     user = create(:user)
     post = create(:post, account: user.account, user: user)
     ai_chat = create(:ai_chat, post: post, user: user)
     sign_in user
 
-    assert_enqueued_with(job: AIChatResponseJob) do
-      post dashboard_post_ai_chat_messages_url(user.account.name, post, ai_chat), params: {
-        ai_message: { content: "Continue writing" }
-      }
+    assert_difference "ai_chat.ai_messages.count", 1 do
+      assert_enqueued_with(job: AIChatResponseJob, args: [ ai_chat ]) do
+        post dashboard_post_ai_chat_messages_url(user.account.name, post, ai_chat), params: {
+          ai_message: { content: "Continue writing" }
+        }
+      end
     end
 
+    assert_equal "user", ai_chat.ai_messages.last.role
+    assert_equal "Continue writing", ai_chat.ai_messages.last.content
     assert_redirected_to dashboard_post_ai_chat_url(user.account.name, post, ai_chat)
   end
 
