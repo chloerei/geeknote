@@ -96,8 +96,17 @@ class MarkdownMirror {
     this.editorView.focus()
   }
 
-  getValue() {
+  getContent() {
     return this.editorView.state.doc.toString()
+  }
+
+  setContent(content) {
+    const current = this.editorView.state.doc.toString()
+    if (current === content) return
+
+    this.editorView.dispatch({
+      changes: { from: 0, to: current.length, insert: content }
+    })
   }
 
   insertText(text) {

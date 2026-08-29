@@ -81,7 +81,7 @@ class MarkdownEditor extends HTMLElement {
     this.classList.add("fetching")
 
     const formData = new FormData()
-    formData.append("content", this.markdownMirror.getValue())
+    formData.append("content", this.markdownMirror.getContent())
     const response = await post("/preview", {
       body: formData
     })
