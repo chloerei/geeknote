@@ -118,12 +118,23 @@ class MarkdownMirror {
     })
   }
 
-  findAndReplace(findText, replaceText) {
-    const pos = this.editorView.state.doc.toString().indexOf(findText)
-    if (pos > -1) {
-      this.editorView.dispatch({
-        changes: { from: pos, to: pos + findText.length, insert: replaceText }
-      })
+  findAndReplace(findText, replaceText, replaceAll = false) {
+    if (findText === "") return
+
+    const changes = []
+    const doc = this.editorView.state.doc.toString()
+    let pos = 0
+
+    while (true) {
+      const index = doc.indexOf(findText, pos)
+      if (index === -1) break
+      changes.push({ from: index, to: index + findText.length, insert: replaceText })
+      if (!replaceAll) break
+      pos = index + findText.length
+    }
+
+    if (changes.length) {
+      this.editorView.dispatch({ changes })
     }
   }
 
