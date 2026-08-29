@@ -1,5 +1,5 @@
-import { EditorView, ViewPlugin, keymap, placeholder as placeholderPlugin } from "@codemirror/view"
-import { EditorState, EditorSelection } from "@codemirror/state"
+import { EditorView, ViewPlugin, keymap, placeholder as placeholderPlugin, Decoration } from "@codemirror/view"
+import { EditorState, EditorSelection, StateEffect, StateField } from "@codemirror/state"
 import { indentOnInput, bracketMatching, syntaxHighlighting, HighlightStyle } from "@codemirror/language"
 import { defaultKeymap, history, historyKeymap } from "@codemirror/commands"
 import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete"
@@ -16,6 +16,38 @@ const classHighlightStyle = HighlightStyle.define(
   })
 )
 
+// Highlight the text replaced by findAndReplace until the document is edited again
+const addHighlightEffect = StateEffect.define({
+  map: (ranges, mapping) => ranges.map(({ from, to }) => ({
+    from: mapping.mapPos(from),
+    to: mapping.mapPos(to)
+  }))
+})
+
+const highlightMark = Decoration.mark({ class: "cm-replaced-highlight" })
+
+const highlightField = StateField.define({
+  create: () => Decoration.none,
+  update(decorations, transaction) {
+    for (const effect of transaction.effects) {
+      if (effect.is(addHighlightEffect)) {
+        return Decoration.set(
+          effect.value.map(({ from, to }) => highlightMark.range(from, to)),
+          true
+        )
+      }
+    }
+
+    // Editing the document again (typing, undo, ...) clears the highlight
+    if (transaction.docChanged) {
+      return Decoration.none
+    }
+
+    return decorations
+  },
+  provide: (field) => EditorView.decorations.from(field)
+})
+
 EditorView.EDIT_CONTEXT = false
 
 class MarkdownMirror {
@@ -29,6 +61,7 @@ class MarkdownMirror {
         doc: input.value,
         extensions: [
           history(),
+          highlightField,
           indentOnInput(),
           syntaxHighlighting(classHighlightStyle, { fallback: true }),
           bracketMatching(),
@@ -118,7 +151,7 @@ class MarkdownMirror {
     })
   }
 
-  findAndReplace(findText, replaceText, replaceAll = false) {
+  findAndReplace(findText, replaceText, { replaceAll = false, highlight = false } = {}) {
     if (findText === "") return
 
     const changes = []
@@ -134,7 +167,18 @@ class MarkdownMirror {
     }
 
     if (changes.length) {
-      this.editorView.dispatch({ changes })
+      const effects = []
+
+      if (highlight) {
+        const changeSet = this.editorView.state.changes(changes)
+        const highlights = changes.map(({ from, to }) => ({
+          from: changeSet.mapPos(from, 1),
+          to: changeSet.mapPos(to, -1)
+        }))
+        effects.push(addHighlightEffect.of(highlights))
+      }
+
+      this.editorView.dispatch({ changes, effects })
     }
   }
 

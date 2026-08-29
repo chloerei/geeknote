@@ -84,4 +84,9 @@ markdown-editor {
     font-family: monospace;
     font-size: 0.875rem;
   }
+
+  .cm-replaced-highlight {
+    background-color: color-mix(in srgb, var(--color-warning) 35%, transparent);
+    border-radius: 0.125rem;
+  }
 }
