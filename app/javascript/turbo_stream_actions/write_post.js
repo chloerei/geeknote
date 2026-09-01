@@ -13,6 +13,6 @@ Turbo.StreamActions.write_post = function () {
 
   const content = this.getAttribute("content")
   if (content !== null) {
-    editor.markdownMirror?.setContent(content)
+    editor.markdownMirror?.setContent(content, { highlight: true })
   }
 }

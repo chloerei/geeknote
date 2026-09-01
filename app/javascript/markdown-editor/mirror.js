@@ -133,13 +133,22 @@ class MarkdownMirror {
     return this.editorView.state.doc.toString()
   }
 
-  setContent(content) {
+  setContent(content, { highlight = false } = {}) {
     const current = this.editorView.state.doc.toString()
     if (current === content) return
 
-    this.editorView.dispatch({
-      changes: { from: 0, to: current.length, insert: content }
-    })
+    const changes = { from: 0, to: current.length, insert: content }
+    const effects = []
+
+    if (highlight) {
+      const changeSet = this.editorView.state.changes(changes)
+      effects.push(addHighlightEffect.of([{
+        from: changeSet.mapPos(0, 1),
+        to: changeSet.mapPos(current.length, -1)
+      }]))
+    }
+
+    this.editorView.dispatch({ changes, effects })
   }
 
   insertText(text) {
