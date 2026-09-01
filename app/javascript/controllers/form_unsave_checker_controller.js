@@ -2,6 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="form-unsave-checker"
 export default class extends Controller {
+  static targets = ["form"]
+
   static values = {
     unsave: Boolean,
     confirm: {
@@ -12,13 +14,15 @@ export default class extends Controller {
 
   connect() {
     this.handleInput = (event) => {
-      if (event.target.hasAttribute("name")) {
+      if (this.belongsToForm(event.target) && event.target.hasAttribute("name")) {
         this.unsaveValue = true
       }
     }
 
-    this.handleTurboSubmitEnd = () => {
-      this.unsaveValue = false
+    this.handleTurboSubmitEnd = (event) => {
+      if (!this.hasFormTarget || event.detail.form === this.formTarget) {
+        this.unsaveValue = false
+      }
     }
 
     this.handleBeforeunload = (event) => {
@@ -48,5 +52,16 @@ export default class extends Controller {
     this.element.removeEventListener("turbo:submit-end", this.handleTurboSubmitEnd)
     window.removeEventListener("beforeunload", this.handleBeforeunload)
     window.removeEventListener("turbo:before-visit", this.handleBeforevisit)
+  }
+
+  // Only watch fields that belong to the form under watch. This covers inputs
+  // nested in the form as well as fields associated with it via the `form`
+  // attribute (e.g. the settings panel), while ignoring unrelated forms such
+  // as the AI chat composer. Falls back to the whole controller element when
+  // no form target is declared.
+  belongsToForm(target) {
+    return !this.hasFormTarget ||
+      target.form === this.formTarget ||
+      this.formTarget.contains(target)
   }
 }
