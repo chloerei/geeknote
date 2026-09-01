@@ -1,14 +1,14 @@
 class ReadPostTool < RubyLLM::Tool
   description "This tool reads a post for current convesation. It returns the post's content and metadata."
 
-  def initialize(post)
-    @post = post
+  def initialize(chat)
+    @chat = chat
   end
 
   def execute
     {
-      title: @post.title,
-      content: @post.content
+      title: @chat.post.title,
+      content: @chat.post.content
     }
   end
 end

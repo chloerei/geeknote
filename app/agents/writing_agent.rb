@@ -3,8 +3,8 @@ class WritingAgent < RubyLLM::Agent
 
   tools do
     [
-      ReadPostTool.new(chat.post),
-      WritePostTool.new(chat.post)
+      ReadPostTool.new(chat),
+      WritePostTool.new(chat)
     ]
   end
 end

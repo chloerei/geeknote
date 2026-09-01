@@ -1,5 +1,5 @@
 <turbo-frame id="ai-panel" class="flex flex-col min-h-0 h-screen">
-  <%= turbo_stream_from "ai_chat_#{@ai_chat.id}" %>
+  <%= turbo_stream_from @ai_chat %>
 
   <div class="navbar px-4 gap-2 border-b border-base-300 shrink-0">
     <div class="flex-none">
