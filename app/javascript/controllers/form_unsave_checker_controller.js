@@ -19,12 +19,6 @@ export default class extends Controller {
       }
     }
 
-    this.handleTurboSubmitEnd = (event) => {
-      if (!this.hasFormTarget || event.detail.form === this.formTarget) {
-        this.unsaveValue = false
-      }
-    }
-
     this.handleBeforeunload = (event) => {
       if (this.unsaveValue) {
         event.preventDefault()
@@ -41,7 +35,6 @@ export default class extends Controller {
     }
 
     this.element.addEventListener("input", this.handleInput)
-    this.element.addEventListener("turbo:submit-end", this.handleTurboSubmitEnd)
     window.addEventListener("beforeunload", this.handleBeforeunload)
     window.addEventListener("turbo:before-visit", this.handleTurboBeforevisit)
   }
@@ -49,9 +42,13 @@ export default class extends Controller {
   disconnect() {
     this.unsaveValue = false
     this.element.removeEventListener("input", this.handleInput)
-    this.element.removeEventListener("turbo:submit-end", this.handleTurboSubmitEnd)
     window.removeEventListener("beforeunload", this.handleBeforeunload)
-    window.removeEventListener("turbo:before-visit", this.handleBeforevisit)
+    window.removeEventListener("turbo:before-visit", this.handleTurboBeforevisit)
+  }
+
+  // Bound via data-action="turbo:submit-end->form-unsave-checker#submitEnd" on the watched form
+  submitEnd() {
+    this.unsaveValue = false
   }
 
   // Only watch fields that belong to the form under watch. This covers inputs
