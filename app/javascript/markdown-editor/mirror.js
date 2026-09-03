@@ -142,10 +142,15 @@ class MarkdownMirror {
 
     if (highlight) {
       const changeSet = this.editorView.state.changes(changes)
-      effects.push(addHighlightEffect.of([{
-        from: changeSet.mapPos(0, 1),
-        to: changeSet.mapPos(current.length, -1)
-      }]))
+      const highlights = []
+      // Collect the written range directly in the resulting document. Mapping the
+      // old [0, length] boundaries is unreliable when the document was empty
+      // (both endpoints collapse onto the same position), which would produce an
+      // empty or inverted decoration range.
+      changeSet.iterChangedRanges((fromA, toA, fromB, toB) => {
+        if (toB > fromB) highlights.push({ from: fromB, to: toB })
+      })
+      if (highlights.length) effects.push(addHighlightEffect.of(highlights))
     }
 
     this.editorView.dispatch({ changes, effects })
@@ -180,11 +185,14 @@ class MarkdownMirror {
 
       if (highlight) {
         const changeSet = this.editorView.state.changes(changes)
-        const highlights = changes.map(({ from, to }) => ({
-          from: changeSet.mapPos(from, 1),
-          to: changeSet.mapPos(to, -1)
-        }))
-        effects.push(addHighlightEffect.of(highlights))
+        const highlights = []
+        // Same reasoning as setContent: read the replaced ranges in the resulting
+        // document. Ranges that collapse to zero width (pure deletion) are skipped
+        // because mark decorations cannot be empty.
+        changeSet.iterChangedRanges((fromA, toA, fromB, toB) => {
+          if (toB > fromB) highlights.push({ from: fromB, to: toB })
+        })
+        if (highlights.length) effects.push(addHighlightEffect.of(highlights))
       }
 
       this.editorView.dispatch({ changes, effects })
