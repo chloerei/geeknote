@@ -5,7 +5,8 @@ class WritingAgent < RubyLLM::Agent
     [
       ReadSnapshotTool.new(chat),
       ChangeTitleTool.new(chat),
-      WriteContentTool.new(chat)
+      WriteContentTool.new(chat),
+      EditContentTool.new(chat)
     ]
   end
 end
