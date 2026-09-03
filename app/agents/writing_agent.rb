@@ -4,7 +4,8 @@ class WritingAgent < RubyLLM::Agent
   tools do
     [
       ReadSnapshotTool.new(chat),
-      WriteSnapshotTool.new(chat)
+      ChangeTitleTool.new(chat),
+      WriteContentTool.new(chat)
     ]
   end
 end

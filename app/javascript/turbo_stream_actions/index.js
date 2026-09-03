@@ -1,1 +1,2 @@
-import "./write_post"
+import "./change_title"
+import "./write_content"
