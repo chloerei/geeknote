@@ -19,7 +19,7 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
   def create
     content = params.dig(:ai_message, :content)
     if content.present?
-      @ai_chat = @post.ai_chats.new(user: Current.user)
+      @ai_chat = @post.ai_chats.new(user: Current.user, snapshot: snapshot_params)
 
       if @ai_chat.save
         @ai_chat.ask_later(content)
@@ -39,6 +39,10 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
   end
 
   private
+
+  def snapshot_params
+    params.fetch(:snapshot, {}).permit(:title, :content)
+  end
 
   def set_ai_chat
     @ai_chat = @post.ai_chats.find(params[:id])

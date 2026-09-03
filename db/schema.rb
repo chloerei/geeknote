@@ -102,6 +102,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_18_113138) do
     t.datetime "created_at", null: false
     t.bigint "post_id", null: false
     t.bigint "ruby_llm_model_id", null: false
+    t.jsonb "snapshot", default: {}, null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["post_id"], name: "index_ai_chats_on_post_id"

@@ -20,6 +20,20 @@ class Dashboard::Posts::AIChats::MessagesControllerTest < ActionDispatch::Integr
     assert_redirected_to dashboard_post_ai_chat_url(user.account.name, post, ai_chat)
   end
 
+  test "should update chat snapshot when creating message" do
+    user = create(:user)
+    post = create(:post, account: user.account, user: user)
+    ai_chat = create(:ai_chat, post: post, user: user)
+    sign_in user
+
+    post dashboard_post_ai_chat_messages_url(user.account.name, post, ai_chat), params: {
+      ai_message: { content: "Continue writing" },
+      snapshot: { title: "New title", content: "New body" }
+    }
+
+    assert_equal({ "title" => "New title", "content" => "New body" }, ai_chat.reload.snapshot)
+  end
+
   test "should not enqueue job without content" do
     user = create(:user)
     post = create(:post, account: user.account, user: user)

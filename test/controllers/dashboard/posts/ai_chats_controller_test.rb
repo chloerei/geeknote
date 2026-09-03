@@ -30,7 +30,6 @@ class Dashboard::Posts::AIChatsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create chat" do
-    RubyLLM.config.default_model = "deepseek-v4-flash"
     user = create(:user)
     post = create(:post, account: user.account, user: user)
     sign_in user
@@ -49,6 +48,24 @@ class Dashboard::Posts::AIChatsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "user", ai_chat.ai_messages.last.role
     assert_equal "Help me write an opening", ai_chat.ai_messages.last.content
     assert_redirected_to dashboard_post_ai_chat_url(user.account.name, post, ai_chat)
+  end
+
+  test "should create chat with snapshot" do
+    user = create(:user)
+    post = create(:post, account: user.account, user: user)
+    sign_in user
+
+    assert_difference "post.ai_chats.count", 1 do
+      assert_difference "AI::Message.count", 1 do
+        post dashboard_post_ai_chats_url(user.account.name, post), params: {
+          ai_message: { content: "Help me write an opening" },
+          snapshot: { title: "Draft title", content: "Draft body" }
+        }
+      end
+    end
+
+    ai_chat = post.ai_chats.last
+    assert_equal({ "title" => "Draft title", "content" => "Draft body" }, ai_chat.snapshot)
   end
 
   test "should not create chat without content" do

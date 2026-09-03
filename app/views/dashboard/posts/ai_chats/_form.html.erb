@@ -1,6 +1,6 @@
 <%# locals: (ai_message:) %>
 
-<%= form_with model: ai_message, url: dashboard_post_ai_chats_path(@account.name, @post) do |form| %>
+<%= form_with model: ai_message, url: dashboard_post_ai_chats_path(@account.name, @post), data: { controller: "ai-composer", action: "submit->ai-composer#snapshot" } do |form| %>
   <%= render "dashboard/posts/ai_chats/composer",
     form: form,
     field: :content,
