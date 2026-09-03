@@ -1,6 +1,6 @@
 class WriteContentTool < RubyLLM::Tool
   description <<~DESC
-    This tool replaces the entire snapshot content for the current conversation,
+    This tool replaces the entire content for the current post,
     ignoring the original text. Use edit_content to change only part of the content.
   DESC
 

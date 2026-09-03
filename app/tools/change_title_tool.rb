@@ -1,5 +1,5 @@
 class ChangeTitleTool < RubyLLM::Tool
-  description "This tool changes the title of the snapshot for the current conversation."
+  description "Use this tool to modify the title of the current post. Do not use other tools to modify the title, and do not write the post title into the content."
 
   parameter :title, description: "The title of the snapshot."
 

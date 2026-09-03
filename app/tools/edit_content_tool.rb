@@ -1,6 +1,6 @@
 class EditContentTool < RubyLLM::Tool
   description <<~DESC
-    This tool replaces a text inside the snapshot content for the current conversation.
+    This tool replaces a text inside the content for the current post.
     Unlike write_content, which ignores the original content and replaces it entirely,
     edit_content only modifies the parts that match old_text.
   DESC

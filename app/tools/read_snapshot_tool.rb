@@ -1,5 +1,5 @@
 class ReadSnapshotTool < RubyLLM::Tool
-  description "This tool reads the snapshot for the current conversation. It returns the snapshot's title and content."
+  description "This tool reads the title and content for the current post."
 
   def initialize(chat)
     @chat = chat
