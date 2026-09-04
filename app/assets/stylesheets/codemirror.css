@@ -46,6 +46,18 @@ markdown-editor {
     opacity: 70%;
   }
 
+  /* CodeMirror wraps every inline widget in invisible buffer images
+     (.cm-widgetBuffer). Its built-in styles are not injected because
+     StyleModule.mount is disabled, so Tailwind preflight's img { display: block }
+     would break the line around each suggestion widget. Restore the inline
+     zero-width behavior CodeMirror expects. */
+  .cm-widgetBuffer {
+    display: inline;
+    width: 0;
+    height: 1em;
+    vertical-align: text-top;
+  }
+
   .cmt-heading1,
   .cmt-heading2,
   .cmt-heading3,

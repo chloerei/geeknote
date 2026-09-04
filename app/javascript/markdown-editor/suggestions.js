@@ -270,7 +270,7 @@ class AiSuggestionLayer {
         if (doc.length > 0) {
           decorations.push(Decoration.mark({ class: "cm-ai-del" }).range(0, doc.length))
         }
-        this.pushInsertion(decorations, block.newText, doc.length)
+        this.pushInsertion(decorations, block.newText, doc.length, { block: true })
       } else if (block.from !== undefined) {
         const chip = new AiChipWidget(this, block.id)
         decorations.push(Decoration.widget({ widget: chip }).range(block.from))
@@ -286,13 +286,16 @@ class AiSuggestionLayer {
     })
   }
 
-  // The replacement text is shown inline after the deleted span when it fits on
-  // one line, otherwise as a block so it lays out below without being clipped.
-  pushInsertion(decorations, text, position) {
+  // The replacement text is shown inline right after the deleted span so a
+  // localized suggestion stays in the text flow. CodeMirror inline widgets
+  // cannot contain line breaks (the content would be clipped or misaligned),
+  // so multi-line replacements fall back to a block widget on its own lines.
+  // A whole-document rewrite always renders as a block at the end of the doc.
+  pushInsertion(decorations, text, position, { block = false } = {}) {
     if (!text) return
 
     const widget = new AiInsertWidget(text)
-    const options = text.includes("\n") ? { widget: widget, block: true } : { widget: widget }
+    const options = block || text.includes("\n") ? { widget: widget, block: true } : { widget: widget }
     decorations.push(Decoration.widget(options).range(position))
   }
 }
