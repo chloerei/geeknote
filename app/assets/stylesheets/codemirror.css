@@ -115,19 +115,31 @@ markdown-editor {
     white-space: pre-wrap;
   }
 
-  .cm-ai-chip {
+  .cm-ai-chip-anchor {
+    position: relative;
+    display: inline;
+    overflow: visible;
+  }
+
+  .cm-ai-chip-anchor .cm-ai-chip {
     display: inline-flex;
     align-items: center;
     gap: 0.125rem;
-    margin: 0 0.25rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(calc(-100% - 4px));
+    white-space: nowrap;
     padding: 0 0.125rem;
     border-radius: 9999px;
     border: 1px solid color-mix(in srgb, var(--color-base-content) 20%, transparent);
     background-color: var(--color-base-100);
-    vertical-align: middle;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.15);
+    user-select: none;
+    pointer-events: auto;
   }
 
-  .cm-ai-chip button {
+  .cm-ai-chip-anchor .cm-ai-chip button {
     padding: 0 0.25rem;
     border: 0;
     background: transparent;
@@ -136,15 +148,15 @@ markdown-editor {
     cursor: pointer;
   }
 
-  .cm-ai-chip .cm-ai-accept {
+  .cm-ai-chip-anchor .cm-ai-accept {
     color: var(--color-success);
   }
 
-  .cm-ai-chip .cm-ai-reject {
+  .cm-ai-chip-anchor .cm-ai-reject {
     color: var(--color-error);
   }
 
-  .cm-ai-chip button:hover {
+  .cm-ai-chip-anchor .cm-ai-chip button:hover {
     filter: brightness(0.85);
   }
 }

@@ -1,9 +1,9 @@
 import { EditorView, Decoration, WidgetType } from "@codemirror/view"
 import { StateEffect, StateField } from "@codemirror/state"
 
-// Pending AI suggestion decorations (del / ins / accept-reject chips).
-// The full set is replaced atomically through suggestionDecoEffect whenever
-// blocks arrive, are accepted/rejected, or get re-located after a doc change.
+// Pending AI suggestion decorations (del / ins marks). The full set is
+// replaced atomically through suggestionDecoEffect whenever blocks arrive,
+// are accepted/rejected, or get re-located after a doc change.
 const suggestionDecoEffect = StateEffect.define()
 
 const suggestionDecoField = StateField.define({
@@ -19,7 +19,33 @@ const suggestionDecoField = StateField.define({
   provide: (field) => EditorView.decorations.from(field)
 })
 
-// Floating accept / reject chip rendered at the start of a suggestion block.
+// Accept / reject pill. Each block gets one, floating above the start of the
+// change. It is built as a plain DOM pill and wrapped by AiChipWidget.
+function makeChipEl(layer, id) {
+  const chip = document.createElement("span")
+  chip.className = "cm-ai-chip"
+
+  const accept = document.createElement("button")
+  accept.type = "button"
+  accept.className = "cm-ai-accept"
+  accept.textContent = "✓"
+  accept.title = "Accept this suggestion"
+  accept.addEventListener("click", () => layer.acceptSuggestion(id))
+
+  const reject = document.createElement("button")
+  reject.type = "button"
+  reject.className = "cm-ai-reject"
+  reject.textContent = "✕"
+  reject.title = "Reject this suggestion"
+  reject.addEventListener("click", () => layer.rejectSuggestion(id))
+
+  chip.append(accept, reject)
+  return chip
+}
+
+// Zero-size inline anchor placed at the block start. Its absolutely positioned
+// chip floats above the anchor without participating in the line layout, and
+// because the anchor is real document content it scrolls with the text for free.
 class AiChipWidget extends WidgetType {
   constructor(layer, id) {
     super()
@@ -36,25 +62,10 @@ class AiChipWidget extends WidgetType {
   }
 
   toDOM() {
-    const dom = document.createElement("span")
-    dom.className = "cm-ai-chip"
-
-    const accept = document.createElement("button")
-    accept.type = "button"
-    accept.className = "cm-ai-accept"
-    accept.textContent = "✓"
-    accept.title = "Accept this suggestion"
-    accept.addEventListener("click", () => this.layer.acceptSuggestion(this.id))
-
-    const reject = document.createElement("button")
-    reject.type = "button"
-    reject.className = "cm-ai-reject"
-    reject.textContent = "✕"
-    reject.title = "Reject this suggestion"
-    reject.addEventListener("click", () => this.layer.rejectSuggestion(this.id))
-
-    dom.append(accept, reject)
-    return dom
+    const anchor = document.createElement("span")
+    anchor.className = "cm-ai-chip-anchor"
+    anchor.append(makeChipEl(this.layer, this.id))
+    return anchor
   }
 }
 
