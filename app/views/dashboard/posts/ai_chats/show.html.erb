@@ -46,7 +46,7 @@
     </div>
   </div>
 
-  <div class="px-4 pt-2" data-controller="ai-suggestion-bar">
+  <div class="px-4 py-2" data-controller="ai-suggestion-bar">
     <div class="rounded-2xl border border-base-300 bg-base-100 px-3 py-2 flex items-center gap-2" data-ai-suggestion-bar-target="bar" hidden>
       <span class="grow text-sm text-base-content/70">
         <%= t ".suggestion_bar_label" %>：
@@ -61,7 +61,7 @@
     </div>
   </div>
 
-  <div class="px-4 pt-0">
+  <div class="px-4 pt-0 pb-4">
     <%= render "dashboard/posts/ai_chats/messages/form", ai_chat: @ai_chat, ai_message: @ai_message %>
   </div>
 </turbo-frame>
