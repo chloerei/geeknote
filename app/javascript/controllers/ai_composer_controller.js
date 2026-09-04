@@ -8,6 +8,10 @@ import { Controller } from "@hotwired/stimulus"
 // message as snapshot[title] / snapshot[content] so the chat stores a snapshot.
 export default class extends Controller {
   snapshot() {
+    // Sending a new message means the round restarts from the current editor
+    // content: discard any still pending AI suggestions.
+    document.querySelector("markdown-editor")?.rejectAllSuggestions()
+
     const titleInput = document.getElementById("post_title")
     const contentInput = document.getElementById("post_content")
 

@@ -46,7 +46,22 @@
     </div>
   </div>
 
-  <div class="p-4 pt-0">
+  <div class="px-4 pt-2" data-controller="ai-suggestion-bar">
+    <div class="rounded-2xl border border-base-300 bg-base-100 px-3 py-2 flex items-center gap-2" data-ai-suggestion-bar-target="bar" hidden>
+      <span class="grow text-sm text-base-content/70">
+        <%= t ".suggestion_bar_label" %>：
+        <span data-ai-suggestion-bar-target="count">0</span>
+      </span>
+      <button type="button" class="btn btn-primary btn-sm" data-action="ai-suggestion-bar#acceptAll">
+        <%= t ".suggestion_accept_all" %>
+      </button>
+      <button type="button" class="btn btn-ghost btn-sm" data-action="ai-suggestion-bar#rejectAll">
+        <%= t ".suggestion_reject_all" %>
+      </button>
+    </div>
+  </div>
+
+  <div class="px-4 pt-0">
     <%= render "dashboard/posts/ai_chats/messages/form", ai_chat: @ai_chat, ai_message: @ai_message %>
   </div>
 </turbo-frame>

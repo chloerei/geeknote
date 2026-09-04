@@ -10,6 +10,8 @@ import { tags } from "@lezer/highlight"
 import { StyleModule } from "style-mod"
 StyleModule.mount = () => { /* Disabled it ! */ }
 
+import { suggestionDecoField, AiSuggestionLayer } from "./suggestions"
+
 const classHighlightStyle = HighlightStyle.define(
   Object.keys(tags).map((key) => {
     return { tag: tags[key], class: `cmt-${key}` }
@@ -51,17 +53,19 @@ const highlightField = StateField.define({
 EditorView.EDIT_CONTEXT = false
 
 class MarkdownMirror {
-  constructor({ parent, input, scrollMargin, onFileAccept, onFileAttach } = {
+  constructor({ parent, input, scrollMargin, onFileAccept, onFileAttach, onSuggestionsChange } = {
     scrollMargin: { top: 0, bottom: 0 }
   }) {
     this.onFileAccept = onFileAccept
     this.onFileAttach = onFileAttach
+    this.onSuggestionsChange = onSuggestionsChange
     this.editorView = new EditorView({
       state: EditorState.create({
         doc: input.value,
         extensions: [
           history(),
           highlightField,
+          suggestionDecoField,
           indentOnInput(),
           syntaxHighlighting(classHighlightStyle, { fallback: true }),
           bracketMatching(),
@@ -84,6 +88,13 @@ class MarkdownMirror {
                   input.dispatchEvent(new Event("input", { bubbles: true }))
                 }
               }
+            }
+          }),
+          // Pending suggestions are anchored by their old_text: re-locate them
+          // after any doc change (debounced) so stale blocks disappear by themselves.
+          EditorView.updateListener.of((viewUpdate) => {
+            if (viewUpdate.docChanged) {
+              this.aiSuggestions?.handleDocChange()
             }
           }),
           EditorView.scrollMargins.of((view) => {
@@ -118,9 +129,15 @@ class MarkdownMirror {
       }),
       parent: parent
     })
+
+    this.aiSuggestions = new AiSuggestionLayer(this.editorView, {
+      onChange: (blocks) => this.onSuggestionsChange?.(blocks)
+    })
   }
 
   destroy() {
+    this.aiSuggestions?.destroy()
+    this.aiSuggestions = null
     this.editorView.dom.remove()
     this.editorView = null
   }
@@ -244,6 +261,40 @@ class MarkdownMirror {
         }
       })
     }
+  }
+
+  // --- AI suggestions (delegated to the AiSuggestionLayer in ./suggestions) --
+
+  appendSuggestionBlock(block) {
+    this.aiSuggestions?.appendSuggestionBlock(block)
+  }
+
+  acceptSuggestion(id) {
+    this.aiSuggestions?.acceptSuggestion(id)
+  }
+
+  rejectSuggestion(id) {
+    this.aiSuggestions?.rejectSuggestion(id)
+  }
+
+  acceptAllSuggestions() {
+    this.aiSuggestions?.acceptAllSuggestions()
+  }
+
+  rejectAllSuggestions() {
+    this.aiSuggestions?.rejectAllSuggestions()
+  }
+
+  clearContentSuggestions() {
+    this.aiSuggestions?.rejectAllSuggestions()
+  }
+
+  get pendingContentCount() {
+    return this.aiSuggestions?.pendingContentCount ?? 0
+  }
+
+  get hasRewritePending() {
+    return this.aiSuggestions?.hasRewritePending ?? false
   }
 }
 

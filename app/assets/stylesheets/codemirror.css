@@ -89,4 +89,50 @@ markdown-editor {
     background-color: color-mix(in srgb, var(--color-warning) 35%, transparent);
     border-radius: 0.125rem;
   }
+
+  .cm-ai-del {
+    background-color: color-mix(in srgb, var(--color-error) 12%, transparent);
+    border-radius: 0.125rem;
+    text-decoration: line-through;
+    text-decoration-color: var(--color-error);
+  }
+
+  .cm-ai-ins {
+    background-color: color-mix(in srgb, var(--color-success) 15%, transparent);
+    border-radius: 0.125rem;
+    white-space: pre-wrap;
+  }
+
+  .cm-ai-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.125rem;
+    margin: 0 0.25rem;
+    padding: 0 0.125rem;
+    border-radius: 9999px;
+    border: 1px solid color-mix(in srgb, var(--color-base-content) 20%, transparent);
+    background-color: var(--color-base-100);
+    vertical-align: middle;
+  }
+
+  .cm-ai-chip button {
+    padding: 0 0.25rem;
+    border: 0;
+    background: transparent;
+    line-height: 1.25;
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+
+  .cm-ai-chip .cm-ai-accept {
+    color: var(--color-success);
+  }
+
+  .cm-ai-chip .cm-ai-reject {
+    color: var(--color-error);
+  }
+
+  .cm-ai-chip button:hover {
+    filter: brightness(0.85);
+  }
 }

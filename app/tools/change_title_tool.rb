@@ -1,23 +1,20 @@
-class ChangeTitleTool < RubyLLM::Tool
-  description "Use this tool to modify the title of the current post. Do not use other tools to modify the title, and do not write the post title into the content."
+require_relative "ai_suggestion_broadcasting"
 
-  parameter :title, description: "The title of the snapshot."
+class ChangeTitleTool < RubyLLM::Tool
+  include AISuggestionBroadcasting
+
+  description "Sets a new title for the current post. Unlike content edits, a title change is applied immediately without user review. Do not use other tools to modify the title, and do not write the post title into the content."
+
+  parameter :title, description: "The proposed title."
 
   def initialize(chat)
     @chat = chat
   end
 
   def execute(title:)
-    snapshot = { title: title, content: @chat.snapshot["content"] }
+    return { success: true, changed: false } if title.to_s == @chat.snapshot["title"].to_s
 
-    if @chat.update(snapshot: snapshot)
-      # The post editor listens for this action to live-preview the snapshot title.
-      Turbo::StreamsChannel.broadcast_action_to @chat,
-        action: :change_title,
-        attributes: { title: title }
-      { success: true }
-    else
-      { error: @chat.errors.full_messages.join(", ") }
-    end
+    broadcast_ai_suggestions([ { type: "title", new_title: title.to_s } ])
+    { success: true, changed: true }
   end
 end

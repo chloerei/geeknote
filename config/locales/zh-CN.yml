@@ -213,6 +213,9 @@ zh-CN:
           untitled: 新对话
           delete_confirm: 确认删除这个对话？
           empty: 还没有消息，发送第一条消息开始对话吧
+          suggestion_bar_label: 待处理的修改建议
+          suggestion_accept_all: 接受全部
+          suggestion_reject_all: 拒绝全部
         messages:
           form:
             content_placeholder: 输入消息

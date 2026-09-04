@@ -10,6 +10,9 @@ application.register("autoremove", AutoremoveController)
 import AiComposerController from "./ai_composer_controller"
 application.register("ai-composer", AiComposerController)
 
+import AiSuggestionBarController from "./ai_suggestion_bar_controller"
+application.register("ai-suggestion-bar", AiSuggestionBarController)
+
 import AutoresizeController from "./autoresize_controller"
 application.register("autoresize", AutoresizeController)
 
