@@ -509,3 +509,28 @@
     }
   }
 }
+
+/* AI chat bubbles
+
+   .chat-raw carries the plain markdown text that the server keeps appending
+   to while streaming; it stays hidden and the client renders .chat-markdown
+   next to it. Colors derived from currentColor adapt to both the light
+   assistant bubble and the tinted user bubble. */
+.chat-raw {
+  display: none;
+}
+
+.chat-markdown {
+  a {
+    color: currentColor;
+  }
+
+  pre {
+    background-color: color-mix(in srgb, currentColor 8%, transparent);
+    border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  }
+
+  *:not(pre) code {
+    background-color: color-mix(in srgb, currentColor 10%, transparent);
+  }
+}

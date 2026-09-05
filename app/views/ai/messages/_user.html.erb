@@ -4,6 +4,9 @@
     <div class="mb-1 px-1 text-right text-xs text-base-content/50">
       <time><%= format_time user.created_at %></time>
     </div>
-    <div id="ai_message_<%= user.id %>_content" class="rounded-2xl rounded-tr-sm bg-primary px-4 py-2.5 text-primary-content whitespace-pre-wrap break-words"><%= user.content %></div>
+    <div data-controller="streaming-markdown" class="rounded-2xl rounded-tr-sm bg-primary px-4 py-2.5 text-primary-content break-words">
+      <div id="ai_message_<%= user.id %>_content" data-streaming-markdown-target="raw" class="chat-raw whitespace-pre-wrap"><%= user.content %></div>
+      <div data-streaming-markdown-target="rendered" class="chat-markdown typography"></div>
+    </div>
   </div>
 </div>

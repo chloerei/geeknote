@@ -61,6 +61,9 @@ application.register("scroll-pagination", ScrollPaginationController)
 import SortableController from "./sortable_controller"
 application.register("sortable", SortableController)
 
+import StreamingMarkdownController from "./streaming_markdown_controller"
+application.register("streaming-markdown", StreamingMarkdownController)
+
 import TagFieldController from "./tag_field_controller"
 application.register("tag-field", TagFieldController)
 
