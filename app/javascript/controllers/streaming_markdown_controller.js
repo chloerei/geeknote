@@ -38,10 +38,11 @@ export default class extends Controller {
 
   render() {
     const text = this.rawTarget.textContent ?? ""
-    const html =
-      text.length > 0
-        ? DOMPurify.sanitize(marked.parse(text, { gfm: true, breaks: true }))
-        : ""
-    this.renderedTarget.innerHTML = html
+    if (text.length === 0) return
+
+    // While waiting for the first streamed chunk the rendered target holds
+    // the daisyUI loading dots (server markup); replacing it with the parsed
+    // markdown doubles as removing them.
+    this.renderedTarget.innerHTML = DOMPurify.sanitize(marked.parse(text, { gfm: true, breaks: true }))
   }
 }

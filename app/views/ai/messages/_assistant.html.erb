@@ -7,7 +7,11 @@
     </div>
     <div data-controller="streaming-markdown" class="rounded-2xl rounded-tl-sm bg-base-200 px-4 py-2.5 break-words">
       <div id="ai_message_<%= assistant.id %>_content" data-streaming-markdown-target="raw" class="chat-raw whitespace-pre-wrap"><%= assistant.content %></div>
-      <div data-streaming-markdown-target="rendered" class="chat-markdown typography"></div>
+      <div data-streaming-markdown-target="rendered" class="chat-markdown typography">
+        <% if assistant.content.blank? %>
+          <span class="loading loading-dots loading-sm" role="status"></span>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
