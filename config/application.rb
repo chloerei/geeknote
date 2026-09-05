@@ -42,6 +42,11 @@ module GeekNote
     config.i18n.default_locale = "zh-CN"
     config.time_zone = "Beijing"
 
+    # The `llm` queue runs on Solid Queue fiber workers (see config/queue.yml),
+    # which require fiber-scoped isolated execution state. Applied globally so
+    # that all environments behave the same.
+    config.active_support.isolation_level = :fiber
+
     config.generators do |generate|
       generate.helper false
       generate.assets false

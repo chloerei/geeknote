@@ -8,7 +8,7 @@ class Dashboard::Posts::AIChats::MessagesControllerTest < ActionDispatch::Integr
     sign_in user
 
     assert_difference "ai_chat.ai_messages.count", 1 do
-      assert_enqueued_with(job: AIChatResponseJob, args: [ ai_chat ]) do
+      assert_enqueued_with(job: AIChatResponseJob, queue: "llm", args: [ ai_chat ]) do
         post dashboard_post_ai_chat_messages_url(user.account.name, post, ai_chat), params: {
           ai_message: { content: "Continue writing" }
         }

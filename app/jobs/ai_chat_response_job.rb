@@ -1,4 +1,6 @@
 class AIChatResponseJob < ApplicationJob
+  queue_as :llm
+
   def perform(ai_chat)
     ai_chat_agent = WritingAgent.new(chat: ai_chat, persist_instructions: false)
     ai_chat_agent.complete do |chunk|
