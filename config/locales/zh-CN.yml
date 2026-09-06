@@ -176,6 +176,11 @@ zh-CN:
         name: 系统
       error:
         name: 出错
+      tool_call:
+        toggle: 展开或收起工具调用详情
+        running: 等待工具输出…
+        input: 输入
+        output: 输出
       tool_calls:
         default:
           name: 工具调用

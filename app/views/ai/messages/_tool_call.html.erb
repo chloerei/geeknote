@@ -1,0 +1,40 @@
+<%# locals: (tool_call_record:) %>
+<%# RubyLLM::ActiveRecord::ToolCall with :result preloaded %>
+<% tool_call = tool_call_record.to_llm %>
+<% result = tool_call_record.result %>
+
+<div id="ai_message_tool_call_<%= tool_call.id %>" class="flex justify-start">
+  <div class="w-full max-w-[85%]">
+    <div class="collapse collapse-arrow rounded-xl border border-base-300 bg-base-200/60">
+      <%# Unchecked (default): collapsed showing just the tool name.
+          While a call is still waiting for its result it starts open. %>
+      <input type="checkbox" aria-label="<%= t ".toggle" %>" <%= 'checked' unless result %> />
+      <div class="collapse-title flex items-center gap-2 pr-11 text-sm font-medium">
+        <span class="font-mono text-xs text-base-content/80"><%= tool_call.name %></span>
+        <% unless result %>
+          <span class="loading loading-spinner loading-xs text-base-content/50" role="status"></span>
+        <% end %>
+      </div>
+      <div class="collapse-content">
+        <div class="text-[10px] font-medium uppercase tracking-wide text-base-content/50"><%= t ".input" %></div>
+        <div class="mt-1">
+          <%= render tool_call_partial(tool_call), tool_call: tool_call %>
+        </div>
+
+        <div class="mt-3 text-[10px] font-medium uppercase tracking-wide text-base-content/50"><%= t ".output" %></div>
+        <%# Turbo replaces this placeholder with the tool result when it
+            becomes available (see AI::Message#broadcast_message_created). %>
+        <div id="ai_message_tool_call_output_<%= tool_call.id %>" class="mt-1">
+          <% if result.present? %>
+            <%= render tool_result_partial(result), tool: result %>
+          <% else %>
+            <div class="flex items-center gap-2 rounded-lg bg-base-100/70 px-2.5 py-2 text-xs text-base-content/50">
+              <span class="loading loading-dots loading-sm" role="status"></span>
+              <span><%= t ".running" %></span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

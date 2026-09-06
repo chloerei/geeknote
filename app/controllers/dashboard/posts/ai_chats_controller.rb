@@ -11,7 +11,9 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
   end
 
   def show
-    @pagy, @ai_messages = pagy(@ai_chat.ai_messages.reorder(id: :desc))
+    # Tool results render inside their parent tool-call card, never as
+    # standalone list entries.
+    @pagy, @ai_messages = pagy(@ai_chat.ai_messages.without_tool_results.reorder(id: :desc))
     @ai_message = AI::Message.new
     @page_titles.prepend t(".show.title")
   end
