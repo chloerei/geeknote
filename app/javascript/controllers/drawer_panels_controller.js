@@ -8,11 +8,16 @@ export default class extends Controller {
   static targets = ["toggle", "panel", "button"]
 
   connect() {
-    this.sync(this.activePanel())
+    this.syncPanelState()
   }
 
-  afterMorph() {
-    this.sync(this.activePanel())
+  // Fired from data-action on turbo:morph / turbo:render. A full-page Turbo
+  // render (e.g. the redirect after creating a post) swaps the body while the
+  // permanent toggle is only re-inserted afterwards, so connect() can run
+  // before the toggle exists. Resyncing once the render settles applies the
+  // persisted panel state.
+  afterRender() {
+    this.syncPanelState()
   }
 
   toggle(event) {
@@ -30,6 +35,12 @@ export default class extends Controller {
     // toggle(). Keep the persisted state in sync with the checkbox.
     if (!this.toggleTarget.checked) {
       this.sync(null)
+    }
+  }
+
+  syncPanelState() {
+    if (this.hasToggleTarget) {
+      this.sync(this.activePanel())
     }
   }
 
