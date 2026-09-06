@@ -173,6 +173,11 @@ zh-CN:
         running: 等待工具输出…
         input: 输入
         output: 输出
+        names:
+          read_snapshot: 读取文章快照
+          change_title: 修改标题
+          write_content: 重写全文
+          edit_content: 局部修改
       tool_calls:
         default:
           name: 工具调用
