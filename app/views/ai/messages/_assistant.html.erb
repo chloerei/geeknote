@@ -1,11 +1,7 @@
 <% assistant ||= local_assigns[:message] %>
 <div id="ai_message_<%= assistant.id %>" class="flex justify-start">
-  <div class="max-w-[85%]">
-    <div class="mb-1 flex items-baseline gap-2 px-1 text-xs text-base-content/50">
-      <span class="font-medium"><%= t ".name" %></span>
-      <time><%= format_time assistant.created_at %></time>
-    </div>
-    <div data-controller="streaming-markdown" class="rounded-2xl rounded-tl-sm bg-base-200 px-4 py-2.5 break-words">
+  <div class="min-w-0 w-full break-words px-4">
+    <div data-controller="streaming-markdown">
       <div id="ai_message_<%= assistant.id %>_content" data-streaming-markdown-target="raw" class="chat-raw whitespace-pre-wrap"><%= assistant.content %></div>
       <div data-streaming-markdown-target="rendered" class="chat-markdown typography">
         <% if assistant.content.blank? %>

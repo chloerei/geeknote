@@ -2,9 +2,7 @@
     normal path renders it inside its parent tool-call collapse). %>
 <% tool ||= local_assigns[:message] %>
 <div id="ai_message_tool_result_<%= tool.id %>" class="flex justify-start">
-  <div class="max-w-[85%]">
-    <div class="rounded-xl border border-base-300 bg-base-200/60 px-3 py-2 text-xs">
-      <%= render tool_result_partial(tool), tool: tool %>
-    </div>
+  <div class="w-full px-4">
+    <%= render tool_result_partial(tool), tool: tool %>
   </div>
 </div>

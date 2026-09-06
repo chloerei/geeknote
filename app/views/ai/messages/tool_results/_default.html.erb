@@ -3,7 +3,7 @@
     collapse card, both on full page loads and when streamed in live via
     Turbo (AI::Message#broadcast_message_created). %>
 <% if (error_message = tool.tool_error_message).present? %>
-  <div class="rounded-lg border border-error/30 bg-error/10 px-2.5 py-2 font-mono text-xs text-error break-words"><%= error_message %></div>
+  <div class="rounded-lg border border-error/30 bg-error/10 px-2.5 py-2 font-mono text-xs text-error whitespace-pre-wrap break-words"><%= error_message %></div>
 <% else %>
-  <pre class="rounded-lg bg-base-100/70 px-2.5 py-2 font-mono text-xs whitespace-pre-wrap break-all"><%= tool.content.presence || t(".no_output") %></pre>
+  <pre class="rounded-lg bg-base-200 px-2.5 py-2 font-mono text-xs text-base-content/70 whitespace-pre-wrap break-all"><%= tool.content.presence || t(".no_output") %></pre>
 <% end %>

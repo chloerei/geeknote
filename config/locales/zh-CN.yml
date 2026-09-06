@@ -168,14 +168,6 @@ zh-CN:
         content_placeholder: 内容（Markdown）
   ai:
     messages:
-      assistant:
-        name: AI 助手
-      user:
-        name: 我
-      system:
-        name: 系统
-      error:
-        name: 出错
       tool_call:
         toggle: 展开或收起工具调用详情
         running: 等待工具输出…
