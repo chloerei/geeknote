@@ -10,6 +10,13 @@ class AI::Message < ApplicationRecord
   after_update_commit :broadcast_message_updated
   after_destroy_commit :broadcast_message_destroyed
 
+  # Overrides the gem's to_partial_path: an assistant message that carries tool
+  # calls still renders through the assistant partial, which shows its content
+  # alongside the tool calls. Only role "tool" stays special.
+  def to_partial_path
+    "#{self.class.name.underscore.pluralize}/#{role.to_s.presence || "assistant"}"
+  end
+
   def broadcast_append_chunk(content)
     broadcast_append_to ai_chat,
       target: "ai_message_#{id}_content",

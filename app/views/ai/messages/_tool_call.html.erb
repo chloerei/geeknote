@@ -3,9 +3,8 @@
 <% tool_call = tool_call_record.to_llm %>
 <% result = tool_call_record.result %>
 
-<div id="ai_message_tool_call_<%= tool_call.id %>" class="flex justify-start">
-  <div class="w-full min-w-0 px-4">
-    <div class="collapse collapse-arrow">
+<div id="ai_message_tool_call_<%= tool_call.id %>" class="mt-2 w-full min-w-0">
+  <div class="collapse collapse-arrow">
       <%# Unchecked (default): collapsed showing just the tool name.
           While a call is still waiting for its result it starts open. %>
       <input type="checkbox" aria-label="<%= t ".toggle" %>" <%= 'checked' unless result %> />
@@ -53,4 +52,3 @@
       </div>
     </div>
   </div>
-</div>
