@@ -3,19 +3,9 @@ default: &default
     - polling_interval: 1
       batch_size: 500
   workers:
-    # General worker. Queues are listed explicitly (instead of "*") so that
-    # `llm` jobs are never claimed here: Solid Queue has no syntax to exclude a
-    # queue from a wildcard worker. If a new queue is introduced, add it here.
-    - queues: [ "default", "low" ]
-      threads: 3
+    - queues: "*"
+      fibers: <%= ENV.fetch("WORKER_FIBERS", 10) %>
       processes: <%= ENV.fetch("JOB_CONCURRENCY", 1) %>
-      polling_interval: 0.1
-    # AI chat responses stream over long-lived connections and mostly wait on
-    # I/O, so run them as fibers on a single reactor thread instead of tying up
-    # worker threads for the whole duration of a response. This worker is the
-    # only one that claims jobs from the `llm` queue.
-    - queues: "llm"
-      fibers: <%= ENV.fetch("LLM_WORKER_FIBERS", 20) %>
       polling_interval: 0.1
 
 development:
