@@ -5,12 +5,8 @@
 
 <div id="ai_message_tool_call_<%= tool_call.id %>" class="mt-2 w-full min-w-0">
   <div class="collapse collapse-arrow">
-      <%# Unchecked (default): collapsed showing just the tool name.
-          While a call is still waiting for its result it starts open. %>
-      <input type="checkbox" aria-label="<%= t ".toggle" %>" <%= 'checked' unless result %> />
+      <input type="checkbox" aria-label="<%= t ".toggle" %>" />
       <div class="collapse-title flex items-center gap-2 py-1 pl-0 pr-9 text-sm font-medium">
-        <%# 完整 svg 按工具分开展示，方便以后逐个替换。
-            read_snapshot 用放大镜，写作类工具用笔，未知工具默认扳手。 %>
         <% case tool_call.name %>
         <% when "read_snapshot" %>
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide shrink-0 text-base-content/50"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
