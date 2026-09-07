@@ -23,6 +23,35 @@ class AI::Message < ApplicationRecord
       content: ERB::Util.html_escape(content.to_s)
   end
 
+  # Thinking chunks stream into the raw target of the collapsed thinking card
+  # (see ai/messages/_thinking), mirroring how content streams into the bubble.
+  def broadcast_append_thinking_chunk(content)
+    broadcast_append_to ai_chat,
+      target: "ai_message_#{id}_thinking_content",
+      content: ERB::Util.html_escape(content.to_s)
+  end
+
+  # Ends the "thinking…" spinner the streaming shell shows while reasoning may
+  # still be on its way (sent once thinking text starts streaming).
+  def broadcast_stop_thinking_pending
+    broadcast_remove_to ai_chat, target: "ai_message_#{id}_thinking_pending"
+  end
+
+  # Reasoning finished and the answer is starting: swap the checked (open)
+  # toggle of the live thinking card for an unchecked one to collapse it.
+  def broadcast_collapse_thinking
+    broadcast_replace_to ai_chat,
+      target: "ai_message_#{id}_thinking_toggle",
+      partial: "ai/messages/thinking_toggle",
+      locals: { message: self }
+  end
+
+  # Removes the empty thinking card when the model answers without emitting
+  # any reasoning text at all.
+  def broadcast_remove_empty_thinking_card
+    broadcast_remove_to ai_chat, target: "ai_message_#{id}_thinking"
+  end
+
   private
 
   # Rows are created as empty assistant shells and finalized (tool calls / role

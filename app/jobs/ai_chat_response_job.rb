@@ -8,13 +8,13 @@ class AIChatResponseJob < ApplicationJob
   def perform(ai_chat)
     @ai_chat_agent = WritingAgent.new(chat: ai_chat, persist_instructions: false)
     @pending_content = +""
+    @pending_thinking = +""
     @last_broadcast_at = Time.now
+    @broadcast_message_id = nil
 
     begin
       @ai_chat_agent.complete do |chunk|
-        next if chunk.content.blank?
-
-        @pending_content << chunk.content
+        collect(chunk)
         flush_broadcast if broadcast_due?
       end
     ensure
@@ -29,12 +29,69 @@ class AIChatResponseJob < ApplicationJob
     Time.now - @last_broadcast_at >= BROADCAST_INTERVAL_SECONDS
   end
 
-  def flush_broadcast
-    return if @pending_content.empty?
+  # Each chunk carries either a reasoning delta (thinking) or answer text, and
+  # reasoning always precedes the answer, so the two buffers never interleave
+  # within one generation.
+  def collect(chunk)
+    thinking = chunk.thinking&.text
+    @pending_thinking << thinking if thinking.present?
+    @pending_content << chunk.content if chunk.content.present?
+  end
 
-    ai_message = @ai_chat_agent.chat.ai_messages.last
-    ai_message.broadcast_append_chunk(@pending_content)
+  def flush_broadcast
+    flushed = flush_thinking
+    flushed = flush_content || flushed
+    @last_broadcast_at = Time.now if flushed
+  end
+
+  # Each generation turn streams into a fresh assistant shell row, so the
+  # thinking/content progress below is scoped to the message being streamed.
+  def current_message
+    message = @ai_chat_agent.chat.ai_messages.last
+    unless message.id == @broadcast_message_id
+      @broadcast_message_id = message.id
+      @thinking_streamed = false
+      @content_started = false
+    end
+    message
+  end
+
+  def flush_thinking
+    return false if @pending_thinking.empty?
+
+    message = current_message
+    message.broadcast_append_thinking_chunk(@pending_thinking)
+    @pending_thinking = +""
+
+    unless @thinking_streamed
+      @thinking_streamed = true
+      # Reasoning text is on its way: drop the pending spinner.
+      message.broadcast_stop_thinking_pending
+    end
+    true
+  end
+
+  def flush_content
+    return false if @pending_content.empty?
+
+    message = current_message
+    first_content = !@content_started
+    @content_started = true
+
+    message.broadcast_append_chunk(@pending_content)
     @pending_content = +""
-    @last_broadcast_at = Time.now
+
+    if first_content
+      if @thinking_streamed
+        # Reasoning is over: collapse the open card now that the answer text
+        # is about to stream in.
+        message.broadcast_collapse_thinking
+      else
+        # The answer is starting without any reasoning: the thinking card the
+        # streaming shell rendered would stay empty forever, so remove it.
+        message.broadcast_remove_empty_thinking_card
+      end
+    end
+    true
   end
 end
