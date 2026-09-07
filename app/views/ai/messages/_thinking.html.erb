@@ -10,7 +10,7 @@
     AI::Message#broadcast_thinking_finished (triggered by AIChatResponseJob at
     the first answer chunk), and the finalized row renders the card collapsed
     as well. %>
-<div id="ai_message_<%= message.id %>_thinking" class="mt-2 w-full min-w-0">
+<div id="ai_message_<%= message.id %>_thinking" class="w-full min-w-0">
   <div class="collapse collapse-arrow">
     <%# Checked (open) while reasoning is still streaming in; the whole card is
         replaced with an unchecked toggle once reasoning ends. %>

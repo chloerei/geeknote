@@ -7,7 +7,7 @@
 <% tool_call = tool_call_record.to_llm %>
 <% result = tool_call_record.result %>
 
-<div id="ai_message_tool_call_<%= tool_call.id %>" class="mt-2 w-full min-w-0">
+<div id="ai_message_tool_call_<%= tool_call.id %>" class="w-full min-w-0">
   <div class="collapse collapse-arrow">
     <input type="checkbox" aria-label="<%= t ".toggle" %>" />
     <div class="collapse-title flex items-center gap-2 py-1 pl-0 pr-9 text-sm font-medium">

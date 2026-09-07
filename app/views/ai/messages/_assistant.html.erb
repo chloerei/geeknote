@@ -4,7 +4,9 @@
     chunks, so its thinking card is rendered pre-emptively with a spinner. %>
 <% thinking_pending = assistant.content.blank? && tool_calls.empty? %>
 <div id="ai_message_<%= assistant.id %>" class="flex justify-start">
-  <div class="min-w-0 w-full break-words px-4">
+  <%# space-y-4 matches the gap between message rows (#ai_messages), so thinking,
+      content, and tool calls read as one evenly-spaced stream. %>
+  <div class="min-w-0 w-full break-words space-y-4 px-4">
     <% if assistant.thinking_text.present? || thinking_pending %>
       <%= render "ai/messages/thinking",
         message: assistant,
