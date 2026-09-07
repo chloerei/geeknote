@@ -6,6 +6,12 @@ class AIChatResponseJob < ApplicationJob
   BROADCAST_INTERVAL_SECONDS = 0.1
 
   def perform(ai_chat)
+    @ai_chat = ai_chat
+    # Remember the user message this round belongs to. Round cleanup (resetting
+    # processing and restoring the composer) only runs on the job that still
+    # owns the latest round, so a stale job never clobbers a newer round's state.
+    @round_id = ai_chat.round_id
+    @stream_aborted = false
     @ai_chat_agent = WritingAgent.new(chat: ai_chat, persist_instructions: false)
     @pending_content = +""
     @pending_thinking = +""
@@ -18,13 +24,47 @@ class AIChatResponseJob < ApplicationJob
         collect(chunk)
         flush_broadcast if broadcast_due?
       end
+    rescue RubyLLM::CancelledError
+      # The user stopped the chat: the gem already cleaned up the empty shell
+      # row and re-raised, so just mark the run as aborted. Do not re-raise —
+      # a cancellation is a normal stop and should not fail the job.
+      Rails.logger.info("AIChatResponseJob: chat #{@ai_chat.id} generation cancelled")
+      @stream_aborted = true
+    rescue StandardError
+      # Keep the original failure semantics for other errors, but still skip
+      # flushing into the shell row the gem has destroyed.
+      @stream_aborted = true
+      raise
     ensure
-      # Send any remaining buffered content when the stream ends (even on errors).
-      flush_broadcast
+      # Flush the remaining buffer on a clean finish; when aborted the gem has
+      # already destroyed the target row, so flushing would only append into
+      # DOM nodes that have been removed.
+      flush_broadcast unless @stream_aborted
+      finish_round
     end
   end
 
   private
+
+  # Unified cleanup after a run ends (completion, cancellation, or error): when
+  # this job still owns the latest round, reset processing and broadcast the
+  # composer's primary button back to its submittable state.
+  def finish_round
+    chat = @ai_chat.reload
+    return unless chat.round_id == @round_id
+
+    chat.update_columns(processing: false) if chat.processing?
+    # Broadcast through the channel instead of the model-level broadcast_*
+    # helper: the model helper needs the streamable passed positionally and
+    # merges a local named after the model (+chat+) into the broadcast, which
+    # the strict-locals composer_actions partial rejects as an unknown local.
+    Turbo::StreamsChannel.broadcast_replace_later_to chat,
+      target: "ai_composer_actions",
+      partial: "dashboard/posts/ai_chats/composer_actions",
+      locals: { busy: false }
+  rescue ActiveRecord::RecordNotFound
+    # The chat was deleted mid-run; nothing left to clean up.
+  end
 
   def broadcast_due?
     Time.now - @last_broadcast_at >= BROADCAST_INTERVAL_SECONDS

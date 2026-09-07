@@ -17,7 +17,36 @@ class Dashboard::Posts::AIChats::MessagesControllerTest < ActionDispatch::Integr
 
     assert_equal "user", ai_chat.ai_messages.last.role
     assert_equal "Continue writing", ai_chat.ai_messages.last.content
+    assert_predicate ai_chat.reload, :processing?
     assert_redirected_to dashboard_post_ai_chat_url(user.account.name, post, ai_chat)
+  end
+
+  test "should respond with turbo stream after creating message" do
+    user = create(:user)
+    post = create(:post, account: user.account, user: user)
+    ai_chat = create(:ai_chat, post: post, user: user)
+    sign_in user
+
+    post dashboard_post_ai_chat_messages_url(user.account.name, post, ai_chat), as: :turbo_stream, params: {
+      ai_message: { content: "Continue writing" }
+    }
+
+    assert_response :success
+  end
+
+  test "should clear pending cancellation when creating message" do
+    user = create(:user)
+    post = create(:post, account: user.account, user: user)
+    ai_chat = create(:ai_chat, post: post, user: user)
+    ai_chat.update_columns(cancelled: true)
+    sign_in user
+
+    post dashboard_post_ai_chat_messages_url(user.account.name, post, ai_chat), params: {
+      ai_message: { content: "Continue writing" }
+    }
+
+    assert_not ai_chat.reload.cancelled?
+    assert_predicate ai_chat, :processing?
   end
 
   test "should update chat snapshot when creating message" do

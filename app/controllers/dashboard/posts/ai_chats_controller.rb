@@ -1,5 +1,5 @@
 class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
-  before_action :set_ai_chat, only: [ :show, :destroy ]
+  before_action :set_ai_chat, only: [ :show, :destroy, :cancel ]
 
   layout "application"
 
@@ -24,7 +24,10 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
       @ai_chat = @post.ai_chats.new(user: Current.user, snapshot: snapshot_params)
 
       if @ai_chat.save
+        # A new round starts here: clear any leftover cancellation request from
+        # the previous round and mark this round as processing.
         @ai_chat.ask_later(content)
+        @ai_chat.update_columns(cancelled: false, processing: true)
         AIChatResponseJob.perform_later(@ai_chat)
         redirect_to dashboard_post_ai_chat_path(@account.name, @post, @ai_chat), notice: t(".success")
       else
@@ -38,6 +41,23 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
   def destroy
     @ai_chat.destroy!
     redirect_to dashboard_post_ai_chats_path(@account.name, @post), notice: t(".success"), status: :see_other
+  end
+
+  # Stops the round currently being generated. cancel! (from the ruby_llm gem)
+  # persists the cancellation request to the cancelled column; the running
+  # AIChatResponseJob notices it at its next checkpoint (polled every ~1s) and
+  # aborts. Here we reset processing immediately and put the composer back into
+  # its submittable state.
+  def cancel
+    @ai_chat.cancel!
+    @ai_chat.update_columns(processing: false)
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html do
+        redirect_to dashboard_post_ai_chat_path(@account.name, @post, @ai_chat), notice: t(".success")
+      end
+    end
   end
 
   private

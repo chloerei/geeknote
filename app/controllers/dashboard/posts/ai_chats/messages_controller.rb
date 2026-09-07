@@ -6,6 +6,10 @@ class Dashboard::Posts::AIChats::MessagesController < Dashboard::Posts::BaseCont
     if content.present?
       @ai_chat.update(snapshot: snapshot_params) if params[:snapshot].present?
       @ai_chat.ask_later(content)
+      # A new round starts here: clear any leftover cancellation request and
+      # mark the round as processing so the composer shows the stop button
+      # (instead of submit) until the job finishes.
+      @ai_chat.update_columns(cancelled: false, processing: true)
       AIChatResponseJob.perform_later(@ai_chat)
 
       respond_to do |format|

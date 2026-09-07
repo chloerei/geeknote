@@ -208,7 +208,11 @@ zh-CN:
           success: 对话已删除。
         form:
           content_placeholder: 你想让 AI 帮你写点什么？
-          submit: 开始新对话
+        composer_actions:
+          submit: 发送
+          stop: 停止
+        cancel:
+          success: 已停止生成。
         ai_chat:
           untitled: 新对话
           delete_confirm: 确认删除这个对话？
@@ -223,7 +227,6 @@ zh-CN:
         messages:
           form:
             content_placeholder: 输入消息
-            submit: 发送
       create:
         success: 文章已创建。
       destroy:

@@ -100,6 +100,9 @@ Rails.application.routes.draw do
 
         resources :ai_chats, only: [ :index, :show, :create, :destroy ] do
           resources :messages, only: [ :create ], module: :ai_chats
+          member do
+            post :cancel
+          end
         end
       end
     end

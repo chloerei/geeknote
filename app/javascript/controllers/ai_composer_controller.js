@@ -7,6 +7,19 @@ import { Controller } from "@hotwired/stimulus"
 // #post_content inputs), capture the current draft and submit it along with the
 // message as snapshot[title] / snapshot[content] so the chat stores a snapshot.
 export default class extends Controller {
+  // Enter (without Shift) submits the composer; Shift+Enter inserts a newline.
+  // The submit button only exists in the idle state — while generating it is
+  // replaced by the stop button — so ignore Enter when there is no submit
+  // button. The composer stays typeable but not submittable mid-generation.
+  submitOnEnter(event) {
+    if (event.key !== "Enter" || event.shiftKey || event.isComposing) return
+
+    if (!this.element.querySelector('button[type="submit"]')) return
+
+    event.preventDefault()
+    this.element.requestSubmit()
+  }
+
   snapshot() {
     // Sending a new message means the round restarts from the current editor
     // content: discard any still pending AI suggestions.

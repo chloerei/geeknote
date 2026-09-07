@@ -1,0 +1,18 @@
+<%# locals: (busy: false, cancel_path: nil) %>
+
+<%# The primary action button: the send button when idle, replaced in place by
+    the stop button while generating. Turbo Stream toggles between the two by
+    replacing #ai_composer_actions — only the buttons, never the textarea, so
+    drafts typed mid-generation survive — which is why this partial must not
+    depend on the form builder and outputs plain HTML. %>
+<div id="ai_composer_actions" class="shrink-0">
+  <% if busy && cancel_path %>
+    <%= link_to cancel_path, class: "btn btn-soft btn-error btn-circle shrink-0", aria: { label: t(".stop") }, title: t(".stop"), data: { turbo_method: :post } do %>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="lucide lucide-square-icon lucide-square"><rect width="18" height="18" x="3" y="3" rx="2"/></svg>
+    <% end %>
+  <% else %>
+    <button type="submit" class="btn btn-primary btn-circle shrink-0" aria-label="<%= t(".submit") %>" title="<%= t(".submit") %>">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-icon lucide-send"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+    </button>
+  <% end %>
+</div>

@@ -5,6 +5,7 @@
     form: form,
     field: :content,
     placeholder: t(".content_placeholder"),
-    submit_label: t(".submit"),
-    resizable: true %>
+    resizable: true,
+    busy: ai_chat.processing?,
+    cancel_path: cancel_dashboard_post_ai_chat_path(@account.name, @post, ai_chat) %>
 <% end %>

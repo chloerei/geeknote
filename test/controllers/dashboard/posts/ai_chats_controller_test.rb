@@ -47,6 +47,7 @@ class Dashboard::Posts::AIChatsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "deepseek-v4-flash", ai_chat.model_id
     assert_equal "user", ai_chat.ai_messages.last.role
     assert_equal "Help me write an opening", ai_chat.ai_messages.last.content
+    assert_predicate ai_chat, :processing?
     assert_redirected_to dashboard_post_ai_chat_url(user.account.name, post, ai_chat)
   end
 
@@ -125,5 +126,41 @@ class Dashboard::Posts::AIChatsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to dashboard_post_ai_chats_url(user.account.name, post)
+  end
+
+  test "should cancel chat generation" do
+    user = create(:user)
+    post = create(:post, account: user.account, user: user)
+    ai_chat = create(:ai_chat, post: post, user: user)
+    ai_chat.update_columns(processing: true)
+    sign_in user
+
+    post cancel_dashboard_post_ai_chat_url(user.account.name, post, ai_chat), as: :turbo_stream
+
+    assert_response :success
+    assert_predicate ai_chat.reload, :cancelled?
+    assert_not_predicate ai_chat.reload, :processing?
+  end
+
+  test "should redirect after cancelling chat generation for html requests" do
+    user = create(:user)
+    post = create(:post, account: user.account, user: user)
+    ai_chat = create(:ai_chat, post: post, user: user)
+    sign_in user
+
+    post cancel_dashboard_post_ai_chat_url(user.account.name, post, ai_chat)
+
+    assert_redirected_to dashboard_post_ai_chat_url(user.account.name, post, ai_chat)
+    assert_predicate ai_chat.reload, :cancelled?
+  end
+
+  test "should not cancel chat of other post" do
+    user = create(:user)
+    post = create(:post)
+    ai_chat = create(:ai_chat, post: post, user: post.user)
+    sign_in user
+
+    post cancel_dashboard_post_ai_chat_url(user.account.name, post, ai_chat)
+    assert_response :not_found
   end
 end
