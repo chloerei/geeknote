@@ -88,7 +88,11 @@ class AI::Message < ApplicationRecord
     return unless tool_result?
 
     tool_call = ruby_llm_parent_tool_call
-    broadcast_replace_later_to ai_chat,
+    # Broadcast through the channel instead of the model-level broadcast_*
+    # helper: Turbo::Broadcastable merges a local named after the model element
+    # (+message+) into every broadcast, which the strict-locals tool_call
+    # partial (locals: tool_call_record:) rejects as an unknown local.
+    Turbo::StreamsChannel.broadcast_replace_later_to ai_chat,
       target: "ai_message_tool_call_#{tool_call.tool_call_id}",
       partial: "ai/messages/tool_call",
       locals: { tool_call_record: tool_call }
