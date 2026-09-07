@@ -1,7 +1,7 @@
 <% tool ||= local_assigns[:tool] %>
 <%# AI::Message tool result; rendered as the "output" section of a tool-call
-    collapse card, both on full page loads and when streamed in live via
-    Turbo (AI::Message#broadcast_message_created). %>
+    collapse card, both on full page loads and when the whole card is swapped
+    in live via Turbo (AI::Message#broadcast_tool_result_to_parent). %>
 <% if (error_message = tool.tool_error_message).present? %>
   <div class="rounded-lg border border-error/30 bg-error/10 px-2.5 py-2 font-mono text-xs text-error whitespace-pre-wrap break-words"><%= error_message %></div>
 <% else %>

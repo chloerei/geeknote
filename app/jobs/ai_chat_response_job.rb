@@ -9,6 +9,7 @@ class AIChatResponseJob < ApplicationJob
     @ai_chat_agent = WritingAgent.new(chat: ai_chat, persist_instructions: false)
     @pending_content = +""
     @pending_thinking = +""
+    @thinking_text = +""
     @last_broadcast_at = Time.now
     @broadcast_message_id = nil
 
@@ -52,6 +53,7 @@ class AIChatResponseJob < ApplicationJob
       @broadcast_message_id = message.id
       @thinking_streamed = false
       @content_started = false
+      @thinking_text = +""
     end
     message
   end
@@ -60,14 +62,10 @@ class AIChatResponseJob < ApplicationJob
     return false if @pending_thinking.empty?
 
     message = current_message
+    @thinking_text << @pending_thinking
     message.broadcast_append_thinking_chunk(@pending_thinking)
     @pending_thinking = +""
-
-    unless @thinking_streamed
-      @thinking_streamed = true
-      # Reasoning text is on its way: drop the pending spinner.
-      message.broadcast_stop_thinking_pending
-    end
+    @thinking_streamed = true
     true
   end
 
@@ -83,9 +81,12 @@ class AIChatResponseJob < ApplicationJob
 
     if first_content
       if @thinking_streamed
-        # Reasoning is over: collapse the open card now that the answer text
-        # is about to stream in.
-        message.broadcast_collapse_thinking
+        # Reasoning is over and the answer is starting: persist the reasoning
+        # text that has streamed into the live card, then replace the whole
+        # thinking card (spinner, open) with its completed rendering (icon,
+        # collapsed) — AI::Message#broadcast_thinking_finished.
+        message.update_column(:thinking_text, @thinking_text)
+        message.broadcast_thinking_finished
       else
         # The answer is starting without any reasoning: the thinking card the
         # streaming shell rendered would stay empty forever, so remove it.

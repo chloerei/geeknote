@@ -31,18 +31,14 @@ class AI::Message < ApplicationRecord
       content: ERB::Util.html_escape(content.to_s)
   end
 
-  # Ends the "thinking…" spinner the streaming shell shows while reasoning may
-  # still be on its way (sent once thinking text starts streaming).
-  def broadcast_stop_thinking_pending
-    broadcast_remove_to ai_chat, target: "ai_message_#{id}_thinking_pending"
-  end
-
-  # Reasoning finished and the answer is starting: swap the checked (open)
-  # toggle of the live thinking card for an unchecked one to collapse it.
-  def broadcast_collapse_thinking
-    broadcast_replace_to ai_chat,
-      target: "ai_message_#{id}_thinking_toggle",
-      partial: "ai/messages/thinking_toggle",
+  # Reasoning finished and the answer is starting: swap the whole live thinking
+  # card (spinner icon, open) for its completed rendering (lightbulb icon,
+  # collapsed). The caller persists the streamed reasoning text on the row first
+  # so this render carries the full body (AIChatResponseJob#flush_content).
+  def broadcast_thinking_finished
+    broadcast_replace_later_to ai_chat,
+      target: "ai_message_#{id}_thinking",
+      partial: "ai/messages/thinking",
       locals: { message: self }
   end
 
@@ -82,17 +78,20 @@ class AI::Message < ApplicationRecord
     broadcast_action_later_to ai_chat, action: :remove, target: "ai_message_#{id}"
   end
 
-  # Streams the result into its parent tool-call card's output placeholder and
-  # removes the bubble that announced this row's shell. The gem persists the
-  # role change and parent link in one transaction, so by the time this commit
-  # callback runs the has_one parent is current — no stale association cache.
+  # Swaps the whole parent tool-call card for its completed rendering — spinner
+  # icon and "running" placeholder give way to the tool icon and result in one
+  # replace — then removes the bubble that announced this row's shell. The gem
+  # persists the role change and parent link in one transaction, so by the time
+  # this commit callback runs the has_one parent is current — no stale
+  # association cache.
   def broadcast_tool_result_to_parent
     return unless tool_result?
 
+    tool_call = ruby_llm_parent_tool_call
     broadcast_replace_later_to ai_chat,
-      target: "ai_message_tool_call_output_#{ruby_llm_parent_tool_call.tool_call_id}",
-      partial: "ai/messages/tool_results/default",
-      locals: { tool: self }
+      target: "ai_message_tool_call_#{tool_call.tool_call_id}",
+      partial: "ai/messages/tool_call",
+      locals: { tool_call_record: tool_call }
     broadcast_remove_announcing_bubble
   end
 

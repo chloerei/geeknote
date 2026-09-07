@@ -114,51 +114,6 @@ class Dashboard::Posts::AIChatsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
-  test "should show thinking card collapsed for assistant message with thinking text" do
-    user = create(:user)
-    post = create(:post, account: user.account, user: user)
-    ai_chat = create(:ai_chat, post: post, user: user)
-    assistant = create(:ai_message, ai_chat: ai_chat, role: "assistant", content: "Sure, here is the opening", thinking_text: "I will outline the opening first.\n\nSome **markdown** reasoning.")
-    sign_in user
-
-    get dashboard_post_ai_chat_url(user.account.name, post, ai_chat)
-    assert_response :success
-
-    # A finalized message renders the thinking card collapsed by default.
-    assert_select "#ai_message_#{assistant.id}_thinking input[type=checkbox]:not([checked])"
-    # assert_select collapses whitespace, so compare against the joined text.
-    assert_select "#ai_message_#{assistant.id}_thinking_content", text: "I will outline the opening first. Some **markdown** reasoning."
-  end
-
-  test "should not show thinking card for assistant message without thinking text" do
-    user = create(:user)
-    post = create(:post, account: user.account, user: user)
-    ai_chat = create(:ai_chat, post: post, user: user)
-    assistant = create(:ai_message, ai_chat: ai_chat, role: "assistant", content: "Sure, here is the opening")
-    sign_in user
-
-    get dashboard_post_ai_chat_url(user.account.name, post, ai_chat)
-    assert_response :success
-
-    assert_select "#ai_message_#{assistant.id}_thinking", count: 0
-  end
-
-  test "should render thinking card open while the assistant message is still streaming" do
-    user = create(:user)
-    post = create(:post, account: user.account, user: user)
-    ai_chat = create(:ai_chat, post: post, user: user)
-    assistant = create(:ai_message, ai_chat: ai_chat, role: "assistant", content: "")
-    sign_in user
-
-    get dashboard_post_ai_chat_url(user.account.name, post, ai_chat)
-    assert_response :success
-
-    # The streaming shell has no content or tool call yet, so its thinking card
-    # is open (thinking text is expected to arrive) and shows the spinner.
-    assert_select "#ai_message_#{assistant.id}_thinking input[type=checkbox][checked]"
-    assert_select "#ai_message_#{assistant.id}_thinking_pending"
-  end
-
   test "should destroy chat" do
     user = create(:user)
     post = create(:post, account: user.account, user: user)

@@ -1,22 +1,27 @@
 <%# locals: (message:, pending: false) %>
-<%# Reasoning card shown above an assistant message: a lightbulb title row like
-    a tool call, whose body streams thinking through the same streaming-markdown
+<%# Reasoning card shown above an assistant message. Its title leads with a
+    spinner while reasoning may still be on its way and with a lightbulb once
+    it is over; the body streams thinking through the same streaming-markdown
     raw/rendered pair as the answer text.
 
     While the message is still streaming (pending) the card renders open so the
-    reasoning text is visible as it arrives. Once reasoning is over the card
-    collapses: AIChatResponseJob replaces the checked toggle with an unchecked
-    copy at the first content chunk, and the finalized row renders the card
-    collapsed. %>
+    reasoning text is visible as it arrives. When reasoning ends the whole card
+    is replaced by its completed rendering — icon, collapsed — via
+    AI::Message#broadcast_thinking_finished (triggered by AIChatResponseJob at
+    the first answer chunk), and the finalized row renders the card collapsed
+    as well. %>
 <div id="ai_message_<%= message.id %>_thinking" class="mt-2 w-full min-w-0">
   <div class="collapse collapse-arrow">
-    <%= render "ai/messages/thinking_toggle", message: message, checked: pending %>
+    <%# Checked (open) while reasoning is still streaming in; the whole card is
+        replaced with an unchecked toggle once reasoning ends. %>
+    <input type="checkbox" <%= "checked" if pending %> />
     <div class="collapse-title flex items-center gap-2 py-1 pl-0 pr-9 text-sm font-medium">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide shrink-0 text-base-content/50"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-      <span class="text-xs text-base-content/80"><%= t ".title" %></span>
-      <% if pending && message.thinking_text.blank? %>
-        <span id="ai_message_<%= message.id %>_thinking_pending" class="loading loading-spinner loading-xs text-base-content/50" role="status"></span>
+      <% if pending %>
+        <span class="loading loading-spinner loading-xs text-base-content/50" role="status"></span>
+      <% else %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide shrink-0 text-base-content/50"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
       <% end %>
+      <span class="text-xs text-base-content/80"><%= t ".title" %></span>
     </div>
     <div class="collapse-content pb-0 pl-0 pr-0">
       <div class="mt-1 ml-1 border-l-2 border-base-300/70 pb-2 pl-4">

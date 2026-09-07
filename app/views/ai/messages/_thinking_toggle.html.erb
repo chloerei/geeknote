@@ -1,6 +1,0 @@
-<%# locals: (message:, checked: false) %>
-<%# The daisyUI collapse toggle of the thinking card. "checked" renders the card
-    open while the message is still streaming; AIChatResponseJob broadcasts an
-    unchecked copy (AI::Message#broadcast_collapse_thinking) once reasoning is
-    over and the answer is about to stream in. %>
-<input type="checkbox" id="ai_message_<%= message.id %>_thinking_toggle" <%= "checked" if checked %> />

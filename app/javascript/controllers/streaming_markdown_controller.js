@@ -40,9 +40,9 @@ export default class extends Controller {
     const text = this.rawTarget.textContent ?? ""
     if (text.length === 0) return
 
-    // While waiting for the first streamed chunk the rendered target holds
-    // the daisyUI loading dots (server markup); replacing it with the parsed
-    // markdown doubles as removing them.
+    // The rendered target starts empty (or holds whatever the server put in it
+    // on a full page load) and is fully replaced once streamed text arrives. This
+    // render runs on every raw mutation to re-parse the whole document.
     this.renderedTarget.innerHTML = DOMPurify.sanitize(marked.parse(text, { gfm: true, breaks: true }))
   }
 }

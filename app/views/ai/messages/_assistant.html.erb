@@ -16,11 +16,7 @@
     <% if assistant.content.present? || tool_calls.empty? %>
       <div data-controller="streaming-markdown">
         <div id="ai_message_<%= assistant.id %>_content" data-streaming-markdown-target="raw" class="chat-raw whitespace-pre-wrap"><%= assistant.content %></div>
-        <div data-streaming-markdown-target="rendered" class="chat-markdown typography">
-          <% if assistant.content.blank? %>
-            <span class="loading loading-dots loading-sm" role="status"></span>
-          <% end %>
-        </div>
+        <div data-streaming-markdown-target="rendered" class="chat-markdown typography"></div>
       </div>
     <% end %>
 
