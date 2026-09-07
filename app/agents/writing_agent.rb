@@ -1,6 +1,8 @@
 class WritingAgent < RubyLLM::Agent
   chat_model AI::Chat
 
+  thinking effort: :low
+
   tools do
     [
       ReadSnapshotTool.new(chat),
