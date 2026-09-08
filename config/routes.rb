@@ -99,7 +99,7 @@ Rails.application.routes.draw do
         end
 
         resources :ai_chats, only: [ :index, :show, :create, :destroy ] do
-          resources :messages, only: [ :create ], module: :ai_chats
+          resources :messages, only: [ :create, :show, :update, :edit ], module: :ai_chats
           member do
             post :cancel
           end

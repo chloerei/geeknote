@@ -25,9 +25,10 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
 
       if @ai_chat.save
         # A new round starts here: clear any leftover cancellation request from
-        # the previous round and mark this round as processing.
+        # the previous round (and any parked edit) and mark this round as
+        # processing.
         @ai_chat.ask_later(content)
-        @ai_chat.update_columns(cancelled: false, processing: true)
+        @ai_chat.update_columns(cancelled: false, processing: true, restart_from_message_id: nil)
         AIChatResponseJob.perform_later(@ai_chat)
         redirect_to dashboard_post_ai_chat_path(@account.name, @post, @ai_chat), notice: t(".success")
       else
@@ -47,10 +48,11 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
   # persists the cancellation request to the cancelled column; the running
   # AIChatResponseJob notices it at its next checkpoint (polled every ~1s) and
   # aborts. Here we reset processing immediately and put the composer back into
-  # its submittable state.
+  # its submittable state. An explicit stop also withdraws a parked edit
+  # request: stopping wins over regenerating from the edit.
   def cancel
     @ai_chat.cancel!
-    @ai_chat.update_columns(processing: false)
+    @ai_chat.update_columns(processing: false, restart_from_message_id: nil)
 
     respond_to do |format|
       format.turbo_stream

@@ -168,6 +168,10 @@ zh-CN:
         content_placeholder: 内容（Markdown）
   ai:
     messages:
+      user:
+        edit: 编辑
+      edit:
+        content_placeholder: 修改你的消息
       tool_call:
         toggle: 展开或收起工具调用详情
         running: 等待工具输出…
@@ -208,6 +212,9 @@ zh-CN:
           success: 对话已删除。
         form:
           content_placeholder: 你想让 AI 帮你写点什么？
+        composer:
+          cancel: 取消
+          save: 保存
         composer_actions:
           submit: 发送
           stop: 停止

@@ -3,25 +3,71 @@ class Dashboard::Posts::AIChats::MessagesController < Dashboard::Posts::BaseCont
 
   def create
     content = params.dig(:ai_message, :content)
-    if content.present?
+    return head :no_content if content.blank?
+
+    @created = false
+    # One live round per chat: refuse while generating unless a stop is pending
+    # (the composer disables submit, but a second tab can still race in).
+    @ai_chat.with_lock do
+      @ai_chat.reload
+      next if @ai_chat.processing? && !@ai_chat.cancelled?
+
       @ai_chat.update(snapshot: snapshot_params) if params[:snapshot].present?
       @ai_chat.ask_later(content)
-      # A new round starts here: clear any leftover cancellation request and
-      # mark the round as processing so the composer shows the stop button
-      # (instead of submit) until the job finishes.
-      @ai_chat.update_columns(cancelled: false, processing: true)
+      # The new round supersedes any leftover cancel request or parked edit.
+      @ai_chat.update_columns(cancelled: false, processing: true, restart_from_message_id: nil)
       AIChatResponseJob.perform_later(@ai_chat)
+      @created = true
+    end
 
-      respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_to dashboard_post_ai_chat_path(@account.name, @post, @ai_chat) }
+    head :no_content unless @created
+  end
+
+  # Swap the message row for the composer-based edit form.
+  def edit
+    @message = editable_message
+  end
+
+  # Abandon the edit and swap the row back to its bubble.
+  def show
+    @message = editable_message
+  end
+
+  # Saves an edited user message and restarts the conversation from it. While a
+  # round is running (or draining after a stop) the restart is parked and
+  # applied by the round's finish_round once its writes have settled.
+  def update
+    @message = editable_message
+
+    content = params.dig(:ai_message, :content)
+    # Blank content is ignored, like the composer's create.
+    return head :no_content if content.blank?
+
+    @ai_chat.update(snapshot: snapshot_params) if params[:snapshot].present?
+    @message.update!(ai_message_params)
+
+    @ai_chat.with_lock do
+      @ai_chat.reload
+      if @ai_chat.processing? || @ai_chat.cancelled?
+        # Cancellation lags (polled): park the truncation for finish_round.
+        @ai_chat.update_columns(restart_from_message_id: @message.id, processing: true)
+        @ai_chat.cancel!
+      else
+        @ai_chat.restart_from!(@message)
       end
-    else
-      head :no_content
     end
   end
 
   private
+
+  # Only user messages are editable; RecordNotFound → 404 via ApplicationController.
+  def editable_message
+    @ai_chat.ai_messages.where(role: "user").find(params[:id])
+  end
+
+  def ai_message_params
+    params.require(:ai_message).permit(:content)
+  end
 
   def snapshot_params
     params.fetch(:snapshot, {}).permit(:title, :content)

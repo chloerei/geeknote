@@ -142,6 +142,32 @@ class Dashboard::Posts::AIChatsControllerTest < ActionDispatch::IntegrationTest
     assert_not_predicate ai_chat.reload, :processing?
   end
 
+  test "should clear parked edit when cancelling generation" do
+    user = create(:user)
+    post = create(:post, account: user.account, user: user)
+    ai_chat = create(:ai_chat, post: post, user: user)
+    ai_chat.update_columns(processing: true, restart_from_message_id: 42)
+    sign_in user
+
+    post cancel_dashboard_post_ai_chat_url(user.account.name, post, ai_chat), as: :turbo_stream
+
+    assert_predicate ai_chat.reload, :cancelled?
+    assert_nil ai_chat.reload.restart_from_message_id
+  end
+
+  test "should clear parked edit when creating a chat" do
+    user = create(:user)
+    post = create(:post, account: user.account, user: user)
+    sign_in user
+
+    post dashboard_post_ai_chats_url(user.account.name, post), params: {
+      ai_message: { content: "Help me write an opening" }
+    }
+
+    ai_chat = post.ai_chats.last
+    assert_nil ai_chat.restart_from_message_id
+  end
+
   test "should redirect after cancelling chat generation for html requests" do
     user = create(:user)
     post = create(:post, account: user.account, user: user)

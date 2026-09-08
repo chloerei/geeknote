@@ -6,6 +6,7 @@ class CreateAIChats < ActiveRecord::Migration[8.1]
       t.references :ruby_llm_model, null: false, foreign_key: { to_table: :ruby_llm_models }, type: :bigint
       t.boolean :cancelled, null: false, default: false
       t.boolean :processing, null: false, default: false
+      t.references :restart_from_message, index: false
       t.jsonb :snapshot, null: false, default: {}
       t.timestamps
     end

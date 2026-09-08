@@ -1,24 +1,37 @@
-<%# locals: (form:, field:, rows: 2, placeholder:, resizable: false, busy: false, cancel_path: nil) %>
+<%# locals: (form:, field:, rows: 2, placeholder:, busy: false, cancel_path: nil) %>
+<%# One box for the bottom composer (new message: submit / stop) and for inline
+    editing (persisted form object: cancel / save actions). %>
+<% editing = form.object.persisted? %>
 
 <div class="rounded-2xl border border-base-300 bg-base-100 p-2 transition-colors focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
-  <%# Enter-to-submit is bound to the textarea (not the send button) so that
+  <%# Enter-to-submit is bound to the textarea (not the submit button) so that
       replacing just the button area while processing never needs rebinding;
       in the busy state there is no submit button and ai-composer ignores Enter. %>
   <%= form.text_area field,
     rows: rows,
-    id: form.field_id(field),
+    id: editing ? "edit_ai_message_#{form.object.id}" : form.field_id(field),
     placeholder: placeholder,
     autofocus: true,
-    data: {
-      controller: (resizable ? "autoresize" : nil),
-      action: "keydown->ai-composer#submitOnEnter"
-    }.compact,
+    data: { controller: "autoresize", action: "keydown->ai-composer#submitOnEnter" },
     class: "textarea w-full border-0 bg-transparent resize-none px-2 py-1.5 min-h-[2lh] shadow-none focus:outline-none" %>
 
   <div class="flex items-center justify-between gap-1 pt-1">
     <div class="flex items-center gap-1">
       <%# Reserved for future auxiliary buttons (e.g. attachments) %>
     </div>
-    <%= render "dashboard/posts/ai_chats/composer_actions", busy: busy, cancel_path: cancel_path %>
+    <% if editing %>
+      <% chat = form.object.ai_chat %>
+      <% post = chat.post %>
+      <div class="flex items-center gap-1 shrink-0">
+        <%= link_to t(".cancel"),
+          dashboard_post_ai_chat_message_path(post.account.name, post, chat, form.object),
+          class: "btn btn-ghost btn-sm", data: { turbo_stream: true } %>
+        <%# A real <button type="submit"> — ai-composer#submitOnEnter only sees
+            button[type=submit], not form.submit's input. %>
+        <button type="submit" class="btn btn-primary btn-sm"><%= t(".save") %></button>
+      </div>
+    <% else %>
+      <%= render "dashboard/posts/ai_chats/composer_actions", busy: busy, cancel_path: cancel_path %>
+    <% end %>
   </div>
 </div>

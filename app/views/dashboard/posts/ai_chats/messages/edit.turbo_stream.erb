@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(@message) do %>
+  <%= render "ai/messages/edit", message: @message %>
+<% end %>

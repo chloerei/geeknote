@@ -46,22 +46,28 @@ class AIChatResponseJob < ApplicationJob
 
   private
 
-  # Unified cleanup after a run ends (completion, cancellation, or error): when
-  # this job still owns the latest round, reset processing and broadcast the
-  # composer's primary button back to its submittable state.
+  # Cleanup when this job still owns the latest round: apply a parked edit
+  # (truncate + restart, keeping the composer busy) or reset to idle. Locked
+  # against concurrent edits (MessagesController#update).
   def finish_round
-    chat = @ai_chat.reload
-    return unless chat.round_id == @round_id
+    @ai_chat.with_lock do
+      chat = @ai_chat.reload
+      next unless chat.round_id == @round_id
 
-    chat.update_columns(processing: false) if chat.processing?
-    # Broadcast through the channel instead of the model-level broadcast_*
-    # helper: the model helper needs the streamable passed positionally and
-    # merges a local named after the model (+chat+) into the broadcast, which
-    # the strict-locals composer_actions partial rejects as an unknown local.
-    Turbo::StreamsChannel.broadcast_replace_later_to chat,
-      target: "ai_composer_actions",
-      partial: "dashboard/posts/ai_chats/composer_actions",
-      locals: { busy: false }
+      if (message = chat.restart_from_message)
+        chat.restart_from!(message)
+      else
+        chat.update_columns(processing: false) if chat.processing?
+        # Broadcast through the channel instead of the model-level broadcast_*
+        # helper: the model helper needs the streamable passed positionally and
+        # merges a local named after the model (+chat+) into the broadcast, which
+        # the strict-locals composer_actions partial rejects as an unknown local.
+        Turbo::StreamsChannel.broadcast_replace_later_to chat,
+          target: "ai_composer_actions",
+          partial: "dashboard/posts/ai_chats/composer_actions",
+          locals: { busy: false }
+      end
+    end
   rescue ActiveRecord::RecordNotFound
     # The chat was deleted mid-run; nothing left to clean up.
   end

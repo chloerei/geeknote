@@ -75,7 +75,9 @@ class AI::Message < ApplicationRecord
   end
 
   def broadcast_message_destroyed
-    broadcast_action_later_to ai_chat, action: :remove, target: "ai_message_#{id}"
+    # render: false — remove only needs the target; rendering by default would
+    # deserialize the deleted message to nil and crash the broadcast job.
+    broadcast_action_to ai_chat, action: :remove, target: "ai_message_#{id}", render: false
   end
 
   # Swaps the whole parent tool-call card for its completed rendering — spinner
@@ -100,6 +102,6 @@ class AI::Message < ApplicationRecord
   end
 
   def broadcast_remove_announcing_bubble
-    broadcast_action_later_to ai_chat, action: :remove, target: "ai_message_#{id}"
+    broadcast_action_to ai_chat, action: :remove, target: "ai_message_#{id}", render: false
   end
 end

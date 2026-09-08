@@ -1,0 +1,16 @@
+<%# locals: (message:) %>
+<%# Edit-state message row: composer-based form; save PATCHes and ai-composer
+    syncs the editor snapshot on submit. %>
+<% chat = message.ai_chat %>
+<% post = chat.post %>
+<div id="ai_message_<%= message.id %>" class="flex justify-end">
+  <div class="w-full max-w-[85%]">
+    <%= form_with model: message, url: dashboard_post_ai_chat_message_path(post.account.name, post, chat, message),
+      data: { controller: "ai-composer", action: "submit->ai-composer#snapshot" } do |form| %>
+      <%= render "dashboard/posts/ai_chats/composer",
+        form: form,
+        field: :content,
+        placeholder: t(".content_placeholder") %>
+    <% end %>
+  </div>
+</div>
