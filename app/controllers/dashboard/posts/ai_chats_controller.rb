@@ -45,14 +45,14 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
     redirect_to dashboard_post_ai_chats_path(@account.name, @post), notice: t(".success"), status: :see_other
   end
 
-  # Stops the round currently being generated. cancel! (from the ruby_llm gem)
+  # Stops the round currently being generated. cancel (from the ruby_llm gem)
   # persists the cancellation request to the cancelled column; the running
   # AIChatResponseJob notices it at its next checkpoint (polled every ~1s) and
   # aborts. Here we reset processing immediately and put the composer back into
   # its submittable state. An explicit stop also withdraws a parked edit
   # request: stopping wins over regenerating from the edit.
   def cancel
-    @ai_chat.cancel!
+    @ai_chat.cancel
     @ai_chat.update_columns(processing: false, restart_from_message_id: nil)
 
     respond_to do |format|

@@ -9,6 +9,7 @@ class CreateRubyLlmRecords < ActiveRecord::Migration[8.1]
       t.integer :context_window
       t.integer :max_output_tokens
       t.date :knowledge_cutoff
+      t.datetime :unlisted_at
 
       t.jsonb :modalities, default: {}
       t.jsonb :capabilities, default: []
@@ -31,6 +32,7 @@ class CreateRubyLlmRecords < ActiveRecord::Migration[8.1]
       t.string :name, null: false
       t.text :thought_signature
       t.string :approval
+      t.boolean :remote, null: false, default: false
 
       t.jsonb :arguments, default: {}
 
@@ -72,14 +74,16 @@ class CreateRubyLlmRecords < ActiveRecord::Migration[8.1]
     create_table :ruby_llm_batches do |t|
       t.string :provider_batch_id, null: false
       t.string :provider, null: false
-      t.string :status
+      t.string :status, null: false
+      t.string :raw_status
       t.boolean :completed, null: false, default: false
       t.string :chat_type
       t.string :batch_protocol
 
-      t.json :chat_ids, default: []
+      t.jsonb :chat_ids, default: []
 
-      t.json :request_counts
+      t.jsonb :request_counts
+      t.jsonb :reported_cost
       t.timestamps
 
       t.index [ :provider, :provider_batch_id ], unique: true

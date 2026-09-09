@@ -116,13 +116,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_18_113138) do
   create_table "ai_messages", force: :cascade do |t|
     t.bigint "ai_chat_id", null: false
     t.boolean "cache_until_here", default: false, null: false
-    t.json "citations"
+    t.jsonb "citations"
     t.text "content"
     t.datetime "created_at", null: false
     t.string "finish_reason"
-    t.json "raw_content"
+    t.jsonb "raw_content"
+    t.jsonb "raw_reasoning"
     t.string "role", null: false
-    t.json "server_tool_calls"
+    t.jsonb "server_tool_calls"
     t.text "thinking_signature"
     t.text "thinking_text"
     t.datetime "updated_at", null: false
@@ -271,14 +272,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_18_113138) do
 
   create_table "ruby_llm_batches", force: :cascade do |t|
     t.string "batch_protocol"
-    t.json "chat_ids", default: []
+    t.jsonb "chat_ids", default: []
     t.string "chat_type"
     t.boolean "completed", default: false, null: false
     t.datetime "created_at", null: false
     t.string "provider", null: false
     t.string "provider_batch_id", null: false
-    t.json "request_counts"
-    t.string "status"
+    t.string "raw_status"
+    t.jsonb "reported_cost"
+    t.jsonb "request_counts"
+    t.string "status", null: false
     t.datetime "updated_at", null: false
     t.index ["provider", "provider_batch_id"], name: "index_ruby_llm_batches_on_provider_and_provider_batch_id", unique: true
     t.index ["status"], name: "index_ruby_llm_batches_on_status"
@@ -298,6 +301,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_18_113138) do
     t.string "name", null: false
     t.jsonb "pricing", default: {}
     t.string "provider", null: false
+    t.datetime "unlisted_at"
     t.datetime "updated_at", null: false
     t.index ["capabilities"], name: "index_ruby_llm_models_on_capabilities", using: :gin
     t.index ["family"], name: "index_ruby_llm_models_on_family"
@@ -313,6 +317,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_18_113138) do
     t.bigint "message_id", null: false
     t.string "message_type", null: false
     t.string "name", null: false
+    t.boolean "remote", default: false, null: false
     t.bigint "result_id"
     t.string "result_type"
     t.text "thought_signature"

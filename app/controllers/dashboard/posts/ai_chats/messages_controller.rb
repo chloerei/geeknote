@@ -51,7 +51,7 @@ class Dashboard::Posts::AIChats::MessagesController < Dashboard::Posts::BaseCont
       if @ai_chat.processing? || @ai_chat.cancelled?
         # Cancellation lags (polled): park the truncation for finish_round.
         @ai_chat.update_columns(restart_from_message_id: @message.id, processing: true)
-        @ai_chat.cancel!
+        @ai_chat.cancel
       else
         @ai_chat.restart_from!(@message)
       end

@@ -17,17 +17,18 @@ GIT
 
 GIT
   remote: https://github.com/crmne/ruby_llm.git
-  revision: b44504a992c967711e45f623ac50df49e16101f3
+  revision: 4eb5f1d7b915e7db634d8a948d684e60ac7a4eec
   branch: main
   specs:
-    ruby_llm (1.16.0)
+    ruby_llm (2.0.0.rc1)
       base64
       event_stream_parser (~> 1)
       faraday (>= 1.10.0)
       faraday-multipart (>= 1)
       faraday-net_http (>= 1)
       faraday-retry (>= 1)
-      marcel (~> 1)
+      json (< 3)
+      marcel (>= 1.0, < 3)
       schematist (~> 1.1)
       zeitwerk (~> 2)
 
