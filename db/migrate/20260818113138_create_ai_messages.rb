@@ -14,7 +14,5 @@ class CreateAIMessages < ActiveRecord::Migration[8.1]
       t.string :finish_reason
       t.timestamps
     end
-
-    add_index :ai_messages, :role
   end
 end

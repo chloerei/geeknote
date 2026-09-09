@@ -17,7 +17,7 @@ GIT
 
 GIT
   remote: https://github.com/crmne/ruby_llm.git
-  revision: 4eb5f1d7b915e7db634d8a948d684e60ac7a4eec
+  revision: 0dc8f0a3e8a06ffcd4ebf5fc9bbfce2b51d4691e
   branch: main
   specs:
     ruby_llm (2.0.0.rc1)

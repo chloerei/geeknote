@@ -128,7 +128,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_18_113138) do
     t.text "thinking_text"
     t.datetime "updated_at", null: false
     t.index ["ai_chat_id"], name: "index_ai_messages_on_ai_chat_id"
-    t.index ["role"], name: "index_ai_messages_on_role"
   end
 
   create_table "attachments", force: :cascade do |t|
