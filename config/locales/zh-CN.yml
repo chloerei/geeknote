@@ -1,6 +1,15 @@
 ---
 zh-CN:
   activerecord:
+    models:
+      ai_chat: AI 对话
+      ai_message: AI 消息
+      "ai/chat":
+        one: AI 对话
+        other: AI 对话
+      "ai/message":
+        one: AI 消息
+        other: AI 消息
     attributes:
       account:
         feed_mark_canonical: 标记原文链接
@@ -72,6 +81,22 @@ zh-CN:
         password_challenge: 当前密码
         password_confirmation: 密码确认
         weekly_digest_email_enabled: 每周摘要邮件
+      "ai/chat":
+        title: 标题
+        user: 用户
+        post: 文章
+        processing: 正在生成
+        cancelled: 已停止
+        created_at: 创建时间
+        updated_at: 更新时间
+      "ai/message":
+        ai_chat: 所属对话
+        role: 角色
+        content: 内容
+        thinking_text: 思考过程
+        finish_reason: 结束原因
+        created_at: 创建时间
+        updated_at: 更新时间
     errors:
       models:
         account:
@@ -131,6 +156,13 @@ zh-CN:
         new:
           merge: 合并
           merge_to: 将以下标签合并到“%{name}”
+    ai:
+      chats:
+        destroy:
+          success: 对话及其全部消息已删除。
+      messages:
+        destroy:
+          success: 消息已删除。
   administrate:
     actions:
       back: 返回
