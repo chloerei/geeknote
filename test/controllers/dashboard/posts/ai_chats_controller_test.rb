@@ -36,15 +36,18 @@ class Dashboard::Posts::AIChatsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference "post.ai_chats.count", 1 do
       assert_difference "AI::Message.count", 1 do
-        post dashboard_post_ai_chats_url(user.account.name, post), params: {
-          ai_message: { content: "Help me write an opening" }
-        }
+        assert_enqueued_with(job: AIChatTitleJob) do
+          post dashboard_post_ai_chats_url(user.account.name, post), params: {
+            ai_message: { content: "Help me write an opening" }
+          }
+        end
       end
     end
 
     ai_chat = post.ai_chats.last
     assert_equal user, ai_chat.user
     assert_equal "deepseek-v4-flash", ai_chat.model_id
+    assert_nil ai_chat.title
     assert_equal "user", ai_chat.ai_messages.last.role
     assert_equal "Help me write an opening", ai_chat.ai_messages.last.content
     assert_predicate ai_chat, :processing?

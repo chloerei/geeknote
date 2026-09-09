@@ -11,11 +11,6 @@ class AI::Chat < ApplicationRecord
     class_name: "AI::Message",
     optional: true
 
-  # Title shown in the chat history list: the first user message, used as a summary.
-  def title
-    ai_messages.find { |message| message.role == "user" }&.content.presence
-  end
-
   # Identifier of the current conversation round: the user message that started
   # it. AI suggestion broadcasts carry it so the editor can discard suggestions
   # from late or stale rounds.

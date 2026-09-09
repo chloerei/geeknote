@@ -4,7 +4,7 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
   layout "application"
 
   def index
-    @pagy, @ai_chats = pagy(@post.ai_chats.includes(:ai_messages).order(created_at: :desc))
+    @pagy, @ai_chats = pagy(@post.ai_chats.order(created_at: :desc))
     @ai_message = AI::Message.new
 
     @page_titles.prepend t(".index.title")
@@ -29,6 +29,7 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
         # processing.
         @ai_chat.ask_later(content)
         @ai_chat.update_columns(cancelled: false, processing: true, restart_from_message_id: nil)
+        AIChatTitleJob.perform_later(@ai_chat)
         AIChatResponseJob.perform_later(@ai_chat)
         redirect_to dashboard_post_ai_chat_path(@account.name, @post, @ai_chat), notice: t(".success")
       else
