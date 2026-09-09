@@ -27,7 +27,9 @@ gem "active_storage_validations", "~> 3.0.2"
 
 gem "solid_cache", "~> 1.0.8"
 gem "solid_cable", "~> 3.0.8"
-gem "solid_queue", "~> 1.3.0"
+gem "solid_queue", "~> 1.7.0"
+# Required by solid_queue fiber workers (config/queue.yml)
+gem "async", "~> 2.45"
 gem "mission_control-jobs", "~> 1.1.0"
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -84,6 +86,8 @@ gem "groupdate", "~> 6.7"
 gem "administrate", "~> 1.0.0"
 
 gem "positioning"
+
+gem "ruby_llm", github: "crmne/ruby_llm", branch: "main"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

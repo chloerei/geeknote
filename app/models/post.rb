@@ -13,6 +13,7 @@ class Post < ApplicationRecord
   belongs_to :series, optional: true
   has_many :bookmarks
   has_many :revisions, class_name: "PostRevision", dependent: :delete_all
+  has_many :ai_chats, class_name: "AI::Chat", dependent: :destroy
 
   has_secure_token :preview_token
   has_one_attached :featured_image do |attachable|

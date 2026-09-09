@@ -76,6 +76,11 @@ Rails.application.routes.draw do
     resources :users, only: [ :index, :show, :edit, :update, :destroy ]
     resources :email_tests, only: [ :index, :create ]
 
+    namespace :ai do
+      resources :chats, only: [ :index, :show, :destroy ]
+      resources :messages, only: [ :index, :show, :destroy ]
+    end
+
     mount MissionControl::Jobs::Engine, at: "/jobs"
   end
 
@@ -95,6 +100,13 @@ Rails.application.routes.draw do
 
           member do
             patch :restore
+          end
+        end
+
+        resources :ai_chats, only: [ :index, :show, :create, :destroy ] do
+          resources :messages, only: [ :create, :show, :update, :edit ], module: :ai_chats
+          member do
+            post :cancel
           end
         end
       end

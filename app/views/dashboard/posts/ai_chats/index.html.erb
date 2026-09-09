@@ -1,0 +1,47 @@
+<turbo-frame id="ai-panel" class="flex flex-col min-h-0 h-screen">
+  <div class="navbar px-4 gap-2 border-b border-base-300 shrink-0">
+    <div class="grow min-w-0">
+      <div class="text-lg font-medium">
+        <%= t ".title" %>
+      </div>
+    </div>
+    <label for="drawer-toggle" class="btn btn-ghost btn-square">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </label>
+  </div>
+
+  <div class="grow min-h-0 overflow-auto">
+    <div class="p-4 pb-2">
+      <%= render "form", ai_message: @ai_message %>
+    </div>
+
+    <div class="px-4 pt-4 pb-4">
+      <div class="flex items-center gap-3">
+        <div class="text-xs font-medium uppercase tracking-wider text-base-content/50">
+          <%= t ".history" %>
+        </div>
+        <div class="grow h-px bg-base-200"></div>
+      </div>
+
+      <% if @ai_chats.any? %>
+        <div class="mt-1">
+          <div id="ai_chats_list" class="list" data-controller="scroll-pagination" data-scroll-pagination-auto-load-value="true">
+            <%= render partial: "ai_chat", collection: @ai_chats %>
+            <% if @pagy.next %>
+              <a href="<%= pagy_url_for(@pagy, @pagy.next) %>" class="btn btn-ghost btn-block" data-action="scroll-pagination#load" data-scroll-pagination-target="nextLink" data-turbo-prefetch="false">
+                <%= t "general.load_more" %>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+              </a>
+            <% else %>
+              <div class="text-center text-xs opacity-60 py-4"><%= t "general.end_label" %></div>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="text-center text-base-content/60 py-8">
+          <%= t ".empty" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</turbo-frame>

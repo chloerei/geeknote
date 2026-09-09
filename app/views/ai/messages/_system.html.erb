@@ -1,0 +1,4 @@
+<% system ||= local_assigns[:message] %>
+<div id="ai_message_<%= system.id %>" class="flex justify-center">
+  <div class="w-full px-4 text-center text-xs text-base-content/60 whitespace-pre-wrap break-words"><%= system.content %></div>
+</div>

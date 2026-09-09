@@ -2,6 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="form-unsave-checker"
 export default class extends Controller {
+  static targets = ["form"]
+
   static values = {
     unsave: Boolean,
     confirm: {
@@ -12,13 +14,9 @@ export default class extends Controller {
 
   connect() {
     this.handleInput = (event) => {
-      if (event.target.hasAttribute("name")) {
+      if (this.belongsToForm(event.target) && event.target.hasAttribute("name")) {
         this.unsaveValue = true
       }
-    }
-
-    this.handleTurboSubmitEnd = () => {
-      this.unsaveValue = false
     }
 
     this.handleBeforeunload = (event) => {
@@ -37,7 +35,6 @@ export default class extends Controller {
     }
 
     this.element.addEventListener("input", this.handleInput)
-    this.element.addEventListener("turbo:submit-end", this.handleTurboSubmitEnd)
     window.addEventListener("beforeunload", this.handleBeforeunload)
     window.addEventListener("turbo:before-visit", this.handleTurboBeforevisit)
   }
@@ -45,8 +42,23 @@ export default class extends Controller {
   disconnect() {
     this.unsaveValue = false
     this.element.removeEventListener("input", this.handleInput)
-    this.element.removeEventListener("turbo:submit-end", this.handleTurboSubmitEnd)
     window.removeEventListener("beforeunload", this.handleBeforeunload)
-    window.removeEventListener("turbo:before-visit", this.handleBeforevisit)
+    window.removeEventListener("turbo:before-visit", this.handleTurboBeforevisit)
+  }
+
+  // Bound via data-action="turbo:submit-end->form-unsave-checker#submitEnd" on the watched form
+  submitEnd() {
+    this.unsaveValue = false
+  }
+
+  // Only watch fields that belong to the form under watch. This covers inputs
+  // nested in the form as well as fields associated with it via the `form`
+  // attribute (e.g. the settings panel), while ignoring unrelated forms such
+  // as the AI chat composer. Falls back to the whole controller element when
+  // no form target is declared.
+  belongsToForm(target) {
+    return !this.hasFormTarget ||
+      target.form === this.formTarget ||
+      this.formTarget.contains(target)
   }
 }

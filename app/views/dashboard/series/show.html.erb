@@ -50,9 +50,17 @@
     <h3 class="text-lg font-medium mb-2"><%= t("general.posts") %></h3>
 
     <% if @posts.any? %>
-      <%= render "components/scroll_pagination", pagy: @pagy, content_html: { class: "list", data: { controller: "sortable", sortable_handle_value: ".handle", sortable_resource_name_value: "post" } } do %>
+      <div id="posts_list" class="list" data-controller="scroll-pagination sortable" data-sortable-handle-value=".handle" data-sortable-resource-name-value="post">
         <%= render partial: "post", collection: @posts %>
-      <% end %>
+        <% if @pagy.next %>
+          <a href="<%= pagy_url_for(@pagy, @pagy.next) %>" class="btn btn-ghost btn-block" data-action="scroll-pagination#load" data-scroll-pagination-target="nextLink" data-turbo-prefetch="false">
+            <%= t "general.load_more" %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+          </a>
+        <% else %>
+          <div class="text-center text-xs opacity-60 py-4"><%= t "general.end_label" %></div>
+        <% end %>
+      </div>
     <% else %>
       <div class="flex flex-col items-center gap-3 py-12 text-base-content/50">
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text-icon lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>

@@ -1,0 +1,29 @@
+<% assistant ||= local_assigns[:message] %>
+<% tool_calls = assistant.ruby_llm_tool_calls.includes(result: :ruby_llm_parent_tool_call).load %>
+<%# A streaming shell (no content or tool call yet) may still receive thinking
+    chunks, so its thinking card is rendered pre-emptively with a spinner. %>
+<% thinking_pending = assistant.content.blank? && tool_calls.empty? %>
+<div id="ai_message_<%= assistant.id %>" class="flex justify-start">
+  <%# space-y-4 matches the gap between message rows (#ai_messages), so thinking,
+      content, and tool calls read as one evenly-spaced stream. %>
+  <div class="min-w-0 w-full break-words space-y-4 px-4">
+    <% if assistant.thinking_text.present? || thinking_pending %>
+      <%= render "ai/messages/thinking",
+        message: assistant,
+        pending: thinking_pending && assistant.thinking_text.blank? %>
+    <% end %>
+
+    <%# A row that only carries tool calls has no streamed content of its own,
+        so skip the (loading) content bubble and show the tool calls directly. %>
+    <% if assistant.content.present? || tool_calls.empty? %>
+      <div data-controller="streaming-markdown">
+        <div id="ai_message_<%= assistant.id %>_content" data-streaming-markdown-target="raw" class="chat-raw whitespace-pre-wrap"><%= assistant.content %></div>
+        <div data-streaming-markdown-target="rendered" class="chat-markdown typography"></div>
+      </div>
+    <% end %>
+
+    <% tool_calls.each do |record| %>
+      <%= render "ai/messages/tool_call", tool_call_record: record %>
+    <% end %>
+  </div>
+</div>

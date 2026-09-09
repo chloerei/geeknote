@@ -1,6 +1,15 @@
 ---
 zh-CN:
   activerecord:
+    models:
+      ai_chat: AI 对话
+      ai_message: AI 消息
+      "ai/chat":
+        one: AI 对话
+        other: AI 对话
+      "ai/message":
+        one: AI 消息
+        other: AI 消息
     attributes:
       account:
         feed_mark_canonical: 标记原文链接
@@ -72,6 +81,22 @@ zh-CN:
         password_challenge: 当前密码
         password_confirmation: 密码确认
         weekly_digest_email_enabled: 每周摘要邮件
+      "ai/chat":
+        title: 标题
+        user: 用户
+        post: 文章
+        processing: 正在生成
+        cancelled: 已停止
+        created_at: 创建时间
+        updated_at: 更新时间
+      "ai/message":
+        ai_chat: 所属对话
+        role: 角色
+        content: 内容
+        thinking_text: 思考过程
+        finish_reason: 结束原因
+        created_at: 创建时间
+        updated_at: 更新时间
     errors:
       models:
         account:
@@ -131,6 +156,13 @@ zh-CN:
         new:
           merge: 合并
           merge_to: 将以下标签合并到“%{name}”
+    ai:
+      chats:
+        destroy:
+          success: 对话及其全部消息已删除。
+      messages:
+        destroy:
+          success: 消息已删除。
   administrate:
     actions:
       back: 返回
@@ -166,6 +198,32 @@ zh-CN:
     comments:
       form:
         content_placeholder: 内容（Markdown）
+  ai:
+    messages:
+      user:
+        edit: 编辑
+      edit:
+        content_placeholder: 修改你的消息
+      tool_call:
+        toggle: 展开或收起工具调用详情
+        running: 等待工具输出…
+        input: 输入
+        output: 输出
+        names:
+          read_snapshot: 读取文章快照
+          change_title: 修改标题
+          write_content: 重写全文
+          edit_content: 局部修改
+      tool_calls:
+        default:
+          name: 工具调用
+      thinking:
+        title: 思考过程
+      tool_results:
+        default:
+          name: 工具
+          error_title: 工具结果出错
+          no_output: （无输出）
   analytics:
     period:
       30d: 最近 30 天
@@ -173,11 +231,48 @@ zh-CN:
       90d: 最近 90 天
   dashboard:
     posts:
+      ai_chats:
+        index:
+          title: AI 写作助手
+          history: 历史对话
+          empty: 还没有对话，在顶部发起一个新对话吧
+          back_to_editor: 返回编辑
+        create:
+          success: 对话已创建。
+          create_failed: 对话创建失败，请重试。
+        destroy:
+          success: 对话已删除。
+        form:
+          content_placeholder: 你想让 AI 帮你写点什么？
+        composer:
+          cancel: 取消
+          save: 保存
+        composer_actions:
+          submit: 发送
+          stop: 停止
+        cancel:
+          success: 已停止生成。
+        ai_chat:
+          untitled: 新对话
+          delete_confirm: 确认删除这个对话？
+        show:
+          title: 对话
+          untitled: 新对话
+          delete_confirm: 确认删除这个对话？
+          empty: 还没有消息，发送第一条消息开始对话吧
+          suggestion_bar_label: 待处理的修改建议
+          suggestion_accept_all: 接受全部
+          suggestion_reject_all: 拒绝全部
+        messages:
+          form:
+            content_placeholder: 输入消息
       create:
         success: 文章已创建。
       destroy:
         success: 文章已删除。
       editor:
+        ai_panel_save_first: 保存文章后即可使用 AI 助手
+        ai_chat: AI 写作助手
         delete_forever_confirm: 永久删除文章？
         no_series: 无系列
         revisions: 历史版本
@@ -259,6 +354,7 @@ zh-CN:
     appearance: 外观
     block: Block
     back_to_home: 返回首页
+    begin_label: "- BEGIN -"
     bookmarks: 书签
     cancel_upload: 取消上传
     click_to_select_image: 点击选择图片

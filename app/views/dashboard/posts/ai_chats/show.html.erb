@@ -1,0 +1,67 @@
+<turbo-frame id="ai-panel" class="flex flex-col min-h-0 h-screen">
+  <%= turbo_stream_from @ai_chat %>
+
+  <div class="navbar px-4 gap-2 border-b border-base-300 shrink-0">
+    <div class="flex-none">
+      <a href="<%= dashboard_post_ai_chats_path(@account.name, @post) %>" class="btn btn-ghost btn-square">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+      </a>
+    </div>
+    <div class="grow min-w-0">
+      <div class="text-lg font-medium truncate">
+        <%= @ai_chat.title || t(".untitled") %>
+      </div>
+    </div>
+    <div class="flex-none">
+      <div class="dropdown dropdown-end">
+        <label tabindex="0" class="btn btn-ghost btn-square">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical-icon lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+        </label>
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+          <li>
+            <a href="<%= dashboard_post_ai_chat_path(@account.name, @post, @ai_chat) %>" data-turbo-method="delete" data-turbo-confirm="<%= t ".delete_confirm" %>" class="text-error">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2-icon lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+              <%= t "general.delete" %>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="grow min-h-0 flex flex-col-reverse overflow-auto">
+    <div id="ai_messages" class="p-4 space-y-4" data-controller="scroll-pagination" data-scroll-pagination-auto-load-value="true">
+      <div class="hidden only:block text-center text-base-content/60 py-8">
+        <%= t ".empty" %>
+      </div>
+      <% if @pagy.next %>
+        <a href="<%= pagy_url_for(@pagy, @pagy.next) %>" class="btn btn-ghost btn-block" data-action="scroll-pagination#load" data-scroll-pagination-target="nextLink" data-turbo-prefetch="false">
+          <%= t "general.load_more" %>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up-icon lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
+        </a>
+      <% end %>
+      <% @ai_messages.reverse.each do |ai_message| %>
+        <%= render partial: ai_message.to_partial_path, object: ai_message %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="px-4 py-2" data-controller="ai-suggestion-bar">
+    <div class="rounded-2xl border border-base-300 bg-base-100 px-3 py-2 flex items-center gap-2" data-ai-suggestion-bar-target="bar" hidden>
+      <span class="grow text-sm text-base-content/70">
+        <%= t ".suggestion_bar_label" %>：
+        <span data-ai-suggestion-bar-target="count">0</span>
+      </span>
+      <button type="button" class="btn btn-primary btn-sm" data-action="ai-suggestion-bar#acceptAll">
+        <%= t ".suggestion_accept_all" %>
+      </button>
+      <button type="button" class="btn btn-ghost btn-sm" data-action="ai-suggestion-bar#rejectAll">
+        <%= t ".suggestion_reject_all" %>
+      </button>
+    </div>
+  </div>
+
+  <div class="px-4 pt-0 pb-4">
+    <%= render "dashboard/posts/ai_chats/messages/form", ai_chat: @ai_chat, ai_message: @ai_message %>
+  </div>
+</turbo-frame>

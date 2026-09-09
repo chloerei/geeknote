@@ -1,0 +1,3 @@
+<%# locals: (tool_call:) %>
+<%# RubyLLM::ToolCall; rendered as the "input" section of a tool-call collapse card %>
+<pre class="rounded-lg bg-base-200 px-2.5 py-2 font-mono text-xs text-base-content/70 whitespace-pre-wrap break-all"><%= JSON.pretty_generate(tool_call.arguments) %></pre>

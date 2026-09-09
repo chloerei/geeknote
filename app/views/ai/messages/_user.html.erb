@@ -1,0 +1,17 @@
+<% user ||= local_assigns[:message] %>
+<% chat = user.ai_chat %>
+<% post = chat.post %>
+<%# Appears left of the bubble on hover; justify-end keeps the bubble in place. %>
+<div id="ai_message_<%= user.id %>" class="flex items-center justify-end gap-2 group">
+  <%= link_to edit_dashboard_post_ai_chat_message_path(post.account.name, post, chat, user),
+    class: "btn btn-ghost btn-square btn-sm h-8 min-h-8 w-8 hidden group-hover:inline-flex focus-visible:inline-flex",
+    title: t(".edit"), aria: { label: t(".edit") }, data: { turbo_stream: true } do %>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+  <% end %>
+  <div class="max-w-[85%]">
+    <div data-controller="streaming-markdown" class="rounded-2xl rounded-tr-sm bg-primary px-4 py-2.5 text-primary-content break-words">
+      <div id="ai_message_<%= user.id %>_content" data-streaming-markdown-target="raw" class="chat-raw whitespace-pre-wrap"><%= user.content %></div>
+      <div data-streaming-markdown-target="rendered" class="chat-markdown typography"></div>
+    </div>
+  </div>
+</div>

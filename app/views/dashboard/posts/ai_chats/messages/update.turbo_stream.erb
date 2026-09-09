@@ -1,0 +1,8 @@
+<%= turbo_stream.replace dom_id(@message) do %>
+  <%= render "ai/messages/user", message: @message %>
+<% end %>
+<%# A saved edit starts the next round: show the composer as busy (stop) so no
+    message is sent mid-handover. Only the button area, never the draft. %>
+<%= turbo_stream.replace "ai_composer_actions" do %>
+  <%= render "dashboard/posts/ai_chats/composer_actions", busy: true, cancel_path: cancel_dashboard_post_ai_chat_path(@account.name, @post, @ai_chat) %>
+<% end %>

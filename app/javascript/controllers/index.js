@@ -7,6 +7,12 @@ import { application } from "./application"
 import AutoremoveController from "./autoremove_controller"
 application.register("autoremove", AutoremoveController)
 
+import AiComposerController from "./ai_composer_controller"
+application.register("ai-composer", AiComposerController)
+
+import AiSuggestionBarController from "./ai_suggestion_bar_controller"
+application.register("ai-suggestion-bar", AiSuggestionBarController)
+
 import AutoresizeController from "./autoresize_controller"
 application.register("autoresize", AutoresizeController)
 
@@ -24,6 +30,9 @@ application.register("copy-link", CopyLinkController)
 
 import DialogController from "./dialog_controller"
 application.register("dialog", DialogController)
+
+import DrawerPanelsController from "./drawer_panels_controller"
+application.register("drawer-panels", DrawerPanelsController)
 
 import FormUnsaveCheckerController from "./form_unsave_checker_controller"
 application.register("form-unsave-checker", FormUnsaveCheckerController)
@@ -51,6 +60,9 @@ application.register("scroll-pagination", ScrollPaginationController)
 
 import SortableController from "./sortable_controller"
 application.register("sortable", SortableController)
+
+import StreamingMarkdownController from "./streaming_markdown_controller"
+application.register("streaming-markdown", StreamingMarkdownController)
 
 import TagFieldController from "./tag_field_controller"
 application.register("tag-field", TagFieldController)

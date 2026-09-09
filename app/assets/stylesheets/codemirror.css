@@ -46,6 +46,18 @@ markdown-editor {
     opacity: 70%;
   }
 
+  /* CodeMirror wraps every inline widget in invisible buffer images
+     (.cm-widgetBuffer). Its built-in styles are not injected because
+     StyleModule.mount is disabled, so Tailwind preflight's img { display: block }
+     would break the line around each suggestion widget. Restore the inline
+     zero-width behavior CodeMirror expects. */
+  .cm-widgetBuffer {
+    display: inline;
+    width: 0;
+    height: 1em;
+    vertical-align: text-top;
+  }
+
   .cmt-heading1,
   .cmt-heading2,
   .cmt-heading3,
@@ -83,5 +95,72 @@ markdown-editor {
   .cmt-monospace {
     font-family: monospace;
     font-size: 0.875rem;
+  }
+
+  .cm-ai-del {
+    background-color: color-mix(in srgb, var(--color-error) 12%, transparent);
+    border-radius: 0.125rem;
+    text-decoration: line-through;
+    text-decoration-color: var(--color-error);
+  }
+
+  .cm-ai-ins {
+    background-color: color-mix(in srgb, var(--color-success) 15%, transparent);
+    border-radius: 0.125rem;
+    white-space: pre-wrap;
+  }
+
+  .cm-ai-chip-anchor {
+    position: relative;
+    display: inline;
+    overflow: visible;
+  }
+
+  .cm-ai-chip-anchor .cm-ai-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.125rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(calc(-100% - 4px));
+    white-space: nowrap;
+    padding: 0.125rem 0.25rem;
+    border-radius: 9999px;
+    border: 1px solid color-mix(in srgb, var(--color-base-content) 12%, transparent);
+    background-color: var(--color-base-100);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+    user-select: none;
+    pointer-events: auto;
+  }
+
+  .cm-ai-chip-anchor .cm-ai-chip button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    border: 0;
+    border-radius: 9999px;
+    background: transparent;
+    font-size: 0.8rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .cm-ai-chip-anchor .cm-ai-accept {
+    color: var(--color-success);
+    opacity: 0.85;
+  }
+
+  .cm-ai-chip-anchor .cm-ai-reject {
+    color: var(--color-error);
+    opacity: 0.85;
+  }
+
+  .cm-ai-chip-anchor .cm-ai-chip button:hover {
+    background-color: color-mix(in srgb, var(--color-base-content) 12%, transparent);
+    opacity: 1;
   }
 }

@@ -15,6 +15,23 @@ GIT
       ruby-progressbar (~> 1.8, >= 1.8.1)
       terminal-table (>= 1.5.1)
 
+GIT
+  remote: https://github.com/crmne/ruby_llm.git
+  revision: 0dc8f0a3e8a06ffcd4ebf5fc9bbfce2b51d4691e
+  branch: main
+  specs:
+    ruby_llm (2.0.0.rc1)
+      base64
+      event_stream_parser (~> 1)
+      faraday (>= 1.10.0)
+      faraday-multipart (>= 1)
+      faraday-net_http (>= 1)
+      faraday-retry (>= 1)
+      json (< 3)
+      marcel (>= 1.0, < 3)
+      schematist (~> 1.1)
+      zeitwerk (~> 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -113,6 +130,10 @@ GEM
     anyway_config (2.8.0)
       ruby-next-core (~> 1.0)
     ast (2.4.3)
+    async (2.45.1)
+      console (~> 1.29)
+      fiber-annotation
+      io-event (~> 1.21)
     aws-eventstream (1.4.0)
     aws-partitions (1.1253.0)
     aws-sdk-core (3.249.0)
@@ -159,6 +180,10 @@ GEM
     commonmarker (2.6.3-x86_64-linux)
     concurrent-ruby (1.3.8)
     connection_pool (3.0.2)
+    console (1.37.0)
+      fiber-annotation
+      fiber-local (~> 1.1)
+      json
     crack (1.0.1)
       bigdecimal
       rexml
@@ -180,10 +205,11 @@ GEM
       dotenv (= 3.2.0)
       railties (>= 6.1)
     drb (2.2.3)
-    erb (6.0.4)
+    erb (6.0.7)
     erubi (1.13.1)
-    et-orbi (1.4.0)
+    et-orbi (1.4.2)
       tzinfo
+    event_stream_parser (1.0.0)
     factory_bot (6.6.0)
       activesupport (>= 6.1.0)
     factory_bot_rails (6.5.1)
@@ -197,9 +223,15 @@ GEM
       multipart-post (~> 2.0)
     faraday-net_http (3.4.4)
       net-http (~> 0.5)
+    faraday-retry (2.4.0)
+      faraday (~> 2.0)
     ffi (1.17.4-aarch64-linux-gnu)
     ffi (1.17.4-x86_64-linux-gnu)
-    fugit (1.12.1)
+    fiber-annotation (0.2.0)
+    fiber-local (1.1.0)
+      fiber-storage
+    fiber-storage (1.0.1)
+    fugit (1.13.0)
       et-orbi (~> 1.4)
       raabro (~> 1.4)
     globalid (1.4.0)
@@ -232,7 +264,8 @@ GEM
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
-    io-console (0.8.2)
+    io-console (0.9.2)
+    io-event (1.21.1)
     irb (1.18.0)
       pp (>= 0.6.0)
       prism (>= 1.3.0)
@@ -341,7 +374,7 @@ GEM
       postal-ruby (>= 0.0.2, < 2.0)
     postal-ruby (1.0.1)
       moonrope-client (>= 1.0.2, < 1.1)
-    pp (0.6.3)
+    pp (0.6.4)
       prettyprint
     premailer (1.29.0)
       addressable
@@ -357,15 +390,12 @@ GEM
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
       rack
-    psych (5.3.1)
-      date
-      stringio
     public_suffix (7.0.5)
     puma (8.0.2)
       nio4r (~> 2.0)
-    raabro (1.4.0)
+    raabro (1.5.0)
     racc (1.8.1)
-    rack (3.2.6)
+    rack (3.2.7)
     rack-session (2.1.2)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -411,13 +441,18 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
       ffi (~> 1.0)
-    rdoc (7.2.0)
+    rbs (4.2.0)
+      logger
+      prism (>= 1.6.0)
+      tsort
+    rdoc (8.0.0)
       erb
-      psych (>= 4.0.0)
+      prism (>= 1.6.0)
+      rbs (>= 4.0.0)
       tsort
     recaptcha (5.21.2)
     regexp_parser (2.12.0)
-    reline (0.6.3)
+    reline (0.7.0)
       io-console (~> 0.5)
     rexml (3.4.4)
     rouge (4.7.0)
@@ -456,6 +491,7 @@ GEM
       logger
     rubyzip (3.4.1)
     safely_block (1.0.0)
+    schematist (1.1.0)
     securerandom (0.4.1)
     selenium-webdriver (4.46.0)
       base64 (~> 0.2)
@@ -472,7 +508,7 @@ GEM
       activejob (>= 7.2)
       activerecord (>= 7.2)
       railties (>= 7.2)
-    solid_queue (1.3.2)
+    solid_queue (1.7.0)
       activejob (>= 7.1)
       activerecord (>= 7.1)
       concurrent-ruby (>= 1.3.1)
@@ -482,7 +518,6 @@ GEM
     ssrf_filter (1.5.0)
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
-    stringio (3.2.0)
     terminal-table (4.0.0)
       unicode-display_width (>= 1.1.1, < 4)
     thor (1.5.0)
@@ -520,7 +555,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.8.2)
+    zeitwerk (2.8.3)
 
 PLATFORMS
   aarch64-linux
@@ -530,6 +565,7 @@ DEPENDENCIES
   active_storage_validations (~> 3.0.2)
   administrate (~> 1.0.0)
   ahoy_matey (~> 5.4.1)
+  async (~> 2.45)
   aws-sdk-s3 (~> 1.212.0)
   bcrypt (~> 3.1.20)
   bootsnap (~> 1.21.1)
@@ -567,10 +603,11 @@ DEPENDENCIES
   recaptcha (~> 5.21.1)
   rouge (~> 4.7.0)
   rubocop-rails-omakase (~> 1.1.0)
+  ruby_llm!
   selenium-webdriver (>= 4.14.0)
   solid_cable (~> 3.0.8)
   solid_cache (~> 1.0.8)
-  solid_queue (~> 1.3.0)
+  solid_queue (~> 1.7.0)
   stimulus-rails (~> 1.3.4)
   thruster (~> 0.1.15)
   turbo-rails (~> 2.0.17)
