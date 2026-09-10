@@ -59,7 +59,12 @@ class AI::Message < ApplicationRecord
     if role == "tool"
       broadcast_tool_result_to_parent
     else
-      broadcast_append_later_to ai_chat, target: "ai_messages"
+      # Appended synchronously, not via _later: a tool-result row is created as
+      # an assistant shell and removed moments later by a synchronous
+      # broadcast, so queueing this append risks the remove arriving first and
+      # leaving a stray bubble. It also guarantees the shell exists before the
+      # first streamed chunk targets it.
+      broadcast_append_to ai_chat, target: "ai_messages"
     end
   end
 
