@@ -15,23 +15,6 @@ GIT
       ruby-progressbar (~> 1.8, >= 1.8.1)
       terminal-table (>= 1.5.1)
 
-GIT
-  remote: https://github.com/crmne/ruby_llm.git
-  revision: 0dc8f0a3e8a06ffcd4ebf5fc9bbfce2b51d4691e
-  branch: main
-  specs:
-    ruby_llm (2.0.0.rc1)
-      base64
-      event_stream_parser (~> 1)
-      faraday (>= 1.10.0)
-      faraday-multipart (>= 1)
-      faraday-net_http (>= 1)
-      faraday-retry (>= 1)
-      json (< 3)
-      marcel (>= 1.0, < 3)
-      schematist (~> 1.1)
-      zeitwerk (~> 2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -489,6 +472,17 @@ GEM
     ruby-vips (2.3.0)
       ffi (~> 1.12)
       logger
+    ruby_llm (2.0.0.rc2)
+      base64
+      event_stream_parser (~> 1)
+      faraday (>= 1.10.0)
+      faraday-multipart (>= 1)
+      faraday-net_http (>= 1)
+      faraday-retry (>= 1)
+      json (< 3)
+      marcel (>= 1.0, < 3)
+      schematist (~> 1.1)
+      zeitwerk (~> 2)
     rubyzip (3.4.1)
     safely_block (1.0.0)
     schematist (1.1.0)
@@ -603,7 +597,7 @@ DEPENDENCIES
   recaptcha (~> 5.21.1)
   rouge (~> 4.7.0)
   rubocop-rails-omakase (~> 1.1.0)
-  ruby_llm!
+  ruby_llm (= 2.0.0.rc2)
   selenium-webdriver (>= 4.14.0)
   solid_cable (~> 3.0.8)
   solid_cache (~> 1.0.8)
