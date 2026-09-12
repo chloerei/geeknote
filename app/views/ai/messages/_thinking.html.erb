@@ -4,17 +4,17 @@
     it is over; the body streams thinking through the same streaming-markdown
     raw/rendered pair as the answer text.
 
-    While the message is still streaming (pending) the card renders open so the
-    reasoning text is visible as it arrives. When reasoning ends the whole card
-    is replaced by its completed rendering — icon, collapsed — via
+    The card stays collapsed by default in both states — while reasoning is
+    still streaming and once it is over — so the reasoning text only unfolds
+    when the reader opens it. When reasoning ends the whole card is replaced by
+    its completed rendering — icon, still collapsed — via
     AI::Message#broadcast_thinking_finished (triggered by AIChatResponseJob at
     the first answer chunk), and the finalized row renders the card collapsed
     as well. %>
 <div id="ai_message_<%= message.id %>_thinking" class="w-full min-w-0">
   <div class="collapse collapse-arrow">
-    <%# Checked (open) while reasoning is still streaming in; the whole card is
-        replaced with an unchecked toggle once reasoning ends. %>
-    <input type="checkbox" <%= "checked" if pending %> />
+    <%# Collapsed in both states; the reader expands it on demand. %>
+    <input type="checkbox" />
     <div class="collapse-title flex items-center gap-2 py-1 pl-0 pr-9 text-sm font-medium">
       <% if pending %>
         <span class="loading loading-spinner loading-xs text-base-content/50" role="status"></span>
