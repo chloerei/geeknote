@@ -14,7 +14,7 @@
   "forwardPorts": [3000],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "bin/setup",
+  // "postCreateCommand": "bin/setup",
   "customizations": {
     "vscode": {
       "extensions": ["Shopify.ruby-lsp", "bradlc.vscode-tailwindcss"]
