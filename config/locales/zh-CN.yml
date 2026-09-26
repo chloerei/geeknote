@@ -467,6 +467,7 @@ zh-CN:
     statistics: 统计
     submit: 提交
     tags: 标签
+    theme: 主题
     title: 标题
     toc: 目录
     top_posts: 热门文章
@@ -544,6 +545,7 @@ zh-CN:
         notification_description: 更改通知设置
         password_description: 更改登录密码
         profile_description: 管理个人资料
+        theme_description: 更改主题
     account_deletions:
       create:
         account_name_mismatch: 输入的账号名不匹配，无法删除账号。
@@ -569,3 +571,11 @@ zh-CN:
     profiles:
       update:
         success: 资料更新成功。
+    themes:
+      show:
+        light: 亮
+        light_description: 始终使用亮色主题。
+        dark: 暗
+        dark_description: 始终使用暗色主题。
+        system: 跟随系统
+        system_description: 跟随设备的系统设置。

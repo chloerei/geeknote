@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     resource :password
     resource :profile, only: [ :show, :update ]
     resource :notification
+    resource :theme, only: [ :show ]
     resource :account_deletion, only: [ :show, :create ]
   end
 

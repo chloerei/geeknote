@@ -67,6 +67,9 @@ application.register("streaming-markdown", StreamingMarkdownController)
 import TagFieldController from "./tag_field_controller"
 application.register("tag-field", TagFieldController)
 
+import ThemeController from "./theme_controller"
+application.register("theme", ThemeController)
+
 import TocController from "./toc_controller"
 application.register("toc", TocController)
 

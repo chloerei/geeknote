@@ -12,10 +12,18 @@
 @import "./typography.css";
 
 @plugin "daisyui/theme" {
-  name: "geeknote";
+  name: "light";
   default: true;
-  prefersdark: false;
   color-scheme: light;
+
+  --radius-field: 8px;
+  --radius-box: 16px;
+}
+
+@plugin "daisyui/theme" {
+  name: "dark";
+  prefersdark: true;
+  color-scheme: dark;
 
   --radius-field: 8px;
   --radius-box: 16px;

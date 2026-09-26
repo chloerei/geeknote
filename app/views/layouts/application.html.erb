@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="bg-base-200" data-theme="geeknote">
+<html class="bg-base-200">
   <head>
     <title><%= @page_titles.join(" - ") %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -7,6 +7,19 @@
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <script>
+      // Restore an explicit light/dark choice before first paint. Leaving
+      // data-theme unset means "follow the system" (daisyUI's prefersdark).
+      (function () {
+        try {
+          var theme = localStorage.getItem("theme");
+          if (theme === "light" || theme === "dark") {
+            document.documentElement.dataset.theme = theme;
+          }
+        } catch (e) {}
+      })();
+    </script>
 
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "markdown-editor", "chart", "data-turbo-track": "reload", type: "module" %>
