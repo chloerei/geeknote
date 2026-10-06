@@ -4,14 +4,17 @@
 
 import { application } from "./application"
 
-import AutoremoveController from "./autoremove_controller"
-application.register("autoremove", AutoremoveController)
-
 import AiComposerController from "./ai_composer_controller"
 application.register("ai-composer", AiComposerController)
 
 import AiSuggestionBarController from "./ai_suggestion_bar_controller"
 application.register("ai-suggestion-bar", AiSuggestionBarController)
+
+import AiTagSuggestController from "./ai_tag_suggest_controller"
+application.register("ai-tag-suggest", AiTagSuggestController)
+
+import AutoremoveController from "./autoremove_controller"
+application.register("autoremove", AutoremoveController)
 
 import AutoresizeController from "./autoresize_controller"
 application.register("autoresize", AutoresizeController)

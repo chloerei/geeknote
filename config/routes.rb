@@ -90,6 +90,7 @@ Rails.application.routes.draw do
     resources :posts, only: [ :index, :new, :create, :edit, :update, :destroy ] do
       collection do
         post "preview"
+        post "ai_tags", to: "posts/ai_tags#create"
       end
 
       scope module: :posts do

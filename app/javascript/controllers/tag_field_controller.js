@@ -46,4 +46,36 @@ export default class extends Controller {
   disconnect() {
     this.tomSelect.destroy()
   }
+
+  // Adds tag names programmatically (e.g. AI suggestions). addItem ignores a
+  // value that has no option yet, so missing options are created first. Tags
+  // already selected are skipped, compared case insensitively because tag names
+  // are case insensitive on the server. The tags already there are kept and the
+  // new ones fill the remaining room up to +limit+. The input event keeps the
+  // editor's unsaved-changes checker in sync.
+  addTags(names, limit = Infinity) {
+    if (!this.tomSelect) return
+
+    const selected = this.tomSelect.items.map((item) => item.toLowerCase())
+    let added = false
+
+    for (const name of names) {
+      if (selected.length >= limit) break
+
+      const value = name?.trim()
+      if (!value || selected.includes(value.toLowerCase())) continue
+
+      selected.push(value.toLowerCase())
+      if (!this.tomSelect.options[value]) {
+        this.tomSelect.addOption({ name: value })
+      }
+      this.tomSelect.addItem(value)
+      added = true
+    }
+
+    // Nothing changed, nothing to mark as unsaved.
+    if (added) {
+      this.inputTarget.dispatchEvent(new Event("input", { bubbles: true }))
+    }
+  }
 }

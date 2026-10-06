@@ -13,8 +13,11 @@ module Taggable
   end
 
   def tag_list=(value)
+    # names are citext, so two entries differing only in case resolve to the
+    # same tag: dedupe before assigning or the tagging insert violates its
+    # uniqueness index.
     self.tags = value.split(",").map do |name|
       Tag.find_or_create_by(name: name.strip)
-    end
+    end.uniq
   end
 end

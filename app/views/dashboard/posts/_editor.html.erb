@@ -119,9 +119,28 @@
               <div class="space-y-2">
                 <%= render "components/image_field", form: form, name: :featured_image, options: { form: editor_form_id } %>
 
-                <fieldset class="fieldset">
-                  <legend class="fieldset-legend">
-                    <%= t "general.tags" %>
+                <fieldset class="fieldset"
+                  data-controller="ai-tag-suggest"
+                  data-ai-tag-suggest-url-value="<%= ai_tags_dashboard_posts_path(post.account.name) %>"
+                  data-ai-tag-suggest-limit-value="<%= AI::TagSuggestion::MAX_TAGS %>"
+                  data-ai-tag-suggest-empty-value="<%= t(".tag_suggestion_empty") %>"
+                  data-ai-tag-suggest-failure-value="<%= t(".tag_suggestion_failure") %>"
+                  data-ai-tag-suggest-tag-field-outlet="[data-controller~='tag-field']">
+                  <%# w-full — a legend shrinks to its content, and the legend's
+                      space-between is what pushes the button to the right edge %>
+                  <legend class="fieldset-legend w-full">
+                    <span><%= t "general.tags" %></span>
+                    <% if AI::TagSuggestion.available? %>
+                      <button type="button"
+                        class="btn btn-ghost btn-xs btn-square"
+                        title="<%= t(".suggest_tags") %>"
+                        data-ai-tag-suggest-target="button"
+                        data-action="ai-tag-suggest#suggest">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles-icon lucide-sparkles" data-ai-tag-suggest-target="icon"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+                        <%# loading! — daisyUI's .loading sets display, so the hidden class needs the important modifier to win %>
+                        <span class="loading loading-spinner loading-xs hidden!" data-ai-tag-suggest-target="spinner"></span>
+                      </button>
+                    <% end %>
                   </legend>
                   <div data-controller="tag-field" data-turbo-permanent>
                     <%= form.hidden_field :tag_list, form: editor_form_id, data: { tag_field_target: "input" } %>
