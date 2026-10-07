@@ -7,7 +7,7 @@ module AI
   # which turns them into a user facing message.
   class TagSuggestion
     MAX_TAGS = 5
-    POPULAR_TAGS_LIMIT = 30
+    POPULAR_TAGS_LIMIT = 100
     # Only the beginning of a long post is needed to tell what it is about.
     CONTENT_LIMIT = 8_000
 
