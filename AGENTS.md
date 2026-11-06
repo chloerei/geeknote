@@ -2,4 +2,5 @@
 
 ## Development Environment
 
-- The development environment runs via Docker Compose (`compose.yml`, `Dockerfile.dev`); never install runtimes or packages on the host, and run dev commands inside the app container, e.g. `docker compose up -d` then `docker compose exec app <command>`.
+- Runs on Docker Compose (`compose.yml`, `Dockerfile.dev`); never install runtimes or packages on the host.
+- Start it once with `docker compose up -d`, then run commands inside the running container: `docker compose exec app <command>` (e.g. `bin/rails test`, `bin/rubocop`). Prefer this over `docker compose run` or re-running `up`.
