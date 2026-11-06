@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   include Commentable
   include Meilisearch::Rails
 
-  extend Pagy::Meilisearch
+  extend Pagy::Search
 
   normalizes :canonical_url, with: ->(url) { url.presence }
 

@@ -11,7 +11,7 @@ class Dashboard::PostsController < Dashboard::BaseController
       posts = posts.where(status: @status)
     end
 
-    @pagy, @posts = pagy(posts)
+    @pagy, @posts = pagy(:offset, posts)
 
     @page_titles.prepend t("general.posts")
   end

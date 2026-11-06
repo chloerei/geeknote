@@ -2,7 +2,7 @@ class Account::FollowingsController < Account::BaseController
   before_action :require_user_account
 
   def index
-    @pagy, @accounts = pagy(@account.owner.followings.includes(:owner).order("follows.created_at DESC"), page: params[:page])
+    @pagy, @accounts = pagy(:offset, @account.owner.followings.includes(:owner).order("follows.created_at DESC"), page: params[:page])
     @page_titles.prepend t("general.following")
   end
 

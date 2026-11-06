@@ -1,7 +1,7 @@
 class Tag < ApplicationRecord
   include Meilisearch::Rails
 
-  extend Pagy::Meilisearch
+  extend Pagy::Search
 
   has_many :taggings, dependent: :delete_all
   has_many :posts, through: :taggings, source: :taggable, source_type: "Post"

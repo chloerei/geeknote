@@ -1,6 +1,4 @@
 module ApplicationHelper
-  include Pagy::Frontend
-
   def avatar_url(user)
     if user.avatar.attached?
       polymorphic_url user.avatar.variant(:thumb)

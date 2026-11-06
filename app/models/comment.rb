@@ -2,7 +2,7 @@ class Comment < ApplicationRecord
   include Meilisearch::Rails
   include Likable
 
-  extend Pagy::Meilisearch
+  extend Pagy::Search
 
   belongs_to :commentable, polymorphic: true, counter_cache: true, touch: true
   belongs_to :parent, class_name: "Comment", optional: true, counter_cache: :replies_count, touch: true

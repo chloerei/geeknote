@@ -1,13 +1,13 @@
 class ApplicationController < ActionController::Base
   include Authentication
-  include Pagy::Backend
+  include Pagy::Method
 
   before_action :set_site
 
   layout "site"
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
-  rescue_from Pagy::OverflowError, with: :render_404
+  rescue_from Pagy::RangeError, with: :render_404
 
   private
 

@@ -2,7 +2,7 @@ class Dashboard::SeriesController < Dashboard::BaseController
   def index
     series = @account.series.order(updated_at: :desc)
 
-    @pagy, @series = pagy(series)
+    @pagy, @series = pagy(:offset, series)
 
     @page_titles.prepend t("general.series")
   end
@@ -10,7 +10,7 @@ class Dashboard::SeriesController < Dashboard::BaseController
   def show
     @series = @account.series.find(params[:id])
     posts = @series.posts.order(position: :asc)
-    @pagy, @posts = pagy(posts)
+    @pagy, @posts = pagy(:offset, posts)
 
     @page_titles.prepend @series.title
   end

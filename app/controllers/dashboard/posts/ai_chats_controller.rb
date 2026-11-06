@@ -4,7 +4,7 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
   layout "application"
 
   def index
-    @pagy, @ai_chats = pagy(@post.ai_chats.order(created_at: :desc))
+    @pagy, @ai_chats = pagy(:offset, @post.ai_chats.order(created_at: :desc))
     @ai_message = AI::Message.new
 
     @page_titles.prepend t(".index.title")
@@ -13,7 +13,7 @@ class Dashboard::Posts::AIChatsController < Dashboard::Posts::BaseController
   def show
     # Tool results render inside their parent tool-call card, never as
     # standalone list entries.
-    @pagy, @ai_messages = pagy(@ai_chat.ai_messages.without_tool_results.reorder(id: :desc))
+    @pagy, @ai_messages = pagy(:offset, @ai_chat.ai_messages.without_tool_results.reorder(id: :desc))
     @ai_message = AI::Message.new
     @page_titles.prepend t(".show.title")
   end

@@ -1,7 +1,7 @@
 class Account < ApplicationRecord
   include Meilisearch::Rails
 
-  extend Pagy::Meilisearch
+  extend Pagy::Search
 
   belongs_to :owner, polymorphic: true
   has_many :posts, dependent: :destroy

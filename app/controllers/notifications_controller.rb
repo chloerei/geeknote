@@ -5,7 +5,7 @@ class NotificationsController < ApplicationController
   layout "site"
 
   def index
-    @pagy, @notifications = pagy(Current.user.notifications.order(created_at: :desc))
+    @pagy, @notifications = pagy(:offset, Current.user.notifications.order(created_at: :desc))
     @page_titles.prepend t("general.notifications")
   end
 

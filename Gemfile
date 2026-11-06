@@ -51,7 +51,7 @@ gem "commonmarker", "~> 2.6.1"
 gem "rouge", "~> 4.7.0"
 
 # pagination
-gem "pagy", "~> 9.4.0"
+gem "pagy", "~> 43.8"
 
 # version diffs
 gem "diffy"

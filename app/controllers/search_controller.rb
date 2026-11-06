@@ -16,15 +16,16 @@ class SearchController < ApplicationController
 
     case @type
     when "posts"
+      # Explicit Meilisearch filter: ActiveRecord scopes are not translated by the paginator.
       options[:filter] = "status = 'published'"
-      posts = Post.published.pagy_search(params[:q], options)
-      @pagy, @posts = pagy_meilisearch(posts)
+      posts = Post.pagy_search(params[:q], **options)
+      @pagy, @posts = pagy(:meilisearch, posts)
     when "comments"
-      comments = Comment.pagy_search(params[:q], options)
-      @pagy, @comments = pagy_meilisearch(comments)
+      comments = Comment.pagy_search(params[:q], **options)
+      @pagy, @comments = pagy(:meilisearch, comments)
     when "accounts"
-      accounts = Account.pagy_search(params[:q], options)
-      @pagy, @accounts = pagy_meilisearch(accounts)
+      accounts = Account.pagy_search(params[:q], **options)
+      @pagy, @accounts = pagy(:meilisearch, accounts)
     end
 
     @page_titles.prepend t("general.search")

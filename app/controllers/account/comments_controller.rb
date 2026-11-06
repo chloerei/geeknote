@@ -4,7 +4,7 @@ class Account::CommentsController < Account::BaseController
   before_action :require_author, except: [ :index, :show ]
 
   def index
-    @pagy, @comments = pagy(@account.owner.comments.includes(:user).order(created_at: :desc))
+    @pagy, @comments = pagy(:offset, @account.owner.comments.includes(:user).order(created_at: :desc))
   end
 
   def show
@@ -23,7 +23,7 @@ class Account::CommentsController < Account::BaseController
       comments.order(created_at: :desc)
     end
 
-    @pagy, @comments = pagy(comments.includes(:user))
+    @pagy, @comments = pagy(:offset, comments.includes(:user))
 
     @page_titles.prepend t("general.comments")
   end

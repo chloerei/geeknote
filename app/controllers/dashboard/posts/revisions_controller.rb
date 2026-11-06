@@ -16,7 +16,7 @@ class Dashboard::Posts::RevisionsController < Dashboard::Posts::BaseController
   end
 
   def list
-    @pagy, @revisions = pagy(@post.revisions.includes(:user).order(id: :desc))
+    @pagy, @revisions = pagy(:offset, @post.revisions.includes(:user).order(id: :desc))
     render partial: "revision_list"
   end
 
