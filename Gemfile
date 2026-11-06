@@ -33,7 +33,7 @@ gem "async", "~> 2.45"
 gem "mission_control-jobs", "~> 1.1.0"
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", "~> 1.21.1", require: false
+gem "bootsnap", "~> 1.26.1", require: false
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails", "~> 2.0.17"
@@ -63,7 +63,7 @@ gem "rails-i18n", "~> 8.1.0"
 
 gem "local_time", "~> 3.0.3"
 
-gem "aws-sdk-s3", "~> 1.212.0", require: false
+gem "aws-sdk-s3", "~> 1.237.0", require: false
 
 gem "imgproxy-rails", "~> 0.3.0"
 
@@ -119,5 +119,5 @@ group :test do
   gem "selenium-webdriver", ">= 4.14.0"
   # Easy installation and use of web drivers to run system tests with browsers
   gem "webdrivers"
-  gem "webmock", "~> 3.25.1"
+  gem "webmock", "~> 3.34.0"
 end

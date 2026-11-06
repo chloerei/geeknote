@@ -131,8 +131,8 @@ GEM
     aws-sdk-kms (1.138.0)
       aws-sdk-core (~> 3, >= 3.263.0)
       aws-sigv4 (~> 1.5)
-    aws-sdk-s3 (1.212.0)
-      aws-sdk-core (~> 3, >= 3.241.4)
+    aws-sdk-s3 (1.237.0)
+      aws-sdk-core (~> 3, >= 3.263.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.5)
     aws-sigv4 (1.12.1)
@@ -141,8 +141,8 @@ GEM
     bcrypt (3.1.22)
     bigdecimal (4.1.3)
     bindex (0.8.1)
-    bootsnap (1.21.1)
-      msgpack (~> 1.2)
+    bootsnap (1.26.1)
+      msgpack (~> 1.5)
     brakeman (8.1.0)
       racc
     builder (3.3.0)
@@ -540,7 +540,7 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (~> 4.0)
-    webmock (3.25.2)
+    webmock (3.34.0)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
@@ -562,9 +562,9 @@ DEPENDENCIES
   administrate (~> 1.0.0)
   ahoy_matey (~> 5.4.1)
   async (~> 2.45)
-  aws-sdk-s3 (~> 1.212.0)
+  aws-sdk-s3 (~> 1.237.0)
   bcrypt (~> 3.1.20)
-  bootsnap (~> 1.21.1)
+  bootsnap (~> 1.26.1)
   brakeman (~> 8.1.0)
   bundler-audit
   capybara
@@ -609,7 +609,7 @@ DEPENDENCIES
   turbo-rails (~> 2.0.17)
   web-console (~> 4.2.1)
   webdrivers
-  webmock (~> 3.25.1)
+  webmock (~> 3.34.0)
 
 RUBY VERSION
   ruby 4.0.9
