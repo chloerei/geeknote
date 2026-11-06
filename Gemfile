@@ -119,5 +119,5 @@ group :test do
   gem "selenium-webdriver", ">= 4.14.0"
   # Easy installation and use of web drivers to run system tests with browsers
   gem "webdrivers"
-  gem "webmock", "~> 3.25.1"
+  gem "webmock", "~> 3.34.0"
 end
