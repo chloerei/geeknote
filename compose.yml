@@ -1,18 +1,27 @@
 services:
   app:
     build:
-      context: ..
-      dockerfile: .devcontainer/Dockerfile
+      context: .
+      dockerfile: Dockerfile.dev
 
     volumes:
-      - ../:/workspaces/geeknote:cached
+      - .:/workspaces/geeknote:cached
+      # Cache gems installed by bin/setup across container recreations.
+      - bundle:/usr/local/bundle
 
-    # Overrides default command so things don't shut down after the process ends.
-    command: sleep infinity
+    # bin/setup installs dependencies and prepares the databases before bin/dev starts.
+    command: ["bash", "-c", "bin/setup && exec bin/dev"]
+
+    # Keep stdin open so bin/dev's watchers stay alive when run detached.
+    tty: true
+    stdin_open: true
 
     environment:
       DATABASE_URL: postgres://postgres:postgres@postgres:5432
       MEILISEARCH_URL: http://meilisearch:7700
+
+    ports:
+      - "3000:3000"
 
     depends_on:
       - postgres
@@ -30,6 +39,7 @@ services:
 
   meilisearch:
     image: getmeili/meilisearch:v1.8
+    restart: unless-stopped
     environment:
       MEILI_NO_ANALYTICS: true
     volumes:
@@ -38,3 +48,4 @@ services:
 volumes:
   postgres-data:
   meili-data:
+  bundle:

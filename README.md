@@ -4,7 +4,13 @@ Source code of https://geeknote.net , a blog community platform.
 
 ## Development
 
-Open project in VSCode and it will prompt you to open in devcontainer.
+Start the development environment with Docker Compose:
+
+```sh
+docker compose up
+```
+
+Then open http://localhost:3000.
 
 ## Deployment
 

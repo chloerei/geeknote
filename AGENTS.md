@@ -1,6 +1,5 @@
 # AGENTS.md
 
-## Development Environment (devcontainer)
+## Development Environment
 
-- Manage development environment dependencies through the devcontainer in `.devcontainer/`; do not install runtimes, system libraries, or packages on the host.
-- Before running any dev-dependent command, check whether the current environment is already the devcontainer: `/.dockerenv` exists (Docker) or `/workspaces/chatbot` exists (the configured `workspaceFolder`). If not, run the command inside it via `devcontainer exec --workspace-folder . <command>`.
+- The development environment runs via Docker Compose (`compose.yml`, `Dockerfile.dev`); never install runtimes or packages on the host, and run dev commands inside the app container, e.g. `docker compose up -d` then `docker compose exec app <command>`.

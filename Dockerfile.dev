@@ -1,0 +1,23 @@
+FROM ruby:4.0.9
+
+ENV BINDING="0.0.0.0"
+
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends \
+      curl \
+      git \
+      libpq-dev \
+      libvips42 \
+      nodejs \
+      npm \
+      postgresql-client \
+    && rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+WORKDIR /workspaces/geeknote
+
+# bin/dev installs foreman on demand, but preinstalling it keeps container startup fast.
+RUN gem install foreman --no-document
+
+EXPOSE 3000
+
+CMD ["bin/dev"]
