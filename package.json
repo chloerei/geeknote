@@ -23,7 +23,7 @@
     "local-time": "^3.0.3",
     "marked": "^18.0.11",
     "sortablejs": "^1.15.7",
-    "tom-select": "^2.4.3"
+    "tom-select": "^2.6.2"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --format=esm --outdir=app/assets/builds",
