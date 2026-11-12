@@ -30,7 +30,7 @@ gem "solid_cable", "~> 3.0.8"
 gem "solid_queue", "~> 1.7.0"
 # Required by solid_queue fiber workers (config/queue.yml)
 gem "async", "~> 2.45"
-gem "mission_control-jobs", "~> 1.1.0"
+gem "mission_control-jobs", "~> 1.3.1"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", "~> 1.26.1", require: false
