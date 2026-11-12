@@ -102,7 +102,7 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem "web-console", "~> 4.2.1"
+  gem "web-console", "~> 4.3.0"
 
   gem "i18n-tasks", github: "chloerei/i18n-tasks"
 
