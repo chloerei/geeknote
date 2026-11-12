@@ -354,8 +354,8 @@ GEM
     parser (3.3.13.0)
       ast (~> 2.4.1)
       racc
-    pg (1.6.3-aarch64-linux)
-    pg (1.6.3-x86_64-linux)
+    pg (1.7.0-aarch64-linux)
+    pg (1.7.0-x86_64-linux)
     positioning (0.4.8)
       activerecord (>= 6.1)
       activesupport (>= 6.1)
@@ -592,7 +592,7 @@ DEPENDENCIES
   mission_control-jobs (~> 1.1.0)
   newrelic_rpm
   pagy (~> 43.8)
-  pg (~> 1.6.2)
+  pg (~> 1.7.0)
   positioning
   postal-rails (~> 1.0.1)
   premailer-rails (~> 1.12.0)
