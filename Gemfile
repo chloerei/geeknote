@@ -48,7 +48,7 @@ gem "cssbundling-rails"
 gem "commonmarker", "~> 2.6.1"
 
 # code highlight
-gem "rouge", "~> 4.7.0"
+gem "rouge", "~> 5.1.0"
 
 # pagination
 gem "pagy", "~> 43.8"
