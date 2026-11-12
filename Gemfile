@@ -77,7 +77,7 @@ gem "recaptcha", "~> 5.21.1", require: false
 
 gem "meilisearch-rails", "~> 0.16.0"
 
-gem "ahoy_matey", "~> 5.4.1"
+gem "ahoy_matey", "~> 5.5.0"
 
 gem "chartkick", "~> 5.2"
 
