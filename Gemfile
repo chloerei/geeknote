@@ -27,7 +27,7 @@ gem "active_storage_validations", "~> 4.1.1"
 
 gem "solid_cache", "~> 1.0.8"
 gem "solid_cable", "~> 4.1.0"
-gem "solid_queue", "~> 1.7.0"
+gem "solid_queue", "~> 1.7.2"
 # Required by solid_queue fiber workers (config/queue.yml)
 gem "async", "~> 2.45"
 gem "mission_control-jobs", "~> 1.3.1"
