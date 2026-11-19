@@ -1,4 +1,4 @@
-FROM ruby:4.0.9
+FROM ruby:4.0.10
 
 ENV BINDING="0.0.0.0"
 

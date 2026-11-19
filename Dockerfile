@@ -8,7 +8,7 @@
 # For the containerized development environment, see compose.yml and Dockerfile.dev.
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=4.0.9
+ARG RUBY_VERSION=4.0.10
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
 # Rails app lives here
