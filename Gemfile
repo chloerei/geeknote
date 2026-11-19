@@ -23,7 +23,9 @@ gem "propshaft", "~> 1.3.1"
 # Use Active Storage variant
 gem "image_processing", "~> 2.2.0"
 # image_processing 2.x treats image backends as soft dependencies.
-gem "ruby-vips", "~> 2.3"
+# Active Storage requires it on demand, so skip Bundler.require: requiring it
+# at boot fails on machines without the libvips shared library (e.g. CI).
+gem "ruby-vips", "~> 2.3", require: false
 
 gem "active_storage_validations", "~> 4.1.1"
 
