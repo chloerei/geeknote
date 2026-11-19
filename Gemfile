@@ -75,7 +75,7 @@ gem "postal-rails", "~> 1.0.1", require: false
 
 gem "recaptcha", "~> 5.21.1", require: false
 
-gem "meilisearch-rails", "~> 0.16.0"
+gem "meilisearch-rails", "~> 0.17.0"
 
 gem "ahoy_matey", "~> 5.5.0"
 
