@@ -21,7 +21,7 @@ gem "bcrypt", "~> 3.1.20"
 gem "propshaft", "~> 1.3.1"
 
 # Use Active Storage variant
-gem "image_processing", "~> 1.14.0"
+gem "image_processing", "~> 2.2.0"
 
 gem "active_storage_validations", "~> 4.1.1"
 
