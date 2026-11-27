@@ -6,7 +6,7 @@ default: &default
     - queues: "*"
       fibers: <%= ENV.fetch("WORKER_FIBERS", 10) %>
       processes: <%= ENV.fetch("JOB_CONCURRENCY", 1) %>
-      polling_interval: 0.1
+      polling_interval: 0.5
 
 development:
   <<: *default
